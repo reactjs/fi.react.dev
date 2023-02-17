@@ -277,7 +277,7 @@ Huomaa miten `onClick={kunKlikataan}` ei sisällä sulkeita lopussa! Älä kutsu
 
 Usein haluat, että komponenttisi "muistaa" jotain tietoa ja näyttää sitä. Esimerkiksi, ehkäpä haluat laskea montako kertaa painiketta on napsautettu. Tehdäksesi tämän, lisää tila eli _state_ komponenttiisi.
 
-Ensiksi, importtaa [`useState`](/apis/react/useState) Reactista:
+Ensiksi, importtaa [`useState`](/reference/react/useState) Reactista:
 
 ```js {1,4}
 import {useState} from 'react';
@@ -315,6 +315,16 @@ Jos renderöit saman komponentin useasti, kullakin komponentilla on oma tilansa.
 ```js
 import {useState} from 'react';
 
+export default function MyApp() {
+  return (
+    <div>
+      <h1>Laskurit, jotka päivittyvät erikseen</h1>
+      <Painonappi />
+      <Painonappi />
+    </div>
+  );
+}
+
 function Painonappi() {
   const [count, setCount] = useState(0);
 
@@ -325,15 +335,6 @@ function Painonappi() {
   return <button onClick={kunKlikataan}>Napsautit {count} kertaa</button>;
 }
 
-export default function MyApp() {
-  return (
-    <div>
-      <h1>Laskurit, jotka päivittyvät erikseen</h1>
-      <Painonappi />
-      <Painonappi />
-    </div>
-  );
-}
 ```
 
 ```css
@@ -349,7 +350,7 @@ Huomaa miten kukin painike "muistaa" sen oman `count` tilan eikä se vaikuta mui
 
 ## Hookkien käyttäminen {/*using-hooks*/}
 
-Funktiot, jotka alkavat sanalla `use` ovat *hookkeja*. `useState` on Reactin sisäänrakennettu hookki. Löydät lisää sisäänrakennettuja hookkeja [React API referenssistä](/apis/react). Voit myös kirjoittaa omia Hookkeja olemassaolevia yhdistelemällä.
+Funktiot, jotka alkavat sanalla `use` ovat *hookkeja*. `useState` on Reactin sisäänrakennettu hookki. Löydät lisää sisäänrakennettuja hookkeja [React API referenssistä](/reference/react). Voit myös kirjoittaa omia Hookkeja olemassaolevia yhdistelemällä.
 
 Hookit ovat rajoittavampia kuin normaalit funktiot. Voit kutsua hookkeja _ainoastaan_ komponentin päätasolta (tai muista hookeista). Jos haluat käyttää `useState` hookkia ehdollisesti tai loopissa, luo uusi komponentti ja sijoita se sinne.
 
@@ -399,9 +400,8 @@ Nyt kun klikkaat kumpaakin painiketta, `count` tila `MyApp` komponentissa muuttu
 
 Ensiksi, _siirrä tila ylöspäin_ `MyButton` komponentista `MyApp` komponenttiin:
 
-```js {2,6-10}
+```js {2-6,18}
 function MyButton() {
-  // ... siirretään tila täältä ...
 }
 
 export default function MyApp() {
@@ -419,6 +419,11 @@ export default function MyApp() {
     </div>
   );
 }
+
+function MyButton() {
+  // ... siirretään tila täältä ...
+}
+
 ```
 
 Sitten _anna tila alaspäin_ `MyApp` komponentissa kuhunkin `MyButton` komponenttiin yhdessä klikkauksen tapahtumakäsittelijän kanssa. Voit antaa tietoa `MyButton` komponenttiin käyttäen JSX aaltosulkeita, aivan kuten aiemmin teit sisäänrakennettujen `<img>` tagien kanssa:
@@ -464,10 +469,6 @@ Tätä kutsutaan "tilan nostamiseksi ylös". Siirtämällä tilaa ylös jaamme s
 ```js
 import {useState} from 'react';
 
-function MyButton({count, onClick}) {
-  return <button onClick={onClick}>Napsautit {count} kertaa</button>;
-}
-
 export default function MyApp() {
   const [count, setCount] = useState(0);
 
@@ -481,6 +482,14 @@ export default function MyApp() {
       <MyButton count={count} onClick={handleClick} />
       <MyButton count={count} onClick={handleClick} />
     </div>
+  );
+}
+
+function MyButton({ count, onClick }) {
+  return (
+    <button onClick={onClick}>
+      Napsautit {count} kertaa
+    </button>
   );
 }
 ```
@@ -498,4 +507,4 @@ button {
 
 Nyt tiedät perusteet siitä miten kirjoitetaan React koodia!
 
-Siirry seuraavaksi [Ajattelua Reactissa](/learn/thinking-in-react) sivulle nähdäksesi, miltä käyttöliittymän rakentaminen Reactilla tuntuu käytännössä.
+Katso seuraavaksi [Oppaat](/learn/tutorial-tic-tac-toe) laittaaksesi ne käytäntöön ja rakentaaksesi ensimmäisen mini-React sovelluksen.

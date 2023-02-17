@@ -81,7 +81,7 @@ Kokeile kommentoida `root.render()` kutsu ja näet komponentin katoavan!
 
 ### Uudelleenrenderöityy tilan päivittyessä {/*re-renders-when-state-updates*/}
 
-Kun komponentti on renderöity aluksi, voit käynnistää uusia renderöintejä päivittämällä sen tilaa [`set` funktiolla.](/apis/react/useState#setstate) Komponentin tilan päivittäminen automaattisesti lisää renderöinnin jonoon. (Voit kuvitella tätä ravintolan vieraana tilaamassa teetä, jälkiruokaa, ja kaikkea muuta alkuperäisen tilauksen jälkeen, janon tai nälän tilasta riippuen.)
+Kun komponentti on renderöity aluksi, voit käynnistää uusia renderöintejä päivittämällä sen tilaa [`set` funktiolla.](/reference/react/useState#setstate) Komponentin tilan päivittäminen automaattisesti lisää renderöinnin jonoon. (Voit kuvitella tätä ravintolan vieraana tilaamassa teetä, jälkiruokaa, ja kaikkea muuta alkuperäisen tilauksen jälkeen, janon tai nälän tilasta riippuen.)
 
 <IllustrationBlock sequential>
   <Illustration
@@ -166,9 +166,11 @@ Muutoin saatat kohdata hämmentäviä bugeja ja arvaamatonta käyttäytymistä k
 
 </Pitfall>
 
-<DeepDive title="Tehokkuuden optimointi">
+<DeepDive>
 
-Päivitetyn komponentin sisäkkäisten komponenttien renderöinti oletuksena ei ole optimaalinen suorituskyvyn kannalta, jos päivittynyt komoponentti on todella korkealla puussa. Jos törmäät ongelmiin suorituskyvyssä, on useita tapoja ratkaista niitä jälkeenpäin. Näitä käydään läpi [Suorituskyky](https://reactjs.org/docs/optimizing-performance.html#gatsby-focus-wrapper) osiossa. **Älä optimoi ennenaikaisesti!**
+#### Tehokkuuden optimointi {/*optimizing-performance*/}
+
+Päivitetyn komponentin sisäkkäisten komponenttien renderöinti oletuksena ei ole optimaalinen suorituskyvyn kannalta, jos päivittynyt komoponentti on todella korkealla puussa. Jos törmäät ongelmiin suorituskyvyssä, on useita tapoja ratkaista niitä jälkeenpäin. Näitä käydään läpi [Suorituskyky](https://reactjs.org/docs/optimizing-performance.html) osiossa. **Älä optimoi ennenaikaisesti!**
 
 </DeepDive>
 

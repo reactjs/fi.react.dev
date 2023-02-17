@@ -168,9 +168,11 @@ Jos et halua lisätä ylimääräistä `<div>` tagia merkintäkoodiisi, voit kir
 </>
 ```
 
-Tätä tyhjää tagia kutsutaan *[Fragmentiksi.](/apis/react/Fragment)* Fragmenttien avulla voit ryhmittää asioita jättämättä jälkiä selaimen HTML puuhun.
+Tätä tyhjää tagia kutsutaan *[Fragmentiksi.](/reference/react/Fragment)* Fragmenttien avulla voit ryhmittää asioita jättämättä jälkiä selaimen HTML puuhun.
 
-<DeepDive title="Miksi useat JSX tagit täytyy kääriä?">
+<DeepDive>
+
+#### Miksi useat JSX tagit täytyy kääriä {/*why-do-multiple-jsx-tags-need-to-be-wrapped*/}
 
 JSX näyttää samalta kuin HTML, mutta pellin alla se muunnetaan tavallisiksi JavaScript-olioiksi. Et voi palauttaa kahta oliota funktiosta käärimättä niitä taulukkoon. Tämä selittää miksi et voi palauttaa kahta JSX tagia käärimättä niitä yhteen tagiin tai Fragmenttiin.
 
@@ -211,7 +213,7 @@ Tämän takia Reactissa monet HTML ja SVG attribuutit kirjoitetaan camelCase muo
 />
 ```
 
-Voit [löytää kaikki nämä attribuutit Reactin DOM Elementseistä.](TODO) Jos muistat jonkun väärin, älä huoli. React viestii mahdollisia korjauksia [selaimen konsoliin.](https://developer.mozilla.org/docs/Tools/Browser_Console)
+Voit [löytää kaikki nämä attribuutit Reactin DOM Elementseistä.](/reference/react-dom/components/common) Jos muistat jonkun väärin, älä huoli. React viestii mahdollisia korjauksia [selaimen konsoliin.](https://developer.mozilla.org/docs/Tools/Browser_Console)
 
 <Pitfall>
 

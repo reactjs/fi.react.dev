@@ -204,7 +204,9 @@ return (
 
 Voit lukea sen kuin *"jos `isPacked` on tosi, sitten (`?`) renderöi `name + ' ✔'`, muussa tapauksessa (`:`) renderöi `nimi`."*)
 
-<DeepDive title="Vastaavatko nämä kaksi esimerkkiä toisiaan täysin?">
+<DeepDive>
+
+#### Vastaavatko nämä kaksi esimerkkiä toisiaan täysin? {/*are-these-two-examples-fully-equivalent*/}
 
 Jos sinulla on taustaa olio-ohjelmoinnista, saatat olettaa, että kaksi yllä olevaa esimerkkiä ovat hienovaraisesti erilaisia, koska yksi niistä voi luoda kaksi erilaista "instanssia" `<li>` elementistä. Mutta JSX elementit eivät ole "instansseja", sillä ne eivät ylläpidä sisäistä tilaa eivätkä ne ole aitoja DOM-solmuja. Ne ovat kevyitä kuvauksia, kuten pohjapiirustuksia. Joten nämä kaksi esimerkkiä *ovat* itse asiassa täysin toisiaan vastaavia. [Tilan säilyttäminen ja nollaus](/learn/preserving-and-resetting-state) menee syvemmälle siihen miten kaikki tämä toimii.
 

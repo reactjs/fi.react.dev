@@ -342,7 +342,9 @@ const fullName = firstName + ' ' + lastName;
 
 Näin ollen tapahtumakäsittelijöiden ei tarvitse tehdä mitään erityistä sen päivittämiseksi. Kun kutsut `setFirstnName` tai `setLastName` funktioita, kutsut uudelleenrenderöinnin, ja seuraavan kerran `fullName` tullaan laskemaan uusiksi uuden datan pohjalta.
 
-<DeepDive title="Älä peilaa propseja tilaan">
+<DeepDive>
+
+#### Älä peilaa propseja tilaan {/*don-t-mirror-props-in-state*/}
 
 Yleinen esimerkki tarpeettomasta tilasta on seuraavanlainen koodi:
 
@@ -1474,7 +1476,9 @@ button { margin: 10px; }
 
 Voit sisentää tilaa niin paljon kuin haluat, mutta sen muuttaminen "tasaiseksi" voi ratkaista useita ongelmia. Se tekee tilan päivittämisestä helpompaa ja auttaa varmistamaan, että tilassa ei ole toistoa eri tasojen välillä.
 
-<DeepDive title="Muistinkäytön parantaminen">
+<DeepDive>
+
+#### Muistinkäytön parantaminen {/*improving-memory-usage*/}
 
 Ihannetapauksessa poistaisit myös poistetut kohteet (ja niiden lapset!) "taulukko" oliosta muistin parantamiseksi. Tämä versio tekee myös tämän. Se myös [käyttää Immeriä](/learn/updating-objects-in-state#write-concise-update-logic-with-immer) tehdäkseen tilan päivityslogiikan tiiviimmäksi.
 

@@ -67,7 +67,7 @@ Määrittelit `handleClick` funktion ja [välitit sen propsina](/learn/passing-p
 * ovat useimmiten määritelty komponenttien *sisällä*.
 * alkavat sanalla `handle`, jonka jälkeen nimeen tulee tapahtuman nimi.
 
-> Tavanomaisesti tapahtumakäsittelijät alkavat sanalla `handle` ja sisältävät tapahtuman nimen. Näet usein `onClick={handleClick}`, `onMouseEnter={handleMouseEnter}`, ja niin edelleen.
+Tavanomaisesti tapahtumakäsittelijät alkavat sanalla `handle` ja sisältävät tapahtuman nimen. Näet usein `onClick={handleClick}`, `onMouseEnter={handleMouseEnter}`, ja niin edelleen.
 
 Vaihtoehtoisesti voit määritellä tapahtumakäsittelijän samalla rivillä JSX:ssä.
 
@@ -126,7 +126,7 @@ Molemmissa tilanteissa välität funktion:
 * `<button onClick={handleClick}>` välittää `handleClick` funktion.
 * `<button onClick={() => alert('...')}>` välittää `() => alert('...')` funktion.
 
-> [Lue lisää nuolifunktioista.](https://javascript.info/arrow-functions-basics)
+[Lue lisää nuolifunktioista.](https://javascript.info/arrow-functions-basics)
 
 </Pitfall>
 
@@ -232,9 +232,9 @@ Jos käytät [design system:iä](https://uxdesign.cc/everything-you-need-to-know
 
 ### Tapahtumakäsittelijän propsien nimeäminen {/*naming-event-handler-props*/}
 
-Sisäänrakennetut elementit kuten `<button>` ja `<div>` tukevat ainoastaan [selaimen tapahtumien nimiä](TODO:/apis/react-dom/events) kuten `onClick`. Kuitenkin, kun rakennat omia komponenttejasi, voit nimetä niiden tapahtumakäsittelijöiden propsit miten haluat.
+Sisäänrakennetut elementit kuten `<button>` ja `<div>` tukevat ainoastaan [selaimen tapahtumien nimiä](/reference/react-dom/components/common#common-props) kuten `onClick`. Kuitenkin, kun rakennat omia komponenttejasi, voit nimetä niiden tapahtumakäsittelijöiden propsit miten haluat.
 
-> Tavanomaisesti, tapahtumakäsittelijän propsien kuuluisi alkaa sanalla `on`, ja jatkua isolla kirjaimella.
+Tavanomaisesti, tapahtumakäsittelijän propsien kuuluisi alkaa sanalla `on`, ja jatkua isolla kirjaimella.
 
 Esimerkiksi, `Button` komponentin `onClick` propsi voitaisiin kutusua `onSmash`:
 
@@ -415,7 +415,9 @@ Kun klikkaat painiketta:
 
 `e.stopPropagation()` funktion tuloksena painikkeiden klikkaaminen näyttää vain yhden ilmoituksen (`button`:sta) kahden ilmoituksen sijaan (`<button>`:sta sekä `<div>`:sta). Painikkeen klikkaaminen ei ole sama asia kuin ympäröivä työkalupalkki, joten propagoinnin pysäyttäminen on järkevää tälle UI:lle.
 
-<DeepDive title="Nappaa tapahtumavaiheet">
+<DeepDive>
+
+#### Nappaa tapahtumavaiheet {/*capture-phase-events*/}
 
 Harvinaisissa tapauksissa saatat haluta napata kaikki lapsielementtien tapahtumat, *vaikka ne olisivat estäneet propagoinnin*. Esimerkiksi, ehkäpä haluat kerätä analytiikkatietoja jokaisesta klikkauksesta, riippumatta propagointilogiikasta. Voit tehdä tämän lisäämällä `Capture` tapahtumanimen perään:
 
@@ -587,7 +589,7 @@ export default function LightSwitch() {
 
 </Sandpack>
 
-Vaihtoehtoisesti voit kääriä kutsun toisen funktion sisään, kuten `<button onClick={() => handleClick()}`:
+Vaihtoehtoisesti voit kääriä kutsun toisen funktion sisään, kuten `<button onClick={() => handleClick()}>`:
 
 <Sandpack>
 

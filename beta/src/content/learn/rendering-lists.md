@@ -372,11 +372,13 @@ img { width: 100px; height: 100px; border-radius: 50%; }
 
 </Sandpack>
 
-<DeepDive title="Useiden DOM-kohteiden näyttäminen jokaikselle taulukon kohteelle">
+<DeepDive>
+
+#### Useiden DOM-kohteiden näyttäminen jokaikselle taulukon kohteelle {/*displaying-several-dom-nodes-for-each-list-item*/}
 
 Mitä teet kun yhden kohteen täytyy renderlidä useampi DOM-kohde?
 
-Lyhyt [`<>...</>` Fragment](/apis/react/Fragment)-syntaksi ei anna sinun välittää avainta, joten joudut joko sisällyttämään ne `<div>`:n sisälle, tai voit käyttää hieman pitempää ja [eksplisiittisempää `<Fragment>` syntaksia:](/apis/react/Fragment#rendering-a-list-of-fragments)
+Lyhyt [`<>...</>` Fragment](/reference/react/Fragment)-syntaksi ei anna sinun välittää avainta, joten joudut joko sisällyttämään ne `<div>`:n sisälle, tai voit käyttää hieman pitempää ja [eksplisiittisempää `<Fragment>` syntaksia:](/reference/react/Fragment#rendering-a-list-of-fragments)
 
 ```js
 import { Fragment } from 'react';
@@ -762,7 +764,7 @@ img { width: 100px; height: 100px; border-radius: 50%; }
 
 Tarkkaavainen lukija saattaa huomata, että kahden `filter` kutsun takia tarkistamme jokaisen henkilön ammatin kahdesti. Propertyn tarkistaminen on hyvin nopeaa, joten tässä esimerkissä se ei haittaa. Jos logiikkasi kuitenkin olisi raskaampaa kuin tässä, voisit korvata `filter` kutsut silmukalla, joka manuaalisesti luo taulukot ja tarkistaa henkilön vain kerran.
 
-Itse asiassa, jos `people` ei koskaan muutu, voit siirtää tämän koodin pois komponentistasi. Reactin näkökulmasta riittää, että annat sille taulukon JSX-kohteita. Ei ole merkitystä miten luot kyseisen taulukon:
+Itse asiassa, jos `people` ei koskaan muutu, voisit siirtää tämän koodin pois komponentistasi. Reactin näkökulmasta riittää, että annat sille taulukon JSX-kohteita. Ei ole merkitystä miten luot kyseisen taulukon:
 
 <Sandpack>
 

@@ -127,7 +127,9 @@ Molemmat `'./Gallery.js'` tai `'./Gallery'` toimivat Reactin kanssa, kuitenkin e
 
 </Note>
 
-<DeepDive title="Default exportit vai nimetyt exportit">
+<DeepDive>
+
+#### Default exportit vai nimetyt exportit {/*default-vs-named-exports*/}
 
 JavaScriptissa on kaksi ensisijaista tapaa exportata arvoja: default exportit ja nimetyt exportit. Tähän mennessä esimerkit ovat käyttäneet ainoastaan default exportteja. Voit kuitenkin käyttää jompaa kumpaa tai molempia samassa tiedostossa. **Tiedostossa voi olla ainoastaan yksi _default_ exportti, mutta sillä voi olla niin monta _nimettyä_ exporttia kuin haluat.**
 

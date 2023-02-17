@@ -238,7 +238,9 @@ export default function Form({
 
 </Sandpack>
 
-<DeepDive title="Monien visuaalisten tilojen näyttäminen kerralla">
+<DeepDive>
+
+#### Monien visuaalisten tilojen näyttäminen kerralla {/*displaying-many-visual-states-at-once*/}
 
 Jos komponentilla on monia visuaalisia tiloja, voi olla kätevää näyttää ne kaikki samalla sivulla:
 
@@ -344,7 +346,7 @@ Lomakkeen tilat
 
 ### 3. Vaihe: Esitä tila muistissa käyttämällä `useState`:a {/*step-3-represent-the-state-in-memory-with-usestate*/}
 
-Seuraavaksi sinun täytyy esitellä komponenttisi visuaaliset tilat muistissa [`useState`.](/apis/react/useState) hookilla. Yksinkertaisuus on avainasemassa: jokainen osa tilaa on "liikkuva osa", ja **haluat niin vähän "liikkuvia osia" kuin mahdollista.** Suurempi monimutkaisuus johtaa useampiin virheisiin!
+Seuraavaksi sinun täytyy esitellä komponenttisi visuaaliset tilat muistissa [`useState`.](/reference/react/useState) hookilla. Yksinkertaisuus on avainasemassa: jokainen osa tilaa on "liikkuva osa", ja **haluat niin vähän "liikkuvia osia" kuin mahdollista.** Suurempi monimutkaisuus johtaa useampiin virheisiin!
 
 Aloita tilalla, jonka on *ehdottomasti oltava* siellä. Sinun on esimerkiksi tallennettava `answer` syötettä varten ja `error` (jos se on olemassa) viimeisimmän virheen tallentamiseksi:
 
@@ -386,7 +388,9 @@ const [status, setStatus] = useState('typing'); // 'typing', 'submitting', tai '
 ```
 Tiedät, että ne ovat välttämättömiä, kun et voi poistaa yhtään niistä rikkomatta toiminnallisuutta.
 
-<DeepDive title="Eliminating “impossible” states with a reducer">
+<DeepDive>
+
+#### Mahdottomien tilojen poistaminen reducerilla {/*eliminating-impossible-states-with-a-reducer*/}
 
 Nämä kolme muuttujaa ovat tarpeeksi kuvaamaan tämän lomakkeen tilaa. Kuitenkin, on jotain välitiloja, jotka eivät ole järkeviä. Esimerkiksi, ei-null `error` ei ole järkevä kun `status` on `success`. Tilan tarkemmaksi mallintamiseksi, voit käyttää [reduceria.](/learn/extracting-state-logic-into-a-reducer) Reducerien avulla voit yhdistää useita tilamuuttujia yhdeksi olioksi ja tiivistää liittyvät logiikat yhteen!
 

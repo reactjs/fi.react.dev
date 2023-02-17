@@ -195,7 +195,7 @@ JSX:n lisääminen projektiin ei vaadi monimutkaisia työkaluja kuten [bundleria
 Siirry projektisi hakemistoon terminaalissa ja liitä nämä kaksi kometoa (**Varmista, että sinulla on [Node.js](https://nodejs.org/) asennettuna!**):
 
 1. `npm init -y` (mikäli epäonnistuu, [täällä on ratkaisu](https://gist.github.com/gaearon/246f6380610e262f8a648e3e51cad40d))
-2. `npm install babel-cli@6 babel-preset-react-app@3`
+2. `npm install @babel/cli@7 babel-preset-react-app@10`
 
 Tarvitset vain npm:n asentaaksesi JSX esikääntäjän. Et tarvitse sitä mihinkään muuhun. Sekä React että sovelluskoodisi voi pysyä `<script>` tageina ilman muutoksia.
 
@@ -206,7 +206,7 @@ Onnittelut! Lisäsit juuri **tuotantovalmiin JSX ympäristön** projektiisi.
 Voit esikääntää JSX koodin siten, että joka kerta kun tallennat tiedoston, jossa on JSX -koodia, muunnin suoritetaan uudelleen, kääntäen JSX tiedoston pelkäksi JavaScript tiedostoksi, jota selain ymmärtää. Tässä on miten se asennetaan:
 
 1. Luo kansio nimeltään **`src`**.
-2. Terminaalissa, suorita komento: `npx babel --watch src --out-dir . --presets react-app/prod ` (Älä odota komennon valmistumista! Tämä aloittaa automaattisen tarkkailijan seuraamaan muutoksia JSX koodissa `src` hakemistossa.)
+2. Terminaalissa, suorita komento: `npx babel --watch src --out-dir . --presets babel-preset-react-app/prod ` (Älä odota komennon valmistumista! Tämä aloittaa automaattisen tarkkailijan seuraamaan muutoksia JSX koodissa `src` hakemistossa.)
 3. Siirrä JSX koodiksi muunnettu **`like-button.js`** ([sen pitäisi näyttää tältä!](https://gist.githubusercontent.com/gaearon/be5ae0fbf563d6c5fe5c1563907b13d2/raw/4c0d0b8c7f4fcb341720424c28c72059f8174c62/like-button.js)) uuteen **`src`** hakemistoon
 
 Tarkkailija luo uuden esikäännetyn **`like-button.js`** tiedoston, joka sisältää selaimelle sopivaa JavaScript koodia.
@@ -221,13 +221,14 @@ Työkalua, jota juuri käytit on Babel ja voit lukea lisää siitä [sen dokumen
 
 Jos viihdyt kehitystyökalujen kanssa ja haluat niiden tekevän enemmän, [käsittelemme joitain suosituimmista ja helposti lähestyttävistä työkalupakeista täällä](/learn/start-a-new-react-project).
 
+<DeepDive>
 
-<DeepDive title="React ilman JSX:ää">
+#### React ilman JSX:ää {/*react-without-jsx*/}
 
 Alun perin JSX esiteltiin, jotta Reactilla kirjoittavat komponentit tuntuvat yhtä tutuilta kuin HTML:n kirjoittaminen. Sittemmin syntaksi on yleistynyt. Kuitenkin, on tilanteita joissa et välttämättä halua tai voi käyttää JSX:ää. Sinulla on kaksi vaihtoehtoa:
 
 - Käytä vaihtoehtoista JSX:ää kuten [htm](https://github.com/developit/htm), joka käyttää kääntäjän sijasta JavaScriptin [template stringejä](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals).
-- Käytä [`React.createElement()`](/apis/react/createElement) funktiota, jolla on erityinen rakenne selitettynä alla.
+- Käytä [`React.createElement()`](/reference/react/createElement) funktiota, jolla on erityinen rakenne selitettynä alla.
 
 JSX:llä kirjoittaisit komponentin seuraavasti:
 

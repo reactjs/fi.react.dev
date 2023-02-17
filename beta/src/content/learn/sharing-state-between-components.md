@@ -284,7 +284,9 @@ Kun `Accordion` komponentin `activeIndex` tila muuttuu arvoksi `1`, toinen `Pane
 
 </DiagramGroup>
 
-<DeepDive title="Hallitut ja hallitsemattomat komponentit">
+<DeepDive>
+
+#### Hallitut ja hallitsemattomat komponentit {/*controlled-and-uncontrolled-components*/}
 
 On yleistä kutsua komponenttia, jotka sisältävät paikallista tilaa, "hallitsemattomiksi". Esimerkiksi, alkuperäinen `Panel` komponentti, joka sisälsi `isActive` tilamuuttujan on hallitsematon, koska sen pääkomponentti ei voi vaikuttaa onko paneeli avoin vai suljettu.
 

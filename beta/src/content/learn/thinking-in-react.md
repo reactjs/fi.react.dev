@@ -247,7 +247,9 @@ Käydään ne vielä läpi yksitellen:
 
 Tämä tarkoittaa, että vain hakulause ja valintaruudun arvo ovat tiloja. Hienosti tehty!
 
-<DeepDive title="Propsit vs Tila">
+<DeepDive>
+
+#### Propsit vs Tila {/*props-vs-state*/}
 
 On kaksi "mallia" tietoa Reactissa: propsit ja tila. Nämä kaksi poikkeavat toisistaan:
 
@@ -283,7 +285,7 @@ Käydään läpi strategiaa tälle tilalle:
 
 Joten tila elää `FilterableProductTable` komponentissa.
 
-Lisää tila komponenttiin käyttämällä [`useState()` Hookkia.](/apis/usestate) Hookeilla pääset käsiksi komponentin [renderöintisykliin](/learn/render-and-commit). Lisä kaksi tilamuuttujaa `FilterableProductTable` komponentin yläosassa ja määritä sovelluksesi aloitusarvot:
+Lisää tila komponenttiin käyttämällä [`useState()` Hookkia.](/reference/react/useState) Hookeilla pääset käsiksi komponentin [renderöintisykliin](/learn/render-and-commit). Lisä kaksi tilamuuttujaa `FilterableProductTable` komponentin yläosassa ja määritä sovelluksesi aloitusarvot:
 
 ```js
 function FilterableProductTable({ products }) {

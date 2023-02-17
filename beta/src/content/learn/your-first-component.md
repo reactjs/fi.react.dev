@@ -207,7 +207,9 @@ Kun alakomponentti tarvitsee jotain dataa, [välitä se propsien kautta](/learn/
 
 </Pitfall>
 
-<DeepDive title="Komponentteja loppuun asti">
+<DeepDive>
+
+#### Komponentteja loppuun asti {/*components-all-the-way-down*/}
 
 React sovelluksesi alkaa "juurikomponentista". Useimmiten se luodaan automaattisesti kun aloitat uuden projektin. Esimerkiksi, jos käytät [CodeSandbox](https://codesandbox.io/):ia tai [Create React App](https://create-react-app.dev/):ia, juurikomponentti määritellään `src/App.js` tiedostossa. Jos käytät [Next.js](https://nextjs.org/) ohjelmistokehystä, juurikomponentti on määritelty `pages/index.js` tiedostossa. Näissä esimerkissä olet exportannut juurikomponentteja.
 

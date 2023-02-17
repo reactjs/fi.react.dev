@@ -1230,7 +1230,9 @@ textarea {
 
 </Sandpack>
 
-<DeepDive title="Tilan säilyttäminen poistetuille komponenteille">
+<DeepDive>
+
+#### Tilan säilyttäminen poistetuille komponenteille {/*preserving-state-for-removed-components*/}
 
 Oikeassa chat-sovelluksessa, haluaisit varmaankin palauttaa syötteen kun käyttäjä valitsee edellisen vastaanottajan uudestaan. On useita tapoja pitää tila "hengissä" komponentille, joka ei ole enää näkyvissä:
 

@@ -21,7 +21,7 @@ function HomepageHero() {
       </div>
       <section className="my-8 sm:my-10 grid grid-cols-1 lg:grid-cols-2 gap-x-8 gap-y-4">
         <div className="flex flex-col justify-center">
-          <YouWillLearnCard title="Opi React" path="/learn">
+          <YouWillLearnCard title="Pika-aloitus" path="/learn">
             <p>
               Opi ajattelemaan Reactissa vaiheittaisten ohjeiden ja
               interaktiivisten esimerkkien avulla.
@@ -29,7 +29,7 @@ function HomepageHero() {
           </YouWillLearnCard>
         </div>
         <div className="flex flex-col justify-center">
-          <YouWillLearnCard title="API-ohje" path="/apis/react">
+          <YouWillLearnCard title="API-viite" path="/reference/react">
             <p>
               Tutustu React hookkien rajapintoihin ja katso niiden muodot
               värikoodatuilla ohjeilla.

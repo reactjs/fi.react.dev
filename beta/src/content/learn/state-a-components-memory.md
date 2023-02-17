@@ -10,7 +10,7 @@ Components often need to change what's on the screen as a result of an interacti
 
 <YouWillLearn>
 
-* Miten lisätä tilamuuttuja [`useState`](/apis/react/useState) hookilla
+* Miten lisätä tilamuuttuja [`useState`](/reference/react/useState) hookilla
 * Minkä arvoparin `useState` hookki palauttaa
 * Miten lisätä useampi tilamuuttuja
 * Miksi tilaa sanotaan paikalliseksi
@@ -161,7 +161,7 @@ Päivittääksesi komponentti uudella datalla, kaksi asiaa täytyy tapahtua:
 1. **Säilyttää** data renderien välillä.
 2. **Käynnistää** React renderöimään komponenttin uudella datalla (uudelleenrenderöinti).
 
-[`useState`](/apis/react/useState) hookki tarjoaa molemmat näistä:
+[`useState`](/reference/react/useState) hookki tarjoaa molemmat näistä:
 
 1. **Tilamuuttujan** ylläpitämään data renderien välillä.
 2. **Tilan asettajafunktio** päivittämään muuttujaa ja käynnistämään komponentin uudelleenrenderöinti.
@@ -347,7 +347,7 @@ Tila on vain yksi näistä toiminnoista, mutta tulet tapaamaan toiset hookit my�
 
 ### `useState`:n anatomia {/*anatomy-of-usestate*/}
 
-Kun kutsut [`useState`](/apis/react/usestate):a, sanot Reactille, että haluat tämän komponentin muistavan jotain:
+Kun kutsut [`useState`](/reference/react/useState):a, sanot Reactille, että haluat tämän komponentin muistavan jotain:
 
 ```js
 const [index, setIndex] = useState(0);
@@ -518,7 +518,9 @@ button {
 
 Hyvä idea on tehdä useita tilamuuttujia jos ne eivät liity toisiinsa, kuten `index` ja `showMore` tässä esimerkissä. Mutta jos löydät itsesi usein vaihtamassa kahta tilamuuttujaa yhdessä, saattaa olla parempi vaihtoehto yhdistää ne yhteen. Esimerkiksi, jos sinulla on lomake monilla kentillä, se voi olla kätevää pitää tila yhdessä oliossa ennemin kuin yksi tilamuuttuja per kenttä. [Tilarakenteen päättäminen](/learn/choosing-the-state-structure) -sivulla on enemmän vinkkejä tähän.
 
-<DeepDive title="Miten React tietää minkä tilan palauttaa?">
+<DeepDive>
+
+#### Miten React tietää minkä tilan palauttaa? {/*how-does-react-know-which-state-to-return*/}
 
 Olet saattanut huomata, että `useState` kutsu ei vastaanota tietoa siitä *mitä* tilamuuttujaa se vastaa. Ei ole mitään "tunnistetta", joka välitettäisiin `useState`:lle, joten miten se tietää minkä tilamuuttujan palauttaa? Nojaako se johonkin taikaan kuten funktioiden parsimiseen? Ei.
 

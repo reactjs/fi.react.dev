@@ -53,9 +53,9 @@ React on suunniteltu tämän konseptin ympärille. **React olettaa, että jokain
 function Recipe({ drinkers }) {
   return (
     <ol>    
-      <li>Boil {drinkers} cups of milk.</li>
-      <li>Add {2 * drinkers} spoons of masala spices.</li>
-      <li>Remove from heat, and add {drinkers} spoons of tea.</li>
+      <li>Boil {drinkers} cups of water.</li>
+      <li>Add {drinkers} spoons of tea and {0.5 * drinkers} spoons of spice.</li>
+      <li>Add {0.5 * drinkers} cups of milk to boil and sugar to taste.</li>
     </ol>
   );
 }
@@ -64,8 +64,8 @@ export default function App() {
   return (
     <section>
       <h1>Spiced Chai Recipe</h1>
-      <h2>For one</h2> 
-      <Recipe drinkers={1} />
+      <h2>For two</h2>
+      <Recipe drinkers={2} />
       <h2>For a gathering</h2>
       <Recipe drinkers={4} />
     </section>
@@ -75,15 +75,15 @@ export default function App() {
 
 </Sandpack>
 
-Kun välität `drinkers={1}` komponentille `Recipe`, se palauttaa JSX:n sisältäen `1 cups of milk`. Aina. 
+Kun välität `drinkers={2}` komponentille `Recipe`, se palauttaa JSX:n sisältäen `2 cups of water`. Aina. 
 
-Kun välität `drinkers={4}`, se palauttaa JSX:n sisältäen `4 cups of milk`. Aina. 
+Kun välität `drinkers={4}`, se palauttaa JSX:n sisältäen `4 cups of water`. Aina. 
 
 Juuri kuten matemaattinen kaava.
 
 Voit ajatella komponenttisi reseptinä: jos seuraat sitä, etkä esittele uusia ainesosia kesken ruoanlaiton aikana, saat saman aterian joka kerta. Tuo "ateria" on JSX jonka komponentti tarjoaa Reactille [renderöitäväksi.](/learn/render-and-commit)
 
-<Illustration src="/images/docs/illustrations/i_puritea-recipe.png" alt="Tee resepti x määrälle henkilöitä: ota x kuppia vettä, lisää 2x lusikallista mausteita, ja x lusikallista teetä!" />
+<Illustration src="/images/docs/illustrations/i_puritea-recipe.png" alt="Tee resepti x määrälle henkilöitä: ota x kuppia vettä, lisää x lusikallista teetä ja 0.5x lusikallista mausteita ja 0.5x kuppia maitoa" />
 
 ## Sivuvaikutukset: (ei-)toivotut seuraukset {/*side-effects-unintended-consequences*/}
 
@@ -109,7 +109,7 @@ export default function TeaSet() {
       <Cup />
       <Cup />
     </>
-  )
+  );
 }
 ```
 
@@ -145,7 +145,9 @@ Nyt komponenttisi on puhdas, sillä JSX joka palautetaan riippuu ainoastaan `gue
 
 Yleisesti ottaen sinun ei tarvitse olettaa komponenttien renderöitävän missään tietyssä järjestyksessä. Sillä ei ole väliä kutsutko <Math><MathI>y</MathI> = 2<MathI>x</MathI></Math> ennen vai jälkeen <Math><MathI>y</MathI> = 5<MathI>x</MathI></Math>: molemmat kaavat toimivat erikseen toisistaan. Samalla tavalla, jokaisen komponentin tulisi "miettiä itselleen", eikä koordinoida tai riippua muista renderöinnin aikana. Renderöinti on kuin koulun koe: jokaisen komponentin tulisi laskea JSX itsekseen!
 
-<DeepDive title="Epäpuhtaiden laskelmien tunnistaminen StrictModella">
+<DeepDive>
+
+#### Epäpuhtaiden laskelmien tunnistaminen StrictModella {/*detecting-impure-calculations-with-strict-mode*/}
 
 Vaikka et välttämättä ole käyttänyt niitä kaikkia vielä, Reactissa on kolmenlaista syötettä jota lukea renderöinnin aikana: [propsit](/learn/passing-props-to-a-component), [tila](/learn/state-a-components-memory), ja [konteksti](/learn/passing-data-deeply-with-context). Kannattaa aina kohdella näitä arvoja vain-luku muodossa.
 
@@ -193,16 +195,18 @@ Vaikka funktionaalinen ohjelmointi nojaa pitkälti puhtauteen, jossain vaiheessa
 
 Reactissa, **sivuvaikutukset useimmiten kuuluvat [tapahtumakäsittelijöiden](/learn/responding-to-events) sisään.** Tapahtumakäsittelijät ovat funktioita, joita React suorittaa kun teet jotain toimintoja—esimerkiksi painat nappia. Vaikka tapahtumakäsittelijät on määritelty komponentin *sisällä*, niitä ei suoriteta renderöinnin *aikana*! **Joten tapahtumakäsittelijöiden ei tarvitse olla puhtaita.**
 
-Jos olet olet käyttänyt kaikki vaihtoehdot, etkä löydä oikeaa tapahtumakäsittelijää sivuvaikutuksellesi, voit silti kiinnittää sen palautettuun JSX:ään käyttäen [`useEffect`](/apis/react/useEffect) kutsua komponentissasi. Tämä kertoo Reactille, että kutsuu sitä myöhemmin renderöinnin jälkeen, jolloin sivuvaikutukset ovat sallittuja. **Huomaa, että tämän tavan pitäisi olla sinun viimeinen keino.**
+Jos olet olet käyttänyt kaikki vaihtoehdot, etkä löydä oikeaa tapahtumakäsittelijää sivuvaikutuksellesi, voit silti kiinnittää sen palautettuun JSX:ään käyttäen [`useEffect`](/reference/react/useEffect) kutsua komponentissasi. Tämä kertoo Reactille, että kutsuu sitä myöhemmin renderöinnin jälkeen, jolloin sivuvaikutukset ovat sallittuja. **Huomaa, että tämän tavan pitäisi olla sinun viimeinen keino.**
 
 Kun mahdollista, kokeile muotoilla logiikkasi vain renderöinnillä. Yllätyt miten pitkälle sillä pääsee!
 
-<DeepDive title="Miksi React välittää puhtaudesta?">
+<DeepDive>
+
+#### Miksi React välittää puhtaudesta? {/*why-does-react-care-about-purity*/}
 
 Puhtaiden funktioiden kirjoittaminen vaatii tottumusta ja itsekuria. Mutta se avaa mahtavia mahdollisuuksia:
 
 * Komponenttisi voidaan suorittaa eri ympäristössä—esimerkiksi palvelinpuolella. Sillä ne palauttaa saman tuloksen samoista lähtötiedoista, yksi komponentti voi palvella monta käyttäjäpyyntöä.
-* Voit parantaa tehokkuutta [ohittamalla renderöinnin](/apis/react/memo) komponenteille, joiden lähtötiedot eivät ole muuttuneet. Tämä on turvallista koska puhtaat funktiot palauttavat aina saman lopputuloksen, joten ne on turvallista tallentaa.
+* Voit parantaa tehokkuutta [ohittamalla renderöinnin](/reference/react/memo) komponenteille, joiden lähtötiedot eivät ole muuttuneet. Tämä on turvallista koska puhtaat funktiot palauttavat aina saman lopputuloksen, joten ne on turvallista tallentaa.
 * Jos jokin data muuttuu kesken renderöinnin syvällä komponenttipuussa, React voi aloittaa renderöinnin uudelleen hukkaamatta aikaa keskeneräiseen renderöintiin. Puhtaus tekee keskeyttämisestä turvallista.
 
 Jokainen uusi Reactin ominaisuus joita rakennamme hyödyntää puhtautta. Tiedonhausta animaatioihin ja tehokkuuteen, komponenttien pitäminen puhtaina avaa tehokkaan React paradigman.

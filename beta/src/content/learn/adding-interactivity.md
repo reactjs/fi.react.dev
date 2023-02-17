@@ -70,7 +70,7 @@ Lue **[Responding to Events](/learn/responding-to-events)** oppiaksesi miten lis
 
 Komponenttien on usein muutettava näytön sisältöä vuorovaikutuksen seurauksena. Lomakkeeseen kirjoittaminen päivittää syöttökenttää, kuvakarusellissa "seuraava" napsauttaminen tulisi muuttaa näytettävää kuvaa, "osta"-painike asettaa tuotteen ostoskoriin. Komponenttien täytyy "muistaa" asioita: nykyinen syöte, nykyinen kuva, ostoskori. Reactissa tämän kaltaista komponenttikohtaista muistia kutsutaan *tilaksi.*
 
-Voit lisätä komponentteihin tilan käyttämällä [`useState`](/apis/react/useState) koukkua eli hookkia. *Hookit* ovat erikoisfunktioita, joilla voit käyttää Reactin ominaisuuksia komponenteissasi (tila on yksi näistä ominaisuuksista). `useState` hookilla voit määritellä tilamuuttujan. Sille voidaan antaa alustava tila ja se palauttaa parin arvoja: nykyisen tilan, sekä setter funktion, jolla voit päivittää sitä.
+Voit lisätä komponentteihin tilan käyttämällä [`useState`](/reference/react/useState) koukkua eli hookkia. *Hookit* ovat erikoisfunktioita, joilla voit käyttää Reactin ominaisuuksia komponenteissasi (tila on yksi näistä ominaisuuksista). `useState` hookilla voit määritellä tilamuuttujan. Sille voidaan antaa alustava tila ja se palauttaa parin arvoja: nykyisen tilan, sekä setter funktion, jolla voit päivittää sitä.
 
 ```js
 const [index, setIndex] = useState(0);

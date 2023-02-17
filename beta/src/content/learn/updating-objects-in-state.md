@@ -177,7 +177,9 @@ body {
 
 </Sandpack>
 
-<DeepDive title="Paikallinen mutaatio on ok">
+<DeepDive>
+
+#### Paikallinen mutaatio on ok {/*local-mutation-is-fine*/}
 
 Tällainen koodi on ongelmallista, koska se muuttaa _olemassa olevaa_ oliota tilassa:
 
@@ -370,7 +372,9 @@ input {
 
 Huomaa, että `...` spread -syntaksi on "matala" (engl. shallow)--se kopioi asioita vain yhden tason syvyydeltä. Tämä tekee siitä nopean, mutta tämä tarkoittaa myös, että jos haluat päivittää sisäkkäistä propertyä, joudut käyttämään sitä useammin.
 
-<DeepDive title="Yhden tapahtumakäsittelijän käyttäminen useille kentille">
+<DeepDive>
+
+#### Yhden tapahtumakäsittelijän käyttäminen useille kentille {/*using-a-single-event-handler-for-multiple-fields*/}
 
 Voit myös käyttää `[` ja `]` sulkeita olion määrittelyn sisällä määritelläksesi propertyn dynaamisella nimellä. Tässä on sama esimerkki, mutta yhdellä tapahtumakäsittelijällä kolmen sijaan:
 
@@ -582,7 +586,10 @@ img {
 
 </Sandpack>
 
-<DeepDive title="Oliot eivät oikeastaan ole sisäkkäisiä">
+
+<DeepDive>
+
+#### Oliot eivät oikeastaan ole sisäkkäisiä {/*objects-are-not-really-nested*/}
 
 Tällainen olio näyttää "sisäkkäiseltä" koodissa:
 
@@ -648,7 +655,9 @@ updatePerson((draft) => {
 
 Kuitenkin toisin kuin tavallinen mutaatio, tämä ei ylikirjoita aiempaa tilaa!
 
-<DeepDive title="Miten Immer toimii?">
+<DeepDive>
+
+#### Miten Immer toimii? {/*how-does-immer-work*/}
 
 `draft`, jonka Immer tarjoaa on erityinen oliomuoto, jota kutsutaan [Proxy:ksi](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy), joka "nauhoittaa" mitä teet sillä. Siksi voit muunnella sitä vapaasti niin paljon kuin haluat! Konepellin alla Immer selvittää, mitä osia luonnoksesta on muutettu, ja tuottaa täysin uuden olion, joka sisältää muokkauksesi.
 
@@ -656,9 +665,8 @@ Kuitenkin toisin kuin tavallinen mutaatio, tämä ei ylikirjoita aiempaa tilaa!
 
 Kokeillaksesi Immeriä:
 
-1. Lisää `use-immer` projektisi `package.json` tiedostoon riippuvuutena
-2. Suorita `npm install`
-3. Lopuksi korvaa `import { useState } from 'react'` lauseella `import { useImmer } from 'use-immer'`
+1. Suorita `npm install use-immer`
+2. Sitten korvaa `import { useState } from 'react'` lauseella `import { useImmer } from 'use-immer'`
 
 Tässä ylempi esimerkki muutettu käyttämään Immeriä:
 
@@ -768,12 +776,14 @@ img {
 
 Huomaa, kuinka paljon tiiviimpiä tapahtumankäsittelijöistä on tullut. Voit käyttää sekä `useState:a` että `useImmer:a` samassa komponentissa niin monesti kuin haluat. Immer on hyvä tapa pitää päivityskäsittelijät tiiviinä, varsinkin jos tilasi on sisäkkäinen ja olioiden kopiointi johtaa toistuvaan koodiin.
 
-<DeepDive title="Miksi tilan mujtatointia ei suositella Reactissa">
+<DeepDive>
+
+#### Miksi tilan mujtatointia ei suositella Reactissa? {/*why-is-mutating-state-not-recommended-in-react*/}
 
 Tähän on useita syitä:
 
 - **Debuggaus:** Jos käytät `console.log` kutsua etkä muuta tilaa, viimeisimmät tilamuutokset eivät häiritse aiempia lokejasi. Näin näet selvästi, miten tila on muuttunut renderöintien välillä.
-- **Optimointi:** Reactin yleiset [optimointistrategiat](/apis/react/memo) tukeutuvat työn ohittamiseen jos aiemmat propsit tai tila pysyy samana. Jos et koskaan mutatoi tilaa, on nopeaa tarkistaa oliko mitään muutoksia. Jos `prevObj === obj`, voit olla varma siitä, että mikään ei voinut muokata sitä.
+- **Optimointi:** Reactin yleiset [optimointistrategiat](/reference/react/memo) tukeutuvat työn ohittamiseen jos aiemmat propsit tai tila pysyy samana. Jos et koskaan mutatoi tilaa, on nopeaa tarkistaa oliko mitään muutoksia. Jos `prevObj === obj`, voit olla varma siitä, että mikään ei voinut muokata sitä.
 - **Uudet ominaisuudet:** Reactin uudet ominaisuudet, joita olemme rakantamssa tukeutuvat siihen, että tilaa [käsitellään kuin snapshottia.](/learn/state-as-a-snapshot) Jos mutatoit tilan aiempia versioita, se saattaa estää uusien ominaisuuksien käyttöä.
 - **Muutokset vaatimuksiin:** Jotkin sovellustoiminnot, kuten Kumoa/Tee uudelleen, muutoshistorian näyttäminen tai antaa käyttäjän palauttaa lomakkeen aiemmat arvot, ovat helpompi toteuttaa kun mitään ei mutatoida. Tämä johtuu siitä, että pidät kopiot aiemmista tiloista muistissa ja käytät niitä uudelleen kun se on asianmukaista. Jos aloitat mutatoivalla tavalla, tämänkaltaiset ominaisuudet voi olla hankala lisätä jälkeenpäin.
 - **Yksinkertaisempi toteutus:** Koska React ei turvaudu mutaatioon, sen ei tarvitse tehdä mitään erityistä objekteillesi. Sen ei tarvitse kaapata niiden ominaisuuksia tai kietoa niitä Proxyihin tai tehdä muuta työtä alustuksen yhteydessä. Tämän vuoksi Reactin avulla voit laittaa minkä tahansa objektin tilaan - oli se kuinka suuri tahansa - ilman ylimääräisiä suorituskykyyn tai oikeellisuuteen liittyviä sudenkuoppia.
