@@ -1,25 +1,25 @@
 ---
-title: Extracting State Logic into a Reducer
+title: Tilalogiikan siirtäminen reduktoriin
 ---
 
 <Intro>
 
-Components with many state updates spread across many event handlers can get overwhelming. For these cases, you can consolidate all the state update logic outside your component in a single function, called a _reducer._
+Komponentit joissa on paljon tilapäivityksiä ja jotka jakavat tilan päivitykset useiden tapahtumankäsittelijöiden välillä, voivat olla hämmentäviä. Näissä tapauksissa voit yhdistää kaiken tilanpäivityslogiikan komponentin ulkopuolelle yhteen funktioon, jota kutsutaan _reduktoriksi_ (engl. _reducer_). 
 
 </Intro>
 
 <YouWillLearn>
 
-- What a reducer function is
-- How to refactor `useState` to `useReducer`
-- When to use a reducer
-- How to write one well
+- Mikä on reduktorifunktio
+- Miten refaktoroidaan `useState` `useReducer`-käyttöön
+- Milloin reduktoria kannattaa käyttää
+- Miten se kirjoitetaan hyvin
 
 </YouWillLearn>
 
-## Consolidate state logic with a reducer {/*consolidate-state-logic-with-a-reducer*/}
+## Tilalogiikan yhdistäminen reduktoriin {/*consolidate-state-logic-with-a-reducer*/}
 
-As your components grow in complexity, it can get harder to see at a glance all the different ways in which a component's state gets updated. For example, the `TaskApp` component below holds an array of `tasks` in state and uses three different event handlers to add, remove, and edit tasks:
+Kun komponenttisi kasvavat monimutkaisemmiksi, voi olla vaikeampaa nähdä yhdellä silmäyksellä kaikkia eri tapoja, joilla komponentin tilaa päivitetään. Esimerkiksi alla oleva `TaskApp`-komponentti sisältää taulukon `tasks` ja käyttää kolmea eri tapahtumankäsittelijää tehtävien lisäämiseen, poistamiseen ja muokkaamiseen:
 
 <Sandpack>
 
@@ -179,17 +179,17 @@ li {
 
 </Sandpack>
 
-Each of its event handlers calls `setTasks` in order to update the state. As this component grows, so does the amount of state logic sprinkled throughout it. To reduce this complexity and keep all your logic in one easy-to-access place, you can move that state logic into a single function outside your component, **called a "reducer".**
+Kukin tapahtumankäsittelijä kutsuu `setTasks`-funktiota tilan päivittämiseksi. Kun komponentti kasvaa, kasvaa myös tilalogiikan määrä. Tilalogiikan vähentämiseksi ja sen helpottamiseksi voit siirtää tilan logiikan yksittäiseen funktioon komponentin ulkopuolelle, **jota kutsutaan "reduktoriksi".**
 
-Reducers are a different way to handle state. You can migrate from `useState` to `useReducer` in three steps:
+Reduktorit ovat erilainen tapa käsitellä tilaa. Voit siirtyä `useState`sta `useReducer`iin kolmessa vaiheessa:
 
-1. **Move** from setting state to dispatching actions.
-2. **Write** a reducer function.
-3. **Use** the reducer from your component.
+1. **Siirrä** tilan asettaminen toiminnon lähettämiseksi.
+2. **Kirjoita** reduktorifunktio.
+3. **Käytä** reduktoria komponentistasi.
 
-### Step 1: Move from setting state to dispatching actions {/*step-1-move-from-setting-state-to-dispatching-actions*/}
+### 1. Vaihe: Päivitä tilan asettaminen toiminnon lähettämiseksi {/*step-1-move-from-setting-state-to-dispatching-actions*/}
 
-Your event handlers currently specify _what to do_ by setting state:
+Tapahtumakäsittelijäsi määrittävät _mitä tehdä_ asettamalla tilan:
 
 ```js
 function handleAddTask(text) {
@@ -220,13 +220,13 @@ function handleDeleteTask(taskId) {
 }
 ```
 
-Remove all the state setting logic. What you are left with are three event handlers:
+Poista kaikki tilan asettamisen logiikka. Jäljelle jää kolme tapahtumankäsittelijää:
 
-- `handleAddTask(text)` is called when the user presses "Add".
-- `handleChangeTask(task)` is called when the user toggles a task or presses "Save".
-- `handleDeleteTask(taskId)` is called when the user presses "Delete".
+- `handleAddTask(text)` kutsutaan kun käyttäjä painaa "Add".
+- `handleChangeTask(task)` kutsutaan kun käyttäjä vaihtaa tehtävän tilaa tai painaa "Save".
+- `handleDeleteTask(taskId)` kutsutaan kun käyttäjä painaa "Delete".
 
-Managing state with reducers is slightly different from directly setting state. Instead of telling React "what to do" by setting state, you specify "what the user just did" by dispatching "actions" from your event handlers. (The state update logic will live elsewhere!) So instead of "setting `tasks`" via an event handler, you're dispatching an "added/changed/deleted a task" action. This is more descriptive of the user's intent.
+Tilan hallinta reduktoreilla on hieman erilaista kuin suoraan tilan asettaminen. Sen sijaan että kerrot Reactille "mitä tehdä" asettamalla tilan, määrität "mitä käyttäjä juuri teki" lähettämällä "toimintoja" tapahtumankäsittelijöistäsi. (Tilan päivityslogiikka asuu muualla!) Joten sen sijaan että "asettaisit `tasks`in" tapahtumankäsittelijässä, lähettäisit "lisätty/muokattu/poistettu tehtävä" -toiminnon. Tämä on kuvaavampi käyttäjän tarkoituksesta.
 
 ```js
 function handleAddTask(text) {
@@ -252,12 +252,12 @@ function handleDeleteTask(taskId) {
 }
 ```
 
-The object you pass to `dispatch` is called an "action":
+Olio jonka välität `dispatch`lle on nimeltään "toiminto":
 
 ```js {3-7}
 function handleDeleteTask(taskId) {
   dispatch(
-    // "action" object:
+    // "action" olio:
     {
       type: 'deleted',
       id: taskId,
@@ -266,43 +266,43 @@ function handleDeleteTask(taskId) {
 }
 ```
 
-It is a regular JavaScript object. You decide what to put in it, but generally it should contain the minimal information about _what happened_. (You will add the `dispatch` function itself in a later step.)
+Se on tavallinen JavaScript-olio. Päätät mitä sinne laitat, mutta yleensä se pitäisi sisällään vähimmäistiedot _mitä tapahtui_. (Lisäät `dispatch`-funktion itse myöhemmin.)
 
 <Note>
 
-An action object can have any shape.
+Toiminto-olion muoto voi olla mitä tahansa.
 
-By convention, it is common to give it a string `type` that describes what happened, and pass any additional information in other fields. The `type` is specific to a component, so in this example either `'added'` or `'added_task'` would be fine. Choose a name that says what happened!
+Käytännön mukaan, on yleistä antaa sille merkkijono `type`, joka kuvaa mitä tapahtui, ja lähettää lisätietoja muissa kentissä. `type` on erityinen komponentille, joten tässä esimerkissä joko `'added'` tai `'added_task'` olisi hyvä. Valitse nimi, joka kertoo mitä tapahtui!
 
 ```js
 dispatch({
-  // specific to component
-  type: 'what_happened',
-  // other fields go here
+  // erityinen komponentille
+  type: 'mita_tapahtui',
+  // muut kentät tulee tänne
 });
 ```
 
 </Note>
 
-### Step 2: Write a reducer function {/*step-2-write-a-reducer-function*/}
+### 2. Vaihe: Kirjoita reduktorifunktio {/*step-2-write-a-reducer-function*/}
 
-A reducer function is where you will put your state logic. It takes two arguments, the current state and the action object, and it returns the next state:
+Reduktorifunktio on paikka, johon laitat tilalogiikan. Se ottaa kaksi argumenttia, nykyisen tilan ja toiminnon olion, ja palauttaa seuraavan tilan:
 
 ```js
 function yourReducer(state, action) {
-  // return next state for React to set
+  // palauta seuraava tila Reactille asetettavaksi
 }
 ```
 
-React will set the state to what you return from the reducer.
+React asettaa tilaksi sen mitä palautat reduktorista.
 
-To move your state setting logic from your event handlers to a reducer function in this example, you will:
+Siirtääksesi tilan asettamislogiikan tapahtumankäsittelijöistäsi reduktorifunktioon tässä esimerkissä, sinun pitää:
 
-1. Declare the current state (`tasks`) as the first argument.
-2. Declare the `action` object as the second argument.
-3. Return the _next_ state from the reducer (which React will set the state to).
+1. Määritä nykyinen tila (`tasks`) ensimmäisenä argumenttina.
+2. Määritä `action`-olio toisena argumenttina.
+3. Palauta _seuraava_ tila reduktorista (jonka React asettaa tilaksi).
 
-Here is all the state setting logic migrated to a reducer function:
+Tässä on kaikki tilanasettamislogiikka siirretty reduktorifunktioon:
 
 ```js
 function tasksReducer(tasks, action) {
@@ -331,13 +331,13 @@ function tasksReducer(tasks, action) {
 }
 ```
 
-> Because the reducer function takes state (`tasks`) as an argument, you can **declare it outside of your component.** This decreases the indentation level and can make your code easier to read.
+> Koska reduktorifunktio ottaa tilan (`tasks`) argumenttina, voit **määritellä sen komponentin ulkopuolella.** Tämä pienentää sisennystasoa ja voi tehdä koodistasi helpommin luettavaa.
 
 <Note>
 
-The code above uses if/else statements, but it's a convention to use [switch statements](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/switch) inside reducers. The result is the same, but it can be easier to read switch statements at a glance.
+Koodi yllä käyttää if/else -lauseita, mutta on tapana käyttää [switch-lauseita](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/switch) reduktoreissa. Tulos on sama, mutta switch-lauseet ovat helpompi lukea silmäyksellä.
 
-We'll be using them throughout the rest of this documentation like so:
+Käytämme niitä tässä dokumentaatiossa loppuun asti seuraavasti:
 
 ```js
 function tasksReducer(tasks, action) {
@@ -371,19 +371,19 @@ function tasksReducer(tasks, action) {
 }
 ```
 
-We recommend to wrap each `case` block into the `{` and `}` curly braces so that variables declared inside of different `case`s don't clash with each other. Also, a `case` should usually end with a `return`. If you forget to `return`, the code will "fall through" to the next `case`, which can lead to mistakes!
+Suosittelemme käärimään jokaisen `case`-lohkon `{` ja `}` aaltosulkeisiin, jotta eri `case`-lohkoissa määritellyt muuttujat eivät sekoitu keskenään. Lisäksi `case`-lohkossa pitäisi yleensä loppua `return`-lauseella. Jos unohdat `return`-lauseen, koodi "tippuu" seuraavan `case`-lohkon läpi, mikä voi johtaa virheisiin!
 
-If you're not yet comfortable with switch statements, using if/else is completely fine.
+Jos et ole vielä mukavuusalueellasi switch-lauseilla, if/else on täysin ok.
 
 </Note>
 
 <DeepDive>
 
-#### Why are reducers called this way? {/*why-are-reducers-called-this-way*/}
+#### Miksi reduktoreita kutsutaan tällä tavalla? {/*why-are-reducers-called-this-way*/}
 
-Although reducers can "reduce" the amount of code inside your component, they are actually named after the [`reduce()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce) operation that you can perform on arrays.
+Vaikka reduktoreita voidaan käyttää koodin vähentämiseen komponenteissa, ne nimetään [`reduce()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce)-toiminnon mukaan, jota voit suorittaa taulukoilla.
 
-The `reduce()` operation lets you take an array and "accumulate" a single value out of many:
+`reduce()`-toiminnolla voit ottaa taulukon ja "kerätä" yhden arvon monista:
 
 ```
 const arr = [1, 2, 3, 4, 5];
@@ -392,9 +392,9 @@ const sum = arr.reduce(
 ); // 1 + 2 + 3 + 4 + 5
 ```
 
-The function you pass to `reduce` is known as a "reducer". It takes the _result so far_ and the _current item,_ then it returns the _next result._ React reducers are an example of the same idea: they take the _state so far_ and the _action_, and return the _next state._ In this way, they accumulate actions over time into state.
+Funktio jonka välität `reduce` -funktioon kutsutaan "reduktoriksi". Se ottaa _tuloksen tähän mennessä_ ja _nykyisen kohteen_ ja palauttaa _seuraavan tuloksen_. React-reduktorit ovat samaa ideaa: ne ottaa _tilan tähän mennessä_ ja _toiminnon_ ja palauttaa _seuraavan tilan_. Tällä tavalla ne keräävät toimintoja ajan myötä tilaan.
 
-You could even use the `reduce()` method with an `initialState` and an array of `actions` to calculate the final state by passing your reducer function to it:
+Voisit jopa käyttää `reduce()`-metodia `initialState`- ja `actions`-taulukoiden kanssa lopullisen tilan laskemiseen välittämällä sille reduktorifunktion:
 
 <Sandpack>
 
@@ -453,43 +453,43 @@ export default function tasksReducer(tasks, action) {
 
 </Sandpack>
 
-You probably won't need to do this yourself, but this is similar to what React does!
+Sinun ei välttämättä tarvitse tehdä tätä itse, mutta tämä on samankaltaista kuin mitä React tekee.
 
 </DeepDive>
 
-### Step 3: Use the reducer from your component {/*step-3-use-the-reducer-from-your-component*/}
+### 3. Vaihe: Käytä reduktoria komponentistasi {/*step-3-use-the-reducer-from-your-component*/}
 
-Finally, you need to hook up the `tasksReducer` to your component. Make sure to import the `useReducer` Hook from React:
+Lopuksi, sinun täytyy liittää `tasksReducer` komponenttiisi. Varmista, että tuot `useReducer` Hookin Reactista:
 
 ```js
 import {useReducer} from 'react';
 ```
 
-Then you can replace `useState`:
+Sitten voit korvata `useState`n:
 
 ```js
 const [tasks, setTasks] = useState(initialTasks);
 ```
 
-with `useReducer` like so:
+`useReducer`lla kuten tässä:
 
 ```js
 const [tasks, dispatch] = useReducer(tasksReducer, initialTasks);
 ```
 
-The `useReducer` Hook is similar to `useState`—you must pass it an initial state and it returns a stateful value and a way to set state (in this case, the dispatch function). But it's a little different.
+`useReducer` hookki on samankaltainen kuin `useState`-hookki. Sinun täytyy antaa sille alkuarvo niin se palauttaa tilan arvon ja tavan asettaa tilan (tässä tapauksessa `dispatch`-funktio). Mutta se on hieman erilainen.
 
-The `useReducer` Hook takes two arguments:
+`useReducer` hookki ottaa kaksi argumenttia:
 
-1. A reducer function
-2. An initial state
+1. Reduktorifunktion
+2. Alkutilan
 
-And it returns:
+Ja se palauttaa:
 
-1. A stateful value
-2. A dispatch function (to "dispatch" user actions to the reducer)
+1. Tilan
+2. Toiminnonlähetysfunktion (joka "dispatchaa" käyttäjän toimintoja reduktoriin)
 
-Now it's fully wired up! Here, the reducer is declared at the bottom of the component file:
+Nyt se on täysin kytketty! Tässä reduktori on määritelty komponentin tiedoston alaosassa:
 
 <Sandpack>
 
@@ -674,7 +674,7 @@ li {
 
 </Sandpack>
 
-If you want, you can even move the reducer to a different file:
+Jos haluat, voit siirtää reduktorin eri tiedostoon:
 
 <Sandpack>
 
@@ -862,30 +862,31 @@ li {
 
 </Sandpack>
 
-Component logic can be easier to read when you separate concerns like this. Now the event handlers only specify _what happened_ by dispatching actions, and the reducer function determines _how the state updates_ in response to them.
+Komponentin logiikka on helpompi lukea, kun erotat asiat kuten tämä. Nyt tapahtumankäsittelijät määrittelevät vain _mitä tapahtui_ lähettämällä toimintoja, ja reduktori määrittelee _miten tila päivittyy_ vastaamaan niitä.
 
-## Comparing `useState` and `useReducer` {/*comparing-usestate-and-usereducer*/}
+## `useState` ja `useReducer` vertailussa {/*comparing-usestate-and-usereducer*/}
 
-Reducers are not without downsides! Here's a few ways you can compare them:
+Reduktorit eivät ole ilman haittoja! Tässä on muutamia tapoja verrata niitä:
 
-- **Code size:** Generally, with `useState` you have to write less code upfront. With `useReducer`, you have to write both a reducer function _and_ dispatch actions. However, `useReducer` can help cut down on the code if many event handlers modify state in a similar way.
-- **Readability:** `useState` is very easy to read when the state updates are simple. When they get more complex, they can bloat your component's code and make it difficult to scan. In this case, `useReducer` lets you cleanly separate the _how_ of update logic from the _what happened_ of event handlers.
-- **Debugging:** When you have a bug with `useState`, it can be difficult to tell _where_ the state was set incorrectly, and _why_. With `useReducer`, you can add a console log into your reducer to see every state update, and _why_ it happened (due to which `action`). If each `action` is correct, you'll know that the mistake is in the reducer logic itself. However, you have to step through more code than with `useState`.
-- **Testing:** A reducer is a pure function that doesn't depend on your component. This means that you can export and test it separately in isolation. While generally it's best to test components in a more realistic environment, for complex state update logic it can be useful to assert that your reducer returns a particular state for a particular initial state and action.
-- **Personal preference:** Some people like reducers, others don't. That's okay. It's a matter of preference. You can always convert between `useState` and `useReducer` back and forth: they are equivalent!
+- **Koodin koko:** Yleensä `useState` -käyttöönottoon tarvitaan vähemmän koodia. `useReducer` -käyttöönottoon tarvitaan sekä reduktori-funktio _että_ toimintoja. Kuitenkin `useReducer` voi auttaa vähentämään koodia, jos monet tapahtumankäsittelijät muuttavat tilaa samalla tavalla.
+- **Luettavuus:** `useState` on erittäin helppo lukea, kun tilan päivitykset ovat yksinkertaisia. Kun niistä tulee monimutkaisempia, ne voivat paisuttaa komponentin koodia ja tehdä sen vaikeaksi lukea. Tässä tapauksessa `useReducer`lla voit erottaa selkeästi päivityslogiikan toiminnon itse tapahtumasta.
+- **Debuggaus:** Kun sinulla on bugi `useState` hookin kanssa, se saattaa olla hankalaa selvittää _missä_ tila asetettiin väärin ja _miksi_. `useReducer` hookin kanssa voit lisätä reduktorifunktioon lokikirjauksen konsoliin, jotta näet jokaisen tilan päivityksen ja _miksi_ se tapahtui (minkä `action`in perusteella). Jos jokainen `action` on oikein, tiedät, että virhe on reduktorifunktion logiikassa. Kuitenkin sinun on käytävä läpi enemmän koodia kuin `useState` hookin kanssa.
+- **Testaaminen:** A reducer is a pure function that doesn't depend on your component. This means that you can export and test it separately in isolation. While generally it's best to test components in a more realistic environment, for complex state update logic it can be useful to assert that your reducer returns a particular state for a particular initial state and action.
+- **Testaaminen:** Reduktori on puhdas funktio, joka ei riipu komponentistasi. Tämä tarkoittaa, että voit exportata ja testata sitä erikseen eristettynä. Yleensä parasta on testata komponentteja realistisemmassa ympäristössä, mutta monimutkaisen tilan päivityslogiikan tapauksessa voi olla hyödyllistä varmistaa, että reduktori palauttaa tietyn tilan aina tiettyyn alkutilaan ja toimintoon.
+- **Oma mieltymys:** Toiset pitävät reduktoreista, toiset eivät. Se on ok. Se on mielipidekysymys. Voit aina muuttaa `useState` ja `useReducer` koodit toisistaan: ne ovat yhtä hyviä!
 
-We recommend using a reducer if you often encounter bugs due to incorrect state updates in some component, and want to introduce more structure to its code. You don't have to use reducers for everything: feel free to mix and match! You can even `useState` and `useReducer` in the same component.
+Suosittelemme käyttämään reduktoria, jos kohtaat usein virheitä tilan päivityksissä jossakin komponentissa ja haluat lisätä koodiin enemmän rakennetta. Et tarvitse reduktoria kaikkeen: käytä vapaasti! Voit jopa käyttää `useState` ja `useReducer` hookkeja samassa komponentissa.
 
-## Writing reducers well {/*writing-reducers-well*/}
+## Hyvän reduktorin kirjoittaminen {/*writing-reducers-well*/}
 
-Keep these two tips in mind when writing reducers:
+Pidä nämä kaksi vinkkiä mielessäsi, kun kirjoitat reduktoreita:
 
-- **Reducers must be pure.** Similar to [state updater functions](/learn/queueing-a-series-of-state-updates), reducers run during rendering! (Actions are queued until the next render.) This means that reducers [must be pure](/learn/keeping-components-pure)—same inputs always result in the same output. They should not send requests, schedule timeouts, or perform any side effects (operations that impact things outside the component). They should update [objects](/learn/updating-objects-in-state) and [arrays](/learn/updating-arrays-in-state) without mutations.
-- **Each action describes a single user interaction, even if that leads to multiple changes in the data.** For example, if a user presses "Reset" on a form with five fields managed by a reducer, it makes more sense to dispatch one `reset_form` action rather than five separate `set_field` actions. If you log every action in a reducer, that log should be clear enough for you to reconstruct what interactions or responses happened in what order. This helps with debugging!
+- **Reduktorien on oltava puhtaita.** Samanlailla kuin [tilan päivitysfunktiot](/learn/queueing-a-series-of-state-updates), reduktorit suoritetaan renderöinnin aikana! (Toiminnot ovat jonossa seuraavaan renderöintiin.) Tämä tarkoittaa, että reduktorien [on oltava puhtaita](/learn/keeping-components-pure)—samat lähtötiedot tuottavat aina saman lopputuloksen. Niiden ei tulisi lähettää kutsuja, ajastaa aikakatkaisuja, tai tehdä sivuvaikutuksia (toimintoja, jotka vaikuttavat asioihin komponentin ulkopuolella). Niiden tulisi päivittää [olioita](/learn/updating-objects-in-state) ja [taulukoita](/learn/updating-arrays-in-state) ilman mutaatiota.
+- **Jokainen toiminto kuvastaa yksittäisen käyttäjän vuorovaikutusta, vaikka se johtaisi useampiin muutoksiin datassa.** Esimerkiksi, jos käyttäjä painaa "Reset" painiketta lomakkeessa, jossa on viisi kenttää hallittuna reduktorilla, on järkevämpää lähettää yksi `reset_form` toiminto kuin viisi erillistä `set_field` toimintoa. Jos lokitetaan jokainen toiminto reduktorissa, lokin tulisi olla riittävän selkeä, jotta voit rakentaa mitä vuorovaikutuksia tai vastauksia tapahtui missä järjestyksessä. Tämä auttaa virheenkorjauksessa!
 
-## Writing concise reducers with Immer {/*writing-concise-reducers-with-immer*/}
+## Tiiviin reduktorin kirjoittaminen Immerin avulla {/*writing-concise-reducers-with-immer*/}
 
-Just like with [updating objects](/learn/updating-objects-in-state#write-concise-update-logic-with-immer) and [arrays](/learn/updating-arrays-in-state#write-concise-update-logic-with-immer) in regular state, you can use the Immer library to make reducers more concise. Here, [`useImmerReducer`](https://github.com/immerjs/use-immer#useimmerreducer) lets you mutate the state with `push` or `arr[i] =` assignment:
+Juuri kuten [olioiden](/learn/updating-objects-in-state#write-concise-update-logic-with-immer) ja [taulukoiden](/learn/updating-arrays-in-state#write-concise-update-logic-with-immer) päivittämisen kanssa, voit käyttää Immer kirjastoa reduktoreiden kirjoittamiseen tiiviimmäksi. Tässä, [`useImmerReducer`](https://github.com/immerjs/use-immer#useimmerreducer):n avulla voit muuttaa tilan `push` tai `arr[i] =` määrityksellä:
 
 <Sandpack>
 
@@ -1082,34 +1083,34 @@ li {
 
 </Sandpack>
 
-Reducers must be pure, so they shouldn't mutate state. But Immer provides you with a special `draft` object which is safe to mutate. Under the hood, Immer will create a copy of your state with the changes you made to the `draft`. This is why reducers managed by `useImmerReducer` can mutate their first argument and don't need to return state.
+Reduktorien on oltava puhtaita, joten niiden ei tulisi mutatoida tilaa. Mutta Immer tarjoaa sinulle erikoisen `draft`-olion, jota voi turvallisesti mutatoida. Immer luo taustalla kopion tilasta muutoksilla, jotka teit `draft`:iin. Tämän takia `useImmerReducer`:n hallinnoimat reduktorit voivat mutatoida niiden ensimmäistä argumenttiaan ja ei tarvitse palauttaa tilaa.
 
 <Recap>
 
-- To convert from `useState` to `useReducer`:
-  1. Dispatch actions from event handlers.
-  2. Write a reducer function that returns the next state for a given state and action.
-  3. Replace `useState` with `useReducer`.
-- Reducers require you to write a bit more code, but they help with debugging and testing.
-- Reducers must be pure.
-- Each action describes a single user interaction.
-- Use Immer if you want to write reducers in a mutating style.
+- `useState`sta `useReduceriin` muuttaminen:
+  1. Lähetä toimintoja tapahtumankäsittelijöistä.
+  2. Kirjoita reduktorifunktio, joka palauttaa seuraavan tilan annetulle tilalle ja toiminnolle.
+  3. Korvaa `useState` `useReducer`:lla.
+- Reduktorit vaativat hieman enemmän koodia, mutta ne auttavat virheenetsinnässä ja testauksessa.
+- Reduktorien on oltava puhtaita.
+- Kullakin toiminnolla on yksi käyttäjän vuorovaikutus.
+- Käytä Immeriä, jos haluat kirjoittaa reduktorit muuttavalla tyylillä.
 
 </Recap>
 
 <Challenges>
 
-#### Dispatch actions from event handlers {/*dispatch-actions-from-event-handlers*/}
+#### Lähetä toimintoja tapahtumankäsittelijöistä {/*dispatch-actions-from-event-handlers*/}
 
-Currently, the event handlers in `ContactList.js` and `Chat.js` have `// TODO` comments. This is why typing into the input doesn't work, and clicking on the buttons doesn't change the selected recipient.
+Tällä hetkellä, tapahtumankäsittelijät `ContactList.js` ja `Chat.js` tiedostoissa sisältävät `// TODO` kommentteja. Tämän takia kirjoittaminen ei toimi ja nappien painaminen ei vaihda valittua vastaanottajaa.
 
-Replace these two `// TODO`s with the code to `dispatch` the corresponding actions. To see the expected shape and the type of the actions, check the reducer in `messengerReducer.js`. The reducer is already written so you won't need to change it. You only need to dispatch the actions in `ContactList.js` and `Chat.js`.
+Korvaa nämä kaksi `// TODO` kommenttia koodilla, joka lähettää `dispatch`llä toimintoja. Katso toiminnon odotettu muoto ja tyyppi reduktorista, `messengerReducer.js` tiedostosta. Reduktori on jo kirjoitettu, joten sinun ei tarvitse muuttaa sitä. Sinun tarvitsee vain lähettää toimintoja `ContactList.js` ja `Chat.js` tiedostoissa.
 
 <Hint>
 
-The `dispatch` function is already available in both of these components because it was passed as a prop. So you need to call `dispatch` with the corresponding action object.
+`dispatch` funktio on jo saatavilla molemmissa näissä komponenteissa, sillä se välitettiin propsina. Joten sinun täytyy kutsua `dispatch` funktiota vastaavalla toiminto-olio.
 
-To check the action object shape, you can look at the reducer and see which `action` fields it expects to see. For example, the `changed_selection` case in the reducer looks like this:
+Katso toiminto-olion muoto reduktorista ja katso mitä `action` kenttiä se odottaa näkevänsä. Esimerkiksi `changed_selection` tapauksessa reduktorissa näyttää tältä:
 
 ```js
 case 'changed_selection': {
@@ -1120,7 +1121,7 @@ case 'changed_selection': {
 }
 ```
 
-This means that your action object should have a `type: 'changed_selection'`. You also see the `action.contactId` being used, so you need to include a `contactId` property into your action.
+Tämä tarkoittaa, että toiminto-oliosi pitäisi sisältää `type: 'changed_selection'` kentän. Voit myös nähdä, että `action.contactId`:tä käytetään, joten sinun on sisällytettävä `contactId` kenttä toiminto-olioosi.
 
 </Hint>
 
@@ -1256,23 +1257,23 @@ textarea {
 
 <Solution>
 
-From the reducer code, you can infer that actions need to look like this:
+Reduktorin koodista voit päätellä toimintojen on näytettävä tältä:
 
 ```js
-// When the user presses "Alice"
+// Kun käyttäjä painaa "Alice"
 dispatch({
   type: 'changed_selection',
   contactId: 1,
 });
 
-// When user types "Hello!"
+// Kun käyttäjä kirjoittaa "Hello!"
 dispatch({
   type: 'edited_message',
   message: 'Hello!',
 });
 ```
 
-Here is the example updated to dispatch the corresponding messages:
+Tässä on esimerkki päivitetty lähettämään vastaavat viestit:
 
 <Sandpack>
 
@@ -1411,12 +1412,12 @@ textarea {
 
 </Solution>
 
-#### Clear the input on sending a message {/*clear-the-input-on-sending-a-message*/}
+#### Tyhjää viestikenttä lähettämisen jälkeen {/*clear-the-input-on-sending-a-message*/}
 
-Currently, pressing "Send" doesn't do anything. Add an event handler to the "Send" button that will:
+Tällä hetkellä, "Lähetä" ei tee mitään. Lisää tapahtumankäsittelijä "Lähetä" painikkeelle, joka tekee seuraavat asiat:
 
-1. Show an `alert` with the recipient's email and the message.
-2. Clear the message input.
+1. Näytä `alert` vastaanottajan sähköpostiosoitteella ja viestillä.
+2. Tyhjää viestikenttä lähettämisen jälkeen.
 
 <Sandpack>
 
@@ -1555,7 +1556,7 @@ textarea {
 
 <Solution>
 
-There are a couple of ways you could do it in the "Send" button event handler. One approach is to show an alert and then dispatch an `edited_message` action with an empty `message`:
+On muutama tapa, jolla voit tehdä sen "Lähetä" painikkeen tapahtumankäsittelijässä. Yksi tapa on näyttää `alert` ja sitten lähettää `edited_message` toiminto tyhjällä `message` kentällä:
 
 <Sandpack>
 
@@ -1701,9 +1702,9 @@ textarea {
 
 </Sandpack>
 
-This works and clears the input when you hit "Send".
+Tämä toimii ja tyhjää kentän kun painat "Lähetä".
 
-However, _from the user's perspective_, sending a message is a different action than editing the field. To reflect that, you could instead create a _new_ action called `sent_message`, and handle it separately in the reducer:
+Kuitenkin, _käyttäjän näkökulmasta_, viestin lähettäminen on eri toiminto kuin kentän muokkaaminen. Tätä vastatakseen, voisit luoda _uuden_ toiminnon nimeltä `sent_message`, ja käsitellä sitä erikseen reduktorissa:
 
 <Sandpack>
 
@@ -1854,15 +1855,15 @@ textarea {
 
 </Sandpack>
 
-The resulting behavior is the same. But keep in mind that action types should ideally describe "what the user did" rather than "how you want the state to change". This makes it easier to later add more features.
+Lopullinen tulos on sama. Pidä kuitenkin mielessä, että toiminto-tyyppien tulisi ideaalisti kuvata "mitä käyttäjä teki" toisin kuin "miten haluat tilan muuttuvan". Tämä tekee uusien ominaisuuksien lisäämisestä helpompaa myöhemmin.
 
-With either solution, it's important that you **don't** place the `alert` inside a reducer. The reducer should be a pure function--it should only calculate the next state. It should not "do" anything, including displaying messages to the user. That should happen in the event handler. (To help catch mistakes like this, React will call your reducers multiple times in Strict Mode. This is why, if you put an alert in a reducer, it fires twice.)
+Molemmilla vaihtoehdoilla, on tärkeää, että **et* sijoita `alert` kutsua reduktorin sisään. Reduktorin tulisi olla puhdas funktio--sen tulisi laskea vain seuraava tila. Sen ei tulisi "tehdä" mitään, mukaanlukien näyttää käyttäjälle viestiä. Sen tulisi tapahtua tapahtumakäsittelijässä. (Helpottaaksesi tämän kaltaisten virheiden löytämistä, React kutsuu reduktoreitasi useita kertoja StrictModessa. Tämän takia jos laitat ilmoituksen reduktoriin, sitä kutsutaan kahdesti.)
 
 </Solution>
 
-#### Restore input values when switching between tabs {/*restore-input-values-when-switching-between-tabs*/}
+#### Palauta syöttölaatikon arvot välilehtiä vaihtaessa {/*restore-input-values-when-switching-between-tabs*/}
 
-In this example, switching between different recipients always clears the text input:
+Tässä esimerkissä, vaihtaminen vastaanottajien välillä tyhjää aina tekstisyötteen:
 
 ```js
 case 'changed_selection': {
@@ -1873,25 +1874,25 @@ case 'changed_selection': {
   };
 ```
 
-This is because you don't want to share a single message draft between several recipients. But it would be better if your app "remembered" a draft for each contact separately, restoring them when you switch contacts.
+Tämä tapahtuu, sillä et halua jakaa yhtä viestin luonnosta useiden vastaanottajien välillä. Mutta olisi parempi, jos sovellus "muistaisi" luonnoksen jokaiselle vastaanottajalle erikseen, ja palauttaisi sen, kun vaihdat vastaanottajia.
 
-Your task is to change the way the state is structured so that you remember a separate message draft _per contact_. You would need to make a few changes to the reducer, the initial state, and the components.
+Tehtäväsi on muuttaa tilan rakennetta siten, että muistat erillisen viestin luonnoksen _jokaiselle vastaanottajalle_. Sinun täytyy tehdä muutamia muutoksia reduktoriin, alkutilaan ja komponentteihin.
 
 <Hint>
 
-You can structure your state like this:
+Voit rakentaa tilasi näin:
 
 ```js
 export const initialState = {
   selectedId: 0,
   messages: {
-    0: 'Hello, Taylor', // Draft for contactId = 0
-    1: 'Hello, Alice', // Draft for contactId = 1
+    0: 'Hello, Taylor', // Luonnos kontaktille contactId = 0
+    1: 'Hello, Alice', // Luonnos kontaktille contactId = 1
   },
 };
 ```
 
-The `[key]: value` [computed property](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Object_initializer#computed_property_names) syntax can help you update the `messages` object:
+`[key]: value` [computed property](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Object_initializer#computed_property_names) -syntaksi saattaa auttaa `messages` olion päivittämisessä:
 
 ```js
 {
@@ -2053,31 +2054,31 @@ textarea {
 
 <Solution>
 
-You'll need to update the reducer to store and update a separate message draft per contact:
+Sinun täytyy päivittää reduktori tallentamaan ja päivittämään erilliset luonnosviestit jokaista vastaanottajaa kohtaan:
 
 ```js
-// When the input is edited
+// Kun kenttää muokataan
 case 'edited_message': {
   return {
-    // Keep other state like selection
+    // Pidä muu tila, kuten valinnat
     ...state,
     messages: {
-      // Keep messages for other contacts
+      // Pidä viestit muille yhteystiedoille
       ...state.messages,
-      // But change the selected contact's message
+      // Mutta muuta valitun yhteystiedon viesti
       [state.selectedId]: action.message
     }
   };
 }
 ```
 
-You would also update the `Messenger` component to read the message for the currently selected contact:
+Voisit myös päivittää `Messenger` komponentin lukemaan viestin valitulle yhteystiedolle:
 
 ```js
 const message = state.messages[state.selectedId];
 ```
 
-Here is the complete solution:
+Tässä on kokonaisuus:
 
 <Sandpack>
 
@@ -2237,19 +2238,19 @@ textarea {
 
 </Sandpack>
 
-Notably, you didn't need to change any of the event handlers to implement this different behavior. Without a reducer, you would have to change every event handler that updates the state.
+Huomaa, että sinun ei tarvinnut muuttaa yhtään tapahtumankäsittelijää tämän erilaisen toiminnan toteuttamiseksi. Ilman reduktoria sinun olisi pitänyt muuttaa jokainen tapahtumankäsittelijä, joka päivittää tilaa.
 
 </Solution>
 
-#### Implement `useReducer` from scratch {/*implement-usereducer-from-scratch*/}
+#### Toteuta `useReducer` alusta asti {/*implement-usereducer-from-scratch*/}
 
-In the earlier examples, you imported the `useReducer` Hook from React. This time, you will implement _the `useReducer` Hook itself!_ Here is a stub to get you started. It shouldn't take more than 10 lines of code.
+Aiemmissa esimerkeissä importtasit `useReducer` hookin Reactista. Tällä kertaa tulet toteuttamaan _`useReducer` hookin itse!_ Tässä on pohja päästäksesi alkuun. Sen ei tulisi vie enempää kuin 10 riviä koodia.
 
-To test your changes, try typing into the input or select a contact.
+Testataksesi muutoksiasi, yritä kirjoittaa tekstiä kenttään tai valitse yhteystieto.
 
 <Hint>
 
-Here is a more detailed sketch of the implementation:
+Tässä on tarkempi luonnos toteutuksesta:
 
 ```js
 export function useReducer(reducer, initialState) {
@@ -2263,7 +2264,7 @@ export function useReducer(reducer, initialState) {
 }
 ```
 
-Recall that a reducer function takes two arguments--the current state and the action object--and it returns the next state. What should your `dispatch` implementation do with it?
+Muista, että reduktorifunktio otta kaksi argumenttia: nykyisen tilan ja toimintotiedon. Se palauttaa seuraavan tilan. Mitä `dispatch`-toimintosi tulisi tehdä sen kanssa?
 
 </Hint>
 
@@ -2439,7 +2440,7 @@ textarea {
 
 <Solution>
 
-Dispatching an action calls a reducer with the current state and the action, and stores the result as the next state. This is what it looks like in code:
+Toiminnon lähettäminen kutsuu reduktoria nykyisen tilan ja toiminnon kanssa ja tallentaa tuloksen seuraavaksi tilaksi. Tältä se näyttää koodissa:
 
 <Sandpack>
 
@@ -2614,7 +2615,7 @@ textarea {
 
 </Sandpack>
 
-Though it doesn't matter in most cases, a slightly more accurate implementation looks like this:
+Vaikka sillä ei ole väliä useimmissa tapauksissa, tarkempi toteutus näyttää tältä:
 
 ```js
 function dispatch(action) {
@@ -2622,7 +2623,7 @@ function dispatch(action) {
 }
 ```
 
-This is because the dispatched actions are queued until the next render, [similar to the updater functions.](/learn/queueing-a-series-of-state-updates)
+Tämä johtuu siitä, että lähetetyt toiminnot jonotetaan seuraavaan renderöintiin, [kuten päivittäjäfunktioihin.](/learn/queueing-a-series-of-state-updates)
 
 </Solution>
 
