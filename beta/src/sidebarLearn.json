@@ -9,7 +9,7 @@
       "routes": [
         {
           "hasSectionHeader": true,
-          "sectionHeader": "Get Started"
+          "sectionHeader": "Aloitus"
         },
         {
           "title": "Asennus",
@@ -135,23 +135,23 @@
               "path": "/learn/reacting-to-input-with-state"
             },
             {
-              "title": "Choosing the State Structure",
+              "title": "Tilarakenteen päättäminen",
               "path": "/learn/choosing-the-state-structure"
             },
             {
-              "title": "Sharing State Between Components",
+              "title": "Tilan jakaminen komponenttien välillä",
               "path": "/learn/sharing-state-between-components"
             },
             {
-              "title": "Preserving and Resetting State",
+              "title": "Tilan säilyttäminen ja nollaus",
               "path": "/learn/preserving-and-resetting-state"
             },
             {
-              "title": "Extracting State Logic into a Reducer",
+              "title": "Tilalogiikan siirtäminen reduktoriin",
               "path": "/learn/extracting-state-logic-into-a-reducer"
             },
             {
-              "title": "Passing Data Deeply with Context",
+              "title": "Tiedon välittäminen syvälle kontekstilla",
               "path": "/learn/passing-data-deeply-with-context"
             },
             {
@@ -201,10 +201,10 @@
         },
         {
           "hasSectionHeader": true,
-          "sectionHeader": "About React"
+          "sectionHeader": "Tietoa Reactista"
         },
         {
-          "title": "Community",
+          "title": "Yhteisö",
           "path": "/community",
           "routes": [
             {
@@ -238,7 +238,7 @@
           ]
         },
         {
-          "title": "Blog",
+          "title": "Blogi",
           "path": "/blog",
           "routes": [
             {

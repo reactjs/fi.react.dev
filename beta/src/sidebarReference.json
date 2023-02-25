@@ -1,5 +1,5 @@
 {
-  "title": "API Reference",
+  "title": "API viite",
   "heading": true,
   "path": "/reference/react",
   "routes": [
@@ -9,10 +9,10 @@
       "routes": [
         {
           "hasSectionHeader": true,
-          "sectionHeader": "'react' package"
+          "sectionHeader": "'react' paketti"
         },
         {
-          "title": "Components",
+          "title": "Komponentit",
           "path": "/reference/react/components",
           "routes": [
             {
@@ -34,7 +34,7 @@
           ]
         },
         {
-          "title": "Hooks",
+          "title": "Hookit",
           "path": "/reference/react",
           "routes": [
             {
@@ -100,7 +100,7 @@
           ]
         },
         {
-          "title": "APIs",
+          "title": "API:t",
           "path": "/reference/react/apis",
           "routes": [
             {
@@ -127,14 +127,14 @@
         },
         {
           "hasSectionHeader": true,
-          "sectionHeader": "'react-dom' package"
+          "sectionHeader": "'react-dom' paketti"
         },
         {
-          "title": "Components",
+          "title": "Komponentit",
           "path": "/reference/react-dom/components",
           "routes": [
             {
-              "title": "Common (e.g. <div>)",
+              "title": "Yleiset (esim. <div>)",
               "path": "/reference/react-dom/components/common"
             },
             {
@@ -160,7 +160,7 @@
           ]
         },
         {
-          "title": "APIs",
+          "title": "API:t",
           "path": "/reference/react-dom",
           "routes": [
             {
@@ -190,7 +190,7 @@
           ]
         },
         {
-          "title": "Client APIs",
+          "title": "Asiakaspuolen API:t",
           "path": "/reference/react-dom/client",
           "routes": [
             {
@@ -204,7 +204,7 @@
           ]
         },
         {
-          "title": "Server APIs",
+          "title": "Palvelinpuolen API:t",
           "path": "/reference/react-dom/server",
           "routes": [
             {
@@ -235,10 +235,10 @@
         },
         {
           "hasSectionHeader": true,
-          "sectionHeader": "Legacy APIs"
+          "sectionHeader": "Vanhat API:t"
         },
         {
-          "title": "Legacy React APIs",
+          "title": "Vanhat React API:t",
           "path": "/reference/react/legacy",
           "routes": [
             {
