@@ -421,7 +421,7 @@ export default function ContactList({selectedContact, contacts, onSelect}) {
               {contact.name}
             </button>
           </li>
-        ))}
+        )}
       </ul>
     </section>
   );
