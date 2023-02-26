@@ -1,5 +1,5 @@
 ---
-title: Scaling Up with Reducer and Context
+title: Ylösskaalaus reduktorin ja kontekstin avulla
 ---
 
 <Intro>
