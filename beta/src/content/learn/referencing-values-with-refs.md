@@ -1,49 +1,49 @@
 ---
-title: 'Referencing Values with Refs'
+title: 'Arvoihin viittaaminen Refillä'
 ---
 
 <Intro>
 
-When you want a component to "remember" some information, but you don't want that information to [trigger new renders](/learn/render-and-commit), you can use a *ref*.
+Kun haluat komponentin "muistavan" jotain tietoa, mutta et halua tiedon [triggeröivän uudelleenrenderöintiä](/learn/render-and-commit), voit käyttää *refiä*.
 
 </Intro>
 
 <YouWillLearn>
 
-- How to add a ref to your component
-- How to update a ref's value
-- How refs are different from state
-- How to use refs safely
+- Miten lisätä ref komponenttiisi
+- Miten päivittää refin arvo
+- Miten refit eroavat tilasta
+- Miten käyttää refiä turvallisesti
 
 </YouWillLearn>
 
-## Adding a ref to your component {/*adding-a-ref-to-your-component*/}
+## Refin lisääminen komponenttiisi {/*adding-a-ref-to-your-component*/}
 
-You can add a ref to your component by importing the `useRef` Hook from React:
+Voit lisätä refin komponenttiisi importaamalla `useRef` Hookin Reactista:
 
 ```js
 import { useRef } from 'react';
 ```
 
-Inside your component, call the `useRef` Hook and pass the initial value that you want to reference as the only argument. For example, here is a ref to the value `0`:
+Komponenttisi sisällä kutsu `useRef` hookkia ja välitä oletusarvo, jota haluat viitata ainoana argumenttina. Esimerkiksi, tässä on ref arvolla `0`:
 
 ```js
 const ref = useRef(0);
 ```
 
-`useRef` returns an object like this:
+`useRef` palauttaa seuraavanlaisen olion:
 
 ```js
 { 
-  current: 0 // The value you passed to useRef
+  current: 0 // Arvo, jonka välitit useRef funktiolle
 }
 ```
 
-<Illustration src="/images/docs/illustrations/i_ref.png" alt="An arrow with 'current' written on it stuffed into a pocket with 'ref' written on it." />
+<Illustration src="/images/docs/illustrations/i_ref.png" alt="Nuoli jossa on 'current' kirjoitettuna, joka on sijoitettu taskuun jossa on 'ref' kirjoitettuna." />
 
-You can access the current value of that ref through the `ref.current` property. This value is intentionally mutable, meaning you can both read and write to it. It's like a secret pocket of your component that React doesn't track. (This is what makes it an "escape hatch" from React's one-way data flow--more on that below!)
+Pääset käsiksi nykyiseen refin arvoon `ref.current` ominaisuuden kautta. Tämä arvo on tarkoituksella muokattavissa, eli voit sekä lukea että kirjoittaa siihen. Se on kuin salainen tasku komponentissasi, jota React ei seuraa. (Tämä on se mikä tekee refistä "pelastusluukun" Reactin yksisuuntaisesta datavirtauksesta--josta alla lisää!)
 
-Here, a button will increment `ref.current` on every click:
+Täss, painike kasvattaa `ref.current` arvoa joka kerta kun sitä painetaan:
 
 <Sandpack>
 
@@ -68,20 +68,20 @@ export default function Counter() {
 
 </Sandpack>
 
-The ref points to a number, but, like [state](/learn/state-a-components-memory), you could point to anything: a string, an object, or even a function. Unlike state, ref is a plain JavaScript object with the `current` property that you can read and modify.
+Ref osoittaa numeroon, mutta, kuten [tila](/learn/state-a-components-memory), voit viitata mihin tahansa: merkkijonoon, olioon tai jopa funktioon. Tilaan verrattuna, ref on tavallinen JavaScript-olio, jolla on `current`-ominaisuus, jota voit lukea ja muokata.
 
-Note that **the component doesn't re-render with every increment.** Like state, refs are retained by React between re-renders. However, setting state re-renders a component. Changing a ref does not!
+Huomaa, että **komponentti ei renderöidy uudelleen joka kerta kun arvo kasvaa.** Kuten tila, refit säilyvät Reactin uudelleenrenderöintien välillä. Kuitenkin, tilan asettaminen uudelleenrenderöi komponentin. Refin päivittäminen ei!
 
-## Example: building a stopwatch {/*example-building-a-stopwatch*/}
+## Esimerkki: sekuntikellon rakentaminen {/*example-building-a-stopwatch*/}
 
-You can combine refs and state in a single component. For example, let's make a stopwatch that the user can start or stop by pressing a button. In order to display how much time has passed since the user pressed "Start", you will need to keep track of when the Start button was pressed and what the current time is. **This information is used for rendering, so you'll keep it in state:**
+Voit yhdistää refin ja tilan samaan komponenttiin. Esimerkiksi, tehdään sekuntikello, jonka käyttäjä voi käynnistää tai pysäyttää nappia painamalla. Jotta voidaan näyttää kuinka paljon aikaa on kulunut siitä kun käyttäjä on painanut "Start" nappia, sinun täytyy pitää kirjaa siitä milloin käyttäjä painoi "Start" nappia ja mitä nykyinen aika on. **Tätä tietoa käytetään renderöinnissä, joten pidä se tilassa:**
 
 ```js
 const [startTime, setStartTime] = useState(null);
 const [now, setNow] = useState(null);
 ```
 
-When the user presses "Start", you'll use [`setInterval`](https://developer.mozilla.org/docs/Web/API/setInterval) in order to update the time every 10 milliseconds:
+Kun käyttäjä painaa "Start", käytät [`setInterval`](https://developer.mozilla.org/docs/Web/API/setInterval) funktiota päivittääksesi ajan joka 10 millisekuntin välien:
 
 <Sandpack>
 
@@ -93,12 +93,12 @@ export default function Stopwatch() {
   const [now, setNow] = useState(null);
 
   function handleStart() {
-    // Start counting.
+    // Aloita laskeminen.
     setStartTime(Date.now());
     setNow(Date.now());
 
     setInterval(() => {
-      // Update the current time every 10ms.
+      // Päivitä tämänhetkinen aika joka 10ms välein.
       setNow(Date.now());
     }, 10);
   }
@@ -121,7 +121,7 @@ export default function Stopwatch() {
 
 </Sandpack>
 
-When the "Stop" button is pressed, you need to cancel the existing interval so that it stops updating the `now` state variable. You can do this by calling [`clearInterval`](https://developer.mozilla.org/en-US/docs/Web/API/clearInterval), but you need to give it the interval ID that was previously returned by the `setInterval` call when the user pressed Start. You need to keep the interval ID somewhere. **Since the interval ID is not used for rendering, you can keep it in a ref:**
+Kun "Stop" nappia painetaan, sinun täytyy peruuttaa olemassa oleva ajastin, jotta se lopettaa `now` tilamuuttujan päivittämisen. Voit tehdä tämän kutsumalla [`clearInterval`](https://developer.mozilla.org/en-US/docs/Web/API/clearInterval) funktiota, mutta sinun täytyy antaa sille ajastimen ID, joka palautettiin aiemmin `setInterval` kutsun kautta kun käyttäjä painoi "Start". Sinun täytyy pitää ajastimen ID jossain. **Koska ajastimen ID:tä ei käytetä renderöinnissä, voit pitää sen refissä:**
 
 <Sandpack>
 
@@ -168,20 +168,20 @@ export default function Stopwatch() {
 
 </Sandpack>
 
-When a piece of information is used for rendering, keep it in state. When a piece of information is only needed by event handlers and changing it doesn't require a re-render, using a ref may be more efficient.
+Kun tietoa käytetään renderöinnissä, pidä se tilassa. Kun tietoa tarvitaan vain tapahtumankäsittelijöissä ja sen muuttaminen ei vaadi uudelleenrenderöintiä, refin käyttäminen voi olla tehokkaampaa.
 
-## Differences between refs and state {/*differences-between-refs-and-state*/}
+## Refin ja tilan erot {/*differences-between-refs-and-state*/}
 
-Perhaps you're thinking refs seem less "strict" than state—you can mutate them instead of always having to use a state setting function, for instance. But in most cases, you'll want to use state. Refs are an "escape hatch" you won't need often. Here's how state and refs compare:
+Ehkäpä ajattelet, että refit vaikuttavat vähemmän "tiukilta" kuin tila—voit muokata niitä tilan asettamisfunktion käyttämisen sijaan. Mutta useimmissa tapauksissa haluat käyttää tilaa. Refit ovat "pelastusluukku", jota et tarvitse usein. Tässä on miten tila ja refit vastaavat toisiaan:
 
-| refs                                                                                  | state                                                                                                                     |
-| ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------- |
-| `useRef(initialValue)` returns `{ current: initialValue }`                            | `useState(initialValue)` returns the current value of a state variable and a state setter function ( `[value, setValue]`) |
-| Doesn't trigger re-render when you change it.                                         | Triggers re-render when you change it.                                                                                    |
-| Mutable—you can modify and update `current`'s value outside of the rendering process. | "Immutable"—you must use the state setting function to modify state variables to queue a re-render.                       |
-| You shouldn't read (or write) the `current` value during rendering. | You can read state at any time. However, each render has its own [snapshot](/learn/state-as-a-snapshot) of state which does not change.
+| ref                                                                                           | tila                                                                                                                          |
+| --------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- |
+| `useRef(initialValue)` palauttaa `{ current: initialValue }`                                  | `useState(initialValue)` palauttaa tilamuuttujan nykyisen arvon ja tilan asetusfunktion ( `[value, setValue]`)                |
+| Ei triggeröi uudelleenrenderöintiä kun muutat sitä.                                           | Triggeröi uudelleenrenderöinnin kun muutat sitä.                                                                              |
+| Mutatoitavissa—voit muokata ja päivittää `current`:n arvoa renderöintiprosessin ulkopuolella. | Ei-mutatoitavissa—sinun täytyy käyttää tilan asetusfunktiota muokataksesi tilamuuttujaa jonottaaksesi uudelleenrenderöinti.   |
+| Sinuun ei tulisi lukea (tai kirjoittaa) `current` arvoa kesken renderöinnin. | Voit lukea tilaa koska tahansa. Kuitenkin, jokaisella renderöinnillä on oma [tilakuvansa](/learn/state-as-a-snapshot) tilasta, joka ei muutu.  |
 
-Here is a counter button that's implemented with state:
+Tässä on laskuri-painike, joka on toteutettu tilalla:
 
 <Sandpack>
 
@@ -205,9 +205,9 @@ export default function Counter() {
 
 </Sandpack>
 
-Because the `count` value is displayed, it makes sense to use a state value for it. When the counter's value is set with `setCount()`, React re-renders the component and the screen updates to reflect the new count.
+Koska `count` arvo näytetään, on järkevää käyttää tilaa arvon tallentamiseen. Kun laskurin arvo asetetaan `setCount()` funktiolla, React renderöi komponentin uudelleen ja ruutu päivittyy vastaamaan uutta arvoa.
 
-If you tried to implement this with a ref, React would never re-render the component, so you'd never see the count change! See how clicking this button **does not update its text**:
+Jos yrität toteuttaa tämän refillä, React ei koskaan renderöi komponenttia uudelleen, joten et koskaan näe laskurin arvon muuttuvan! Katso miten tämän painikkeen klikkaaminen **ei päivitä sen tekstiä**:
 
 <Sandpack>
 
@@ -218,7 +218,7 @@ export default function Counter() {
   let countRef = useRef(0);
 
   function handleClick() {
-    // This doesn't re-render the component!
+    // Tämä ei uudeleenrenderöi komponenttia!
     countRef.current = countRef.current + 1;
   }
 
@@ -232,68 +232,68 @@ export default function Counter() {
 
 </Sandpack>
 
-This is why reading `ref.current` during render leads to unreliable code. If you need that, use state instead.
+Tämä on syy miksi refin `current` arvon lukeminen renderöinnin aikana johtaa epäluotettavaan koodiin. Jos tarvitset tätä, käytä tilaa sen sijaan.
 
 <DeepDive>
 
-#### How does useRef work inside? {/*how-does-use-ref-work-inside*/}
+#### Miten useRef toimii? {/*how-does-use-ref-work-inside*/}
 
-Although both `useState` and `useRef` are provided by React, in principle `useRef` could be implemented _on top of_ `useState`. You can imagine that inside of React, `useRef` is implemented like this:
+Vaikka sekä `useState` että `useRef` on tarjottu Reactin puolesta, periaatteessa `useRef` voitaisiin toteuttaa `useState`:n päälle. Voit kuvitella, että Reactin sisällä `useRef` on toteutettu näin:
 
 ```js
-// Inside of React
+// Reactin sisällä
 function useRef(initialValue) {
   const [ref, unused] = useState({ current: initialValue });
   return ref;
 }
 ```
 
-During the first render, `useRef` returns `{ current: initialValue }`. This object is stored by React, so during the next render the same object will be returned. Note how the state setter is unused in this example. It is unnecessary because `useRef` always needs to return the same object!
+Ensimmäisen renderöinnin aikana, `useRef` palauttaa `{ current: initialValue }`. Tämä olio tallennetaan Reactin puolelle, joten seuraavalla renderöinnillä sama olio palautetaan. Huomaa, että tilan asetusfunktiota ei käytetä tässä esimerkissä. Se on tarpeeton, koska `useRef`:n tarvitsee aina palauttaa sama olio!
 
-React provides a built-in version of `useRef` because it is common enough in practice. But you can think of it as a regular state variable without a setter. If you're familiar with object-oriented programming, refs might remind you of instance fields--but instead of `this.something` you write `somethingRef.current`.
+React tarjoaa sisäänrakennetun version `useRef`:sta koska se on tarpeeksi yleinen. Mutta voit ajatella sitä tavallisena tilamuuttujana ilman asetusfunktiota. Jos olet tutustunut olio-ohjelmointiin, refit voivat muistuttaa sinua instanssimuuttujista, mutta `this.something` sijaan kirjoitat `somethingRef.current`.
 
 </DeepDive>
 
-## When to use refs {/*when-to-use-refs*/}
+## Milloin käyttää refiä {/*when-to-use-refs*/}
 
-Typically, you will use a ref when your component needs to "step outside" React and communicate with external APIs—often a browser API that won't impact the appearance of the component. Here are a few of these rare situations:
+Tyypillisesti, käytät refiä kun komponenttisi täytyy "astua Reactin ulkopuolelle" ja kommunikoida ulkoisten rajapintojen kanssa—usein selaimen API:n, joka ei vaikuta komponentin ulkonäköön. Tässä on muutamia näitä harvinaisia tilanteita:
 
-- Storing [timeout IDs](https://developer.mozilla.org/docs/Web/API/setTimeout)
-- Storing and manipulating [DOM elements](https://developer.mozilla.org/docs/Web/API/Element), which we cover on [the next page](/learn/manipulating-the-dom-with-refs)
-- Storing other objects that aren't necessary to calculate the JSX.
+- Tallentaakseen [ajastimen ID:t](https://developer.mozilla.org/docs/Web/API/setTimeout)
+- Tallentaakseen ja muokatakseen [DOM elementtejä](https://developer.mozilla.org/docs/Web/API/Element), joita käsittelemme [seuraavalla sivulla](/learn/manipulating-the-dom-with-refs)
+- Tallentaakseen muita oliota, jotka eivät ole tarpeellisia JSX:n laskemiseen.
 
-If your component needs to store some value, but it doesn't impact the rendering logic, choose refs.
+Jos komponenttisi tarvitsee tallentaa arvoa, mutta se ei vaikuta renderöinnin logiikkaan, valitse ref.
 
-## Best practices for refs {/*best-practices-for-refs*/}
+## Parhaat käytännöt refille {/*best-practices-for-refs*/}
 
-Following these principles will make your components more predictable:
+Näitä periaatteita noudattaen komponenteistasi tulee ennakoitavampia:
 
-- **Treat refs as an escape hatch.** Refs are useful when you work with external systems or browser APIs. If much of your application logic and data flow relies on refs, you might want to rethink your approach.
-- **Don't read or write `ref.current` during rendering.** If some information is needed during rendering, use [state](/learn/state-a-components-memory) instead. Since React doesn't know when `ref.current` changes, even reading it while rendering makes your component's behavior difficult to predict. (The only exception to this is code like `if (!ref.current) ref.current = new Thing()` which only sets the ref once during the first render.)
+- **Käsittele refejä kuten pelastusluukkua.** Refit ovat hyödyllisiä kun työskentelet ulkoisten järjestelmien tai selaimen API:n kanssa. Jos suuri osa sovelluksesi logiikasta ja datavirtauksesta riippuu refeistä, saatat haluta miettiä lähestymistapaasi uudelleen.
+- **Älä lue tai kirjoita `ref.current`:iin kesken renderöinnin.** Jos jotain tietoa tarvitaan kesken renderöinnin, käytä [tilaa](/learn/state-a-components-memory) sen sijaan. Koska React ei tiedä milloin `ref.current` muuttuu, jopa sen lukeminen renderöinnin aikana tekee komponenttisi käyttäytymisestä vaikeasti ennakoitavaa. (Ainoa poikkeus tähän on koodi kuten `if(!ref.current) ref.current = new Thing()` joka asettaa refin vain kerran ensimäisellä renderöinnillä.)
 
-Limitations of React state don't apply to refs. For example, state acts like a [snapshot for every render](/learn/state-as-a-snapshot) and [doesn't update synchronously.](/learn/queueing-a-series-of-state-updates) But when you mutate the current value of a ref, it changes immediately:
+Reactin tilan rajoitukset eivät päde refiin. Esimerkiksi tila toimii [tilannekuvana jokaiselle renderöinnille](/learn/state-as-a-snapshot) ja [se ei päivity synkronisesti.](/learn/queueing-a-series-of-state-updates) Mutta kun muokkaat refin nykyistä arvoa, se muuttuu välittömästi:
 
 ```js
 ref.current = 5;
 console.log(ref.current); // 5
 ```
 
-This is because **the ref itself is a regular JavaScript object,** and so it behaves like one.
+Tämä johtuu siitä, että **ref on tavallinen JavaScript olio**, joten se käyttäytyy samoin.
 
-You also don't need to worry about [avoiding mutation](/learn/updating-objects-in-state) when you work with a ref. As long as the object you're mutating isn't used for rendering, React doesn't care what you do with the ref or its contents.
+Sinun ei myöskään tarvitse huolehtia [mutaatioiden välttämistä](/learn/updating-objects-in-state), kun työskentelet refin kanssa. Jos olio, jota muutat ei ole käytössä renderöinnissä, React ei välitä mitä teet refin tai sen sisällön kanssa.
 
-## Refs and the DOM {/*refs-and-the-dom*/}
+## Ref ja DOM {/*refs-and-the-dom*/}
 
-You can point a ref to any value. However, the most common use case for a ref is to access a DOM element. For example, this is handy if you want to focus an input programmatically. When you pass a ref to a `ref` attribute in JSX, like `<div ref={myRef}>`, React will put the corresponding DOM element into `myRef.current`. You can read more about this in [Manipulating the DOM with Refs.](/learn/manipulating-the-dom-with-refs)
+Voit osoittaa refin mihin tahansa arvoon. Kuitenkin yleisin käyttökohde refille on DOM elementin käsittely. Esimerkiksi, tämä on kätevää jos haluat focusoida syöttölaatikon ohjelmakoodissa. Kun annat refin `ref`-attribuuttiin JSX:ssä, kuten `<div ref={myRef}>`, React asettaa vastaavan DOM elementin `myRef.current`:iin. Voit lukea lisää tästä [Manipulating the DOM with Refs.](/learn/manipulating-the-dom-with-refs)
 
 <Recap>
 
-- Refs are an escape hatch to hold onto values that aren't used for rendering. You won't need them often.
-- A ref is a plain JavaScript object with a single property called `current`, which you can read or set.
-- You can ask React to give you a ref by calling the `useRef` Hook.
-- Like state, refs let you retain information between re-renders of a component.
-- Unlike state, setting the ref's `current` value does not trigger a re-render.
-- Don't read or write `ref.current` during rendering. This makes your component hard to predict.
+- Refit ovat pelastusluukku arvojen pitämiseen, jotka eivät ole käytössä renderöinnissä. Et tarvitse niitä usein.
+- Ref on perus JavaScript-olio, jolla on yksi ominaisuus nimeltään `current`, jonka voit lukea tai asettaa.
+- Voit pyytää Reactia antamaan sinulle refin kutsumalla `useRef` Hookia.
+- Kuten tila, refit antavat sinun säilyttää tietoa komponentin uudelleenrenderöinnin välillä.
+- Toisin kuin tila, refin `current`-arvon asettaminen ei aiheuta uudelleenrenderöintiä.
+- Älä lue tai kirjota `ref.current`-arvoa renderöinnin aikana. Tämä tekee komponentistasi vaikeasti ennustettavan.
 
 </Recap>
 
@@ -301,13 +301,13 @@ You can point a ref to any value. However, the most common use case for a ref is
 
 <Challenges>
 
-#### Fix a broken chat input {/*fix-a-broken-chat-input*/}
+#### Korjaa rikkinäinen chat-kenttä {/*fix-a-broken-chat-input*/}
 
-Type a message and click "Send". You will notice there is a three second delay before you see the "Sent!" alert. During this delay, you can see an "Undo" button. Click it. This "Undo" button is supposed to stop the "Sent!" message from appearing. It does this by calling [`clearTimeout`](https://developer.mozilla.org/en-US/docs/Web/API/clearTimeout) for the timeout ID saved during `handleSend`. However, even after "Undo" is clicked, the "Sent!" message still appears. Find why it doesn't work, and fix it.
+Kirjoita viesti ja paina "Send" painiketta. Huomaat, että viesti ilmestyy kolmen sekunnin viiveellä. Tämän ajan aikana näet "Undo" painikkeen. Paina sitä. Tämä "Undo" painike on tarkoitettu pysäyttämään "Sent!" viesti näkyvistä. Se tekee tämän kutsumalla [`clearTimeout`](https://developer.mozilla.org/en-US/docs/Web/API/clearTimeout) funktiota timeout ID:llä, joka tallennettiin `handleSend` funktion aikana. Kuitenkin, vaikka "Undo" painiketta painettaisiin, "Sent!" viesti ilmestyy silti. Etsi miksi se ei toimi, ja korjaa se.
 
 <Hint>
 
-Regular variables like `let timeoutID` don't "survive" between re-renders because every render runs your component (and initializes its variables) from scratch. Should you keep the timeout ID somewhere else?
+Tavalliset muuttujat kuten `let timeoutID` eivät "selviä" uudelleenrenderöinnin välillä, koska jokainen renderöinti ajaa komponenttisi (ja alustaa sen muuttujat) alusta. Pitäisikö sinun pitää timeout ID jossain muualla?
 
 </Hint>
 
@@ -360,7 +360,7 @@ export default function Chat() {
 
 <Solution>
 
-Whenever your component re-renders (such as when you set state), all local variables get initialized from scratch. This is why you can't save the timeout ID in a local variable like `timeoutID` and then expect another event handler to "see" it in the future. Instead, store it in a ref, which React will preserve between renders.
+Kun komponenttisi uudelleenrenderöidään (kuten tilan asettamisen yhteydessä), kaikki paikalliset muuttujat alustetaan alusta. Tämä on syy siihen, miksi et voi tallentaa timeout ID:tä paikalliseen muuttujaan kuten `timeoutID` ja sitten odottaa toisen tapahtumankäsittelijän "näkevän" sen tulevaisuudessa. Tallenna se refiin, jota React säilyttää renderöintien välillä.
 
 <Sandpack>
 
@@ -412,9 +412,9 @@ export default function Chat() {
 </Solution>
 
 
-#### Fix a component failing to re-render {/*fix-a-component-failing-to-re-render*/}
+#### Korjaa komponentin uudelleenrenderöinti {/*fix-a-component-failing-to-re-render*/}
 
-This button is supposed to toggle between showing "On" and "Off". However, it always shows "Off". What is wrong with this code? Fix it.
+Tämän painikkeen on tarkoitus vaihtaa "On" ja "Off" välillä. Kuitenkin, se näyttää aina "Off". Mikä tässä koodissa on vikana? Korjaa se.
 
 <Sandpack>
 
@@ -438,7 +438,7 @@ export default function Toggle() {
 
 <Solution>
 
-In this example, the current value of a ref is used to calculate the rendering output: `{isOnRef.current ? 'On' : 'Off'}`. This is a sign that this information should not be in a ref, and should have instead been put in state. To fix it, remove the ref and use state instead:
+Tässä esimerkissä, refin nykyinen arvo käytetään renderöinnin tuloksen laskemiseen: `{isOnRef.current ? 'On' : 'Off'}`. Tämä on merkki siitä, että tämä tieto ei pitäisi olla refissä, ja sen pitäisi olla tilassa. Korjataksesi sen, poista ref ja käytä tilaa sen sijaan:
 
 <Sandpack>
 
@@ -462,17 +462,17 @@ export default function Toggle() {
 
 </Solution>
 
-#### Fix debouncing {/*fix-debouncing*/}
+#### Korjaa debounce {/*fix-debouncing*/}
 
-In this example, all button click handlers are ["debounced".](https://redd.one/blog/debounce-vs-throttle) To see what this means, press one of the buttons. Notice how the message appears a second later. If you press the button while waiting for the message, the timer will reset. So if you keep clicking the same button fast many times, the message won't appear until a second *after* you stop clicking. Debouncing lets you delay some action until the user "stops doing things".
+Tässä esimerkissä kaikki painikkeiden klikkaukset ovat ["debounced".](https://redd.one/blog/debounce-vs-throttle) Nähdäksesi mitä tämä tarkoittaa, paina yhtä painikkeista. Huomaa, kuinka viesti ilmestyy sekunnin kuluttua. Jos painat painiketta odottaessasi viestiä, ajanlaskuri nollautuu. Joten jos painat samaa painiketta nopeasti useita kertoja, viestiä ei näy ennen kuin sekunti *jälkeen* kun lopetat painamisen. Debouncing antaa sinun viivästyttää jotain toimintoa, kunnes käyttäjä "lopettaa tekemästä asioita".
 
-This example works, but not quite as intended. The buttons are not independent. To see the problem, click one of the buttons, and then immediately click another button. You'd expect that after a delay, you would see both button's messages. But only the last button's message shows up. The first button's message gets lost.
+Tämä esimerkki toimii, mutta ei ihan niin kuin tarkoitettiin. Painikkeet eivät ole riippumattomia. Nähdäksesi ongelman, paina yhtä painikkeista, ja paina sitten välittömästi toista painiketta. Odota hetki, ja näet molempien painikkeiden viestit. Mutta vain viimeisen painikkeen viesti näkyy. Ensimmäisen painikkeen viesti katoaa.
 
-Why are the buttons interfering with each other? Find and fix the issue.
+Miksi painikkeiden klikkaukset vaikuttavat toisiinsa? Etsi ja korjaa ongelma.
 
 <Hint>
 
-The last timeout ID variable is shared between all `DebouncedButton` components. This is why clicking one button resets another button's timeout. Can you store a separate timeout ID for each button?
+Viimeisin timeout ID-muuttuja on jaettu kaikkien `DebouncedButton` -komponenttien välillä. Tämä on syy siihen, miksi yhden painikkeen klikkaaminen nollaa toisen painikkeen ajanlaskurin. Voitko tallentaa erillisen timeout ID:n jokaiselle painikkeelle?
 
 </Hint>
 
@@ -527,7 +527,7 @@ button { display: block; margin: 10px; }
 
 <Solution>
 
-A variable like `timeoutID` is shared between all components. This is why clicking on the second button resets the first button's pending timeout. To fix this, you can keep timeout in a ref. Each button will get its own ref, so they won't conflict with each other. Notice how clicking two buttons fast will show both messages.
+Muuttuja kuten `timeoutID` on jaettu kaikkien komponenttien välillä. Tämä on syy siihen, miksi yhden painikkeen klikkaaminen nollaa toisen painikkeen ajanlaskurin. Korjataksesi tämän, voit pitää timeoutin refissä. Jokainen painike saa oman refinsä, joten ne eivät riko toisiaan. Huomaa, kuinka nopeasti painamalla kaksi painiketta näet molempien viestit.
 
 <Sandpack>
 
@@ -579,11 +579,11 @@ button { display: block; margin: 10px; }
 
 </Solution>
 
-#### Read the latest state {/*read-the-latest-state*/}
+#### Lue viimeisin tila {/*read-the-latest-state*/}
 
-In this example, after you press "Send", there is a small delay before the message is shown. Type "hello", press Send, and then quickly edit the input again. Despite your edits, the alert would still show "hello" (which was the value of state [at the time](/learn/state-as-a-snapshot#state-over-time) the button was clicked).
+Tässä esimerkissä, kun painat "Lähetä", on pieni viive ennen kuin viesti näkyy. Kirjoita "hei", paina Lähetä ja muokkaa sitten nopeasti syötettä. Vaikka muokkaatkin, ilmoitus näyttää edelleen "hei" (joka oli tilan arvo [kun painiketta painettiin](/learn/state-as-a-snapshot#state-over-time)).
 
-Usually, this behavior is what you want in an app. However, there may be occasional cases where you want some asynchronous code to read the *latest* version of some state. Can you think of a way to make the alert show the *current* input text rather than what it was at the time of the click?
+Useiten tämä käyttäytyminen on haluttua sovelluksessa. Kuitenkin on tilanteita, joissa haluat, että jokin asynkroninen koodi lukee *viimeisimmän* tilan. Voitko keksiä tavan, jolla ilmoitus näyttää *nykyisen* syöttölaatikon tekstin, eikä sitä, mitä se oli painiketta painettaessa?
 
 <Sandpack>
 
@@ -618,7 +618,7 @@ export default function Chat() {
 
 <Solution>
 
-State works [like a snapshot](/learn/state-as-a-snapshot), so you can't read the latest state from an asynchronous operation like a timeout. However, you can keep the latest input text in a ref. A ref is mutable, so you can read the `current` property at any time. Since the current text is also used for rendering, in this example, you will need *both* a state variable (for rendering), *and* a ref (to read it in the timeout). You will need to update the current ref value manually.
+Tila toimii [kuten tilannekuva](/learn/state-as-a-snapshot), joten et voi lukea viimeisintä tilaa aikakatkaisusta kuten timeoutista. Voit kuitenkin pitää viimeisimmän syötetyn tekstin refissä. Ref on muuttuva, joten voit lukea `current` -ominaisuuden milloin tahansa. Koska nykyinen teksti käytetään myös renderöinnissä, tässä esimerkissä tarvitset *molemmat* tilamuuttujan (renderöintiä varten) *ja* refin (timeoutin lukemista varten). Sinun täytyy päivittää nykyinen ref-arvo manuaalisesti.
 
 <Sandpack>
 
