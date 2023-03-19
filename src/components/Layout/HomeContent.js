@@ -186,7 +186,7 @@ export function HomeContent() {
           </FullBleed>
           <Center>
             <Para>
-              Tätä merkintäkieltä kutsutaan nimellä JSX. Se on JavaScript suntaksin lisäosa, jonka React teki suosituksi. JSX merkintäkoodin laittaminen lähelle renderöintilogiikkaa tekee React komponenteista helposti luotavia, ylläpidettäviä ja poistettavia.
+              Tätä merkintäkieltä kutsutaan nimellä JSX. Se on JavaScript syntaksin lisäosa, jonka React teki suosituksi. JSX merkintäkoodin laittaminen lähelle renderöintilogiikkaa tekee React komponenteista helposti luotavia, ylläpidettäviä ja poistettavia.
             </Para>
           </Center>
         </Section>
@@ -381,11 +381,11 @@ export function HomeContent() {
               <div className="w-full lg:w-6/12 max-w-3xl flex flex-col items-start justify-start lg:pl-5 lg:pr-10">
                 <Header>Päivitä kun tulevaisuus on valmis</Header>
                 <Para>
-                  React lähestyy muutoksia huolella. Jokainen React commit testataan bisneskriittisillä pinnoilla, yli miljardin käyttäjän kesken. Yli 100 000 React komponenttia Metalla auttavat vahvistamaan jokaista muuttostrategiaa.
+                  React lähestyy muutoksia huolella. Jokainen React commit testataan bisneskriittisillä pinnoilla, yli miljardin käyttäjän kesken. Yli 100 000 React komponenttia Metalla auttavat vahvistamaan jokaista muutosstrategiaa.
                 </Para>
                 <div className="order-last pt-5">
                   <Para>
-                    React-tiimi on aina tutkimassa miten kehittää Reactia. Jossain tutkimuksissa voi kestää vuosia ennen kuin tuloksia näkyy. Reactilla on korkea kynnys ottaa tutkimusideoita tuotantoon. Vain todistetut lähestymistavat tulevat osaksi Reactia.
+                    React-tiimi on aina tutkimassa miten kehittää Reactia. Joissain tutkimuksissa voi kestää vuosia ennen kuin tuloksia näkyy. Reactilla on korkea kynnys ottaa tutkimusideoita tuotantoon. Vain todistetut lähestymistavat tulevat osaksi Reactia.
                   </Para>
                   <div className="hidden lg:flex justify-start w-full">
                     <CTA color="gray" icon="news" href="/blog">
@@ -432,7 +432,7 @@ export function HomeContent() {
                   yhteisöön
                 </Header>
                 <Para>
-                  Et ole yksin. Kaksi miljoonaa kehittäjää ympäri maalimaa vierailevat Reactin dokumentaatiota joka kuukausi. React on jotain, missä ihmiset ja tiimit ovat samaa mieltä keskenään.
+                  Et ole yksin. Kaksi miljoonaa kehittäjää ympäri maailmaa vierailevat Reactin dokumentaatiossa joka kuukausi. React on jotain, missä ihmiset ja tiimit ovat samaa mieltä keskenään.
                 </Para>
               </Center>
             </div>
