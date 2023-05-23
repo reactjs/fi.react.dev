@@ -1,62 +1,62 @@
 ---
-title: Editor Setup
+title: Editorin asentaminen
 ---
 
 <Intro>
 
-A properly configured editor can make code clearer to read and faster to write. It can even help you catch bugs as you write them! If this is your first time setting up an editor or you're looking to tune up your current editor, we have a few recommendations.
+Oikein määritelty editori voi tehdä koodista selkeämpää lukea ja nopeampaa kirjoittaa. Se voi jopa helpottaa löytämään bugeja samalla kun kirjoitat niitä! Jos tämä on ensimmäinen kerta asentamassa editoria tai haluat virittää nykyistä editoriasi, meillä on muutamia suosituksia.
 
 </Intro>
 
 <YouWillLearn>
 
-* What the most popular editors are
-* How to format your code automatically
+* Mitkä ovat suosituimmat editorit
+* Miten koodi muotoillaan automaattisesti
 
 </YouWillLearn>
 
-## Your editor {/*your-editor*/}
+## Editorisi {/*your-editor*/}
 
-[VS Code](https://code.visualstudio.com/) is one of the most popular editors in use today. It has a large marketplace of extensions and integrates well with popular services like GitHub. Most of the features listed below can be added to VS Code as extensions as well, making it highly configurable!
+[VS Code](https://code.visualstudio.com/) on yksiä suosituimpia editoreita käytössä nykypäivänä. Sillä on suuri kauppa lisäosille ja se integroituu hyvin suosittujen palveluiden kuten GitHubin kanssa. Useimmat alla olevista ominaisuuksista voidaan lisätä VS Codeen lisäosina, joka tekee siitä todella konfiguroitavan!
 
-Other popular text editors used in the React community include:
+Muita suosittuja tekstieditoreita React-yhteisössä ovat muun muassa:
 
-* [WebStorm](https://www.jetbrains.com/webstorm/) is an integrated development environment designed specifically for JavaScript.
-* [Sublime Text](https://www.sublimetext.com/) has support for JSX and TypeScript, [syntax highlighting](https://stackoverflow.com/a/70960574/458193) and autocomplete built in.
-* [Vim](https://www.vim.org/) is a highly configurable text editor built to make creating and changing any kind of text very efficient. It is included as "vi" with most UNIX systems and with Apple OS X.
+* [WebStorm](https://www.jetbrains.com/webstorm/) on IDE ohjelmointiympäristö suunniteltu erityisesti JavaScriptille.
+* [Sublime Text](https://www.sublimetext.com/) editorissa on tuki JSX:lle sekä TypeScriptille, [syntaksin korostus](https://stackoverflow.com/a/70960574/458193) ja sisäänrakennettu automaattinen täydennys.
+* [Vim](https://www.vim.org/) on laajasti konfiguroitava tekstieditori, joka tekee tekstin luomisesta ja muokkaamisesta tehokasta. Useissa UNIX ja Applen macOS järjestelmissä se tulee mukana "vi" komentona.
 
-## Recommended text editor features {/*recommended-text-editor-features*/}
+## Suositellut tekstieditoreiden ominaisuudet {/*recommended-text-editor-features*/}
 
-Some editors come with these features built in, but others might require adding an extension. Check to see what support your editor of choice provides to be sure!
+Joissain editoreissa nämä ominaisuudet tulevat sisäänrakennettuna, mutta jotkin saattavat tarvita lisäosan. Tarkista millaista tukea editorisi tarjoaa ollaksesi varma!
 
-### Linting {/*linting*/}
+### Lintterit {/*linting*/}
 
-Code linters find problems in your code as you write, helping you fix them early. [ESLint](https://eslint.org/) is a popular, open source linter for JavaScript. 
+Koodilintterit taikka "nukan poistajat" etsivät ongelmia koodistasi kun kirjoitat, auttaen korjaamaan ne ajoissa. [ESLint](https://eslint.org/) on suosittu, avoimen lähdekoodin lintteri JavaScriptille.
 
-* [Install ESLint with the recommended configuration for React](https://www.npmjs.com/package/eslint-config-react-app) (be sure you have [Node installed!](https://nodejs.org/en/download/current/))
-* [Integrate ESLint in VSCode with the official extension](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint)
+* [Asenna ESLint suositelluilla määrityksillä Reactille](https://www.npmjs.com/package/eslint-config-react-app) (tarkista, että sinulla on [Node asennettuna!](https://nodejs.org/en/download/current/))
+* [Integroi ESLint VSCodeen virallisella lisäosalla](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint)
 
-**Make sure that you've enabled all the [`eslint-plugin-react-hooks`](https://www.npmjs.com/package/eslint-plugin-react-hooks) rules for your project.** They are essential and catch the most severe bugs early. The recommended [`eslint-config-react-app`](https://www.npmjs.com/package/eslint-config-react-app) preset already includes them.
+**Varmista, että olet ottanut käyttöön kaikki [`eslint-plugin-react-hooks`](https://www.npmjs.com/package/eslint-plugin-react-hooks) säännöt projektillesi.** Ne ovat olennaisia ja nappaavat vakavimmat bugit ajoissa. Suositeltu [`eslint-config-react-app`](https://www.npmjs.com/package/eslint-config-react-app) esiasetus sisältää ne valmiiksi.
 
-### Formatting {/*formatting*/}
+### Muotoilu {/*formatting*/}
 
-The last thing you want to do when sharing your code with another contributor is get into an discussion about [tabs vs spaces](https://www.google.com/search?q=tabs+vs+spaces)! Fortunately, [Prettier](https://prettier.io/) will clean up your code by reformatting it to conform to preset, configurable rules. Run Prettier, and all your tabs will be converted to spaces—and your indentation, quotes, etc will also all be changed to conform to the configuration. In the ideal setup, Prettier will run when you save your file, quickly making these edits for you.
+Vihoviimeinen asia on joutua keskustelemaan toisen kehittäjän kanssa aihesta [sarkain vs välilyönti](https://www.google.com/search?q=tabs+vs+spaces)! Onneksi [Prettier](https://prettier.io/) siivoaa koodisi uudelleen muotoilemalla sen pitäytymään muutettaviin esimääriteltyihin sääntöihin. Suorita Prettier ja kaikki välilehtesi muutetaan välilyönneiksi-ja kaikki sisennykset, lainausmerkit, jne tulee muuttumaan konfiguraation mukaiseksi. Ihanteellisessa tilanteessa Prettier suoritetaan kun tallennat tiedostosi, nopeasti tehden nämä muutokset sinulle.
 
-You can install the [Prettier extension in VSCode](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode) by following these steps:
+Voit asentaa [Prettier lisäosan VSCodeen](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode) seuraamalla näitä vaiheita:
 
-1. Launch VS Code
-2. Use Quick Open (press Ctrl/Cmd+P)
-3. Paste in `ext install esbenp.prettier-vscode`
-4. Press Enter
+1. Käynnistä VS Code
+2. Käytä Quick Open -ominaisuutta (paina `CTRL/CMD + P`)
+3. Liitä `ext install esbenp.prettier-vscode`
+4. Paina rivinvaihtoa
 
-#### Formatting on save {/*formatting-on-save*/}
+#### Muotoilun muutos tallentaessa {/*formatting-on-save*/}
 
-Ideally, you should format your code on every save. VS Code has settings for this!
+Ihannetilanteessa sinun pitäisi muotoilla koodisi jokaisen tallennuksen yhteydessä. VS Codessa on asetus tätä varten!
 
-1. In VS Code, press `CTRL/CMD + SHIFT + P`.
-2. Type "settings"
-3. Hit Enter
-4. In the search bar, type "format on save"
-5. Be sure the "format on save" option is ticked!
+1. VS Codessa, paina `CTRL/CMD + SHIFT + P`.
+2. Kirjoita "settings"
+3. Paina rivinvahtoa
+4. Hakupalkissa, hae "format on save"
+5. Varmista, että "format on save" vaihtoehto on valittuna!
 
-> If your ESLint preset has formatting rules, they may conflict with Prettier. We recommend disabling all formatting rules in your ESLint preset using [`eslint-config-prettier`](https://github.com/prettier/eslint-config-prettier) so that ESLint is *only* used for catching logical mistakes. If you want to enforce that files are formatted before a pull request is merged, use [`prettier --check`](https://prettier.io/docs/en/cli.html#--check) for your continuous integration.
+> Jos ESLint säännöissäsi on muotoilusääntöjä, ne voivat olla ristiriidassa Prettierin kanssa. Suosittelemme poistamaan käytöstä kaikki ESLint muotoilusäännöt käyttämällä [`eslint-config-prettier`](https://github.com/prettier/eslint-config-prettier), jotta ESLint on *ainoastaan* käytössä logiikkavirheiden etsimiseen. Jos haluat pakottaa, että tiedostot muotoillaan ennen kuin pull request yhdistetään, käytä [`prettier --check`](https://prettier.io/docs/en/cli.html#--check) komentoa continuous integration -työkalussasi.
