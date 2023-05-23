@@ -1,97 +1,97 @@
 ---
-title: 'Synchronizing with Effects'
+title: Synkronointi Effecteilla
 ---
 
 <Intro>
 
-Some components need to synchronize with external systems. For example, you might want to control a non-React component based on the React state, set up a server connection, or send an analytics log when a component appears on the screen. *Effects* let you run some code after rendering so that you can synchronize your component with some system outside of React.
+Joidenkin komponenttien täytyy synkronoida ulkoisten järjestelmien kanssa. Esimerkiksi saatat haluta hallita ei-React-komponenttia perustuen Reactin tilaan, asettaa palvelinyhteyden tai lähettää analytiikkalokeja, kun komponentti näkyy näytöllä. *Effectit* mahdollistavat koodin suorittamisen renderöinnin jälkeen, jotta voit synkronoida komponentin jonkin ulkoisen järjestelmän kanssa Reactin ulkopuolella.
 
 </Intro>
 
 <YouWillLearn>
 
-- What Effects are
-- How Effects are different from events
-- How to declare an Effect in your component
-- How to skip re-running an Effect unnecessarily
-- Why Effects run twice in development and how to fix them
+- Mitä Effectit ovat
+- Miten Effectit eroavat tapahtumista
+- Miten määrittelet Effecti komponentissasi
+- Miten ohitat Effectin tarpeettoman suorittamisen
+- Miksi Effectit suoritetetaan kahdesti kehitysympäristössä ja miten sen voi korjata
 
 </YouWillLearn>
 
-## What are Effects and how are they different from events? {/*what-are-effects-and-how-are-they-different-from-events*/}
+## Mitä Effectit ovat ja miten ne eroavat tapahtumista? {/*what-are-effects-and-how-are-they-different-from-events*/}
 
-Before getting to Effects, you need to be familiar with two types of logic inside React components:
+Ennen kuin siirrytään Effecteihin, tutustutaan kahdenlaiseen logiikkaan React-komponenteissa:
 
-- **Rendering code** (introduced in [Describing the UI](/learn/describing-the-ui)) lives at the top level of your component. This is where you take the props and state, transform them, and return the JSX you want to see on the screen. [Rendering code must be pure.](/learn/keeping-components-pure) Like a math formula, it should only _calculate_ the result, but not do anything else.
+- **Renderöintikoodi** (esitellään [Käyttöliittymän kuvauksessa](/learn/describing-the-ui)) elää komponentin yläpuolella. Tässä on paikka missä otat propsit ja tilan, muunnet niitä ja palautat JSX:ää, jonka haluat nähdä näytöllä. [Renderöintikoodin on oltava puhdasta.](/learn/keeping-components-pure) Kuten matemaattinen kaava, sen tulisi vain _laskea_ tulos, mutta ei tehdä mitään muuta.
 
-- **Event handlers** (introduced in [Adding Interactivity](/learn/adding-interactivity)) are nested functions inside your components that *do* things rather than just calculate them. An event handler might update an input field, submit an HTTP POST request to buy a product, or navigate the user to another screen. Event handlers contain ["side effects"](https://en.wikipedia.org/wiki/Side_effect_(computer_science)) (they change the program's state) caused by a specific user action (for example, a button click or typing).
+- **Tapahtumakäsittelijät** (esitellään [Interaktiivisuuden lisäämisessä](/learn/adding-interactivity)) ovat komponenttien sisäisiä funktioita, jotka *tekevät* asioita sen sijaan, että vain laskisivat asioita. Tapahtumakäsittelijä saattavat päivittää syöttökenttää, lähettää HTTP POST -pyyntöjä ostaakseen tuoteen tai ohjata käyttäjän toiselle näytölle. Tapahtumakäsittelijät sisältävät ["sivuvaikutuksia"](https://en.wikipedia.org/wiki/Side_effect_(computer_science)) (ne muuttavat ohjelman tilaa) ja aiheutuvat tietystä käyttäjän toiminnasta (esimerkiksi painikkeen napsauttamisesta tai kirjoittamisesta).
 
-Sometimes this isn't enough. Consider a `ChatRoom` component that must connect to the chat server whenever it's visible on the screen. Connecting to a server is not a pure calculation (it's a side effect) so it can't happen during rendering. However, there is no single particular event like a click that causes `ChatRoom` to be displayed.
+Joskus tämä ei riitä. Harkitse `ChatRoom` -komponenttia, jonka täytyy yhdistää keskustelupalvelimeen, kun se näkyy näytöllä. Palvelimeen yhdistäminen ei ole puhdas laskenta (se on sivuvaikutus), joten se ei voi tapahtua renderöinnin aikana. Kuitenkaan ei ole yhtä tiettyä tapahtumaa, kuten napsautusta, joka aiheuttaisi `ChatRoom` -komponentin näkymisen.
 
-***Effects* let you specify side effects that are caused by rendering itself, rather than by a particular event.** Sending a message in the chat is an *event* because it is directly caused by the user clicking a specific button. However, setting up a server connection is an *Effect* because it should happen no matter which interaction caused the component to appear. Effects run at the end of a [commit](/learn/render-and-commit) after the screen updates. This is a good time to synchronize the React components with some external system (like network or a third-party library).
+***Effectien* avulla voit määritellä sivuvaikutukset, jotka johtuvat renderöinnistä itsestään, eikä tietystä tapahtumasta.** Viestin lähettäminen keskustelussa on *tapahtuma*, koska se aiheutuu suoraan käyttäjän napsauttamasta tiettyä painiketta. Kuitenkin palvelimen yhdistäminen on *effect*, koska se on tehtävä riippumatta siitä, mikä vuorovaikutus aiheutti komponentin näkyvyyden. Effectit suoritetaan [renderöintiprosessin](/learn/render-and-commit) lopussa näytön päivityksen jälkeen. Tässä on hyvä aika synkronoida React-komponentit jonkin ulkoisen järjestelmän kanssa (kuten verkon tai kolmannen osapuolen kirjaston).
 
 <Note>
 
-Here and later in this text, capitalized "Effect" refers to the React-specific definition above, i.e. a side effect caused by rendering. To refer to the broader programming concept, we'll say "side effect".
+Tässä ja myöhemmin tekstissä, "Effect":llä viittaamme Reactin määritelmään, eli sivuvaikutukseen, joka aiheutuu renderöinnistä. Viittaaksemme laajempaan ohjelmointikäsitteeseen, sanomme "sivuvaikutus".
 
 </Note>
 
 
-## You might not need an Effect {/*you-might-not-need-an-effect*/}
+## Et välttämättä tarvitse Effectia {/*you-might-not-need-an-effect*/}
 
-**Don't rush to add Effects to your components.** Keep in mind that Effects are typically used to "step out" of your React code and synchronize with some *external* system. This includes browser APIs, third-party widgets, network, and so on. If your Effect only adjusts some state based on other state, [you might not need an Effect.](/learn/you-might-not-need-an-effect)
+**Älä kiiruhda lisäämään Effecteja komponentteihisi.** Pidä mielessä, että Effectit ovat tyypillisesti tapa "astua ulos" React-koodistasi ja synkronoida jonkin *ulkoisen* järjestelmän kanssa. Tämä sisältää selaimen API:t, kolmannen osapuolen pienoisohjelmat, verkon jne. Jos Effectisi vain muuttaa tilaa perustuen toiseen tilaan, [voit ehkä jättää Effectin pois.](/learn/you-might-not-need-an-effect)
 
-## How to write an Effect {/*how-to-write-an-effect*/}
+## Miten kirjoitat Effectin {/*how-to-write-an-effect*/}
 
-To write an Effect, follow these three steps:
+Kirjoittaaksesi Effectin, seuraa näitä kolmea vaihetta:
 
-1. **Declare an Effect.** By default, your Effect will run after every render.
-2. **Specify the Effect dependencies.** Most Effects should only re-run *when needed* rather than after every render. For example, a fade-in animation should only trigger when a component appears. Connecting and disconnecting to a chat room should only happen when the component appears and disappears, or when the chat room changes. You will learn how to control this by specifying *dependencies.*
-3. **Add cleanup if needed.** Some Effects need to specify how to stop, undo, or clean up whatever they were doing. For example, "connect" needs "disconnect", "subscribe" needs "unsubscribe", and "fetch" needs either "cancel" or "ignore". You will learn how to do this by returning a *cleanup function*.
+1. **Määrittele Effect.** Oletuksena, Effectisi suoritetaan jokaisen renderöinnin jälkeen.
+2. **Määrittele Effectin riippuvuudet.** Useimmat Effectit pitäisi suorittaa vain *tarvittaessa* sen sijaan, että ne suoritettaisiin jokaisen renderöinnin jälkeen. Esimerkiksi fade-in -animaatio pitäisi käynnistyä vain, kun komponentti ilmestyy. Keskusteluhuoneeseen yhdistäminen ja sen katkaisu pitäisi tapahtua vain, kun komponentti ilmestyy ja häviää tai kun keskusteluhuone muuttuu. Opit hallitsemaan tätä määrittämällä *riippuvuudet.*
+3. **Lisää puhdistus, jos tarpeen.** Joidenkin Effectien täytyy määrittää, miten ne pysäytetään, peruutetaan, tai puhdistavat mitä ne ovat tehneet. Esimerkiksi "yhdistys" tarvitsee "katkaisun", "tila" tarvitsee "peruuta tilaus" ja "hae" tarvitsee joko "peruuta" tai "jätä huomiotta". Opit tekemään tämän palauttamalla *puhdistusfunktion*.
 
-Let's look at each of these steps in detail.
+Katsotaan näitä vaiheita yksityiskohtaisesti.
 
-### Step 1: Declare an Effect {/*step-1-declare-an-effect*/}
+### 1. Vaihe: Määrittele Effect {/*step-1-declare-an-effect*/}
 
-To declare an Effect in your component, import the [`useEffect` Hook](/reference/react/useEffect) from React:
+Määritelläksesi Effectin komponentissasi, tuo [`useEffect` Hook](/reference/react/useEffect) Reactista:
 
 ```js
 import { useEffect } from 'react';
 ```
 
-Then, call it at the top level of your component and put some code inside your Effect:
+Sitten kutsu sitä komponentin yläpuolella ja laita koodia Effectin sisään:
 
 ```js {2-4}
 function MyComponent() {
   useEffect(() => {
-    // Code here will run after *every* render
+    // Koodi täällä suoritetaan *jokaisen* renderöinnin jälkeen
   });
   return <div />;
 }
 ```
 
-Every time your component renders, React will update the screen *and then* run the code inside `useEffect`. In other words, **`useEffect` "delays" a piece of code from running until that render is reflected on the screen.**
+Joka kerta kun komponenttisi renderöityy, React päivittää ruudun *ja sitten* suorittaa koodin `useEffect`:n sisällä. Toisin sanoen, **`useEffect` "viivästää" koodin suorittamista, kunnes renderöinti on näkyvissä ruudulla.**
 
-Let's see how you can use an Effect to synchronize with an external system. Consider a `<VideoPlayer>` React component. It would be nice to control whether it's playing or paused by passing an `isPlaying` prop to it:
+Katsotaan miten voit käyttää Effectia synkronoidaksesi ulkoisen järjestelmän kanssa. Harkitse `<VideoPlayer>` React komponenttia. Olisi mukavaa kontrolloida, onko video toistossa vai pysäytettynä, välittämällä `isPlaying` propsin sille:
 
 ```js
 <VideoPlayer isPlaying={isPlaying} />;
 ```
 
-Your custom `VideoPlayer` component renders the built-in browser [`<video>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/video) tag:
+Sinun mukautettu `VideoPlayer` komponentti renderöi selaimen sisäänrakennetun [`<video>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/video) tagin:
 
 ```js
 function VideoPlayer({ src, isPlaying }) {
-  // TODO: do something with isPlaying
+  // TODO: tee jotain isPlaying:lla
   return <video src={src} />;
 }
 ```
 
-However, the browser `<video>` tag does not have an `isPlaying` prop. The only way to control it is to manually call the [`play()`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement/play) and [`pause()`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement/pause) methods on the DOM element. **You need to synchronize the value of `isPlaying` prop, which tells whether the video _should_ currently be playing, with calls like `play()` and `pause()`.**
+Kuitenkaan selaimen `<video>` tagissa ei ole `isPlaying` proppia. Ainoa tapa ohjata sitä on manuaalisesti kutsua [`play()`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement/play) ja [`pause()`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement/pause) metodeja DOM elementillä. **Sinun täytyy synkronoida `isPlaying` propin arvo, joka kertoo, pitäisikö video _nyt_ toistaa, imperatiivisilla kutsuilla kuten `play()` ja `pause()`.**
 
-We'll need to first [get a ref](/learn/manipulating-the-dom-with-refs) to the `<video>` DOM node.
+Meidän täytyy ensiksi hakea [ref](/learn/manipulating-the-dom-with-refs) `<video>`:n DOM noodiin.
 
-You might be tempted to try to call `play()` or `pause()` during rendering, but that isn't correct:
+Saattaa olla houkuttelevaa kutsua `play()` tai `pause()` metodeja renderöinnin aikana, mutta se ei ole oikein:
 
 <Sandpack>
 
@@ -102,9 +102,9 @@ function VideoPlayer({ src, isPlaying }) {
   const ref = useRef(null);
 
   if (isPlaying) {
-    ref.current.play();  // Calling these while rendering isn't allowed.
+    ref.current.play();  // Tämän kutsuminen renderöinnin aikana ei ole sallittua.
   } else {
-    ref.current.pause(); // Also, this crashes.
+    ref.current.pause(); // Tämä myöskin kaatuu.
   }
 
   return <video ref={ref} src={src} loop playsInline />;
@@ -133,11 +133,11 @@ video { width: 250px; }
 
 </Sandpack>
 
-The reason this code isn't correct is that it tries to do something with the DOM node during rendering. In React, [rendering should be a pure calculation](/learn/keeping-components-pure) of JSX and should not contain side effects like modifying the DOM.
+Syy miksi tämä koodi ei ole oikein on, että se koittaa tehdä jotain DOM noodilla kesken renderöinnin. Reactissa [renderöinnin tulisi olla puhdas laskelma](/learn/keeping-components-pure) JSX:stä ja sen ei tulisi sisältää sivuvaikutuksia kuten DOM:n muuttamista.
 
-Moreover, when `VideoPlayer` is called for the first time, its DOM does not exist yet! There isn't a DOM node yet to call `play()` or `pause()` on, because React doesn't know what DOM to create until you return the JSX.
+Lisäksi, kun `VideoPlayer` kutsutaan ensimmäistä kertaa, sen DOM ei vielä ole olemassa! Ei ole vielä DOM noodia josta kutsua `play()` tai `pause()` koska React ei tiedä mitä DOM:ia luoda ennen kuin palautat JSX:n.
 
-The solution here is to **wrap the side effect with `useEffect` to move it out of the rendering calculation:**
+Ratkaisu tässä on **kääriä sivuvaikutus `useEffectilla` ja siirtää se pois renderöintilaskusta:**
 
 ```js {6,12}
 import { useEffect, useRef } from 'react';
@@ -157,11 +157,11 @@ function VideoPlayer({ src, isPlaying }) {
 }
 ```
 
-By wrapping the DOM update in an Effect, you let React update the screen first. Then your Effect runs.
+Käärimällä DOM päivitys Effectiin, annat Reactin päivittää ensin ruudun. Sitten Effectisi suoritetaan.
 
-When your `VideoPlayer` component renders (either the first time or if it re-renders), a few things will happen. First, React will update the screen, ensuring the `<video>` tag is in the DOM with the right props. Then React will run your Effect. Finally, your Effect will call `play()` or `pause()` depending on the value of `isPlaying`.
+Kun `VideoPlayer` komponenttisi renderöityy (joko ensimmäistä kertaa tai jos se renderöityy uudelleen), tapahtuu muutamia asioita. Ensimmäiseksi React päivittää ruudun, varmistaen että `<video>` tagi on DOM:issa oikeilla propseilla. Sitten React suorittaa Effectisi. Lopuksi, Effectisi kutsuu `play()` tai `pause()` riippuen `isPlaying` propin arvosta.
 
-Press Play/Pause multiple times and see how the video player stays synchronized to the `isPlaying` value:
+Paina Play/Pause useita kertoja ja katso miten videoplayer pysyy synkronoituna `isPlaying` arvon kanssa:
 
 <Sandpack>
 
@@ -205,13 +205,13 @@ video { width: 250px; }
 
 </Sandpack>
 
-In this example, the "external system" you synchronized to React state was the browser media API. You can use a similar approach to wrap legacy non-React code (like jQuery plugins) into declarative React components.
+Tässä esimerkissä "ulkoinen järjestelmä" jonka kanssa synkronoit Reactin tilan oli selaimen media API. Voit käyttää samanlaista lähestymistapaa kääriäksesi legacy ei-React koodin (kuten jQuery pluginit) deklaratiivisiin React komponentteihin.
 
-Note that controlling a video player is much more complex in practice. Calling `play()` may fail, the user might play or pause using the built-in browser controls, and so on. This example is very simplified and incomplete.
+Huomaa, että videoplayerin ohjaaminen on paljon monimutkaisempaa käytännössä. `play()` kutsu voi epäonnistua, käyttäjä voi toistaa tai pysäyttää videon käyttämällä selaimen sisäänrakennettuja ohjauselementtejä, jne. Tämä esimerkki on hyvin yksinkertaistettu ja puutteellinen.
 
 <Pitfall>
 
-By default, Effects run after *every* render. This is why code like this will **produce an infinite loop:**
+Oletuksena Effectit suoritetaan *jokaisen* renderöinnin jälkeen. Tämä on syy miksi seuraavanlainen koodi **tuottaa loputtoman silmukan:**
 
 ```js
 const [count, setCount] = useState(0);
@@ -220,20 +220,20 @@ useEffect(() => {
 });
 ```
 
-Effects run as a *result* of rendering. Setting state *triggers* rendering. Setting state immediately in an Effect is like plugging a power outlet into itself. The Effect runs, it sets the state, which causes a re-render, which causes the Effect to run, it sets the state again, this causes another re-render, and so on.
+Effectit suoritetaan renderöinnin *johdosta*. Tilan asettaminen *aiheuttaa* renderöinnin. Tilan asettaminen välittömästi Effectissä on kuin pistäisi jatkojohdon kiinni itseensä. Effect suoritetaan, se asettaa tilan, joka aiheuttaa uudelleen renderöinnin, joka aiheuttaa Effectin suorittamisen, joka asettaa tilan uudelleen, joka aiheuttaa uudelleen renderöinnin, ja niin edelleen.
 
-Effects should usually synchronize your components with an *external* system. If there's no external system and you only want to adjust some state based on other state, [you might not need an Effect.](/learn/you-might-not-need-an-effect)
+Effectien tulisi yleensä synkronoida komponenttisi *ulkopuolisen* järjestelmän kanssa. Jos ei ole ulkopuolista järjestelmää ja haluat vain muuttaa tilaa perustuen toiseen tilaan, [voit ehkä jättää Effectin pois.](/learn/you-might-not-need-an-effect)
 
 </Pitfall>
 
-### Step 2: Specify the Effect dependencies {/*step-2-specify-the-effect-dependencies*/}
+### 2. Vaihe: Määrittele Effectin riippuvuudet {/*step-2-specify-the-effect-dependencies*/}
 
-By default, Effects run after *every* render. Often, this is **not what you want:**
+Oletuksena Effectit toistetaan *jokaisen* renderöinnin jälkeen. Usein tämä **ei ole mitä haluat:**
 
-- Sometimes, it's slow. Synchronizing with an external system is not always instant, so you might want to skip doing it unless it's necessary. For example, you don't want to reconnect to the chat server on every keystroke.
-- Sometimes, it's wrong. For example, you don't want to trigger a component fade-in animation on every keystroke. The animation should only play once when the component appears for the first time.
+- Joskus, se on hidas. Synkronointi ulkoisen järjestelmän kanssa ei aina ole nopeaa, joten haluat ehkä ohittaa sen, ellei sitä ole tarpeen. Esimerkiksi, et halua yhdistää chat palvelimeen jokaisen näppäinpainalluksen jälkeen.
+- Joksus, se on väärin. Esimerkiksi, et halua käynnistää komponentin fade-in animaatiota jokaisen näppäinpainalluksen jälkeen. Animaation pitäisi toistua pelkästään kerran kun komponentti ilmestyy ensimmäisellä kerralla.
 
-To demonstrate the issue, here is the previous example with a few `console.log` calls and a text input that updates the parent component's state. Notice how typing causes the Effect to re-run:
+Havainnollistaaksemme ongelmaa, tässä on edellinen esimerkki muutamalla `console.log` kutsulla ja tekstikentällä, joka päivittää vanhemman komponentin tilaa. Huomaa miten kirjoittaminen aiheuttaa Effectin uudelleen suorittamisen:
 
 <Sandpack>
 
@@ -281,7 +281,7 @@ video { width: 250px; }
 
 </Sandpack>
 
-You can tell React to **skip unnecessarily re-running the Effect** by specifying an array of *dependencies* as the second argument to the `useEffect` call. Start by adding an empty `[]` array to the above example on line 14:
+Voit kertoa Reactin **ohittamaan tarpeettoman Effectin uudelleen suorittamisen** määrittelemällä *riippuvuus* taulukon toisena argumenttina `useEffect` kutsulle. Aloita lisäämällä tyhjä `[]` taulukko ylläolevaan esimerkkiin riville 14:
 
 ```js {3}
   useEffect(() => {
@@ -289,7 +289,13 @@ You can tell React to **skip unnecessarily re-running the Effect** by specifying
   }, []);
 ```
 
-You should see an error saying `React Hook useEffect has a missing dependency: 'isPlaying'`:
+Sinun tulisi nähdä virhe, jossa lukee `React Hook useEffect has a missing dependency: 'isPlaying'`:
+
+```js
+  useEffect(() => {
+    // ...
+  }, []);
+```
 
 <Sandpack>
 
@@ -307,7 +313,7 @@ function VideoPlayer({ src, isPlaying }) {
       console.log('Calling video.pause()');
       ref.current.pause();
     }
-  }, []); // This causes an error
+  }, []); // Tämä aiheuttaa virheen
 
   return <video ref={ref} src={src} loop playsInline />;
 }
@@ -337,19 +343,20 @@ video { width: 250px; }
 
 </Sandpack>
 
-The problem is that the code inside of your Effect *depends on* the `isPlaying` prop to decide what to do, but this dependency was not explicitly declared. To fix this issue, add `isPlaying` to the dependency array:
+Ongelma on, että effectin sisällä oleva koodi *riippuu* `isPlaying` propsin arvosta päättääkseen mitä tehdä, mutta tätä riippuvuutta ei ole määritelty. Korjataksesi tämän ongelman, lisää `isPlaying` riippuvuustaulukkoon:
+
 
 ```js {2,7}
   useEffect(() => {
-    if (isPlaying) { // It's used here...
+    if (isPlaying) { // Sitä käytetään tässä...
       // ...
     } else {
       // ...
     }
-  }, [isPlaying]); // ...so it must be declared here!
+  }, [isPlaying]); // ...joten se täytyy määritellä täällä!
 ```
 
-Now all dependencies are declared, so there is no error. Specifying `[isPlaying]` as the dependency array tells React that it should skip re-running your Effect if `isPlaying` is the same as it was during the previous render. With this change, typing into the input doesn't cause the Effect to re-run, but pressing Play/Pause does:
+Nyt kaikki riippuvuudet on määritelty, joten virheitä ei ole. `[isPlaying]` riippuvuustaulukon määrittäminen kertoo Reactille, että se pitäisi ohittaa Effectin uudelleen suorittaminen jos `isPlaying` on sama kuin se oli edellisellä renderöinnillä. Tämän muutoksen jälkeen, tekstikenttään kirjoittaminen ei aiheuta Effectin uudelleen suorittamista, mutta Play/Pause painikkeen painaminen aiheuttaa:
 
 <Sandpack>
 
@@ -397,37 +404,38 @@ video { width: 250px; }
 
 </Sandpack>
 
-The dependency array can contain multiple dependencies. React will only skip re-running the Effect if *all* of the dependencies you specify have exactly the same values as they had during the previous render. React compares the dependency values using the [`Object.is`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is) comparison. See the [`useEffect` reference](/reference/react/useEffect#reference) for details.
+Riippuvuustaulukko voi sisältää useita riippuvuuksia. React ohittaa Effectin uudelleen suorittamisen *vain* jos *kaikki* riippuvuudet ovat samat kuin edellisellä renderöinnillä. React vertaa riippuvuuksien arvoja käyttäen [`Object.is`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is) vertailua. Katso [`useEffect` API viittaus](/reference/react/useEffect#reference) lisätietoja varten.
 
-**Notice that you can't "choose" your dependencies.** You will get a lint error if the dependencies you specified don't match what React expects based on the code inside your Effect. This helps catch many bugs in your code. If you don't want some code to re-run, [*edit the Effect code itself* to not "need" that dependency.](/learn/lifecycle-of-reactive-effects#what-to-do-when-you-dont-want-to-re-synchronize)
+**Huomaa, että et voi "valita" riippuvuuksiasi.** Jos määrittelemäsi riippuvuudet eivät vastaa Reactin odottamia riippuvuuksia, saat linter virheen. Tämä auttaa löytämään useita virheitä koodissasi. Jos Effect käyttää jotain arvoa, mutta *et* halua suorittaa Effectiä uudelleen kun se muuttuu, sinun täytyy [*muokata Effectin koodia itse* jotta se ei "tarvitse" tätä riippuvuutta.](/learn/lifecycle-of-reactive-effects#what-to-do-when-you-dont-want-to-re-synchronize)
 
 <Pitfall>
 
-The behaviors without the dependency array and with an *empty* `[]` dependency array are different:
+Käyttäytyminen *ilman* riippuvuustaulukkoa ja *tyhjällä* `[]` riippuvuustaulukolla ovat hyvin erilaisia:
 
-```js {3,7,11}
+```js {3,7,12}
 useEffect(() => {
-  // This runs after every render
+  // Tämä suoritetaan joka kerta kun komponentti renderöidään
 });
 
 useEffect(() => {
-  // This runs only on mount (when the component appears)
+  // Tämä suoritetaan vain mountattaessa (kun komponentti ilmestyy)
 }, []);
 
 useEffect(() => {
-  // This runs on mount *and also* if either a or b have changed since the last render
+  // Tämä suoritetaan mountattaessa *ja myös* jos a tai b ovat
+  // muuttuneet viime renderöinnin jälkeen
 }, [a, b]);
 ```
 
-We'll take a close look at what "mount" means in the next step.
+Katsomme seuraavassa vaiheessa tarkemmin mitä "mount" tarkoittaa.
 
 </Pitfall>
 
 <DeepDive>
 
-#### Why was the ref omitted from the dependency array? {/*why-was-the-ref-omitted-from-the-dependency-array*/}
+#### Miksi ref oli jätetty riippuvuustaulukosta pois? {/*why-was-the-ref-omitted-from-the-dependency-array*/}
 
-This Effect uses _both_ `ref` and `isPlaying`, but only `isPlaying` is declared as a dependency:
+Tämä Effecti käyttää _sekä_ `ref` että `isPlaying`:ä, mutta vain `isPlaying` on määritelty riippuvuustaulukkoon:
 
 ```js {9}
 function VideoPlayer({ src, isPlaying }) {
@@ -441,7 +449,7 @@ function VideoPlayer({ src, isPlaying }) {
   }, [isPlaying]);
 ```
 
-This is because the `ref` object has a *stable identity:* React guarantees [you'll always get the same object](/reference/react/useRef#returns) from the same `useRef` call on every render. It never changes, so it will never by itself cause the Effect to re-run. Therefore, it does not matter whether you include it or not. Including it is fine too:
+Tämä tapahtuu koska `ref` oliolla on *vakaa identiteetti:* React takaa [että saat aina saman olion](/reference/react/useRef#returns) samasta `useRef` kutsusta joka renderöinnillä. Se ei koskaan muutu, joten se ei koskaan itsessään aiheuta Effectin uudelleen suorittamista. Siksi ei ole merkityksellistä onko se määritelty riippuvuustaulukkoon vai ei. Sen sisällyttäminen on myös ok:
 
 ```js {9}
 function VideoPlayer({ src, isPlaying }) {
@@ -455,17 +463,17 @@ function VideoPlayer({ src, isPlaying }) {
   }, [isPlaying, ref]);
 ```
 
-The [`set` functions](/reference/react/useState#setstate) returned by `useState` also have stable identity, so you will often see them omitted from the dependencies too. If the linter lets you omit a dependency without errors, it is safe to do.
+`useState`:n palauttamilla [`set` funktioilla](/reference/react/useState#setstate) on myös vakaa identiteetti, joten näet usein että se jätetään riippuvuustaulukosta pois. Jos linter sallii riippuvuuden jättämisen pois ilman virheitä, se on turvallista tehdä.
 
-Omitting always-stable dependencies only works when the linter can "see" that the object is stable. For example, if `ref` was passed from a parent component, you would have to specify it in the dependency array. However, this is good because you can't know whether the parent component always passes the same ref, or passes one of several refs conditionally. So your Effect _would_ depend on which ref is passed.
+Aina-vakaiden riippuvuuksien jättäminen pois toimii vain kun linter voi "nähdä", että olio on vakaa. Esimerkiksi, jos `ref` välitetään yläkomponentilta, sinun täytyy määritellä se riippuvuustaulukkoon. Kuitenkin, tämä on hyvä tehdä koska et voi tietää, että yläkomponentti välittää aina saman refin, tai välittää yhden useista refeistä ehdollisesti. Joten Effectisi _riippuisi_ siitä, mikä ref välitetään.
 
 </DeepDive>
 
-### Step 3: Add cleanup if needed {/*step-3-add-cleanup-if-needed*/}
+### 3. Vaihe: Lisää puhdistus tarvittaessa {/*step-3-add-cleanup-if-needed*/}
 
-Consider a different example. You're writing a `ChatRoom` component that needs to connect to the chat server when it appears. You are given a `createConnection()` API that returns an object with `connect()` and `disconnect()` methods. How do you keep the component connected while it is displayed to the user?
+Harkitse hieman erilaista esimerkkiä. Kirjoitat `ChatRoom` komponenttia, jonka tarvitsee yhdistää chat palvelimeen kun se ilmestyy. Sinulle annetaan `createConnection()` API joka palauttaa olion, jossa on `connect()` ja `disconnect()` metodit. Kuinka pidät komponentin yhdistettynä kun se näytetään käyttäjälle?
 
-Start by writing the Effect logic:
+Aloita kirjoittamalla Effectin logiikka:
 
 ```js
 useEffect(() => {
@@ -474,7 +482,7 @@ useEffect(() => {
 });
 ```
 
-It would be slow to connect to the chat after every re-render, so you add the dependency array:
+Olisi hidasta yhdistää chat -palvelimeen joka renderöinnin jälkeen, joten lisäät riippuvuustaulukon:
 
 ```js {4}
 useEffect(() => {
@@ -483,9 +491,9 @@ useEffect(() => {
 }, []);
 ```
 
-**The code inside the Effect does not use any props or state, so your dependency array is `[]` (empty). This tells React to only run this code when the component "mounts", i.e. appears on the screen for the first time.**
+**Effectin sisällä oleva koodi ei käytä yhtäkään propsia tai tilamuuttujaa, joten riippuvuustaulukkosi on `[]` (tyhjä). Tämä kertoo Reactille että suorittaa tämän koodin vain kun komponentti "mounttaa", eli näkyy ensimmäistä kertaa näytöllä.**
 
-Let's try running this code:
+Kokeillaan koodin suorittamista:
 
 <Sandpack>
 
@@ -504,7 +512,7 @@ export default function ChatRoom() {
 
 ```js chat.js
 export function createConnection() {
-  // A real implementation would actually connect to the server
+  // Oikea toteutus yhdistäisi todellisuudessa palvelimeen
   return {
     connect() {
       console.log('✅ Connecting...');
@@ -522,15 +530,13 @@ input { display: block; margin-bottom: 20px; }
 
 </Sandpack>
 
-This Effect only runs on mount, so you might expect `"✅ Connecting..."` to be printed once in the console. **However, if you check the console, `"✅ Connecting..."` gets printed twice. Why does it happen?**
+Tämä Effecti suoritetaan vain mountissa, joten voit odottaa että `"✅ Connecting..."` tulostuu kerran konsoliin. **Kuitenkin, jos tarkistat konsolin, `"✅ Connecting..."` tulostuu kaksi kertaa. Miksi se tapahtuu?**
 
-Imagine the `ChatRoom` component is a part of a larger app with many different screens. The user starts their journey on the `ChatRoom` page. The component mounts and calls `connection.connect()`. Then imagine the user navigates to another screen--for example, to the Settings page. The `ChatRoom` component unmounts. Finally, the user clicks Back and `ChatRoom` mounts again. This would set up a second connection--but the first connection was never destroyed! As the user navigates across the app, the connections would keep piling up.
+Kuvittele, että `ChatRoom` komponentti on osa isompaa sovellusta, jossa on useita eri näyttöjä. Käyttäjä aloittaa matkansa `ChatRoom` sivulta. Komponentti mounttaa ja kutsuu `connection.connect()`. Sitten kuvittele, että käyttäjä navigoi toiselle näytölle--esimerkiksi asetussivulle. `ChatRoom` komponentti unmounttaa. Lopuksi, käyttäjä painaa Takaisin -nappia ja `ChatRoom` mounttaa uudelleen. Tämä yhdistäisi toiseen kertaan--mutta ensimmäistä yhdistämistä ei koskaan tuhottu! Kun käyttäjä navigoi sovelluksen läpi, yhteydet kasaantuisivat.
 
-Bugs like this are easy to miss without extensive manual testing. To help you spot them quickly, in development React remounts every component once immediately after its initial mount.
+Tämän kaltaiset bugit voivat helposti jäädä huomiotta ilman raskasta manuaalista testaamista. Helpottaaksesi näiden löytämistä, React kehitysvaiheessa remounttaa jokaisen komponentin kerran heti mountin jälkeen. **Nähdessäsi `"✅ Connecting..."` tulostuksen kahdesti, huomaat helposti ongelman: koodisi ei sulje yhteyttä kun komponentti unmounttaa.**
 
-Seeing the `"✅ Connecting..."` log twice helps you notice the real issue: your code doesn't close the connection when the component unmounts.
-
-To fix the issue, return a *cleanup function* from your Effect:
+Korjataksesi ongelman, palauta *siivousfunktio* Effectistäsi:
 
 ```js {4-6}
   useEffect(() => {
@@ -542,7 +548,7 @@ To fix the issue, return a *cleanup function* from your Effect:
   }, []);
 ```
 
-React will call your cleanup function each time before the Effect runs again, and one final time when the component unmounts (gets removed). Let's see what happens when the cleanup function is implemented:
+React kutsuu siivousfunktiotasi joka kerta ennen kuin Effectia suoritetaan uudelleen, ja kerran kun komponentti unmounttaa (poistetaan). Kokeillaan mitä tapahtuu kun siivousfunktio on toteutettu:
 
 <Sandpack>
 
@@ -562,7 +568,7 @@ export default function ChatRoom() {
 
 ```js chat.js
 export function createConnection() {
-  // A real implementation would actually connect to the server
+  // Oikea toteutus yhdistäisi todellisuudessa palvelimeen
   return {
     connect() {
       console.log('✅ Connecting...');
@@ -580,27 +586,27 @@ input { display: block; margin-bottom: 20px; }
 
 </Sandpack>
 
-Now you get three console logs in development:
+Nyt saat kolme tulostusta konsoliin kehitysvaiheessa:
 
 1. `"✅ Connecting..."`
 2. `"❌ Disconnected."`
 3. `"✅ Connecting..."`
 
-**This is the correct behavior in development.** By remounting your component, React verifies that navigating away and back would not break your code. Disconnecting and then connecting again is exactly what should happen! When you implement the cleanup well, there should be no user-visible difference between running the Effect once vs running it, cleaning it up, and running it again. There's an extra connect/disconnect call pair because React is probing your code for bugs in development. This is normal--don't try to make it go away!
+**Tämä on kehitysvaiheen oikea käyttäytyminen.** Remounttaamalla komponenttisi, React varmistaa että navigointi pois ja takaisin ei riko koodiasi. Yhdistäminen ja sitten katkaiseminen on juuri se mitä pitäisi tapahtua! Kun toteutat siivouksen hyvin, käyttäjälle ei pitäisi olla näkyvissä eroa suorittamalla Effectiä kerran vs suorittamalla se, siivoamalla se ja suorittamalla se uudelleen. Ylimääräinen yhdistys/katkaisu pari on olemassa kehitysvaiheessa, koska React tutkii koodiasi virheiden löytämiseksi. Tämä on normaalia ja sinun ei tulisi yrittää saada sitä pois.
 
-**In production, you would only see `"✅ Connecting..."` printed once.** Remounting components only happens in development to help you find Effects that need cleanup. You can turn off [Strict Mode](/reference/react/StrictMode) to opt out of the development behavior, but we recommend keeping it on. This lets you find many bugs like the one above.
+**Tuotannossa, näkisit ainoastaan `"✅ Connecting..."` tulostuksen kerran.** Remounttaaminen tapahtuu vain kehitysvaiheessa auttaaksesi sinua löytämään Effectit, joissa on siivousfunktio. Voit kytkeä [Strict Mode:n](/reference/react/Strict-mode) pois päältä, jotta saat kehitysvaiheen toiminnon pois käytöstä, mutta suosittelemme että pidät sen päällä. Tämä auttaa sinua löytämään monia bugeja kuten yllä.
 
-## How to handle the Effect firing twice in development? {/*how-to-handle-the-effect-firing-twice-in-development*/}
+## Miten käsittelet kahdesti toistuvan Effectin kehitysvaiheessa? {/*how-to-handle-the-effect-firing-twice-in-development*/}
 
-React intentionally remounts your components in development to find bugs like in the last example. **The right question isn't "how to run an Effect once", but "how to fix my Effect so that it works after remounting".**
+React tarkoituksella remounttaa komponenttisi kehitysvaiheessa auttaaksesi sinua löytämään bugeja kuten edellisessä esimerkissä. **Oikea kysymys ei ole "miten suoritan Effectin kerran", vaan "miten korjaan Effectini niin että se toimii remounttauksen jälkeen".**
 
-Usually, the answer is to implement the cleanup function.  The cleanup function should stop or undo whatever the Effect was doing. The rule of thumb is that the user shouldn't be able to distinguish between the Effect running once (as in production) and a _setup → cleanup → setup_ sequence (as you'd see in development).
+Useiten vastaus on toteuttaa siivousfunktio. Siivousfunktion pitäisi pysäyttää tai peruuttaa se mitä Effect oli tekemässä. Yleinen sääntö on että käyttäjän ei pitäisi pystyä erottamaan Effectin suorittamista kerran (tuotannossa) ja _setup → cleanup → setup_ sekvenssistä (mitä näet kehitysvaiheessa).
 
-Most of the Effects you'll write will fit into one of the common patterns below.
+Useimmat Effectit jotka kirjoitat sopivat yhteen alla olevista yleisistä kuvioista.
 
-### Controlling non-React widgets {/*controlling-non-react-widgets*/}
+### Ei-React komponenttien ohjaaminen {/*controlling-non-react-widgets*/}
 
-Sometimes you need to add UI widgets that aren't written to React. For example, let's say you're adding a map component to your page. It has a `setZoomLevel()` method, and you'd like to keep the zoom level in sync with a `zoomLevel` state variable in your React code. Your Effect would look similar to this:
+Joskus tarvitset UI pienoisohjelmia, jotka eivät ole kirjoitettu Reactiin. Esimerkiksi, sanotaan että lisäät kartta-komponentin sivullesi. Sillä on `setZoomLevel()` metodi, ja haluat pitää zoom tason synkronoituna `zoomLevel` tilamuuttujan kanssa React koodissasi. Effectisi näyttäisi tältä:
 
 ```js
 useEffect(() => {
@@ -609,9 +615,9 @@ useEffect(() => {
 }, [zoomLevel]);
 ```
 
-Note that there is no cleanup needed in this case. In development, React will call the Effect twice, but this is not a problem because calling `setZoomLevel` twice with the same value does not do anything. It may be slightly slower, but this doesn't matter because it won't remount needlessly in production.
+Huomaa, että tässä tilanteessa siivousta ei tarvita. Kehitysvaiheessa React kutsuu Effectia kahdesti, mutta tässä se ei ole ongelma, koska `setZoomLevel`:n kutsuminen kahdesti samalla arvolla ei tee mitään. Se saattaa olla hieman hitaampaa, mutta tämä ei ole ongelma koska remounttaus tapahtuu kehitysvaiheessa eikä tuotannossa.
 
-Some APIs may not allow you to call them twice in a row. For example, the [`showModal`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLDialogElement/showModal) method of the built-in [`<dialog>`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLDialogElement) element throws if you call it twice. Implement the cleanup function and make it close the dialog:
+Jotkin API:t eivät salli kutsua niitä kahdesti peräkkäin. Esimerkiksi, sisäänrakennetun [`<dialog>`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLDialogElement) elementin [`showModal`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLDialogElement/showModal) metodi heittää virheen jos kutsut sitä kahdesti peräkkäin. Toteuta siivousfunktio, joka sulkee dialogin:
 
 ```js {4}
 useEffect(() => {
@@ -621,11 +627,11 @@ useEffect(() => {
 }, []);
 ```
 
-In development, your Effect will call `showModal()`, then immediately `close()`, and then `showModal()` again. This has the same user-visible behavior as calling `showModal()` once, as you would see in production.
+Kehitysvaiheessa Effectisi kutsuu `showModal()` metodia, jonka perään heti `close()`, ja sitten `showModal()` metodia uudelleen. Tämä on käyttäjälle sama kuin jos kutsuisit `showModal()` metodia vain kerran, kuten näet tuotannossa.
 
-### Subscribing to events {/*subscribing-to-events*/}
+### Tapahtumien tilaaminen {/*subscribing-to-events*/}
 
-If your Effect subscribes to something, the cleanup function should unsubscribe:
+Jos Effectisi tilaavat jotain, siivousfunktiosi pitäisi purkaa tilaus:
 
 ```js {6}
 useEffect(() => {
@@ -637,27 +643,27 @@ useEffect(() => {
 }, []);
 ```
 
-In development, your Effect will call `addEventListener()`, then immediately `removeEventListener()`, and then `addEventListener()` again with the same handler. So there would be only one active subscription at a time. This has the same user-visible behavior as calling `addEventListener()` once, as in production.
+Kehitysvaiheessa Effectisi kutsuu `addEventListener()` metodia, jonka perään heti `removeEventListener()` metodia, ja sitten `addEventListener()` metodia uudelleen samalla käsittelijällä. Joten aina on vain yksi aktiivinen tilaus kerrallaan. Tämä on käyttäjälle sama kuin jos kutsuisit `addEventListener()` metodia vain kerran, kuten näet tuotannossa.
 
-### Triggering animations {/*triggering-animations*/}
+### Animaatioiden käynnistäminen {/*triggering-animations*/}
 
-If your Effect animates something in, the cleanup function should reset the animation to the initial values:
+Jos Effectisi animoi jotain, siivousfunktiosi pitäisi palauttaa animaatio alkuperäiseen tilaan:
 
 ```js {4-6}
 useEffect(() => {
   const node = ref.current;
-  node.style.opacity = 1; // Trigger the animation
+  node.style.opacity = 1; // Käynnistä animaatio
   return () => {
-    node.style.opacity = 0; // Reset to the initial value
+    node.style.opacity = 0; // Palauta oletusarvoon
   };
 }, []);
 ```
 
-In development, opacity will be set to `1`, then to `0`, and then to `1` again. This should have the same user-visible behavior as setting it to `1` directly, which is what would happen in production. If you use a third-party animation library with support for tweening, your cleanup function should reset the timeline to its initial state.
+Kehitysvaiheessa läpinäkyvyys asetetaan `1`:een, sitten `0`:aan, ja sitten `1`:een uudelleen. Tämä pitäisi olla käyttäjälle sama kuin jos asettaisit sen suoraan `1`:een, joka olisi mitä tapahtuu tuotannossa. Jos käytät kolmannen osapuolen animaatiokirjastoa joka tukee tweenausta (engl. tweening), siivousfunktion pitäisi palauttaa tweenin aikajana alkuperäiseen tilaan.
 
-### Fetching data {/*fetching-data*/}
+### Tiedon haku {/*tiedon-haku*/}
 
-If your Effect fetches something, the cleanup function should either [abort the fetch](https://developer.mozilla.org/en-US/docs/Web/API/AbortController) or ignore its result:
+Jos Effectisi hakee jotain, siivousfunktiosi pitäisi joko [perua haku](https://developer.mozilla.org/en-US/docs/Web/API/AbortController) tai sivuuttaa sen tulos:
 
 ```js {2,6,13-15}
 useEffect(() => {
@@ -678,11 +684,11 @@ useEffect(() => {
 }, [userId]);
 ```
 
-You can't "undo" a network request that already happened, but your cleanup function should ensure that the fetch that's _not relevant anymore_ does not keep affecting your application. If the `userId` changes from `'Alice'` to `'Bob'`, cleanup ensures that the `'Alice'` response is ignored even if it arrives after `'Bob'`.
+Et voi "peruuttaa" verkkopyyntöä joka on jo tapahtunut, mutta siivousfunktiosi pitäisi varmistaa että pyyntö joka ei ole enää tarpeellinen ei vaikuta sovellukseesi. Jos `userId` muuttuu `'Alice'`:sta `'Bob'`:ksi, siivousfunktio varmistaa että `'Alice'` vastaus jätetään huomiotta vaikka se vastaanotettaisiin `'Bob'`:n vastauksen jälkeen.
 
-**In development, you will see two fetches in the Network tab.** There is nothing wrong with that. With the approach above, the first Effect will immediately get cleaned up so its copy of the `ignore` variable will be set to `true`. So even though there is an extra request, it won't affect the state thanks to the `if (!ignore)` check.
+**Kehitysvaiheessa, näet kaksi verkkopyyntöä Network välilehdellä.** Tässä ei ole mitään vikaa. Yllä olevan menetelmän mukaan, ensimmäinen Effecti poistetaan välittömästi, joten sen kopio `ignore` muuttujasta asetetaan `true`:ksi. Joten vaikka onkin ylimääräinen pyyntö, se ei vaikuta tilaan kiitos `if (!ignore)` tarkistuksen.
 
-**In production, there will only be one request.** If the second request in development is bothering you, the best approach is to use a solution that deduplicates requests and caches their responses between components:
+**Tuotannossa tulee tapahtumaan vain yksi pyyntö.** Jos kehitysvaiheessa toinen pyyntö häiritsee sinua, paras tapa on käyttää ratkaisua joka deduplikoi pyynnöt ja asettaa niiden vastaukset välimuistiin komponenttien välillä:
 
 ```js
 function TodoList() {
@@ -690,50 +696,50 @@ function TodoList() {
   // ...
 ```
 
-This will not only improve the development experience, but also make your application feel faster. For example, the user pressing the Back button won't have to wait for some data to load again because it will be cached. You can either build such a cache yourself or use one of the many alternatives to manual fetching in Effects.
+Tämä ei vain paranna kehityskokemusta, vaan myös saa sovelluksesi tuntumaan nopeammalta. Esimerkiksi, käyttäjän ei tarvitse odottaa että jotain dataa ladataan uudelleen kun painaa Takaisin -painiketta, koska se on välimuistissa. Voit joko rakentaa tällaisen välimuistin itse tai effecteissa manuaalisen datahaun sijaan käyttää jotain olemassa olevaa vaihtoehtoa. 
 
 <DeepDive>
 
-#### What are good alternatives to data fetching in Effects? {/*what-are-good-alternatives-to-data-fetching-in-effects*/}
+#### Mitkä ovat hyviä vaihtoehtoja datan hakemiseen effecteissa? {/*what-are-good-alternatives-to-data-fetching-in-effects*/}
 
-Writing `fetch` calls inside Effects is a [popular way to fetch data](https://www.robinwieruch.de/react-hooks-fetch-data/), especially in fully client-side apps. This is, however, a very manual approach and it has significant downsides:
+`fetch` kutsujen kirjoittaminen Effecteissa on [suosittu tapa hakea dataa](https://www.robinwieruch.de/react-hooks-fetch-data/), erityisesti täysin asiakaspuolen sovelluksissa. Tämä on kuitenkin hyvin manuaalinen tapa ja sillä on merkittäviä haittoja:
 
-- **Effects don't run on the server.** This means that the initial server-rendered HTML will only include a loading state with no data. The client computer will have to download all JavaScript and render your app only to discover that now it needs to load the data. This is not very efficient.
-- **Fetching directly in Effects makes it easy to create "network waterfalls".** You render the parent component, it fetches some data, renders the child components, and then they start fetching their data. If the network is not very fast, this is significantly slower than fetching all data in parallel.
-- **Fetching directly in Effects usually means you don't preload or cache data.** For example, if the component unmounts and then mounts again, it would have to fetch the data again.
-- **It's not very ergonomic.** There's quite a bit of boilerplate code involved when writing `fetch` calls in a way that doesn't suffer from bugs like [race conditions.](https://maxrozen.com/race-conditions-fetching-data-react-with-useeffect)
+- **Effecteja ei ajeta palvelimella.** Tämä tarkoittaa, että palvelimella renderöity HTML sisältää vain lataus -tilan ilman dataa. Asiakkaan tietokoneen pitää ladata koko JavaScript ja renderöidä sovellus, jotta se huomaa, että nyt sen täytyy ladata dataa. Tämä ei ole erityisen tehokasta.
+- **Hakeminen Effectissa tekee "verkkovesiputouksien" toteuttamisesta helppoa.** Renderöit ylemmän komponentin, se hakee jotain dataa, renderöit lapsikomponentit, ja sitten ne alkavat hakea omaa dataansa. Jos verkkoyhteys ei ole erityisen nopea, tämä on huomattavasti hitaampaa kuin jos kaikki datat haettaisiin yhtäaikaisesti.
+- **Hakeminen suoraan Effecteissa useiten tarkoittaa ettet esilataa tai välimuista dataa.** Esimerkiksi, jos komponentti poistetaan ja sitten liitetään takaisin, se joutuu hakemaan datan uudelleen.
+- **Se ei ole kovin ergonomista.** Pohjakoodia on aika paljon kirjoittaessa `fetch` kutsuja tavalla, joka ei kärsi bugeista kuten [kilpailutilanteista.](https://maxrozen.com/race-conditions-fetching-data-react-with-useeffect)
 
-This list of downsides is not specific to React. It applies to fetching data on mount with any library. Like with routing, data fetching is not trivial to do well, so we recommend the following approaches:
+Tämä lista huonoista puolista ei koske pelkästään Reactia. Se pätee mihin tahansa kirjastoon kun dataa haetaan mountissa. Kuten reitityksessä, datan hakeminen ei ole helppoa tehdä hyvin, joten suosittelemme seuraavia lähestymistapoja:
 
-- **If you use a [framework](/learn/start-a-new-react-project#production-grade-react-frameworks), use its built-in data fetching mechanism.** Modern React frameworks have integrated data fetching mechanisms that are efficient and don't suffer from the above pitfalls.
-- **Otherwise, consider using or building a client-side cache.** Popular open source solutions include [React Query](https://tanstack.com/query/latest), [useSWR](https://swr.vercel.app/), and [React Router 6.4+.](https://beta.reactrouter.com/en/main/start/overview) You can build your own solution too, in which case you would use Effects under the hood, but add logic for deduplicating requests, caching responses, and avoiding network waterfalls (by preloading data or hoisting data requirements to routes).
+- **Jos käytät [frameworkia](/learn/start-a-new-react-project#building-with-a-full-featured-framework), käytä sen sisäänrakennettua datan hakemiseen tarkoitettua mekanismia.** Modernit React frameworkit sisältävät tehokkaita datan hakemiseen tarkoitettuja mekanismeja, jotka eivät kärsi yllä mainituista ongelmista.
+- **Muussa tapauksessa, harkitse tai rakenna asiakaspuolen välimuisti.** Suosittuja avoimen lähdekoodin ratkaisuja ovat [React Query](https://tanstack.com/query/latest), [useSWR](https://swr.vercel.app/), ja [React Router 6.4+.](https://beta.reactrouter.com/en/main/start/overview) Voit myös rakentaa oman ratkaisusi, jolloin käytät Effecteja alustana mutta lisäät logiikkaa pyyntöjen deduplikointiin, vastausten välimuistitukseen ja verkkovesiputousten välttämiseen (esilataamalla dataa tai nostamalla datan vaatimukset reiteille).
 
-You can continue fetching data directly in Effects if neither of these approaches suit you.
+Voit jatkaa datan hakemista suoraan Effecteissa jos nämä lähestymistavat eivät sovi sinulle.
 
 </DeepDive>
 
-### Sending analytics {/*sending-analytics*/}
+### Analytiikan lähettäminen {/*sending-analytics*/}
 
-Consider this code that sends an analytics event on the page visit:
+Harkitse tätä koodia, joka lähettää analytiikkatapahtuman sivun vierailusta:
 
 ```js
 useEffect(() => {
-  logVisit(url); // Sends a POST request
+  logVisit(url); // Lähettää POST pyynnön
 }, [url]);
 ```
 
-In development, `logVisit` will be called twice for every URL, so you might be tempted to try to fix that. **We recommend keeping this code as is.** Like with earlier examples, there is no *user-visible* behavior difference between running it once and running it twice. From a practical point of view, `logVisit` should not do anything in development because you don't want the logs from the development machines to skew the production metrics. Your component remounts every time you save its file, so it logs extra visits in development anyway.
+Kehitysvaiheessa `logVisit` kutsutaan kahdesti jokaiselle URL:lle, joten saattaa olla houkuttelevaa tämän välttämistä. **Suosittelemme pitämään tämän koodin sellaisenaan.** Kuten aiemmissa esimerkeissä, ei ole *käyttäjän näkökulmasta* havaittavaa eroa siitä, ajetaanko se kerran vai kahdesti. Käytännöllisestä näkökulmasta `logVisit`:n ei tulisi tehdä mitään kehitysvaiheessa, koska et halua, että kehityskoneiden lokit vaikuttavat tuotantotilastoihin. Komponenttisi remounttaa joka kerta kun tallennat sen tiedoston, joten se lähettäisi ylimääräisiä vierailuja kehitysvaiheessa joka tapauksessa.
 
-**In production, there will be no duplicate visit logs.**
+**Tuotannossa ei ole kaksoiskappaleita vierailulokeista.**
 
-To debug the analytics events you're sending, you can deploy your app to a staging environment (which runs in production mode) or temporarily opt out of [Strict Mode](/reference/react/StrictMode) and its development-only remounting checks. You may also send analytics from the route change event handlers instead of Effects. For more precise analytics, [intersection observers](https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API) can help track which components are in the viewport and how long they remain visible.
+Analytiikkatapahtumien debuggauukseen voit joko julkaista sovelluksen testiympäristöön (joka suoritetaan tuotantotilassa) tai väliaikaisesti poistaa käytöstä [Strict Mode](/reference/react/StrictMode):n ja sen kehitysvaiheessa olevat remounttaus-tarkistukset. Voit myös lähettää analytiikkaa reitityksen tapahtumakäsittelijöistä Effectien sijaan. Entistäkin tarkemman analytiikan lähettämiseen voit käyttää [Intersection Observer API](https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API):a, jotka auttavat seuraamaan, mitkä komponentit ovat näkyvissä ja kuinka kauan.
 
-### Not an Effect: Initializing the application {/*not-an-effect-initializing-the-application*/}
+### Ei ole Effect: Sovelluksen alustaminen {/*not-an-effect-initializing-the-application*/}
 
-Some logic should only run once when the application starts. You can put it outside your components:
+Jokin logiikka tulisi suorittaa vain kerran kun sovellus käynnistyy. Voit laittaa sen komponentin ulkopuolelle:
 
 ```js {2-3}
-if (typeof window !== 'undefined') { // Check if we're running in the browser.
+if (typeof window !== 'undefined') { // Tarkista suoritetaanko selaimessa
   checkAuthToken();
   loadDataFromLocalStorage();
 }
@@ -743,37 +749,37 @@ function App() {
 }
 ```
 
-This guarantees that such logic only runs once after the browser loads the page.
+Tämä takaa, että tällainen logiikka suoritetaan vain kerran selaimen lataamisen jälkeen.
 
-### Not an Effect: Buying a product {/*not-an-effect-buying-a-product*/}
+### Ei ole Effect: Tuotteen ostaminen {/*not-an-effect-buying-a-product*/}
 
-Sometimes, even if you write a cleanup function, there's no way to prevent user-visible consequences of running the Effect twice. For example, maybe your Effect sends a POST request like buying a product:
+Joksus, vaikka kirjoittaisit siivousfunktion, ei ole tapaa estää käyttäjälle näkyviä seurauksia Effectin kahdesti suorittamisesta. Esimerkiksi, joskus Effecti voi lähettää POST pyynnön kuten tuotteen ostamisen:
 
 ```js {2-3}
 useEffect(() => {
-  // 🔴 Wrong: This Effect fires twice in development, exposing a problem in the code.
+  // 🔴 Väärin: Tämä Effecti suoritetaan kahdesti tuotannossa, paljastaen ongelman koodissa.
   fetch('/api/buy', { method: 'POST' });
 }, []);
 ```
 
-You wouldn't want to buy the product twice. However, this is also why you shouldn't put this logic in an Effect. What if the user goes to another page and then presses Back? Your Effect would run again. You don't want to buy the product when the user *visits* a page; you want to buy it when the user *clicks* the Buy button.
+Et halua ostaa tuotetta kahdesti. Kuitenkin, tämä on myös syy miksi et halua laittaa tätä logiikkaa Effectiin. Mitä jos käyttäjä menee toiselle sivulle ja tulee takaisin? Effectisi suoritetaan uudelleen. Et halua ostaa tuotetta koska käyttäjä *vieraili* sivulla; haluat ostaa sen kun käyttäjä *painaa* Osta -nappia.
 
-Buying is not caused by rendering; it's caused by a specific interaction. It should run only when the user presses the button. **Delete the Effect and move your `/api/buy` request into the Buy button event handler:**
+Ostaminen ei aiheutunut renderöinnin takia. Se aiheutuu tietyn vuorovaikutuksen takia. Se suoritetaan vain kerran koska vuorovaikutus (napsautus) tapahtuu vain kerran. **Poista Effecti ja siirrä `/api/buy` pyyntö Osta -painkkeen tapahtumakäsittelijään:**
 
 ```js {2-3}
   function handleClick() {
-    // ✅ Buying is an event because it is caused by a particular interaction.
+    // ✅ Ostaminen on tapahtuma, koska se aiheutuu tietyn vuorovaikutuksen seurauksena.
     fetch('/api/buy', { method: 'POST' });
   }
 ```
 
-**This illustrates that if remounting breaks the logic of your application, this usually uncovers existing bugs.** From the user's perspective, visiting a page shouldn't be different from visiting it, clicking a link, and pressing Back. React verifies that your components abide by this principle by remounting them once in development.
+**Tämä osoittaa, että jos remounttaus rikkoo sovelluksen logiikkaa, tämä usein paljastaa olemassa olevia virheitä.** Käyttäjän näkökulmasta, sivulla vierailu ei pitäisi olla sen erilaisempaa kuin vierailu, linkin napsautus ja sitten Takaisin -painikkeen napsauttaminen. React varmistaa, että komponenttisi eivät riko tätä periaatetta kehitysvaiheessa remounttaamalla niitä kerran.
 
-## Putting it all together {/*putting-it-all-together*/}
+## Laitetaan kaikki yhteen {/*putting-it-all-together*/}
 
-This playground can help you "get a feel" for how Effects work in practice.
+Tämä hiekkalaatikko voi auttaa "saamaan tunteen" siitä, miten Effectit toimivat käytännössä.
 
-This example uses [`setTimeout`](https://developer.mozilla.org/en-US/docs/Web/API/setTimeout) to schedule a console log with the input text to appear three seconds after the Effect runs. The cleanup function cancels the pending timeout. Start by pressing "Mount the component":
+Tämä esimerkki käyttää [`setTimeout`](https://developer.mozilla.org/en-US/docs/Web/API/setTimeout) funktiota aikatauluttaakseen konsolilokiin syötetyn tekstin ilmestyvän kolmen sekunnin kuluttua Effectin suorittamisen jälkeen. Siivoamisfunktio peruuttaa odottavan aikakatkaisun. Aloita painamalla "Mount the component":
 
 <Sandpack>
 
@@ -827,21 +833,21 @@ export default function App() {
 
 </Sandpack>
 
-You will see three logs at first: `Schedule "a" log`, `Cancel "a" log`, and `Schedule "a" log` again. Three second later there will also be a log saying `a`. As you learned earlier, the extra schedule/cancel pair is because React remounts the component once in development to verify that you've implemented cleanup well.
+Näet aluksi kolme eri lokia: `Schedule "a" log`, `Cancel "a" log`, ja `Schedule "a" log` uudelleen. Kolme sekuntia myöhemmin lokiin ilmestyy viesti `a`. Kuten opit aiemmin tällä sivulla, ylimääräinen schedule/cancel pari tapahtuu koska **React remounttaa komponentin kerran kehitysvaiheessa varmistaakseen, että olet toteuttanut siivouksen hyvin.**
 
-Now edit the input to say `abc`. If you do it fast enough, you'll see `Schedule "ab" log` immediately followed by `Cancel "ab" log` and `Schedule "abc" log`. **React always cleans up the previous render's Effect before the next render's Effect.** This is why even if you type into the input fast, there is at most one timeout scheduled at a time. Edit the input a few times and watch the console to get a feel for how Effects get cleaned up.
+Nyt muokkaa syöttölaatikon arvoksi `abc`. Jos teet sen tarpeeksi nopeasti, näet `Schedule "ab" log` viestin, jonka jälkeen `Cancel "ab" log` ja `Schedule "abc" log`. **React siivoaa aina edellisen renderöinnin Effectin ennen seuraavan renderöinnin Effectiä.** Tämä on syy miksi vaikka kirjoittaisit syöttölaatikkoon nopeasti, aikakatkaisuja on aina enintään yksi kerrallaan. Muokkaa syöttölaatikkoa muutaman kerran ja katso konsolia saadaksesi käsityksen siitä, miten Effectit siivotaan.
 
-Type something into the input and then immediately press "Unmount the component". Notice how unmounting cleans up the last render's Effect. Here, it clears the last timeout before it has a chance to fire.
+Kirjoita jotain syöttölaatikkoon ja heti perään paina "Unmount the component". **Huomaa kuinka unmounttaus siivoaa viimeisen renderöinnin Effectin.** Tässä esimerkissä se tyhjentää viimeisen aikakatkaisun ennen kuin se ehtii käynnistyä.
 
-Finally, edit the component above and comment out the cleanup function so that the timeouts don't get cancelled. Try typing `abcde` fast. What do you expect to happen in three seconds? Will `console.log(text)` inside the timeout print the *latest* `text` and produce five `abcde` logs? Give it a try to check your intuition!
+Lopuksi, muokkaa yllä olevaa komponenttia ja **kommentoi siivousfunktio**, jotta ajastuksia ei peruuteta. Kokeile kirjoittaa `abcde` nopeasti. Mitä odotat tapahtuvan kolmen sekuntin kuluttua? Tulisiko `console.log(text)` aikakatkaisussa tulostamaan *viimeisimmän* `text`:n ja tuottamaan viisi `abcde` lokia? Kokeile tarkistaaksesi intuitiosi!
 
-Three seconds later, you should see a sequence of logs (`a`, `ab`, `abc`, `abcd`, and `abcde`) rather than five `abcde` logs. **Each Effect "captures" the `text` value from its corresponding render.**  It doesn't matter that the `text` state changed: an Effect from the render with `text = 'ab'` will always see `'ab'`. In other words, Effects from each render are isolated from each other. If you're curious how this works, you can read about [closures](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Closures).
+Kolmen sekuntin jälkeen lokeissa tulisi näkyä (`a`, `ab`, `abc`, `abcd`, ja `abcde`) viiden `abcde` lokin sijaan. **Kukin Effecti nappaa `text`:n arvon vastaavasta renderöinnistä.** Se ei ole väliä, että `text` tila muuttui: Effecti renderöinnistä `text = 'ab'` näkee aina `'ab'`. Toisin sanottuna, Effectit jokaisesta renderöinnistä ovat toisistaan erillisiä. Jos olet kiinnostunut siitä, miten tämä toimii, voit lukea [closureista](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Closures).
 
 <DeepDive>
 
-#### Each render has its own Effects {/*each-render-has-its-own-effects*/}
+#### Kullakin renderillä on sen omat Effectit {/*each-render-has-its-own-effects*/}
 
-You can think of `useEffect` as "attaching" a piece of behavior to the render output. Consider this Effect:
+Voit ajatella `useEffect`:ia "liittävän" palan toiminnallisuutta osana renderöinnin tulosta. Harkitse tätä Effectiä:
 
 ```js
 export default function ChatRoom({ roomId }) {
@@ -855,119 +861,119 @@ export default function ChatRoom({ roomId }) {
 }
 ```
 
-Let's see what exactly happens as the user navigates around the app.
+Katsotaan mitä oikeasti tapahtuu kun käyttäjä liikkuu sovelluksessa.
 
-#### Initial render {/*initial-render*/}
+#### Alustava renderöinti {/*initial-render*/}
 
-The user visits `<ChatRoom roomId="general" />`. Let's [mentally substitute](/learn/state-as-a-snapshot#rendering-takes-a-snapshot-in-time) `roomId` with `'general'`:
+Käyttäjä vierailee `<ChatRoom roomId="general" />`. Katsotaan [mielikuvitustilassa](/learn/state-as-a-snapshot#rendering-takes-a-snapshot-in-time) `roomId` arvoksi `'general'`:
 
 ```js
-  // JSX for the first render (roomId = "general")
+  // JSX ensimäisellä renderöinnillä (roomId = "general")
   return <h1>Welcome to general!</h1>;
 ```
 
-**The Effect is *also* a part of the rendering output.** The first render's Effect becomes:
+**Effecti on *myös* osa renderöinnin tulosta.** Ensimmäisen renderöinnin Effecti muuttuu:
 
 ```js
-  // Effect for the first render (roomId = "general")
+  // Effecti ensimäisellä renderöinnillä (roomId = "general")
   () => {
     const connection = createConnection('general');
     connection.connect();
     return () => connection.disconnect();
   },
-  // Dependencies for the first render (roomId = "general")
+  // Riippuvuudet ensimäisellä renderöinnillä (roomId = "general")
   ['general']
 ```
 
-React runs this Effect, which connects to the `'general'` chat room.
+React suorittaa tämän Effectin, joka yhdistää `'general'` keskusteluhuoneeseen.
 
-#### Re-render with same dependencies {/*re-render-with-same-dependencies*/}
+#### Uudelleen renderöinti samoilla riippuvuuksilla {/*re-render-with-same-dependencies*/}
 
-Let's say `<ChatRoom roomId="general" />` re-renders. The JSX output is the same:
+Sanotaan, että `<ChatRoom roomId="general" />` renderöidään uudelleen. JSX tuloste pysyy samana:
 
 ```js
-  // JSX for the second render (roomId = "general")
+  // JSX toisella renderöinnillä (roomId = "general")
   return <h1>Welcome to general!</h1>;
 ```
 
-React sees that the rendering output has not changed, so it doesn't update the DOM.
+React näkee, että renderöinnin tuloste ei ole muuttunut, joten se ei päivitä DOM:ia.
 
-The Effect from the second render looks like this:
+Effecti toiselle renderöinnille näyttää tältä:
 
 ```js
-  // Effect for the second render (roomId = "general")
+  // Effecti toisella renderöinnillä (roomId = "general")
   () => {
     const connection = createConnection('general');
     connection.connect();
     return () => connection.disconnect();
   },
-  // Dependencies for the second render (roomId = "general")
+  // Riippuvuudet toisella renderöinnillä (roomId = "general")
   ['general']
 ```
 
-React compares `['general']` from the second render with `['general']` from the first render. **Because all dependencies are the same, React *ignores* the Effect from the second render.** It never gets called.
+React vertaa `['general']`:a toiselta renderöinniltä ensimmäisen renderöinnin `['general']` kanssa. **Koska kaikki riippuvuudet ovat samat, React *jättää huomiotta* toisen renderöinnin Effectin.** Sitä ei koskaan kutsuta.
 
-#### Re-render with different dependencies {/*re-render-with-different-dependencies*/}
+#### Uudelleen renderöinti eri riippuvuuksilla {/*re-render-with-different-dependencies*/}
 
-Then, the user visits `<ChatRoom roomId="travel" />`. This time, the component returns different JSX:
+Sitten, käyttäjä vierailee `<ChatRoom roomId="travel" />`. Tällä kertaa komponentti palauttaa eri JSX:ää:
 
 ```js
-  // JSX for the third render (roomId = "travel")
+  // JSX kolmannella renderöinnillä (roomId = "travel")
   return <h1>Welcome to travel!</h1>;
 ```
 
-React updates the DOM to change `"Welcome to general"` into `"Welcome to travel"`.
+React päivittää DOM:in muuttamalla `"Welcome to general"` lukemaan `"Welcome to travel"`.
 
-The Effect from the third render looks like this:
+Effecti kolmannelle renderöinnille näyttää tältä:
 
 ```js
-  // Effect for the third render (roomId = "travel")
+  // Effecti kolmannella renderöinnillä (roomId = "travel")
   () => {
     const connection = createConnection('travel');
     connection.connect();
     return () => connection.disconnect();
   },
-  // Dependencies for the third render (roomId = "travel")
+  // Riippuvuudet kolmannella renderöinnillä (roomId = "travel")
   ['travel']
 ```
 
-React compares `['travel']` from the third render with `['general']` from the second render. One dependency is different: `Object.is('travel', 'general')` is `false`. The Effect can't be skipped.
+React vertaa `['travel']`:ia kolmannelta renderöinniltä toiselta renderöinnin `['general']` kanssa. Yksi riippuvuus on erilainen: `Object.is('travel', 'general')` on `false`. Effectiä ei voi jättää huomiotta.
 
-**Before React can apply the Effect from the third render, it needs to clean up the last Effect that _did_ run.** The second render's Effect was skipped, so React needs to clean up the first render's Effect. If you scroll up to the first render, you'll see that its cleanup calls `disconnect()` on the connection that was created with `createConnection('general')`. This disconnects the app from the `'general'` chat room.
+**Ennen kuin React voi ottaa käyttöön kolmannen renderöinnin Effectin, sen täytyy siivota viimeisin Effecti joka _suoritettiin_.** Toisen renderöinnin Effecti ohitettiin, joten Reactin täytyy siivota ensimmäisen renderöinnin Effecti. Jos selaat ylös ensimmäiseen renderöintiin, näet että sen siivous kutsuu `createConnection('general')`:lla luodun yhteyden `disconnect()` metodia. Tämä irroittaa sovelluksen `'general'` keskusteluhuoneesta.
 
-After that, React runs the third render's Effect. It connects to the `'travel'` chat room.
+Sen jälkeen React suorittaa kolmannen renderöinnin Effectin. Se yhdistää sovelluksen `'travel'` keskusteluhuoneeseen.
 
 #### Unmount {/*unmount*/}
 
-Finally, let's say the user navigates away, and the `ChatRoom` component unmounts. React runs the last Effect's cleanup function. The last Effect was from the third render. The third render's cleanup destroys the `createConnection('travel')` connection. So the app disconnects from the `'travel'` room.
+Lopuksi, sanotaan, että käyttäjä siirtyy pois ja `ChatRoom` komponentti unmounttaa. React suorittaa viimeisen Effectin siivousfunktion. Viimeinen Effecti oli kolmannen renderöinnin. Kolmannen renderöinnin siivousfunktio tuhoaa `createConnection('travel')` yhteyden. Joten sovellus irroittaa itsensä `'travel'` keskusteluhuoneesta.
 
-#### Development-only behaviors {/*development-only-behaviors*/}
+#### Kehitysvaiheen käyttäytymiset {/*development-only-behaviors*/}
 
-When [Strict Mode](/reference/react/StrictMode) is on, React remounts every component once after mount (state and DOM are preserved). This [helps you find Effects that need cleanup](#step-3-add-cleanup-if-needed) and exposes bugs like race conditions early. Additionally, React will remount the Effects whenever you save a file in development. Both of these behaviors are development-only.
+Kun [Strict Mode](/reference/react/StrictMode) on käytössä, React remounttaa jokaisen komponentin kerran mountin jälkeen (tila ja DOM säilytetään). Tämä [helpottaa löytämään Effecteja jotka tarvitsevat siivousfunktiota](#step-3-add-cleanup-if-needed) ja paljastaa bugeja kuten kilpailutilanteita (engl. race conditions). Lisäksi, React remounttaa Effectit joka kerta kun tallennat tiedoston kehitysvaiheessa. Molemmat näistä käyttäytymisistä tapahtuu ainoastaan kehitysvaiheessa.
 
 </DeepDive>
 
 <Recap>
 
-- Unlike events, Effects are caused by rendering itself rather than a particular interaction.
-- Effects let you synchronize a component with some external system (third-party API, network, etc).
-- By default, Effects run after every render (including the initial one).
-- React will skip the Effect if all of its dependencies have the same values as during the last render.
-- You can't "choose" your dependencies. They are determined by the code inside the Effect.
-- Empty dependency array (`[]`) corresponds to the component "mounting", i.e. being added to the screen.
-- In Strict Mode, React mounts components twice (in development only!) to stress-test your Effects.
-- If your Effect breaks because of remounting, you need to implement a cleanup function.
-- React will call your cleanup function before the Effect runs next time, and during the unmount.
+- Toisin kuin tapahtumat, Effectit aiheutuvat renderöinnin seurauksena tietyn vuorovaikutuksen sijaan.
+- Effectien avulla voit synkronoida komponentin jonkin ulkoisen järjestelmän kanss (kolmannen osapuolen API:n, verkon, jne.).
+- Oletuksena, Effectit suoritetaan jokaisen renderöinnin jälkeen (mukaan lukien ensimmäinen renderöinti).
+- React ohittaa Effectin jos kaikki sen riippuvuudet ovat samat kuin viimeisellä renderöinnillä.
+- Et voi "valita" riippuvuuksiasi. Ne määräytyvät Effectin sisällä olevan koodin mukaan.
+- Tyhjä riippuvuustaulukko (`[]`) vastaa komponentin "mounttaamista", eli sitä kun komponentti lisätään näytölle.
+- Kun Strict Mode on käytössä, React mounttaa komponentit kaksi kertaa (vain kehitysvaiheessa!) stressitestataksesi Effecteja.
+- Jos Effecti rikkoutuu remountin takia, sinun täytyy toteuttaa siivousfunktio.
+- React kutsuu siivousfunktiota ennen kuin Effectiasi suoritetaan seuraavan kerran, ja unmountin yhteydessä.
 
 </Recap>
 
 <Challenges>
 
-#### Focus a field on mount {/*focus-a-field-on-mount*/}
+#### Kohdenna kenttään mountattaessa {/*focus-a-field-on-mount*/}
 
-In this example, the form renders a `<MyInput />` component.
+Tässä esimerkissä, lomake renderöi `<MyInput />` komponentin.
 
-Use the input's [`focus()`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/focus) method to make `MyInput` automatically focus when it appears on the screen. There is already a commented out implementation, but it doesn't quite work. Figure out why it doesn't work, and fix it. (If you're familiar with the `autoFocus` attribute, pretend that it does not exist: we are reimplementing the same functionality from scratch.)
+Käytä inputin [`focus()`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/focus) metodia, jotta `MyInput` komponentti automaattisesti kohdentuu kun se ilmestyy näytölle. Alhaalla on jo kommentoitu toteutus, mutta se ei toimi täysin. Selvitä miksi se ei toimi ja korjaa se. (Jos olet tutustunut `autoFocus` attribuuttiin, kuvittele, että sitä ei ole olemassa: me toteutamme saman toiminnallisuuden alusta alkaen.)
 
 <Sandpack>
 
@@ -977,7 +983,7 @@ import { useEffect, useRef } from 'react';
 export default function MyInput({ value, onChange }) {
   const ref = useRef(null);
 
-  // TODO: This doesn't quite work. Fix it.
+  // TODO: Tämä ei ihan toimi. Korjaa se.
   // ref.current.focus()    
 
   return (
@@ -1043,15 +1049,15 @@ body {
 </Sandpack>
 
 
-To verify that your solution works, press "Show form" and verify that the input receives focus (becomes highlighted and the cursor is placed inside). Press "Hide form" and "Show form" again. Verify the input is highlighted again.
+Tarkistaaksesi, että ratkaisusi toimii, paina "Show form" ja tarkista, että kenttä kohdentuu (se muuttuu korostetuksi ja kursori asettuu siihen). Paina "Hide form" ja "Show form" uudelleen. Tarkista, että kenttä on korostettu uudelleen.
 
-`MyInput` should only focus _on mount_ rather than after every render. To verify that the behavior is right, press "Show form" and then repeatedly press the "Make it uppercase" checkbox. Clicking the checkbox should _not_ focus the input above it.
+`MyInput` pitäisi kohdentua _mounttauksen yhteydessä_ eikä jokaisen renderöinnin jälkeen. Varmistaaksesi, että toiminnallisuus on oikein, paina "Show form":ia ja sitten paina toistuvasti "Make it uppercase" valintaruutua. Valintaruudun klikkaaminen ei pitäisi kohdentaa kenttää yllä.
 
 <Solution>
 
-Calling `ref.current.focus()` during render is wrong because it is a *side effect*. Side effects should either be placed inside an event handler or be declared with `useEffect`. In this case, the side effect is _caused_ by the component appearing rather than by any specific interaction, so it makes sense to put it in an Effect.
+`ref.current.focus()` kutsuminen renderöinnin aikana on väärin, koska se on *sivuvaikutus*. Sivuvaikutukset pitäisi sijoittaa tapahtumankäsittelijöihin tai määritellä `useEffect`:n avulla. Tässä tapauksessa sivuvaikutus on *aiheutettu* komponentin ilmestymisestä, eikä mistään tietystä vuorovaikutuksesta, joten on järkevää sijoittaa se Effectiin.
 
-To fix the mistake, wrap the `ref.current.focus()` call into an Effect declaration. Then, to ensure that this Effect runs only on mount rather than after every render, add the empty `[]` dependencies to it.
+Korjataksesi virheen, sijoita `ref.current.focus()` kutsu Effectin määrittelyyn. Sitten, varmistaaksesi, että tämä Effect suoritetaan vain mounttauksen yhteydessä eikä jokaisen renderöinnin jälkeen, lisää siihen tyhjä `[]` riippuvuustaulukko.
 
 <Sandpack>
 
@@ -1129,13 +1135,13 @@ body {
 
 </Solution>
 
-#### Focus a field conditionally {/*focus-a-field-conditionally*/}
+#### Kohdenna kenttä ehdollisesti {/*focus-a-field-conditionally*/}
 
-This form renders two `<MyInput />` components.
+Tämä lomake renderöi kaksi `<MyInput />` -komponenttia.
 
-Press "Show form" and notice that the second field automatically gets focused. This is because both of the `<MyInput />` components try to focus the field inside. When you call `focus()` for two input fields in a row, the last one always "wins".
+Paina "Show form" ja huomaa, että toinen kenttä kohdentuu automaattisesti. Tämä johtuu siitä, että molemmat `<MyInput />` -komponentit yrittävät kohdentaa kentän sisällä. Kun kutsut `focus()` -funktiota kahdelle syöttökentälle peräkkäin, viimeinen aina "voittaa".
 
-Let's say you want to focus the first field. The first `MyInput` component now receives a boolean `shouldFocus` prop set to `true`. Change the logic so that `focus()` is only called if the `shouldFocus` prop received by `MyInput` is `true`.
+Sanotaan, että haluat kohdentaa ensimmäisen kentän. Nyt ensimmäinen `<MyInput />` -komponentti saa boolean-arvon `shouldFocus` -propsin arvolla `true`. Muuta logiikkaa siten, että `focus()` -funktiota kutsutaan vain, jos `MyInput` -komponentti saa `shouldFocus` -propsin arvolla `true`.
 
 <Sandpack>
 
@@ -1145,7 +1151,7 @@ import { useEffect, useRef } from 'react';
 export default function MyInput({ shouldFocus, value, onChange }) {
   const ref = useRef(null);
 
-  // TODO: call focus() only if shouldFocus is true.
+  // TODO: kutsu focus():a vain jos shouldFocus on tosi.
   useEffect(() => {
     ref.current.focus();
   }, []);
@@ -1215,17 +1221,17 @@ body {
 
 </Sandpack>
 
-To verify your solution, press "Show form" and "Hide form" repeatedly. When the form appears, only the *first* input should get focused. This is because the parent component renders the first input with `shouldFocus={true}` and the second input with `shouldFocus={false}`. Also check that both inputs still work and you can type into both of them.
+Tarkistaaksesi ratkaisun, paina "Show form" ja "Hide form" toistuvasti. Kun lomake tulee näkyviin, vain *ensimmäisen* kentän tulisi kohdistua. Tämä johtuu siitä, että vanhemman komponentin renderöimä ensimmäinen syöttökenttä saa `shouldFocus={true}` ja toinen syöttökenttä saa `shouldFocus={false}` -propsin. Tarkista myös, että molemmat kentät toimivat edelleen ja voit kirjoittaa molempiin.
 
 <Hint>
 
-You can't declare an Effect conditionally, but your Effect can include conditional logic.
+Et voi määritellä Effectia ehdollisesti, mutta Effect voi sisältää ehtologiikkaa.
 
 </Hint>
 
 <Solution>
 
-Put the conditional logic inside the Effect. You will need to specify `shouldFocus` as a dependency because you are using it inside the Effect. (This means that if some input's `shouldFocus` changes from `false` to `true`, it will focus after mount.)
+Laita ehdollinen logiikka Effectin sisään. Sinun täytyy määrittää `shouldFocus` -propsi riippuvuudeksi, koska käytät sitä Effectin sisällä. (Tämä tarkoittaa sitä, että jos jonkin syöttökentän `shouldFocus` -propsi muuttuu arvosta `false` arvoon `true`, se kohdistuu komponentin mounttaamisen jälkeen.)
 
 <Sandpack>
 
@@ -1308,15 +1314,15 @@ body {
 
 </Solution>
 
-#### Fix an interval that fires twice {/*fix-an-interval-that-fires-twice*/}
+#### Korjaa ajastin joka käynnistyy kahdesti {/*fix-an-interval-that-fires-twice*/}
 
-This `Counter` component displays a counter that should increment every second. On mount, it calls [`setInterval`.](https://developer.mozilla.org/en-US/docs/Web/API/setInterval) This causes `onTick` to run every second. The `onTick` function increments the counter.
+Tämä `Counter` komponentti näyttää laskurin, jonka pitäisi kasvaa joka sekunti. Mounttauksen yhteydessä se kutsuu [`setInterval`](https://developer.mozilla.org/en-US/docs/Web/API/setInterval):ia. Tämä aiheuttaa `onTick` -funktion suorittamisen joka sekunti. `onTick` -funktio kasvattaa laskuria.
 
-However, instead of incrementing once per second, it increments twice. Why is that? Find the cause of the bug and fix it.
+Kuitenkin, sen sijaan, että se kasvaisi kerran sekunnissa, se kasvaa kahdesti. Miksi? Etsi vian syy ja korjaa se.
 
 <Hint>
 
-Keep in mind that `setInterval` returns an interval ID, which you can pass to [`clearInterval`](https://developer.mozilla.org/en-US/docs/Web/API/clearInterval) to stop the interval.
+Pidä mielessä, että `setInterval` palauttaa ajastimen ID:n, jonka voit antaa [`clearInterval`](https://developer.mozilla.org/en-US/docs/Web/API/clearInterval):lle pysäyttääksesi ajastimen.
 
 </Hint>
 
@@ -1373,11 +1379,11 @@ body {
 
 <Solution>
 
-When [Strict Mode](/reference/react/StrictMode) is on (like in the sandboxes on this site), React remounts each component once in development. This causes the interval to be set up twice, and this is why each second the counter increments twice.
+Kun [Strict Mode](/reference/react/StrictMode) on päällä (kuten tällä sivuilla olevissa hiekkalaatikoissa), React remounttaa jokaisen komponentin kerran kehitysvaiheessa. Tämä aiheuttaa ajastimen asettamisen kahdesti, ja tämä on syy siihen, miksi laskuri kasvaa joka sekunti kahdesti.
 
-However, React's behavior is not the *cause* of the bug: the bug already exists in the code. React's behavior makes the bug more noticeable. The real cause is that this Effect starts a process but doesn't provide a way to clean it up.
+Kuitenkin, Reactin käyttäytyminen ei ole *syy* bugiin: bugi oli jo olemassa koodissa. Reactin käyttäytymienn tekee bugista huomattavamma. Oikea syy on se, että tämä Effect käynnistää prosessin, mutta ei tarjoa tapaa sen siivoamiseen.
 
-To fix this code, save the interval ID returned by `setInterval`, and implement a cleanup function with [`clearInterval`](https://developer.mozilla.org/en-US/docs/Web/API/clearInterval):
+Korjataksesi tämän koodin, tallenna `setInterval`:n palauttama ajastimen ID, ja toteuta siivousfunktio [`clearInterval`](https://developer.mozilla.org/en-US/docs/Web/API/clearInterval):illa:
 
 <Sandpack>
 
@@ -1431,13 +1437,13 @@ body {
 
 </Sandpack>
 
-In development, React will still remount your component once to verify that you've implemented cleanup well. So there will be a `setInterval` call, immediately followed by `clearInterval`, and `setInterval` again. In production, there will be only one `setInterval` call. The user-visible behavior in both cases is the same: the counter increments once per second.
+Kehitysvaiheessa, React remounttaa komponentin kerran varmistaakseen, että olet toteuttanut siivouksen oikein. Joten siellä on `setInterval` -kutsu, jonka perään heti `clearInterval`, ja `setInterval` uudelleen. Tuotantovaiheessa, siellä on vain yksi `setInterval` -kutsu. Käyttäjälle näkyvä käyttäytyminen molemmissa tapauksissa on sama: laskuri kasvaa kerran sekunnissa.
 
 </Solution>
 
-#### Fix fetching inside an Effect {/*fix-fetching-inside-an-effect*/}
+#### Korjaa haku Effectin sisällä {/*fix-fetching-inside-an-effect*/}
 
-This component shows the biography for the selected person. It loads the biography by calling an asynchronous function `fetchBio(person)` on mount and whenever `person` changes. That asynchronous function returns a [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) which eventually resolves to a string. When fetching is done, it calls `setBio` to display that string under the select box.
+Tämä komponentti näyttää valitun henkilön biografian. Se lataa biografian kutsumalla asynkronista funktiota `fetchBio(person)` mountissa ja aina kun `person` muuttuu. Tämä asynkroninen funktio palauttaa [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise):n, joka muuttuu merkkijonoksi. Kun haku on valmis, se kutsuu `setBio`:a näyttääkseen merkkijonon valintalaatikon alla.
 
 <Sandpack>
 
@@ -1486,31 +1492,30 @@ export async function fetchBio(person) {
 
 </Sandpack>
 
+Tässä koodissa on bugi. Aloita valitsemalla "Alice". Sitten valitse "Bob" ja heti sen jälkeen, että valitse "Taylor". Jos teet tämän tarpeeksi nopeasti, huomaat bugin: Taylor on valittuna, mutta kappaleen alla sanotaan "This is Bob's bio."
 
-There is a bug in this code. Start by selecting "Alice". Then select "Bob" and then immediately after that select "Taylor". If you do this fast enough, you will notice that bug: Taylor is selected, but the paragraph below says "This is Bob's bio."
-
-Why does this happen? Fix the bug inside this Effect.
+Miksi tämä tapahtuu? Korjaa bugi Effectin sisällä.
 
 <Hint>
 
-If an Effect fetches something asynchronously, it usually needs cleanup.
+Jos Effecti kutsuu jotain asynkronisesti, se tarvitsee siivouksen.
 
 </Hint>
 
 <Solution>
 
-To trigger the bug, things need to happen in this order:
+Käynnistääksesi bugin, asioiden on tapahduttava tässä järjestyksessä:
 
-- Selecting `'Bob'` triggers `fetchBio('Bob')`
-- Selecting `'Taylor'` triggers `fetchBio('Taylor')`
-- **Fetching `'Taylor'` completes *before* fetching `'Bob'`**
-- The Effect from the `'Taylor'` render calls `setBio('This is Taylor’s bio')`
-- Fetching `'Bob'` completes
-- The Effect from the `'Bob'` render calls `setBio('This is Bob’s bio')`
+- `'Bob'`:n valita käynnistää `fetchBio('Bob')`
+- `'Taylor'`:n valinta käynnistää `fetchBio('Taylor')`
+- **`'Taylor'` hakeminen suoriutuu loppuun *ennen* `'Bob'`:n hakua**
+- `'Taylor'` renderin Effecti kutsuu `setBio('This is Taylor’s bio')`
+- `'Bob'`:n haku suoriutuu loppuun
+- `'Bob'` renderin Effecti kutsuu `setBio('This is Bob’s bio')`
 
-This is why you see Bob's bio even though Taylor is selected. Bugs like this are called [race conditions](https://en.wikipedia.org/wiki/Race_condition) because two asynchronous operations are "racing" with each other, and they might arrive in an unexpected order.
+Tämä on syy miksi näet Bobin bion vaikka Taylor on valittuna. Tämän kaltaisia bugeja kutsutaan [kilpailutilanteiksi (engl. race condition)](https://en.wikipedia.org/wiki/Race_condition) koska kaksi asynkronista operaatiota "kilpailevat" toistensa kanssa, ja ne saattavat saapua odottamattomassa järjestyksessä.
 
-To fix this race condition, add a cleanup function:
+Korjataksesi tämän kilpailutilanteen, lisää siivousfunktio:
 
 <Sandpack>
 
@@ -1564,16 +1569,16 @@ export async function fetchBio(person) {
 
 </Sandpack>
 
-Each render's Effect has its own `ignore` variable. Initially, the `ignore` variable is set to `false`. However, if an Effect gets cleaned up (such as when you select a different person), its `ignore` variable becomes `true`. So now it doesn't matter in which order the requests complete. Only the last person's Effect will have `ignore` set to `false`, so it will call `setBio(result)`. Past Effects have been cleaned up, so the `if (!ignore)` check will prevent them from calling `setBio`:
+Kunkin renderin Effectilla on sen oma `ignore` muuttuja. Aluksi, `ignore` muuttuja on `false`. Kuitenkin, jos Effecti siivotaan (kuten kun valitset eri henkilön), sen `ignore` muuttuja muuttuu `true`:ksi. Nyt ei ole väliä millä järjestyksellä pyynnöt suoriutuvat. Vain viimeisen henkilön Effectillä on `ignore` muuttuja on asetettu `false`:ksi, joten se kutsuu `setBio(result)`:ia. Menneet Effectit on siivottu, joten `if (!ignore)` tarkistus estää ne kutsumasta `setBio`:
 
-- Selecting `'Bob'` triggers `fetchBio('Bob')`
-- Selecting `'Taylor'` triggers `fetchBio('Taylor')` **and cleans up the previous (Bob's) Effect**
-- Fetching `'Taylor'` completes *before* fetching `'Bob'`
-- The Effect from the `'Taylor'` render calls `setBio('This is Taylor’s bio')`
-- Fetching `'Bob'` completes
-- The Effect from the `'Bob'` render **does not do anything because its `ignore` flag was set to `true`**
+- `'Bob'`:n valita käynnistää `fetchBio('Bob')`
+- - `'Taylor'`:n valinta käynnistää `fetchBio('Taylor')` **ja siivoaa edellisen (Bobin) Effectin**
+- `'Taylor'` hakeminen suoriutuu loppuun *ennen* `'Bob'`:n hakua
+- `'Taylor'` renderin Effecti kutsuu `setBio('This is Taylor’s bio')`
+- `'Bob'`:n haku suoriutuu loppuun
+- `'Bob'` renderin Effecti kutsuu `setBio('This is Bob’s bio')` **eikä tee mitään koska sen `ignore` muuttuja on asetettu `true`:ksi**
 
-In addition to ignoring the result of an outdated API call, you can also use [`AbortController`](https://developer.mozilla.org/en-US/docs/Web/API/AbortController) to cancel the requests that are no longer needed. However, by itself this is not enough to protect against race conditions. More asynchronous steps could be chained after the fetch, so using an explicit flag like `ignore` is the most reliable way to fix this type of problems.
+Vanhentuneen API kutsun tuloksen ohittamisen lisäksi, voit myös käyttää [`AbortController`](https://developer.mozilla.org/en-US/docs/Web/API/AbortController):a peruuttaaksesi pyynnöt jotka eivät ole enää tarpeen. Kuitenkin, tämä ei ole tarpeeksi suojataksesi kilpailutilanteita vastaan. Asynkronisia vaiheita voisi olla ketjutettu pyynnön jälkeen lisää, joten luotettavin tapa korjata tällaisia ongelmia on käyttämällä selkeää ehtoa kuten `ignore` muuttujaa.
 
 </Solution>
 
