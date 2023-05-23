@@ -139,8 +139,8 @@ export function HomeContent() {
               type="primary"
               size="lg"
               className="w-full sm:w-auto justify-center"
-              label="Opi Reactia">
-              Opi Reactia
+              label="Opettele Reactia">
+              Opettele Reactia
             </ButtonLink>
             <ButtonLink
               href={'/reference/react'}
@@ -393,7 +393,7 @@ export function HomeContent() {
                           antavat sinun rakentaa sovelluksia Reactilla
                           Androidille, iOS:lle, ja enemmän. Ne näyttävät ja
                           tuntuvat aidolta, koska niiden UI:t <i>ovat</i> täysin
-                          natiiveja. Ne ei ole web view elementtejä,
+                          natiiveja. Ne eivät ole web view elementtejä,
                           komponenttisi renderöi oikeita Android ja iOS ruutuja,
                           jotka alusta tarjoaa.
                         </p>
@@ -989,7 +989,7 @@ function Example2() {
   const count = videos.length;
   let heading = emptyHeading;
   if (count > 0) {
-    const noun = count > 1 ? 'Videos' : 'Video';
+    const noun = count > 1 ? videota' : 'video';
     heading = count + ' ' + noun;
   }
   return (
