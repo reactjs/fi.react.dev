@@ -139,8 +139,8 @@ Miten exporttaat komponenttisi määrää miten se täytyy importata. Saat virhe
 
 | Syntaksi         | Export-lause                           | Import-lause |
 | -----------      | -----------                                | -----------                  |
-| Default    | `export default function Button() {}` | `import Button from './button.js';`     |
-| Nimetty    | `export function Button() {}`         | `import { Button } from './button.js';` |
+| Default    | `export default function Button() {}` | `import Button from './Button.js';`     |
+| Nimetty    | `export function Button() {}`         | `import { Button } from './Button.js';` |
 
 Kun kirjoitat _default_ importtia, voit antaa sille minkä tahansa nimen `import`:n jälkeen. Esimerkiksi, voit kirjoittaa `import Banana from './button.js'` ja se silti tarjoaa saman default exportin. Verrattuna nimettyihin importteihin, nimen on vastattava toisiaan molemmin puolin. Siksi niitä kutsutaan _nimetyiksi_ importeiksi!
 
@@ -257,8 +257,9 @@ Voit käyttää joko default tai nimettyä exporttia `Profile` komponentille, mu
 
 | Syntaksi         | Export-lause                           | Import-lause |
 | -----------      | -----------                                | -----------                  |
-| Default    | `export default function Button() {}` | `import Button from './button.js';`     |
-| Nimetty    | `export function Button() {}`         | `import { Button } from './button.js';` |
+| Default    | `export default function Button() {}` | `import Button from './Button.js';`     |
+| Nimetty    | `export function Button() {}`         | `import { Button } from './Button.js';` |
+
 
 <Hint>
 

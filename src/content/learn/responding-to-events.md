@@ -315,6 +315,12 @@ button { margin-right: 10px; }
 
 Huomaa, miten `App` komponentin ei tarvitse tietää *mitä* `Toolbar` tekee sen `onPlayMovie` tai `onUploadImage` tapahtumakäsittelijöillä. Se on `Toolbar` komponentin toteutusyksityiskohta. Tässä, `Toolbar` välittää ne `Button`:nien `onClick` käsittelijöinä, mutta se voisi myöhemmin myös kutsua niitä pikanäppäimestä. Propsien nimeäminen sovelluskohtaisten vuorovaikutusten kautta, kuten `onPlayMovie`, antaa joustavuuden muuttaa niitä myöhemmin.
 
+<Note>
+
+Varmista, että käytät asianmukaisia HTML-tageja tapahtumankäsittelijöillesi. Esimerkiksi klikkausten käsittelyyn käytä [`<button onClick={handleClick}>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button) -elementtiä sen sijaan, että käyttäisit `<div onClick={handleClick}>`. Todellisen selaimen `<button>` -elementin käyttäminen mahdollistaa sisäänrakennetut selaimen toiminnot, kuten näppäimistönavigoinnin. Jos et pidä oletusarvoisesta painikkeen ulkoasusta ja haluat muokata sitä näyttämään enemmän linkiltä tai erilaiselta käyttöliittymäelementiltä, voit saavuttaa sen CSS:n avulla. [Lue lisää saavutettavan merkinnän kirjoittamisesta.](https://developer.mozilla.org/en-US/docs/Learn/Accessibility/HTML)
+  
+</Note>
+
 ## Tapahtuman leviäminen {/*event-propagation*/}
 
 Komponenttisi tapahtumankäsittelijät nappaavat tapahtumia myös alakomponenteista. Tätä usein kutsutaan "kuplimiseksi" tai "propagoinniksi": se alkaa sieltä missä tapahtuma esiintyi ja nousee puussa ylemmäs. 

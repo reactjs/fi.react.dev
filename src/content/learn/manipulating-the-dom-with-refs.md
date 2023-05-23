@@ -31,7 +31,7 @@ Sitten, käytä sitä määrittääksesi ref komponentissasi:
 const myRef = useRef(null);
 ```
 
-Lopuksi, välitä se DOM noodille `ref` attribuutilla:
+Lopuksi, välitä se `ref` -attribuuttina JSX-tagille, jonka DOM-elementin haluat saada:
 
 ```js
 <div ref={myRef}>
@@ -84,7 +84,7 @@ Vaikka DOM manipulaatio on yleisin käyttötapaus refseille, `useRef` Hookia voi
 
 ### Esimerkki: Scrollaaminen elementtiin {/*example-scrolling-to-an-element*/}
 
-Sinulla voi olla enemmän kuin yksi ref komponentissa. Tässä esimerkissä on karuselli kolmesta kuvasta. Jokainen nappi keskittää kuvan kutsumalla vastaavan DOM noodin [`scrollIntoView()`](https://developer.mozilla.org/en-US/docs/Web/API/Element/scrollIntoView) metodia:
+Sinulla voi olla enemmän kuin yksi ref komponentissa. Tässä esimerkissä on karuselli kolmesta kuvasta. Jokainen nappi keskittää kuvan kutsumalla vastaavan DOM noodin [`scrollIntoView()`](https://developer.mozilla.org/en-US/docs/Web/API/Element/scrollIntoView) metodia vastaavalla DOM noodilla:
 
 <Sandpack>
 
@@ -644,7 +644,7 @@ Kokeile painamalla "Toggle with setState" painiketta muutaman kerran. Viestin pi
 <Sandpack>
 
 ```js
-import {useState, useRef} from 'react';
+import { useState, useRef } from 'react';
 
 export default function Counter() {
   const [show, setShow] = useState(true);

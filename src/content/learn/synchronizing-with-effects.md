@@ -684,7 +684,7 @@ useEffect(() => {
 }, [userId]);
 ```
 
-Et voi "peruuttaa" verkkopyyntöä joka on jo tapahtunut, mutta siivousfunktiosi pitäisi varmistaa että pyyntö joka ei ole enää tarpeellinen ei vaikuta sovellukseesi. Esimerkiksi, jos `userId` muuttuu `'Alice'`:sta `'Bob'`:ksi, siivousfunktio varmistaa että `'Alice'` vastaus jätetään huomiotta vaikka se vastaanotettaisiin `'Bob'`:n vastauksen jälkeen.
+Et voi "peruuttaa" verkkopyyntöä joka on jo tapahtunut, mutta siivousfunktiosi pitäisi varmistaa että pyyntö joka ei ole enää tarpeellinen ei vaikuta sovellukseesi. Jos `userId` muuttuu `'Alice'`:sta `'Bob'`:ksi, siivousfunktio varmistaa että `'Alice'` vastaus jätetään huomiotta vaikka se vastaanotettaisiin `'Bob'`:n vastauksen jälkeen.
 
 **Kehitysvaiheessa, näet kaksi verkkopyyntöä Network välilehdellä.** Tässä ei ole mitään vikaa. Yllä olevan menetelmän mukaan, ensimmäinen Effecti poistetaan välittömästi, joten sen kopio `ignore` muuttujasta asetetaan `true`:ksi. Joten vaikka onkin ylimääräinen pyyntö, se ei vaikuta tilaan kiitos `if (!ignore)` tarkistuksen.
 

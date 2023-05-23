@@ -329,7 +329,7 @@ Entä jos haluat lukea viimeisimmän tilan ennen uudelleen renderöintiä? Halua
 
 #### Toteuta liikennevalot {/*implement-a-traffic-light*/}
 
-Tässä on suojatievalo-komponentti, joka kytkeytyy päälle kun painiketta painetaan:
+Tässä on suojatien valokomponentti, joka vaihtuu tilasta toiseen, kun painiketta painetaan:
 
 <Sandpack>
 

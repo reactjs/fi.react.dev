@@ -549,7 +549,7 @@ artwork.seen = nextSeen; // Ongelma: mutatoi olemassa olevaa kohdetta
 setMyList(myNextList);
 ```
 
-Vaikka `myNextList` taulukko on uusi, *kohteet* ovat samat kuin alkuperäisessä `myList` taulukossa. Joten `artwork.seen`:n muuttaminen muuttaa *alkuperäistä* taideteoskohdetta. Tuo taideteos on myös `yourArtworks` taulukossa, joka aiheuttaa bugin. Tällaisia bugeja voi olla vaikea ajatella, mutta onneksi ne katoavat jos vältät tilan mutatointia.
+Vaikka `myNextList` taulukko on uusi, *kohteet* ovat samat kuin alkuperäisessä `myList` taulukossa. Joten `artwork.seen`:n muuttaminen muuttaa *alkuperäistä* taideteoskohdetta. Tuo taideteos on myös `yourList` taulukossa, joka aiheuttaa bugin. Tällaisia bugeja voi olla vaikea ajatella, mutta onneksi ne katoavat jos vältät tilan mutatointia.
 
 **Voit käyttää `map` metodia korvataksesi vanhan kohteen sen päivitetyllä versiolla ilman mutatointia.**
 
@@ -562,7 +562,7 @@ setMyList(myList.map(artwork => {
     // Ei muutosta
     return artwork;
   }
-});
+}));
 ```
 
 Tässä, `...` on olion levityssyntaksi, jota käytetään [uuden kopion luomiseksi.](/learn/updating-objects-in-state#copying-objects-with-the-spread-syntax)
@@ -682,7 +682,7 @@ export default function BucketList() {
   const [myList, updateMyList] = useImmer(
     initialList
   );
-  const [yourArtworks, updateYourList] = useImmer(
+  const [yourList, updateYourList] = useImmer(
     initialList
   );
 
@@ -713,7 +713,7 @@ export default function BucketList() {
         onToggle={handleToggleMyList} />
       <h2>Your list of art to see:</h2>
       <ItemList
-        artworks={yourArtworks}
+        artworks={yourList}
         onToggle={handleToggleYourList} />
     </>
   );

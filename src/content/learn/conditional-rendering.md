@@ -626,7 +626,7 @@ export default function PackingList() {
 
 Huomaa, että sinun täytyy kirjoittaa `importance > 0 && ...` ennemmin kuin `importance && ...`, sillä jos `importance` on `0`, `0`:aa ei renderöidä pelkkänä vastauksena!
 
-Tässä ratkaisussa kahta erillistä ehtolausetta käytetään asettamaan välilyönti nimen ja tärkeyden väliin. Vaihtoehtoisesti voit käyttää fragmentia: `importance > 0 && <> <i>...</i></>` tai lisätä välilyönnin suoraan `<i>`:n sisään:  `importance > 0 && <i> ...</i>`.
+Tässä ratkaisussa kahta erillistä ehtolausetta käytetään asettamaan välilyönti nimen ja tärkeyden väliin. Vaihtoehtoisesti voit käyttää fragmenttia, jossa on johtava välilyönti: `importance > 0 && <> <i>...</i></>` tai lisätä välilyönnin suoraan `<i>`:n sisään:  `importance > 0 && <i> ...</i>`.
 
 </Solution>
 

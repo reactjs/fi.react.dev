@@ -124,7 +124,7 @@ export function HomeContent() {
         <div className="mx-5 mt-12 lg:mt-24 mb-20 lg:mb-32 flex flex-col justify-center">
           <Logo
             className={cn(
-              'mt-4 mb-3 text-link dark:text-link-dark w-24 lg:w-28 self-center text-sm mr-0 text-link dark:text-link-dark flex origin-center transition-all ease-in-out'
+              'mt-4 mb-3 text-link dark:text-link-dark w-24 lg:w-28 self-center text-sm mr-0 flex origin-center transition-all ease-in-out'
             )}
           />
           <h1 className="text-5xl font-display lg:text-6xl self-center flex font-semibold leading-snug text-primary dark:text-primary-dark">
@@ -158,9 +158,11 @@ export function HomeContent() {
             <Header>Luo käyttöliittymiä komponenteista</Header>
 
             <Para>
-              Reactin avulla voit rakentaa käyttöliittymiä yksittäisistä palasista eli komponenteista. Luo omia React -komponentteja kuten{' '}
+              Reactin avulla voit rakentaa käyttöliittymiä yksittäisistä
+              palasista eli komponenteista. Luo omia React -komponentteja kuten{' '}
               <Code>Thumbnail</Code>, <Code>LikeButton</Code>, ja{' '}
-              <Code>Video</Code>. Yhdistä ne sitten kokonaisiksi sivuiksi ja sovelluksiksi.
+              <Code>Video</Code>. Yhdistä ne sitten kokonaisiksi sivuiksi ja
+              sovelluksiksi.
             </Para>
           </Center>
           <FullBleed>
@@ -168,7 +170,10 @@ export function HomeContent() {
           </FullBleed>
           <Center>
             <Para>
-              Työskentelet sitten yksin tai tuhansien muiden kehittäjien kanssa, Reactin käyttäminen tuntuu samalta. Se on suunniteltu yhdistämään komponentteja, jotka yksittäiset ihmiset, tiimit ja organisaatiot ovat kirjoittaneet.
+              Työskentelet sitten yksin tai tuhansien muiden kehittäjien kanssa,
+              Reactin käyttäminen tuntuu samalta. Se on suunniteltu yhdistämään
+              komponentteja, jotka yksittäiset ihmiset, tiimit ja organisaatiot
+              ovat kirjoittaneet.
             </Para>
           </Center>
         </Section>
@@ -177,8 +182,10 @@ export function HomeContent() {
           <Center>
             <Header>Kirjoita komponentteja koodilla ja merkintäkielellä</Header>
             <Para>
-              React komponentit ovat JavaScript funktioita. Halutako näyttää jotain sisältöä ehdollisesti? Käytä <Code>if</Code> ehtolausetta.
-              Näytätkö listaa? Kokeile taulukon <Code>map()</Code> metodia. Reactin oppiminen on ohjelmoinnin oppimista.
+              React komponentit ovat JavaScript funktioita. Halutako näyttää
+              jotain sisältöä ehdollisesti? Käytä <Code>if</Code> ehtolausetta.
+              Näytätkö listaa? Kokeile taulukon <Code>map()</Code> metodia.
+              Reactin oppiminen on ohjelmoinnin oppimista.
             </Para>
           </Center>
           <FullBleed>
@@ -186,16 +193,25 @@ export function HomeContent() {
           </FullBleed>
           <Center>
             <Para>
-              Tätä merkintäkieltä kutsutaan nimellä JSX. Se on JavaScript syntaksin lisäosa, jonka React teki suosituksi. JSX merkintäkoodin laittaminen lähelle renderöintilogiikkaa tekee React komponenteista helposti luotavia, ylläpidettäviä ja poistettavia.
+              Tätä merkintäkieltä kutsutaan nimellä JSX. Se on JavaScript
+              syntaksin lisäosa, jonka React teki suosituksi. JSX merkintäkoodin
+              laittaminen lähelle renderöintilogiikkaa tekee React
+              komponenteista helposti luotavia, ylläpidettäviä ja poistettavia.
             </Para>
           </Center>
         </Section>
 
         <Section background="left-card">
           <Center>
-            <Header>Lisää interaktiivisuutta siellä, missä sitä tarvitset</Header>
+            <Header>
+              Lisää interaktiivisuutta siellä, missä sitä tarvitset
+            </Header>
             <Para>
-              React komponentit vastaanottavat tietoa ja palauttavat mitä ruudulla pitäisi näkyä. Voit välittää niille uutta dataa vastauksena vuorovaikutukseen, kuten jos käyttäjä kirjoittaa jotain kenttään. React päivittää ruudun sitten vastaamaan uutta dataa.
+              React komponentit vastaanottavat tietoa ja palauttavat mitä
+              ruudulla pitäisi näkyä. Voit välittää niille uutta dataa
+              vastauksena vuorovaikutukseen, kuten jos käyttäjä kirjoittaa
+              jotain kenttään. React päivittää ruudun sitten vastaamaan uutta
+              dataa.
             </Para>
           </Center>
           <FullBleed>
@@ -203,7 +219,9 @@ export function HomeContent() {
           </FullBleed>
           <Center>
             <Para>
-              Sinun ei tarvitse rakentaa koko sivua Reactilla. Voit lisätä Reactin olemassa olevaan HTML sivuun, ja renderöidä interaktiivisia React komponentteja missä tahansa sivulla.
+              Sinun ei tarvitse rakentaa koko sivua Reactilla. Voit lisätä
+              Reactin olemassa olevaan HTML sivuun, ja renderöidä
+              interaktiivisia React komponentteja missä tahansa sivulla.
             </Para>
             <div className="flex justify-start w-full lg:justify-center">
               <CTA
@@ -223,7 +241,11 @@ export function HomeContent() {
               ohjelmistokehyksellä
             </Header>
             <Para>
-              React on kirjasto. Sen avulla voit laittaa komponentteja yhteen, mutta se ei määrittele miten teet reitittämistä tai tiedonhakua. Rakentaaksesi kokonaisen sovelluksen Reactilla, suosittelemme full-stack React ohjelmistokehyksiä kuten <Link href="https://nextjs.org">Next.js</Link> tai{' '}
+              React on kirjasto. Sen avulla voit laittaa komponentteja yhteen,
+              mutta se ei määrittele miten teet reitittämistä tai tiedonhakua.
+              Rakentaaksesi kokonaisen sovelluksen Reactilla, suosittelemme
+              full-stack React ohjelmistokehyksiä kuten{' '}
+              <Link href="https://nextjs.org">Next.js</Link> tai{' '}
               <Link href="https://remix.run">Remix</Link>.
             </Para>
           </Center>
@@ -232,7 +254,11 @@ export function HomeContent() {
           </FullBleed>
           <Center>
             <Para>
-              React on myös arkkitehtuuri. Ohjelmistokehykset, jotka sen toteuttavat antavat sinun hakea dataa asynkronisissa komponenteissa, jotka suoritetaan palvelimella tai jopa build -prosessin aikana. Lue dataa tiedostosta tai tietokannasta ja välitä se interaktiivisille komponenteille.
+              React on myös arkkitehtuuri. Ohjelmistokehykset, jotka sen
+              toteuttavat antavat sinun hakea dataa asynkronisissa
+              komponenteissa, jotka suoritetaan palvelimella tai jopa build
+              -prosessin aikana. Lue dataa tiedostosta tai tietokannasta ja
+              välitä se interaktiivisille komponenteille.
             </Para>
             <div className="flex justify-start w-full lg:justify-center">
               <CTA
@@ -249,7 +275,11 @@ export function HomeContent() {
             <div className="mx-auto max-w-4xl lg:text-center items-center px-5 flex flex-col">
               <Header>Käytä parasta jokaisella alustalla</Header>
               <Para>
-                Ihmiset rakastavat rakentaa web- ja natiivisovelluksia eri syistä. Reactin avulla voit rakentaa sekä web- että natiivisovelluksia käyttäen samoja taitoja. Se nojautuu kunkin alustan vahvuuksiin tehden käyttöliittymmistäsi oikealta tuntuvat kaikilla alustoilla.
+                Ihmiset rakastavat rakentaa web- ja natiivisovelluksia eri
+                syistä. Reactin avulla voit rakentaa sekä web- että
+                natiivisovelluksia käyttäen samoja taitoja. Se nojautuu kunkin
+                alustan vahvuuksiin tehden käyttöliittymmistäsi oikealta
+                tuntuvat kaikilla alustoilla.
               </Para>
             </div>
             <div className="max-w-7xl mx-auto flex flex-col lg:flex-row mt-16 mb-20 lg:mb-28 px-5 gap-20 lg:gap-5">
@@ -261,12 +291,18 @@ export function HomeContent() {
                   <div className="relative overflow-hidden">
                     <div className="absolute inset-0 bg-gradient-right" />
                     <div className="bg-wash relative h-14 w-full" />
-                    <div className="relative flex items-start justify-center flex-col flex-1 flex-col pb-16 pt-5 gap-3 px-5 lg:px-10 lg:pt-8">
+                    <div className="relative flex items-start justify-center flex-col flex-1 pb-16 pt-5 gap-3 px-5 lg:px-10 lg:pt-8">
                       <h4 className="leading-tight text-primary font-semibold text-3xl lg:text-4xl">
                         Pysy aidosti verkossa
                       </h4>
                       <p className="lg:text-xl leading-normal text-secondary">
-                        Ihmiset odottavat verkkosivujen latautuvan nopeasti. Palvelimella, Reactin avulla voit aloittaa HTML koodin lataamisen sinä aikana kun vielä haet dataa, asteittain täyttäen puuttuvan sisällön ennen kuin yhtään JavaScriptia on ladattu. Asiakaspuolella, React käyttää standardoituja Web API:a pitääkseen käyttöliittymän vastaanottavaisena keskellä renderöintiä.
+                        Ihmiset odottavat verkkosivujen latautuvan nopeasti.
+                        Palvelimella, Reactin avulla voit aloittaa HTML koodin
+                        lataamisen sinä aikana kun vielä haet dataa, asteittain
+                        täyttäen puuttuvan sisällön ennen kuin yhtään
+                        JavaScriptia on ladattu. Asiakaspuolella, React käyttää
+                        standardoituja Web API:a pitääkseen käyttöliittymän
+                        vastaanottavaisena keskellä renderöintiä.
                       </p>
                     </div>
                   </div>
@@ -347,14 +383,19 @@ export function HomeContent() {
                           Kehitä aidosti alustalle
                         </h4>
                         <p className="h-full lg:text-xl text-secondary dark:text-secondary-dark leading-normal">
-                          Ihmiset odottavat natiivisovellusten näyttävän ja tuntuvan niiden alustalta.{' '}
+                          Ihmiset odottavat natiivisovellusten näyttävän ja
+                          tuntuvan niiden alustalta.{' '}
                           <Link href="https://reactnative.dev">
                             React Native
                           </Link>{' '}
                           ja{' '}
                           <Link href="https://github.com/expo/expo">Expo</Link>{' '}
-                          antavat sinun rakentaa sovelluksia Reactilla Androidille, iOS:lle, ja enemmän. Ne näyttävät ja tuntuvat aidolta, koska niiden UI:t{' '}
-                          <i>ovat</i> täysin natiiveja. Ne ei ole web view elementtejä, komponenttisi renderöi oikeita Android ja iOS ruutuja, jotka alusta tarjoaa.
+                          antavat sinun rakentaa sovelluksia Reactilla
+                          Androidille, iOS:lle, ja enemmän. Ne näyttävät ja
+                          tuntuvat aidolta, koska niiden UI:t <i>ovat</i> täysin
+                          natiiveja. Ne ei ole web view elementtejä,
+                          komponenttisi renderöi oikeita Android ja iOS ruutuja,
+                          jotka alusta tarjoaa.
                         </p>
                       </div>
                     </div>
@@ -364,7 +405,11 @@ export function HomeContent() {
             </div>
             <div className="px-5 lg:px-0 max-w-4xl mx-auto lg:text-center text-secondary dark:text-secondary-dark">
               <Para>
-                Reactin avulla, sinä voit olla sekä web- <i>että</i> natiivikehittäjä. Tiimisi voi toimittaa monille alustoille ilman käyttäjäkokemuksen heikentämistä. Organisaatiosi voi yhdistää alustasiilot ja muodostaa tiimejä, jotka omistavat ominaisuudet päästä-päähän.
+                Reactin avulla, sinä voit olla sekä web- <i>että</i>{' '}
+                natiivikehittäjä. Tiimisi voi toimittaa monille alustoille ilman
+                käyttäjäkokemuksen heikentämistä. Organisaatiosi voi yhdistää
+                alustasiilot ja muodostaa tiimejä, jotka omistavat ominaisuudet
+                päästä-päähän.
               </Para>
               <div className="flex justify-start w-full lg:justify-center">
                 <CTA color="gray" icon="native" href="https://reactnative.dev/">
@@ -377,15 +422,22 @@ export function HomeContent() {
 
         <Section background="right-card">
           <div className="max-w-7xl mx-auto flex flex-col lg:flex-row px-5">
-            <div className="max-w-3xl lg:max-w-7xl gap-5 flex flex-col lg:flex-row lg:px-5 gap-5">
+            <div className="max-w-3xl lg:max-w-7xl gap-5 flex flex-col lg:flex-row lg:px-5">
               <div className="w-full lg:w-6/12 max-w-3xl flex flex-col items-start justify-start lg:pl-5 lg:pr-10">
                 <Header>Päivitä kun tulevaisuus on valmis</Header>
                 <Para>
-                  React lähestyy muutoksia huolella. Jokainen React commit testataan bisneskriittisillä pinnoilla, yli miljardin käyttäjän kesken. Yli 100 000 React komponenttia Metalla auttavat vahvistamaan jokaista muutosstrategiaa.
+                  React lähestyy muutoksia huolella. Jokainen React commit
+                  testataan bisneskriittisillä pinnoilla, yli miljardin
+                  käyttäjän kesken. Yli 100 000 React komponenttia Metalla
+                  auttavat vahvistamaan jokaista muutosstrategiaa.
                 </Para>
                 <div className="order-last pt-5">
                   <Para>
-                    React-tiimi on aina tutkimassa miten kehittää Reactia. Joissain tutkimuksissa voi kestää vuosia ennen kuin tuloksia näkyy. Reactilla on korkea kynnys ottaa tutkimusideoita tuotantoon. Vain todistetut lähestymistavat tulevat osaksi Reactia.
+                    React-tiimi on aina tutkimassa miten kehittää Reactia.
+                    Joissain tutkimuksissa voi kestää vuosia ennen kuin tuloksia
+                    näkyy. Reactilla on korkea kynnys ottaa tutkimusideoita
+                    tuotantoon. Vain todistetut lähestymistavat tulevat osaksi
+                    Reactia.
                   </Para>
                   <div className="hidden lg:flex justify-start w-full">
                     <CTA color="gray" icon="news" href="/blog">
@@ -432,7 +484,9 @@ export function HomeContent() {
                   yhteisöön
                 </Header>
                 <Para>
-                  Et ole yksin. Kaksi miljoonaa kehittäjää ympäri maailmaa vierailevat Reactin dokumentaatiossa joka kuukausi. React on jotain, missä ihmiset ja tiimit ovat samaa mieltä keskenään.
+                  Et ole yksin. Kaksi miljoonaa kehittäjää ympäri maailmaa
+                  vierailevat Reactin dokumentaatiossa joka kuukausi. React on
+                  jotain, missä ihmiset ja tiimit ovat samaa mieltä keskenään.
                 </Para>
               </Center>
             </div>
@@ -440,7 +494,13 @@ export function HomeContent() {
             <div className="mx-auto flex flex-col max-w-4xl">
               <Center>
                 <Para>
-                  Tämän takia React on enemmän kuin kirjasto, arkkitehtuuri, tai edes ekosysteemi. React on yhteisö. Se on paikka, jossa voit kysyä apua, löytää mahdollisuuksia, tavata uusia ystäviä. Tapaat sekä kehittäjiä että designereita, aloittelijoita ja asiantuntijoita, tutkijoita ja artisteja, opettajia ja opiskelijoita. Taustamme saattavat olla erilaisia, mutta React antaa meidän kaikkien rakentaa käyttöliittymiä yhdessä.
+                  Tämän takia React on enemmän kuin kirjasto, arkkitehtuuri, tai
+                  edes ekosysteemi. React on yhteisö. Se on paikka, jossa voit
+                  kysyä apua, löytää mahdollisuuksia, tavata uusia ystäviä.
+                  Tapaat sekä kehittäjiä että designereita, aloittelijoita ja
+                  asiantuntijoita, tutkijoita ja artisteja, opettajia ja
+                  opiskelijoita. Taustamme saattavat olla erilaisia, mutta React
+                  antaa meidän kaikkien rakentaa käyttöliittymiä yhdessä.
                 </Para>
               </Center>
             </div>
@@ -450,7 +510,7 @@ export function HomeContent() {
             <Logo className="text-link dark:text-link-dark w-24 lg:w-28 mb-10 lg:mb-8 mt-12 h-auto mx-auto self-start" />
             <Header>
               Tervetuloa React <br className="" />
-               yhteisöön
+              yhteisöön
             </Header>
             <ButtonLink
               href={'/learn'}
@@ -479,7 +539,7 @@ function CTA({children, icon, href}) {
     <Tag
       {...extraProps}
       href={href}
-      className="outline-none focus:outline-none focus-visible:outline focus-visible:outline-link focus:outline-offset-2 focus-visible:dark:focus:outline-link-dark group cursor-pointer w-auto justify-center inline-flex font-bold items-center mt-10 outline-none hover:bg-gray-40/5 active:bg-gray-40/10 hover:dark:bg-gray-60/5 active:dark:bg-gray-60/10 leading-tight hover:bg-opacity-80 text-lg py-2.5 rounded-full px-4 sm:px-6 ease-in-out shadow-secondary-button-stroke dark:shadow-secondary-button-stroke-dark text-primary dark:text-primary-dark">
+      className="focus:outline-none focus-visible:outline focus-visible:outline-link focus:outline-offset-2 focus-visible:dark:focus:outline-link-dark group cursor-pointer w-auto justify-center inline-flex font-bold items-center mt-10 outline-none hover:bg-gray-40/5 active:bg-gray-40/10 hover:dark:bg-gray-60/5 active:dark:bg-gray-60/10 leading-tight hover:bg-opacity-80 text-lg py-2.5 rounded-full px-4 sm:px-6 ease-in-out shadow-secondary-button-stroke dark:shadow-secondary-button-stroke-dark text-primary dark:text-primary-dark">
       {icon === 'native' && (
         <svg
           className="mr-2.5 text-primary dark:text-primary-dark"
@@ -1137,13 +1197,14 @@ async function Talks({ confId }) {
 
 function useNestedScrollLock(ref) {
   useEffect(() => {
+    let node = ref.current;
     let isLocked = false;
     let lastScroll = performance.now();
 
     function handleScroll() {
       if (!isLocked) {
         isLocked = true;
-        ref.current.style.pointerEvents = 'none';
+        node.style.pointerEvents = 'none';
       }
       lastScroll = performance.now();
     }
@@ -1151,7 +1212,7 @@ function useNestedScrollLock(ref) {
     function updateLock() {
       if (isLocked && performance.now() - lastScroll > 150) {
         isLocked = false;
-        ref.current.style.pointerEvents = '';
+        node.style.pointerEvents = '';
       }
     }
 
@@ -1225,7 +1286,7 @@ function BrowserChrome({children, hasPulse, hasRefresh, domain, path}) {
     <div className="mx-auto max-w-3xl shadow-nav dark:shadow-nav-dark relative overflow-hidden w-full dark:border-opacity-10 rounded-2xl">
       <div className="w-full h-14 rounded-t-2xl shadow-outer-border backdrop-filter overflow-hidden backdrop-blur-lg backdrop-saturate-200 bg-white bg-opacity-90 z-10 absolute top-0 px-3 gap-2 flex flex-row items-center">
         <div className="select-none h-8 relative bg-gray-30/20 text-sm text-tertiary text-center rounded-full w-full flex-row flex space-between items-center">
-          <div className="h-4 w-6" />
+          {hasRefresh && <div className="h-4 w-6" />}
           <div className="w-full leading-snug flex flex-row items-center justify-center">
             <svg
               className="text-tertiary mr-1 opacity-60"
@@ -1414,7 +1475,10 @@ function VideoList({videos, emptyHeading}) {
 function SearchInput({value, onChange}) {
   const id = useId();
   return (
-    <form className="mb-3 py-1" data-hover="SearchInput">
+    <form
+      className="mb-3 py-1"
+      data-hover="SearchInput"
+      onSubmit={(e) => e.preventDefault()}>
       <label htmlFor={id} className="sr-only">
         Haku
       </label>
@@ -1520,7 +1584,7 @@ function Video({video}) {
 
 function Code({children}) {
   return (
-    <span className="font-mono inline rounded-lg bg-secondary-button dark:bg-secondary-button-dark py-0.5 px-1">
+    <span className="font-mono inline rounded-lg bg-gray-15/40 dark:bg-secondary-button-dark py-0.5 px-1">
       {children}
     </span>
   );

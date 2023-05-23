@@ -1213,7 +1213,7 @@ Vaihtoehtoisesti voit renderöidä kokoelman fragmenteja, jotka sisältävät `<
 <Sandpack>
 
 ```js
-import React, { Fragment } from 'react';
+import { Fragment } from 'react';
 
 const poem = {
   lines: [

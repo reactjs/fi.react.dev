@@ -4,7 +4,7 @@ title: Reagointi syötteen tilaan
 
 <Intro>
 
-React käyttää deklaratiivista tapaa käsitellä käyttöliittymää. Sen sijaan, että manipuloit suoraan käyttöliittymän yksittäisiä osia, määrittelet eri tilat, joissa komponenttisi voi olla, ja vaihdat niiden välillä käyttäjän syötteen perusteella. Tämä muistuttaa sitä, miten suunnittelijat ajattelevat käyttöliittymästä.
+React tarjoaa deklaratiivisen tavan käsitellä käyttöliittymää. Sen sijaan, että manipuloisit suoraan käyttöliittymän yksittäisiä osia, määrittelet eri tilat, joissa komponenttisi voi olla, ja vaihdat niiden välillä käyttäjän syötteen perusteella. Tämä muistuttaa sitä, miten suunnittelijat ajattelevat käyttöliittymästä.
 
 </Intro>
 

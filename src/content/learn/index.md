@@ -288,6 +288,7 @@ Nyt voit määritellä tilamuuttujan komponentin sisällä:
 ```js
 function Painonappi() {
   const [count, setCount] = useState(0);
+  // ...
 ```
 
 Saat kaksi asiaa `useState`:lta. Tämänhetkisen tilan (`count`), ja funktion jolla voit päivittää sitä (`setCount`). Voit antaa niille mitkä tahansa nimet, mutta käytäntö on kutsua niitä seuraavasti: `[something, setSomething]`.

@@ -52,7 +52,7 @@ On kaksi syytä miksi komponentti renderöidään:
 
 ### Ensimmäinen renderöinti {/*initial-render*/}
 
-Kun sovelluksesi käynnistyy, sinun täytyy käynnistää ensimmäinen renderöinti. Ohjelmistokehykset ja hiekkalaatikot usein piilottavat tämän koodin, mutta se tehdään kutsumalla [`createRoot`](https://beta.reactjs.org/apis/react-dom/client/createRoot) funktiota kohde DOM elementillä ja sitten kutsumalla sen `render` metodia komponenttisi kanssa:
+Kun sovelluksesi käynnistyy, sinun täytyy käynnistää ensimmäinen renderöinti. Ohjelmistokehykset ja hiekkalaatikot joskus piilottavat tämän koodin, mutta se tehdään kutsumalla [`createRoot`](/reference/react-dom/client/createRoot) funktiota kohde DOM elementillä ja sitten kutsumalla sen `render` metodia komponenttisi kanssa:
 
 <Sandpack>
 

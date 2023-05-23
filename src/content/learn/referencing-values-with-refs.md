@@ -479,8 +479,6 @@ Viimeisin timeout ID-muuttuja on jaettu kaikkien `DebouncedButton` -komponenttie
 <Sandpack>
 
 ```js
-import { useState } from 'react';
-
 let timeoutID;
 
 function DebouncedButton({ onClick, children }) {
@@ -532,7 +530,7 @@ Muuttuja kuten `timeoutID` on jaettu kaikkien komponenttien välillä. Tämä on
 <Sandpack>
 
 ```js
-import { useState, useRef } from 'react';
+import { useRef } from 'react';
 
 function DebouncedButton({ onClick, children }) {
   const timeoutRef = useRef(null);

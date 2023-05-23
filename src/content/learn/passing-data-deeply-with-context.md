@@ -337,7 +337,7 @@ export default function Heading({ children }) {
 }
 ```
 
-`useContext` on hookki. Juuri kuten `useState` sekä `useReducer`, voit kutsua hookkia vain React-komponentin ylimmällä tasolla. **`useContext` kertoo Reactille, että `Heading` -komponentti haluaa lukea `LevelContext` -kontekstin.**
+`useContext` on hookki. Juuri kuten `useState` sekä `useReducer`, voit kutsua hookkia vain React-komponentin ylimmällä tasolla (et silmukoiden tai ehtolauseiden sisällä). **`useContext` kertoo Reactille, että `Heading` -komponentti haluaa lukea `LevelContext` -kontekstin.**
 
 Nyt kun `Heading` -komponentti ei enää sisällä `level` -propsia, `level` -propsia ei tarvitse enää välittää `Heading` -komponentille JSX:ssä:
 

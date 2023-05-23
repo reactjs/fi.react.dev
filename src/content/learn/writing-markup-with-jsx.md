@@ -126,7 +126,7 @@ Tämä tapahtuu siksi, koska JSX on tiukempaa ja siinä on muutama sääntö ene
 
 <Note>
 
-Usein Reactin virheviestit auttavat sinua löytämään missä ongelma on. Kannattaa lukea niitä, jos jäät jumiin!
+Usein Reactin virheviestit helpottavat löytämään ongelman sijainnin. Kannattaa lukaista ne, jos jäät jumiin!
 
 </Note>
 

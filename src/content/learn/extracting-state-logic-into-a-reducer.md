@@ -24,7 +24,7 @@ Kun komponenttisi kasvavat monimutkaisemmiksi, voi olla vaikeampaa nähdä yhdel
 <Sandpack>
 
 ```js App.js
-import {useState} from 'react';
+import { useState } from 'react';
 import AddTask from './AddTask.js';
 import TaskList from './TaskList.js';
 
@@ -80,7 +80,7 @@ const initialTasks = [
 ```
 
 ```js AddTask.js hidden
-import {useState} from 'react';
+import { useState } from 'react';
 
 export default function AddTask({onAddTask}) {
   const [text, setText] = useState('');
@@ -104,7 +104,7 @@ export default function AddTask({onAddTask}) {
 ```
 
 ```js TaskList.js hidden
-import {useState} from 'react';
+import { useState } from 'react';
 
 export default function TaskList({tasks, onChangeTask, onDeleteTask}) {
   return (
@@ -462,7 +462,7 @@ Sinun ei välttämättä tarvitse tehdä tätä itse, mutta tämä on samankalta
 Lopuksi, sinun täytyy liittää `tasksReducer` komponenttiisi. Tuot `useReducer` Hookki Reactista:
 
 ```js
-import {useReducer} from 'react';
+import { useReducer } from 'react';
 ```
 
 Sitten voit korvata `useState`n:
@@ -494,7 +494,7 @@ Nyt se on täysin kytketty! Tässä reduktori on määritelty komponentin tiedos
 <Sandpack>
 
 ```js App.js
-import {useReducer} from 'react';
+import { useReducer } from 'react';
 import AddTask from './AddTask.js';
 import TaskList from './TaskList.js';
 
@@ -575,7 +575,7 @@ const initialTasks = [
 ```
 
 ```js AddTask.js hidden
-import {useState} from 'react';
+import { useState } from 'react';
 
 export default function AddTask({onAddTask}) {
   const [text, setText] = useState('');
@@ -599,7 +599,7 @@ export default function AddTask({onAddTask}) {
 ```
 
 ```js TaskList.js hidden
-import {useState} from 'react';
+import { useState } from 'react';
 
 export default function TaskList({tasks, onChangeTask, onDeleteTask}) {
   return (
@@ -679,7 +679,7 @@ Jos haluat, voit siirtää reduktorin eri tiedostoon:
 <Sandpack>
 
 ```js App.js
-import {useReducer} from 'react';
+import { useReducer } from 'react';
 import AddTask from './AddTask.js';
 import TaskList from './TaskList.js';
 import tasksReducer from './tasksReducer.js';
@@ -763,7 +763,7 @@ export default function tasksReducer(tasks, action) {
 ```
 
 ```js AddTask.js hidden
-import {useState} from 'react';
+import { useState } from 'react';
 
 export default function AddTask({onAddTask}) {
   const [text, setText] = useState('');
@@ -787,7 +787,7 @@ export default function AddTask({onAddTask}) {
 ```
 
 ```js TaskList.js hidden
-import {useState} from 'react';
+import { useState } from 'react';
 
 export default function TaskList({tasks, onChangeTask, onDeleteTask}) {
   return (
@@ -891,7 +891,7 @@ Juuri kuten [olioiden](/learn/updating-objects-in-state#write-concise-update-log
 <Sandpack>
 
 ```js App.js
-import {useImmerReducer} from 'use-immer';
+import { useImmerReducer } from 'use-immer';
 import AddTask from './AddTask.js';
 import TaskList from './TaskList.js';
 
@@ -966,7 +966,7 @@ const initialTasks = [
 ```
 
 ```js AddTask.js hidden
-import {useState} from 'react';
+import { useState } from 'react';
 
 export default function AddTask({onAddTask}) {
   const [text, setText] = useState('');
@@ -990,7 +990,7 @@ export default function AddTask({onAddTask}) {
 ```
 
 ```js TaskList.js hidden
-import {useState} from 'react';
+import { useState } from 'react';
 
 export default function TaskList({tasks, onChangeTask, onDeleteTask}) {
   return (
@@ -1128,10 +1128,10 @@ Tämä tarkoittaa, että toiminto-oliosi pitäisi sisältää `type: 'changed_se
 <Sandpack>
 
 ```js App.js
-import {useReducer} from 'react';
+import { useReducer } from 'react';
 import Chat from './Chat.js';
 import ContactList from './ContactList.js';
-import {initialState, messengerReducer} from './messengerReducer';
+import { initialState, messengerReducer } from './messengerReducer';
 
 export default function Messenger() {
   const [state, dispatch] = useReducer(messengerReducer, initialState);
@@ -1211,7 +1211,7 @@ export default function ContactList({contacts, selectedId, dispatch}) {
 ```
 
 ```js Chat.js
-import {useState} from 'react';
+import { useState } from 'react';
 
 export default function Chat({contact, message, dispatch}) {
   return (
@@ -1278,10 +1278,10 @@ Tässä on esimerkki päivitetty lähettämään vastaavat viestit:
 <Sandpack>
 
 ```js App.js
-import {useReducer} from 'react';
+import { useReducer } from 'react';
 import Chat from './Chat.js';
 import ContactList from './ContactList.js';
-import {initialState, messengerReducer} from './messengerReducer';
+import { initialState, messengerReducer } from './messengerReducer';
 
 export default function Messenger() {
   const [state, dispatch] = useReducer(messengerReducer, initialState);
@@ -1364,7 +1364,7 @@ export default function ContactList({contacts, selectedId, dispatch}) {
 ```
 
 ```js Chat.js
-import {useState} from 'react';
+import { useState } from 'react';
 
 export default function Chat({contact, message, dispatch}) {
   return (
@@ -1422,10 +1422,10 @@ Tällä hetkellä, "Lähetä" ei tee mitään. Lisää tapahtumankäsittelijä "
 <Sandpack>
 
 ```js App.js
-import {useReducer} from 'react';
+import { useReducer } from 'react';
 import Chat from './Chat.js';
 import ContactList from './ContactList.js';
-import {initialState, messengerReducer} from './messengerReducer';
+import { initialState, messengerReducer } from './messengerReducer';
 
 export default function Messenger() {
   const [state, dispatch] = useReducer(messengerReducer, initialState);
@@ -1508,7 +1508,7 @@ export default function ContactList({contacts, selectedId, dispatch}) {
 ```
 
 ```js Chat.js active
-import {useState} from 'react';
+import { useState } from 'react';
 
 export default function Chat({contact, message, dispatch}) {
   return (
@@ -1561,10 +1561,10 @@ On muutama tapa, jolla voit tehdä sen "Lähetä" painikkeen tapahtumankäsittel
 <Sandpack>
 
 ```js App.js
-import {useReducer} from 'react';
+import { useReducer } from 'react';
 import Chat from './Chat.js';
 import ContactList from './ContactList.js';
-import {initialState, messengerReducer} from './messengerReducer';
+import { initialState, messengerReducer } from './messengerReducer';
 
 export default function Messenger() {
   const [state, dispatch] = useReducer(messengerReducer, initialState);
@@ -1647,7 +1647,7 @@ export default function ContactList({contacts, selectedId, dispatch}) {
 ```
 
 ```js Chat.js active
-import {useState} from 'react';
+import { useState } from 'react';
 
 export default function Chat({contact, message, dispatch}) {
   return (
@@ -1709,10 +1709,10 @@ Kuitenkin, _käyttäjän näkökulmasta_, viestin lähettäminen on eri toiminto
 <Sandpack>
 
 ```js App.js
-import {useReducer} from 'react';
+import { useReducer } from 'react';
 import Chat from './Chat.js';
 import ContactList from './ContactList.js';
-import {initialState, messengerReducer} from './messengerReducer';
+import { initialState, messengerReducer } from './messengerReducer';
 
 export default function Messenger() {
   const [state, dispatch] = useReducer(messengerReducer, initialState);
@@ -1801,7 +1801,7 @@ export default function ContactList({contacts, selectedId, dispatch}) {
 ```
 
 ```js Chat.js active
-import {useState} from 'react';
+import { useState } from 'react';
 
 export default function Chat({contact, message, dispatch}) {
   return (
@@ -1906,10 +1906,10 @@ export const initialState = {
 <Sandpack>
 
 ```js App.js
-import {useReducer} from 'react';
+import { useReducer } from 'react';
 import Chat from './Chat.js';
 import ContactList from './ContactList.js';
-import {initialState, messengerReducer} from './messengerReducer';
+import { initialState, messengerReducer } from './messengerReducer';
 
 export default function Messenger() {
   const [state, dispatch] = useReducer(messengerReducer, initialState);
@@ -1998,7 +1998,7 @@ export default function ContactList({contacts, selectedId, dispatch}) {
 ```
 
 ```js Chat.js
-import {useState} from 'react';
+import { useState } from 'react';
 
 export default function Chat({contact, message, dispatch}) {
   return (
@@ -2083,10 +2083,10 @@ Tässä on kokonaisuus:
 <Sandpack>
 
 ```js App.js
-import {useReducer} from 'react';
+import { useReducer } from 'react';
 import Chat from './Chat.js';
 import ContactList from './ContactList.js';
-import {initialState, messengerReducer} from './messengerReducer';
+import { initialState, messengerReducer } from './messengerReducer';
 
 export default function Messenger() {
   const [state, dispatch] = useReducer(messengerReducer, initialState);
@@ -2184,7 +2184,7 @@ export default function ContactList({contacts, selectedId, dispatch}) {
 ```
 
 ```js Chat.js
-import {useState} from 'react';
+import { useState } from 'react';
 
 export default function Chat({contact, message, dispatch}) {
   return (
@@ -2271,10 +2271,10 @@ Muista, että reduktorifunktio otta kaksi argumenttia: nykyisen tilan ja toimint
 <Sandpack>
 
 ```js App.js
-import {useReducer} from './MyReact.js';
+import { useReducer } from './MyReact.js';
 import Chat from './Chat.js';
 import ContactList from './ContactList.js';
-import {initialState, messengerReducer} from './messengerReducer';
+import { initialState, messengerReducer } from './messengerReducer';
 
 export default function Messenger() {
   const [state, dispatch] = useReducer(messengerReducer, initialState);
@@ -2348,7 +2348,7 @@ export function messengerReducer(state, action) {
 ```
 
 ```js MyReact.js active
-import {useState} from 'react';
+import { useState } from 'react';
 
 export function useReducer(reducer, initialState) {
   const [state, setState] = useState(initialState);
@@ -2384,7 +2384,7 @@ export default function ContactList({contacts, selectedId, dispatch}) {
 ```
 
 ```js Chat.js hidden
-import {useState} from 'react';
+import { useState } from 'react';
 
 export default function Chat({contact, message, dispatch}) {
   return (
@@ -2445,10 +2445,10 @@ Toiminnon lähettäminen kutsuu reduktoria nykyisen tilan ja toiminnon kanssa ja
 <Sandpack>
 
 ```js App.js
-import {useReducer} from './MyReact.js';
+import { useReducer } from './MyReact.js';
 import Chat from './Chat.js';
 import ContactList from './ContactList.js';
-import {initialState, messengerReducer} from './messengerReducer';
+import { initialState, messengerReducer } from './messengerReducer';
 
 export default function Messenger() {
   const [state, dispatch] = useReducer(messengerReducer, initialState);
@@ -2522,7 +2522,7 @@ export function messengerReducer(state, action) {
 ```
 
 ```js MyReact.js active
-import {useState} from 'react';
+import { useState } from 'react';
 
 export function useReducer(reducer, initialState) {
   const [state, setState] = useState(initialState);
@@ -2561,7 +2561,7 @@ export default function ContactList({contacts, selectedId, dispatch}) {
 ```
 
 ```js Chat.js hidden
-import {useState} from 'react';
+import { useState } from 'react';
 
 export default function Chat({contact, message, dispatch}) {
   return (
