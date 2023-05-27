@@ -337,7 +337,7 @@ body > div > div { padding: 20px; }
 
 </Solution>
 
-### Poimi tieto olioon {/*extract-information-into-an-object*/}
+#### Poimi tieto olioon {/*extract-information-into-an-object*/}
 
 Siirrä kuvan URL `person` olioon.
 
@@ -424,7 +424,7 @@ body > div > div { padding: 20px; }
 
 </Solution>
 
-### Kirjoita Write an expression inside JSX curly braces {/*write-an-expression-inside-jsx-curly-braces*/}
+#### Kirjoita Write an expression inside JSX curly braces {/*write-an-expression-inside-jsx-curly-braces*/}
 
 Alla olevassa oliossa kuvan URL osoite on rakennettu neljästä palasta: pohja URL, `imageId`, `imageSize` ja tiedostopäätteestä.
 
