@@ -247,7 +247,7 @@ Tällä sivulla opit:
 
 <Challenges>
 
-### Jaa komponentteja edelleen {/*split-the-components-further*/}
+#### Jaa komponentteja edelleen {/*split-the-components-further*/}
 
 Tällä hetkellä `Gallery.js` exporttaa molemmat `Profile`:n sekä `Gallery`:n, joka on hieman sekavaa.
 
