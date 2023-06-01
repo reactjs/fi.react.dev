@@ -1,45 +1,44 @@
 ---
-title: 'You Might Not Need an Effect'
+title: Et ehkä tarvitse Effectia
 ---
 
 <Intro>
 
-Effects are an escape hatch from the React paradigm. They let you "step outside" of React and synchronize your components with some external system like a non-React widget, network, or the browser DOM. If there is no external system involved (for example, if you want to update a component's state when some props or state change), you shouldn't need an Effect. Removing unnecessary Effects will make your code easier to follow, faster to run, and less error-prone.
-
+Efektit ovat pelastusluukku React-paradigmasta. Niiden avulla voit "astua ulos" Reactista ja synkronoida komponenttejasi jonkin ulkoisen järjestelmän, kuten ei-React-widgetin, verkon tai selaimen DOM:in kanssa. Jos ulkoista järjestelmää ei ole mukana (esimerkiksi jos haluat päivittää komponentin tilan, kun joitain propseja tai tiloja muutetaan), sinun ei pitäisi tarvita Effektia. Tarpeettomien efektien poistaminen tekee koodistasi helpommin seurattavan, nopeamman suorittaa ja vähemmän virhealttiin.
 </Intro>
 
 <YouWillLearn>
 
-* Why and how to remove unnecessary Effects from your components
-* How to cache expensive computations without Effects
-* How to reset and adjust component state without Effects
-* How to share logic between event handlers
-* Which logic should be moved to event handlers
-* How to notify parent components about changes
+* Miksi ja miten poistaa tarpeettomat Effektit komponenteistasi
+* Miten välimuistittaa kalliit laskutoimitukset ilman Effekteja
+* Miten nollata ja säätää komponentin tilaa ilman Effekteja
+* Miten jakaa logiikkaa tapahtumankäsittelijöiden välillä
+* Millainen logiikka tulisi siirtää tapahtumankäsittelijöihin
+* Miten ilmoittaa muutoksista vanhemmille komponenteille
 
 </YouWillLearn>
 
-## How to remove unnecessary Effects {/*how-to-remove-unnecessary-effects*/}
+## Miten poistaa turhia Effecteja {/*how-to-remove-unnecessary-effects*/}
 
-There are two common cases in which you don't need Effects:
+On kaksi yleistä tapausta, joissa et tarvitse efektejä:
 
-* **You don't need Effects to transform data for rendering.** For example, let's say you want to filter a list before displaying it. You might feel tempted to write an Effect that updates a state variable when the list changes. However, this is inefficient. When you update the state, React will first call your component functions to calculate what should be on the screen. Then React will ["commit"](/learn/render-and-commit) these changes to the DOM, updating the screen. Then React will run your Effects. If your Effect *also* immediately updates the state, this restarts the whole process from scratch! To avoid the unnecessary render passes, transform all the data at the top level of your components. That code will automatically re-run whenever your props or state change.
-* **You don't need Effects to handle user events.** For example, let's say you want to send an `/api/buy` POST request and show a notification when the user buys a product. In the Buy button click event handler, you know exactly what happened. By the time an Effect runs, you don't know *what* the user did (for example, which button was clicked). This is why you'll usually handle user events in the corresponding event handlers.
+* **Et tarvitse efektejä datan muokkaamiseen renderöintiä varten.** Esimerkiksi, sanotaan että haluat suodattaa listaa ennen sen näyttämistä. Saatat tuntea houkutuksen efektin kirjoittamiseen, joka päivittää tilamuuttujan, kun lista muuttuu. Kuitenkin tämä on tehottomaa. Kun päivität tilaa, React ensin kutsuu komponenttifunktioitasi laskemaan, mitä tulisi näytölle. Sitten React ["kommittaa"](/learn/render-and-commit) nämä muutokset DOMiin päivittäen näytön. Sitten React suorittaa efektit. Jos efektisi *myös* päivittää välittömästi tilaa, tämä käynnistää koko prosessin alusta! Välttääksesi tarpeettomat renderöintikierrokset, muokkaa kaikki data komponenttiesi ylätasolla. Tuo koodi ajetaan automaattisesti aina kun propsit tai tila muuttuvat.
+* **Et tarvitse efektejä käsittelemään käyttäjätapahtumia.** Esimerkiksi, oletetaan että haluat lähettää `/api/buy` POST-pyynnön ja näyttää ilmoituksen, kun käyttäjä ostaa tuotteen. Osta-nappulan klikkaustapahtumankäsittelijässä tiedät tarkalleen mitä tapahtui. Kun efekti suoritetaan, et tiedä *mitä* käyttäjä teki (esimerkiksi, minkä nappulan hän klikkasi). Tämän vuoksi käyttäjätapahtumat käsitellään yleensä vastaavissa tapahtumankäsittelijöissä.
 
-You *do* need Effects to [synchronize](/learn/synchronizing-with-effects#what-are-effects-and-how-are-they-different-from-events) with external systems. For example, you can write an Effect that keeps a jQuery widget synchronized with the React state. You can also fetch data with Effects: for example, you can synchronize the search results with the current search query. Keep in mind that modern [frameworks](/learn/start-a-new-react-project#production-grade-react-frameworks) provide more efficient built-in data fetching mechanisms than writing Effects directly in your components.
+Tarvitset *kyllä* efektejä [synkronoimiseen](/learn/synchronizing-with-effects#what-are-effects-and-how-are-they-different-from-events) ulkoisten järjestelmien kanssa. Esimerkiksi voit kirjoittaa efektin, joka pitää jQuery-widgetin synkronoituna Reactin tilan kanssa. Voit myös noutaa tietoja efekteillä: esimerkiksi voit pitää hakutulokset synkronoituna nykyisen hakukyselyn kanssa. On kuitenkin hyvä pitää mielessä, että nykyaikaiset [kehysratkaisut](/learn/start-a-new-react-project#production-grade-react-frameworks) tarjoavat tehokkaampia sisäänrakennettuja tiedonhakumekanismeja kuin efektien kirjoittaminen suoraan komponentteihin.
 
-To help you gain the right intuition, let's look at some common concrete examples!
+Katsotaanpa joitakin yleisiä konkreettisia esimerkkejä saadaksesi oikeanlaisen intuition.
 
-### Updating state based on props or state {/*updating-state-based-on-props-or-state*/}
+### Tilan päivittäminen propsin tai tilan pohjalta {/*updating-state-based-on-props-or-state*/}
 
-Suppose you have a component with two state variables: `firstName` and `lastName`. You want to calculate a `fullName` from them by concatenating them. Moreover, you'd like `fullName` to update whenever `firstName` or `lastName` change. Your first instinct might be to add a `fullName` state variable and update it in an Effect:
+Oletetaan, että sinulla on komponentti, jossa on kaksi tilamuuttujaa: `firstName` ja `lastName`. Haluat laskea niistä `fullName`-nimen yhdistämällä ne. Lisäksi haluat, että `fullName` päivittyy aina, kun `firstName` tai `lastName` muuttuvat. Ensimmäinen vaistosi saattaa olla lisätä `fullName`-tilamuuttuja ja päivittää se effektissa:
 
 ```js {5-9}
 function Form() {
   const [firstName, setFirstName] = useState('Taylor');
   const [lastName, setLastName] = useState('Swift');
 
-  // 🔴 Avoid: redundant state and unnecessary Effect
+  // 🔴 Vältä: turha tila ja tarpeeton Effekti
   const [fullName, setFullName] = useState('');
   useEffect(() => {
     setFullName(firstName + ' ' + lastName);
@@ -48,29 +47,29 @@ function Form() {
 }
 ```
 
-This is more complicated than necessary. It is inefficient too: it does an entire render pass with a stale value for `fullName`, then immediately re-renders with the updated value. Remove the state variable and the Effect:
+Tämä on tarpeettoman monimutkainen. Se on myös tehotonta: se suorittaa koko renderöinnin vanhentuneella `fullName`-arvolla ja päivittää sen sitten välittömästi uudelleen päivitetyllä arvolla. Poista tilamuuttuja ja Effekti:
 
 ```js {4-5}
 function Form() {
   const [firstName, setFirstName] = useState('Taylor');
   const [lastName, setLastName] = useState('Swift');
-  // ✅ Good: calculated during rendering
+  // ✅ Hyvä: lasketaan renderöinnin aikana
   const fullName = firstName + ' ' + lastName;
   // ...
 }
 ```
 
-**When something can be calculated from the existing props or state, [don't put it in state.](/learn/choosing-the-state-structure#avoid-redundant-state) Instead, calculate it during rendering.** This makes your code faster (you avoid the extra "cascading" updates), simpler (you remove some code), and less error-prone (you avoid bugs caused by different state variables getting out of sync with each other). If this approach feels new to you, [Thinking in React](/learn/thinking-in-react#step-3-find-the-minimal-but-complete-representation-of-ui-state) explains what should go into state.
+**Kun jotain voidaan laskea olemassa olevista propseista tai tilamuuttujista, [älä aseta sitä tilaan.](/learn/choosing-the-state-structure#avoid-redundant-state) Sen sijaan laske se renderöinnin aikana.** Tämä tekee koodistasi nopeamman (vältät ylimääräiset "kaskadiset" päivitykset), yksinkertaisemman (poistat osan koodista) ja vähemmän virhealttiin (vältät bugeja, jotka johtuvat tilamuuttujien epäsynkronoinnista). Jos tämä lähestymistapa tuntuu uudelta sinulle, [Ajattelu Reactissa](/learn/thinking-in-react#step-3-find-the-minimal-but-complete-representation-of-ui-state) selittää, mitä tilaan tulisi laittaa.
 
-### Caching expensive calculations {/*caching-expensive-calculations*/}
+### Raskaiden laskujen välimuistittaminen {/*caching-expensive-calculations*/}
 
-This component computes `visibleTodos` by taking the `todos` it receives by props and filtering them according to the `filter` prop. You might feel tempted to store the result in state and update it from an Effect:
+Tämä komponentti laskee `visibleTodos`-muuttujan ottamalla `todos`-muuttujan propsina vastaan ja suodattamalla sen `filter`-propsin perusteella. Saatat tuntea houkutuksen tallentaa tulos tilaan ja päivittää sen Effektin avulla:
 
 ```js {4-8}
 function TodoList({ todos, filter }) {
   const [newTodo, setNewTodo] = useState('');
 
-  // 🔴 Avoid: redundant state and unnecessary Effect
+  // 🔴 Vältä: turha tila ja tarpeeton Effekti
   const [visibleTodos, setVisibleTodos] = useState([]);
   useEffect(() => {
     setVisibleTodos(getFilteredTodos(todos, filter));
@@ -80,20 +79,20 @@ function TodoList({ todos, filter }) {
 }
 ```
 
-Like in the earlier example, this is both unnecessary and inefficient. First, remove the state and the Effect:
+Kuten aiemmassa esimerkissä, tämä on sekä tarpeeton että tehoton. Poista ensin tila ja Effekti:
 
 ```js {3-4}
 function TodoList({ todos, filter }) {
   const [newTodo, setNewTodo] = useState('');
-  // ✅ This is fine if getFilteredTodos() is not slow.
+  // ✅ Tämä on okei jos getFilteredTodos() ei ole hidas.
   const visibleTodos = getFilteredTodos(todos, filter);
   // ...
 }
 ```
 
-Usually, this code is fine! But maybe `getFilteredTodos()` is slow or you have a lot of `todos`. In that case you don't want to recalculate `getFilteredTodos()` if some unrelated state variable like `newTodo` has changed.
+Useiten, tämä koodi on okei! Mutta ehkä `getFilteredTodos()` on hidas tai sinulla on useita `todos` kohteita. Tässä tapauksessa et halua laskea `getFilteredTodos()` uudelleen, jos jokin epäolennainen tilamuuttuja, kuten `newTodo`, on muuttunut.
 
-You can cache (or ["memoize"](https://en.wikipedia.org/wiki/Memoization)) an expensive calculation by wrapping it in a [`useMemo`](/reference/react/useMemo) Hook:
+Voit välimuistittaa (tai ["memoisoida"](https://en.wikipedia.org/wiki/Memoization)) kalliin laskutoimituksen käärimällä sen [`useMemo`](/reference/react/useMemo)-Hookin sisään:
 
 ```js {5-8}
 import { useMemo, useState } from 'react';
@@ -101,69 +100,69 @@ import { useMemo, useState } from 'react';
 function TodoList({ todos, filter }) {
   const [newTodo, setNewTodo] = useState('');
   const visibleTodos = useMemo(() => {
-    // ✅ Does not re-run unless todos or filter change
+    // ✅ Ei suoriteta uudelleen, elleivät todos tai filter muutu
     return getFilteredTodos(todos, filter);
   }, [todos, filter]);
   // ...
 }
 ```
 
-Or, written as a single line:
+Tai kirjoitettuna yhtenä rivinä:
 
 ```js {5-6}
 import { useMemo, useState } from 'react';
 
 function TodoList({ todos, filter }) {
   const [newTodo, setNewTodo] = useState('');
-  // ✅ Does not re-run getFilteredTodos() unless todos or filter change
+  // ✅ getFilteredTodos()-funktiota ei suoriteta uudelleen, elleivät todos tai filter muutu.
   const visibleTodos = useMemo(() => getFilteredTodos(todos, filter), [todos, filter]);
   // ...
 }
 ```
 
-**This tells React that you don't want the inner function to re-run unless either `todos` or `filter` have changed.** React will remember the return value of `getFilteredTodos()` during the initial render. During the next renders, it will check if `todos` or `filter` are different. If they're the same as last time, `useMemo` will return the last result it has stored. But if they are different, React will call the inner function again (and store its result).
+**Tämä kertoo Reactille, että et halua sisäisen funktion suorittuvan uudelleen, elleivät `todos` tai `filter` ole muuttuneet.** React muistaa `getFilteredTodos()`-funktion palautusarvon ensimmäisellä renderöinnillä. Seuraavilla renderöinneillä se tarkistaa, ovatko `todos` tai `filter` erilaisia. Jos ne ovat samat kuin viime kerralla, `useMemo` palauttaa viimeksi tallennetun tuloksen. Mutta jos ne ovat erilaisia, React kutsuu sisäistä funktiota uudelleen (ja tallentaa sen tuloksen).
 
-The function you wrap in [`useMemo`](/reference/react/useMemo) runs during rendering, so this only works for [pure calculations.](/learn/keeping-components-pure)
+Funktio, jonka käärit [`useMemo`](/reference/react/useMemo)-Hookin sisään, suoritetaan renderöinnin aikana, joten tämä toimii vain [puhtaiden laskutoimitusten](/learn/keeping-components-pure) kanssa.
 
 <DeepDive>
 
-#### How to tell if a calculation is expensive? {/*how-to-tell-if-a-calculation-is-expensive*/}
+#### Kuinka tunnistan, onko laskenta kallis? {/*how-to-tell-if-a-calculation-is-expensive*/}
 
-In general, unless you're creating or looping over thousands of objects, it's probably not expensive. If you want to get more confidence, you can add a console log to measure the time spent in a piece of code:
+Yleisesti ottaen, ellet luo tai silmukoi tuhansia objekteja, se ei todennäköisesti ole kallista. Jos haluat olla varmempi, voit lisätä konsolilokin mittaamaan aikaa, joka kuluu koodin palan suorittamiseen:
 
 ```js {1,3}
-console.time('filter array');
+console.time('filter taulukko');
 const visibleTodos = getFilteredTodos(todos, filter);
-console.timeEnd('filter array');
+console.timeEnd('filter taulukko');
 ```
 
-Perform the interaction you're measuring (for example, typing into the input). You will then see logs like `filter array: 0.15ms` in your console. If the overall logged time adds up to a significant amount (say, `1ms` or more), it might make sense to memoize that calculation. As an experiment, you can then wrap the calculation in `useMemo` to verify whether the total logged time has decreased for that interaction or not:
+Suorita vuorovaikutus, jota mitataan (esimerkiksi kirjoittaminen syötekenttään). Näet sitten lokit, kuten `filter taulukko: 0.15ms` konsolissasi. Jos kokonaisaika on merkittävä (esimerkiksi `1ms` tai enemmän), saattaa olla järkevää välimuistittaa laskutoimitus. Kokeilun vuoksi voit sitten kääriä laskutoimituksen `useMemo`-Hookin sisään ja tarkistaa, onko kokonaisaika vähentynyt vai ei:
 
 ```js
-console.time('filter array');
+console.time('filter taulukko');
 const visibleTodos = useMemo(() => {
-  return getFilteredTodos(todos, filter); // Skipped if todos and filter haven't changed
+  return getFilteredTodos(todos, filter); // Ohita, jos todos ja filter eivät ole muuttuneet.
 }, [todos, filter]);
-console.timeEnd('filter array');
+console.timeEnd('filter taulukko');
 ```
 
-`useMemo` won't make the *first* render faster. It only helps you skip unnecessary work on updates.
+`useMemo` ei tee ensimmäistä renderöintiä nopeammaksi. Se auttaa ainoastaan välttämään tarpeetonta työtä päivityksissä.
 
-Keep in mind that your machine is probably faster than your users' so it's a good idea to test the performance with an artificial slowdown. For example, Chrome offers a [CPU Throttling](https://developer.chrome.com/blog/new-in-devtools-61/#throttling) option for this.
+Pidä mielessä, että koneesi on todennäköisesti nopeampi kuin käyttäjäsi, joten on hyvä idea testata suorituskykyä keinotekoisella hidastuksella. Esimerkiksi Chrome tarjoaa [CPU Throttling](https://developer.chrome.com/blog/new-in-devtools-61/#throttling)-vaihtoehdon tätä varten.
 
-Also note that measuring performance in development will not give you the most accurate results. (For example, when [Strict Mode](/reference/react/StrictMode) is on, you will see each component render twice rather than once.) To get the most accurate timings, build your app for production and test it on a device like your users have.
+Huomaa myös, että suorituskyvyn mittaaminen kehitysvaiheessa ei anna sinulle tarkimpia tuloksia. (Esimerkiksi, kun [Strict Mode](/reference/react/StrictMode) on päällä, näet jokaisen komponentin renderöityvän kahdesti kerran sijaan.) Saadaksesi tarkimmat ajat, rakenna sovelluksesi tuotantoon ja testaa sitä laitteella, joka käyttäjilläsi on.
 
 </DeepDive>
 
-### Resetting all state when a prop changes {/*resetting-all-state-when-a-prop-changes*/}
+### Kaiken tilan palauttaminen kun propsi muuttuu {/*resetting-all-state-when-a-prop-changes*/}
 
-This `ProfilePage` component receives a `userId` prop. The page contains a comment input, and you use a `comment` state variable to hold its value. One day, you notice a problem: when you navigate from one profile to another, the `comment` state does not get reset. As a result, it's easy to accidentally post a comment on a wrong user's profile. To fix the issue, you want to clear out the `comment` state variable whenever the `userId` changes:
+`ProfilePage` komponentti saa `userId` propsin. Sivulla on kommenttikenttä, ja käytät `comment`-tilamuuttujaa sen arvon säilyttämiseen. Eräänä päivänä huomaat ongelman: kun navigoit yhdestä profiilista toiseen, `comment`-tila ei nollaudu. Tämän seurauksena on helppo vahingossa lähettää kommentti väärälle käyttäjän profiilille. Korjataksesi ongelman, haluat tyhjentää `comment`-tilamuuttujan aina, kun `userId` muuttuu:
 
 ```js {4-7}
 export default function ProfilePage({ userId }) {
   const [comment, setComment] = useState('');
 
-  // 🔴 Avoid: Resetting state on prop change in an Effect
+  // 🔴 Vältä: Tilan resetointi prospin muuttuesssa Effektissa
   useEffect(() => {
     setComment('');
   }, [userId]);
@@ -171,9 +170,9 @@ export default function ProfilePage({ userId }) {
 }
 ```
 
-This is inefficient because `ProfilePage` and its children will first render with the stale value, and then render again. It is also complicated because you'd need to do this in *every* component that has some state inside `ProfilePage`. For example, if the comment UI is nested, you'd want to clear out nested comment state too.
+Tämä on tehotonta, koska `ProfilePage` ja sen lapset renderöityvät ensin vanhentuneella arvolla ja sitten uudelleen. Se on myös monimutkaista, koska sinun täytyisi tehdä tämä *jokaisessa* komponentissa, jossa on tilaa `ProfilePage`:n sisällä. Esimerkiksi, jos kommenttikäyttöliittymä on sisäkkäinen, haluat nollata myös sisäkkäisen kommentin tilan.
 
-Instead, you can tell React that each user's profile is conceptually a _different_ profile by giving it an explicit key. Split your component in two and pass a `key` attribute from the outer component to the inner one:
+Sen sijaan, voit kertoa Reactille, että jokainen käyttäjän profiili on käsitteellisesti *erilainen* profiili antamalla sille eksplisiittisen avaimen. Jaa komponenttisi kahteen ja välitä `key`-attribuutti ulkoisesta komponentista sisäiseen:
 
 ```js {5,11-12}
 export default function ProfilePage({ userId }) {
@@ -186,28 +185,28 @@ export default function ProfilePage({ userId }) {
 }
 
 function Profile({ userId }) {
-  // ✅ This and any other state below will reset on key change automatically
+  // ✅ Tämä ja muut alla olevat tilat nollautuvat key:n muuttuessa automaattisesti
   const [comment, setComment] = useState('');
   // ...
 }
 ```
 
-Normally, React preserves the state when the same component is rendered in the same spot. **By passing `userId` as a `key` to the `Profile` component, you're asking React to treat two `Profile` components with different `userId` as two different components that should not share any state.** Whenever the key (which you've set to `userId`) changes, React will recreate the DOM and [reset the state](/learn/preserving-and-resetting-state#option-2-resetting-state-with-a-key) of the `Profile` component and all of its children. Now the `comment` field will clear out automatically when navigating between profiles.
+Normaalisti, React säilyttää tilan kun sama komponentti on renderöity samaan paikkaan. **Antamalla `userId`:n `key`-attribuuttina `Profile`-komponentille, pyydät Reactia kohtelemaan kahta `Profile`-komponenttia, joilla on eri `userId`, kahtena eri komponenttina, jotka eivät jaa tilaa.** Aina kun avain (jonka olet asettanut `userId`:ksi) muuttuu, React luo uudelleen DOMin ja [nollaa tilan](/learn/preserving-and-resetting-state#option-2-resetting-state-with-a-key) `Profile`-komponentissa ja kaikissa sen lapsikomponenteissa. Nyt `comment`-kenttä tyhjenee automaattisesti navigoidessasi profiilien välillä.
 
-Note that in this example, only the outer `ProfilePage` component is exported and visible to other files in the project. Components rendering `ProfilePage` don't need to pass the key to it: they pass `userId` as a regular prop. The fact `ProfilePage` passes it as a `key` to the inner `Profile` component is an implementation detail.
+Huomaa, että tässä esimerkissä vain ulkoinen `ProfilePage`-komponentti on exportattu ja näkyvissä muissa projektin tiedostoissa. Komponentit, jotka renderöivät `ProfilePage`:a, eivät tarvitse välittää avainta sille: ne välittävät `userId`:n tavallisena propina. Se, että `ProfilePage` välittää sen `key`-attribuuttina sisäiselle `Profile`-komponentille, on toteutuksen yksityiskohta.
 
-### Adjusting some state when a prop changes {/*adjusting-some-state-when-a-prop-changes*/}
+### Tilan säätäminen kun propsi muuttuu {/*adjusting-some-state-when-a-prop-changes*/}
 
-Sometimes, you might want to reset or adjust a part of the state on a prop change, but not all of it.
+Joskus saatat haluat nollata tai säätää osan tilasta propin muuttuessa, mutta et kaikkea.
 
-This `List` component receives a list of `items` as a prop, and maintains the selected item in the `selection` state variable. You want to reset the `selection` to `null` whenever the `items` prop receives a different array:
+`List` komponetti vastaanottaa listan `items` propsina ja ylläpitää valittua kohdetta `selection`-tilamuuttujassa. Haluat nollata `selection`-tilan `null`:ksi aina kun `items`-propiin tulee eri taulukko:
 
 ```js {5-8}
 function List({ items }) {
   const [isReverse, setIsReverse] = useState(false);
   const [selection, setSelection] = useState(null);
 
-  // 🔴 Avoid: Adjusting state on prop change in an Effect
+  // 🔴 Vältä: Tilan säätämistä propsin muutoksen pohjalta Effektissa
   useEffect(() => {
     setSelection(null);
   }, [items]);
@@ -215,16 +214,16 @@ function List({ items }) {
 }
 ```
 
-This, too, is not ideal. Every time the `items` change, the `List` and its child components will render with a stale `selection` value at first. Then React will update the DOM and run the Effects. Finally, the `setSelection(null)` call will cause another re-render of the `List` and its child components, restarting this whole process again.
+Tämä myöskään ei ole ideaali. Joka kerta kun `items` muuttuu, `List` ja sen lapsikomponentit renderöityvät ensin vanhentuneella `selection`-arvolla. Sitten React päivittää DOMin ja suorittaa Efektit. Lopuksi, `setSelection(null)`-kutsu aiheuttaa uuden renderöinnin `List`-komponentille ja sen lapsikomponenteille, käynnistäen tämän koko prosessin uudelleen.
 
-Start by deleting the Effect. Instead, adjust the state directly during rendering:
+Aloita poistamalla Effekti. Sen sijaan, säädä tila suoraan renderöinnin aikana:
 
 ```js {5-11}
 function List({ items }) {
   const [isReverse, setIsReverse] = useState(false);
   const [selection, setSelection] = useState(null);
 
-  // Better: Adjust the state while rendering
+  // Parempi: Säädä tila renderöinnin aikana
   const [prevItems, setPrevItems] = useState(items);
   if (items !== prevItems) {
     setPrevItems(items);
@@ -234,34 +233,34 @@ function List({ items }) {
 }
 ```
 
-[Storing information from previous renders](/reference/react/useState#storing-information-from-previous-renders) like this can be hard to understand, but it’s better than updating the same state in an Effect. In the above example, `setSelection` is called directly during a render. React will re-render the `List` *immediately* after it exits with a `return` statement. React has not rendered the `List` children or updated the DOM yet, so this lets the `List` children skip rendering the stale `selection` value.
+[Tiedon tallentaminen edellisistä renderöinneistä](/reference/react/useState#storing-information-from-previous-renders) kuten tässä voi olla hankalaa ymmärtää, mutta se on parempi kuin saman tilan päivittäminen Effektissa. Yllä olevassa esimerkissä `setSelection` kutsutaan suoraan renderöinnin aikana. React renderöi `List`-komponentin *välittömästi* sen jälkeen, kun se poistuu `return`-lauseella. React ei ole vielä renderöinyt `List`-lapsia tai päivittänyt DOMia, joten tämän avulla `List`-lapset voivat ohittaa vanhentuneen `selection`-arvon renderöinnin.
 
-When you update a component during rendering, React throws away the returned JSX and immediately retries rendering. To avoid very slow cascading retries, React only lets you update the *same* component's state during a render. If you update another component's state during a render, you'll see an error. A condition like `items !== prevItems` is necessary to avoid loops. You may adjust state like this, but any other side effects (like changing the DOM or setting timeouts) should stay in event handlers or Effects to [keep components pure.](/learn/keeping-components-pure)
+Kun päivität komponenttia kesken renderöinnin, React heittää pois palautetun JSX:n ja välittömästi yrittää renderöintiä uudelleen. Välttääksesi hyvin hitaat kaskadiset uudelleenyritykset, React sallii *saman* komponentin tilapäivityksen renderöinnin aikana. Jos päivität toisen komponentin tilaa renderöinnin aikana, näet virheen. Ehto kuten `items !== prevItems` on tarpeen välttääksesi silmukoita. Voit säätää tilaa tällä tavalla, mutta kaikki muut sivuvaikutukset (kuten DOMin muuttaminen tai timeoutin asettaminen) tulisi pysyä tapahtumankäsittelijöissä tai Efekteissä [pitääksesi komponentit puhtaina.](/learn/keeping-components-pure)
 
-**Although this pattern is more efficient than an Effect, most components shouldn't need it either.** No matter how you do it, adjusting state based on props or other state makes your data flow more difficult to understand and debug. Always check whether you can [reset all state with a key](#resetting-all-state-when-a-prop-changes) or [calculate everything during rendering](#updating-state-based-on-props-or-state) instead. For example, instead of storing (and resetting) the selected *item*, you can store the selected *item ID:*
+**Vaikka tämä malli on tehokkaampi kuin Effect, useimpien komponenttien ei pitäisi tarvita sitäkään.** Riippumatta siitä, miten teet sen, tilan säätäminen propsien tai muiden tilojen pohjalta tekee datavirrasta vaikeampaa ymmärtää ja debugata. Tarkista aina, voitko [nollata kaiken tilan avaimella](#resetting-all-state-when-a-prop-changes) tai [laskea kaiken renderöinnin aikana](#updating-state-based-on-props-or-state) sen sijaan. Esimerkiksi, sen sijaan, että tallentaisit (ja nollaisit) valitun *kohteen*, voit tallentaa valitun *kohteen ID:n*:
 
 ```js {3-5}
 function List({ items }) {
   const [isReverse, setIsReverse] = useState(false);
   const [selectedId, setSelectedId] = useState(null);
-  // ✅ Best: Calculate everything during rendering
+  // ✅ Laske kaikki renderöinnin aikana
   const selection = items.find(item => item.id === selectedId) ?? null;
   // ...
 }
 ```
 
-Now there is no need to "adjust" the state at all. If the item with the selected ID is in the list, it remains selected. If it's not, the `selection` calculated during rendering will be `null` because no matching item was found. This behavior is different, but arguably better because most changes to `items` preserve the selection.
+Nyt ei ole tarvetta "säätää" tilaa ollenkaan. Jos kohde valitulla ID:llä on listassa, se pysyy valittuna. Jos ei ole, renderöinnin aikana laskettu `selection` tulee olemaan `null` sillä yhtään vastaavaa kohdetta ei löytynyt. Tämä käyttäytyminen erilainen, mutta väitetysti parempi, koska useimmat muutokset `items`-propsissa säilyttävät valinnan.
 
-### Sharing logic between event handlers {/*sharing-logic-between-event-handlers*/}
+### Logiikan jakaminen tapahtumakäsittelijöiden kesken {/*sharing-logic-between-event-handlers*/}
 
-Let's say you have a product page with two buttons (Buy and Checkout) that both let you buy that product. You want to show a notification whenever the user puts the product in the cart. Calling `showNotification()` in both buttons' click handlers feels repetitive so you might be tempted to place this logic in an Effect:
+Sanotaan, että sinulla on tuotesivu, jossa on kaksi painiketta (Osta ja Siirry kassalle), jotka molemmat antavat sinun ostaa tuotteen. Haluat näyttää ilmoituksen aina, kun käyttäjä laittaa tuotteen ostoskoriin. `showNotification()`-funktion kutsuminen molempien painikkeiden klikkaustapahtumankäsittelijöissä tuntuu toistuvalta, joten saatat tuntea houkutuksen laittaa tämä logiikka Effectiin:
 
 ```js {2-7}
 function ProductPage({ product, addToCart }) {
-  // 🔴 Avoid: Event-specific logic inside an Effect
+  // 🔴 Vältä: Tapahtumakohtainen logiikka Effektissa
   useEffect(() => {
     if (product.isInCart) {
-      showNotification(`Added ${product.name} to the shopping cart!`);
+      showNotification(`Lisätty ${product.name} ostoskoriin!`);
     }
   }, [product]);
 
@@ -277,16 +276,16 @@ function ProductPage({ product, addToCart }) {
 }
 ```
 
-This Effect is unnecessary. It will also most likely cause bugs. For example, let's say that your app "remembers" the shopping cart between the page reloads. If you add a product to the cart once and refresh the page, the notification will appear again. It will keep appearing every time you refresh that product's page. This is because `product.isInCart` will already be `true` on the page load, so the Effect above will call `showNotification()`.
+Tämä Effekti on turha. Se todennäköisesti tulee aiheuttamaan bugeja. Esimerkiksi, sanotaan, että sovelluksesi "muistaa" ostoskorin sivulatausten välillä. Jos lisäät tuotteen ostoskoriin kerran ja päivität sivua, ilmoitus tulee näkyviin uudestaan. Se tulee näkymään joka kerta, kun päivität tuotteen sivun. Tämä johtuu siitä, että `product.isInCart` on jo `true` sivun latauksessa, joten yllä oleva Effekti kutsuu `showNotification()`-funktiota.
 
-**When you're not sure whether some code should be in an Effect or in an event handler, ask yourself *why* this code needs to run. Use Effects only for code that should run *because* the component was displayed to the user.** In this example, the notification should appear because the user *pressed the button*, not because the page was displayed! Delete the Effect and put the shared logic into a function called from both event handlers:
+**Kun et ole varma, pitäisikö koodin olla Effektissa vai tapahtumankäsittelijässä, kysy itseltäsi *miksi* tämä koodi täytyy ajaa. Käytä Effektejä vain koodille, joka täytyy ajaa *koska* komponentti näytettiin käyttäjälle.** Tässä esimerkissä ilmoituksen tulisi näkyä koska käyttäjä *painoi nappia*, ei koska sivu näytettiin! Poista Effekti ja laita jaettu logiikka funktioon, jota kutsutaan molemmista tapahtumankäsittelijöistä:
 
 ```js {2-6,9,13}
 function ProductPage({ product, addToCart }) {
-  // ✅ Good: Event-specific logic is called from event handlers
+  // ✅ Tapahtumakohtainen logiikka kutsutaan tapahtumankäsittelijöistä
   function buyProduct() {
     addToCart(product);
-    showNotification(`Added ${product.name} to the shopping cart!`);
+    showNotification(`Lisätty ${product.name} ostoskoriin!`);
   }
 
   function handleBuyClick() {
@@ -301,23 +300,23 @@ function ProductPage({ product, addToCart }) {
 }
 ```
 
-This both removes the unnecessary Effect and fixes the bug.
+Tämä sekä poistaa turhan Effektin sekä korjaa bugin.
 
-### Sending a POST request {/*sending-a-post-request*/}
+### POST pyynnön lähettäminen {/*sending-a-post-request*/}
 
-This `Form` component sends two kinds of POST requests. It sends an analytics event when it mounts. When you fill in the form and click the Submit button, it will send a POST request to the `/api/register` endpoint:
+Tämä `Form` komponentti lähettää kahdenlaisia POST-pyyntöjä. Se lähettää analytiikkatapahtuman kun se renderöidään. Kun täytät lomakkeen ja painat Lähetä-nappia, se lähettää POST-pyynnön `/api/register`-päätepisteeseen:
 
 ```js {5-8,10-16}
 function Form() {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
 
-  // ✅ Good: This logic should run because the component was displayed
+  // ✅ Tämä logiikka tulisi suorittaa sillä komponentti näytettiin
   useEffect(() => {
     post('/analytics/event', { eventName: 'visit_form' });
   }, []);
 
-  // 🔴 Avoid: Event-specific logic inside an Effect
+  // 🔴 Vältä: Tapahtumakohtainen logiikka Effektissa
   const [jsonToSubmit, setJsonToSubmit] = useState(null);
   useEffect(() => {
     if (jsonToSubmit !== null) {
@@ -333,36 +332,36 @@ function Form() {
 }
 ```
 
-Let's apply the same criteria as in the example before.
+Otetaan käyttöön sama kriteeri kuin edellisessä esimerkissä.
 
-The analytics POST request should remain in an Effect. This is because the _reason_ to send the analytics event is that the form was displayed. (It would fire twice in development, but [see here](/learn/synchronizing-with-effects#sending-analytics) for how to deal with that.)
+Analytiikka-POST-pyynnön tulisi pysyä Effektissa. Tämä johtuu siitä, että *syy* lähettää analytiikkatapahtuma on se, että lomake näytettiin. (Se tultaisiin suorittamaan kahdesti kehitysvaiheessa, mutta [katso täältä](/learn/synchronizing-with-effects#sending-analytics) miten hoitaa se.)
 
-However, the `/api/register` POST request is not caused by the form being _displayed_. You only want to send the request at one specific moment in time: when the user presses the button. It should only ever happen _on that particular interaction_. Delete the second Effect and move that POST request into the event handler:
+Kuitenkin, `/api/register` POST-pyyntö ei ole aiheutettu lomakkeen _näyttämisestä_. Haluat lähettää pyynnön vain yhteen tiettyyn aikaan: kun käyttäjä painaa nappia. Se tulisi tapahtua vain _tässä tiettynä vuorovaikutuksena_. Poista toinen Effekti ja siirrä POST-pyyntö tapahtumankäsittelijään:
 
 ```js {12-13}
 function Form() {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
 
-  // ✅ Good: This logic runs because the component was displayed
+  // ✅ Hyvä: Logiikka suoritetaan, koska komponentti näytettiin
   useEffect(() => {
     post('/analytics/event', { eventName: 'visit_form' });
   }, []);
 
   function handleSubmit(e) {
     e.preventDefault();
-    // ✅ Good: Event-specific logic is in the event handler
+    // ✅ Hyvä: Tapahtumakohtainen logiikka on tapahtumakäsittelijässä
     post('/api/register', { firstName, lastName });
   }
   // ...
 }
 ```
 
-When you choose whether to put some logic into an event handler or an Effect, the main question you need to answer is _what kind of logic_ it is from the user's perspective. If this logic is caused by a particular interaction, keep it in the event handler. If it's caused by the user _seeing_ the component on the screen, keep it in the Effect.
+Kun valitset laitatko logiikan tapahtumankäsittelijään vai Effektiin, pääkysymys, johon sinun täytyy vastata on _minkä tyyppistä logiikkaa_ se on käyttäjän näkökulmasta. Jos tämä logiikka on aiheutettu tietystä vuorovaikutuksesta, pidä se tapahtumankäsittelijässä. Jos se on aiheutettu käyttäjän _näkemisestä_ komponentin ruudulla, pidä se Effektissä.
 
-### Chains of computations {/*chains-of-computations*/}
+### Laskutoimitusten ketjutus {/*chains-of-computations*/}
 
-Sometimes you might feel tempted to chain Effects that each adjust a piece of state based on other state:
+Joskus saatat tuntea houkutuksen ketjuttaa Efektejä, jotka kumpikin säätävät tilaa toisen tilan pohjalta:
 
 ```js {7-29}
 function Game() {
@@ -406,13 +405,13 @@ function Game() {
   // ...
 ```
 
-There are two problems with this code.
+Tässä koodissa on kaksi ongelmaa.
 
-One problem is that it is very inefficient: the component (and its children) have to re-render between each `set` call in the chain. In the example above, in the worst case (`setCard` → render → `setGoldCardCount` → render → `setRound` → render → `setIsGameOver` → render) there are three unnecessary re-renders of the tree below.
+Ensimmäinen ongelma on, että se on hyvin tehoton: komponentti (ja sen lapset) täytyy renderöidä uudelleen jokaisen `set`-kutsun välillä ketjussa. Yllä olevassa esimerkissä, pahimmassa tapauksessa (`setCard` → renderöi → `setGoldCardCount` → renderöi → `setRound` → renderöi → `setIsGameOver` → renderöi) on kolme tarpeetonta uudelleenrenderöintiä puussa.
 
-Even if it weren't slow, as your code evolves, you will run into cases where the "chain" you wrote doesn't fit the new requirements. Imagine you are adding a way to step through the history of the game moves. You'd do it by updating each state variable to a value from the past. However, setting the `card` state to a value from the past would trigger the Effect chain again and change the data you're showing. Such code is often rigid and fragile.
+Vaikka se ei olisi hidas, koodisi eläessä tulet törmäämään tilanteisiin, joissa "ketju" jonka kirjoitit, ei vastaa uusia vaatimuksia. Kuvittele, että olet lisäämässä tapaa selata pelin siirtohistoriaa. Tämä tehdään päivittämällä jokainen tilamuuttuja arvoon menneisyydestä. Kuitenkin, `card`-tilan asettaminen menneisyyden arvoon aiheuttaisi Efektiketjun uudelleen ja muuttaisi näytettävää dataa. Tällainen koodi on usein jäykkää ja haurasta.
 
-In this case, it's better to calculate what you can during rendering, and adjust the state in the event handler:
+Tässä tilanteessa on parempi laskea mitä voit renderöinnin aikana ja säätää tilaa tapahtumankäsittelijässä:
 
 ```js {6-7,14-26}
 function Game() {
@@ -420,7 +419,7 @@ function Game() {
   const [goldCardCount, setGoldCardCount] = useState(0);
   const [round, setRound] = useState(1);
 
-  // ✅ Calculate what you can during rendering
+  // ✅ Lakse mitä voit renderöinnin aikana
   const isGameOver = round > 5;
 
   function handlePlaceCard(nextCard) {
@@ -428,7 +427,7 @@ function Game() {
       throw Error('Game already ended.');
     }
 
-    // ✅ Calculate all the next state in the event handler
+    // ✅ Laske koko seuraava tila tapahtumakäsittelijässä
     setCard(nextCard);
     if (nextCard.gold) {
       if (goldCardCount <= 3) {
@@ -446,21 +445,21 @@ function Game() {
   // ...
 ```
 
-This is a lot more efficient. Also, if you implement a way to view game history, now you will be able to set each state variable to a move from the past without triggering the Effect chain that adjusts every other value. If you need to reuse logic between several event handlers, you can [extract a function](#sharing-logic-between-event-handlers) and call it from those handlers.
+Tämä on paljon tehokkaampaa. Myöskin, jos toteutat tavan katsoa siirtohistoriaa, voit nyt asettaa jokaisen tilamuuttujan menneisyyden arvoon käynnistämättä Efektiketjua, joka säätää jokaista muuta arvoa. Jos tarvitset uudelleenkäytettävää logiikkaa useiden tapahtumankäsittelijöiden välillä, voit [irroittaa funktion](#sharing-logic-between-event-handlers) ja kutsua sitä näistä käsittelijöistä.
 
-Remember that inside event handlers, [state behaves like a snapshot.](/learn/state-as-a-snapshot) For example, even after you call `setRound(round + 1)`, the `round` variable will reflect the value at the time the user clicked the button. If you need to use the next value for calculations, define it manually like `const nextRound = round + 1`.
+Muista, että tapahtumankäsittelijöissä tila käyttäytyy kuin tilannekuva. Esimerkiksi, vaikka kutsuisit `setRound(round + 1)`, `round`-muuttuja heijastaa arvoa siihen aikaan, kun käyttäjä painoi nappia. Jos tarvitset seuraavan arvon laskutoimituksiin, määrittele se manuaalisesti kuten `const nextRound = round + 1`.
 
-In some cases, you *can't* calculate the next state directly in the event handler. For example, imagine a form with multiple dropdowns where the options of the next dropdown depend on the selected value of the previous dropdown. Then, a chain of Effects is appropriate because you are synchronizing with network.
+Joissain tapauksissa, *et voi* laskea seuraavaa tilaa suoraan tapahtumankäsittelijässä. Esimerkiksi, kuvittele lomake, jossa on useita alasvetovalikoita, joiden seuraavat vaihtoehdot riippuvat edellisen alasvetovalikon valitusta arvosta. Tällöin Efektiketju on sopiva, koska synkronoit verkon kanssa.
 
-### Initializing the application {/*initializing-the-application*/}
+### Sovelluksen alustaminen {/*initializing-the-application*/}
 
-Some logic should only run once when the app loads.
+Osa logiikasta tulisi suorittaa kerran kun sovellus alustetaan.
 
-You might be tempted to place it in an Effect in the top-level component:
+Saatat tuntea houkutuksen laittaa se Effektiin pääkomponenttiin:
 
 ```js {2-6}
 function App() {
-  // 🔴 Avoid: Effects with logic that should only ever run once
+  // 🔴 Vältä: Effektit logiikalla, joka tulisi suorittaa vain kerran
   useEffect(() => {
     loadDataFromLocalStorage();
     checkAuthToken();
@@ -469,9 +468,9 @@ function App() {
 }
 ```
 
-However, you'll quickly discover that it [runs twice in development.](/learn/synchronizing-with-effects#how-to-handle-the-effect-firing-twice-in-development) This can cause issues--for example, maybe it invalidates the authentication token because the function wasn't designed to be called twice. In general, your components should be resilient to being remounted. This includes your top-level `App` component.
+Kuitenkin, tulet nopeasti huomaamaan, että se [suoritetaan kahdesti kehitysvaiheessa.](/learn/synchronizing-with-effects#how-to-handle-the-effect-firing-twice-in-development) Tämä voi aiheuttaa ongelmia--esimerkiksi, se voi mitätöidä autentikointitokenin, koska funktio ei ollut suunniteltu kutsuttavaksi kahdesti. Yleisesti ottaen, komponenttiesi tulisi olla joustavia uudelleenmounttaukselle. Pääkomponenttisi mukaanlukien.
 
-Although it may not ever get remounted in practice in production, following the same constraints in all components makes it easier to move and reuse code. If some logic must run *once per app load* rather than *once per component mount*, add a top-level variable to track whether it has already executed:
+Vaikka sitä ei välttämättä koskaan uudelleenmountata käytännössä tuotannossa, samojen rajoitteiden noudattaminen kaikissa komponenteissa tekee koodin siirtämisestä ja uudelleenkäytöstä helpompaa. Jos jotain logiikkaa täytyy suorittaa *kerran sovelluksen latauksessa* sen sijaan, että se suoritettaisiin *kerran komponentin mounttauksessa*, lisää pääkomponenttiin muuttuja, joka seuraa onko se jo suoritettu:
 
 ```js {1,5-6,10}
 let didInit = false;
@@ -480,7 +479,7 @@ function App() {
   useEffect(() => {
     if (!didInit) {
       didInit = true;
-      // ✅ Only runs once per app load
+      // ✅ Suoritetaan vain kerran sovelluksen alustuksessa
       loadDataFromLocalStorage();
       checkAuthToken();
     }
@@ -489,11 +488,11 @@ function App() {
 }
 ```
 
-You can also run it during module initialization and before the app renders:
+Voit myös suorittaa sen moduulin alustuksen aikana ja ennen kuin sovellus renderöidään:
 
 ```js {1,5}
-if (typeof window !== 'undefined') { // Check if we're running in the browser.
-   // ✅ Only runs once per app load
+if (typeof window !== 'undefined') { // Tarkista, olemmeko selaimessa.
+   // ✅ Suoritetaan vain kerran alustuksessa
   checkAuthToken();
   loadDataFromLocalStorage();
 }
@@ -503,9 +502,9 @@ function App() {
 }
 ```
 
-Code at the top level runs once when your component is imported--even if it doesn't end up being rendered. To avoid slowdown or surprising behavior when importing arbitrary components, don't overuse this pattern. Keep app-wide initialization logic to root component modules like `App.js` or in your application's entry point.
+Ylätasolla oleva koodi suoritetaan kerran kun komponenttisi importataan--vaikka sitä ei tultaisi renderöimään. Välttääksesi hidastumista tai yllättävää käytöstä importatessa satunnaisia komponentteja, älä käytä tätä mallia liikaa. Pidä sovelluksen laajuinen alustuslogiikka juurikomponenttimoduuleissa kuten `App.js` tai sovelluksesi sisäänkäynnissä.
 
-### Notifying parent components about state changes {/*notifying-parent-components-about-state-changes*/}
+### Tilamuutosten ilmoittaminen pääkomponentille {/*notifying-parent-components-about-state-changes*/}
 
 Let's say you're writing a `Toggle` component with an internal `isOn` state which can be either `true` or `false`. There are a few different ways to toggle it (by clicking or dragging). You want to notify the parent component whenever the `Toggle` internal state changes, so you expose an `onChange` event and call it from an Effect:
 
@@ -589,7 +588,7 @@ function Toggle({ isOn, onChange }) {
 
 ["Lifting state up"](/learn/sharing-state-between-components) lets the parent component fully control the `Toggle` by toggling the parent's own state. This means the parent component will have to contain more logic, but there will be less state overall to worry about. Whenever you try to keep two different state variables synchronized, try lifting state up instead!
 
-### Passing data to the parent {/*passing-data-to-the-parent*/}
+### Tiedon välittäminen pääkomponentille {/*passing-data-to-the-parent*/}
 
 This `Child` component fetches some data and then passes it to the `Parent` component in an Effect:
 
@@ -629,7 +628,7 @@ function Child({ data }) {
 
 This is simpler and keeps the data flow predictable: the data flows down from the parent to the child.
 
-### Subscribing to an external store {/*subscribing-to-an-external-store*/}
+### Tilaaminen ulkoiseen varastoon {/*subscribing-to-an-external-store*/}
 
 Sometimes, your components may need to subscribe to some data outside of the React state. This data could be from a third-party library or a built-in browser API. Since this data can change without React's knowledge, you need to manually subscribe your components to it. This is often done with an Effect, for example:
 
@@ -691,7 +690,7 @@ function ChatIndicator() {
 
 This approach is less error-prone than manually syncing mutable data to React state with an Effect. Typically, you'll write a custom Hook like `useOnlineStatus()` above so that you don't need to repeat this code in the individual components. [Read more about subscribing to external stores from React components.](/reference/react/useSyncExternalStore)
 
-### Fetching data {/*fetching-data*/}
+### Tiedon haku {/*fetching-data*/}
 
 Many apps use Effects to kick off data fetching. It is quite common to write a data fetching Effect like this:
 
