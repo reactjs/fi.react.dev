@@ -4,7 +4,7 @@ title: forwardRef
 
 <Intro>
 
-`forwardRef` lets your component expose a DOM node to parent component with a [ref.](/learn/manipulating-the-dom-with-refs)
+`forwardRef` rajapinnan avulla komponentti voi tarjota DOM noodin pääkomponenetille [ref](/learn/manipulating-the-dom-with-refs):llä.
 
 ```js
 const SomeComponent = forwardRef(render)
@@ -16,11 +16,11 @@ const SomeComponent = forwardRef(render)
 
 ---
 
-## Reference {/*reference*/}
+## Referenssi {/*reference*/}
 
 ### `forwardRef(render)` {/*forwardref*/}
 
-Call `forwardRef()` to let your component receive a ref and forward it to a child component:
+Kutsu `forwardRef()` -funktiota, jotta komponenttisi voi vastaanottaa ref:n ja välittää sen lapsikomponentille:
 
 ```js
 import { forwardRef } from 'react';
@@ -30,26 +30,26 @@ const MyInput = forwardRef(function MyInput(props, ref) {
 });
 ```
 
-[See more examples below.](#usage)
+[Katso lisää esimerkkejä alla.](#usage)
 
-#### Parameters {/*parameters*/}
+#### Parametrit {/*parameters*/}
 
-* `render`: The render function for your component. React calls this function with the props and `ref` that your component received from its parent. The JSX you return will be the output of your component.
+* `render`: Komponenttisi renderöintifunktio. React kutsuu tätä funktiota komponentin pääkomponentilta saamilla propseilla ja `ref`:lla. JSX, jonka palautat, on komponenttisi ulostulo.
 
-#### Returns {/*returns*/}
+#### Palautukset {/*returns*/}
 
-`forwardRef` returns a React component that you can render in JSX. Unlike React components defined as plain functions, a component returned by `forwardRef` is also able to receive a `ref` prop.
+`forwardRef` palauttaa React-komponentin, jonka voit renderöidä JSX:llä. Toisin kuin React-komponentit, jotka on määritelty tavallisina funktioina, `forwardRef`:n palauttama komponentti voi myös vastaanottaa `ref` propin.
 
-#### Caveats {/*caveats*/}
+#### Huomiot {/*caveats*/}
 
-* In Strict Mode, React will **call your render function twice** in order to [help you find accidental impurities.](#my-initializer-or-updater-function-runs-twice) This is development-only behavior and does not affect production. If your render function is pure (as it should be), this should not affect the logic of your component. The result from one of the calls will be ignored.
+* Strict Modessa, React **kutsuu renderöintifunktiotasi kahdesti** auttaakseen sinua löytämään tahattomia epäpuhtauksia. Tämä on vain kehitystilassa tapahtuva käyttäytyminen, eikä vaikuta tuotantoon. Jos renderöintifunktiosi on puhdas (kuten sen pitäisi olla), tämä ei vaikuta komponenttisi logiikkaan. Toinen kutsuista jätetään huomiotta.
 
 
 ---
 
-### `render` function {/*render-function*/}
+### `render` funktio {/*render-function*/}
 
-`forwardRef` accepts a render function as an argument. React calls this function with `props` and `ref`:
+`forwardRef` hyväksyy renderöintifunktion argumenttina. React kutsuu tätä funktiota `props` ja `ref` -argumenteilla:
 
 ```js
 const MyInput = forwardRef(function MyInput(props, ref) {
@@ -62,23 +62,23 @@ const MyInput = forwardRef(function MyInput(props, ref) {
 });
 ```
 
-#### Parameters {/*render-parameters*/}
+#### Parametrit {/*render-parameters*/}
 
-* `props`: The props passed by the parent component.
+* `props`: Propsit, jotka pääkomponentti on välittänyt.
 
-* `ref`:  The `ref` attribute passed by the parent component. The `ref` can be an object or a function. If the parent component has not passed a ref, it will be `null`. You should either pass the `ref` you receive to another component, or pass it to [`useImperativeHandle`.](/reference/react/useImperativeHandle)
+* `ref`: `ref` attribuutti, jonka pääkomponentti on välittänyt. `ref` voi olla joko objekti tai funktio. Jos pääkomponentti ei ole välittänyt ref:iä, se on `null`. Sinun tulisi joko välittää saamasi `ref` toiselle komponentille tai välittää se [`useImperativeHandle`:lle.](/reference/react/useImperativeHandle)
 
-#### Returns {/*render-returns*/}
+#### Palautukset {/*render-returns*/}
 
-`forwardRef` returns a React component that you can render in JSX. Unlike React components defined as plain functions, the component returned by `forwardRef` is able to take a `ref` prop.
+`forwardRef` palauttaa React komponentin, jonka voit renderöidä JSX:llä. Toisin kuin React komponentit, jotka on määritelty tavallisina funktioina, `forwardRef`:n palauttama komponentti voi myös vastaanottaa `ref` propin.
 
 ---
 
-## Usage {/*usage*/}
+## Käyttö {/*usage*/}
 
-### Exposing a DOM node to the parent component {/*exposing-a-dom-node-to-the-parent-component*/}
+### DOM noodin välittäminen pääkomponentille {/*exposing-a-dom-node-to-the-parent-component*/}
 
-By default, each component's DOM nodes are private. However, sometimes it's useful to expose a DOM node to the parent--for example, to allow focusing it. To opt in, wrap your component definition into `forwardRef()`:
+Oletuksena jokaisen komponentin DOM noodit ovat yksityisiä. Joskus on kuitenkin hyödyllistä välittää DOM noodi pääkomponentille, esimerkiksi mahdollistaaksesi siihen kohdentamisen. Ottaaksesi tämän käyttöön, kääri komponenttisi `forwardRef()` -funktioon:
 
 ```js {3,11}
 import { forwardRef } from 'react';
@@ -94,7 +94,7 @@ const MyInput = forwardRef(function MyInput(props, ref) {
 });
 ```
 
-You will receive a <CodeStep step={1}>ref</CodeStep> as the second argument after props. Pass it to the DOM node that you want to expose:
+Saat <CodeStep step={1}>ref</CodeStep> -argumentin toisena argumenttina propsien jälkeen. Välitä se DOM noodiin, jonka haluat julkaista:
 
 ```js {8} [[1, 3, "ref"], [1, 8, "ref", 30]]
 import { forwardRef } from 'react';
@@ -110,7 +110,7 @@ const MyInput = forwardRef(function MyInput(props, ref) {
 });
 ```
 
-This lets the parent `Form` component access the <CodeStep step={2}>`<input>` DOM node</CodeStep> exposed by `MyInput`:
+Tämän avulla pääkomponentti `Form` voi käyttää `MyInput` komponentin julkaisemaa <CodeStep step={2}>`<input>` DOM noodia</CodeStep>:
 
 ```js [[1, 2, "ref"], [1, 10, "ref", 41], [2, 5, "ref.current"]]
 function Form() {
@@ -131,15 +131,15 @@ function Form() {
 }
 ```
 
-This `Form` component [passes a ref](/reference/react/useRef#manipulating-the-dom-with-a-ref) to `MyInput`. The `MyInput` component *forwards* that ref to the `<input>` browser tag. As a result, the `Form` component can access that `<input>` DOM node and call [`focus()`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/focus) on it.
+`Form` komponentti [välittää ref:n](/reference/react/useRef#manipulating-the-dom-with-a-ref) `MyInput`:lle. `MyInput` komponentti *välittää* sen ref:n `<input>` selaimen tagille. Tämän seurauksena `Form` komponentti voi käyttää `<input>` DOM noodia ja kutsua [`focus()`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/focus) siihen.
 
-Keep in mind that exposing a ref to the DOM node inside your component makes it harder to change your component's internals later. You will typically expose DOM nodes from reusable low-level components like buttons or text inputs, but you won't do it for application-level components like an avatar or a comment.
+Pidä mielessä, että ref:n julkaiseminen komponenttisi sisällä olevaan DOM noodin tekee sen vaikeammaksi muuttaa komponenttisi sisäistä rakennetta myöhemmin. Yleensä julkaiset DOM noodin ref:n uudelleen käytettävistä matalan tason komponenteista, kuten painikkeista tai tekstisyötteistä, mutta et tee sitä sovellustason komponenteille, kuten avatarille tai kommentille.
 
 <Recipes title="Examples of forwarding a ref">
 
-#### Focusing a text input {/*focusing-a-text-input*/}
+#### Syöttökenttään kohdistaminen {/*focusing-a-text-input*/}
 
-Clicking the button will focus the input. The `Form` component defines a ref and passes it to the `MyInput` component. The `MyInput` component forwards that ref to the browser `<input>`. This lets the `Form` component focus the `<input>`.
+Painiketta painaminen kohdistaa syöttökenttään. `Form` komponentti määrittelee ref:n ja välittää sen `MyInput` komponentille. `MyInput` komponentti välittää sen ref:n selaimen `<input>` tagille. Tämän avulla `Form` komponentti voi kohdistaa `<input>`:in.
 
 <Sandpack>
 
@@ -191,9 +191,9 @@ input {
 
 <Solution />
 
-#### Playing and pausing a video {/*playing-and-pausing-a-video*/}
+#### Videon toistaminen ja tauottaminen {/*playing-and-pausing-a-video*/}
 
-Clicking the button will call [`play()`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement/play) and [`pause()`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement/pause) on a `<video>` DOM node. The `App` component defines a ref and passes it to the `MyVideoPlayer` component. The `MyVideoPlayer` component forwards that ref to the browser `<video>` node. This lets the `App` component play and pause the `<video>`.
+Painikkeen painaminen kutsuu `<video>` DOM noodin [`play()`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement/play) ja [`pause()`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement/pause) metodeja. `App` komponentti määrittää ref:n ja välittää sen `MyVideoPlayer` komponentille. `MyVideoPlayer` komponentti välittää tuon ref:n selaimen `<video>` tagille. Tämän avulla `App` komponentti voi toistaa ja tauottaa `<video>`:n.
 
 <Sandpack>
 
@@ -206,10 +206,10 @@ export default function App() {
   return (
     <>
       <button onClick={() => ref.current.play()}>
-        Play
+        Toista
       </button>
       <button onClick={() => ref.current.pause()}>
-        Pause
+        Tauota
       </button>
       <br />
       <MyVideoPlayer
@@ -252,9 +252,9 @@ button { margin-bottom: 10px; margin-right: 10px; }
 
 ---
 
-### Forwarding a ref through multiple components {/*forwarding-a-ref-through-multiple-components*/}
+### Refin välittäminen useiden komponenttien läpi {/*forwarding-a-ref-through-multiple-components*/}
 
-Instead of forwarding a `ref` to a DOM node, you can forward it to your own component like `MyInput`:
+Sen sijaan, että välittäisit `ref`:n DOM noodille, voit välittää sen omalle komponentillesi kuten `MyInput`:
 
 ```js {1,5}
 const FormField = forwardRef(function FormField(props, ref) {
@@ -268,7 +268,7 @@ const FormField = forwardRef(function FormField(props, ref) {
 });
 ```
 
-If that `MyInput` component forwards a ref to its `<input>`, a ref to `FormField` will give you that `<input>`:
+Jos tämä `MyInput` komponentti välittää ref:n `<input>`:lle, ref `FormField`:lle antaa sinulle tuon `<input>`:in:
 
 ```js {2,5,10}
 function Form() {
@@ -289,7 +289,7 @@ function Form() {
 }
 ```
 
-The `Form` component defines a ref and passes it to `FormField`. The `FormField` component forwards that ref to `MyInput`, which forwards it to a browser `<input>` DOM node. This is how `Form` accesses that DOM node.
+`Form` komponentti määrittää refin ja välittää sen `FormField`:lle. `FormField` komponentti välittää tuon ref:n `MyInput`:lle, joka välittää sen selaimen `<input>` DOM noodille. Tämän avulla `Form` komponentti voi käsitellä tuota DOM noodia.
 
 
 <Sandpack>
@@ -367,9 +367,9 @@ input, button {
 
 ---
 
-### Exposing an imperative handle instead of a DOM node {/*exposing-an-imperative-handle-instead-of-a-dom-node*/}
+### Imperatiivisen käsittelijän julkaiseminen DOM noden sijaan {/*exposing-an-imperative-handle-instead-of-a-dom-node*/}
 
-Instead of exposing an entire DOM node, you can expose a custom object, called an *imperative handle,* with a more constrained set of methods. To do this, you'd need to define a separate ref to hold the DOM node:
+Sen sijaan, että julkistaisit koko DOM noodin, voit julkistaa räätälöidyn olion, jota kutsutaan *imperatiiviseksi käsittelijäksi*, jolla on suppeampi joukko metodeja. Tämän toteuttamiseksi, sinun täytyy määrittää erillinen ref, joka pitää sisällään DOM noodin:
 
 ```js {2,6}
 const MyInput = forwardRef(function MyInput(props, ref) {
@@ -381,7 +381,7 @@ const MyInput = forwardRef(function MyInput(props, ref) {
 });
 ```
 
-Pass the `ref` you received to [`useImperativeHandle`](/reference/react/useImperativeHandle) and specify the value you want to expose to the `ref`:
+Välitä vastaanottamasi `ref` [`useImperativeHandle`:lle](/reference/react/useImperativeHandle) ja määritä arvo, jonka haluat julkistaa `ref`:lle:
 
 ```js {6-15}
 import { forwardRef, useRef, useImperativeHandle } from 'react';
@@ -404,7 +404,7 @@ const MyInput = forwardRef(function MyInput(props, ref) {
 });
 ```
 
-If some component gets a ref to `MyInput`, it will only receive your `{ focus, scrollIntoView }` object instead of the DOM node. This lets you limit the information you expose about your DOM node to the minimum.
+Jos jokin komponentti saa refin `MyInput`:lle, saa se vain `{ focus, scrollIntoView }` olion koko DOM noodin sijaan. Tämän avulla voit rajoittaa DOM noodista julkistettavan informaation minimiin.
 
 <Sandpack>
 
@@ -417,7 +417,7 @@ export default function Form() {
 
   function handleClick() {
     ref.current.focus();
-    // This won't work because the DOM node isn't exposed:
+    // Tämä ei toimi, koska DOM noodi ei ole julkistettu:
     // ref.current.style.opacity = 0.5;
   }
 
@@ -463,25 +463,25 @@ input {
 
 </Sandpack>
 
-[Read more about using imperative handles.](/reference/react/useImperativeHandle)
+[Lue lisää imperatiivisista käsittelijöistä.](/reference/react/useImperativeHandle)
 
 <Pitfall>
 
-**Do not overuse refs.** You should only use refs for *imperative* behaviors that you can't express as props: for example, scrolling to a node, focusing a node, triggering an animation, selecting text, and so on.
+**Älä käytä ref:iä liikaa.** Sinun tulisi käyttää ref:iä vain *imperatiivisiin* toimintoihin, joita et voi ilmaista propseina: esimerkiksi nodeen vierittäminen, noden kohdistaminen, animaation käynnistäminen, tekstin valitseminen jne.
 
-**If you can express something as a prop, you should not use a ref.** For example, instead of exposing an imperative handle like `{ open, close }` from a `Modal` component, it is better to take `isOpen` as a prop like `<Modal isOpen={isOpen} />`. [Effects](/learn/synchronizing-with-effects) can help you expose imperative behaviors via props.
+**Jos voit ilmaista jotain propseina, sinun ei tulisi käyttää ref:iä.** Esimerkiksi sen sijaan, että julkistaisit `Modal` komponentista *imperatiivisen käsittelijän* kuten `{ open, close }`, on parempi ottaa `isOpen` propsi kuten `<Modal isOpen={isOpen} />`. [Effectit](/learn/synchronizing-with-effects) voivat auttaa sinua julkistamaan imperatiivisia toimintoja propseina.
 
 </Pitfall>
 
 ---
 
-## Troubleshooting {/*troubleshooting*/}
+## Vianmääritys {/*troubleshooting*/}
 
-### My component is wrapped in `forwardRef`, but the `ref` to it is always `null` {/*my-component-is-wrapped-in-forwardref-but-the-ref-to-it-is-always-null*/}
+### Komponenttini on kääritty `forwardRef`:iin, mutta `ref` siihen on aina `null` {/*my-component-is-wrapped-in-forwardref-but-the-ref-to-it-is-always-null*/}
 
-This usually means that you forgot to actually use the `ref` that you received.
+Usein tämä tarkoittaa, että unohdit käyttää `ref`:iä, jonka sait.
 
-For example, this component doesn't do anything with its `ref`:
+Esimerkiksi, tämä komponentti ei tee mitään sen `ref`:llä:
 
 ```js {1}
 const MyInput = forwardRef(function MyInput({ label }, ref) {
@@ -494,7 +494,7 @@ const MyInput = forwardRef(function MyInput({ label }, ref) {
 });
 ```
 
-To fix it, pass the `ref` down to a DOM node or another component that can accept a ref:
+Korjataksesi tämän, välitä `ref` DOM noodille tai toiselle komponentille, joka voi vastaanottaa ref:n:
 
 ```js {1,5}
 const MyInput = forwardRef(function MyInput({ label }, ref) {
@@ -507,7 +507,7 @@ const MyInput = forwardRef(function MyInput({ label }, ref) {
 });
 ```
 
-The `ref` to `MyInput` could also be `null` if some of the logic is conditional:
+`ref` `MyInput`:lle voi olla myös `null`, jos osa logiikasta on ehdollista:
 
 ```js {1,5}
 const MyInput = forwardRef(function MyInput({ label, showInput }, ref) {
@@ -520,7 +520,7 @@ const MyInput = forwardRef(function MyInput({ label, showInput }, ref) {
 });
 ```
 
-If `showInput` is `false`, then the ref won't be forwarded to any node, and a ref to `MyInput` will remain empty. This is particularly easy to miss if the condition is hidden inside another component, like `Panel` in this example:
+Jos `showInput` on `false`, ref:iä ei välitetä millekään nodille, ja ref `MyInput`:lle pysyy tyhjänä. Tämä on erityisen helppo jättää huomaamatta, jos ehto on piilotettu toisen komponentin sisälle, kuten `Panel` tässä esimerkissä:
 
 ```js {5,7}
 const MyInput = forwardRef(function MyInput({ label, showInput }, ref) {
