@@ -52,7 +52,11 @@ img { margin: 0 10px 10px 0; height: 90px; }
 
 </Sandpack>
 
+<<<<<<< HEAD
 Tässä esimerkissä nämä löytyvät **juurikomponenttitiedostosta** nimeltään `App.js`. [Create React App](https://create-react-app.dev/):ssa sovelluksesi elää `src/App.js` tiedostossa. Riippuen asennuksestasi, juurikomponenttisi saattaa olla toisessa tiedostossa. Jos käytät ohkelmistokehystä, jossa on tiedostopohjainen reititys, kuten Next.js, juurikomponenttisi on eri jokaiselle sivulle.
+=======
+These currently live in a **root component file,** named `App.js` in this example. Depending on your setup, your root component could be in another file, though. If you use a framework with file-based routing, such as Next.js, your root component will be different for every page.
+>>>>>>> 842c24c9aefaa60b7ae9b46b002bd1b3cf4d31f3
 
 ## Komponentin exporttaus ja importtaus {/*exporting-and-importing-a-component*/}
 

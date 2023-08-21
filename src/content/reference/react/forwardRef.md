@@ -135,7 +135,7 @@ function Form() {
 
 Pidä mielessä, että ref:n julkaiseminen komponenttisi sisällä olevaan DOM noodin tekee sen vaikeammaksi muuttaa komponenttisi sisäistä rakennetta myöhemmin. Yleensä julkaiset DOM noodin ref:n uudelleen käytettävistä matalan tason komponenteista, kuten painikkeista tai tekstisyötteistä, mutta et tee sitä sovellustason komponenteille, kuten avatarille tai kommentille.
 
-<Recipes title="Examples of forwarding a ref">
+<Recipes titleText="Examples of forwarding a ref">
 
 #### Syöttökenttään kohdistaminen {/*focusing-a-text-input*/}
 
