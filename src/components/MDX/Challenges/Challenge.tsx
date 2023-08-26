@@ -69,6 +69,7 @@ export function Challenge({
               className="me-2"
               onClick={toggleSolution}
               active={showSolution}>
+              {' '}
               <IconSolution className="me-1.5" />{' '}
               {showSolution ? 'Piilota ratkaisu' : 'Näytä ratkaisu'}
             </Button>
