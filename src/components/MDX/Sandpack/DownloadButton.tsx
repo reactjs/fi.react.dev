@@ -2,8 +2,8 @@
  * Copyright (c) Facebook, Inc. and its affiliates.
  */
 
-import {useSyncExternalStore} from 'react';
 import {useSandpack} from '@codesandbox/sandpack-react';
+import {useSyncExternalStore} from 'react';
 import {IconDownload} from '../../Icon/IconDownload';
 export interface DownloadButtonProps {}
 
@@ -103,11 +103,7 @@ ${css}
       onClick={downloadHTML}
       title="Lataa hiekkalaatikko"
       type="button">
-<<<<<<< HEAD
-      <IconDownload className="inline mr-1" /> Lataa
-=======
-      <IconDownload className="inline me-1" /> Download
->>>>>>> 842c24c9aefaa60b7ae9b46b002bd1b3cf4d31f3
+      <IconDownload className="inline me-1" /> Lataa
     </button>
   );
 }

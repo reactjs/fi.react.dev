@@ -2,15 +2,15 @@
  * Copyright (c) Facebook, Inc. and its affiliates.
  */
 
-import * as React from 'react';
 import cn from 'classnames';
-import {IconChevron} from '../Icon/IconChevron';
-import {IconDeepDive} from '../Icon/IconDeepDive';
-import {IconCodeBlock} from '../Icon/IconCodeBlock';
-import {Button} from '../Button';
-import {H4} from './Heading';
 import {useRouter} from 'next/router';
+import * as React from 'react';
 import {useEffect, useRef, useState} from 'react';
+import {Button} from '../Button';
+import {IconChevron} from '../Icon/IconChevron';
+import {IconCodeBlock} from '../Icon/IconCodeBlock';
+import {IconDeepDive} from '../Icon/IconDeepDive';
+import {H4} from './Heading';
 
 interface ExpandableExampleProps {
   children: React.ReactNode;
@@ -70,24 +70,14 @@ function ExpandableExample({children, excerpt, type}: ExpandableExampleProps) {
           })}>
           {isDeepDive && (
             <>
-<<<<<<< HEAD
-              <IconDeepDive className="inline mr-2 dark:text-purple-30 text-purple-40" />
-              Syväsukellus
-=======
               <IconDeepDive className="inline me-2 dark:text-purple-30 text-purple-40" />
-              Deep Dive
->>>>>>> 842c24c9aefaa60b7ae9b46b002bd1b3cf4d31f3
+              Syväsukellus
             </>
           )}
           {isExample && (
             <>
-<<<<<<< HEAD
-              <IconCodeBlock className="inline mr-2 dark:text-yellow-30 text-yellow-50" />
-              Esimerkki
-=======
               <IconCodeBlock className="inline me-2 dark:text-yellow-30 text-yellow-50" />
-              Example
->>>>>>> 842c24c9aefaa60b7ae9b46b002bd1b3cf4d31f3
+              Esimerkki
             </>
           )}
         </h5>

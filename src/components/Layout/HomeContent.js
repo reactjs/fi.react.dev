@@ -2,30 +2,30 @@
  * Copyright (c) Facebook, Inc. and its affiliates.
  */
 
-import {
-  createContext,
-  memo,
-  useState,
-  useContext,
-  useId,
-  Suspense,
-  useEffect,
-  useRef,
-  useTransition,
-} from 'react';
 import cn from 'classnames';
 import NextLink from 'next/link';
+import {
+  Suspense,
+  createContext,
+  memo,
+  useContext,
+  useEffect,
+  useId,
+  useRef,
+  useState,
+  useTransition,
+} from 'react';
 
-import ButtonLink from '../ButtonLink';
-import {IconRestart} from '../Icon/IconRestart';
-import BlogCard from 'components/MDX/BlogCard';
+import {ExternalLink} from 'components/ExternalLink';
 import {IconChevron} from 'components/Icon/IconChevron';
 import {IconSearch} from 'components/Icon/IconSearch';
 import {Logo} from 'components/Logo';
-import Link from 'components/MDX/Link';
+import BlogCard from 'components/MDX/BlogCard';
 import CodeBlock from 'components/MDX/CodeBlock';
-import {ExternalLink} from 'components/ExternalLink';
+import Link from 'components/MDX/Link';
 import sidebarBlog from '../../sidebarBlog.json';
+import ButtonLink from '../ButtonLink';
+import {IconRestart} from '../Icon/IconRestart';
 
 function Section({children, background = null}) {
   return (
@@ -383,20 +383,12 @@ export function HomeContent() {
                           </Link>{' '}
                           ja{' '}
                           <Link href="https://github.com/expo/expo">Expo</Link>{' '}
-<<<<<<< HEAD
                           antavat sinun rakentaa sovelluksia Reactilla
-                          Androidille, iOS:lle, ja enemmän. Ne näyttävät ja
+                          Androidille, iOS:lle, ja muille. Ne näyttävät ja
                           tuntuvat aidolta, koska niiden UI:t <i>ovat</i> täysin
-                          natiiveja. Ne eivät ole web view elementtejä,
-                          komponenttisi renderöi oikeita Android ja iOS ruutuja,
-                          jotka alusta tarjoaa.
-=======
-                          let you build apps in React for Android, iOS, and
-                          more. They look and feel native because their UIs{' '}
-                          <i>are</i> truly native. It’s not a web view—your
-                          React components render real Android and iOS views
-                          provided by the platform.
->>>>>>> 842c24c9aefaa60b7ae9b46b002bd1b3cf4d31f3
+                          natiiveja. Ne eivät ole web-view elementtejä,
+                          komponenttisi renderöi oikeita alustan tarjoamia
+                          Android ja iOS ruutuja.
                         </p>
                       </div>
                     </div>
@@ -424,13 +416,8 @@ export function HomeContent() {
         <Section background="right-card">
           <div className="max-w-7xl mx-auto flex flex-col lg:flex-row px-5">
             <div className="max-w-3xl lg:max-w-7xl gap-5 flex flex-col lg:flex-row lg:px-5">
-<<<<<<< HEAD
-              <div className="w-full lg:w-6/12 max-w-3xl flex flex-col items-start justify-start lg:pl-5 lg:pr-10">
-                <Header>Päivitä kun tulevaisuus on valmis</Header>
-=======
               <div className="w-full lg:w-6/12 max-w-3xl flex flex-col items-start justify-start lg:ps-5 lg:pe-10">
-                <Header>Upgrade when the future is ready</Header>
->>>>>>> 842c24c9aefaa60b7ae9b46b002bd1b3cf4d31f3
+                <Header>Päivitä kun tulevaisuus on valmis</Header>
                 <Para>
                   React lähestyy muutoksia huolella. Jokainen React commit
                   testataan bisneskriittisillä pinnoilla, yli miljardin
@@ -515,13 +502,8 @@ export function HomeContent() {
           <div className="mt-20 px-5 lg:px-0 mb-6 max-w-4xl text-center text-opacity-80">
             <Logo className="text-link dark:text-link-dark w-24 lg:w-28 mb-10 lg:mb-8 mt-12 h-auto mx-auto self-start" />
             <Header>
-<<<<<<< HEAD
-              Tervetuloa React <br className="" />
+              Tervetuloa React <br className="hidden lg:inline" />
               yhteisöön
-=======
-              Welcome to the <br className="hidden lg:inline" />
-              React community
->>>>>>> 842c24c9aefaa60b7ae9b46b002bd1b3cf4d31f3
             </Header>
             <ButtonLink
               href={'/learn'}
@@ -1499,13 +1481,8 @@ function SearchInput({value, onChange}) {
         <input
           type="text"
           id={id}
-<<<<<<< HEAD
-          className="flex pl-11 py-4 h-10 w-full bg-secondary-button outline-none betterhover:hover:bg-opacity-80 pointer items-center text-left text-primary rounded-full align-middle text-base"
-          placeholder="Haku"
-=======
           className="flex ps-11 py-4 h-10 w-full text-start bg-secondary-button outline-none betterhover:hover:bg-opacity-80 pointer items-center text-primary rounded-full align-middle text-base"
-          placeholder="Search"
->>>>>>> 842c24c9aefaa60b7ae9b46b002bd1b3cf4d31f3
+          placeholder="Haku"
           value={value}
           onChange={(e) => onChange(e.target.value)}
         />
