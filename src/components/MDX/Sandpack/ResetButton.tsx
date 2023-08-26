@@ -2,7 +2,6 @@
  * Copyright (c) Facebook, Inc. and its affiliates.
  */
 
-import * as React from 'react';
 import {IconRestart} from '../../Icon/IconRestart';
 export interface ResetButtonProps {
   onReset: () => void;
@@ -15,7 +14,7 @@ export function ResetButton({onReset}: ResetButtonProps) {
       onClick={onReset}
       title="Palauta hiekkalaatikko"
       type="button">
-      <IconRestart className="inline ml-1 mr-1 relative" /> Palauta
+      <IconRestart className="inline ms-1 me-1 relative" /> Palauta
     </button>
   );
 }

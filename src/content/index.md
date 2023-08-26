@@ -1,6 +1,6 @@
 ---
 id: home
-title: React – Kirjasto web- ja natiivikäyttöliittymille
+title: React
 permalink: index.html
 ---
 

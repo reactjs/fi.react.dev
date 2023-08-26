@@ -211,7 +211,7 @@ Kun alakomponentti tarvitsee jotain dataa, [välitä se propsien kautta](/learn/
 
 #### Komponentteja loppuun asti {/*components-all-the-way-down*/}
 
-React sovelluksesi alkaa "juurikomponentista". Useimmiten se luodaan automaattisesti kun aloitat uuden projektin. Esimerkiksi, jos käytät [CodeSandbox](https://codesandbox.io/):ia tai [Create React App](https://create-react-app.dev/):ia, juurikomponentti määritellään `src/App.js` tiedostossa. Jos käytät [Next.js](https://nextjs.org/) ohjelmistokehystä, juurikomponentti on määritelty `pages/index.js` tiedostossa. Näissä esimerkissä olet exportannut juurikomponentteja.
+React sovelluksesi alkaa "juurikomponentista". Useimmiten se luodaan automaattisesti kun aloitat uuden projektin. Esimerkiksi, jos käytät [CodeSandbox](https://codesandbox.io/):ia tai jos käytät [Next.js](https://nextjs.org/) ohjelmistokehystä, juurikomponentti on määritelty `pages/index.js` tiedostossa. Näissä esimerkissä olet exportannut juurikomponentteja.
 
 Useimmat React sovellukset käyttävät komponentteja loppuun asti. Tämä tarkoittaa, että et ainoastaan käytä komponentteja uudelleenkäytettäviin palasiin kuten painikkeisiin, mutta myös suurempiin paloihin kuten sivuplakkeihin, listoihin ja lopulta kokonaisiin sivuihin! Komponentit ovat näppärä tapa järjestää merkintä- ja UI-koodia vaikka joitain käytettäisiin vain kerran.
 

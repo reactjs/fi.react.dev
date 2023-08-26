@@ -2,15 +2,15 @@
  * Copyright (c) Facebook, Inc. and its affiliates.
  */
 
-import * as React from 'react';
 import cn from 'classnames';
-import {IconChevron} from '../Icon/IconChevron';
-import {IconDeepDive} from '../Icon/IconDeepDive';
-import {IconCodeBlock} from '../Icon/IconCodeBlock';
-import {Button} from '../Button';
-import {H4} from './Heading';
 import {useRouter} from 'next/router';
+import * as React from 'react';
 import {useEffect, useRef, useState} from 'react';
+import {Button} from '../Button';
+import {IconChevron} from '../Icon/IconChevron';
+import {IconCodeBlock} from '../Icon/IconCodeBlock';
+import {IconDeepDive} from '../Icon/IconDeepDive';
+import {H4} from './Heading';
 
 interface ExpandableExampleProps {
   children: React.ReactNode;
@@ -70,13 +70,13 @@ function ExpandableExample({children, excerpt, type}: ExpandableExampleProps) {
           })}>
           {isDeepDive && (
             <>
-              <IconDeepDive className="inline mr-2 dark:text-purple-30 text-purple-40" />
+              <IconDeepDive className="inline me-2 dark:text-purple-30 text-purple-40" />
               Syväsukellus
             </>
           )}
           {isExample && (
             <>
-              <IconCodeBlock className="inline mr-2 dark:text-yellow-30 text-yellow-50" />
+              <IconCodeBlock className="inline me-2 dark:text-yellow-30 text-yellow-50" />
               Esimerkki
             </>
           )}
@@ -98,7 +98,7 @@ function ExpandableExample({children, excerpt, type}: ExpandableExampleProps) {
               isExample,
           })}
           onClick={() => setIsExpanded((current) => !current)}>
-          <span className="mr-1">
+          <span className="me-1">
             <IconChevron displayDirection={isExpanded ? 'up' : 'down'} />
           </span>
           {isExpanded ? 'Piilota' : 'Näytä'}

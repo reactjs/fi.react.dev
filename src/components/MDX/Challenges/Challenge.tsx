@@ -2,14 +2,14 @@
  * Copyright (c) Facebook, Inc. and its affiliates.
  */
 
-import {useState} from 'react';
 import cn from 'classnames';
 import {Button} from 'components/Button';
-import {ChallengeContents} from './Challenges';
+import {useState} from 'react';
+import {IconArrowSmall} from '../../Icon/IconArrowSmall';
 import {IconHint} from '../../Icon/IconHint';
 import {IconSolution} from '../../Icon/IconSolution';
-import {IconArrowSmall} from '../../Icon/IconArrowSmall';
 import {H4} from '../Heading';
+import {ChallengeContents} from './Challenges';
 
 interface ChallengeProps {
   isRecipes?: boolean;
@@ -61,25 +61,25 @@ export function Challenge({
       <div className="flex justify-between items-center mt-4">
         {currentChallenge.hint ? (
           <div>
-            <Button className="mr-2" onClick={toggleHint} active={showHint}>
-              <IconHint className="mr-1.5" />{' '}
+            <Button className="me-2" onClick={toggleHint} active={showHint}>
+              <IconHint className="me-1.5" />{' '}
               {showHint ? 'Piilota vihje' : 'Näytä vihje'}
             </Button>
             <Button
-              className="mr-2"
+              className="me-2"
               onClick={toggleSolution}
               active={showSolution}>
-              <IconSolution className="mr-1.5" />{' '}
+              <IconSolution className="me-1.5" />{' '}
               {showSolution ? 'Piilota ratkaisu' : 'Näytä ratkaisu'}
             </Button>
           </div>
         ) : (
           !isRecipes && (
             <Button
-              className="mr-2"
+              className="me-2"
               onClick={toggleSolution}
               active={showSolution}>
-              <IconSolution className="mr-1.5" />{' '}
+              <IconSolution className="me-1.5" />{' '}
               {showSolution ? 'Piilota ratkaisu' : 'Näytä ratkaisu'}
             </Button>
           )
@@ -95,7 +95,7 @@ export function Challenge({
             onClick={handleClickNextChallenge}
             active>
             Seuraava {isRecipes ? 'esimerkki' : 'haaste'}
-            <IconArrowSmall displayDirection="right" className="block ml-1.5" />
+            <IconArrowSmall displayDirection="end" className="block ms-1.5" />
           </Button>
         )}
       </div>
@@ -120,8 +120,8 @@ export function Challenge({
                 active>
                 Seuraava haaste
                 <IconArrowSmall
-                  displayDirection="right"
-                  className="block ml-1.5"
+                  displayDirection="end"
+                  className="block ms-1.5"
                 />
               </Button>
             )}
