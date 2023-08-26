@@ -1438,7 +1438,7 @@ Olisi kiva jos olisi tapa kertoa Reactille että kun `savedContact.id` on eri, `
 
 <Solution>
 
-Jaa `EditContact` komponentti kahteen. Siirrä kaikki lomakkeen tila sisäiseen `EditForm` komponenttiin. Vie ulompi `EditContact` komponentti ja välittää `savedContact.id` sisäiselle `EditContact` komponentille `key` propsina. Tämän seurauksena sisäinen `EditForm` komponentti nollaa koko lomakkeen tilan ja luo uuden DOMin aina kun valitset eri yhteystiedon.
+Jaa `EditContact` komponentti kahteen. Siirrä kaikki lomakkeen tila sisäiseen `EditForm` komponenttiin. Vie ulompi `EditContact` komponentti ja välittää `savedContact.id` sisäiselle `EditForm` komponentille `key` propsina. Tämän seurauksena sisäinen `EditForm` komponentti nollaa koko lomakkeen tilan ja luo uuden DOMin aina kun valitset eri yhteystiedon.
 
 <Sandpack>
 
