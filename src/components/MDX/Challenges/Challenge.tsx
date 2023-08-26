@@ -2,14 +2,14 @@
  * Copyright (c) Facebook, Inc. and its affiliates.
  */
 
-import {useState} from 'react';
 import cn from 'classnames';
 import {Button} from 'components/Button';
-import {ChallengeContents} from './Challenges';
+import {useState} from 'react';
+import {IconArrowSmall} from '../../Icon/IconArrowSmall';
 import {IconHint} from '../../Icon/IconHint';
 import {IconSolution} from '../../Icon/IconSolution';
-import {IconArrowSmall} from '../../Icon/IconArrowSmall';
 import {H4} from '../Heading';
+import {ChallengeContents} from './Challenges';
 
 interface ChallengeProps {
   isRecipes?: boolean;
@@ -61,27 +61,16 @@ export function Challenge({
       <div className="flex justify-between items-center mt-4">
         {currentChallenge.hint ? (
           <div>
-<<<<<<< HEAD
-            <Button className="mr-2" onClick={toggleHint} active={showHint}>
-              <IconHint className="mr-1.5" />{' '}
-              {showHint ? 'Piilota vihje' : 'Näytä vihje'}
-=======
             <Button className="me-2" onClick={toggleHint} active={showHint}>
               <IconHint className="me-1.5" />{' '}
-              {showHint ? 'Hide hint' : 'Show hint'}
->>>>>>> 819518cfe32dd2db3b765410247c30feea713c77
+              {showHint ? 'Piilota vihje' : 'Näytä vihje'}
             </Button>
             <Button
               className="me-2"
               onClick={toggleSolution}
               active={showSolution}>
-<<<<<<< HEAD
-              <IconSolution className="mr-1.5" />{' '}
-              {showSolution ? 'Piilota ratkaisu' : 'Näytä ratkaisu'}
-=======
               <IconSolution className="me-1.5" />{' '}
-              {showSolution ? 'Hide solution' : 'Show solution'}
->>>>>>> 819518cfe32dd2db3b765410247c30feea713c77
+              {showSolution ? 'Piilota ratkaisu' : 'Näytä ratkaisu'}
             </Button>
           </div>
         ) : (
@@ -90,13 +79,8 @@ export function Challenge({
               className="me-2"
               onClick={toggleSolution}
               active={showSolution}>
-<<<<<<< HEAD
-              <IconSolution className="mr-1.5" />{' '}
-              {showSolution ? 'Piilota ratkaisu' : 'Näytä ratkaisu'}
-=======
               <IconSolution className="me-1.5" />{' '}
-              {showSolution ? 'Hide solution' : 'Show solution'}
->>>>>>> 819518cfe32dd2db3b765410247c30feea713c77
+              {showSolution ? 'Piilota ratkaisu' : 'Näytä ratkaisu'}
             </Button>
           )
         )}
@@ -110,13 +94,8 @@ export function Challenge({
             )}
             onClick={handleClickNextChallenge}
             active>
-<<<<<<< HEAD
             Seuraava {isRecipes ? 'esimerkki' : 'haaste'}
-            <IconArrowSmall displayDirection="right" className="block ml-1.5" />
-=======
-            Next {isRecipes ? 'Example' : 'Challenge'}
             <IconArrowSmall displayDirection="end" className="block ms-1.5" />
->>>>>>> 819518cfe32dd2db3b765410247c30feea713c77
           </Button>
         )}
       </div>

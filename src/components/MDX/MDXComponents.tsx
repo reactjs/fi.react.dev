@@ -2,34 +2,34 @@
  * Copyright (c) Facebook, Inc. and its affiliates.
  */
 
-import {Children, useContext, useMemo} from 'react';
-import * as React from 'react';
 import cn from 'classnames';
+import * as React from 'react';
+import {Children, useContext, useMemo} from 'react';
 
+import ButtonLink from 'components/ButtonLink';
+import {IconNavArrow} from '../Icon/IconNavArrow';
+import BlogCard from './BlogCard';
+import {Challenges, Hint, Solution} from './Challenges';
 import CodeBlock from './CodeBlock';
 import {CodeDiagram} from './CodeDiagram';
 import ConsoleBlock from './ConsoleBlock';
+import Diagram from './Diagram';
+import DiagramGroup from './DiagramGroup';
 import ExpandableCallout from './ExpandableCallout';
 import ExpandableExample from './ExpandableExample';
 import {H1, H2, H3, H4} from './Heading';
 import InlineCode from './InlineCode';
 import Intro from './Intro';
-import BlogCard from './BlogCard';
 import Link from './Link';
 import {PackageImport} from './PackageImport';
 import Recap from './Recap';
 import Sandpack from './Sandpack';
-import Diagram from './Diagram';
-import DiagramGroup from './DiagramGroup';
 import SimpleCallout from './SimpleCallout';
-import TerminalBlock from './TerminalBlock';
-import YouWillLearnCard from './YouWillLearnCard';
-import {Challenges, Hint, Solution} from './Challenges';
-import {IconNavArrow} from '../Icon/IconNavArrow';
-import ButtonLink from 'components/ButtonLink';
-import {TocContext} from './TocContext';
-import type {Toc, TocItem} from './TocContext';
 import {TeamMember} from './TeamMember';
+import TerminalBlock from './TerminalBlock';
+import type {Toc, TocItem} from './TocContext';
+import {TocContext} from './TocContext';
+import YouWillLearnCard from './YouWillLearnCard';
 
 function CodeStep({children, step}: {children: any; step: number}) {
   return (
@@ -126,13 +126,8 @@ function LearnMore({
               label="Lue lisää"
               href={path}
               type="primary">
-<<<<<<< HEAD
               Lue lisää
-              <IconNavArrow displayDirection="right" className="inline ml-1" />
-=======
-              Read More
               <IconNavArrow displayDirection="end" className="inline ms-1" />
->>>>>>> 819518cfe32dd2db3b765410247c30feea713c77
             </ButtonLink>
           ) : null}
         </div>
