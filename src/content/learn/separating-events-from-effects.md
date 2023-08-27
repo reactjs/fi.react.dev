@@ -1,37 +1,37 @@
 ---
-title: 'Separating Events from Effects'
+title: 'Tapahtumien erottaminen Efekteista'
 ---
 
 <Intro>
 
-Event handlers only re-run when you perform the same interaction again. Unlike event handlers, Effects re-synchronize if some value they read, like a prop or a state variable, is different from what it was during the last render. Sometimes, you also want a mix of both behaviors: an Effect that re-runs in response to some values but not others. This page will teach you how to do that.
+Tapahtumakäsittelijät suoritetaan uudelleen ainoastaan kun suoritat saman vuorovaikutuksen uudelleen. Toisin kuin tapahtumakäsittelijät, Efektit synkronoituvat jos jokin arvo jota ne luki, kuten propsi tai tilamuuttuja, on muuttunut viimeisestä renderöinnistä. Joskus haluat myös sekoituksen molemmista käyttäytymisistä: Efekti joka suoritetaan uudelleen vastauksena joihinkin arvoihin mutta ei toisiin. Tällä sivulla opit miten se tehdään.
 
 </Intro>
 
 <YouWillLearn>
 
-- How to choose between an event handler and an Effect
-- Why Effects are reactive, and event handlers are not
-- What to do when you want a part of your Effect's code to not be reactive
-- What Effect Events are, and how to extract them from your Effects
-- How to read the latest props and state from Effects using Effect Events
+- Miten valita tapahtumakäsittelijän ja Efektin välillä
+- Miksi Efektit ovat reaktiivisia ja tapahtumakäsittelijät eivät
+- Mitä tehdä kun haluat osan Efektin koodista ei reaktiivisen
+- Mitä Efekektitapahtumat ovat ja miten erottaa ne Efekteistä
+- Miten lukea viimeisin propsin ja tilan arvo Efekteistä käyttäen Efektitapahtumia
 
 </YouWillLearn>
 
-## Choosing between event handlers and Effects {/*choosing-between-event-handlers-and-effects*/}
+## Valinta tapahtumankäsittelijöiden ja Efektien välillä {/*choosing-between-event-handlers-and-effects*/}
 
-First, let's recap the difference between event handlers and Effects.
+Ensiksi kertaus tapahtumankäsittelijöiden ja Efektien välillä.
 
-Imagine you're implementing a chat room component. Your requirements look like this:
+Kuvittele, että olet toteuttamassa chat-huoneen komponenttia. Vaatimuksesi näyttävät tältä:
 
-1. Your component should automatically connect to the selected chat room.
-1. When you click the "Send" button, it should send a message to the chat.
+1. Komponenttisi tulisi automaattisesti yhdistää valittuun chat-huoneeseen.
+2. Kun painat "Lähetä" painiketta, sen tulisi lähettää viesti chattiin.
 
-Let's say you've already implemented the code for them, but you're not sure where to put it. Should you use event handlers or Effects? Every time you need to answer this question, consider [*why* the code needs to run.](/learn/synchronizing-with-effects#what-are-effects-and-how-are-they-different-from-events)
+Sanotaan, että olet jo toteuttanut koodin niille, mutta et ole varma minne laittaa sen. Pitäisikö sinun käyttää tapahtumankäsittelijöitä vai Efektejä? Joka kerta kun sinun täytyy vastata tähän kysymykseen, harkitse [*miksi* koodi täytyy suorittaa.](/learn/synchronizing-with-effects#what-are-effects-and-how-are-they-different-from-events)
 
-### Event handlers run in response to specific interactions {/*event-handlers-run-in-response-to-specific-interactions*/}
+### Tapahtumankäsittelijät suoritetaan vastauksena tiettyihin vuorovaikutuksiin {/*event-handlers-run-in-response-to-specific-interactions*/}
 
-From the user's perspective, sending a message should happen *because* the particular "Send" button was clicked. The user will get rather upset if you send their message at any other time or for any other reason. This is why sending a message should be an event handler. Event handlers let you handle specific interactions:
+Käyttäjän näkökulmasta, viestin lähettäminen tapahtuu *koska* tietty "Lähetä" painike painettiin. Käyttäjä suuttuu jos lähetät heidän viestinsä mihin tahansa muuhun aikaan tai mistä tahansa muusta syystä. Tämän takia viestin lähettäminen tulisi olla tapahtumankäsittelijä. Tapahtumankäsittelijät antavat sinun käsitellä tiettyjä vuorovaikutuksia:
 
 ```js {4-6}
 function ChatRoom({ roomId }) {
@@ -44,19 +44,19 @@ function ChatRoom({ roomId }) {
   return (
     <>
       <input value={message} onChange={e => setMessage(e.target.value)} />
-      <button onClick={handleSendClick}>Send</button>;
+      <button onClick={handleSendClick}>Lähetä</button>;
     </>
   );
 }
 ```
 
-With an event handler, you can be sure that `sendMessage(message)` will *only* run if the user presses the button.
+Tapahtumankäsittelijällä voit olla varma, että `sendMessage(message)` suoritetaan *vain* jos käyttäjä painaa painiketta.
 
-### Effects run whenever synchronization is needed {/*effects-run-whenever-synchronization-is-needed*/}
+### Efektit suoritetaan kun synkronointi on tarpeen {/*effects-run-whenever-synchronization-is-needed*/}
 
-Recall that you also need to keep the component connected to the chat room. Where does that code go?
+Muista, että sinun täytyy myös pitää komponentti yhdistettynä chat-huoneeseen. Mihin se koodi laitetaan?
 
-The *reason* to run this code is not some particular interaction. It doesn't matter why or how the user navigated to the chat room screen. Now that they're looking at it and could interact with it, the component needs to stay connected to the selected chat server. Even if the chat room component was the initial screen of your app, and the user has not performed any interactions at all, you would *still* need to connect. This is why it's an Effect:
+Mikään tietty vuorovaikutus ei ole *syy* miksi tämä koodi suoritetaan. Sillä ei ole väliä miten tai miksi käyttäjä siirtyi chat-huone -sivulle. Nyt kun ne katsovat sitä ja voivat olla vuorovaikutuksessa sen kanssa, komponentin täytyy pysyä yhteydessä valittuun chat-palvelimeen. Vaikka chat-huone komponenetti olisi sovelluksen aloitusruutu, ja käyttäjä ei ole suorittanut mitään vuorovaikutuksia, sinun täytyy *silti* yhdistää. Tämän takia se on Efekti:
 
 ```js {3-9}
 function ChatRoom({ roomId }) {
@@ -72,7 +72,7 @@ function ChatRoom({ roomId }) {
 }
 ```
 
-With this code, you can be sure that there is always an active connection to the currently selected chat server, *regardless* of the specific interactions performed by the user. Whether the user has only opened your app, selected a different room, or navigated to another screen and back, your Effect ensures that the component will *remain synchronized* with the currently selected room, and will [re-connect whenever it's necessary.](/learn/lifecycle-of-reactive-effects#why-synchronization-may-need-to-happen-more-than-once)
+Tällä koodilla, voit olla varma että on aina aktiivinen yhteys valittuun chat-palvelimeen, *riippumatta* käyttäjän suorittamista vuorovaikutuksista. Olipa käyttäjä vain avannut sovelluksesi, valinnut eri huoneen, tai navigoinut toiselle sivulle ja takaisin, Efektisi varmistaa että komponentti *pysyy synkronoituna* valittuun huoneeseen, ja [yhdistää uudelleen aina kun se on tarpeen.](/learn/lifecycle-of-reactive-effects#why-synchronization-may-need-to-happen-more-than-once)
 
 <Sandpack>
 
@@ -99,7 +99,7 @@ function ChatRoom({ roomId }) {
     <>
       <h1>Welcome to the {roomId} room!</h1>
       <input value={message} onChange={e => setMessage(e.target.value)} />
-      <button onClick={handleSendClick}>Send</button>
+      <button onClick={handleSendClick}>Lähetä</button>
     </>
   );
 }
@@ -136,7 +136,7 @@ export function sendMessage(message) {
 }
 
 export function createConnection(serverUrl, roomId) {
-  // A real implementation would actually connect to the server
+  // Todellinen toteutus yhdistäisi palvelimeen oikeasti
   return {
     connect() {
       console.log('✅ Connecting to "' + roomId + '" room at ' + serverUrl + '...');
@@ -154,13 +154,13 @@ input, select { margin-right: 20px; }
 
 </Sandpack>
 
-## Reactive values and reactive logic {/*reactive-values-and-reactive-logic*/}
+## Reaktiiviset arvot ja reaktiivinen logiikka {/*reactive-values-and-reactive-logic*/}
 
-Intuitively, you could say that event handlers are always triggered "manually", for example by clicking a button. Effects, on the other hand, are "automatic": they run and re-run as often as it's needed to stay synchronized.
+Intuitiivisesti, voisit sanoa, että tapahtumankäsittelijät ovat aina käynnistetty "manuaalisesti", esimerkiksi painamalla nappia. Efektit, ovat toisaalta "automaattisia": ne suoritetaan ja suoritetaan uudelleen niin usein kuin on tarpeen pysyäkseen synkronoituna.
 
-There is a more precise way to think about this.
+On tarkempi tapa ajatella tätä.
 
-Props, state, and variables declared inside your component's body are called <CodeStep step={2}>reactive values</CodeStep>. In this example, `serverUrl` is not a reactive value, but `roomId` and `message` are. They participate in the rendering data flow:
+Propsit, tila, ja komponentissa määritellyt muuttujat ovat <CodeStep step={2}>reaktiivisia arvoja</CodeStep>. Tässä esimerkissä, `serverUrl` ei ole reaktiivinen arvo, mutta `roomId` ja `message` ovat. Ne osallistuvat renderöinnin datavirtaan:
 
 ```js [[2, 3, "roomId"], [2, 4, "message"]]
 const serverUrl = 'https://localhost:1234';
@@ -172,16 +172,16 @@ function ChatRoom({ roomId }) {
 }
 ```
 
-Reactive values like these can change due to a re-render. For example, the user may edit the `message` or choose a different `roomId` in a dropdown. Event handlers and Effects respond to changes differently:
+Tämän kaltaiset reaktiiviset arvot voivat muuttua renderöinnin yhteydessä. Esimerkiksi, käyttäjä saattaa muokata `message` tilaa tai valita eri `roomId`:n pudotusvalikosta. Tapahtumankäsittelijät ja Efektit reagoivat muutoksiin eri tavalla:
 
-- **Logic inside event handlers is *not reactive.*** It will not run again unless the user performs the same interaction (e.g. a click) again. Event handlers can read reactive values without "reacting" to their changes.
-- **Logic inside Effects is *reactive.*** If your Effect reads a reactive value, [you have to specify it as a dependency.](/learn/lifecycle-of-reactive-effects#effects-react-to-reactive-values) Then, if a re-render causes that value to change, React will re-run your Effect's logic with the new value.
+- **Tapahtumankäsittelijöissä oleva logiikka *ei ole reaktiivista.*** Sitä ei suoriteta ellei käyttäjä suorita samaa vuorovaikutusta (esim. klikkausta) uudelleen. Tapahtumankäsittelijät voivat lukea reaktiivisia arvoja ilman että ne "reagoivat" niiden muutoksiin.
+- **Efekteissa oleva logiikka *on reaktiivsta.*** Jos Efektisi lukee reaktiivista arvoa, [sinun täytyy määritellä se riippuvuudeksi.](/learn/lifecycle-of-reactive-effects#effects-react-to-reactive-values) Sitte, jos uudelleenrenderöinti aiheuttaa arvon muuttumisen, React suorittaa Efektisi logiikan uudelleen uudella arvolla.
 
-Let's revisit the previous example to illustrate this difference.
+Käydään edellinen esimerkki läpi uudelleen eron havainnollistamiseksi.
 
-### Logic inside event handlers is not reactive {/*logic-inside-event-handlers-is-not-reactive*/}
+### Logiikka tapahtumankäsittelijöissä ei ole reaktiivista {/*logic-inside-event-handlers-is-not-reactive*/}
 
-Take a look at this line of code. Should this logic be reactive or not?
+Katso tätä koodiriviä. Pitäisikö tämän logiikan olla reaktiivista vai ei?
 
 ```js [[2, 2, "message"]]
     // ...
@@ -189,7 +189,7 @@ Take a look at this line of code. Should this logic be reactive or not?
     // ...
 ```
 
-From the user's perspective, **a change to the `message` does _not_ mean that they want to send a message.** It only means that the user is typing. In other words, the logic that sends a message should not be reactive. It should not run again only because the <CodeStep step={2}>reactive value</CodeStep> has changed. That's why it belongs in the event handler:
+Käyttäjän näkökulmasta, **muutos `message`:en _ei_ tarkoita, että he haluavat lähettää viestin.** Se tarkoittaa vain, että käyttäjä kirjoittaa. Toisin sanoen, logiikka joka lähettää viestin ei tulisi olla reaktiivista. Sitä ei pitäisi suorittaa uudelleen vain koska <CodeStep step={2}>reaktiivinen arvo</CodeStep> on muuttunut. Tämän takia se kuuluu tapahtumankäsittelijään:
 
 ```js {2}
   function handleSendClick() {
@@ -197,11 +197,11 @@ From the user's perspective, **a change to the `message` does _not_ mean that th
   }
 ```
 
-Event handlers aren't reactive, so `sendMessage(message)` will only run when the user clicks the Send button.
+Tapahtumankäsittelijät eivät ole reaktiivisia, joten `sendMessage(message)` suoritetaan ainoastaan kun käyttäjä painaa Lähetä painiketta.
 
-### Logic inside Effects is reactive {/*logic-inside-effects-is-reactive*/}
+### Logiikka Efekteissa on reaktiivista {/*logic-inside-effects-is-reactive*/}
 
-Now let's return to these lines:
+Nyt palataan näihin riveihin:
 
 ```js [[2, 2, "roomId"]]
     // ...
@@ -210,7 +210,7 @@ Now let's return to these lines:
     // ...
 ```
 
-From the user's perspective, **a change to the `roomId` *does* mean that they want to connect to a different room.** In other words, the logic for connecting to the room should be reactive. You *want* these lines of code to "keep up" with the <CodeStep step={2}>reactive value</CodeStep>, and to run again if that value is different. That's why it belongs in an Effect:
+Käyttäjän näkökulmasta, **muutos `roomId` tilaan *tarkoittaa* että he haluavat yhdistää eri huoneeseen.** Toisin sanoen, logiikka huoneen yhdistämiseen tulisi olla reaktiivista. *Haluat*, että nämä koodirivit "pysyvät mukana" <CodeStep step={2}>reaktiivisessa arvossa</CodeStep>, ja suoritetaan uudelleen jos arvo on eri. Tämän takia se kuuluu Efektiin:
 
 ```js {2-3}
   useEffect(() => {
@@ -222,13 +222,13 @@ From the user's perspective, **a change to the `roomId` *does* mean that they wa
   }, [roomId]);
 ```
 
-Effects are reactive, so `createConnection(serverUrl, roomId)` and `connection.connect()` will run for every distinct value of `roomId`. Your Effect keeps the chat connection synchronized to the currently selected room.
+Efektit ovat reaktiivisia, joten `createConnection(serverUrl, roomId)` ja `connection.connect()` suoritetaan jokaiselle eri `roomId` arvolle. Efektisi pitää chat-yhteyden synkronoituna valittuun huoneeseen.
 
-## Extracting non-reactive logic out of Effects {/*extracting-non-reactive-logic-out-of-effects*/}
+## Ei-reaktiivisen logiikan irroittaminen Efekteista {/*extracting-non-reactive-logic-out-of-effects*/}
 
-Things get more tricky when you want to mix reactive logic with non-reactive logic.
+Asioista tulee hankalampia kun haluat sekoittaa reaktiivista logiikkaa ei-reaktiiviseen logiikkaan.
 
-For example, imagine that you want to show a notification when the user connects to the chat. You read the current theme (dark or light) from the props so that you can show the notification in the correct color:
+Esimerkiksi, kuvittele, että haluat näyttää ilmoituksen kun käyttäjä yhdistää chattiin. Luet nykyisen teeman (tumma tai vaalea) propsista jotta voit näyttää ilmoituksen oikeassa värissä:
 
 ```js {1,4-6}
 function ChatRoom({ roomId, theme }) {
@@ -241,7 +241,7 @@ function ChatRoom({ roomId, theme }) {
     // ...
 ```
 
-However, `theme` is a reactive value (it can change as a result of re-rendering), and [every reactive value read by an Effect must be declared as its dependency.](/learn/lifecycle-of-reactive-effects#react-verifies-that-you-specified-every-reactive-value-as-a-dependency) Now you have to specify `theme` as a dependency of your Effect:
+Kuitenkin, `theme` on reaktiivinen arvo (se voi muuttua renderöinnin yhteydessä), ja [kaikki Efektin lukemat reaktiiviset arvot täytyy lisätä sen riippuvuuksiin.](/learn/lifecycle-of-reactive-effects#react-verifies-that-you-specified-every-reactive-value-as-a-dependency) Nyt sinun täytyy lisätä `theme` Efektisi riippuvuuksiin:
 
 ```js {5,11}
 function ChatRoom({ roomId, theme }) {
@@ -254,11 +254,11 @@ function ChatRoom({ roomId, theme }) {
     return () => {
       connection.disconnect()
     };
-  }, [roomId, theme]); // ✅ All dependencies declared
+  }, [roomId, theme]); // ✅ Kaikki riippuvuudet määritelty
   // ...
 ```
 
-Play with this example and see if you can spot the problem with this user experience:
+Kokeile tätä esimerkkiä ja katso jos huomaat ongelman tämän käyttökokemuksen kanssa:
 
 <Sandpack>
 
@@ -335,7 +335,7 @@ export default function App() {
 
 ```js chat.js
 export function createConnection(serverUrl, roomId) {
-  // A real implementation would actually connect to the server
+  // Todellinen toteutus yhdistäisi palvelimeen
   let connectedCallback;
   let timeout;
   return {
@@ -386,9 +386,9 @@ label { display: block; margin-top: 10px; }
 
 </Sandpack>
 
-When the `roomId` changes, the chat re-connects as you would expect. But since `theme` is also a dependency, the chat *also* re-connects every time you switch between the dark and the light theme. That's not great!
+Kun `roomId` muuttuu, chat yhdistää uudelleen kuten odotit. Mutta koska `theme` on myös riippuvuus, chat yhdistää *myös* joka kerta kun vaihdat tumman ja vaalean teeman välillä. Ei hyvä!
 
-In other words, you *don't* want this line to be reactive, even though it is inside an Effect (which is reactive):
+Toisin sanoen, *et* halua tämän rivin olevan reaktiivinen, vaikka se on Efektissä (joka on reaktiivinen):
 
 ```js
       // ...
@@ -396,17 +396,17 @@ In other words, you *don't* want this line to be reactive, even though it is ins
       // ...
 ```
 
-You need a way to separate this non-reactive logic from the reactive Effect around it.
+Tarvitset tavan erottaa tämän ei-reaktiivisen logiikan reaktiivisesta Efektistä.
 
-### Declaring an Effect Event {/*declaring-an-effect-event*/}
+### Efektitapahtuman määrittäminen {/*declaring-an-effect-event*/}
 
 <Wip>
 
-This section describes an **experimental API that has not yet been released** in a stable version of React.
+Tämä kohta kuvailee **kokeellista API:a joka ei ole vielä julkaistu** Reactin vakaassa versiossa.
 
 </Wip>
 
-Use a special Hook called [`useEffectEvent`](/reference/react/experimental_useEffectEvent) to extract this non-reactive logic out of your Effect:
+Käytä erityistä Hookia nimeltä [`useEffectEvent`](/reference/react/experimental_useEffectEvent) irroittaaksesi tämän ei-reaktiivisen logiikan Efektistä:
 
 ```js {1,4-6}
 import { useEffect, useEffectEvent } from 'react';
@@ -418,9 +418,9 @@ function ChatRoom({ roomId, theme }) {
   // ...
 ```
 
-Here, `onConnected` is called an *Effect Event.* It's a part of your Effect logic, but it behaves a lot more like an event handler. The logic inside it is not reactive, and it always "sees" the latest values of your props and state.
+Tässä, `onConnected` kutsutaan *Efektitapahtumaksi*. Se on osa Efektisi logiikkaa, mutta se käyttäytyy enemmän tapahtumankäsittelijän tavoin. Logiikka sen sisällä ei ole reaktiivista, ja se "näkee" aina viimeisimmät propsin ja tilan arvot.
 
-Now you can call the `onConnected` Effect Event from inside your Effect:
+Nyt voit kutsua `onConnected` Efektitapahtumaa Efektisi sisältä:
 
 ```js {2-4,9,13}
 function ChatRoom({ roomId, theme }) {
@@ -435,13 +435,13 @@ function ChatRoom({ roomId, theme }) {
     });
     connection.connect();
     return () => connection.disconnect();
-  }, [roomId]); // ✅ All dependencies declared
+  }, [roomId]); // ✅ Kaikki riippuvuudet määritelty
   // ...
 ```
 
-This solves the problem. Note that you had to *remove* `onConnected` from the list of your Effect's dependencies. **Effect Events are not reactive and must be omitted from dependencies.**
+Tämä korjaa ongelman. Huomaa, että sinun täytyi *poistaa* `onConnected` Efektisi riippuvuuksien listalta. **Efektitapahtumat eivät ole reaktiivisia ja ne täytyy jättää pois riippuvuuksien listalta.**
 
-Verify that the new behavior works as you would expect:
+Varmista, että uusi käyttäytyminen toimii odotetusti:
 
 <Sandpack>
 
@@ -523,7 +523,7 @@ export default function App() {
 
 ```js chat.js
 export function createConnection(serverUrl, roomId) {
-  // A real implementation would actually connect to the server
+  // Todellinen toteutus yhdistäisi palvelimeen oikeasti
   let connectedCallback;
   let timeout;
   return {
@@ -574,19 +574,19 @@ label { display: block; margin-top: 10px; }
 
 </Sandpack>
 
-You can think of Effect Events as being very similar to event handlers. The main difference is that event handlers run in response to a user interactions, whereas Effect Events are triggered by you from Effects. Effect Events let you "break the chain" between the reactivity of Effects and code that should not be reactive.
+Voit ajatella Efektitapahtumien olevat hyvin samanlaisia kuin tapahtumankäsittelijät. Pääero on, että tapahtumankäsittelijät suoritetaan vastauksena käyttäjän vuorovaikutukseen, kun taas Efektitapahtumat käynnistetään Efektistäsi. Efektitapahtumat antavat sinun "katkaista ketjun" Efektien reaktiivisuuden ja koodin välillä, jonka ei tulisi olla reaktiivista.
 
-### Reading latest props and state with Effect Events {/*reading-latest-props-and-state-with-effect-events*/}
+### Viimeisimmän propsin ja tilan lukeminen Efektitapahtumilla {/*reading-latest-props-and-state-with-effect-events*/}
 
 <Wip>
 
-This section describes an **experimental API that has not yet been released** in a stable version of React.
+Tämä kohta kuvailee **kokeellista API:a joka ei ole vielä julkaistu** Reactin vakaassa versiossa.
 
 </Wip>
 
-Effect Events let you fix many patterns where you might be tempted to suppress the dependency linter.
+Efektitapahtumien avulla voit korjata monia tapauksia, joissa saattaisit kokea houkutuksen linterin hiljentämiseen.
 
-For example, say you have an Effect to log the page visits:
+Sanotaan esimerkiksi, että sinulla on Efekti, joka kerää sivun vierailut:
 
 ```js
 function Page() {
@@ -597,7 +597,7 @@ function Page() {
 }
 ```
 
-Later, you add multiple routes to your site. Now your `Page` component receives a `url` prop with the current path. You want to pass the `url` as a part of your `logVisit` call, but the dependency linter complains:
+Myöhemmin, lisäät useita reittejä sivustollesi. Nyt `Page` komponenttisi saa `url` propsin nykyisellä polulla. Haluat välittää `url`:n osana `logVisit` kutsua, mutta riippuvuus-linteri valittaa:
 
 ```js {1,3}
 function Page({ url }) {
@@ -608,18 +608,18 @@ function Page({ url }) {
 }
 ```
 
-Think about what you want the code to do. You *want* to log a separate visit for different URLs since each URL represents a different page. In other words, this `logVisit` call *should* be reactive with respect to the `url`. This is why, in this case, it makes sense to follow the dependency linter, and add `url` as a dependency:
+Ajattele mitä haluat koodin tekevän. Nyt *haluat* sen kirjaavan lokin jokaisesta eri URL:n vierailusta, koska jokainen URL edustaa eri sivua. Toisin sanoen, tämä `logVisit` kutsu *täytyy* olla reaktiivinen `url`:n suhteen. Tämän takia, tässä tapauksessa, on järkevää seurata riippuvuus-linteriä, ja lisätä `url` riippuvuudeksi:
 
 ```js {4}
 function Page({ url }) {
   useEffect(() => {
     logVisit(url);
-  }, [url]); // ✅ All dependencies declared
+  }, [url]); // ✅ Kaikki riippuvuudet määritelty
   // ...
 }
 ```
 
-Now let's say you want to include the number of items in the shopping cart together with every page visit:
+Nyt sanotaan, että haluat sisällyttää ostoskorin tuotteiden määrän jokaisen sivun vierailun yhteydessä:
 
 ```js {2-3,6}
 function Page({ url }) {
@@ -633,9 +633,9 @@ function Page({ url }) {
 }
 ```
 
-You used `numberOfItems` inside the Effect, so the linter asks you to add it as a dependency. However, you *don't* want the `logVisit` call to be reactive with respect to `numberOfItems`. If the user puts something into the shopping cart, and the `numberOfItems` changes, this *does not mean* that the user visited the page again. In other words, *visiting the page* is, in some sense, an "event". It happens at a precise moment in time.
+Käytit `numberOfItems` Efektin sisällä, joten linter pyytää lisäämään sen riippuvuudeksi. *Et* kuitenkaan halua `logVisit` kutsun olevan reaktiivinen `numberOfItems`:n suhteen. Jos käyttäjä laittaa jotain ostoskoriin, ja `numberOfItems` muuttuu, tämä *ei tarkoita* että käyttäjä vieraili sivulla uudelleen. Toisin sanoen, *sivulla vierailu* on, jollain tapaa, "tapahtuma". Se tapahtuu tiettynä hetkenä.
 
-Split the code in two parts:
+Jaa koodi kahteen osaan:
 
 ```js {5-7,10}
 function Page({ url }) {
@@ -648,20 +648,20 @@ function Page({ url }) {
 
   useEffect(() => {
     onVisit(url);
-  }, [url]); // ✅ All dependencies declared
+  }, [url]); // ✅ Kaikki riippuvuudet määritelty
   // ...
 }
 ```
 
-Here, `onVisit` is an Effect Event. The code inside it isn't reactive. This is why you can use `numberOfItems` (or any other reactive value!) without worrying that it will cause the surrounding code to re-execute on changes.
+Tässä, `onVisit` on Efektitapahtuma. Koodi sen sisällä ei ole reaktiivista. Tämän takia voit käyttää `numberOfItems`:a (tai mitä tahansa reaktiivista arvoa!) huoletta, että se aiheuttaisi ympäröivän koodin uudelleen suorittamisen muutoksien yhteydessä.
 
-On the other hand, the Effect itself remains reactive. Code inside the Effect uses the `url` prop, so the Effect will re-run after every re-render with a different `url`. This, in turn, will call the `onVisit` Effect Event.
+Toisaalta, Efekti itsessään pysyy reaktiivisena. Koodi Efektin sisällä käyttää `url` propsia, joten Efekti tullaan suoritamaan uudelleen jokaisen uudelleenrenderöinnin yhteydessä eri `url`:lla. Tämä, puolestaan, kutsuu `onVisit` Efektitapahtumaa.
 
-As a result, you will call `logVisit` for every change to the `url`, and always read the latest `numberOfItems`. However, if `numberOfItems` changes on its own, this will not cause any of the code to re-run.
+Tämän seurauksena kutsut `logVisit` funktiota jokaisen `url` muutoksen yhteydessä, ja luet aina uusimman `numberOfItems`:n. Kuitenkin, jos `numberOfItems` muuttuu itsestään, tämä ei aiheuta koodin uudelleen suorittamista.
 
 <Note>
 
-You might be wondering if you could call `onVisit()` with no arguments, and read the `url` inside it:
+Saatat miettiä voisitko kutsua `onVisit()` ilman argumentteja, ja lukea `url`:n sen sisällä:
 
 ```js {2,6}
   const onVisit = useEffectEvent(() => {
@@ -673,7 +673,7 @@ You might be wondering if you could call `onVisit()` with no arguments, and read
   }, [url]);
 ```
 
-This would work, but it's better to pass this `url` to the Effect Event explicitly. **By passing `url` as an argument to your Effect Event, you are saying that visiting a page with a different `url` constitutes a separate "event" from the user's perspective.** The `visitedUrl` is a *part* of the "event" that happened:
+Tämä voisi toimia, mutta on parempi välittää `url` Efektitapahtumalle eksplisiittisesti. **Välittämällä `url`:n argumenttina Efektitapahtumalle, sanot että sivulla vierailu eri `url`:lla muodostaa erillisen "tapahtuman" käyttäjän näkökulmasta.** `visitedUrl` on osa "tapahtumaa" joka tapahtui:
 
 ```js {1-2,6}
   const onVisit = useEffectEvent(visitedUrl => {
@@ -685,9 +685,9 @@ This would work, but it's better to pass this `url` to the Effect Event explicit
   }, [url]);
 ```
 
-Since your Effect Event explicitly "asks" for the `visitedUrl`, now you can't accidentally remove `url` from the Effect's dependencies. If you remove the `url` dependency (causing distinct page visits to be counted as one), the linter will warn you about it. You want `onVisit` to be reactive with regards to the `url`, so instead of reading the `url` inside (where it wouldn't be reactive), you pass it *from* your Effect.
+Sillä Efektitapahtumasi eksplisiittisesti "kysyy" `visitedUrl`:aa, nyt et voi vahingossa poistaa `url`:a Efektisi riippuvuuksista. Jos poistat `url` riippuvuuden (erilliset vierailut lasketaan yhdeksi), linteri varoittaa siitä. Haluat `onVisit`:n olevan reaktiivinen `url`:n suhteen, joten sen sijaan että lukisit `url`:n sisältä (jossa se ei olisi reaktiivinen), välität sen *Efektistä*.
 
-This becomes especially important if there is some asynchronous logic inside the Effect:
+Tästä tulee erityisen tärkeää jos Efektissä on jotain asynkronista logiikkaa:
 
 ```js {6,8}
   const onVisit = useEffectEvent(visitedUrl => {
@@ -697,19 +697,19 @@ This becomes especially important if there is some asynchronous logic inside the
   useEffect(() => {
     setTimeout(() => {
       onVisit(url);
-    }, 5000); // Delay logging visits
+    }, 5000); // Viivästä vierailujen kirjaamista
   }, [url]);
 ```
 
-Here, `url` inside `onVisit` corresponds to the *latest* `url` (which could have already changed), but `visitedUrl` corresponds to the `url` that originally caused this Effect (and this `onVisit` call) to run.
+Tässä, `url` `onVisit`:n sisällä vastaa *viimeisintä* `url`:ää (joka saattaa olla jo muuttunut), mutta `visitedUrl` vastaa `url`:ää joka alunperin aiheutti tämän Efektin (ja tämän `onVisit` kutsun) suorittamisen.
 
 </Note>
 
 <DeepDive>
 
-#### Is it okay to suppress the dependency linter instead? {/*is-it-okay-to-suppress-the-dependency-linter-instead*/}
+#### Onko oikein hiljentää riippuvuuslintteri? {/*is-it-okay-to-suppress-the-dependency-linter-instead*/}
 
-In the existing codebases, you may sometimes see the lint rule suppressed like this:
+Olemassa olevissa koodipohjissa, saatat törmätä linterin hiljentämiseen tällä tavalla:
 
 ```js {7-9}
 function Page({ url }) {
@@ -718,20 +718,20 @@ function Page({ url }) {
 
   useEffect(() => {
     logVisit(url, numberOfItems);
-    // 🔴 Avoid suppressing the linter like this:
+    // 🔴 Vältä linterin hiljentämistä tällä tavalla:
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [url]);
   // ...
 }
 ```
 
-After `useEffectEvent` becomes a stable part of React, we recommend **never suppressing the linter**.
+Kun `useEffectEvent`:sta tulee vakaa osa Reactia, suosittelemme **älä koskaan hiljennä linteriä**.
 
-The first downside of suppressing the rule is that React will no longer warn you when your Effect needs to "react" to a new reactive dependency you've introduced to your code. In the earlier example, you added `url` to the dependencies *because* React reminded you to do it. You will no longer get such reminders for any future edits to that Effect if you disable the linter. This leads to bugs.
+Ensimmäinen haittapuoli linterin hiljentämisessä on, että React ei enää varoita sinua kun Efektisi tarvitsee "reagoida" uuteen reaktiiviseen riippuvuuteen, jonka olet lisännyt koodiisi. Aiemmassa esimerkissä, lisäsit `url`:n riippuvuudeksi *koska* React muistutti sinua siitä. Et enää saa tällaisia muistutuksia tulevista muutoksista Efektiin jos hiljennät linterin. Tämä johtaa bugeihin.
 
-Here is an example of a confusing bug caused by suppressing the linter. In this example, the `handleMove` function is supposed to read the current `canMove` state variable value in order to decide whether the dot should follow the cursor. However, `canMove` is always `true` inside `handleMove`.
+Tässä on esimerkki sekavasta viasta linterin hiljentäminen on aiheuttanut. Tässä esimerkissä, `handleMove` funktion on tarkoitus lukea nykyinen `canMove` tilamuuttujan arvo päättääkseen seuraako piste hiirtä. Kuitenkin, `canMove` on aina `true` `handleMove`:n sisällä.
 
-Can you see why?
+Löydätkö miksi?
 
 <Sandpack>
 
@@ -790,13 +790,13 @@ body {
 </Sandpack>
 
 
-The problem with this code is in suppressing the dependency linter. If you remove the suppression, you'll see that this Effect should depend on the `handleMove` function. This makes sense: `handleMove` is declared inside the component body, which makes it a reactive value. Every reactive value must be specified as a dependency, or it can potentially get stale over time!
+Ongelma koodissa on riippuvuuslinterin hiljentäminen. Jos poistat hiljennyksen, huomaat että tämä Efekti tarvitsee `handleMove` funktion riippuvuudeksi. Tämä on järkevää: `handleMove` on määritelty komponentin sisällä, joka tekee siitä reaktiivisen arvon. Jokaisen reaktiivisen arvon täytyy olla määritelty riippuvuudeksi, tai se voi vanhentua ajan myötä!
 
-The author of the original code has "lied" to React by saying that the Effect does not depend (`[]`) on any reactive values. This is why React did not re-synchronize the Effect after `canMove` has changed (and `handleMove` with it). Because React did not re-synchronize the Effect, the `handleMove` attached as a listener is the `handleMove` function created during the initial render. During the initial render, `canMove` was `true`, which is why `handleMove` from the initial render will forever see that value.
+Alkuperäisen koodin kirjoittaja on "valehdellut" Reactille kertomalla sille, että Efekti ei riipu (`[]`) yhdestäkään reaktiivisesta arvosta. Tämän takia React ei uudelleen synkronoi Efektia sen jälkeen kun `canMove` on muuttunut (ja `handleMove`:a sen mukana). Koska React ei uudelleen synkronoinut Efektiä, `handleMove` joka on liitetty tapahtumankäsittelijäksi on `handleMove` funktio, joka on luotu ensimmäisen renderöinnin aikana. Ensimmäisen renderöinnin aikana, `canMove` oli `true`, minkä takia `handleMove` ensimmäiseltä renderöinniltä näkee aina tämän arvon.
 
-**If you never suppress the linter, you will never see problems with stale values.**
+**Jos et koskaan hiljennä linteria, et koskaan näe ongelmia vanhentuneiden arvojen kanssa.**
 
-With `useEffectEvent`, there is no need to "lie" to the linter, and the code works as you would expect:
+Käyttämällä `useEffectEvent` hookkia, ei ole tarpeen "valehdella" linterille, ja koodi toimii kuten oletat:
 
 <Sandpack>
 
@@ -870,26 +870,26 @@ body {
 
 </Sandpack>
 
-This doesn't mean that `useEffectEvent` is *always* the correct solution. You should only apply it to the lines of code that you don't want to be reactive. In the above sandbox, you didn't want the Effect's code to be reactive with regards to `canMove`. That's why it made sense to extract an Effect Event.
+Tämä ei tarkoita, että `useEffectEvent` olisi *aina* oikea ratkaisu. Sinun tulisi käyttää sitä vain koodiriveillä, joiden et halua olevan reaktiivisia. Yllä olevassa hiekkalaatikossa, et halunnut Efektin koodin olevan reaktiivista `canMove`:n suhteen. Tämän takia oli järkevää irroittaa Efektitapahtuma.
 
-Read [Removing Effect Dependencies](/learn/removing-effect-dependencies) for other correct alternatives to suppressing the linter.
+Lue [Riippuvuuksien poistaminen Efektista](/learn/removing-effect-dependencies) muita oikeita vaihtoehtoja linterin hiljentämisen sijaan.
 
 </DeepDive>
 
-### Limitations of Effect Events {/*limitations-of-effect-events*/}
+### Efektitapahtumien rajoitteet {/*limitations-of-effect-events*/}
 
 <Wip>
 
-This section describes an **experimental API that has not yet been released** in a stable version of React.
+Tämä kohta kuvailee **kokeellista API:a joka ei ole vielä julkaistu** Reactin vakaassa versiossa.
 
 </Wip>
 
-Effect Events are very limited in how you can use them:
+Efektitapahtumat ovat hyvin rajattuja siinä miten voit käyttää niitä:
 
-* **Only call them from inside Effects.**
-* **Never pass them to other components or Hooks.**
+* **Kutsu vain Efektin sisältä.**
+* **Älä koskaan välitä niitä toisiin komponentteihin tai Hookkeihin.**
 
-For example, don't declare and pass an Effect Event like this:
+Esimerkiksi, älä määrittele ja välitä Efektitapahtumaa näin:
 
 ```js {4-6,8}
 function Timer() {
@@ -899,7 +899,7 @@ function Timer() {
     setCount(count + 1);
   });
 
-  useTimer(onTick, 1000); // 🔴 Avoid: Passing Effect Events
+  useTimer(onTick, 1000); // 🔴 Vältä: Efektitapahtuman välittäminen
 
   return <h1>{count}</h1>
 }
@@ -912,11 +912,11 @@ function useTimer(callback, delay) {
     return () => {
       clearInterval(id);
     };
-  }, [delay, callback]); // Need to specify "callback" in dependencies
+  }, [delay, callback]); // Täytyy määritellä "callback" riippuvuuksissa
 }
 ```
 
-Instead, always declare Effect Events directly next to the Effects that use them:
+Sen sijaan, määrittele Efektitapahtumat aina suoraan Efektien vieressä, jotka niitä käyttävät:
 
 ```js {10-12,16,21}
 function Timer() {
@@ -934,40 +934,40 @@ function useTimer(callback, delay) {
 
   useEffect(() => {
     const id = setInterval(() => {
-      onTick(); // ✅ Good: Only called locally inside an Effect
+      onTick(); // ✅ Hyvä: Kutsutaan vain paikallisesti Efektin sisässä
     }, delay);
     return () => {
       clearInterval(id);
     };
-  }, [delay]); // No need to specify "onTick" (an Effect Event) as a dependency
+  }, [delay]); // Ei tarvetta määritellä "onTick" (Efektitapahtumaa) riippuvuudeksi
 }
 ```
 
-Effect Events are non-reactive "pieces" of your Effect code. They should be next to the Effect using them.
+Efektitapahtumat ovat ei-reaktiivisia "palasia" Efektisi koodistasi. Niiden tulisi olla Efektin vieressä, joka niitä käyttää.
 
 <Recap>
 
-- Event handlers run in response to specific interactions.
-- Effects run whenever synchronization is needed.
-- Logic inside event handlers is not reactive.
-- Logic inside Effects is reactive.
-- You can move non-reactive logic from Effects into Effect Events.
-- Only call Effect Events from inside Effects.
-- Don't pass Effect Events to other components or Hooks.
+- Tapahtumankäsittelijät suoritetaan vastauksena tiettyihin vuorovaikutuksiin.
+- Efektit suoritetaan aina kun synkronointi on tarpeen.
+- Logiikka tapahtumankäsittelijän sisällä ei ole reaktiivista.
+- Logiikka Efektissa on reaktiivista.
+- Voit siirtää ei-reaktiivisen logiikan Efektista Efektitapahtumiin.
+- Kutsu vain Efektitapahtumia Efektien sisältä.
+- Älä välitä Efektitapahtumia muihin komponentteihin tai Hookkeihin.
 
 </Recap>
 
 <Challenges>
 
-#### Fix a variable that doesn't update {/*fix-a-variable-that-doesnt-update*/}
+#### Korjaa muuttuja joka ei päivity {/*fix-a-variable-that-doesnt-update*/}
 
-This `Timer` component keeps a `count` state variable which increases every second. The value by which it's increasing is stored in the `increment` state variable. You can control the `increment` variable with the plus and minus buttons.
+Tämä `Timer` komponentti pitää `count` tilamuuttujan, joka kasvaa joka sekunti. Arvo jolla se kasvaa on tallennettu `increment` tilamuuttujaan. Voit hallita `increment` muuttujaa plus ja miinus napeilla.
 
-However, no matter how many times you click the plus button, the counter is still incremented by one every second. What's wrong with this code? Why is `increment` always equal to `1` inside the Effect's code? Find the mistake and fix it.
+Kuitenkin, sillä ei ole väliä miten monta kertaa painat plus painiketta, laskuri kasvaa silti yhdellä joka sekunti. Mikä on vikana tässä koodissa? Miksi `increment` on aina yhtä suuri kuin `1` Efektin koodissa? Etsi virhe ja korjaa se.
 
 <Hint>
 
-To fix this code, it's enough to follow the rules.
+Korjataksesi tämä koodi, riittää että seuraat sääntöjä.
 
 </Hint>
 
@@ -1020,9 +1020,9 @@ button { margin: 10px; }
 
 <Solution>
 
-As usual, when you're looking for bugs in Effects, start by searching for linter suppressions.
+Kuten yleensä, kun etsit bugeja Efekteista, aloita etsimällä linterin hiljennyksiä.
 
-If you remove the suppression comment, React will tell you that this Effect's code depends on `increment`, but you "lied" to React by claiming that this Effect does not depend on any reactive values (`[]`). Add `increment` to the dependency array:
+Jos poistat hiljennykommentin, React kertoo sinulle, että tämän Efektin koodi riippuu `increment`:sta, mutta "valehtelit" Reactille väittämällä, että tämä Efekti ei riipu mistään reaktiivisista arvoista (`[]`). Lisää `increment` riippuvuuslistalle:
 
 <Sandpack>
 
@@ -1070,19 +1070,19 @@ button { margin: 10px; }
 
 </Sandpack>
 
-Now, when `increment` changes, React will re-synchronize your Effect, which will restart the interval.
+Nyt kun `increment` muuttuu, React uudelleen synkronoi Efektisi, joka käynnistää uudelleen laskurin.
 
 </Solution>
 
-#### Fix a freezing counter {/*fix-a-freezing-counter*/}
+#### Korjaa jumittuva laskuri {/*fix-a-freezing-counter*/}
 
-This `Timer` component keeps a `count` state variable which increases every second. The value by which it's increasing is stored in the `increment` state variable, which you can control it with the plus and minus buttons. For example, try pressing the plus button nine times, and notice that the `count` now increases each second by ten rather than by one.
+Tämä `Timer` komponentti pitää `count` tilamuuttujan, joka kasvaa joka sekunti. Arvo jolla se kasvaa on tallennettu `increment` tilamuuttujaan, jota voit hallita plus ja miinus napeilla. Esimerkiksi, kokeile painaa plus nappia yhdeksän kertaa, ja huomaa että `count` kasvaa nyt joka sekunti kymmenellä, eikä yhdellä.
 
-There is a small issue with this user interface. You might notice that if you keep pressing the plus or minus buttons faster than once per second, the timer itself seems to pause. It only resumes after a second passes since the last time you've pressed either button. Find why this is happening, and fix the issue so that the timer ticks on *every* second without interruptions.
+Käyttöliittymässä on pieni ongelma. Saatat huomata sen jos painat plus tai miinus painikkeita nopeammin kuin kerran sekuntissa, ajastin näyttää pysähtyvän. Se jatkaa vain kun on kulunut sekunti siitä kun painoit jotain painiketta. Etsi miksi tämä tapahtuu, ja korjaa ongelma niin että ajastin tikittää *joka* sekunti ilman keskeytyksiä.
 
 <Hint>
 
-It seems like the Effect which sets up the timer "reacts" to the `increment` value. Does the line that uses the current `increment` value in order to call `setCount` really need to be reactive?
+Näyttää siltä, että Efekti joka asettaa ajastimen "reagoi" `increment` arvoon. Tarvitseeko rivi joka käyttää nykyistä `increment` arvoa kutsuakseen `setCount`:ia olla reaktiivinen?
 
 </Hint>
 
@@ -1151,9 +1151,9 @@ button { margin: 10px; }
 
 <Solution>
 
-The issue is that the code inside the Effect uses the `increment` state variable. Since it's a dependency of your Effect, every change to `increment` causes the Effect to re-synchronize, which causes the interval to clear. If you keep clearing the interval every time before it has a chance to fire, it will appear as if the timer has stalled.
+Ongelma on Efektin sisällä oleva koodi, joka käyttää `increment` tilamuuttujaa. Koska se on Efektin riippuvuus, joka muutos `increment` muuttujaan aiheuttaa Efektin uudelleen synkronoinnin, joka aiheuttaa laskurin nollaamisen. Jos jatkat ajastimen nollaamista ennen kuin se ehtii laueta, se näyttää siltä kuin ajastin olisi pysähtynyt.
 
-To solve the issue, extract an `onTick` Effect Event from the Effect:
+Korjataksesi ongelman, irroita `onTick` Efektitapahtuma Efektistä:
 
 <Sandpack>
 
@@ -1223,17 +1223,17 @@ button { margin: 10px; }
 
 </Sandpack>
 
-Since `onTick` is an Effect Event, the code inside it isn't reactive. The change to `increment` does not trigger any Effects.
+Koska `onTick` on Efektitapahtuma, koodi sen sisällä ei ole reaktiivista. Muutos `increment` muuttujaan ei aiheuta Efektien uudelleen synkronointia.
 
 </Solution>
 
-#### Fix a non-adjustable delay {/*fix-a-non-adjustable-delay*/}
+#### Korjaa muuttumaton viive {/*fix-a-non-adjustable-delay*/}
 
-In this example, you can customize the interval delay. It's stored in a `delay` state variable which is updated by two buttons. However, even if you press the "plus 100 ms" button until the `delay` is 1000 milliseconds (that is, a second), you'll notice that the timer still increments very fast (every 100 ms). It's as if your changes to the `delay` are ignored. Find and fix the bug.
+Tässä esimerkissä, voit mukauttaa laskurin viivettä. Se ylläpidetään `delay` tilamuuttujassa, jota päivitetään kahdella painikkeella. Kuitenkin, vaikka jos painat "plus 100 ms" painiketta kunnes `delay` on 1000 millisekuntia (eli sekuntin), huomaat, että ajastin silti kasvaa hyvin nopeasti (joka 100 ms). Tuntuu kuin muutoksesi `delay` muuttujaan jätetään huomiotta. Etsi ja korjaa bugi.
 
 <Hint>
 
-Code inside Effect Events is not reactive. Are there cases in which you would _want_ the `setInterval` call to re-run?
+Koodi Efektitapahtuman sisällä ei ole reaktiivista. Onko tapauksia joissa haluaisit `setInterval` kutsun suorittuvan uudelleen?
 
 </Hint>
 
@@ -1322,7 +1322,7 @@ button { margin: 10px; }
 
 <Solution>
 
-The problem with the above example is that it extracted an Effect Event called `onMount` without considering what the code should actually be doing. You should only extract Effect Events for a specific reason: when you want to make a part of your code non-reactive. However, the `setInterval` call *should* be reactive with respect to the `delay` state variable. If the `delay` changes, you want to set up the interval from scratch! To fix this code, pull all the reactive code back inside the Effect:
+Ongelma yllä olevassa esimerkissä on, että se erotti Efektitapahtuman nimeltä `onMount` ottamatta huomioon mitä koodin pitäisi oikeasti tehdä. Sinun tulisi erottaa Efektitapahtumia vain tiettyyn tarkoitukseen: kun haluat tehdä osan koodistasi ei-reaktiiviseksi. Kuitenkin, `setInterval` kutsun *pitäisi* olla reaktiivinen `delay` tilamuuttujan suhteen. Jos `delay` muuttuu, haluat asettaa ajastimen alusta! Korjataksesi tämän koodin, siirrä kaikki reaktiivinen koodi takaisin Efektiin:
 
 <Sandpack>
 
@@ -1402,21 +1402,21 @@ button { margin: 10px; }
 
 </Sandpack>
 
-In general, you should be suspicious of functions like `onMount` that focus on the *timing* rather than the *purpose* of a piece of code. It may feel "more descriptive" at first but it obscures your intent. As a rule of thumb, Effect Events should correspond to something that happens from the *user's* perspective. For example, `onMessage`, `onTick`, `onVisit`, or `onConnected` are good Effect Event names. Code inside them would likely not need to be reactive. On the other hand, `onMount`, `onUpdate`, `onUnmount`, or `onAfterRender` are so generic that it's easy to accidentally put code that *should* be reactive into them. This is why you should name your Effect Events after *what the user thinks has happened,* not when some code happened to run.
+Yleisesti ottaen, sinun tulisi olla epäileväinen funktioista kuten `onMount`, jotka keskittyvät *ajoitukseen* *tarkoituksen* sijasta. Saattaa tuntua "kuvaavammalta" aluksi, mutta se piilottaa tarkoituksesi. Nyrkkisääntönä, Efektitapahtumien tulisi vastata jotain joka tapahtuu *käyttäjän* näkökulmasta. Esimerkiksi, `onMessage`, `onTick`, `onVisit`, tai `onConnected` ovat hyviä Efektitapahtuman nimiä. Koodi niiden sisällä ei todennäköisesti tarvitse olla reaktiivista. Toisaalta, `onMount`, `onUpdate`, `onUnmount`, tai `onAfterRender` ovat niin geneerisiä, että on helppo vahingossa laittaa koodia jonka *pitäisi* olla reaktiivista niihin. Tämän takia sinun tulisi nimetä Efektitapahtumasi sen mukaan *mitä käyttäjä ajattelee tapahtuneen*, ei milloin jokin koodi sattui ajautumaan. 
 
 </Solution>
 
-#### Fix a delayed notification {/*fix-a-delayed-notification*/}
+#### Korjaa viivästynyt ilmoitus {/*fix-a-delayed-notification*/}
 
-When you join a chat room, this component shows a notification. However, it doesn't show the notification immediately. Instead, the notification is artificially delayed by two seconds so that the user has a chance to look around the UI.
+Kun liityty chat-huoneeseen, tämä komponentti näyttää ilmoituksen. Se ei kuitenkaan näytä ilmoitusta heti. Sen sijaan, ilmoitus on keinotekoisesti viivästetty kahdella sekuntilla, jotta käyttäjällä on mahdollisuus katsoa ympärilleen käyttöliittymässä.
 
-This almost works, but there is a bug. Try changing the dropdown from "general" to "travel" and then to "music" very quickly. If you do it fast enough, you will see two notifications (as expected!) but they will *both* say "Welcome to music".
+Tämä melkein toimii, mutta siinä on bugi. Kokeile vaihtaa pudotusvalikosta "general" huoneeseen "travel" ja sitten "music" hyvin nopeasti. Jos teet sen tarpeeksi nopeasti, näet kaksi ilmoitusta (kuten odotettua!) mutta molemmat sanovat "Welcome to music".
 
-Fix it so that when you switch from "general" to "travel" and then to "music" very quickly, you see two notifications, the first one being "Welcome to travel" and the second one being "Welcome to music". (For an additional challenge, assuming you've *already* made the notifications show the correct rooms, change the code so that only the latter notification is displayed.)
+Korjaa tämä siten, jotta kun vaihdat "general" arvosta "travel" arvoon ja sitten "music" arvoon erittäin nopeasti, näet kaksi ilmoitusta, ensimmäisenä "Welcome to travel" ja toisena "Welcome to music". (Lisähaasteena, olettaen että olet *jo* korjannut ilmoitukset näyttämään oikeat huoneet, muuta koodia siten, että vain jälkimmäinen ilmoitus näytetään.)
 
 <Hint>
 
-Your Effect knows which room it connected to. Is there any information that you might want to pass to your Effect Event?
+Efektisi tietää mihin huoneeseen se on yhdistetty. Onko mitään tietoa, jonka haluaisit välittää Efektitapahtumalle?
 
 </Hint>
 
@@ -1502,7 +1502,7 @@ export default function App() {
 
 ```js chat.js
 export function createConnection(serverUrl, roomId) {
-  // A real implementation would actually connect to the server
+  // Todellinen toteutus yhdistäisi palvelimeen oikeasti
   let connectedCallback;
   let timeout;
   return {
@@ -1555,11 +1555,11 @@ label { display: block; margin-top: 10px; }
 
 <Solution>
 
-Inside your Effect Event, `roomId` is the value *at the time Effect Event was called.*
+Tapahtumakäsittelijän sisällä, `roomId` on arvoltaan *siinä ajassa kun Efektitapahtuma kutsuttiin*.
 
-Your Effect Event is called with a two second delay. If you're quickly switching from the travel to the music room, by the time the travel room's notification shows, `roomId` is already `"music"`. This is why both notifications say "Welcome to music".
+Efektitapahtumasi on kutsuttu kahden sekuntin viiveellä. Jos nopeasti vaihdat travel huoneesta music huoneeseen, siihen mennessä kun travel huoneen ilmoitus näytetään, `roomId` on jo `"music"`. Tämän takia molemmat ilmoitukset sanovat "Welcome to music".
 
-To fix the issue, instead of reading the *latest* `roomId` inside the Effect Event, make it a parameter of your Effect Event, like `connectedRoomId` below. Then pass `roomId` from your Effect by calling `onConnected(roomId)`:
+Korjataksesi ongelma, sen sijaan että lukisit *uusimman* `roomId` arvon Efektitapahtuman sisällä, tee siitä Efektitapahtuman argumentti, kuten `connectedRoomId` alla. Sitten välitä `roomId` Efektista kutsuen `onConnected(roomId)`:
 
 <Sandpack>
 
@@ -1643,7 +1643,7 @@ export default function App() {
 
 ```js chat.js
 export function createConnection(serverUrl, roomId) {
-  // A real implementation would actually connect to the server
+  // Todellinen toteutus yhdistäisi palvelimeen oikeasti
   let connectedCallback;
   let timeout;
   return {
@@ -1694,9 +1694,9 @@ label { display: block; margin-top: 10px; }
 
 </Sandpack>
 
-The Effect that had `roomId` set to `"travel"` (so it connected to the `"travel"` room) will show the notification for `"travel"`. The Effect that had `roomId` set to `"music"` (so it connected to the `"music"` room) will show the notification for `"music"`. In other words, `connectedRoomId` comes from your Effect (which is reactive), while `theme` always uses the latest value.
+Efekti jolla oli `roomId` arvona `"travel"` (joten se yhdisti `"travel"` huoneeseen) näyttää ilmoituksen `"travel"` huoneelle. Efekti jolla oli `roomId` arvona `"music"` (joten se yhdisti `"music"` huoneeseen) näyttää ilmoituksen `"music"` huoneelle. Toisin sanoen, `connectedRoomId` tulee Efektistäsi (joka on reaktiivinen), kun taas `theme` käyttää aina uusinta arvoa.
 
-To solve the additional challenge, save the notification timeout ID and clear it in the cleanup function of your Effect:
+Ratkaistaksesi lisähaasteen, tallenna ilmoituksen viiveen ID ja siivoa se Efektin siivousfunktiossa:
 
 <Sandpack>
 
@@ -1786,7 +1786,7 @@ export default function App() {
 
 ```js chat.js
 export function createConnection(serverUrl, roomId) {
-  // A real implementation would actually connect to the server
+  // Oikea toteutus yhdistäisi palvelimeen oikeasti
   let connectedCallback;
   let timeout;
   return {
@@ -1837,7 +1837,7 @@ label { display: block; margin-top: 10px; }
 
 </Sandpack>
 
-This ensures that already scheduled (but not yet displayed) notifications get cancelled when you change rooms.
+Tämä takaa sen, että jo aikataulutetut (mutta ei vielä näytetyt) ilmoitukset peruutetaan, kun vaihdat huoneita.
 
 </Solution>
 
