@@ -4,7 +4,7 @@ title: 'Reaktiivisten Efektien elinkaari'
 
 <Intro>
 
-Efekteilla on eri elinkaari komponenteista. Komponentit voivat mountata, päivittyä, tai un-mountata. Efekti voi tehdä vain kaksi asiaa: aloittaa synkronoimaan jotain, ja myöhemmin lopettaa synkronointi. Tämä sykli voi tapahtua useita kertoja, jos Efekti riippuu propseista ja tilasta, jotka muuttuvat ajan myötä. React tarjoaa linter-säännön, joka tarkistaa, että olet määrittänyt Efektin riippuvuudet oikein. Tämä pitää Efektisi synkronoituna viimeisimpiin proppseihin ja statukseen.
+Efekteilla on eri elinkaari komponenteista. Komponentit voivat mountata, päivittyä, tai un-mountata. Efekti voi tehdä vain kaksi asiaa: aloittaa synkronoimaan jotain, ja myöhemmin lopettaa synkronointi. Tämä sykli voi tapahtua useita kertoja, jos Efekti riippuu propseista ja tilasta, jotka muuttuvat ajan myötä. React tarjoaa linter-säännön, joka tarkistaa, että olet määrittänyt Efektin riippuvuudet oikein. Tämä pitää Efektisi synkronoituna viimeisimpiin propseihin ja statukseen.
 
 </Intro>
 

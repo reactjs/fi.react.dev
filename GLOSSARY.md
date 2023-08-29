@@ -38,7 +38,7 @@
 - **build tool**: käännöstyökalu
 - **setter function**: setter funktio. (Asetin kuulostaa tyhmältä)
 - **hover**: (as in a user hovering over a button): hoverointi. (Leijuminen ei ehkä ole kovin itsestäänselvää mitä sillä tarkoitetaan.)
-- **focus**: (as in a user focusing over a button): focusointi. (^)
+- **focus**: (as in a user focusing over a button): kohdenna
 - **framework**: ohjelmistokehys
 - **codebase**: koodipohja
 - **property**: en keksinyt järkevää suomennosta, property
