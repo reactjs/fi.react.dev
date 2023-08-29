@@ -6,10 +6,10 @@ exports.siteConfig = {
   // --------------------------------------
   // Translations should replace these lines:
   languageCode: 'fi',
-  hasLegacySite: true,
+  hasLegacySite: false,
   isRTL: false,
   // --------------------------------------
-  copyright: `Copyright © ${new Date().getFullYear()} Facebook Inc. All Rights Reserved.`,
+  copyright: `Copyright © ${new Date().getFullYear()} Facebook Inc. Kaikki oikeudet pidätetään.`,
   repoUrl: 'https://github.com/facebook/react',
   twitterUrl: 'https://twitter.com/reactjs',
   algolia: {

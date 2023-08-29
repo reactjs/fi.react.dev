@@ -1,5 +1,5 @@
 {
-  "title": "API Reference",
+  "title": "API viite",
   "path": "/reference/react",
   "routes": [
     {
@@ -7,7 +7,7 @@
       "sectionHeader": "react@18.2.0"
     },
     {
-      "title": "Hooks",
+      "title": "Hookit",
       "path": "/reference/react",
       "routes": [
         {
@@ -73,7 +73,7 @@
       ]
     },
     {
-      "title": "Components",
+      "title": "Komponentit",
       "path": "/reference/react/components",
       "routes": [
         {
@@ -95,7 +95,7 @@
       ]
     },
     {
-      "title": "APIs",
+      "title": "APIt",
       "path": "/reference/react/apis",
       "routes": [
         {
@@ -121,7 +121,7 @@
       ]
     },
     {
-      "title": "Directives",
+      "title": "Direktiivit",
       "path": "/reference/react/directives",
       "canary": true,
       "routes": [
@@ -142,11 +142,11 @@
       "sectionHeader": "react-dom@18.2.0"
     },
     {
-      "title": "Components",
+      "title": "Komponentit",
       "path": "/reference/react-dom/components",
       "routes": [
         {
-          "title": "Common (e.g. <div>)",
+          "title": "Yleiset (esim <div>)",
           "path": "/reference/react-dom/components/common"
         },
         {
@@ -172,7 +172,7 @@
       ]
     },
     {
-      "title": "APIs",
+      "title": "APIt",
       "path": "/reference/react-dom",
       "routes": [
         {
@@ -202,7 +202,7 @@
       ]
     },
     {
-      "title": "Client APIs",
+      "title": "Asiakaspuolen APIt",
       "path": "/reference/react-dom/client",
       "routes": [
         {
@@ -216,7 +216,7 @@
       ]
     },
     {
-      "title": "Server APIs",
+      "title": "Palvelinpuolen APIt",
       "path": "/reference/react-dom/server",
       "routes": [
         {
@@ -247,10 +247,10 @@
     },
     {
       "hasSectionHeader": true,
-      "sectionHeader": "Legacy APIs"
+      "sectionHeader": "Vanhemmat APIt"
     },
     {
-      "title": "Legacy React APIs",
+      "title": "Vanhemmat React APIt",
       "path": "/reference/react/legacy",
       "routes": [
         {
