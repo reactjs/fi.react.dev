@@ -1,30 +1,30 @@
 ---
-title: 'Reusing Logic with Custom Hooks'
+title: 'Logiikan uudelleenkäyttö omilla Hookeilla'
 ---
 
 <Intro>
 
-React comes with several built-in Hooks like `useState`, `useContext`, and `useEffect`. Sometimes, you'll wish that there was a Hook for some more specific purpose: for example, to fetch data, to keep track of whether the user is online, or to connect to a chat room. You might not find these Hooks in React, but you can create your own Hooks for your application's needs.
+React sisältää useita sisäänrakennettuja Hookkeja kuten `useState`, `useContext`, ja `useEffect`. Joskus saatat haluta, että olisi Hookki johonkin tiettyyn tarkoitukseen: esimerkiksi, datan hakemiseen, käyttäjän verkkoyhteyden seuraamiseen, tai yhteyden muodostamiseen chat-huoneeseen. Et välttämättä löydä näitä Hookkeja Reactista, mutta voit luoda omia Hookkeja sovelluksesi tarpeisiin.
 
 </Intro>
 
 <YouWillLearn>
 
-- What custom Hooks are, and how to write your own
-- How to reuse logic between components
-- How to name and structure your custom Hooks
-- When and why to extract custom Hooks
+- Mitä omat Hookit ovat ja miten voit kirjoittaa niitä
+- Miten voit jakaa logiikkaa komponenttien välillä
+- Miten nimetä ja järjestää omat Hookit
+- Milloin ja miksi omat Hookit kannattaa tehdä
 
 </YouWillLearn>
 
-## Custom Hooks: Sharing logic between components {/*custom-hooks-sharing-logic-between-components*/}
+## Omat Hookit: Logiikan jakaminen komponenttien välillä {/*custom-hooks-sharing-logic-between-components*/}
 
-Imagine you're developing an app that heavily relies on the network (as most apps do). You want to warn the user if their network connection has accidentally gone off while they were using your app. How would you go about it? It seems like you'll need two things in your component:
+Kuvittele, että olet kehittämässä sovellusta, joka tukeutuu paljolit verkkoon (kuten useimmat sovellukset). Haluat varoittaa käyttäjää, jos heidän verkkoyhteytensä on vahingossa katkennut, kun he käyttivät sovellustasi. Miten lähestyisit tätä? Näyttää siltä, että tarvitset kaksi asiaa komponentissasi:
 
-1. A piece of state that tracks whether the network is online.
-2. An Effect that subscribes to the global [`online`](https://developer.mozilla.org/en-US/docs/Web/API/Window/online_event) and [`offline`](https://developer.mozilla.org/en-US/docs/Web/API/Window/offline_event) events, and updates that state.
+1. Palan tilaa, joka seuraa onko verkkoyhteys saatavilla.
+2. Efektin, joka tilaa globaalin [`online`](https://developer.mozilla.org/en-US/docs/Web/API/Window/online_event) ja [`offline`](https://developer.mozilla.org/en-US/docs/Web/API/Window/offline_event) tapahtumat, ja päivittää tilan.
 
-This will keep your component [synchronized](/learn/synchronizing-with-effects) with the network status. You might start with something like this:
+Tämä pitää komponenttisi [synkronoituna](/learn/synchronizing-with-effects) verkon tilan kanssa. Voit aloittaa tällaisella:
 
 <Sandpack>
 
@@ -54,11 +54,11 @@ export default function StatusBar() {
 
 </Sandpack>
 
-Try turning your network on and off, and notice how this `StatusBar` updates in response to your actions.
+Kokeile yhdistää verkko päälle ja pois, ja huomaa miten `StatusBar` päivittyy toimintasi mukaan.
 
-Now imagine you *also* want to use the same logic in a different component. You want to implement a Save button that will become disabled and show "Reconnecting..." instead of "Save" while the network is off.
+Kuvittele nyt, että haluat *myös* käyttää samaa logiikkaa toisessa komponentissa. Haluat toteuttaa Tallenna -painikkeen, joka menee pois käytöstä ja näyttää "Yhdistetään..." sen sijaan, että se näyttäisi "Tallenna" kun verkko on pois päältä.
 
-To start, you can copy and paste the `isOnline` state and the Effect into `SaveButton`:
+Aloittaaksesi, voit kopioida ja liittää `isOnline` tilan ja Efektin `SaveButton`iin:
 
 <Sandpack>
 
@@ -96,13 +96,13 @@ export default function SaveButton() {
 
 </Sandpack>
 
-Verify that, if you turn off the network, the button will change its appearance.
+Varmista, että jos käännät verkon pois päältä, painike muuttaa ulkonäköään.
 
-These two components work fine, but the duplication in logic between them is unfortunate. It seems like even though they have different *visual appearance,* you want to reuse the logic between them.
+Nämä kaksi komponenttia toimivat, mutta niiden logiikan kopiointi on valitettavaa. Vaikuttaa siltä, että vaikka niillä on erilainen *visuaalinen ulkonäkö*, haluat jakaa niiden logiikkaa.
 
-### Extracting your own custom Hook from a component {/*extracting-your-own-custom-hook-from-a-component*/}
+### Oman Hookin tekeminen komponentista {/*extracting-your-own-custom-hook-from-a-component*/}
 
-Imagine for a moment that, similar to [`useState`](/reference/react/useState) and [`useEffect`](/reference/react/useEffect), there was a built-in `useOnlineStatus` Hook. Then both of these components could be simplified and you could remove the duplication between them:
+Kuvttele, että samalla tavalla kuin [`useState`](/reference/react/useState) ja [`useEffect`](/reference/react/useEffect), olisi olemassa sisäänrakennettu `useOnlineStatus` Hookki. Sitten molemmat näistä komponenteista voitaisiin yksinkertaistaa ja voit poistaa niiden toistetun logiikan:
 
 ```js {2,7}
 function StatusBar() {
@@ -125,7 +125,7 @@ function SaveButton() {
 }
 ```
 
-Although there is no such built-in Hook, you can write it yourself. Declare a function called `useOnlineStatus` and move all the duplicated code into it from the components you wrote earlier:
+Vaikka tällaista sisäänrakennettua Hookkia ei ole, voit kirjoittaa sen itse. Määrittele funktio nimeltä `useOnlineStatus` ja siirrä kaikki toistettu koodi komponenteista siihen:
 
 ```js {2-16}
 function useOnlineStatus() {
@@ -148,7 +148,7 @@ function useOnlineStatus() {
 }
 ```
 
-At the end of the function, return `isOnline`. This lets your components read that value:
+Funktion lopussa, palauta `isOnline`. Tämä antaa komponenttien lukea arvoa:
 
 <Sandpack>
 
@@ -209,89 +209,89 @@ export function useOnlineStatus() {
 
 </Sandpack>
 
-Verify that switching the network on and off updates both components.
+Vahvista, että verkon kytkeminen päälle ja pois päältä päivittää molemmat komponentit.
 
-Now your components don't have as much repetitive logic. **More importantly, the code inside them describes *what they want to do* (use the online status!) rather than *how to do it* (by subscribing to the browser events).**
+Nyt komponenttisi ei sisällä niin paljon toistettua logiikkaa. **Tärkeämpää on, että niiden sisällä oleva koodi kuvailee *mitä ne haluavat tehdä* (käyttää verkon tilaa!) sen sijaan, että *miten se tehdään* (tilaamalla selaimen tapahtumia).**
 
-When you extract logic into custom Hooks, you can hide the gnarly details of how you deal with some external system or a browser API. The code of your components expresses your intent, not the implementation.
+Kun siirrät logiikan omiin Hookkeihin, voit piilottaa miten käsittelet jotain ulkoista järjestelmää tai selaimen API:a. Komponenttisi koodi ilmaisee aikomuksesi, ei toteutusta.
 
-### Hook names always start with `use` {/*hook-names-always-start-with-use*/}
+### Hookkien nimet alkavat aina `use` -etuliitteellä {/*hook-names-always-start-with-use*/}
 
-React applications are built from components. Components are built from Hooks, whether built-in or custom. You'll likely often use custom Hooks created by others, but occasionally you might write one yourself!
+React sovellukset rakennetaan komponenteista. Komponentit ovat rakennettu Hookeista, sisäänrakennetuista tai omista. Todennäköisesti käytät usein muiden tekemiä omia Hookkeja, mutta joskus saatat kirjoittaa oman!
 
-You must follow these naming conventions:
+Sinun täytyy noudattaa näitä nimeämiskäytäntöjä:
 
-1. **React component names must start with a capital letter,** like `StatusBar` and `SaveButton`. React components also need to return something that React knows how to display, like a piece of JSX.
-2. **Hook names must start with `use` followed by a capital letter,** like [`useState`](/reference/react/useState) (built-in) or `useOnlineStatus` (custom, like earlier on the page). Hooks may return arbitrary values.
+1. **React komponenttien nimien on alettava isolla alkukirjaimella,** kuten `StarBar` ja `SaveButton`. React komponenttien täytyy myös palauttaa jotain, mitä React osaa näyttää, kuten JSX-palasen.
+2. **Hookkien nimien on alettava `use` etuliitteellä, jota seuraa iso alkukirjain,** kuten [`useState`](/reference/react/useState) (sisäänrakennettu) tai `useOnlineStatus` (oma, kuten aiemmin sivulla). Hookit voivat palauttaa mitä tahansa arvoja.
 
-This convention guarantees that you can always look at a component and know where its state, Effects, and other React features might "hide". For example, if you see a `getColor()` function call inside your component, you can be sure that it can't possibly contain React state inside because its name doesn't start with `use`. However, a function call like `useOnlineStatus()` will most likely contain calls to other Hooks inside!
+Tämä yleinen tapa takaa sen, että voit aina katsoa komponenttia ja tiedät missä kaikki sen tila, Efekti, ja muut React toiminnot saatat "piiloutua". Esimerkiksi, jos näet `getColor()` funktiokutsun komponentissasi, voit olla varma, että se ei voi sisältää React tilaa sisällä koska sen nimi ei ala `use` -etuliitteellä. Kuitenkin, funktiokutsu kuten `useOnlineStatus()` todennäköisesti sisältää kutsuja muihin Hookkeihin sen sisällä!
 
 <Note>
 
-If your linter is [configured for React,](/learn/editor-setup#linting) it will enforce this naming convention. Scroll up to the sandbox above and rename `useOnlineStatus` to `getOnlineStatus`. Notice that the linter won't allow you to call `useState` or `useEffect` inside of it anymore. Only Hooks and components can call other Hooks!
+Jos linterisi on [määritelty Reactille,](/learn/editor-setup#linting) se takaa tämän nimeämiskäytännön. Selaa yllä olevaan esimerkkiin ja nimeä `useOnlineStatus` uudelleen `getOnlineStatus`:ksi. Huomaa, että linteri ei enää salli sinun kutsua `useState` tai `useEffect` -funktioita sen sisällä. Vain Hookit ja komponentit voivat kutsua muita Hookkeja!
 
 </Note>
 
 <DeepDive>
 
-#### Should all functions called during rendering start with the use prefix? {/*should-all-functions-called-during-rendering-start-with-the-use-prefix*/}
+#### Pitäisikö kaikkien renderöinnin aikana kutsuttujen funktioiden käyttää use -etuliitettä? {/*should-all-functions-called-during-rendering-start-with-the-use-prefix*/}
 
-No. Functions that don't *call* Hooks don't need to *be* Hooks.
+Funktiot, jotka eivät *kutsu* Hookkeja eivät tarvitse olla Hookkeja.
 
-If your function doesn't call any Hooks, avoid the `use` prefix. Instead, write it as a regular function *without* the `use` prefix. For example, `useSorted` below doesn't call Hooks, so call it `getSorted` instead:
+Jos funktiosi ei kutsu yhtään Hookkia, vältä `use` etuliitteen käyttöä. Sen sijaan, kirjoita se kuten tavallinen funktio *ilman* `use` etuliitettä. Esimerkiksi, alla oleva `useSorted` ei kutsu Hookkeja, joten sen sijaan kutsu sitä `getSorted` nimellä:
 
 ```js
-// 🔴 Avoid: A Hook that doesn't use Hooks
+// 🔴 Vältä: Hookki, joka ei käytä Hookkeja
 function useSorted(items) {
   return items.slice().sort();
 }
 
-// ✅ Good: A regular function that doesn't use Hooks
+// ✅ Hyvä: Tavallinen funktio, joka ei käytä Hookkeja
 function getSorted(items) {
   return items.slice().sort();
 }
 ```
 
-This ensures that your code can call this regular function anywhere, including conditions:
+Tämä takaa sen, että koodisi voi kutsua tätä funktiota missä tahansa, mukaan lukien ehtolauseissa:
 
 ```js
 function List({ items, shouldSort }) {
   let displayedItems = items;
   if (shouldSort) {
-    // ✅ It's ok to call getSorted() conditionally because it's not a Hook
+    // ✅ On ok kutsua getSorted() ehdollisesti, koska se ei ole Hookki
     displayedItems = getSorted(items);
   }
   // ...
 }
 ```
 
-You should give `use` prefix to a function (and thus make it a Hook) if it uses at least one Hook inside of it:
+Anna `use` etuliite funktiolle (ja siten tee siitä Hookki) jos se käyttää edes yhtä Hookkia sen sisällä:
 
 ```js
-// ✅ Good: A Hook that uses other Hooks
+// ✅ Hyvä: Hookki, joka käyttää muita Hookkeja
 function useAuth() {
   return useContext(Auth);
 }
 ```
 
-Technically, this isn't enforced by React. In principle, you could make a Hook that doesn't call other Hooks. This is often confusing and limiting so it's best to avoid that pattern. However, there may be rare cases where it is helpful. For example, maybe your function doesn't use any Hooks right now, but you plan to add some Hook calls to it in the future. Then it makes sense to name it with the `use` prefix:
+Teknisesti ottaen tätä ei pakoteta Reactissa. Periaatteessa, voit tehdä Hookin, joka ei kutsu muita Hookkeja. Tämä on usein hämmentävää ja rajoittavaa, joten on parasta välttää tätä mallia. Kuitenkin, voi olla harvinaisia tapauksia, joissa se on hyödyllistä. Esimerkiksi, ehkä funktiosi ei käytä yhtään Hookkia juuri nyt, mutta suunnittelet lisääväsi siihen Hookkien kutsuja tulevaisuudessa. Silloin on järkevää nimetä se `use` etuliitteellä:
 
 ```js {3-4}
-// ✅ Good: A Hook that will likely use some other Hooks later
+// ✅ Hyvä: Hoookki, joka saattaa kutsua toisia Hookkeja myöhemmin
 function useAuth() {
-  // TODO: Replace with this line when authentication is implemented:
+  // TODO: Korvaa tämä rivi kun autentikointi on toteutettu:
   // return useContext(Auth);
   return TEST_USER;
 }
 ```
 
-Then components won't be able to call it conditionally. This will become important when you actually add Hook calls inside. If you don't plan to use Hooks inside it (now or later), don't make it a Hook.
+Silloin komponentit eivät voi kutsua sitä ehdollisesti. Tästä tulee tärkeää kun haluat lisätä Hookkien kutsuja sen sisään. Jos et suunnittele lisääväsi Hookkien kutsuja sen sisään (taikka myöhemmin), älä tee siitä Hookkia.
 
 </DeepDive>
 
-### Custom Hooks let you share stateful logic, not state itself {/*custom-hooks-let-you-share-stateful-logic-not-state-itself*/}
+### Omien Hookkien avulla voit jakaa tilallista logiikkaa, et tilaa suoraan {/*custom-hooks-let-you-share-stateful-logic-not-state-itself*/}
 
-In the earlier example, when you turned the network on and off, both components updated together. However, it's wrong to think that a single `isOnline` state variable is shared between them. Look at this code:
+Aiemmassa esimerkissä, kun käänsit verkon päälle ja pois päältä, molemmat komponentit päivittyivät yhdessä. Kuitenkin, on väärin ajatella, että yksi `isOnline` tilamuuttuja on jaettu niiden välillä. Katso tätä koodia:
 
 ```js {2,7}
 function StatusBar() {
@@ -305,7 +305,7 @@ function SaveButton() {
 }
 ```
 
-It works the same way as before you extracted the duplication:
+Se toimii samalla tavalla kuin ennen toistetun logiikan poistamista:
 
 ```js {2-5,10-13}
 function StatusBar() {
@@ -325,9 +325,9 @@ function SaveButton() {
 }
 ```
 
-These are two completely independent state variables and Effects! They happened to have the same value at the same time because you synchronized them with the same external value (whether the network is on).
+Nämä ovat kaksi täysin toisistaan erillä olevia tilamuuttujia ja Effekteja! Ne sattuivat olemaan saman arvoisia samaan aikaan koska synkronoit ne samalla ulkoisella arvolla (onko verkko päällä).
 
-To better illustrate this, we'll need a different example. Consider this `Form` component:
+Tämän paremmin havainnollistaaksesi, tarvitsemme erilaisen esimerkin. Kuvittele tämä `Form` komponentti:
 
 <Sandpack>
 
@@ -369,13 +369,13 @@ input { margin-left: 10px; }
 
 </Sandpack>
 
-There's some repetitive logic for each form field:
+Jokaisessa lomakkeen kentässä on toistettua logiikkaa:
 
-1. There's a piece of state (`firstName` and `lastName`).
-1. There's a change handler (`handleFirstNameChange` and `handleLastNameChange`).
-1. There's a piece of JSX that specifies the `value` and `onChange` attributes for that input.
+1. On pala tilaa: (`firstName` and `lastName`).
+1. On tapahtumankäsittelijöitä: (`handleFirstNameChange` and `handleLastNameChange`).
+1. On pala JSX koodia, joka määrittelee `value`:n ja`onChange` attribuutin syöttökentälle.
 
-You can extract the repetitive logic into this `useFormInput` custom Hook:
+Voit siirtää toistuvan logiikan tästä `useFormInput` omaksi Hookiksi:
 
 <Sandpack>
 
@@ -428,9 +428,9 @@ input { margin-left: 10px; }
 
 </Sandpack>
 
-Notice that it only declares *one* state variable called `value`.
+Huomaa miten se vain määrittelee *yhden* tilamuuttujan nimeltä `value`.
 
-However, the `Form` component calls `useFormInput` *two times:*
+Kuitenkin, `Form` komponentti kutsuu `useFormInput`:a *kahdesti:*
 
 ```js
 function Form() {
@@ -439,17 +439,17 @@ function Form() {
   // ...
 ```
 
-This is why it works like declaring two separate state variables!
+Tämän takia se toimii kuten kaksi erillistä tilamuuttujaa!
 
-**Custom Hooks let you share *stateful logic* but not *state itself.* Each call to a Hook is completely independent from every other call to the same Hook.** This is why the two sandboxes above are completely equivalent. If you'd like, scroll back up and compare them. The behavior before and after extracting a custom Hook is identical.
+**Omien Hookkien avulla voit jakaa *tilallista logiikkaa' muttet *tilaa itsessään.* Jokainen kutsu Hookkiin on täysin eristetty toisista kutsuista samaan Hookkiin.** Tämän takia kaksi yllä olevaa hiekkalaatikkoa ovat täysin samanlaisia. Jos haluat, selaa ylös ja vertaa niitä. Käyttäytyminen ennen ja jälkeen oman Hookin tekemiseen on identtinen.
 
-When you need to share the state itself between multiple components, [lift it up and pass it down](/learn/sharing-state-between-components) instead.
+Kun haluat jakaa tilaa kahden komponentin välillä, [nosta se ylös ja välitä se alaspäin](/learn/sharing-state-between-components).
 
-## Passing reactive values between Hooks {/*passing-reactive-values-between-hooks*/}
+## Reaktiivisten arvojen välittäminen Hookkien välillä {/*passing-reactive-values-between-hooks*/}
 
-The code inside your custom Hooks will re-run during every re-render of your component. This is why, like components, custom Hooks [need to be pure.](/learn/keeping-components-pure) Think of custom Hooks' code as part of your component's body!
+Koodi oman Hookkisi sisällä suoritetaan joka kerta komponentin renderöinnin yhteydessä. Tämän takia, kuten komponenttien, omien Hookkien [täytyy olla puhtaita.](/learn/keeping-components-pure) Ajattele oman Hookkisi koodia osana komponenttisi sisältöä!
 
-Because custom Hooks re-render together with your component, they always receive the latest props and state. To see what this means, consider this chat room example. Change the server URL or the chat room:
+Koska omat Hookit renderöidään yhdessä komponenttisi kanssa, ne saavat aina uusimmat propit ja tilan. Katso mitä tämä tarkoittaa, harkitse tätä chat-huone esimerkkiä. Muuta palvelimen URL tai chat-huone:
 
 <Sandpack>
 
@@ -516,7 +516,7 @@ export default function ChatRoom({ roomId }) {
 
 ```js chat.js
 export function createConnection({ serverUrl, roomId }) {
-  // A real implementation would actually connect to the server
+  // Todellinen toteutus yhdistäisi palvelimeen oikeasti
   if (typeof serverUrl !== 'string') {
     throw Error('Expected serverUrl to be a string. Received: ' + serverUrl);
   }
@@ -599,9 +599,9 @@ button { margin-left: 10px; }
 
 </Sandpack>
 
-When you change `serverUrl` or `roomId`, the Effect ["reacts" to your changes](/learn/lifecycle-of-reactive-effects#effects-react-to-reactive-values) and re-synchronizes. You can tell by the console messages that the chat re-connects every time that you change your Effect's dependencies.
+Kun muutat `serverUrl` tai `roomId`, Efekti ["reagoi" muutoksiisi](/learn/lifecycle-of-reactive-effects#effects-react-to-reactive-values) ja synkronoituu uudelleen. Voit nähdä tämän konsoliviesteistä, että chat yhdistää uudelleen joka kerta kun muutat Efektin riippuvuuksia.
 
-Now move the Effect's code into a custom Hook:
+Nyt siirrä Efektin koodi omaan Hookkiisi:
 
 ```js {2-13}
 export function useChatRoom({ serverUrl, roomId }) {
@@ -620,7 +620,7 @@ export function useChatRoom({ serverUrl, roomId }) {
 }
 ```
 
-This lets your `ChatRoom` component call your custom Hook without worrying about how it works inside:
+Tämän avulla `ChatRoom` komponenttisi kutsuu omaa Hookkiasi huolimatta siitä miten se toimii:
 
 ```js {4-7}
 export default function ChatRoom({ roomId }) {
@@ -643,9 +643,9 @@ export default function ChatRoom({ roomId }) {
 }
 ```
 
-This looks much simpler! (But it does the same thing.)
+Tämä näyttää paljon yksinkertaisemmalta! (Mutta tekee saman asian.)
 
-Notice that the logic *still responds* to prop and state changes. Try editing the server URL or the selected room:
+Huomaa miten logiikka *silti reagoi* propsin ja tilan muutoksiin. Kokeile muokata palvelimen URL tai valittua huonetta:
 
 <Sandpack>
 
@@ -724,7 +724,7 @@ export function useChatRoom({ serverUrl, roomId }) {
 
 ```js chat.js
 export function createConnection({ serverUrl, roomId }) {
-  // A real implementation would actually connect to the server
+  // Todellinen toteutus yhdistäisi palvelimeen oikeasti
   if (typeof serverUrl !== 'string') {
     throw Error('Expected serverUrl to be a string. Received: ' + serverUrl);
   }
@@ -807,7 +807,7 @@ button { margin-left: 10px; }
 
 </Sandpack>
 
-Notice how you're taking the return value of one Hook:
+Huomaa miten, otat yhden Hookin palautusarvon:
 
 ```js {2}
 export default function ChatRoom({ roomId }) {
@@ -820,7 +820,7 @@ export default function ChatRoom({ roomId }) {
   // ...
 ```
 
-and pass it as an input to another Hook:
+ja välität sen toisen Hookin sisään:
 
 ```js {6}
 export default function ChatRoom({ roomId }) {
@@ -833,17 +833,17 @@ export default function ChatRoom({ roomId }) {
   // ...
 ```
 
-Every time your `ChatRoom` component re-renders, it passes the latest `roomId` and `serverUrl` to your Hook. This is why your Effect re-connects to the chat whenever their values are different after a re-render. (If you ever worked with audio or video processing software, chaining Hooks like this might remind you of chaining visual or audio effects. It's as if the output of `useState` "feeds into" the input of the `useChatRoom`.)
+Joka kerta kun `ChatRoom` komponenttisi renderöityy, se välittää viimeisimmän `roomId` ja `serverUrl`:n Hookillesi. Tämän takia Efektisi yhdistää chattiin joka kerta kun niiden arvot muuttuvat edellisestä renderöinnistä. (Jos olet koskaan työskennellyt ääni- tai videokäsittelyohjelmistojen kanssa, Hookkien ketjuttaminen saattaa muistuttaa sinua visuaalisten tai ääniefektien ketjuttamisesta. Se on kuin `useState` -tulosteen "syöttäminen" `useChatRoom` -syötteeseen.)
 
-### Passing event handlers to custom Hooks {/*passing-event-handlers-to-custom-hooks*/}
+### Tapahtumakäsittelijöiden välittäminen omiin Hookkeihin {/*passing-event-handlers-to-custom-hooks*/}
 
 <Wip>
 
-This section describes an **experimental API that has not yet been released** in a stable version of React.
+Tämä osio kuvailee **kokeellista API:a, joka ei ole vielä julkaistu** vakaassa React versiossa.
 
 </Wip>
 
-As you start using `useChatRoom` in more components, you might want to let components customize its behavior. For example, currently, the logic for what to do when a message arrives is hardcoded inside the Hook:
+Kun alat käyttämään `useChatRoom` Hookkia useammissa komponenteissa, saatat haluta antaa komponenttien muokata sen toimintaa. Esimerkiksi, tällä hetkellä, logiikka sille mitä tehdä kun viesti saapuu on kovakoodattu Hookkiin:
 
 ```js {9-11}
 export function useChatRoom({ serverUrl, roomId }) {
@@ -862,7 +862,7 @@ export function useChatRoom({ serverUrl, roomId }) {
 }
 ```
 
-Let's say you want to move this logic back to your component:
+Sanotaan, että haluat siirtää tämän logiikan takaisin komponenttiisi:
 
 ```js {7-9}
 export default function ChatRoom({ roomId }) {
@@ -878,7 +878,7 @@ export default function ChatRoom({ roomId }) {
   // ...
 ```
 
-To make this work, change your custom Hook to take `onReceiveMessage` as one of its named options:
+Saadaksesi tämä toimimaan, muuta oma Hookkisi vastaanottamaan `onReceiveMessage` yhtenä nimetyistä vaihtoehdoista:
 
 ```js {1,10,13}
 export function useChatRoom({ serverUrl, roomId, onReceiveMessage }) {
@@ -893,13 +893,13 @@ export function useChatRoom({ serverUrl, roomId, onReceiveMessage }) {
       onReceiveMessage(msg);
     });
     return () => connection.disconnect();
-  }, [roomId, serverUrl, onReceiveMessage]); // ✅ All dependencies declared
+  }, [roomId, serverUrl, onReceiveMessage]); // ✅ Kaikki muuttujat määritelty
 }
 ```
 
-This will work, but there's one more improvement you can do when your custom Hook accepts event handlers.
+Tämä silti toimii, mutta on yksi parannus, jonka voit tehdä kun oma Hookkisi hyväksyy tapahtumankäsittelijöitä.
 
-Adding a dependency on `onReceiveMessage` is not ideal because it will cause the chat to re-connect every time the component re-renders. [Wrap this event handler into an Effect Event to remove it from the dependencies:](/learn/removing-effect-dependencies#wrapping-an-event-handler-from-the-props)
+`onReceiveMessage` riippuvuuden lisääminen ei ole ihanteellista, koska se aiheuttaa chattiin yhdistämisen joka kerta kun komponentti renderöityy. [Kääri tämä tapahtumankäsittelijä Efektitapahtumaan poistaaksesi sen riippuvuuksista:](/learn/removing-effect-dependencies#wrapping-an-event-handler-from-the-props)
 
 ```js {1,4,5,15,18}
 import { useEffect, useEffectEvent } from 'react';
@@ -919,11 +919,11 @@ export function useChatRoom({ serverUrl, roomId, onReceiveMessage }) {
       onMessage(msg);
     });
     return () => connection.disconnect();
-  }, [roomId, serverUrl]); // ✅ All dependencies declared
+  }, [roomId, serverUrl]); // ✅ Kaikki riippuvuudet määritelty
 }
 ```
 
-Now the chat won't re-connect every time that the `ChatRoom` component re-renders. Here is a fully working demo of passing an event handler to a custom Hook that you can play with:
+Nyt chatti ei enää yhdistä uudelleen joka kerta, kun `ChatRoom` komponentti renderöidään uudelleen. Tässä on toimiva esimerkki tapahtumankäsittelijän välittämisestä omiin Hookkeihin, jota voit kokeilla:
 
 <Sandpack>
 
@@ -1008,7 +1008,7 @@ export function useChatRoom({ serverUrl, roomId, onReceiveMessage }) {
 
 ```js chat.js
 export function createConnection({ serverUrl, roomId }) {
-  // A real implementation would actually connect to the server
+  // Todellinen toteutus yhdistäisi palvelimeen oikeasti
   if (typeof serverUrl !== 'string') {
     throw Error('Expected serverUrl to be a string. Received: ' + serverUrl);
   }
@@ -1091,20 +1091,20 @@ button { margin-left: 10px; }
 
 </Sandpack>
 
-Notice how you no longer need to know *how* `useChatRoom` works in order to use it. You could add it to any other component, pass any other options, and it would work the same way. That's the power of custom Hooks.
+Huomaa miten sinun ei tarvitse enää tietää *miten* `useChatRoom` toimii käyttääksesi sitä. Voisit lisätä sen mihin tahansa muuhun komponenttiin, välittää mitä tahansa muita vaihtoehtoja, ja se toimisi samalla tavalla. Tämä on omien Hookkien voima.
 
-## When to use custom Hooks {/*when-to-use-custom-hooks*/}
+## Milloin käyttää omia Hookkeja {/*when-to-use-custom-hooks*/}
 
-You don't need to extract a custom Hook for every little duplicated bit of code. Some duplication is fine. For example, extracting a `useFormInput` Hook to wrap a single `useState` call like earlier is probably unnecessary.
+Sinun ei tarvitse luoda omaa Hookkia jokaiselle toistetulle koodinpalaselle. Jotkut toistot ovat hyväksyttäviä. Esimerkiksi, oman `useFormInput` Hookin luominen yhden `useState` kutsun ympärille kuten aiemmin on todennäköisesti tarpeetonta.
 
-However, whenever you write an Effect, consider whether it would be clearer to also wrap it in a custom Hook. [You shouldn't need Effects very often,](/learn/you-might-not-need-an-effect) so if you're writing one, it means that you need to "step outside React" to synchronize with some external system or to do something that React doesn't have a built-in API for. Wrapping it into a custom Hook lets you precisely communicate your intent and how the data flows through it.
+Kuitenkin, joka kerta kun kirjoitat Efektiä, mieti olisiko selkeämpää kääriä se omaan Hookkiin. [Sinun ei tulisi tarvita Efektejä usein,](/learn/you-might-not-need-an-effect) joten jos olet kirjoittamassa yhtä, se tarkoittaa että sinun tulee "astua ulos Reactista" synkronoidaksesi jonkin ulkoisen järjestelmän kanssa tai tehdäksesi jotain, jolle Reactilla ei ole sisäänrakennettua API:a. Käärimällä sen omaan Hookkiin voit tarkasti kommunikoida aikeesi ja miten data virtaa sen läpi.
 
-For example, consider a `ShippingForm` component that displays two dropdowns: one shows the list of cities, and another shows the list of areas in the selected city. You might start with some code that looks like this:
+Esimerkiksi, harkitse `ShippingForm` komponenttia, joka näyttää kaksi pudotusvalikkoa: toinen näyttää kaupunkien listan, ja toinen näyttää valitun kaupungin alueiden listan. Voit aloittaa koodilla, joka näyttää tältä:
 
 ```js {3-16,20-35}
 function ShippingForm({ country }) {
   const [cities, setCities] = useState(null);
-  // This Effect fetches cities for a country
+  // Tämä Efekti hakee kaupungit maalle
   useEffect(() => {
     let ignore = false;
     fetch(`/api/cities?country=${country}`)
@@ -1121,7 +1121,7 @@ function ShippingForm({ country }) {
 
   const [city, setCity] = useState(null);
   const [areas, setAreas] = useState(null);
-  // This Effect fetches areas for the selected city
+  // Tämä Efekti hakee alueet valitulle kaupungille
   useEffect(() => {
     if (city) {
       let ignore = false;
@@ -1141,7 +1141,7 @@ function ShippingForm({ country }) {
   // ...
 ```
 
-Although this code is quite repetitive, [it's correct to keep these Effects separate from each other.](/learn/removing-effect-dependencies#is-your-effect-doing-several-unrelated-things) They synchronize two different things, so you shouldn't merge them into one Effect. Instead, you can simplify the `ShippingForm` component above by extracting the common logic between them into your own `useData` Hook:
+Vaikka tämä koodi on toistuvaa, [on oiken pitää nämä Efektit erillään toisistaan.](/learn/removing-effect-dependencies#is-your-effect-doing-several-unrelated-things) Ne synkronoivat kahta eri asiaa, joten sinun ei tulisi yhdistää niitä yhdeksi Efektiksi. Sen sijaan, voit yksinkertaistaa `ShippingForm` komponenttia yllä käärimällä yhteisen logiikan omaksi `useData` Hookiksi:
 
 ```js {2-18}
 function useData(url) {
@@ -1165,7 +1165,7 @@ function useData(url) {
 }
 ```
 
-Now you can replace both Effects in the `ShippingForm` components with calls to `useData`:
+Nyt voit korvata molemmat Efektit `ShippingForm` komponentissa `useData` kutsuilla:
 
 ```js {2,4}
 function ShippingForm({ country }) {
@@ -1175,39 +1175,39 @@ function ShippingForm({ country }) {
   // ...
 ```
 
-Extracting a custom Hook makes the data flow explicit. You feed the `url` in and you get the `data` out. By "hiding" your Effect inside `useData`, you also prevent someone working on the `ShippingForm` component from adding [unnecessary dependencies](/learn/removing-effect-dependencies) to it. With time, most of your app's Effects will be in custom Hooks.
+Omien Hookkien tekeminen tekee datavirtauksesta eksplisiittisempää. Syötät `url` arvon sisään ja saat `data`:n ulos. "Piilottamalla" Efektin `useData`:n sisään, vältät myös sen, että joku joka työskentelee `ShippingForm` komponentin kanssa lisää [turhia riippuvuuksia](/learn/removing-effect-dependencies) siihen. Ajan myötä, suurin osa sovelluksesi Efekteistä on omien Hookkien sisällä.
 
 <DeepDive>
 
-#### Keep your custom Hooks focused on concrete high-level use cases {/*keep-your-custom-hooks-focused-on-concrete-high-level-use-cases*/}
+#### Pidä Hookkisi konkreettisissa korkean tason käyttötapauksissa {/*keep-your-custom-hooks-focused-on-concrete-high-level-use-cases*/}
 
-Start by choosing your custom Hook's name. If you struggle to pick a clear name, it might mean that your Effect is too coupled to the rest of your component's logic, and is not yet ready to be extracted.
+Aloita valitsemalla oman Hookkisi nimi. Jos sinulla on vaikeuksia valita selkeä nimi, se saattaa tarkoittaa, että Efektisi on liian kytketty komponenttisi logiikkaan, eikä ole vielä valmis eristettäväksi.
 
-Ideally, your custom Hook's name should be clear enough that even a person who doesn't write code often could have a good guess about what your custom Hook does, what it takes, and what it returns:
+Ihanteellisesti, oman Hookkisi nimi tulisi olla tarpeeksi selkeä, että jopa henkilö joka ei kirjoita koodia usein voisi arvata mitä oma Hookkisi tekee, mitä se ottaa vastaan, ja mitä se palauttaa:
 
 * ✅ `useData(url)`
 * ✅ `useImpressionLog(eventName, extraData)`
 * ✅ `useChatRoom(options)`
 
-When you synchronize with an external system, your custom Hook name may be more technical and use jargon specific to that system. It's good as long as it would be clear to a person familiar with that system:
+Kun synkronoit ulkoisen järjestelmän kanssa, oman Hookkisi nimi saattaa olla teknisempi ja käyttää kyseisen järjestelmän jargonia. On hyvä asia, kunhan se olisi selvää henkilölle joka on tuttu kyseisen järjestelmän kanssa:
 
 * ✅ `useMediaQuery(query)`
 * ✅ `useSocket(url)`
 * ✅ `useIntersectionObserver(ref, options)`
 
-**Keep custom Hooks focused on concrete high-level use cases.** Avoid creating and using custom "lifecycle" Hooks that act as alternatives and convenience wrappers for the `useEffect` API itself:
+**Pidä omat Hookkisi keskittyneinä konkreettisiin korkean tason käyttötapauksiin.** Vältä luomasta ja käyttämästä omia elinkaaren Hookkeja, jotka toimivat vaihtoehtoina ja kätevinä kääreinä `useEffect` API:lle:
 
 * 🔴 `useMount(fn)`
 * 🔴 `useEffectOnce(fn)`
 * 🔴 `useUpdateEffect(fn)`
 
-For example, this `useMount` Hook tries to ensure some code only runs "on mount":
+Esimerkiksi, tämä `useMount` Hookki pyrkii takamaan, että jotain koodia suoritetaan vain "mountissa":
 
 ```js {4-5,14-15}
 function ChatRoom({ roomId }) {
   const [serverUrl, setServerUrl] = useState('https://localhost:1234');
 
-  // 🔴 Avoid: using custom "lifecycle" Hooks
+  // 🔴 Vältä: käyttämästä omia elinkaaren Hookkeja
   useMount(() => {
     const connection = createConnection({ roomId, serverUrl });
     connection.connect();
@@ -1217,7 +1217,7 @@ function ChatRoom({ roomId }) {
   // ...
 }
 
-// 🔴 Avoid: creating custom "lifecycle" Hooks
+// 🔴 Vältä: luomasta omia elinkaaren Hookkeja
 function useMount(fn) {
   useEffect(() => {
     fn();
@@ -1225,15 +1225,15 @@ function useMount(fn) {
 }
 ```
 
-**Custom "lifecycle" Hooks like `useMount` don't fit well into the React paradigm.** For example, this code example has a mistake (it doesn't "react" to `roomId` or `serverUrl` changes), but the linter won't warn you about it because the linter only checks direct `useEffect` calls. It won't know about your Hook.
+**Omat "elinkaaren" Hookit kuten `useMount` eivät sovi hyvin Reactin paradigman kanssa.** Esimerkiksi, tässä koodissa on virhe (se ei "reagoi" `roomId` tai `serverUrl` muutoksiin), mutta linteri ei varoita sinua siitä, koska linteri tarkistaa vain suoria `useEffect` kutsuja. Se ei tiedä omasta Hookistasi.
 
-If you're writing an Effect, start by using the React API directly:
+Jos olet kirjoittamassa Efektiä, aloita käyttämällä React APIa suoraan:
 
 ```js
 function ChatRoom({ roomId }) {
   const [serverUrl, setServerUrl] = useState('https://localhost:1234');
 
-  // ✅ Good: two raw Effects separated by purpose
+  // ✅ Hyvä: kaksi raakaa Efektiä jaettu eri tarkoituksiin
 
   useEffect(() => {
     const connection = createConnection({ serverUrl, roomId });
@@ -1249,28 +1249,28 @@ function ChatRoom({ roomId }) {
 }
 ```
 
-Then, you can (but don't have to) extract custom Hooks for different high-level use cases:
+Sitten, voit (mutta sinun ei tarvitse) eristää omia Hookkeja eri korkean tason käyttötapauksille:
 
 ```js
 function ChatRoom({ roomId }) {
   const [serverUrl, setServerUrl] = useState('https://localhost:1234');
 
-  // ✅ Great: custom Hooks named after their purpose
+  // ✅ Hyvä: omat Hookit nimetty tarkoitusten perusteella
   useChatRoom({ serverUrl, roomId });
   useImpressionLog('visit_chat', { roomId });
   // ...
 }
 ```
 
-**A good custom Hook makes the calling code more declarative by constraining what it does.** For example, `useChatRoom(options)` can only connect to the chat room, while `useImpressionLog(eventName, extraData)` can only send an impression log to the analytics. If your custom Hook API doesn't constrain the use cases and is very abstract, in the long run it's likely to introduce more problems than it solves.
+**Hyvä Hookki tekee koodin kutsumisesta deklaratiivisempaa rajoittamalla mitä se tekee.** Esimerkiksi, `useChatRoom(options)` voi vain yhdistää chattiin, kun taas `useImpressionLog(eventName, extraData)` voi vain lähettää näyttökerran analytiikkaan. Jos oma Hookkisi API ei rajoita käyttötapauksia ja on hyvin abstrakti, pitkällä aikavälillä se todennäköisesti aiheuttaa enemmän ongelmia kuin ratkaisee.
 
 </DeepDive>
 
-### Custom Hooks help you migrate to better patterns {/*custom-hooks-help-you-migrate-to-better-patterns*/}
+### Omat Hookit auttavat siirtymään parempiin toimintatapoihin {/*custom-hooks-help-you-migrate-to-better-patterns*/}
 
-Effects are an ["escape hatch"](/learn/escape-hatches): you use them when you need to "step outside React" and when there is no better built-in solution for your use case. With time, the React team's goal is to reduce the number of the Effects in your app to the minimum by providing more specific solutions to more specific problems. Wrapping your Effects in custom Hooks makes it easier to upgrade your code when these solutions become available.
+Efektit ovat ["pelastusluukku"](/learn/escape-hatches): käytät niitä kun sinun täytyy "astua ulos Reactista" ja kun parempaa sisäänrakennettua ratkaisua käyttötapaukseesi ei ole. Ajan myötä, React tiimin tavoite on vähentää Efektien määrää sovelluksessasi minimiin tarjoamalla tarkempia ratkaisuja tarkempiin ongelmiin. Efektiesi kääriminen omiin Hookkeihin tekee koodin päivittämisestä helpompaa kun nämä ratkaisut tulevat saataville.
 
-Let's return to this example:
+Palataan tähän esimerkkiin:
 
 <Sandpack>
 
@@ -1331,9 +1331,9 @@ export function useOnlineStatus() {
 
 </Sandpack>
 
-In the above example, `useOnlineStatus` is implemented with a pair of [`useState`](/reference/react/useState) and [`useEffect`.](/reference/react/useEffect) However, this isn't the best possible solution. There is a number of edge cases it doesn't consider. For example, it assumes that when the component mounts, `isOnline` is already `true`, but this may be wrong if the network already went offline. You can use the browser [`navigator.onLine`](https://developer.mozilla.org/en-US/docs/Web/API/Navigator/onLine) API to check for that, but using it directly would not work on the server for generating the initial HTML. In short, this code could be improved.
+Yllä olevassa esimerkissä, `useOnlineStatus` on toteutettu [`useState`](/reference/react/useState) ja [`useEffect`.](/reference/react/useEffect) Hookeilla. Kuitenkin, tämä ei ole paras ratkaisu. On useita reunatapauksia, joita se ei huomioi. Esimerkiksi, se olettaa komponentin mountatessa, `isOnline` olisi jo `true`, vaikka tämä voi olla väärin jos verkkoyhteys on jo katkennut. Voit käyttää selaimen [`navigator.onLine`](https://developer.mozilla.org/en-US/docs/Web/API/Navigator/onLine) API:a tarkistaaksesi tämän, mutta sitä ei voi käyttää suoraan palvelimella HTML:n generointiin. Lyhyesti, tätä koodia voisi parantaa.
 
-Luckily, React 18 includes a dedicated API called [`useSyncExternalStore`](/reference/react/useSyncExternalStore) which takes care of all of these problems for you. Here is how your `useOnlineStatus` Hook, rewritten to take advantage of this new API:
+Onneksi, React 18 sisältää dedikoidun APIn nimeltään [`useSyncExternalStore`](/reference/react/useSyncExternalStore), joka huolehtii kaikista näistä ongelmista puolestasi. Tässä on miten `useOnlineStatus` Hookkisi kirjoitetaan uudelleen hyödyntämään tätä uutta API:a:
 
 <Sandpack>
 
@@ -1384,8 +1384,8 @@ function subscribe(callback) {
 export function useOnlineStatus() {
   return useSyncExternalStore(
     subscribe,
-    () => navigator.onLine, // How to get the value on the client
-    () => true // How to get the value on the server
+    () => navigator.onLine, // Miten haet arvon päätelaitteella
+    () => true // Miten haet arvon palvelimella
   );
 }
 
@@ -1393,7 +1393,7 @@ export function useOnlineStatus() {
 
 </Sandpack>
 
-Notice how **you didn't need to change any of the components** to make this migration:
+Huomaa miten **sinun ei tarvinnut muuttaa mitään komponenteissa** tehdäksesi tämän siirtymän:
 
 ```js {2,7}
 function StatusBar() {
@@ -1407,22 +1407,22 @@ function SaveButton() {
 }
 ```
 
-This is another reason for why wrapping Effects in custom Hooks is often beneficial:
+Tämä on yksi syy miksi Efektien kääriminen omiin Hookkeihin on usein hyödyllistä:
 
-1. You make the data flow to and from your Effects very explicit.
-2. You let your components focus on the intent rather than on the exact implementation of your Effects.
-3. When React adds new features, you can remove those Effects without changing any of your components.
+1. Teet datavirtauksesta Efektiin ja Efektistä eksplisiittistä.
+2. Annat komponenttien keskittyä tarkoitukseen tarkan Efektin toteutuksen sijaan.
+3. Kun React lisää uusia ominaisuuksia, voit poistaa nämä Efektit muuttamatta komponenntejasi.
 
-Similar to a [design system,](https://uxdesign.cc/everything-you-need-to-know-about-design-systems-54b109851969) you might find it helpful to start extracting common idioms from your app's components into custom Hooks. This will keep your components' code focused on the intent, and let you avoid writing raw Effects very often. Many excellent custom Hooks are maintained by the React community.
+Samoin kuin [design -järjestelmissä,](https://uxdesign.cc/everything-you-need-to-know-about-design-systems-54b109851969) saatat kokea yleisten ilmaisujen eristämisen omista komponenteista omiin Hookkeihin hyödylliseksi. Tämä pitää komponenttiesi koodin keskittyneenä tarkoitukseen, ja antaa sinun välttää raakojen Efektien kirjoittamista hyvin usein. Monia erinomaisia omia Hookkeja ylläpitää Reactin yhteisö.
 
 <DeepDive>
 
-#### Will React provide any built-in solution for data fetching? {/*will-react-provide-any-built-in-solution-for-data-fetching*/}
+#### Tuleeko React tarjoamaan sisäänrakennetun ratkaisun tiedonhakuun? {/*will-react-provide-any-built-in-solution-for-data-fetching*/}
 
-We're still working out the details, but we expect that in the future, you'll write data fetching like this:
+Työstämme yksityiskohtia, mutta odotamme että tulevaisuudessa, kirjoitat datan hakemisen näin:
 
 ```js {1,4,6}
-import { use } from 'react'; // Not available yet!
+import { use } from 'react'; // Ei vielä saatavilla!
 
 function ShippingForm({ country }) {
   const cities = use(fetch(`/api/cities?country=${country}`));
@@ -1431,13 +1431,13 @@ function ShippingForm({ country }) {
   // ...
 ```
 
-If you use custom Hooks like `useData` above in your app, it will require fewer changes to migrate to the eventually recommended approach than if you write raw Effects in every component manually. However, the old approach will still work fine, so if you feel happy writing raw Effects, you can continue to do that.
+Jos käytät omia Hookkeja kuten `useData` yllä sovelluksessasi, se vaatii vähemmän muutoksia siirtyä lopulta suositeltuun lähestymistapaan kuin jos kirjoitat raakoja Efektejä jokaiseen komponenttiin manuaalisesti. Kuitenkin, vanha lähestymistapa toimii edelleen hyvin, joten jos tunnet olosi onnelliseksi kirjoittaessasi raakoja Efektejä, voit jatkaa niiden käyttämistä.
 
 </DeepDive>
 
-### There is more than one way to do it {/*there-is-more-than-one-way-to-do-it*/}
+### On useampi tapa tehdä se {/*there-is-more-than-one-way-to-do-it*/}
 
-Let's say you want to implement a fade-in animation *from scratch* using the browser [`requestAnimationFrame`](https://developer.mozilla.org/en-US/docs/Web/API/window/requestAnimationFrame) API. You might start with an Effect that sets up an animation loop. During each frame of the animation, you could change the opacity of the DOM node you [hold in a ref](/learn/manipulating-the-dom-with-refs) until it reaches `1`. Your code might start like this:
+Sanotaan, että haluat toteuttaa häivitysanimaation *alusta saakka* käyttäen selaimen [`requestAnimationFrame`](https://developer.mozilla.org/en-US/docs/Web/API/window/requestAnimationFrame) APIa. Saatat aloittaa Efektillä joka asettaa animaatiosilmukan. Jokaisen animaatiokehyksen aikana, voisit muuttaa DOM solmun läpinäkyvyyttä, jonka [pidät ref:ssä](/learn/manipulating-the-dom-with-refs) kunnes se saavuttaa `1`. Koodisi saattaisi alkaa näyttää tältä:
 
 <Sandpack>
 
@@ -1459,7 +1459,7 @@ function Welcome() {
       const progress = Math.min(timePassed / duration, 1);
       onProgress(progress);
       if (progress < 1) {
-        // We still have more frames to paint
+        // On silti enemmän kehyksiä tehtävänä
         frameId = requestAnimationFrame(onFrame);
       }
     }
@@ -1520,7 +1520,7 @@ html, body { min-height: 300px; }
 
 </Sandpack>
 
-To make the component more readable, you might extract the logic into a `useFadeIn` custom Hook:
+Tehdäksesi komponentista luettavemman, saatat eristää logiikan `useFadeIn` omaksi Hookiksi:
 
 <Sandpack>
 
@@ -1569,7 +1569,7 @@ export function useFadeIn(ref, duration) {
       const progress = Math.min(timePassed / duration, 1);
       onProgress(progress);
       if (progress < 1) {
-        // We still have more frames to paint
+        // Meillä on vielä enemmän kehyksiä tehtävänä
         frameId = requestAnimationFrame(onFrame);
       }
     }
@@ -1611,7 +1611,7 @@ html, body { min-height: 300px; }
 
 </Sandpack>
 
-You could keep the `useFadeIn` code as is, but you could also refactor it more. For example, you could extract the logic for setting up the animation loop out of `useFadeIn` into a custom `useAnimationLoop` Hook:
+Voit pitää `useFadeIn` koodin sellaisenaan, mutta voit myös refaktoroida sitä enemmän. Esimerkiksi, voit eristää logiikan animaatiosilmukan asettamisen `useFadeIn` ulkopuolelle omaksi `useAnimationLoop` Hookiksi:
 
 <Sandpack>
 
@@ -1715,7 +1715,7 @@ html, body { min-height: 300px; }
 
 </Sandpack>
 
-However, you didn't *have to* do that. As with regular functions, ultimately you decide where to draw the boundaries between different parts of your code. You could also take a very different approach. Instead of keeping the logic in the Effect, you could move most of the imperative logic inside a JavaScript [class:](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes)
+Kuitenkaan sinun ei ole *pakko* tehdä sitä. Kuten tavallisten funktioiden kanssa, lopulta päätät missä piirrät rajat eri osien välille koodissasi. Voit myös ottaa hyvin erilaisen lähestymistavan. Sen sijaan, että pitäisit logiikan Efektissä, voit siirtää suurimman osan imperatiivisesta logiikasta JavaScript [luokkaan:](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes)
 
 <Sandpack>
 
@@ -1813,9 +1813,9 @@ html, body { min-height: 300px; }
 
 </Sandpack>
 
-Effects let you connect React to external systems. The more coordination between Effects is needed (for example, to chain multiple animations), the more it makes sense to extract that logic out of Effects and Hooks *completely* like in the sandbox above. Then, the code you extracted *becomes* the "external system". This lets your Effects stay simple because they only need to send messages to the system you've moved outside React.
+Efektien avulla yhdistät Reactin ulkoisiin järjestelmiin. Mitä enemmän koordinaatiota Efektien välillä tarvitaan (esimerkiksi, ketjuttaaksesi useita animaatioita), sitä enemmän on järkeä eristää logiikka Efekteistä ja Hookkeista *täysin* kuten yllä olevassa esimerkissä. Sitten, eristämäsi koodi *tulee* "ulkoiseksi järjestelmäksi". Tämä pitää Efektisi yksinkertaisina koska niiden täytyy vain lähettää viestejä järjestelmään jonka olet siirtänyt Reactin ulkopuolelle.
 
-The examples above assume that the fade-in logic needs to be written in JavaScript. However, this particular fade-in animation is both simpler and much more efficient to implement with a plain [CSS Animation:](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Animations/Using_CSS_animations)
+Esimerkki yllä olettaa, että häivityslogiikka täytyy kirjoittaa JavaScriptillä. Kuitenkin, tämä tietty häivitysanimaatio on sekä yksinkertaisempi että paljon tehokkaampi toteuttaa tavallisella [CSS animaatiolla:](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Animations/Using_CSS_animations)
 
 <Sandpack>
 
@@ -1870,27 +1870,27 @@ html, body { min-height: 300px; }
 
 </Sandpack>
 
-Sometimes, you don't even need a Hook!
+Joskus et edes tarvitse Hookkia!
 
 <Recap>
 
-- Custom Hooks let you share logic between components.
-- Custom Hooks must be named starting with `use` followed by a capital letter.
-- Custom Hooks only share stateful logic, not state itself.
-- You can pass reactive values from one Hook to another, and they stay up-to-date.
-- All Hooks re-run every time your component re-renders.
-- The code of your custom Hooks should be pure, like your component's code.
-- Wrap event handlers received by custom Hooks into Effect Events.
-- Don't create custom Hooks like `useMount`. Keep their purpose specific.
-- It's up to you how and where to choose the boundaries of your code.
+- Omien Hookkien avulla voit jakaa logiikkaa komponenttien välillä.
+- Omat Hookit on nimettävä `use`-alkuisiksi ja niiden täytyy alkaa isolla kirjaimella.
+- Omat Hookit jakavat vain tilallisen logiikan, ei itse tilaa.
+- Voit välittää reaktiivisia arvoja Hookista toiseen ja ne pysyvät ajan tasalla.
+- Kaikki Hookit suoritetaan joka kerta kun komponenttisi renderöityy.
+- Hookin koodin tulisi olla puhdasta, kuten komponenttisi koodi.
+- Kääri tapahtumankäsittelijät jotka Hookkisi vastaanottaa Efektitapahtumiin.
+- Älä luo omia Hookkeja kuten `useMount`. Pidä niiden tarkoitus tarkkana.
+- Sinä päätät miten ja missä valitset koodisi rajat.
 
 </Recap>
 
 <Challenges>
 
-#### Extract a `useCounter` Hook {/*extract-a-usecounter-hook*/}
+#### Tee `useCounter` Hookki {/*extract-a-usecounter-hook*/}
 
-This component uses a state variable and an Effect to display a number that increments every second. Extract this logic into a custom Hook called `useCounter`. Your goal is to make the `Counter` component implementation look exactly like this:
+Tämä komponentti käyttää tilamuuttujaa ja Efektiä näyttääkseen numeron joka kasvaa joka sekunti. Eristä tämä logiikka omaksi Hookiksi nimeltä `useCounter`. Tavoitteesi on saada `Counter` komponentin toteutus näyttämään tältä:
 
 ```js
 export default function Counter() {
@@ -1899,7 +1899,7 @@ export default function Counter() {
 }
 ```
 
-You'll need to write your custom Hook in `useCounter.js` and import it into the `Counter.js` file.
+Sinun täytyy kirjoittaa oma Hookkisi `useCounter.js` tiedostoon ja tuoda se `Counter.js` tiedostoon.
 
 <Sandpack>
 
@@ -1919,14 +1919,14 @@ export default function Counter() {
 ```
 
 ```js useCounter.js
-// Write your custom Hook in this file!
+// Kirjoita oma Hookkisi tähän tiedostoon!
 ```
 
 </Sandpack>
 
 <Solution>
 
-Your code should look like this:
+Koodisi tulisi näyttää tältä:
 
 <Sandpack>
 
@@ -1956,13 +1956,13 @@ export function useCounter() {
 
 </Sandpack>
 
-Notice that `App.js` doesn't need to import `useState` or `useEffect` anymore.
+Huomaa miten `App.js`:n ei tarvitse importata `useState`:a taikka `useEffect`:ia enää.
 
 </Solution>
 
-#### Make the counter delay configurable {/*make-the-counter-delay-configurable*/}
+#### Tee laskurin viiveestä muutettava {/*make-the-counter-delay-configurable*/}
 
-In this example, there is a `delay` state variable controlled by a slider, but its value is not used. Pass the `delay` value to your custom `useCounter` Hook, and change the `useCounter` Hook to use the passed `delay` instead of hardcoding `1000` ms.
+Tässä esimerkissä on `delay` tilamuuttuja jota hallitaan liukusäätimellä, mutta sen arvoa ei käytetä. Välitä `delay` arvo omalle `useCounter` Hookillesi, ja muuta `useCounter` Hookkia käyttämään annettua `delay` arvoa sen sijaan että se kovakoodaisi `1000` ms.
 
 <Sandpack>
 
@@ -2012,7 +2012,7 @@ export function useCounter() {
 
 <Solution>
 
-Pass the `delay` to your Hook with `useCounter(delay)`. Then, inside the Hook, use `delay` instead of the hardcoded `1000` value. You'll need to add `delay` to your Effect's dependencies. This ensures that a change in `delay` will reset the interval.
+Välitä `delay` Hookillesi `useCounter(delay)` avulla. Sitten, Hookissa, käytä `delay`:ta kovakoodatun `1000` arvon sijaan. Sinun täytyy lisätä `delay` Efektisi riippuvuuksiin. Tämä varmistaa että `delay`:n muutos nollaa laskurin.
 
 <Sandpack>
 
@@ -2062,9 +2062,9 @@ export function useCounter(delay) {
 
 </Solution>
 
-#### Extract `useInterval` out of `useCounter` {/*extract-useinterval-out-of-usecounter*/}
+#### Siirrä `useInterval` Hookki `useCounter` Hookista {/*extract-useinterval-out-of-usecounter*/}
 
-Currently, your `useCounter` Hook does two things. It sets up an interval, and it also increments a state variable on every interval tick. Split out the logic that sets up the interval into a separate Hook called `useInterval`. It should take two arguments: the `onTick` callback, and the `delay`. After this change, your `useCounter` implementation should look like this:
+Nykyisellään, `useCounter` Hookkisi tekee kaksi asiaa. Se asettaa laskurin, ja se myös kasvattaa tilamuuttujaa joka kehyksellä. Eristä logiikka, joka asettaa laskurin omaksi Hookiksi nimeltä `useInterval`. Sen tulisi ottaa kaksi argumenttia: `onTick` callbackki, ja `delay`. Tämän muutoksen jälkeen, `useCounter` toteutuksesi tulisi näyttää tältä:
 
 ```js
 export function useCounter(delay) {
@@ -2076,7 +2076,7 @@ export function useCounter(delay) {
 }
 ```
 
-Write `useInterval` in the `useInterval.js` file and import it into the `useCounter.js` file.
+Kirjoita `useInterval` `useInterval.js` tiedostoon ja tuo se `useCounter.js` tiedostoon.
 
 <Sandpack>
 
@@ -2106,14 +2106,14 @@ export function useCounter(delay) {
 ```
 
 ```js useInterval.js
-// Write your Hook here!
+// Kirjoita oma Hookkisi tähän tiedostoon!
 ```
 
 </Sandpack>
 
 <Solution>
 
-The logic inside `useInterval` should set up and clear the interval. It doesn't need to do anything else.
+Logiikka `useInterval`:n sisällä tulisi aloittaa ja lopettaa laskuri. Sen ei tarvitse tehdä mitään muuta.
 
 <Sandpack>
 
@@ -2152,17 +2152,17 @@ export function useInterval(onTick, delay) {
 
 </Sandpack>
 
-Note that there is a bit of a problem with this solution, which you'll solve in the next challenge.
+Huomaa, että tässä ratkaisussa on pieni ongelma, jonka ratkaiset seuraavassa haasteessa.
 
 </Solution>
 
-#### Fix a resetting interval {/*fix-a-resetting-interval*/}
+#### Korjaa nollautuva laskuri {/*fix-a-resetting-interval*/}
 
-In this example, there are *two* separate intervals.
+Tässä esimerkissä on *kaksi* erillistä laskuria.
 
-The `App` component calls `useCounter`, which calls `useInterval` to update the counter every second. But the `App` component *also* calls `useInterval` to randomly update the page background color every two seconds.
+`App` komponentti kutsuu `useCounter` Hookkia, joka kutsuu `useInterval` Hookkia päivittääkseen laskurin joka sekunti. Mutta `App` komponentti *myös* kutsuu `useInterval` Hookkia satunnaisesti päivittääkseen sivun taustavärin kahden sekuntin välein.
 
-For some reason, the callback that updates the page background never runs. Add some logs inside `useInterval`:
+Jostain syystä, callbackkia joka päivittää sivun taustavärin ei koskaan suoriteta. Lisää konsoliloki `useInterval`:iin:
 
 ```js {2,5}
   useEffect(() => {
@@ -2175,13 +2175,13 @@ For some reason, the callback that updates the page background never runs. Add s
   }, [onTick, delay]);
 ```
 
-Do the logs match what you expect to happen? If some of your Effects seem to re-synchronize unnecessarily, can you guess which dependency is causing that to happen? Is there some way to [remove that dependency](/learn/removing-effect-dependencies) from your Effect?
+Vastaavatko lokit sitä mitä odotat tapahtuvan? Jos jotkut Efekteistäsi näyttävät synkronisoituvan tarpeettomasti, pystytkö arvaamaan mikä riippuvuus aiheuttaa sen? Olisiko jokin tapa [poistaa riippuvuus](/learn/removing-effect-dependencies) Efektistäsi?
 
-After you fix the issue, you should expect the page background to update every two seconds.
+Kun olet korjannut ongelman, sivun taustavärin tulisi päivittyä joka toinen sekunti.
 
 <Hint>
 
-It looks like your `useInterval` Hook accepts an event listener as an argument. Can you think of some way to wrap that event listener so that it doesn't need to be a dependency of your Effect?
+Näyttää siltä että `useInterval` Hookkisi hyväksyy tapahtumankäsittelijän argumenttina. Voitko keksiä jonkin tavan kääriä tapahtumankäsittelijä niin että sen ei tarvitse olla Efektisi riippuvuus?
 
 </Hint>
 
@@ -2250,11 +2250,11 @@ export function useInterval(onTick, delay) {
 
 <Solution>
 
-Inside `useInterval`, wrap the tick callback into an Effect Event, as you did [earlier on this page.](/learn/reusing-logic-with-custom-hooks#passing-event-handlers-to-custom-hooks)
+`useInterval` Hookkisi sisällä, kääri tick callbackki Efektitapahtumaksi, kuten teit [tämän sivun aiemmassa osassa.](/learn/reusing-logic-with-custom-hooks#passing-event-handlers-to-custom-hooks)
 
-This will allow you to omit `onTick` from dependencies of your Effect. The Effect won't re-synchronize on every re-render of the component, so the page background color change interval won't get reset every second before it has a chance to fire.
+Tämä mahdollistaa `onTick`:in jättämisen Efektisi riippuvuuksista pois. Efekti ei synkronisoidu joka renderöinnin yhteydessä, joten sivun taustavärin muutos ei nollaudu joka sekunti ennen kuin sillä on mahdollisuus suorittua.
 
-With this change, both intervals work as expected and don't interfere with each other:
+Tällä muutoksella, molemmat laskurit toimivat odotetusti eivätkä häiritse toisiaan:
 
 <Sandpack>
 
@@ -2321,21 +2321,21 @@ export function useInterval(callback, delay) {
 
 </Solution>
 
-#### Implement a staggering movement {/*implement-a-staggering-movement*/}
+#### Toteuta porrastettu liike {/*implement-a-staggering-movement*/}
 
-In this example, the `usePointerPosition()` Hook tracks the current pointer position. Try moving your cursor or your finger over the preview area and see the red dot follow your movement. Its position is saved in the `pos1` variable.
+Tässä eismerkissä, `usePointerPosition()` Hookki seuraa nykyistä osoittimen sijaintia. Kokeile liikuttaa hiirtäsi tai sormeasi esikatselualueen yli ja näe kuinka punainen piste seuraa liikettäsi. Sen sijainti tallennetaan `pos1` muuttujaan.
 
-In fact, there are five (!) different red dots being rendered. You don't see them because currently they all appear at the same position. This is what you need to fix. What you want to implement instead is a "staggered" movement: each dot should "follow" the previous dot's path. For example, if you quickly move your cursor, the first dot should follow it immediately, the second dot should follow the first dot with a small delay, the third dot should follow the second dot, and so on.
+Itse asiassa, viisi (!) punaista pistettä renderöidään. Et näe niitä, koska tällä hetkellä ne kaikki näkyvät samassa paikassa. Tämä on mitä sinun täytyy korjata. Sen sijaan mitä haluat toteuttaa on "portaikko" liike: jokaisen pisteen tulisi "seurata" edellisen pisteen polkua. Esimerkiksi, jos liikutat kursoriasi nopeasti, ensimmäisen pisteen tulisi seurata sitä välittömästi, toisen pisteen tulisi seurata ensimmäistä pistettä pienellä viiveellä, kolmannen pisteen tulisi seurata toista pistettä, ja niin edelleen.
 
-You need to implement the `useDelayedValue` custom Hook. Its current implementation returns the `value` provided to it. Instead, you want to return the value back from `delay` milliseconds ago. You might need some state and an Effect to do this.
+Sinun täytyy toteuttaa `useDelayedValue` Hookki. Sen nykyinen toteutus palauttaa sille annetun `value`:n. Sen sijaan, haluat palauttaa arvon `delay` millisekuntia sitten. Saatat tarvita tilaa ja Efektin tehdäksesi tämän.
 
-After you implement `useDelayedValue`, you should see the dots move following one another.
+Kun olet toteuttanut `useDelayedValue`:n, sinun tulisi nähdä pisteiden liikkuvan toistensa perässä.
 
 <Hint>
 
-You'll need to store the `delayedValue` as a state variable inside your custom Hook. When the `value` changes, you'll want to run an Effect. This Effect should update `delayedValue` after the `delay`. You might find it helpful to call `setTimeout`.
+Sinun täytyy tallentaa `delayedValue` tilamuutujaan omassa Hookissasi. Kun `value` muuttuu, aja Efekti. Tämä Efekti tulisi päivittää `delayedValue` `delay`:n jälkeen. Saatat löytää hyödylliseksi kutsua `setTimeout` funktiota.
 
-Does this Effect need cleanup? Why or why not?
+Tarvitseeko tämä Efekti siivousta? Miki tai miksi ei?
 
 </Hint>
 
@@ -2408,7 +2408,7 @@ body { min-height: 300px; }
 
 <Solution>
 
-Here is a working version. You keep the `delayedValue` as a state variable. When `value` updates, your Effect schedules a timeout to update the `delayedValue`. This is why the `delayedValue` always "lags behind" the actual `value`.
+Tässä on toimiva versio. Pidät `delayedValue`:n tilamuuttujana. Kun `value` päivittyy, Efektisi aikatauluttaa laskurin päivittääkseen `delayedValue`:n. Tämä on miksi `delayedValue` aina "jää jälkeen" itse `value`:sta.
 
 <Sandpack>
 
@@ -2485,7 +2485,7 @@ body { min-height: 300px; }
 
 </Sandpack>
 
-Note that this Effect *does not* need cleanup. If you called `clearTimeout` in the cleanup function, then each time the `value` changes, it would reset the already scheduled timeout. To keep the movement continuous, you want all the timeouts to fire.
+Huomaa, että tämä Efekti *ei tarvitse* siivousta. Jos kutsuit `clearTimeout` siivousfunktiossa, joka kerta kun `value` muuttuu, se nollaisi jo aikataulutetun laskurin. Jotta liike pysyisi jatkuvana, haluat, että kaikki timeoutit laukeavat.
 
 </Solution>
 

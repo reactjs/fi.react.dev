@@ -14,6 +14,8 @@
 ## General
 
 - **branching logic**: haaralogiikka
+- **convention**: yleinen tapa
+- **lifecycle**: elinkaari
 - **control flow**: ohjausvirta
 - **destructuring**: (taulukon / olion) levityssyntaksi
 - **spread**: (taulukon / olion) levityssyntaksi
