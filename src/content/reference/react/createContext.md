@@ -16,7 +16,7 @@ const SomeContext = createContext(defaultValue)
 
 ---
 
-## Referenssi {/*reference*/}
+## Viite {/*reference*/}
 
 ### `createContext(defaultValue)` {/*createcontext*/}
 
@@ -61,7 +61,7 @@ function App() {
 }
 ```
 
-#### Propsit {/*provider-props*/}
+#### Propsitit {/*provider-props*/}
 
 * `value`: Arvo, jonka haluat välittää kaikille tämän tarjoajan sisällä oleville kontekstin lukeville komponenteille, riippumatta siitä, kuinka syvällä ne ovat. Kontekstin arvo voi olla mitä tahansa tyyppiä. Komponentti, joka kutsuu [`useContext(SomeContext)`](/reference/react/useContext) -Hookkia tarjoajan sisällä, saa `value`:n vastaavasta kontekstin tarjoajasta, joka on sen yläpuolella.
 
@@ -94,7 +94,7 @@ function Button() {
 }
 ```
 
-#### Propsit {/*consumer-props*/}
+#### Propsitit {/*consumer-props*/}
 
 * `children`: Funktio. React kutsuu funktiota, johon välität nykyisen kontekstin arvon, joka on määritetty samalla algoritmilla kuin [`useContext()`](/reference/react/useContext) tekee, ja renderöi tuloksen, jonka palautat tästä funktiosta. React myös uudelleen suorittaa tämän funktion ja päivittää käyttöliittymän aina kun konteksti ylemmistä komponenteista muuttuu.
 

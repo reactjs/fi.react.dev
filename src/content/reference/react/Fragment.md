@@ -19,17 +19,17 @@ title: <Fragment> (<>...</>)
 
 ---
 
-## Reference {/*reference*/}
+## Viite {/*reference*/}
 
 ### `<Fragment>` {/*fragment*/}
 
 Wrap elements in `<Fragment>` to group them together in situations where you need a single element. Grouping elements in `Fragment` has no effect on the resulting DOM; it is the same as if the elements were not grouped. The empty JSX tag `<></>` is shorthand for `<Fragment></Fragment>` in most cases.
 
-#### Props {/*props*/}
+#### Propsit {/*props*/}
 
 - **optional** `key`: Fragments declared with the explicit `<Fragment>` syntax may have [keys.](/learn/rendering-lists#keeping-list-items-in-order-with-key)
 
-#### Caveats {/*caveats*/}
+#### Rajoitukset {/*caveats*/}
 
 - If you want to pass `key` to a Fragment, you can't use the `<>...</>` syntax. You have to explicitly import `Fragment` from `'react'` and render `<Fragment key={yourKey}>...</Fragment>`.
 
@@ -37,7 +37,7 @@ Wrap elements in `<Fragment>` to group them together in situations where you nee
 
 ---
 
-## Usage {/*usage*/}
+## Käyttö {/*usage*/}
 
 ### Returning multiple elements {/*returning-multiple-elements*/}
 

@@ -16,7 +16,7 @@ const [isPending, startTransition] = useTransition()
 
 ---
 
-## Reference {/*reference*/}
+## Viite {/*reference*/}
 
 ### `useTransition()` {/*usetransition*/}
 
@@ -33,11 +33,11 @@ function TabContainer() {
 
 [See more examples below.](#usage)
 
-#### Parameters {/*parameters*/}
+#### Parametrit {/*parameters*/}
 
 `useTransition` does not take any parameters.
 
-#### Returns {/*returns*/}
+#### Palautukset {/*returns*/}
 
 `useTransition` returns an array with exactly two items:
 
@@ -64,15 +64,15 @@ function TabContainer() {
 }
 ```
 
-#### Parameters {/*starttransition-parameters*/}
+#### Parametrit {/*starttransition-parameters*/}
 
 * `scope`: A function that updates some state by calling one or more [`set` functions.](/reference/react/useState#setstate) React immediately calls `scope` with no parameters and marks all state updates scheduled synchronously during the `scope` function call as transitions. They will be [non-blocking](#marking-a-state-update-as-a-non-blocking-transition) and [will not display unwanted loading indicators.](#preventing-unwanted-loading-indicators)
 
-#### Returns {/*starttransition-returns*/}
+#### Palautukset {/*starttransition-returns*/}
 
 `startTransition` does not return anything.
 
-#### Caveats {/*starttransition-caveats*/}
+#### Rajoitukset {/*starttransition-caveats*/}
 
 * `useTransition` is a Hook, so it can only be called inside components or custom Hooks. If you need to start a transition somewhere else (for example, from a data library), call the standalone [`startTransition`](/reference/react/startTransition) instead.
 
@@ -88,7 +88,7 @@ function TabContainer() {
 
 ---
 
-## Usage {/*usage*/}
+## Käyttö {/*usage*/}
 
 ### Marking a state update as a non-blocking transition {/*marking-a-state-update-as-a-non-blocking-transition*/}
 
@@ -1501,7 +1501,7 @@ main {
 
 ---
 
-## Troubleshooting {/*troubleshooting*/}
+## Vianmääritys {/*troubleshooting*/}
 
 ### Updating an input in a transition doesn't work {/*updating-an-input-in-a-transition-doesnt-work*/}
 

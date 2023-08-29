@@ -16,7 +16,7 @@ The [built-in browser `<progress>` component](https://developer.mozilla.org/en-U
 
 ---
 
-## Reference {/*reference*/}
+## Viite {/*reference*/}
 
 ### `<progress>` {/*progress*/}
 
@@ -28,7 +28,7 @@ To display a progress indicator, render the [built-in browser `<progress>`](http
 
 [See more examples below.](#usage)
 
-#### Props {/*props*/}
+#### Propsit {/*props*/}
 
 `<progress>` supports all [common element props.](/reference/react-dom/components/common#props)
 
@@ -39,7 +39,7 @@ Additionally, `<progress>` supports these props:
 
 ---
 
-## Usage {/*usage*/}
+## Käyttö {/*usage*/}
 
 ### Controlling a progress indicator {/*controlling-a-progress-indicator*/}
 

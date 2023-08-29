@@ -24,7 +24,7 @@ unmountComponentAtNode(domNode)
 
 ---
 
-## Reference {/*reference*/}
+## Viite {/*reference*/}
 
 ### `unmountComponentAtNode(domNode)` {/*unmountcomponentatnode*/}
 
@@ -41,17 +41,17 @@ unmountComponentAtNode(domNode);
 
 [See more examples below.](#usage)
 
-#### Parameters {/*parameters*/}
+#### Parametrit {/*parameters*/}
 
 * `domNode`: A [DOM element.](https://developer.mozilla.org/en-US/docs/Web/API/Element) React will remove a mounted React component from this element.
 
-#### Returns {/*returns*/}
+#### Palautukset {/*returns*/}
 
 `unmountComponentAtNode` returns `true` if a component was unmounted and `false` otherwise.
 
 ---
 
-## Usage {/*usage*/}
+## Käyttö {/*usage*/}
 
 Call `unmountComponentAtNode` to remove a <CodeStep step={1}>mounted React component</CodeStep> from a <CodeStep step={2}>browser DOM node</CodeStep> and clean up its event handlers and state.
 

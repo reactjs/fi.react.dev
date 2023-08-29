@@ -16,7 +16,7 @@ const html = renderToStaticMarkup(reactNode)
 
 ---
 
-## Reference {/*reference*/}
+## Viite {/*reference*/}
 
 ### `renderToStaticMarkup(reactNode)` {/*rendertostaticmarkup*/}
 
@@ -32,15 +32,15 @@ It will produce non-interactive HTML output of your React components.
 
 [See more examples below.](#usage)
 
-#### Parameters {/*parameters*/}
+#### Parametrit {/*parameters*/}
 
 * `reactNode`: A React node you want to render to HTML. For example, a JSX node like `<Page />`.
 
-#### Returns {/*returns*/}
+#### Palautukset {/*returns*/}
 
 An HTML string.
 
-#### Caveats {/*caveats*/}
+#### Rajoitukset {/*caveats*/}
 
 * `renderToStaticMarkup` output cannot be hydrated.
 
@@ -50,7 +50,7 @@ An HTML string.
 
 ---
 
-## Usage {/*usage*/}
+## Käyttö {/*usage*/}
 
 ### Rendering a non-interactive React tree as HTML to a string {/*rendering-a-non-interactive-react-tree-as-html-to-a-string*/}
 

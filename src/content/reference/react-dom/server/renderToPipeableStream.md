@@ -22,7 +22,7 @@ This API is specific to Node.js. Environments with [Web Streams,](https://develo
 
 ---
 
-## Reference {/*reference*/}
+## Viite {/*reference*/}
 
 ### `renderToPipeableStream(reactNode, options?)` {/*rendertopipeablestream*/}
 
@@ -44,7 +44,7 @@ On the client, call [`hydrateRoot`](/reference/react-dom/client/hydrateRoot) to 
 
 [See more examples below.](#usage)
 
-#### Parameters {/*parameters*/}
+#### Parametrit {/*parameters*/}
 
 * `reactNode`: A React node you want to render to HTML. For example, a JSX element like `<App />`. It is expected to represent the entire document, so the `App` component should render the `<html>` tag.
 
@@ -62,7 +62,7 @@ On the client, call [`hydrateRoot`](/reference/react-dom/client/hydrateRoot) to 
   * **optional** `progressiveChunkSize`: The number of bytes in a chunk. [Read more about the default heuristic.](https://github.com/facebook/react/blob/14c2be8dac2d5482fda8a0906a31d239df8551fc/packages/react-server/src/ReactFizzServer.js#L210-L225)
 
 
-#### Returns {/*returns*/}
+#### Palautukset {/*returns*/}
 
 `renderToPipeableStream` returns an object with two methods:
 
@@ -71,7 +71,7 @@ On the client, call [`hydrateRoot`](/reference/react-dom/client/hydrateRoot) to 
 
 ---
 
-## Usage {/*usage*/}
+## Käyttö {/*usage*/}
 
 ### Rendering a React tree as HTML to a Node.js Stream {/*rendering-a-react-tree-as-html-to-a-nodejs-stream*/}
 

@@ -19,15 +19,15 @@ title: <Suspense>
 
 ---
 
-## Reference {/*reference*/}
+## Viite {/*reference*/}
 
 ### `<Suspense>` {/*suspense*/}
 
-#### Props {/*props*/}
+#### Propsit {/*props*/}
 * `children`: The actual UI you intend to render. If `children` suspends while rendering, the Suspense boundary will switch to rendering `fallback`.
 * `fallback`: An alternate UI to render in place of the actual UI if it has not finished loading. Any valid React node is accepted, though in practice, a fallback is a lightweight placeholder view, such as a loading spinner or skeleton. Suspense will automatically switch to `fallback` when `children` suspends, and back to `children` when the data is ready. If `fallback` suspends while rendering, it will activate the closest parent Suspense boundary.
 
-#### Caveats {/*caveats*/}
+#### Rajoitukset {/*caveats*/}
 
 - React does not preserve any state for renders that got suspended before they were able to mount for the first time. When the component has loaded, React will retry rendering the suspended tree from scratch.
 - If Suspense was displaying content for the tree, but then it suspended again, the `fallback` will be shown again unless the update causing it was caused by [`startTransition`](/reference/react/startTransition) or [`useDeferredValue`](/reference/react/useDeferredValue).
@@ -36,7 +36,7 @@ title: <Suspense>
 
 ---
 
-## Usage {/*usage*/}
+## Käyttö {/*usage*/}
 
 ### Displaying a fallback while content is loading {/*displaying-a-fallback-while-content-is-loading*/}
 
@@ -2538,7 +2538,7 @@ The server HTML will include the loading indicator. It will be replaced by the `
 
 ---
 
-## Troubleshooting {/*troubleshooting*/}
+## Vianmääritys {/*troubleshooting*/}
 
 ### How do I prevent the UI from being replaced by a fallback during an update? {/*preventing-unwanted-fallbacks*/}
 

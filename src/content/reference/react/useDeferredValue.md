@@ -16,7 +16,7 @@ const deferredValue = useDeferredValue(value)
 
 ---
 
-## Reference {/*reference*/}
+## Viite {/*reference*/}
 
 ### `useDeferredValue(value)` {/*usedeferredvalue*/}
 
@@ -34,15 +34,15 @@ function SearchPage() {
 
 [See more examples below.](#usage)
 
-#### Parameters {/*parameters*/}
+#### Parametrit {/*parameters*/}
 
 * `value`: The value you want to defer. It can have any type.
 
-#### Returns {/*returns*/}
+#### Palautukset {/*returns*/}
 
 During the initial render, the returned deferred value will be the same as the value you provided. During updates, React will first attempt a re-render with the old value (so it will return the old value), and then try another re-render in background with the new value (so it will return the updated value). 
 
-#### Caveats {/*caveats*/}
+#### Rajoitukset {/*caveats*/}
 
 - The values you pass to `useDeferredValue` should either be primitive values (like strings and numbers) or objects created outside of rendering. If you create a new object during rendering and immediately pass it to `useDeferredValue`, it will be different on every render, causing unnecessary background re-renders.
 
@@ -58,7 +58,7 @@ During the initial render, the returned deferred value will be the same as the v
 
 ---
 
-## Usage {/*usage*/}
+## Käyttö {/*usage*/}
 
 ### Showing stale content while fresh content is loading {/*showing-stale-content-while-fresh-content-is-loading*/}
 

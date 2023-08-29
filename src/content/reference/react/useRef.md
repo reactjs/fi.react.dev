@@ -16,7 +16,7 @@ const ref = useRef(initialValue)
 
 ---
 
-## Reference {/*reference*/}
+## Viite {/*reference*/}
 
 ### `useRef(initialValue)` {/*useref*/}
 
@@ -33,11 +33,11 @@ function MyComponent() {
 
 [See more examples below.](#usage)
 
-#### Parameters {/*parameters*/}
+#### Parametrit {/*parameters*/}
 
 * `initialValue`: The value you want the ref object's `current` property to be initially. It can be a value of any type. This argument is ignored after the initial render.
 
-#### Returns {/*returns*/}
+#### Palautukset {/*returns*/}
 
 `useRef` returns an object with a single property:
 
@@ -45,7 +45,7 @@ function MyComponent() {
 
 On the next renders, `useRef` will return the same object.
 
-#### Caveats {/*caveats*/}
+#### Rajoitukset {/*caveats*/}
 
 * You can mutate the `ref.current` property. Unlike state, it is mutable. However, if it holds an object that is used for rendering (for example, a piece of your state), then you shouldn't mutate that object.
 * When you change the `ref.current` property, React does not re-render your component. React is not aware of when you change it because a ref is a plain JavaScript object.
@@ -54,7 +54,7 @@ On the next renders, `useRef` will return the same object.
 
 ---
 
-## Usage {/*usage*/}
+## Käyttö {/*usage*/}
 
 ### Referencing a value with a ref {/*referencing-a-value-with-a-ref*/}
 
@@ -538,7 +538,7 @@ Here, the `playerRef` itself is nullable. However, you should be able to convinc
 
 ---
 
-## Troubleshooting {/*troubleshooting*/}
+## Vianmääritys {/*troubleshooting*/}
 
 ### I can't get a ref to a custom component {/*i-cant-get-a-ref-to-a-custom-component*/}
 

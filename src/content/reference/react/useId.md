@@ -16,7 +16,7 @@ const id = useId()
 
 ---
 
-## Reference {/*reference*/}
+## Viite {/*reference*/}
 
 ### `useId()` {/*useid*/}
 
@@ -32,15 +32,15 @@ function PasswordField() {
 
 [See more examples below.](#usage)
 
-#### Parameters {/*parameters*/}
+#### Parametrit {/*parameters*/}
 
 `useId` does not take any parameters.
 
-#### Returns {/*returns*/}
+#### Palautukset {/*returns*/}
 
 `useId` returns a unique ID string associated with this particular `useId` call in this particular component.
 
-#### Caveats {/*caveats*/}
+#### Rajoitukset {/*caveats*/}
 
 * `useId` is a Hook, so you can only call it **at the top level of your component** or your own Hooks. You can't call it inside loops or conditions. If you need that, extract a new component and move the state into it.
 
@@ -48,7 +48,7 @@ function PasswordField() {
 
 ---
 
-## Usage {/*usage*/}
+## Käyttö {/*usage*/}
 
 <Pitfall>
 

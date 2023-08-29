@@ -16,7 +16,7 @@ useDebugValue(value, format?)
 
 ---
 
-## Reference {/*reference*/}
+## Viite {/*reference*/}
 
 ### `useDebugValue(value, format?)` {/*usedebugvalue*/}
 
@@ -34,16 +34,16 @@ function useOnlineStatus() {
 
 [See more examples below.](#usage)
 
-#### Parameters {/*parameters*/}
+#### Parametrit {/*parameters*/}
 
 * `value`: The value you want to display in React DevTools. It can have any type.
 * **optional** `format`: A formatting function. When the component is inspected, React DevTools will call the formatting function with the `value` as the argument, and then display the returned formatted value (which may have any type). If you don't specify the formatting function, the original `value` itself will be displayed.
 
-#### Returns {/*returns*/}
+#### Palautukset {/*returns*/}
 
 `useDebugValue` does not return anything.
 
-## Usage {/*usage*/}
+## Käyttö {/*usage*/}
 
 ### Adding a label to a custom Hook {/*adding-a-label-to-a-custom-hook*/}
 

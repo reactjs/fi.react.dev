@@ -16,7 +16,7 @@ The [built-in browser `<textarea>` component](https://developer.mozilla.org/en-U
 
 ---
 
-## Reference {/*reference*/}
+## Viite {/*reference*/}
 
 ### `<textarea>` {/*textarea*/}
 
@@ -28,7 +28,7 @@ To display a text area, render the [built-in browser `<textarea>`](https://devel
 
 [See more examples below.](#usage)
 
-#### Props {/*props*/}
+#### Propsit {/*props*/}
 
 `<textarea>` supports all [common element props.](/reference/react-dom/components/common#props)
 
@@ -67,7 +67,7 @@ These `<textarea>` props are relevant both for uncontrolled and controlled text 
 * [`rows`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/textarea#rows): A number. Specifies the default height in average character heights. Defaults to `2`.
 * [`wrap`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/textarea#wrap): Either `'hard'`, `'soft'`, or `'off'`. Specifies how the text should be wrapped when submitting a form.
 
-#### Caveats {/*caveats*/}
+#### Rajoitukset {/*caveats*/}
 
 - Passing children like `<textarea>something</textarea>` is not allowed. [Use `defaultValue` for initial content.](#providing-an-initial-value-for-a-text-area)
 - If a text area receives a string `value` prop, it will be [treated as controlled.](#controlling-a-text-area-with-a-state-variable)
@@ -77,7 +77,7 @@ These `<textarea>` props are relevant both for uncontrolled and controlled text 
 
 ---
 
-## Usage {/*usage*/}
+## Käyttö {/*usage*/}
 
 ### Displaying a text area {/*displaying-a-text-area*/}
 
@@ -336,7 +336,7 @@ textarea { display: block; margin-top: 5px; margin-bottom: 10px; }
 
 ---
 
-## Troubleshooting {/*troubleshooting*/}
+## Vianmääritys {/*troubleshooting*/}
 
 ### My text area doesn't update when I type into it {/*my-text-area-doesnt-update-when-i-type-into-it*/}
 
