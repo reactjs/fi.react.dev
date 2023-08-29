@@ -1,5 +1,5 @@
 ---
-title: Synkronointi Effecteilla
+title: Synkronointi Efekteillä
 ---
 
 <Intro>

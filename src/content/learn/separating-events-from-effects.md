@@ -1,5 +1,5 @@
 ---
-title: 'Tapahtumien erottaminen Efekteista'
+title: 'Tapahtumien erottaminen Efekteistä'
 ---
 
 <Intro>

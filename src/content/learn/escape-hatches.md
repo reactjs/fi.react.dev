@@ -1,35 +1,35 @@
 ---
-title: Escape Hatches
+title: Pelastusluukut
 ---
 
 <Intro>
 
-Some of your components may need to control and synchronize with systems outside of React. For example, you might need to focus an input using the browser API, play and pause a video player implemented without React, or connect and listen to messages from a remote server. In this chapter, you'll learn the escape hatches that let you "step outside" React and connect to external systems. Most of your application logic and data flow should not rely on these features.
+Jotkin komponenteistasi saattavat tarvita kontrolloida ja synkronoida Reactin ulkopuolisten järjestelmien kanssa. Esimerkiksi saatat tarvita fokuksen syöttölaatikkoon käyttäen selaimen API:a, toistaa ja pysäyttää videon toistoa Reactin ulkopuolisella videotoistimella tai yhdistää ja kuunnella viestejä etäpalvelimelta. Tässä luvussa opit pelastusluukut, jotka antavat sinun "astua ulos" Reactista ja yhdistää ulkoisiin järjestelmiin. Suurin osa sovelluksesi logiikasta ja datavirrasta ei pitäisi nojata näihin ominaisuuksiin.
 
 </Intro>
 
 <YouWillLearn isChapter={true}>
 
-* [How to "remember" information without re-rendering](/learn/referencing-values-with-refs)
-* [How to access DOM elements managed by React](/learn/manipulating-the-dom-with-refs)
-* [How to synchronize components with external systems](/learn/synchronizing-with-effects)
-* [How to remove unnecessary Effects from your components](/learn/you-might-not-need-an-effect)
-* [How an Effect's lifecycle is different from a component's](/learn/lifecycle-of-reactive-effects)
-* [How to prevent some values from re-triggering Effects](/learn/separating-events-from-effects)
-* [How to make your Effect re-run less often](/learn/removing-effect-dependencies)
-* [How to share logic between components](/learn/reusing-logic-with-custom-hooks)
+* [Miten "muistaa" tietoa renderöimättä](/learn/referencing-values-with-refs)
+* [Miten käsitellä Reactin hallitsemia DOM elementtejä](/learn/manipulating-the-dom-with-refs)
+* [Miten synkronisoida komponentteja ulkoisten järjestelmien kanssa](/learn/synchronizing-with-effects)
+* [Miten poistaa turhia Efektejä komponenteista](/learn/you-might-not-need-an-effect)
+* [Miten Efektin elinkaari eroaa komponentin elinkaaresta](/learn/lifecycle-of-reactive-effects)
+* [Miten estää Efekin käynnistyminen tietyillä arvoilla](/learn/separating-events-from-effects)
+* [Miten saat Efektin suoriutumaan harvemmin](/learn/removing-effect-dependencies)
+* [Miten jakaa logiikkaa komponenttien välillä](/learn/reusing-logic-with-custom-hooks)
 
 </YouWillLearn>
 
-## Referencing values with refs {/*referencing-values-with-refs*/}
+## Arvoihin viittaaminen Refillä {/*referencing-values-with-refs*/}
 
-When you want a component to "remember" some information, but you don't want that information to [trigger new renders](/learn/render-and-commit), you can use a *ref*:
+Kun haluat komponentin "muistavan" tietoa, mutta et halua sen tiedon [aiheuttavan uusia renderöintejä](/learn/render-and-commit), voit käyttää *refiä*:
 
 ```js
 const ref = useRef(0);
 ```
 
-Like state, refs are retained by React between re-renders. However, setting state re-renders a component. Changing a ref does not! You can access the current value of that ref through the `ref.current` property.
+Kuten tila, React säilyttää refit uudelleenrenderöintien välillä. Kuitenkin tilan asettaminen uudelleenrenderöi komponentin. Refin muuttaminen ei! Voit käyttää refiä sen nykyisen arvon hakemiseen `ref.current` ominaisuuden kautta.
 
 <Sandpack>
 
@@ -54,17 +54,17 @@ export default function Counter() {
 
 </Sandpack>
 
-A ref is like a secret pocket of your component that React doesn't track. For example, you can use refs to store [timeout IDs](https://developer.mozilla.org/en-US/docs/Web/API/setTimeout#return_value), [DOM elements](https://developer.mozilla.org/en-US/docs/Web/API/Element), and other objects that don't impact the component's rendering output.
+Ref on kuin salainen tasku komponentissasi, jota React ei seuraa. Esimerkiksi, voit käyttää refiä tallentamaan [timeout ID:tä](https://developer.mozilla.org/en-US/docs/Web/API/setTimeout#return_value), [DOM elementtejä](https://developer.mozilla.org/en-US/docs/Web/API/Element) ja muita olioita, jotka eivät vaikuta komponentin renderöintiin.
 
 <LearnMore path="/learn/referencing-values-with-refs">
 
-Read **[Referencing Values with Refs](/learn/referencing-values-with-refs)** to learn how to use refs to remember information.
+Lue **[Arvoihin viittaaminen Refillä](/learn/referencing-values-with-refs)** oppiaksesi kuinka käyttää refiä muistamaan tietoa.
 
 </LearnMore>
 
-## Manipulating the DOM with refs {/*manipulating-the-dom-with-refs*/}
+## DOM:in manipulointi Refillä {/*manipulating-the-dom-with-refs*/}
 
-React automatically updates the DOM to match your render output, so your components won't often need to manipulate it. However, sometimes you might need access to the DOM elements managed by React—for example, to focus a node, scroll to it, or measure its size and position. There is no built-in way to do those things in React, so you will need a ref to the DOM node. For example, clicking the button will focus the input using a ref:
+React automaattisesti päivitää DOMin vastaamaan renderöinnin lopputulosta, joten komponenttisi ei tarvitse usein manipuloida sitä. Kuitenkin, joskus saatat tarvita pääsyn DOM elementteihin, joita React hallitsee—esimerkiksi, kohdentamaan solun, vierittämään siihen tai mittaamaan sen kokoa ja sijaintia. Reactissa ei ole sisäänrakennettua tapaa tehdä näitä asioita, joten tarvitset refin DOM elementtiin. Esimerkiksi, klikkaamalla nappia syöttölaatikko kohdentuu käyttäen refiä:
 
 <Sandpack>
 
@@ -93,15 +93,15 @@ export default function Form() {
 
 <LearnMore path="/learn/manipulating-the-dom-with-refs">
 
-Read **[Manipulating the DOM with Refs](/learn/manipulating-the-dom-with-refs)** to learn how to access DOM elements managed by React.
+Lue **[DOM:in manipulointi Refillä](/learn/manipulating-the-dom-with-refs)** oppiaksesi miten käsitellä Reactin hallinnoimia DOM elementtejä.
 
 </LearnMore>
 
-## Synchronizing with Effects {/*synchronizing-with-effects*/}
+## Synkronointi Efekteillä {/*synchronizing-with-effects*/}
 
-Some components need to synchronize with external systems. For example, you might want to control a non-React component based on the React state, set up a server connection, or send an analytics log when a component appears on the screen. Unlike event handlers, which let you handle particular events, *Effects* let you run some code after rendering. Use them to synchronize your component with a system outside of React.
+Joidenkin komponenttien täytyy synkronoida ulkoisten järjestelmien kanssa. Esimerkiksi, saatat haluta kontrolloida Reactin ulkopuolista komponenttia Reactin tilan perusteella, luoda yhteyden palvelimeen tai lähettää analytiikkalokin kun komponentti ilmestyy näytölle. Toisin kuin tapahtumankäsittelijät, jotka antavat sinun käsitellä tiettyjä tapahtumia, *Efektit* antavat sinun suorittaa koodia renderöinnin jälkeen. Käytä niitä synkronoidaksesi komponenttisi Reactin ulkopuolisen järjestelmän kanssa.
 
-Press Play/Pause a few times and see how the video player stays synchronized to the `isPlaying` prop value:
+Paina Play/Pause muutaman kerran ja katso miten videotoistin pysyy synkronoituna `isPlaying` propsin kanssa:
 
 <Sandpack>
 
@@ -145,7 +145,7 @@ video { width: 250px; }
 
 </Sandpack>
 
-Many Effects also "clean up" after themselves. For example, an Effect that sets up a connection to a chat server should return a *cleanup function* that tells React how to disconnect your component from that server:
+Monet Efektit myös "siivoavat" jälkensä. Esimerkiksi, Efekti joka luo yhteyden chat palvelimeen, pitäisi palauttaa *siivousfunktio* joka kertoo Reactille miten katkaista yhteys palvelimeen:
 
 <Sandpack>
 
@@ -165,7 +165,7 @@ export default function ChatRoom() {
 
 ```js chat.js
 export function createConnection() {
-  // A real implementation would actually connect to the server
+  // Todellinen toteutus yhdistäisi palvelimeen oikeasti
   return {
     connect() {
       console.log('✅ Connecting...');
@@ -183,30 +183,30 @@ input { display: block; margin-bottom: 20px; }
 
 </Sandpack>
 
-In development, React will immediately run and clean up your Effect one extra time. This is why you see `"✅ Connecting..."` printed twice. This ensures that you don't forget to implement the cleanup function.
+Kehityksessä React suorittaa ja siivoaa Efektisi yhden kerran ylimääräisesti. Tämä on syy miksi näet `"✅ Connecting..."` tulostettuna kahdesti. Tämä varmistaa, ettet unohda toteuttaa siivousfunktiota.
 
 <LearnMore path="/learn/synchronizing-with-effects">
 
-Read **[Synchronizing with Effects](/learn/synchronizing-with-effects)** to learn how to synchronize components with external systems.
+Lue **[Synkronointi Efekteillä](/learn/synchronizing-with-effects)** oppiaksesi miten synkronoida komponentteja ulkoisten järjestelmien kanssa.
 
 </LearnMore>
 
-## You Might Not Need An Effect {/*you-might-not-need-an-effect*/}
+## Et ehkä tarvitse Efektiä {/*you-might-not-need-an-effect*/}
 
-Effects are an escape hatch from the React paradigm. They let you "step outside" of React and synchronize your components with some external system. If there is no external system involved (for example, if you want to update a component's state when some props or state change), you shouldn't need an Effect. Removing unnecessary Effects will make your code easier to follow, faster to run, and less error-prone.
+Efektit ovat pelastusluukku Reactin paradigmasta. Niiden avulla voit "astua ulos" Reactista ja synkronoida komponenttisi jonkin ulkoisen järjestelmän kanssa. Jos ulkoista järjestelmää ei ole mukana (esimerkiksi, jos haluat päivittää komponentin tilan kun jotkin propsit tai tila muuttuvat), et tarvitse Efektiä. Turhien Efektien poistaminen tekee koodistasi helpommin seurattavaa, nopeampaa suorittaa ja vähemmän virhealtista.
 
-There are two common cases in which you don't need Effects:
-- **You don't need Effects to transform data for rendering.**
-- **You don't need Effects to handle user events.**
+On kaksi yleistä tapaa missä et tarvitse Efektiä:
+- **Et tarvitse Efektiä muuntaaksesi dataa renderöintiin.**
+- **Et tarvitse Efektiä käsitelläksesi käyttäjän tapahtumia.**
 
-For example, you don't need an Effect to adjust some state based on other state:
+Esimerkiksi, et tarvitse Efektiä säätääksesi jotain tilaa toisen tilan perusteella:
 
 ```js {5-9}
 function Form() {
   const [firstName, setFirstName] = useState('Taylor');
   const [lastName, setLastName] = useState('Swift');
 
-  // 🔴 Avoid: redundant state and unnecessary Effect
+  // 🔴 Vältä: toistuva tila ja turha Efekti
   const [fullName, setFullName] = useState('');
   useEffect(() => {
     setFullName(firstName + ' ' + lastName);
@@ -215,31 +215,31 @@ function Form() {
 }
 ```
 
-Instead, calculate as much as you can while rendering:
+Sen sijaan laske niin paljon kuin voit renderöinnin aikana:
 
 ```js {4-5}
 function Form() {
   const [firstName, setFirstName] = useState('Taylor');
   const [lastName, setLastName] = useState('Swift');
-  // ✅ Good: calculated during rendering
+  // ✅ Hyvä: laskettu renderöinnin aikana
   const fullName = firstName + ' ' + lastName;
   // ...
 }
 ```
 
-However, you *do* need Effects to synchronize with external systems. 
+Kuitenkin *tarvitset* Efektin synkronoidaksesi ulkoisten järjestelmien kanssa.
 
 <LearnMore path="/learn/you-might-not-need-an-effect">
 
-Read **[You Might Not Need an Effect](/learn/you-might-not-need-an-effect)** to learn how to remove unnecessary Effects.
+Lue **[Et ehkä tarvitse Efektiä](/learn/you-might-not-need-an-effect)** oppiaksesi miten poistaa turhat Efektit.
 
 </LearnMore>
 
-## Lifecycle of reactive effects {/*lifecycle-of-reactive-effects*/}
+## Reaktiivisten Efektien elinkaari {/*lifecycle-of-reactive-effects*/}
 
-Effects have a different lifecycle from components. Components may mount, update, or unmount. An Effect can only do two things: to start synchronizing something, and later to stop synchronizing it. This cycle can happen multiple times if your Effect depends on props and state that change over time.
+Efekteilla on eri elinkaari komponenteista. Komponentit voivat mountata, päivittyä, tai un-mountata. Efekti voi tehdä vain kaksi asiaa: aloittaa synkronoimaan jotain, ja myöhemmin lopettaa synkronointi. Tämä sykli voi tapahtua useita kertoja, jos Efekti riippuu propseista ja tilasta, jotka muuttuvat ajan myötä.
 
-This Effect depends on the value of the `roomId` prop. Props are *reactive values,* which means they can change on a re-render. Notice that the Effect *re-synchronizes* (and re-connects to the server) if `roomId` changes:
+Tämä Efekti riippuu `roomId` propsin arvosta. Propsit ovat *reaktiivisia arvoja,* mikä tarkoittaa, että ne voivat muuttua renderöinnin yhteydessä. Huomaa, että Efekti *synkronoituu* (ja yhdistää palvelimeen) jos `roomId` muuttuu:
 
 <Sandpack>
 
@@ -283,7 +283,7 @@ export default function App() {
 
 ```js chat.js
 export function createConnection(serverUrl, roomId) {
-  // A real implementation would actually connect to the server
+  // Todellinen toteutus yhdistäisi palvelimeen oikeasti
   return {
     connect() {
       console.log('✅ Connecting to "' + roomId + '" room at ' + serverUrl + '...');
@@ -302,25 +302,25 @@ button { margin-left: 10px; }
 
 </Sandpack>
 
-React provides a linter rule to check that you've specified your Effect's dependencies correctly. If you forget to specify `roomId` in the list of dependencies in the above example, the linter will find that bug automatically.
+React tarjoaa linter-säännön, joka tarkistaa, että olet määrittänyt Efektin riippuvuudet oikein. Jos unohdat määrittää `roomId` riippuvuuslistassa yllä olevassa esimerkissä, linteri löytää virheen automaattisesti.
 
 <LearnMore path="/learn/lifecycle-of-reactive-effects">
 
-Read **[Lifecycle of Reactive Events](/learn/lifecycle-of-reactive-effects)** to learn how an Effect's lifecycle is different from a component's.
+Lue **[Reaktiivisten Efektien elinkaari](/learn/lifecycle-of-reactive-effects)** oppiaksesi miten Efektin elinkaari eroaa komponentin elinkaaresta.
 
 </LearnMore>
 
-## Separating events from Effects {/*separating-events-from-effects*/}
+## Tapahtumien erottaminen Efekteistä {/*separating-events-from-effects*/}
 
 <Wip>
 
-This section describes an **experimental API that has not yet been released** in a stable version of React.
+Tämä osio kuvailee **kokeellista API:a, joka ei ole vielä julkaistu** Reactin vakaassa versiossa.
 
 </Wip>
 
-Event handlers only re-run when you perform the same interaction again. Unlike event handlers, Effects re-synchronize if any of the values they read, like props or state, are different than during last render. Sometimes, you want a mix of both behaviors: an Effect that re-runs in response to some values but not others.
+Tapahtumakäsittelijät suoritetaan uudelleen ainoastaan kun suoritat saman vuorovaikutuksen uudelleen. Toisin kuin tapahtumakäsittelijät, Efektit synkronoituvat jos jokin arvo jota ne luki, kuten propsi tai tilamuuttuja, on muuttunut viimeisestä renderöinnistä. Joskus haluat myös sekoituksen molemmista käyttäytymisistä: Efekti joka suoritetaan uudelleen vastauksena joihinkin arvoihin mutta ei toisiin.
 
-All code inside Effects is *reactive.* It will run again if some reactive value it reads has changed due to a re-render. For example, this Effect will re-connect to the chat if either `roomId` or `theme` have changed:
+Kaikki koodi Efektin sisällä on *reaktiivista.* Se suoritetaan uudelleen mikäli jokin reaktiivinen arvo jota se lukee on muuttunut renderöinnin yhteydessä. Esimerkiksi, tämä Efekti yhdistää uudelleen chattiin jos joko `roomId` tai `theme` on muuttunut:
 
 <Sandpack>
 
@@ -397,7 +397,7 @@ export default function App() {
 
 ```js chat.js
 export function createConnection(serverUrl, roomId) {
-  // A real implementation would actually connect to the server
+  // Todellinen toteutus yhdistäisi palvelimeen oikeasti
   let connectedCallback;
   let timeout;
   return {
@@ -448,7 +448,7 @@ label { display: block; margin-top: 10px; }
 
 </Sandpack>
 
-This is not ideal. You want to re-connect to the chat only if the `roomId` has changed. Switching the `theme` shouldn't re-connect to the chat! Move the code reading `theme` out of your Effect into an *Effect Event*:
+Tämä ei ole ihanteellista. Haluat yhdistää uudelleen chattiin vain jos `roomId` on muuttunut. Teeman vaihtaminen ei pitäisi yhdistää uudelleen chattiin! Siirrä koodi joka lukee `theme` ulos Efektistäsi *Efektitapahtumaan*:
 
 <Sandpack>
 
@@ -530,7 +530,7 @@ export default function App() {
 
 ```js chat.js
 export function createConnection(serverUrl, roomId) {
-  // A real implementation would actually connect to the server
+  // Todellinen toteutus yhdistäisi palvelimeen oikeasti
   let connectedCallback;
   let timeout;
   return {
@@ -581,19 +581,19 @@ label { display: block; margin-top: 10px; }
 
 </Sandpack>
 
-Code inside Effect Events isn't reactive, so changing the `theme` no longer makes your Effect re-connect.
+Koodi Efektitapahtuman sisällä ei ole reaktiivista, joten `theme`:n muuttaminen ei enää saa Efektiäsi yhdistämään uudelleen.
 
 <LearnMore path="/learn/separating-events-from-effects">
 
-Read **[Separating Events from Effects](/learn/separating-events-from-effects)** to learn how to prevent some values from re-triggering Effects.
+Lue **[Tapahtumien erottaminen Efekteistä](/learn/separating-events-from-effects)** oppiaksesi miten estää Efektin käynnistys tiettyjen arvojen muuttuessa.
 
 </LearnMore>
 
-## Removing Effect dependencies {/*removing-effect-dependencies*/}
+## Efektin riippuvuuksien poistaminen {/*removing-effect-dependencies*/}
 
-When you write an Effect, the linter will verify that you've included every reactive value (like props and state) that the Effect reads in the list of your Effect's dependencies. This ensures that your Effect remains synchronized with the latest props and state of your component. Unnecessary dependencies may cause your Effect to run too often, or even create an infinite loop. The way you remove them depends on the case.
+Kun kirjoitat Efektia, linter tarkistaa, että olet sisällyttänyt jokaisen reaktiivisen arvon (kuten propsit ja tilan) Efektisi riippuvuuslistalle. Tämä varmistaa, että Efektisi pysyy synkronoituna komponenttisi viimeisimpien propsien ja tilan kanssa. Tarpeettomat riippuvuudet voivat aiheuttaa Efektisi suorittamisen liian usein tai jopa luoda äärettömän silmukan. Tapa jolla poistat ne riippuvat tilanteesta.
 
-For example, this Effect depends on the `options` object which gets re-created every time you edit the input:
+Esimerkiksi, tämä Efekti riippuu `options` oliosta, joka luodaan uusiksi joka kerta kun muokkaat syöttölaatikkoa:
 
 <Sandpack>
 
@@ -649,7 +649,7 @@ export default function App() {
 
 ```js chat.js
 export function createConnection({ serverUrl, roomId }) {
-  // A real implementation would actually connect to the server
+  // Todellinen toteutus yhdistäisi palvelimeen oikeasti
   return {
     connect() {
       console.log('✅ Connecting to "' + roomId + '" room at ' + serverUrl + '...');
@@ -668,7 +668,7 @@ button { margin-left: 10px; }
 
 </Sandpack>
 
-You don't want the chat to re-connect every time you start typing a message in that chat. To fix this problem, move creation of the `options` object inside the Effect so that the Effect only depends on the `roomId` string:
+Et halua chatin yhdistävän uudelleen joka kerta kun aloitat viestin kirjoittamisen siihen. Korjataksesi tämän ongelman, siirrä `options` olion luonti Efektin sisälle jotta Efekti riippuu vain `roomId` merkkijonosta:
 
 <Sandpack>
 
@@ -723,7 +723,7 @@ export default function App() {
 
 ```js chat.js
 export function createConnection({ serverUrl, roomId }) {
-  // A real implementation would actually connect to the server
+  // Todellinen toteutus yhdistäisi palvelimeen oikeasti
   return {
     connect() {
       console.log('✅ Connecting to "' + roomId + '" room at ' + serverUrl + '...');
@@ -742,19 +742,19 @@ button { margin-left: 10px; }
 
 </Sandpack>
 
-Notice that you didn't start by editing the dependency list to remove the `options` dependency. That would be wrong. Instead, you changed the surrounding code so that the dependency became *unnecessary.* Think of the dependency list as a list of all the reactive values used by your Effect's code. You don't intentionally choose what to put on that list. The list describes your code. To change the dependency list, change the code.
+Huomaa, että et aloittanut muokkaamalla riippuvuuslistaa poistaaksesi `options` riippuvuuden. Se olisi väärin. Sen sijaan, muutit ympäröivää koodia niin, että riippuvuudesta tuli *tarpeeton.* Ajattele riippuvuuslistaa listana kaikista reaktiivisista arvoista, joita Efektisi koodi käyttää. Et valitse tarkoituksella mitä lisätä sille listalle. Lista *kuvastaa* koodiasi. Muuttaaksesi riippuvuuslistaa, muuta koodia.
 
 <LearnMore path="/learn/removing-effect-dependencies">
 
-Read **[Removing Effect Dependencies](/learn/removing-effect-dependencies)** to learn how to make your Effect re-run less often.
+Lue **[Efektin riippuvuuksien poistaminen](/learn/removing-effect-dependencies)** oppiaksesi miten saat Efektisi suoriutumaan harvemmin.
 
 </LearnMore>
 
-## Reusing logic with custom Hooks {/*reusing-logic-with-custom-hooks*/}
+## Logiikan uudelleenkäyttö omilla Hookeilla {/*reusing-logic-with-custom-hooks*/}
 
-React comes with built-in Hooks like `useState`, `useContext`, and `useEffect`. Sometimes, you’ll wish that there was a Hook for some more specific purpose: for example, to fetch data, to keep track of whether the user is online, or to connect to a chat room. To do this, you can create your own Hooks for your application's needs.
+React sisältää useita sisäänrakennettuja Hookkeja kuten `useState`, `useContext`, ja `useEffect`. Joskus saatat haluta, että olisi Hookki johonkin tiettyyn tarkoitukseen: esimerkiksi, datan hakemiseen, käyttäjän verkkoyhteyden seuraamiseen, tai yhteyden muodostamiseen chat-huoneeseen. Tehdäksesi tämän voit luoda omia Hookkeja sovelluksesi tarpeisiin.
 
-In this example, the `usePointerPosition` custom Hook tracks the cursor position, while `useDelayedValue` custom Hook returns a value that's "lagging behind" the value you passed by a certain number of milliseconds. Move the cursor over the sandbox preview area to see a moving trail of dots following the cursor:
+Tässä esimerkissä, `usePointerPosition` Hookki seuraa kursorin sijaintia, kun taas `useDelayedValue` Hookki palauttaa arvon joka on "jäljessä" arvosta jonka annoit sille tietyn määrän millisekunteja. Liikuta kursoria esikatselualueen yli nähdäksesi liikkuvan jäljen pisteistä jotka seuraavat kursoria:
 
 <Sandpack>
 
@@ -835,14 +835,14 @@ body { min-height: 300px; }
 
 </Sandpack>
 
-You can create custom Hooks, compose them together, pass data between them, and reuse them between components. As your app grows, you will write fewer Effects by hand because you'll be able to reuse custom Hooks you already wrote. There are also many excellent custom Hooks maintained by the React community.
+Voit luoda omia Hookkeja, yhdistää niitä yhteen, välittää dataa niiden välillä, ja uudelleenkäyttää niitä komponenttien välillä. Sovelluksesi kasvaessa, kirjoitat vähemmän Efektejä käsin koska voit uudelleenkäyttää omia Hookkejasi joita olet jo kirjoittanut. On myös monia erinomaisia Reactin yhteisön ylläpitämiä Hookkeja .
 
 <LearnMore path="/learn/reusing-logic-with-custom-hooks">
 
-Read **[Reusing Logic with Custom Hooks](/learn/reusing-logic-with-custom-hooks)** to learn how to share logic between components.
+Lue **[Logiikan uudelleenkäyttö omilla Hookeilla](/learn/reusing-logic-with-custom-hooks)** oppiaksesi miten jakaa logiikkaa komponenttien välillä.
 
 </LearnMore>
 
-## What's next? {/*whats-next*/}
+## Mitä seuraavaksi? {/*whats-next*/}
 
-Head over to [Referencing Values with Refs](/learn/referencing-values-with-refs) to start reading this chapter page by page!
+Hyppää [Arvoihin viittaaminen Refillä](/learn/referencing-values-with-refs) sivulle aloittaaksesi lukemaan tämän luvun sivuja sivu sivulta!

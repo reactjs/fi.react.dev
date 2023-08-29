@@ -1,5 +1,5 @@
 ---
-title: Et ehkä tarvitse Effectia
+title: Et ehkä tarvitse Efektiä
 ---
 
 <Intro>
