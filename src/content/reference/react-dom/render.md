@@ -24,7 +24,7 @@ render(reactNode, domNode, callback?)
 
 ---
 
-## Reference {/*reference*/}
+## Viite {/*reference*/}
 
 ### `render(reactNode, domNode, callback?)` {/*render*/}
 
@@ -43,7 +43,7 @@ An app fully built with React will usually only have one `render` call with its 
 
 [See more examples below.](#usage)
 
-#### Parameters {/*parameters*/}
+#### Parametrit {/*parameters*/}
 
 * `reactNode`: A *React node* that you want to display. This will usually be a piece of JSX like `<App />`, but you can also pass a React element constructed with [`createElement()`](/reference/react/createElement), a string, a number, `null`, or `undefined`. 
 
@@ -52,11 +52,11 @@ An app fully built with React will usually only have one `render` call with its 
 * **optional** `callback`: A function. If passed, React will call it after your component is placed into the DOM.
 
 
-#### Returns {/*returns*/}
+#### Palautukset {/*returns*/}
 
 `render` usually returns `null`. However, if the `reactNode` you pass is a *class component*, then it will return an instance of that component.
 
-#### Caveats {/*caveats*/}
+#### Rajoitukset {/*caveats*/}
 
 * In React 18, `render` was replaced by [`createRoot`.](/reference/react-dom/client/createRoot) Please use `createRoot` for React 18 and beyond.
 
@@ -68,7 +68,7 @@ An app fully built with React will usually only have one `render` call with its 
 
 ---
 
-## Usage {/*usage*/}
+## Käyttö {/*usage*/}
 
 Call `render` to display a <CodeStep step={1}>React component</CodeStep> inside a <CodeStep step={2}>browser DOM node</CodeStep>.
 

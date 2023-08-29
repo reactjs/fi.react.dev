@@ -22,7 +22,7 @@ const html = renderToString(reactNode)
 
 ---
 
-## Reference {/*reference*/}
+## Viite {/*reference*/}
 
 ### `renderToString(reactNode)` {/*rendertostring*/}
 
@@ -38,15 +38,15 @@ On the client, call [`hydrateRoot`](/reference/react-dom/client/hydrateRoot) to 
 
 [See more examples below.](#usage)
 
-#### Parameters {/*parameters*/}
+#### Parametrit {/*parameters*/}
 
 * `reactNode`: A React node you want to render to HTML. For example, a JSX node like `<App />`.
 
-#### Returns {/*returns*/}
+#### Palautukset {/*returns*/}
 
 An HTML string.
 
-#### Caveats {/*caveats*/}
+#### Rajoitukset {/*caveats*/}
 
 * `renderToString` has limited Suspense support. If a component suspends, `renderToString` immediately sends its fallback as HTML.
 
@@ -54,7 +54,7 @@ An HTML string.
 
 ---
 
-## Usage {/*usage*/}
+## Käyttö {/*usage*/}
 
 ### Rendering a React tree as HTML to a string {/*rendering-a-react-tree-as-html-to-a-string*/}
 
@@ -126,7 +126,7 @@ The [`flushSync`](/reference/react-dom/flushSync) call is necessary so that the 
 
 ---
 
-## Troubleshooting {/*troubleshooting*/}
+## Vianmääritys {/*troubleshooting*/}
 
 ### When a component suspends, the HTML always contains a fallback {/*when-a-component-suspends-the-html-always-contains-a-fallback*/}
 

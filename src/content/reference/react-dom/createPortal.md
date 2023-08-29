@@ -20,7 +20,7 @@ title: createPortal
 
 ---
 
-## Reference {/*reference*/}
+## Viite {/*reference*/}
 
 ### `createPortal(children, domNode, key?)` {/*createportal*/}
 
@@ -44,7 +44,7 @@ import { createPortal } from 'react-dom';
 
 A portal only changes the physical placement of the DOM node. In every other way, the JSX you render into a portal acts as a child node of the React component that renders it. For example, the child can access the context provided by the parent tree, and events bubble up from children to parents according to the React tree.
 
-#### Parameters {/*parameters*/}
+#### Parametrit {/*parameters*/}
 
 * `children`: Anything that can be rendered with React, such as a piece of JSX (e.g. `<div />` or `<SomeComponent />`), a [Fragment](/reference/react/Fragment) (`<>...</>`), a string or a number, or an array of these.
 
@@ -52,17 +52,17 @@ A portal only changes the physical placement of the DOM node. In every other way
 
 * **optional** `key`: A unique string or number to be used as the portal's [key.](/learn/rendering-lists/#keeping-list-items-in-order-with-key)
 
-#### Returns {/*returns*/}
+#### Palautukset {/*returns*/}
 
 `createPortal` returns a React node that can be included into JSX or returned from a React component. If React encounters it in the render output, it will place the provided `children` inside the provided `domNode`.
 
-#### Caveats {/*caveats*/}
+#### Rajoitukset {/*caveats*/}
 
 * Events from portals propagate according to the React tree rather than the DOM tree. For example, if you click inside a portal, and the portal is wrapped in `<div onClick>`, that `onClick` handler will fire. If this causes issues, either stop the event propagation from inside the portal, or move the portal itself up in the React tree.
 
 ---
 
-## Usage {/*usage*/}
+## Käyttö {/*usage*/}
 
 ### Rendering to a different part of the DOM {/*rendering-to-a-different-part-of-the-dom*/}
 

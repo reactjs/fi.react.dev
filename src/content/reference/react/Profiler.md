@@ -18,7 +18,7 @@ title: <Profiler>
 
 ---
 
-## Reference {/*reference*/}
+## Viite {/*reference*/}
 
 ### `<Profiler>` {/*profiler*/}
 
@@ -30,12 +30,12 @@ Wrap a component tree in a `<Profiler>` to measure its rendering performance.
 </Profiler>
 ```
 
-#### Props {/*props*/}
+#### Propsit {/*props*/}
 
 * `id`: A string identifying the part of the UI you are measuring.
 * `onRender`: An [`onRender` callback](#onrender-callback) that React calls every time components within the profiled tree update. It receives information about what was rendered and how much time it took.
 
-#### Caveats {/*caveats*/}
+#### Rajoitukset {/*caveats*/}
 
 * Profiling adds some additional overhead, so **it is disabled in the production build by default.** To opt into production profiling, you need to enable a [special production build with profiling enabled.](https://fb.me/react-profiling)
 
@@ -51,7 +51,7 @@ function onRender(id, phase, actualDuration, baseDuration, startTime, commitTime
 }
 ```
 
-#### Parameters {/*onrender-parameters*/}
+#### Parametrit {/*onrender-parameters*/}
 
 * `id`: The string `id` prop of the `<Profiler>` tree that has just committed. This lets you identify which part of the tree was committed if you are using multiple profilers.
 * `phase`: `"mount"`, `"update"` or `"nested-update"`. This lets you know whether the tree has just been mounted for the first time or re-rendered due to a change in props, state, or hooks.
@@ -62,7 +62,7 @@ function onRender(id, phase, actualDuration, baseDuration, startTime, commitTime
 
 ---
 
-## Usage {/*usage*/}
+## Käyttö {/*usage*/}
 
 ### Measuring rendering performance programmatically {/*measuring-rendering-performance-programmatically*/}
 

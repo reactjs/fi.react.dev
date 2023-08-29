@@ -19,7 +19,7 @@ canary: true
 
 ---
 
-## Reference {/*reference*/}
+## Viite {/*reference*/}
 
 ### `'use client'` {/*use-client*/}
 
@@ -36,7 +36,7 @@ export default function RichTextEditor(props) {
 
 When a file marked `'use client'` is imported from a server component, [compatible bundlers](/learn/start-a-new-react-project#bleeding-edge-react-frameworks) will treat the import as the "cut-off point" between server-only code and client code. Components at or below this point in the module graph can use client-only React features like [`useState`](/reference/react/useState).
 
-#### Caveats {/*caveats*/}
+#### Rajoitukset {/*caveats*/}
 
 * It's not necessary to add `'use client'` to every file that uses client-only React features, only the files that are imported from server component files. `'use client'` denotes the _boundary_ between server-only and client code; any components further down the tree will automatically be executed on the client. In order to be rendered from server components, components exported from `'use client'` files must have serializable props.
 * When a `'use client'` file is imported from a server file, the imported values can be rendered as a React component or passed via props to a client component. Any other use will throw an exception.
@@ -48,7 +48,7 @@ When a file marked `'use client'` is imported from a server component, [compatib
 * Client components will still run as part of server-side rendering (SSR) or build-time static site generation (SSG), which act as clients to transform React components' initial render output to HTML that can be rendered before JavaScript bundles are downloaded. But they can't use server-only features like reading directly from a database.
 * Directives like `'use client'` must be at the very beginning of a file, above any imports or other code (comments above directives are OK). They must be written with single or double quotes, not backticks. (The `'use xyz'` directive format somewhat resembles the `useXyz()` Hook naming convention, but the similarity is coincidental.)
 
-## Usage {/*usage*/}
+## Käyttö {/*usage*/}
 
 <Wip>
 This section is a work in progress. 

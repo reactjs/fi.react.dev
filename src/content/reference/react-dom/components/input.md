@@ -16,7 +16,7 @@ The [built-in browser `<input>` component](https://developer.mozilla.org/en-US/d
 
 ---
 
-## Reference {/*reference*/}
+## Viite {/*reference*/}
 
 ### `<input>` {/*input*/}
 
@@ -28,7 +28,7 @@ To display an input, render the [built-in browser `<input>`](https://developer.m
 
 [See more examples below.](#usage)
 
-#### Props {/*props*/}
+#### Propsit {/*props*/}
 
 `<input>` supports all [common element props.](/reference/react-dom/components/common#props)
 
@@ -86,7 +86,7 @@ These `<input>` props are relevant both for uncontrolled and controlled inputs:
 * [`type`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#type): A string. One of the [input types.](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#input_types)
 * [`width`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#width):  A string. Specifies the image width for a `type="image"` input.
 
-#### Caveats {/*caveats*/}
+#### Rajoitukset {/*caveats*/}
 
 - Checkboxes need `checked` (or `defaultChecked`), not `value` (or `defaultValue`).
 - If a text input receives a string `value` prop, it will be [treated as controlled.](#controlling-an-input-with-a-state-variable)
@@ -97,7 +97,7 @@ These `<input>` props are relevant both for uncontrolled and controlled inputs:
 
 ---
 
-## Usage {/*usage*/}
+## Käyttö {/*usage*/}
 
 ### Displaying inputs of different types {/*displaying-inputs-of-different-types*/}
 
@@ -462,7 +462,7 @@ If there is no way to avoid re-rendering (for example, if `PageContent` depends 
 
 ---
 
-## Troubleshooting {/*troubleshooting*/}
+## Vianmääritys {/*troubleshooting*/}
 
 ### My text input doesn't update when I type into it {/*my-text-input-doesnt-update-when-i-type-into-it*/}
 

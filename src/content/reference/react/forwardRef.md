@@ -16,7 +16,7 @@ const SomeComponent = forwardRef(render)
 
 ---
 
-## Referenssi {/*reference*/}
+## Viite {/*reference*/}
 
 ### `forwardRef(render)` {/*forwardref*/}
 

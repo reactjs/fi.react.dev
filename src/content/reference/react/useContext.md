@@ -16,7 +16,7 @@ const value = useContext(SomeContext)
 
 ---
 
-## Reference {/*reference*/}
+## Viite {/*reference*/}
 
 ### `useContext(SomeContext)` {/*usecontext*/}
 
@@ -32,15 +32,15 @@ function MyComponent() {
 
 [See more examples below.](#usage)
 
-#### Parameters {/*parameters*/}
+#### Parametrit {/*parameters*/}
 
 * `SomeContext`: The context that you've previously created with [`createContext`](/reference/react/createContext). The context itself does not hold the information, it only represents the kind of information you can provide or read from components.
 
-#### Returns {/*returns*/}
+#### Palautukset {/*returns*/}
 
 `useContext` returns the context value for the calling component. It is determined as the `value` passed to the closest `SomeContext.Provider` above the calling component in the tree. If there is no such provider, then the returned value will be the `defaultValue` you have passed to [`createContext`](/reference/react/createContext) for that context. The returned value is always up-to-date. React automatically re-renders components that read some context if it changes.
 
-#### Caveats {/*caveats*/}
+#### Rajoitukset {/*caveats*/}
 
 * `useContext()` call in a component is not affected by providers returned from the *same* component. The corresponding `<Context.Provider>` **needs to be *above*** the component doing the `useContext()` call.
 * React **automatically re-renders** all the children that use a particular context starting from the provider that receives a different `value`. The previous and the next values are compared with the [`Object.is`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is) comparison. Skipping re-renders with [`memo`](/reference/react/memo) does not prevent the children receiving fresh context values.
@@ -48,7 +48,7 @@ function MyComponent() {
 
 ---
 
-## Usage {/*usage*/}
+## Käyttö {/*usage*/}
 
 
 ### Passing data deeply into the tree {/*passing-data-deeply-into-the-tree*/}
@@ -1343,7 +1343,7 @@ Read more about [`useMemo`](/reference/react/useMemo#skipping-re-rendering-of-co
 
 ---
 
-## Troubleshooting {/*troubleshooting*/}
+## Vianmääritys {/*troubleshooting*/}
 
 ### My component doesn't see the value from my provider {/*my-component-doesnt-see-the-value-from-my-provider*/}
 

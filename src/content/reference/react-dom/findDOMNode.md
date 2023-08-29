@@ -22,7 +22,7 @@ const domNode = findDOMNode(componentInstance)
 
 ---
 
-## Reference {/*reference*/}
+## Viite {/*reference*/}
 
 ### `findDOMNode(componentInstance)` {/*finddomnode*/}
 
@@ -36,16 +36,16 @@ const domNode = findDOMNode(componentInstance);
 
 [See more examples below.](#usage)
 
-#### Parameters {/*parameters*/}
+#### Parametrit {/*parameters*/}
 
 * `componentInstance`: An instance of the [`Component`](/reference/react/Component) subclass. For example, `this` inside a class component.
 
 
-#### Returns {/*returns*/}
+#### Palautukset {/*returns*/}
 
 `findDOMNode` returns the first closest browser DOM node within the given `componentInstance`. When a component renders to `null`, or renders `false`, `findDOMNode` returns `null`. When a component renders to a string, `findDOMNode` returns a text DOM node containing that value.
 
-#### Caveats {/*caveats*/}
+#### Rajoitukset {/*caveats*/}
 
 * A component may return an array or a [Fragment](/reference/react/Fragment) with multiple children. In that case `findDOMNode`, will return the DOM node corresponding to the first non-empty child.
 
@@ -57,7 +57,7 @@ const domNode = findDOMNode(componentInstance);
 
 ---
 
-## Usage {/*usage*/}
+## Käyttö {/*usage*/}
 
 ### Finding the root DOM node of a class component {/*finding-the-root-dom-node-of-a-class-component*/}
 

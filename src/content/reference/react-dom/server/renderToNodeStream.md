@@ -22,7 +22,7 @@ const stream = renderToNodeStream(reactNode)
 
 ---
 
-## Reference {/*reference*/}
+## Viite {/*reference*/}
 
 ### `renderToNodeStream(reactNode)` {/*rendertonodestream*/}
 
@@ -39,15 +39,15 @@ On the client, call [`hydrateRoot`](/reference/react-dom/client/hydrateRoot) to 
 
 [See more examples below.](#usage)
 
-#### Parameters {/*parameters*/}
+#### Parametrit {/*parameters*/}
 
 * `reactNode`: A React node you want to render to HTML. For example, a JSX element like `<App />`.
 
-#### Returns {/*returns*/}
+#### Palautukset {/*returns*/}
 
 A [Node.js Readable Stream](https://nodejs.org/api/stream.html#readable-streams) that outputs an HTML string.
 
-#### Caveats {/*caveats*/}
+#### Rajoitukset {/*caveats*/}
 
 * This method will wait for all [Suspense boundaries](/reference/react/Suspense) to complete before returning any output.
 
@@ -57,7 +57,7 @@ A [Node.js Readable Stream](https://nodejs.org/api/stream.html#readable-streams)
 
 ---
 
-## Usage {/*usage*/}
+## Käyttö {/*usage*/}
 
 ### Rendering a React tree as HTML to a Node.js Readable Stream {/*rendering-a-react-tree-as-html-to-a-nodejs-readable-stream*/}
 

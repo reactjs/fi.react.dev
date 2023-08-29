@@ -20,7 +20,7 @@ title: <StrictMode>
 
 ---
 
-## Reference {/*reference*/}
+## Viite {/*reference*/}
 
 ### `<StrictMode>` {/*strictmode*/}
 
@@ -46,17 +46,17 @@ Strict Mode enables the following development-only behaviors:
 - Your components will [re-run Effects an extra time](#fixing-bugs-found-by-re-running-effects-in-development) to find bugs caused by missing Effect cleanup.
 - Your components will [be checked for usage of deprecated APIs.](#fixing-deprecation-warnings-enabled-by-strict-mode)
 
-#### Props {/*props*/}
+#### Propsit {/*props*/}
 
 `StrictMode` accepts no props.
 
-#### Caveats {/*caveats*/}
+#### Rajoitukset {/*caveats*/}
 
 * There is no way to opt out of Strict Mode inside a tree wrapped in `<StrictMode>`. This gives you confidence that all components inside `<StrictMode>` are checked. If two teams working on a product disagree whether they find the checks valuable, they need to either reach consensus or move `<StrictMode>` down in the tree.
 
 ---
 
-## Usage {/*usage*/}
+## Käyttö {/*usage*/}
 
 ### Enabling Strict Mode for entire app {/*enabling-strict-mode-for-entire-app*/}
 

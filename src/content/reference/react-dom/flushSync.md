@@ -22,7 +22,7 @@ flushSync(callback)
 
 ---
 
-## Reference {/*reference*/}
+## Viite {/*reference*/}
 
 ### `flushSync(callback)` {/*flushsync*/}
 
@@ -40,16 +40,16 @@ Most of the time, `flushSync` can be avoided. Use `flushSync` as last resort.
 
 [See more examples below.](#usage)
 
-#### Parameters {/*parameters*/}
+#### Parametrit {/*parameters*/}
 
 
 * `callback`: A function. React will immediately call this callback and flush any updates it contains synchronously. It may also flush any pending updates, or Effects, or updates inside of Effects. If an update suspends as a result of this `flushSync` call, the fallbacks may be re-shown.
 
-#### Returns {/*returns*/}
+#### Palautukset {/*returns*/}
 
 `flushSync` returns `undefined`.
 
-#### Caveats {/*caveats*/}
+#### Rajoitukset {/*caveats*/}
 
 * `flushSync` can significantly hurt performance. Use sparingly.
 * `flushSync` may force pending Suspense boundaries to show their `fallback` state.
@@ -58,7 +58,7 @@ Most of the time, `flushSync` can be avoided. Use `flushSync` as last resort.
 
 ---
 
-## Usage {/*usage*/}
+## Käyttö {/*usage*/}
 
 ### Flushing updates for third-party integrations {/*flushing-updates-for-third-party-integrations*/}
 

@@ -16,7 +16,7 @@ startTransition(scope)
 
 ---
 
-## Reference {/*reference*/}
+## Viite {/*reference*/}
 
 ### `startTransition(scope)` {/*starttransitionscope*/}
 
@@ -39,15 +39,15 @@ function TabContainer() {
 
 [See more examples below.](#usage)
 
-#### Parameters {/*parameters*/}
+#### Parametrit {/*parameters*/}
 
 * `scope`: A function that updates some state by calling one or more [`set` functions.](/reference/react/useState#setstate) React immediately calls `scope` with no parameters and marks all state updates scheduled synchronously during the `scope` function call as transitions. They will be [non-blocking](/reference/react/useTransition#marking-a-state-update-as-a-non-blocking-transition) and [will not display unwanted loading indicators.](/reference/react/useTransition#preventing-unwanted-loading-indicators)
 
-#### Returns {/*returns*/}
+#### Palautukset {/*returns*/}
 
 `startTransition` does not return anything.
 
-#### Caveats {/*caveats*/}
+#### Rajoitukset {/*caveats*/}
 
 * `startTransition` does not provide a way to track whether a transition is pending. To show a pending indicator while the transition is ongoing, you need [`useTransition`](/reference/react/useTransition) instead.
 
@@ -63,7 +63,7 @@ function TabContainer() {
 
 ---
 
-## Usage {/*usage*/}
+## Käyttö {/*usage*/}
 
 ### Marking a state update as a non-blocking transition {/*marking-a-state-update-as-a-non-blocking-transition*/}
 

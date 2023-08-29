@@ -22,7 +22,7 @@ const factory = createFactory(type)
 
 ---
 
-## Reference {/*reference*/}
+## Viite {/*reference*/}
 
 ### `createFactory(type)` {/*createfactory*/}
 
@@ -48,17 +48,17 @@ export default function App() {
 
 [See more examples below.](#usage)
 
-#### Parameters {/*parameters*/}
+#### Parametrit {/*parameters*/}
 
 * `type`: The `type` argument must be a valid React component type. For example, it could be a tag name string (such as `'div'` or `'span'`), or a React component (a function, a class, or a special component like [`Fragment`](/reference/react/Fragment)).
 
-#### Returns {/*returns*/}
+#### Palautukset {/*returns*/}
 
 Returns a factory function. That factory function receives a `props` object as the first argument, followed by a list of `...children` arguments, and returns a React element with the given `type`, `props` and `children`.
 
 ---
 
-## Usage {/*usage*/}
+## Käyttö {/*usage*/}
 
 ### Creating React elements with a factory {/*creating-react-elements-with-a-factory*/}
 
