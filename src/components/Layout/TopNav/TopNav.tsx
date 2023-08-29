@@ -2,19 +2,19 @@
  * Copyright (c) Facebook, Inc. and its affiliates.
  */
 
-import {
-  useState,
-  useRef,
-  useCallback,
-  useEffect,
-  startTransition,
-  Suspense,
-} from 'react';
-import * as React from 'react';
+import {disableBodyScroll, enableBodyScroll} from 'body-scroll-lock';
 import cn from 'classnames';
 import NextLink from 'next/link';
 import {useRouter} from 'next/router';
-import {disableBodyScroll, enableBodyScroll} from 'body-scroll-lock';
+import * as React from 'react';
+import {
+  Suspense,
+  startTransition,
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+} from 'react';
 
 import {IconClose} from 'components/Icon/IconClose';
 import {IconHamburger} from 'components/Icon/IconHamburger';
@@ -237,7 +237,7 @@ export default function TopNav({
             <div className="3xl:flex-1 flex flex-row ">
               <button
                 type="button"
-                aria-label="Menu"
+                aria-label="Valikko"
                 onClick={() => setIsOpen(!isOpen)}
                 className={cn(
                   'active:scale-95 transition-transform flex lg:hidden w-12 h-12 rounded-full items-center justify-center hover:bg-primary/5 hover:dark:bg-primary-dark/5 outline-link',
@@ -268,7 +268,7 @@ export default function TopNav({
                 )}
                 onClick={onOpenSearch}>
                 <IconSearch className="me-3 align-middle text-gray-30 shrink-0 group-betterhover:hover:text-gray-70" />
-                Search
+                Hae
                 <span className="ms-auto hidden sm:flex item-center me-1">
                   <Kbd data-platform="mac">⌘</Kbd>
                   <Kbd data-platform="win" wide>
@@ -281,25 +281,25 @@ export default function TopNav({
             <div className="text-base justify-center items-center gap-1.5 flex 3xl:flex-1 flex-row 3xl:justify-end">
               <div className="mx-2.5 gap-1.5 hidden lg:flex">
                 <NavItem isActive={section === 'learn'} url="/learn">
-                  Learn
+                  Opettele
                 </NavItem>
                 <NavItem
                   isActive={section === 'reference'}
                   url="/reference/react">
-                  Reference
+                  Viite
                 </NavItem>
                 <NavItem isActive={section === 'community'} url="/community">
-                  Community
+                  Yhteisö
                 </NavItem>
                 <NavItem isActive={section === 'blog'} url="/blog">
-                  Blog
+                  Blogi
                 </NavItem>
               </div>
               <div className="flex w-full md:hidden"></div>
               <div className="flex items-center -space-x-2.5 xs:space-x-0 ">
                 <div className="flex md:hidden">
                   <button
-                    aria-label="Search"
+                    aria-label="Hae"
                     type="button"
                     className="active:scale-95 transition-transform flex md:hidden w-12 h-12 rounded-full items-center justify-center hover:bg-secondary-button hover:dark:bg-secondary-button-dark outline-link"
                     onClick={onOpenSearch}>
@@ -309,7 +309,7 @@ export default function TopNav({
                 <div className="flex dark:hidden">
                   <button
                     type="button"
-                    aria-label="Use Dark Mode"
+                    aria-label="Käytä tummaa tilaa"
                     onClick={() => {
                       window.__setPreferredTheme('dark');
                     }}
@@ -320,7 +320,7 @@ export default function TopNav({
                 <div className="hidden dark:flex">
                   <button
                     type="button"
-                    aria-label="Use Light Mode"
+                    aria-label="Käytä vaaleaa tilaa"
                     onClick={() => {
                       window.__setPreferredTheme('light');
                     }}
@@ -360,20 +360,20 @@ export default function TopNav({
                 <Suspense fallback={null}>
                   <div className="ps-3 xs:ps-5 xs:gap-0.5 xs:text-base overflow-x-auto flex flex-row lg:hidden text-base font-bold text-secondary dark:text-secondary-dark">
                     <NavItem isActive={section === 'learn'} url="/learn">
-                      Learn
+                      Opettele
                     </NavItem>
                     <NavItem
                       isActive={section === 'reference'}
                       url="/reference/react">
-                      Reference
+                      Viite
                     </NavItem>
                     <NavItem
                       isActive={section === 'community'}
                       url="/community">
-                      Community
+                      Yhteisö
                     </NavItem>
                     <NavItem isActive={section === 'blog'} url="/blog">
-                      Blog
+                      Blogi
                     </NavItem>
                   </div>
                   <div
