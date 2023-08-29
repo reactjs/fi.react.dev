@@ -1,42 +1,42 @@
 {
-  "title": "Community",
+  "title": "Yhteisö",
   "path": "/community",
   "routes": [
     {
       "hasSectionHeader": true,
-      "sectionHeader": "GET INVOLVED"
+      "sectionHeader": "OSALLISTU"
     },
     {
-      "title": "Community",
+      "title": "Yhteisö",
       "path": "/community",
       "skipBreadcrumb": true,
       "routes": [
         {
-          "title": "React Conferences",
+          "title": "React Konferenssit",
           "path": "/community/conferences"
         },
         {
-          "title": "React Meetups",
+          "title": "React Tapaamiset",
           "path": "/community/meetups"
         },
         {
-          "title": "React Videos",
+          "title": "React Videot",
           "path": "/community/videos"
         },
         {
-          "title": "Meet the Team",
+          "title": "Tapaa tiimi",
           "path": "/community/team"
         },
         {
-          "title": "Docs Contributors",
+          "title": "Dokumentaation kehittäjät",
           "path": "/community/docs-contributors"
         },
         {
-          "title": "Acknowledgements",
+          "title": "Tunnustukset",
           "path": "/community/acknowledgements"
         },
         {
-          "title": "Versioning Policy",
+          "title": "Versiointikäytäntö",
           "path": "/community/versioning-policy"
         }
       ]

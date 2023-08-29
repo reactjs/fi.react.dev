@@ -1,5 +1,5 @@
 ---
-title: Reagointi syötteen tilaan
+title: Reagointi syötteeseen tilalla
 ---
 
 <Intro>

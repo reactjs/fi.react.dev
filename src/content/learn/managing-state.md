@@ -20,7 +20,7 @@ Sovelluksesi kasvaessa, kannattaa olla tietoinen miten tilasi on järjestetty se
 
 </YouWillLearn>
 
-## Tilan reagointi syötteeseen {/*reacting-to-input-with-state*/}
+## Reagointi syötteeseen tilalla {/*reacting-to-input-with-state*/}
 
 Reactissa et muokkaa käyttöliittymäkoodia suoraan. Esimerkiksi, et kirjoita komentoja kuten "poista painike käytöstä", "ota painike käyttöön", "näytä onnistumisviesti", jne. Sen sijaan kerrot käyttöliittymän, jonka haluat nähdä erilaisissa komponentin tiloissa ("alkutila", "kirjoitetaan -tila", "onnistumistila"), ja sitten vaihdat tilaa käyttäjän syötteen pohjalta. Tämä vastaa samaa kuin miten suunnittelijat ajattelevat käyttöliittymiä.
 
@@ -103,7 +103,7 @@ function submitForm(answer) {
 
 <LearnMore path="/learn/reacting-to-input-with-state">
 
-Lue **[Reacting to Input with State](/learn/reacting-to-input-with-state)** oppiaksesi lähestymään vuorovaikutusta tilalähtöisellä ajattelutavalla.
+Lue **[Reagointi syötteeseen tilalla](/learn/reacting-to-input-with-state)** oppiaksesi lähestymään vuorovaikutusta tilalähtöisellä ajattelutavalla.
 
 </LearnMore>
 
@@ -773,7 +773,7 @@ Lue **[Tiedon välittäminen syvälle kontekstilla](/learn/passing-data-deeply-w
 
 </LearnMore>
 
-## Skaalaus reducerilla ja kontekstilla {/*scaling-up-with-reducer-and-context*/}
+## Skaalaus reduktorin ja kontekstin avulla {/*scaling-up-with-reducer-and-context*/}
 
 Reducerien avulla voit yhdistää komponentin tilanpäivityslogiikan. Kontekstin avulla voit antaa tietoa syvälle muihin komponentteihin. Voit yhdistää reducereita ja konteksteja yhteen hallitaksesi monimutkaisen ruudun tilaa.
 
@@ -987,7 +987,7 @@ li {
 
 <LearnMore path="/learn/scaling-up-with-reducer-and-context">
 
-Lue **[Skaalaus reducerilla ja kontekstilla](/learn/scaling-up-with-reducer-and-context)** oppiaksesi miten tilan hallinta skaalautuu kasvavassa sovelluksessa.
+Lue **[Skaalaus reduktorin ja kontekstin avulla](/learn/scaling-up-with-reducer-and-context)** oppiaksesi miten tilan hallinta skaalautuu kasvavassa sovelluksessa.
 
 </LearnMore>
 

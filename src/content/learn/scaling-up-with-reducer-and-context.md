@@ -1,5 +1,5 @@
 ---
-title: Ylösskaalaus reduktorin ja kontekstin avulla
+title: Skaalaus reduktorin ja kontekstin avulla
 ---
 
 <Intro>
