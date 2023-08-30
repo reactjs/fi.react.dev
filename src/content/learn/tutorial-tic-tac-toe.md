@@ -23,9 +23,9 @@ Tämä opas on jaettu useaan osaan:
 
 ### Mitä olet rakentamassa? {/*what-are-you-building*/}
 
-In this tutorial, you'll build an interactive tic-tac-toe game with React.
+Tässä oppaassa tulet rakentamaan interaktiivisen ristinolla-pelin Reactilla.
 
-You can see what it will look like when you're finished here:
+Näet alla miltä se tulee lopulta näyttämään kun saat sen valmiiksi:
 
 <Sandpack>
 
@@ -194,11 +194,11 @@ body {
 
 </Sandpack>
 
-If the code doesn't make sense to you yet, or if you are unfamiliar with the code's syntax, don't worry! The goal of this tutorial is to help you understand React and its syntax.
+Jos et saa selvää koodista vielä taikka koodin syntaksi ei ole tuttua, älä huoli! Tämän oppaan tavoite on auttaa sinua ymmärtämään Reactia ja sen syntaksia.
 
-We recommend that you check out the tic-tac-toe game above before continuing with the tutorial. One of the features that you'll notice is that there is a numbered list to the right of the game's board. This list gives you a history of all of the moves that have occurred in the game, and it is updated as the game progresses.
+Suosittelemme, että kokeilet peliä ennen kuin jatkat oppaan kanssa. Yksi pelin ominaisuuksista on, että pelilaudan oikealla puolella on numeroitu lista. Tämä lista näyttää pelin kaikki siirrot ja päivittyy pelin edetessä.
 
-Once you've played around with the finished tic-tac-toe game, keep scrolling. You'll start with a simpler template in this tutorial. Our next step is to set you up so that you can start building the game.
+Kun olet pelannut peliä, jatka oppaan kanssa. Tulet aloittamaan yksinkertaisemmasta pohjasta. Seuraava askel on asentaa ympäristö, jotta voit aloittaa pelin rakentamisen.
 
 ## Oppaan asennusvaihe {/*setup-for-the-tutorial*/}
 
