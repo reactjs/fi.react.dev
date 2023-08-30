@@ -277,7 +277,7 @@ Jos jäät jumiin, älä anna tämän estää! Seuraa opasta verkossa ja kokeile
 
 ## Yleiskatsaus {/*overview*/}
 
-Now that you're set up, let's get an overview of React!
+Nyt kun olet valmis, annetaan yleiskatsaus Reactista!
 
 ### Aloituskoodin tarkastelu {/*inspecting-the-starter-code*/}
 
