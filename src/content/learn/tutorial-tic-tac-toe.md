@@ -4,24 +4,24 @@ title: 'Opas: Ristinolla'
 
 <Intro>
 
-You will build a small tic-tac-toe game during this tutorial. This tutorial does not assume any existing React knowledge. The techniques you'll learn in the tutorial are fundamental to building any React app, and fully understanding it will give you a deep understanding of React.
+Tulet rakentamaan pienen ristinolla-pelin tässä oppaassa. Tämä opas ei oleta aikaisempaa React-osaamista. Tekniikat, joita opit oppaan aikana ovat perustavanlaatuisia mille tahansa React-sovellukselle ja niiden ymmärtäminen antaa sinulle syvällisen ymmärryksen Reactista.
 
 </Intro>
 
 <Note>
 
-This tutorial is designed for people who prefer to **learn by doing** and want to quickly try making something tangible. If you prefer learning each concept step by step, start with [Describing the UI.](/learn/describing-the-ui)
+Tämä opas on tarkoitettu henkilöille, jotka suosivat **oppimaan tekemällä** ja haluavat nopeasti kokeilla tehdä jotain konkreettista. Jos suosit oppimista jokaisen käsitteen vaiheittain, aloita [Käyttöliittymän kuvaaminen](/learn/describing-the-ui) sivulta.
 
 </Note>
 
-The tutorial is divided into several sections:
+Tämä opas on jaettu useaan osaan:
 
-- [Setup for the tutorial](#setup-for-the-tutorial) will give you **a starting point** to follow the tutorial.
-- [Overview](#overview) will teach you **the fundamentals** of React: components, props, and state.
-- [Completing the game](#completing-the-game) will teach you **the most common techniques** in React development.
-- [Adding time travel](#adding-time-travel) will give you **a deeper insight** into the unique strengths of React.
+- [Oppaan asennusvaihe](#setup-for-the-tutorial) antaa sinulle *lähtökohdan** oppaan seuraamiseen.
+- [Yleiskatsaus](#overview) opettaa sinulle Reactin **perusteet**: komponentit, propsit, ja tilan.
+- [Pelin viimeistely](#completing-the-game) opettaa sinulle **yleisimmät tekniikat** React kehityksessä.
+- [Aikamatkustuksen lisääminen](#adding-time-travel) opettaa sinulle **syvällisen ymmärryksen** Reactin uniikkeihin vahvuuksiin.
 
-### What are you building? {/*what-are-you-building*/}
+### Mitä olet rakentamassa? {/*what-are-you-building*/}
 
 In this tutorial, you'll build an interactive tic-tac-toe game with React.
 
@@ -200,7 +200,7 @@ We recommend that you check out the tic-tac-toe game above before continuing wit
 
 Once you've played around with the finished tic-tac-toe game, keep scrolling. You'll start with a simpler template in this tutorial. Our next step is to set you up so that you can start building the game.
 
-## Setup for the tutorial {/*setup-for-the-tutorial*/}
+## Oppaan asennusvaihe {/*setup-for-the-tutorial*/}
 
 In the live code editor below, click **Fork** in the top-right corner to open the editor in a new tab using the website CodeSandbox. CodeSandbox lets you write code in your browser and preview how your users will see the app you've created. The new tab should display an empty square and the starter code for this tutorial.
 
@@ -273,11 +273,11 @@ If you get stuck, don't let this stop you! Follow along online instead and try a
 
 </Note>
 
-## Overview {/*overview*/}
+## Yleiskatsaus {/*overview*/}
 
 Now that you're set up, let's get an overview of React!
 
-### Inspecting the starter code {/*inspecting-the-starter-code*/}
+### Aloituskoodin tarkastelu {/*inspecting-the-starter-code*/}
 
 In CodeSandbox you'll see three main sections:
 
@@ -346,7 +346,7 @@ Lines 1-5 brings all the necessary pieces together:
 
 The remainder of the file brings all the pieces together and injects the final product into `index.html` in the `public` folder.
 
-### Building the board {/*building-the-board*/}
+### Pelilaudan rakentaminen {/*building-the-board*/}
 
 Let's get back to `App.js`. This is where you'll spend the rest of the tutorial.
 
@@ -508,7 +508,7 @@ Psssst... That's a lot to type! It's okay to copy and paste code from this page.
 
 </Note>
 
-### Passing data through props {/*passing-data-through-props*/}
+### Datan välittäminen propseilla {/*passing-data-through-props*/}
 
 Next, you'll want to change the value of a square from empty to "X" when the user clicks on the square. With how you've built the board so far you would need to copy-paste the code that updates the square nine times (once for each square you have)! Instead of copy-pasting, React's component architecture allows you to create a reusable component to avoid messy, duplicated code.
 
@@ -702,7 +702,7 @@ body {
 
 </Sandpack>
 
-### Making an interactive component {/*making-an-interactive-component*/}
+### Interaktiivisen komponentin luominen {/*making-an-interactive-component*/}
 
 Let's fill the `Square` component with an `X` when you click it. Declare a function called `handleClick` inside of the `Square`. Then, add `onClick` to the props of the button JSX element returned from the `Square`:
 
@@ -897,7 +897,7 @@ body {
 
 </Sandpack>
 
-### React Developer Tools {/*react-developer-tools*/}
+### React kehitystyökalut {/*react-developer-tools*/}
 
 React DevTools let you check the props and the state of your React components. You can find the React DevTools tab at the bottom of the _browser_ section in CodeSandbox:
 
@@ -913,11 +913,11 @@ For local development, React DevTools is available as a [Chrome](https://chrome.
 
 </Note>
 
-## Completing the game {/*completing-the-game*/}
+## Pelin viimeistely {/*completing-the-game*/}
 
 By this point, you have all the basic building blocks for your tic-tac-toe game. To have a complete game, you now need to alternate placing "X"s and "O"s on the board, and you need a way to determine a winner.
 
-### Lifting state up {/*lifting-state-up*/}
+### Tilan nostaminen ylös {/*lifting-state-up*/}
 
 Currently, each `Square` component maintains a part of the game's state. To check for a winner in a tic-tac-toe game, the `Board` would need to somehow know the state of each of the 9 `Square` components.
 
@@ -1333,7 +1333,7 @@ The DOM `<button>` element's `onClick` attribute has a special meaning to React 
 
 </Note>
 
-### Why immutability is important {/*why-immutability-is-important*/}
+### Miksi muuttumattomuus on tärkeää {/*why-immutability-is-important*/}
 
 Note how in `handleClick`, you call `.slice()` to create a copy of the `squares` array instead of modifying the existing array. To explain why, we need to discuss immutability and why immutability is important to learn.
 
@@ -1359,7 +1359,7 @@ Immutability makes complex features much easier to implement. Later in this tuto
 
 There is also another benefit of immutability. By default, all child components re-render automatically when the state of a parent component changes. This includes even the child components that weren't affected by the change. Although re-rendering is not by itself noticeable to the user (you shouldn't actively try to avoid it!), you might want to skip re-rendering a part of the tree that clearly wasn't affected by it for performance reasons. Immutability makes it very cheap for components to compare whether their data has changed or not. You can learn more about how React chooses when to re-render a component in [the `memo` API reference](/reference/react/memo).
 
-### Taking turns {/*taking-turns*/}
+### Vuorojen ottaminen {/*taking-turns*/}
 
 It's now time to fix a major defect in this tic-tac-toe game: the "O"s cannot be marked on the board.
 
@@ -1520,7 +1520,7 @@ body {
 
 </Sandpack>
 
-### Declaring a winner {/*declaring-a-winner*/}
+### Voittajan päättäminen {/*declaring-a-winner*/}
 
 Now that the players can take turns, you'll want to show when the game is won and there are no more turns to make. To do this you'll add a helper function called `calculateWinner` that takes an array of 9 squares, checks for a winner and returns `'X'`, `'O'`, or `null` as appropriate. Don't worry too much about the `calculateWinner` function; it's not specific to React:
 
@@ -1721,11 +1721,11 @@ body {
 
 </Sandpack>
 
-## Adding time travel {/*adding-time-travel*/}
+## Aikamatkustuksen lisääminen {/*adding-time-travel*/}
 
 As a final exercise, let's make it possible to "go back in time" to the previous moves in the game.
 
-### Storing a history of moves {/*storing-a-history-of-moves*/}
+### Pelin siirtojen tallentaminen {/*storing-a-history-of-moves*/}
 
 If you mutated the `squares` array, implementing time travel would be very difficult.
 
@@ -1745,7 +1745,7 @@ You'll store the past `squares` arrays in another array called `history`, which 
 ]
 ```
 
-### Lifting state up, again {/*lifting-state-up-again*/}
+### Tilan nostaminen ylös, uudestaan {/*lifting-state-up-again*/}
 
 You will now write a new top-level component called `Game` to display a list of past moves. That's where you will place the `history` state that contains the entire game history.
 
@@ -2017,7 +2017,7 @@ body {
 
 </Sandpack>
 
-### Showing the past moves {/*showing-the-past-moves*/}
+### Aikaisempien liikkeiden näyttäminen {/*showing-the-past-moves*/}
 
 Since you are recording the tic-tac-toe game's history, you can now display a list of past moves to the player.
 
@@ -2247,7 +2247,7 @@ For each move in the tic-tac-toe game's history, you create a list item `<li>` w
 
 For now, you should see a list of the moves that occurred in the game and an error in the developer tools console. Let's discuss what the "key" error means.
 
-### Picking a key {/*picking-a-key*/}
+### Avaimen valinta {/*picking-a-key*/}
 
 When you render a list, React stores some information about each rendered list item. When you update a list, React needs to determine what has changed. You could have added, removed, re-arranged, or updated the list's items.
 
@@ -2286,7 +2286,7 @@ If no key is specified, React will report an error and use the array index as a 
 
 Keys do not need to be globally unique; they only need to be unique between components and their siblings.
 
-### Implementing time travel {/*implementing-time-travel*/}
+### Aikamatkustuksen toteutus {/*implementing-time-travel*/}
 
 In the tic-tac-toe game's history, each past move has a unique ID associated with it: it's the sequential number of the move. Moves will never be re-ordered, deleted, or inserted in the middle, so it's safe to use the move index as a key.
 
@@ -2693,7 +2693,7 @@ body {
 
 </Sandpack>
 
-### Final cleanup {/*final-cleanup*/}
+### Loppusiivous {/*final-cleanup*/}
 
 If you look at the code very closely, you may notice that `xIsNext === true` when `currentMove` is even and `xIsNext === false` when `currentMove` is odd. In other words, if you know the value of `currentMove`, then you can always figure out what `xIsNext` should be.
 
@@ -2721,7 +2721,7 @@ export default function Game() {
 
 You no longer need the `xIsNext` state declaration or the calls to `setXIsNext`. Now, there's no chance for `xIsNext` to get out of sync with `currentMove`, even if you make a mistake while coding the components.
 
-### Wrapping up {/*wrapping-up*/}
+### Lopetus {/*wrapping-up*/}
 
 Congratulations! You've created a tic-tac-toe game that:
 
