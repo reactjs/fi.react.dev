@@ -281,15 +281,15 @@ Nyt kun olet valmis, annetaan yleiskatsaus Reactista!
 
 ### Aloituskoodin tarkastelu {/*inspecting-the-starter-code*/}
 
-In CodeSandbox you'll see three main sections:
+CodeSandboxissa näet kolme eri osiota:
 
-![CodeSandbox with starter code](../images/tutorial/react-starter-code-codesandbox.png)
+![CodeSandbox aloituskoodilla](../images/tutorial/react-starter-code-codesandbox.png)
 
-1. The _Files_ section with a list of files like `App.js`, `index.js`, `styles.css` and a folder called `public`
-1. The _code editor_ where you'll see the source code of your selected file
-1. The _browser_ section where you'll see how the code you've written will be displayed
+1. _Files_ osio, jossa on listaus tiedostoista kuten `App.js`, `index.js`, `styles.css` ja hakemisto nimeltään `public`
+1. _Koodieditori_, jossa näet valitun tiedoston lähdekoodin
+1. _Selain_, jossa näet miltä kirjoittamasi koodi näyttää
 
-The `App.js` file should be selected in the _Files_ section. The contents of that file in the _code editor_ should be:
+`App.js` tiedoston tulisi olla valittuna _Files_ osiossa. Tiedoston sisältö _koodieditorissa_ tulisi olla seuraava:
 
 ```jsx
 export default function Square() {
@@ -297,15 +297,15 @@ export default function Square() {
 }
 ```
 
-The _browser_ section should be displaying a square with a X in it like this:
+_Selaimen_ tulisi näyttää neliö, jossa on X:
 
-![x-filled square](../images/tutorial/x-filled-square.png)
+![Neliö, jossa on X](../images/tutorial/x-filled-square.png)
 
-Now let's have a look at the files in the starter code.
+Katsotaan nyt aloituskoodin tiedostoja.
 
 #### `App.js` {/*appjs*/}
 
-The code in `App.js` creates a _component_. In React, a component is a piece of reusable code that represents a part of a user interface. Components are used to render, manage, and update the UI elements in your application. Let's look at the component line by line to see what's going on:
+Koodi `App.js` tiedostossa luo _komponentin_. Reactissa komponentti on pala uudelleenkäytettävää koodia, joka edustaa palan käyttöliittymää. Komponentteja käytetään renderöimään, hallitsemaan ja päivittämään sovelluksesi UI elementtejä. Katsotaan komponenttia rivi riviltä nähdäksemme mitä tapahtuu:
 
 ```js {1}
 export default function Square() {
@@ -313,7 +313,7 @@ export default function Square() {
 }
 ```
 
-The first line defines a function called `Square`. The `export` JavaScript keyword makes this function accessible outside of this file. The `default` keyword tells other files using your code that it's the main function in your file.
+Ensimmäinen rivi määrittelee funktion nimeltään `Square`. `export` -JavaScript avainsana tekee funktion saavutettavaksi tämän tiedoston ulkopuolelle. `default` avainsana kertoo muille tiedostoille, että tämä on pääfunktio tiedostossasi.
 
 ```js {2}
 export default function Square() {
@@ -321,15 +321,15 @@ export default function Square() {
 }
 ```
 
-The second line returns a button. The `return` JavaScript keyword means whatever comes after is returned as a value to the caller of the function. `<button>` is a *JSX element*. A JSX element is a combination of JavaScript code and HTML tags that describes what you'd like to display. `className="square"` is a button property or *prop* that tells CSS how to style the button. `X` is the text displayed inside of the button and `</button>` closes the JSX element to indicate that any following content shouldn't be placed inside the button.
+Seuraava koodirivi palauttaa painonapin. `return` -JavaScript avainsanan tarkoittaa, mitä ikinä sen jälkeen tulee, palautetaan se arvo funktion kutsujalle. `<button>` on *JSX elementti*. JSX elementti on yhdistelmä JavaScript koodia ja HTML tageja, jotka kuvaavat mitä haluaisit näyttää. `className="square"` on painikkeen ominaisuus taikka *propsi*, joka ekertoo CSS:lle miten painike tulisi tyylittää. `X` on teksti, joka näytetään painikkeen sisällä, ja `</button>` sulkee JSX elementin osoittaen, että mitään seuraavaa sisältöä ei tulisi sijoittaa painikkeen sisälle.
 
 #### `styles.css` {/*stylescss*/}
 
-Click on the file labeled `styles.css` in the _Files_ section of CodeSandbox. This file defines the styles for your React app. The first two _CSS selectors_ (`*` and `body`) define the style of large parts of your app while the `.square` selector defines the style of any component where the `className` property is set to `square`. In your code, that would match the button from your Square component in the `App.js` file.
+Paina tiedostosta nimeltään `styles.css` CodeSandboxin _Files_ osiossa. Tämä tiedosto määrittelee React sovelluksesi tyylin. Ensimmäiset kaksi _CSS selektoria_ (`*` ja `body`) määrittävät suuren osan sovelluksestasi tyyleistä, kun taas `.square` selektori määrittää minkä tahansa komponentin tyylin, jossa `className` ominaisuus on asetettu `square` arvoon. Koodissasi tämä vastaa painiketta `Square` komponentissa `App.js` tiedostossa.
 
 #### `index.js` {/*indexjs*/}
 
-Click on the file labeled `index.js` in the _Files_ section of CodeSandbox. You won't be editing this file during the tutorial but it is the bridge between the component you created in the `App.js` file and the web browser.
+Paina tiedostosta nimeltään `index.js` CodeSandboxin _Files_ osiossa. Et tule muokkaamaan tätä tiedostoa oppaan aikana, mutta se on silta `App.js` tiedostossa luomasi komponentin ja selaimen välillä.
 
 ```jsx
 import { StrictMode } from 'react';
@@ -339,14 +339,14 @@ import './styles.css';
 import App from './App';
 ```
 
-Lines 1-5 brings all the necessary pieces together: 
+Rivit 1-5 tuovat kaikki tarvittavat palaset yhteen:
 
 * React
-* React's library to talk to web browsers (React DOM)
-* the styles for your components
-* the component you created in `App.js`.
+* Reactin kirjasto, jolla se juttelee selaimen kanssa (React DOM)
+* komponenttiesi tyylit
+* luomasi komponentti `App.js` tiedostossa.
 
-The remainder of the file brings all the pieces together and injects the final product into `index.html` in the `public` folder.
+Loput tiedostosta tuo kaikki palaset yhteen ja palauttaa lopputuotteen `index.html` tiedostoon `public` hakemistossa.
 
 ### Pelilaudan rakentaminen {/*building-the-board*/}
 
