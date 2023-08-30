@@ -350,9 +350,9 @@ Loput tiedostosta tuo kaikki palaset yhteen ja palauttaa lopputuotteen `index.ht
 
 ### Pelilaudan rakentaminen {/*building-the-board*/}
 
-Let's get back to `App.js`. This is where you'll spend the rest of the tutorial.
+Palataan takaisin `App.js` tiedostoon. Tämä on missä tulet viettämään lopun oppaan ajasta.
 
-Currently the board is only a single square, but you need nine! If you just try and copy paste your square to make two squares like this:
+Nykyisillään pelilauta on vain yksi neliö, mutta tarvitset yhdeksän! Voit yrittää vain kopioida ja liittää neliösi tehdäksesi kaksi neliötä näin:
 
 ```js {2}
 export default function Square() {
@@ -360,7 +360,7 @@ export default function Square() {
 }
 ```
 
-You'll get this error:
+Saat tämän virheen:
 
 <ConsoleBlock level="error">
 
@@ -368,7 +368,7 @@ You'll get this error:
 
 </ConsoleBlock>
 
-React components need to return a single JSX element and not multiple adjacent JSX elements like two buttons. To fix this you can use *fragments* (`<>` and `</>`) to wrap multiple adjacent JSX elements like this:
+React komponenttien täytyy palauttaa yksi JSX elementti, ei useampia vierekkäisiä JSX elementtejä kun kaksi painonappia. Korjataksesi tämän käytä *fragmenttejä* (`<>` ja `</>`) käärimään useampia vierekkäisiä JSX elementtejä näin:
 
 ```js {3-6}
 export default function Square() {
@@ -381,17 +381,17 @@ export default function Square() {
 }
 ```
 
-Now you should see:
+Nyt näet:
 
-![two x-filled squares](../images/tutorial/two-x-filled-squares.png)
+![kaksi x:llä täytettyä neliötä](../images/tutorial/two-x-filled-squares.png)
 
-Great! Now you just need to copy-paste a few times to add nine squares and...
+Hyvä! Nyt sinun tulee kopioida ja littää muutaman kerran saadaksesi yhdeksän neliötä ja sitten....
 
-![nine x-filled squares in a line](../images/tutorial/nine-x-filled-squares.png)
+![yhdeksän x:llä täyettyä neliötä rivissä](../images/tutorial/nine-x-filled-squares.png)
 
-Oh no! The squares are all in a single line, not in a grid like you need for our board. To fix this you'll need to group your squares into rows with `div`s and add some CSS classes. While you're at it, you'll give each square a number to make sure you know where each square is displayed.
+Voi ei! Neliöt ovat kaikki yhdessä rivissä eikä ruudukossa kuten tarvitset sen pelilaudalla. Korjataksesi tämän sinun tulee ryhmitellä neliöt riveihin `div` elementeillä ja lisätä muutama CSS luokka. Samalla kun teet tämän, annat jokaiselle neliölle numeron varmistaaksesi, että tiedät missä jokainen neliö näytetään.
 
-In the `App.js` file, update the `Square` component to look like this:
+`App.js` tiedostossa, päivitä `Square` komponentti näyttämään tältä:
 
 ```js {3-19}
 export default function Square() {
@@ -417,11 +417,11 @@ export default function Square() {
 }
 ```
 
-The CSS defined in `styles.css` styles the divs with the `className` of `board-row`. Now that you've grouped your components into rows with the styled `div`s you have your tic-tac-toe board:
+`styles.css` tiedostossa määritelty CSS tyylittää divit `className`:n `board-row` arvolla. Nyt kun olet ryhmitellyt komponenttisi riveihin tyylitetyillä `div` elementeillä, sinulla on ristinolla-pelilauta:
 
-![tic-tac-toe board filled with numbers 1 through 9](../images/tutorial/number-filled-board.png)
+![ristinolla-pelilauta numeroitu yhdestä yhdeksään](../images/tutorial/number-filled-board.png)
 
-But you now have a problem. Your component named `Square`, really isn't a square anymore. Let's fix that by changing the name to `Board`:
+Mutta nyt sinulla on ongelma. Komponenttisi `Square` ei enää ole neliö. Korjataksesi tämän, muuta nimi `Square` komponentille `Board`:iksi:
 
 ```js {1}
 export default function Board() {
@@ -429,7 +429,7 @@ export default function Board() {
 }
 ```
 
-At this point your code should look something like this:
+Tässä kohtaa, koodisi tuli näyttää tämänkaltaiselta:
 
 <Sandpack>
 
@@ -506,7 +506,7 @@ body {
 
 <Note>
 
-Psssst... That's a lot to type! It's okay to copy and paste code from this page. However, if you're up for a little challenge, we recommend only copying code that you've manually typed at least once yourself.
+Pst... Tuossa on aika paljon kirjoitettavaa! On ihan ok kopioida ja liittää koodia tältä sivulta. Jos kuitenkin haluat haastetta, suosittelemme kopioida vain koodia, jonka olet kirjoittanut ainakin kerran itse.
 
 </Note>
 
