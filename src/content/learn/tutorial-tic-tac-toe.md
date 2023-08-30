@@ -202,7 +202,7 @@ Kun olet pelannut peliä, jatka oppaan kanssa. Tulet aloittamaan yksinkertaisemm
 
 ## Oppaan asennusvaihe {/*setup-for-the-tutorial*/}
 
-In the live code editor below, click **Fork** in the top-right corner to open the editor in a new tab using the website CodeSandbox. CodeSandbox lets you write code in your browser and preview how your users will see the app you've created. The new tab should display an empty square and the starter code for this tutorial.
+Alla olevassa koodieditorissa, paina **Forkkaa* oikeassa yläreunassa avataksesi editorin uuteen välilehteen käyttäen CodeSandboxia. CodeSandbox antaa sinun kirjoittaa koodia selaimessasi ja esikatsella miten käyttäjäsi näkevät luomasi sovelluksen. Uuden välilehden tulisi näyttää tyhjä ruutu ja tämän oppaan aloituskoodi.
 
 <Sandpack>
 
@@ -263,13 +263,15 @@ body {
 
 You can also follow this tutorial using your local development environment. To do this, you need to:
 
-1. Install [Node.js](https://nodejs.org/en/)
-1. In the CodeSandbox tab you opened earlier, press the top-left corner button to open the menu, and then choose **File > Export to ZIP** in that menu to download an archive of the files locally
-1. Unzip the archive, then open a terminal and `cd` to the directory you unzipped
-1. Install the dependencies with `npm install`
-1. Run `npm start` to start a local server and follow the prompts to view the code running in a browser
+Voit myös seurata tätä opasta paikallisessa kehitysympäristössä. Tämä vaatii:
 
-If you get stuck, don't let this stop you! Follow along online instead and try a local setup again later.
+1. Asenna [Node.js](https://nodejs.org/en/)
+1. Aikaisemmin avatussa CodeSandbox -välilehdessä, paina vasemmassa yläreunassa olevaa painiketta ja valitse **File > Export to ZIP** ladataksesi arkiston tiedostoista.
+1. Pura arkisto, ja avaa sitten terminaali ja siirry `cd`:llä purettuun hakemistoon
+1. Asenna riippuvuudet `npm install` komennolla
+1. Suorita `npm start` käynnistääksesi paikallisen palvelimen ja seuraa kehotuksia nähdäksesi koodin selaimessa
+
+Jos jäät jumiin, älä anna tämän estää! Seuraa opasta verkossa ja kokeile paikallista asennusta myöhemmin uudelleen.
 
 </Note>
 
