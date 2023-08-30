@@ -512,9 +512,9 @@ Pst... Tuossa on aika paljon kirjoitettavaa! On ihan ok kopioida ja liittää ko
 
 ### Datan välittäminen propseilla {/*passing-data-through-props*/}
 
-Next, you'll want to change the value of a square from empty to "X" when the user clicks on the square. With how you've built the board so far you would need to copy-paste the code that updates the square nine times (once for each square you have)! Instead of copy-pasting, React's component architecture allows you to create a reusable component to avoid messy, duplicated code.
+Seuraavaksi haluat muuttaa neliön arvon tyhjästä X:ksi kun käyttäjä painaa neliötä. Tällä hetkellä sinun täytyisi kopioida ja liittää koodi, joka päivittää neliön yhdeksän kertaa (kerran jokaiselle neliölle)! Sen sijaan, että kopioisit ja liittäisit, Reactin komponenttiarkkitehtuuri antaa sinun luoda uudelleenkäytettävän komponentin välttääksesi sotkuisen, toistuvan koodin.
 
-First, you are going to copy the line defining your first square (`<button className="square">1</button>`) from your `Board` component into a new `Square` component:
+Ensiksi, kopioit rivin, joka määrittelee ensimmäisen neliösi (`<button className="square">1</button>`) `Board` komponentistasi uuteen `Square` komponenttiin:
 
 ```js {1-3}
 function Square() {
@@ -526,7 +526,7 @@ export default function Board() {
 }
 ```
 
-Then you'll update the Board component to render that `Square` component using JSX syntax:
+Sitten päivität `Board` komponentin renderöimään sen `Square` komponentin käyttäen JSX syntaksia:
 
 ```js {5-19}
 // ...
@@ -553,15 +553,15 @@ export default function Board() {
 }
 ```
 
-Note how unlike the browser `div`s, your own components `Board` and `Square` must start with a capital letter. 
+Huomaa miten toisin kuin selainten `div`:it, omat komponenttisi `Board` ja `Square` täytyy alkaa isolla kirjaimella.
 
-Let's take a look:
+Katsotaanpa:
 
-![one-filled board](../images/tutorial/board-filled-with-ones.png)
+![pelilauta täytetty ykkösillä](../images/tutorial/board-filled-with-ones.png)
 
-Oh no! You lost the numbered squares you had before. Now each square says "1". To fix this, you will use *props* to pass the value each square should have from the parent component (`Board`) to its child (`Square`).
+Voi ei! Menetit numeroidut neliöt, jotka sinulla oli aiemmin. Nyt jokaisessa neliössä lukee "1". Korjataksesi tämän, käytä *propseja* välittääksesi arvon, jonka jokaisen neliön tulisi saada vanhemmalta komponentilta (`Board`) sen alakomponentille (`Square`).
 
-Update the `Square` component to read the `value` prop that you'll pass from the `Board`:
+Päivitä `Square` komponentti lukemaan `value` propsi, jonka välität `Board` komponentilta:
 
 ```js {1}
 function Square({ value }) {
@@ -569,9 +569,9 @@ function Square({ value }) {
 }
 ```
 
-`function Square({ value })` indicates the Square component can be passed a prop called `value`.
+`function Square({ value })` kertoo, että `Square` komponentille voidaan välittää `value` niminen propsi.
 
-Now you want to display that `value` instead of `1` inside every square. Try doing it like this:
+Nyt haluat näyttää `value` arvon `1`:n sijaan jokaisessa neliössä. Kokeile tehdä se näin:
 
 ```js {2}
 function Square({ value }) {
@@ -579,11 +579,11 @@ function Square({ value }) {
 }
 ```
 
-Oops, this is not what you wanted:
+Oho, tämä ei ollut mitä halusit:
 
-![value-filled board](../images/tutorial/board-filled-with-value.png)
+![pelilauta täytetty value tekstillä](../images/tutorial/board-filled-with-value.png)
 
-You wanted to render the JavaScript variable called `value` from your component, not the word "value". To "escape into JavaScript" from JSX, you need curly braces. Add curly braces around `value` in JSX like so:
+Halusit renderöidä JavaScript muuttujan nimeltään `value` komponentistasi, et sanan "value". Päästäksesi "takaisin JavaScriptiin" JSX:stä, tarvitset aaltosulkeet. Lisää aaltosulkeet `value`:n ympärille JSX:ssä näin:
 
 ```js {2}
 function Square({ value }) {
@@ -591,11 +591,11 @@ function Square({ value }) {
 }
 ```
 
-For now, you should see an empty board:
+Toistaiseksi, sinun tulisi nähdä tyhjä pelilauta:
 
-![empty board](../images/tutorial/empty-board.png)
+![tyhjä pelilauta](../images/tutorial/empty-board.png)
 
-This is because the `Board` component hasn't passed the `value` prop to each `Square` component it renders yet. To fix it you'll add the `value` prop to each `Square` component rendered by the `Board` component:
+Näin tapahtuu, koska `Board` komponentti ei ole välittänyt `value` propseja jokaiselle `Square` komponentille, jonka se renderöi. Korjataksesi tämän, lisää `value` propsi jokaiselle `Square` komponentille, jonka `Board` komponentti renderöi:
 
 ```js {5-7,10-12,15-17}
 export default function Board() {
@@ -621,11 +621,11 @@ export default function Board() {
 }
 ```
 
-Now you should see a grid of numbers again:
+Nyt sinun tulisi nähdä numeroitu ruudukko taas:
 
-![tic-tac-toe board filled with numbers 1 through 9](../images/tutorial/number-filled-board.png)
+![ristinolla-pelilauta täytetty yhdestä yhdeksään](../images/tutorial/number-filled-board.png)
 
-Your updated code should look like this:
+Päivitetyn koodisi tulisi näyttää tämänkaltaiselta:
 
 <Sandpack>
 
