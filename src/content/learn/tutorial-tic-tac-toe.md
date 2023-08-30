@@ -1,5 +1,5 @@
 ---
-title: 'Tutorial: Tic-Tac-Toe'
+title: 'Opas: Ristinolla'
 ---
 
 <Intro>
