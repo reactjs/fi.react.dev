@@ -469,7 +469,7 @@ input {
 
 **Älä käytä ref:iä liikaa.** Sinun tulisi käyttää ref:iä vain *imperatiivisiin* toimintoihin, joita et voi ilmaista propseina: esimerkiksi nodeen vierittäminen, noden kohdistaminen, animaation käynnistäminen, tekstin valitseminen jne.
 
-**Jos voit ilmaista jotain propseina, sinun ei tulisi käyttää ref:iä.** Esimerkiksi sen sijaan, että julkistaisit `Modal` komponentista *imperatiivisen käsittelijän* kuten `{ open, close }`, on parempi ottaa `isOpen` propsi kuten `<Modal isOpen={isOpen} />`. [Effectit](/learn/synchronizing-with-effects) voivat auttaa sinua julkistamaan imperatiivisia toimintoja propseina.
+**Jos voit ilmaista jotain propseina, sinun ei tulisi käyttää ref:iä.** Esimerkiksi sen sijaan, että julkistaisit `Modal` komponentista *imperatiivisen käsittelijän* kuten `{ open, close }`, on parempi ottaa `isOpen` propsi kuten `<Modal isOpen={isOpen} />`. [Efektit](/learn/synchronizing-with-effects) voivat auttaa sinua julkistamaan imperatiivisia toimintoja propseina.
 
 </Pitfall>
 

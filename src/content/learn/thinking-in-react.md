@@ -477,7 +477,7 @@ function FilterableProductTable({ products }) {
         onInStockOnlyChange={setInStockOnly} />
 ```
 
-`SearchBar` komponentissa lisää `onChange` tapahtumakäsittelijä ja muuta yläkomponentin tila sieltä käsin:
+`SearchBar` komponentissa lisää `onChange` Tapahtumankäsittelijä ja muuta yläkomponentin tila sieltä käsin:
 
 ```js {5}
 <input

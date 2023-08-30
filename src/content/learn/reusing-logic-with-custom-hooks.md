@@ -835,7 +835,7 @@ export default function ChatRoom({ roomId }) {
 
 Joka kerta kun `ChatRoom` komponenttisi renderöityy, se välittää viimeisimmän `roomId` ja `serverUrl`:n Hookillesi. Tämän takia Efektisi yhdistää chattiin joka kerta kun niiden arvot muuttuvat edellisestä renderöinnistä. (Jos olet koskaan työskennellyt ääni- tai videokäsittelyohjelmistojen kanssa, Hookkien ketjuttaminen saattaa muistuttaa sinua visuaalisten tai ääniefektien ketjuttamisesta. Se on kuin `useState` -tulosteen "syöttäminen" `useChatRoom` -syötteeseen.)
 
-### Tapahtumakäsittelijöiden välittäminen omiin Hookkeihin {/*passing-event-handlers-to-custom-hooks*/}
+### Tapahtumankäsittelijöiden välittäminen omiin Hookkeihin {/*passing-event-handlers-to-custom-hooks*/}
 
 <Wip>
 

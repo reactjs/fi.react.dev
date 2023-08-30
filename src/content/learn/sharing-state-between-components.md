@@ -97,7 +97,7 @@ Koordinoidaksesi nämä kaksi paneelia, sinun täytyy "nostaa tila ylös" pääk
 
 1. **Poista** tila lapsikomponentista.
 2. **Välitä** kovakoodattu data yhteisestä pääkomponentista.
-3. **Lisää** tila yhteiseen pääkomponenttiin ja välitä se alas tapahtumakäsittelijöiden kanssa.
+3. **Lisää** tila yhteiseen pääkomponenttiin ja välitä se alas Tapahtumankäsittelijöiden kanssa.
 
 Tämä antaa `Accordion` komponentin koordinoida molemmat `Panel` komponentit ja pitää vain yhtä auki kerrallaan.
 
@@ -186,7 +186,7 @@ const [activeIndex, setActiveIndex] = useState(0);
 Kun `activeIndex` on `0`, ensimmäinen paneeli on aktiivinen. Kun `activeIndex` on `1`, toinen paneeli on aktiivinen.
 
 
-"Show" painikkeen painaminen kummassakin `Panel` komponentissa tulisi muuttaa aktiivista indeksiä `Accordion` komponentissa. `Panel` ei voi asettaa `activeIndex` tilaa suoraan, sillä se on määritelty `Accordion` komponentissa. `Accordion` komponentin täytyy *eksplisiittisesti sallia* `Panel` komponentin muuttaa `activeIndex` tilaa [välittämällä tapahtumakäsittelijä propsina](/learn/responding-to-events#passing-event-handlers-as-props):
+"Show" painikkeen painaminen kummassakin `Panel` komponentissa tulisi muuttaa aktiivista indeksiä `Accordion` komponentissa. `Panel` ei voi asettaa `activeIndex` tilaa suoraan, sillä se on määritelty `Accordion` komponentissa. `Accordion` komponentin täytyy *eksplisiittisesti sallia* `Panel` komponentin muuttaa `activeIndex` tilaa [välittämällä Tapahtumankäsittelijä propsina](/learn/responding-to-events#passing-event-handlers-as-props):
 
 ```js
 <>
@@ -205,7 +205,7 @@ Kun `activeIndex` on `0`, ensimmäinen paneeli on aktiivinen. Kun `activeIndex` 
 </>
 ```
 
-`Panel` komponentin sisällä oleva `<button>` käyttää nyt `onShow` propsia sen tapahtumakäsittelijänä:
+`Panel` komponentin sisällä oleva `<button>` käyttää nyt `onShow` propsia sen Tapahtumankäsittelijänä:
 
 <Sandpack>
 
@@ -266,7 +266,7 @@ h3, p { margin: 5px 0px; }
 
 </Sandpack>
 
-Tämä viimeistelee tilan nostamisen ylös! Tilan siirtäminen yhteiseen pääkomponenttiin mahdollistaa kahden paneelin koordinoimisen. Aktiivisen indeksin käyttäminen kahden "onko näkyvissä" muutujan sijaan varmistaa, että vain yksi paneeli on aina aktiivinen. Tapahtumakäsittelijän välittäminen alakomponentille mahdollistaa sen, että alakomponentti voi muuttaa pääkomponentin tilaa.
+Tämä viimeistelee tilan nostamisen ylös! Tilan siirtäminen yhteiseen pääkomponenttiin mahdollistaa kahden paneelin koordinoimisen. Aktiivisen indeksin käyttäminen kahden "onko näkyvissä" muutujan sijaan varmistaa, että vain yksi paneeli on aina aktiivinen. Tapahtumankäsittelijän välittäminen alakomponentille mahdollistaa sen, että alakomponentti voi muuttaa pääkomponentin tilaa.
 
 <DiagramGroup>
 
@@ -314,7 +314,7 @@ Nähdäksesi mitä tämä tarkoittaa käytännössä muutamin komponentein, lue 
 
 * Kun haluat koordinoida kahta komponenttia, siirrä niiden tila yhteiseen pääkomponenttiin.
 * Välitä sitten tieto pääkomponentista propseilla.
-* Lopuksi, välitä tapahtumakäsittelijät alas, jotta alakomponentit voivat muuttaa pääkomponentin tilaa.
+* Lopuksi, välitä Tapahtumankäsittelijät alas, jotta alakomponentit voivat muuttaa pääkomponentin tilaa.
 * On hyödyllistä ajatella komponentteja "hallittuina" (ohjataan propseilla) tai "hallitsemattomina" (ohjataan tilalla).
 
 </Recap>
@@ -374,7 +374,7 @@ label { display: block; }
 
 <Solution>
 
-Siirrä `text` tilamuuttuja ylös yhteiseen pääkomponenttiin `handleChange` tapahtumakäsittelijän kanssa. Sitten välitä ne alas propseina molemmille `Input` komponenteille. Tämä pitää ne synkronoituna.
+Siirrä `text` tilamuuttuja ylös yhteiseen pääkomponenttiin `handleChange` Tapahtumankäsittelijän kanssa. Sitten välitä ne alas propseina molemmille `Input` komponenteille. Tämä pitää ne synkronoituna.
 
 <Sandpack>
 
@@ -437,7 +437,7 @@ Huomaa, että `filterItems` on jo toteutettu ja importattu, joten sinun ei tarvi
 
 <Hint>
 
-Sinun täytyy poistaa `query` tila ja `handleChange` tapahtumakäsittelijä `SearchBar` komponentista ja siirtää ne ylös `FilterableList` pääkomponenttiin. Sitten välitä ne alas `SearchBar` komponentille `query` ja `onChange` propseina.
+Sinun täytyy poistaa `query` tila ja `handleChange` Tapahtumankäsittelijä `SearchBar` komponentista ja siirtää ne ylös `FilterableList` pääkomponenttiin. Sitten välitä ne alas `SearchBar` komponentille `query` ja `onChange` propseina.
 
 </Hint>
 

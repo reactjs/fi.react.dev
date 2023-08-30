@@ -15,7 +15,7 @@ on, vaan sen sijaan käynnistää uudelleenrenderöinnin.
 * Miten tilamuuttujan asettaminen käynnistää uudelleenrenderöintejä
 * Milloin ja miten tila päivittyy
 * Miksi tila eo päivity heti kun asetat sen
-* Miten tapahtumakäsittelijät saavat "tilannekuvan" tilasta
+* Miten Tapahtumankäsittelijät saavat "tilannekuvan" tilasta
 
 </YouWillLearn>
 
@@ -65,7 +65,7 @@ label, textarea { margin-bottom: 10px; display: block; }
 
 Tässä mitä tapahtuu kun klikkaat painiketta:
 
-1. `onSubmit` tapahtumakäsittelijä suoritetaan.
+1. `onSubmit` Tapahtumankäsittelijä suoritetaan.
 2. `setIsSent(true)` asettaa `isSent` arvoksi `true` ja lisää renderöinnin jonoon.
 3. React renderöi uudelleen komponentin uuden `isSent` arvon mukaan.
 
@@ -73,9 +73,9 @@ Otetaan tarkempi katse tilan ja renderöinnin suhteeseen.
 
 ## Renderöinti ottaa tilannekuvan ajasta {/*rendering-takes-a-snapshot-in-time*/}
 
-["Renderöinti"](/learn/render-and-commit#step-2-react-renders-your-components) tarkoittaa, että React kutsuu komponenttiasi, joka on funktio. Funktion palauttama JSX on kuten käyttöliittymän tilannekuva ajasta. Sen propsit, tapahtumakäsittelijät sekä paikalliset muuttujat laskettiin **käyttämällä sen tilaa renderöintihetkellä.**
+["Renderöinti"](/learn/render-and-commit#step-2-react-renders-your-components) tarkoittaa, että React kutsuu komponenttiasi, joka on funktio. Funktion palauttama JSX on kuten käyttöliittymän tilannekuva ajasta. Sen propsit, Tapahtumankäsittelijät sekä paikalliset muuttujat laskettiin **käyttämällä sen tilaa renderöintihetkellä.**
 
-Toisin kuin valokuva tai elokuvan kehys, UI "tilannekuva", jonka palautat on interaktiivinen. Se sisältää logiikkaa kuten tapahtumakäsittelijöitä, jotka määrittävät mitä tapahtuu vastauksena syötteeseen. React sitten päivittää ruudun vastaamaan tätä tilannekuvaa ja yhdistää tapahtumakäsittelijät. Lopputuloksena painikkeen painaminen käynnistää JSX koodisi tapahtumakäsittelijän.
+Toisin kuin valokuva tai elokuvan kehys, UI "tilannekuva", jonka palautat on interaktiivinen. Se sisältää logiikkaa kuten Tapahtumankäsittelijöitä, jotka määrittävät mitä tapahtuu vastauksena syötteeseen. React sitten päivittää ruudun vastaamaan tätä tilannekuvaa ja yhdistää Tapahtumankäsittelijät. Lopputuloksena painikkeen painaminen käynnistää JSX koodisi Tapahtumankäsittelijän.
 
 Kun React renderöi komponentin uudelleen:
 
@@ -141,7 +141,7 @@ Huomaa, että `number` kasvaa vain kerran per klikkaus!
 }}>+3</button>
 ```
 
-Tämän painikkeen tapahtumakäsittelijä kertoo Reactille toimimaan seuraavasti:
+Tämän painikkeen Tapahtumankäsittelijä kertoo Reactille toimimaan seuraavasti:
 
 1. `setNumber(number + 1)`: `number` on `0` joten `setNumber(0 + 1)`.
     - React valmistelee muuttamaan `number` arvoksi `1` seuraavalle renderöinnille.
@@ -150,9 +150,9 @@ Tämän painikkeen tapahtumakäsittelijä kertoo Reactille toimimaan seuraavasti
 3. `setNumber(number + 1)`: `number` on `0` joten `setNumber(0 + 1)`.
     - React valmistelee muuttamaan `number` arvoksi `1` seuraavalle renderöinnille.
 
-Vaikka kutsuit `setNumber(number + 1)` kolme kertaa, *tämän renderin* tapahtumakäsittelijän `number` on aina `0`, joten asetit tilan arvoksi `1` kolme kertaa. Tämän vuoksi React renderöi komponentin uudelleen `number` muuttujan ollen `1` eikä `3`.
+Vaikka kutsuit `setNumber(number + 1)` kolme kertaa, *tämän renderin* Tapahtumankäsittelijän `number` on aina `0`, joten asetit tilan arvoksi `1` kolme kertaa. Tämän vuoksi React renderöi komponentin uudelleen `number` muuttujan ollen `1` eikä `3`.
 
-Voit myös havainnollistaa tämän myös korvaamalla tilamuuttujat niiden arovilla koodissa. Koska tilamuuttuja `number` on `0` *tässä renderöinnissä*, sen tapahtumakäsittelijä näyttää tältä:
+Voit myös havainnollistaa tämän myös korvaamalla tilamuuttujat niiden arovilla koodissa. Koska tilamuuttuja `number` on `0` *tässä renderöinnissä*, sen Tapahtumankäsittelijä näyttää tältä:
 
 ```js
 <button onClick={() => {
@@ -162,7 +162,7 @@ Voit myös havainnollistaa tämän myös korvaamalla tilamuuttujat niiden arovil
 }}>+3</button>
 ```
 
-Seuraavassa renderöinnissä `number` on `1`, joten *tämän renderöinnin* tapahtumakäsittelijä näyttää tältä:
+Seuraavassa renderöinnissä `number` on `1`, joten *tämän renderöinnin* Tapahtumankäsittelijä näyttää tältä:
 
 ```js
 <button onClick={() => {
@@ -254,7 +254,7 @@ setTimeout(() => {
 
 Reactiin tallennettu tila on saattanut muuttua, kun ilmoitus suoritetaan, mutta se ajoitettiin käyttämällä tilannekuvaa tilasta sillä hetkellä, kun käyttäjä oli vuorovaikutuksessa sen kanssa!
 
-**Tilamuuttujan arvo ei koskaan muutu renderöinnin aikana,** vaikka sen tapahtumakäsittelijän koodi olisi asynkroninen. *Tuon renderöinnin* `onClick`:n sisällä `number`:n arvo on edelleen `0`, vaikka `setNumber(number + 5)` kutsuttiin. Sen arvo "kiinnitettiin", kun React "otti tilannekuvan" käyttöliittymästä kutsumalla komponenttiasi.
+**Tilamuuttujan arvo ei koskaan muutu renderöinnin aikana,** vaikka sen Tapahtumankäsittelijän koodi olisi asynkroninen. *Tuon renderöinnin* `onClick`:n sisällä `number`:n arvo on edelleen `0`, vaikka `setNumber(number + 5)` kutsuttiin. Sen arvo "kiinnitettiin", kun React "otti tilannekuvan" käyttöliittymästä kutsumalla komponenttiasi.
 
 Tässä on esimerkki siitä, miten tämä tekee tapahtumankäsittelijöistäsi vähemmän alttiita ajoitusvirheille. Alla on lomake, joka lähettää viestin viiden sekunnin viiveellä. Kuvittele tämä skenaario:
 
@@ -307,7 +307,7 @@ label, textarea { margin-bottom: 10px; display: block; }
 
 </Sandpack>
 
-**React pitää tilan arvot "kiinteinä" renderöinnin tapahtumakäsittelijöiden sisällä.** Sinun ei tarvitse huolehtia siitä, onko tila muuttunut koodin suorituksen aikana.
+**React pitää tilan arvot "kiinteinä" renderöinnin Tapahtumankäsittelijöiden sisällä.** Sinun ei tarvitse huolehtia siitä, onko tila muuttunut koodin suorituksen aikana.
 
 Entä jos haluat lukea viimeisimmän tilan ennen uudelleen renderöintiä? Haluat käyttää [tilapäivitysfunktiota](/learn/queueing-a-series-of-state-updates), jota käsitellään seuraavalla sivulla!
 
@@ -364,7 +364,7 @@ h1 { margin-top: 20px; }
 
 </Sandpack>
 
-Lisää `alert` klikkauksen tapahtumakäsittelijään. Kun valo on vihreä se ja sanoo "Kävele", painikkeen painamisen tulisi ilmoittaa "Seuraavaksi pysähdytään". Kun valo on punainen ja sanoo "Pysähdy", painikkeen painamisen tulisi ilmoittaa "Seuraavaksi kävellään".
+Lisää `alert` klikkauksen Tapahtumankäsittelijään. Kun valo on vihreä se ja sanoo "Kävele", painikkeen painamisen tulisi ilmoittaa "Seuraavaksi pysähdytään". Kun valo on punainen ja sanoo "Pysähdy", painikkeen painamisen tulisi ilmoittaa "Seuraavaksi kävellään".
 
 Onko sillä merkitystä laitatko `alert`:n enne vai jälkeen `setWalk` kutsua?
 
@@ -406,7 +406,7 @@ h1 { margin-top: 20px; }
 
 </Sandpack>
 
-Riippumatta siitä laitatko sen ennen vai jälkeen `setWalk` kutsun, sillä ei merkitystä. Tämän renderin `walk` tilan arvo on "kiinteä". `setWalk` kutsuminen muuttaa sen vain *seuraavalle* renderöinnille, mutta se ei vaikuta aikaisempien renderien tapahtumakäsittelijöihin.
+Riippumatta siitä laitatko sen ennen vai jälkeen `setWalk` kutsun, sillä ei merkitystä. Tämän renderin `walk` tilan arvo on "kiinteä". `setWalk` kutsuminen muuttaa sen vain *seuraavalle* renderöinnille, mutta se ei vaikuta aikaisempien renderien Tapahtumankäsittelijöihin.
 
 Tämä rivi saattaa vaikuttaa epäintuitiiviselta aluksi:
 
@@ -414,7 +414,7 @@ Tämä rivi saattaa vaikuttaa epäintuitiiviselta aluksi:
 alert(walk ? 'Seuraavaksi pysähdytään' : 'Seuraavaksi kävellään');
 ```
 
-Mutta siinä on järkeä, kun luet sen seuraavasti: "Jos liikennevalon väri sanoo 'Kävele', ilmoituksen tulisi olla 'Seuraavaksi pysähdytään.'" Tapahtumakäsittelijässäsi oleva `walk` -muuttuja vastaa kyseisen renderöinnin `walk`-arvoa, eikä se muutu.
+Mutta siinä on järkeä, kun luet sen seuraavasti: "Jos liikennevalon väri sanoo 'Kävele', ilmoituksen tulisi olla 'Seuraavaksi pysähdytään.'" Tapahtumankäsittelijässäsi oleva `walk` -muuttuja vastaa kyseisen renderöinnin `walk`-arvoa, eikä se muutu.
 
 Voit tarkistaa, että tämä on oikein soveltamalla korvausmenetelmää. Kun `walk` on `true`, saat:
 

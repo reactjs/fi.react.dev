@@ -426,7 +426,7 @@ function Form() {
   const theme = useContext(ThemeContext);
 
   function handleSubmit() {
-    // ✅ Hyvä: Tapahtumakohtainen logiikka kutsutaan tapahtumakäsittelijästä
+    // ✅ Hyvä: Tapahtumakohtainen logiikka kutsutaan Tapahtumankäsittelijästä
     post('/api/register');
     showNotification('Successfully registered!', theme);
   }
@@ -435,7 +435,7 @@ function Form() {
 }
 ```
 
-Nyt kun koodi on tapahtumakäsittelijässä, se ei ole reaktiivista--joten se suoritetaan vain kun käyttäjä lähettää lomakkeen. Lue [valinta tapahtumankäsittelijän ja Efektin välillä](/learn/separating-events-from-effects#reactive-values-and-reactive-logic) ja [miten poistaa turhia Efekteja.](/learn/you-might-not-need-an-effect)
+Nyt kun koodi on Tapahtumankäsittelijässä, se ei ole reaktiivista--joten se suoritetaan vain kun käyttäjä lähettää lomakkeen. Lue [valinta tapahtumankäsittelijän ja Efektin välillä](/learn/separating-events-from-effects#reactive-values-and-reactive-logic) ja [miten poistaa turhia Efekteja.](/learn/you-might-not-need-an-effect)
 
 ### Tekeekö Efektisi useita toistaan riippumattomia asioita? {/*is-your-effect-doing-several-unrelated-things*/}
 
@@ -1812,7 +1812,7 @@ Tässä esimerkissä, chat yhdistää uudelleen joka kerta kun yrität vaihtaa t
 
 <Hint>
 
-Välität kahta eri funktiota: `onMessage` ja `createConnection`. Molemmat luodaan alusta joka kerta kun `App` renderöidään uudelleen. Ne ovat uusia arvoja joka kerta, minkä takia ne laukaisevat uudelleen Effectisi.
+Välität kahta eri funktiota: `onMessage` ja `createConnection`. Molemmat luodaan alusta joka kerta kun `App` renderöidään uudelleen. Ne ovat uusia arvoja joka kerta, minkä takia ne laukaisevat uudelleen Effektisi.
 
 Yksi näistä funktioista on tapahtumankäsittelijä. Tiedätkö tapoja kutsua tapahtumankäsittelijää Efektinä ilman että "reagoit" tapahtumankäsittelijän uusiin arvoihin? Se olisi hyödyllistä!
 

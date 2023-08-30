@@ -207,9 +207,9 @@ ul, li { margin: 0; padding: 0; }
 
 </Sandpack>
 
-Reduktori helpottaa pitämään tapahtumakäsittelijät lyhyinä ja tiiviinä. Kuitenkin, kun sovelluksesi kasvaa, saataat törmätä toiseen haasteeseen. **Tällä hetkellä, `tasks` tila ja `dispatch` funktio ovat vain saatavilla ylätason `TaskApp` komponentissa.** Jotta muut komponentit voisivat lukea tehtävälistan tai muuttaa sitä, sinun on erikseen [välitettävä](/learn/passing-props-to-a-component) nykyinen tila ja tapahtumakäsittelijät, jotka muuttavat sitä propsien kautta.
+Reduktori helpottaa pitämään Tapahtumankäsittelijät lyhyinä ja tiiviinä. Kuitenkin, kun sovelluksesi kasvaa, saataat törmätä toiseen haasteeseen. **Tällä hetkellä, `tasks` tila ja `dispatch` funktio ovat vain saatavilla ylätason `TaskApp` komponentissa.** Jotta muut komponentit voisivat lukea tehtävälistan tai muuttaa sitä, sinun on erikseen [välitettävä](/learn/passing-props-to-a-component) nykyinen tila ja Tapahtumankäsittelijät, jotka muuttavat sitä propsien kautta.
 
-Esimerkiksi, `TaskApp` välittää tehtävälistan ja tapahtumakäsittelijät `TaskList` komponentille:
+Esimerkiksi, `TaskApp` välittää tehtävälistan ja Tapahtumankäsittelijät `TaskList` komponentille:
 
 ```js
 <TaskList
@@ -231,7 +231,7 @@ And `TaskList` passes the event handlers to `Task`:
 
 Pienessä esimerkissä kuten tässä, tämä toimii hyvin, mutta jos sinulla on kymmeniä tai satoja komponentteja välissä, tilan ja funktioiden välittäminen voi olla melko ärsyttävää!
 
-Tämän takia vaihtoehtoinen tapa on laittaa sekä `tasks` tila että `dispatch` funktio [kontekstiin](/learn/passing-data-deeply-with-context). **Tällöin, minkä tahansa komponentin alla oleva komponentti voi lukea tehtävälistan ja kutsua tapahtumakäsittelijöitä ilman toistuvaa "prop drillingia".**
+Tämän takia vaihtoehtoinen tapa on laittaa sekä `tasks` tila että `dispatch` funktio [kontekstiin](/learn/passing-data-deeply-with-context). **Tällöin, minkä tahansa komponentin alla oleva komponentti voi lukea tehtävälistan ja kutsua Tapahtumankäsittelijöitä ilman toistuvaa "prop drillingia".**
 
 Tässä on tapa yhdistää reduktori kontekstiin:
 
@@ -713,7 +713,7 @@ export default function AddTask() {
     // ...
 ```
 
-**`TaskApp` komponentin ei tarvitse välittää yhtään tapahtumakäsittelijää, eikä `TaskList` komponentin tarvitse myöskään välittää yhtään tapahtumakäsittelijää `Task` komponentille.** Jokainen komponentti lukee kontekstista sen, mitä se tarvitsee:
+**`TaskApp` komponentin ei tarvitse välittää yhtään Tapahtumankäsittelijää, eikä `TaskList` komponentin tarvitse myöskään välittää yhtään Tapahtumankäsittelijää `Task` komponentille.** Jokainen komponentti lukee kontekstista sen, mitä se tarvitsee:
 
 <Sandpack>
 

@@ -47,7 +47,7 @@ h1 { display: inline-block; margin: 10px; width: 30px; text-align: center; }
 
 </Sandpack>
 
-Kuitenkin saatat muistaa edellisestä osasta, [kunkin renderin tila-arvot ovat kiinteät](/learn/state-as-a-snapshot#rendering-takes-a-snapshot-in-time), joten `number` muuttujan arvo ensimmäisen renderöinnin tapahtumakäsittelijässä on aina `0`, riippumatta siitä miten monesti kutsut `setNumber(1)` funktiota:
+Kuitenkin saatat muistaa edellisestä osasta, [kunkin renderin tila-arvot ovat kiinteät](/learn/state-as-a-snapshot#rendering-takes-a-snapshot-in-time), joten `number` muuttujan arvo ensimmäisen renderöinnin Tapahtumankäsittelijässä on aina `0`, riippumatta siitä miten monesti kutsut `setNumber(1)` funktiota:
 
 ```js
 setNumber(0 + 1);
@@ -55,7 +55,7 @@ setNumber(0 + 1);
 setNumber(0 + 1);
 ```
 
-Mutta tässä on yksi toinen tekijä mukana pelissä. **React odottaa kunnes *kaikki* koodi tapahtumakäsittelijässä on suoritettu ennen tilapäivitysten laskentaa.** Tämän vuoksi uudelleen renderöinti tapahtuu kaikkien `setNumber()` kutsujen *jälkeen*.
+Mutta tässä on yksi toinen tekijä mukana pelissä. **React odottaa kunnes *kaikki* koodi Tapahtumankäsittelijässä on suoritettu ennen tilapäivitysten laskentaa.** Tämän vuoksi uudelleen renderöinti tapahtuu kaikkien `setNumber()` kutsujen *jälkeen*.
 
 Tämä saattaa muistuttaa tarjoilijasta ottamassa tilauksia vastaan ravintolassa. Tarjoilija ei juokse keittiöön heti kun mainitset ensimmäisen aterian. Sen sijaan hän antaa sinun tehdä tilauksesi loppuun asti, tehdä siihen muutoksia ja sitten ottaa tilauksia vastaan muilta henkilöiltä pöydässä.
 
@@ -101,7 +101,7 @@ h1 { display: inline-block; margin: 10px; width: 30px; text-align: center; }
 
 Tässä, `n => n + 1` on**päivitysfunktio.** Kun välität sen tila-asettajalle:
 
-1. React lisää tämän funktion jonoon prosessoitavaksi kun kaikki muut koodi tapahtumakäsittelijässä on suoritettu.
+1. React lisää tämän funktion jonoon prosessoitavaksi kun kaikki muut koodi Tapahtumankäsittelijässä on suoritettu.
 2. Seuraavan renderöinnin aikana React käy jonon läpi ja antaa sinulle lopullisen päivitetyn tilan.
 
 ```js
@@ -110,7 +110,7 @@ setNumber(n => n + 1);
 setNumber(n => n + 1);
 ```
 
-Näin React käy läpi nämä rivit koodia tapahtumakäsittelijää suoritettaessa:
+Näin React käy läpi nämä rivit koodia Tapahtumankäsittelijää suoritettaessa:
 
 1. `setNumber(n => n + 1)`: `n => n + 1` on funktio. React lisää sen jonoon.
 1. `setNumber(n => n + 1)`: `n => n + 1` on funktio. React lisää sen jonoon.
@@ -225,7 +225,7 @@ h1 { display: inline-block; margin: 10px; width: 30px; text-align: center; }
 
 </Sandpack>
 
-Näin React käy läpi nämä rivit koodia tapahtumakäsittelijää suoritettaessa:
+Näin React käy läpi nämä rivit koodia Tapahtumankäsittelijää suoritettaessa:
 
 1. `setNumber(number + 5)`: `number` on `0`, joten `setNumber(0 + 5)`. React lisää *"korvaa arvolla `5`"* sen jonoon.
 2. `setNumber(n => n + 1)`: `n => n + 1` on päivitysfunktio. React lisää *tuon funktion* sen jonoon.
@@ -263,7 +263,7 @@ Jos haluat yksityiskohtaisempaa koodia, toinen yleinen käytäntö on toistaa ko
 <Recap>
 
 * Tilan asettaminen ei muuta tilamuuttujaa olemassa olevassa renderöinnissä, vaan pyytää uutta renderöintiä.
-* React käsittelee tilapäivitykset sen jälkeen, kun tapahtumakäsittelijät ovat lopettaneet suorituksensa. Tätä kutsutaan niputtamiseksi.
+* React käsittelee tilapäivitykset sen jälkeen, kun Tapahtumankäsittelijät ovat lopettaneet suorituksensa. Tätä kutsutaan niputtamiseksi.
 * Jos haluat päivittää jonkin tilan useita kertoja yhdessä tapahtumassa, voit käyttää `setNumber(n => n + 1)`-päivitysfunktiota.
 
 </Recap>

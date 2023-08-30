@@ -480,7 +480,7 @@ Lue **[Tilan säilyttäminen ja nollaus](/learn/preserving-and-resetting-state)*
 
 ## Tilalogiikan siirtäminen reduceriin {/*extracting-state-logic-into-a-reducer*/}
 
-Komponentit, joissa on useita tilapäivityksiä, jotka on hajallaan useisiin tapahtumakäsittelijöihin, voivat olla hankalia ymmärtää. Näihin tapauksiin voit tiivistää kaikki tilamuutoksen logiikan komponentin ulkopuolelle yhteen funktioon, jota kutsutaan "reduceriksi". Tapahtumakäsittelijöistäsi tulee tiivitä, koska ne määrittelevät ainoastaan käyttäjän "toiminnot". Tiedoston lopussa reducer funktio määrittelee miten tila kuuluisi päivittää kuhunkin tapahtumaan nähden!
+Komponentit, joissa on useita tilapäivityksiä, jotka on hajallaan useisiin Tapahtumankäsittelijöihin, voivat olla hankalia ymmärtää. Näihin tapauksiin voit tiivistää kaikki tilamuutoksen logiikan komponentin ulkopuolelle yhteen funktioon, jota kutsutaan "reduceriksi". Tapahtumankäsittelijöistäsi tulee tiivitä, koska ne määrittelevät ainoastaan käyttäjän "toiminnot". Tiedoston lopussa reducer funktio määrittelee miten tila kuuluisi päivittää kuhunkin tapahtumaan nähden!
 
 <Sandpack>
 
@@ -775,9 +775,9 @@ Lue **[Tiedon välittäminen syvälle kontekstilla](/learn/passing-data-deeply-w
 
 ## Skaalaus reduktorin ja kontekstin avulla {/*scaling-up-with-reducer-and-context*/}
 
-Reducerien avulla voit yhdistää komponentin tilanpäivityslogiikan. Kontekstin avulla voit antaa tietoa syvälle muihin komponentteihin. Voit yhdistää reducereita ja konteksteja yhteen hallitaksesi monimutkaisen ruudun tilaa.
+Reduktorin avulla voit yhdistää komponentin tilanpäivityslogiikan. Kontekstin avulla voit antaa tietoa syvälle muihin komponentteihin. Voit yhdistää reduktoreita ja konteksteja yhteen hallitaksesi monimutkaisen ruudun tilaa.
 
-Tällä lähestymistavalla monimutkaisen tilan omaava pääkomponentti hallitsee sitä reducerilla. Muut komponentit syvällä komponenttipuussa voivat lukea tilaa kontekstilla. Ne voivat myös dispatchata eli lähettää toimintoja päivittääkseen tilaa.
+Tällä lähestymistavalla monimutkaisen tilan omaava pääkomponentti hallitsee sitä reduktorilla. Muut komponentit syvällä komponenttipuussa voivat lukea tilaa kontekstilla. Ne voivat myös dispatchata eli lähettää toimintoja päivittääkseen tilaa.
 
 <Sandpack>
 

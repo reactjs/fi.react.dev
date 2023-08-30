@@ -151,7 +151,7 @@ button {
 
 </Sandpack>
 
-`handleClick()` tapahtumakäsittelijä päivittää paikallista `index` muuttujaa. Kaksi asiaa kuitenkin estävät muutoksen näkymisen:
+`handleClick()` Tapahtumankäsittelijä päivittää paikallista `index` muuttujaa. Kaksi asiaa kuitenkin estävät muutoksen näkymisen:
 
 1. **Paikalliset muuttujat eivät pysy voimassa renderien välillä.** Kun React renderöi tämän komponentin toiseen kertaan, se luo sen alusta. Se ei ota huomioon paikallisten muuttujien muutoksia.
 2. **Muutokset paikallisiin muuttujiin eivät käynnistä uutta renderöintiä.** React ei huomaa, että sen täytyy renderöidä komponentti uudelleen uusien tietojen kanssa.
@@ -915,7 +915,7 @@ Entä jos haluaisit molempien gallerioiden pitäbän niiden tilan synkronisoitun
 
 #### Viimeistele galleria {/*complete-the-gallery*/}
 
-Kun painat "Next" painiketta viimesellä veistoksella, koodi kaatuu. Korjaa logiikka joka estää kaatumista. Voit tehdä tämän lisäämällä logiikkaa tapahtumakäsittelijään tai poistamalla painikkeen käytöstä kun toimintoa ei ole mahdollista tehdä.
+Kun painat "Next" painiketta viimesellä veistoksella, koodi kaatuu. Korjaa logiikka joka estää kaatumista. Voit tehdä tämän lisäämällä logiikkaa Tapahtumankäsittelijään tai poistamalla painikkeen käytöstä kun toimintoa ei ole mahdollista tehdä.
 
 Korjaamisen jälkeen, lisää "Previous" painike, joka näyttää edellisen veistoksen. Sen ei tulisi kaatua ensimmäisessä veistoksessa.
 
@@ -1059,7 +1059,7 @@ img { width: 120px; height: 120px; }
 
 <Solution>
 
-Tämä lisää suojaavan ehdon molempiin tapahtumakäsittelijöihin sekä poistaa painikkeen käytöstä tarvittaessa:
+Tämä lisää suojaavan ehdon molempiin Tapahtumankäsittelijöihin sekä poistaa painikkeen käytöstä tarvittaessa:
 
 <Sandpack>
 
@@ -1219,13 +1219,13 @@ img { width: 120px; height: 120px; }
 
 </Sandpack>
 
-Huomaa miten `hasPrev` ja `hasNext` ovat käytössä *sekä* palautetussa JSX koodissa että tapahtumakäsittelijöissä! Tämä kätevä tapa toimii koska tapahtumakäsittelijäfunktiot ["sulkevat" (engl. "close over")](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Closures) kaikki määritellyt muuttujat renderöinnin aikana.
+Huomaa miten `hasPrev` ja `hasNext` ovat käytössä *sekä* palautetussa JSX koodissa että Tapahtumankäsittelijöissä! Tämä kätevä tapa toimii koska Tapahtumankäsittelijäfunktiot ["sulkevat" (engl. "close over")](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Closures) kaikki määritellyt muuttujat renderöinnin aikana.
 
 </Solution>
 
 #### Korjaa lomakkeen tukkiutuneet syöttökentät {/*fix-stuck-form-inputs*/}
 
-Kun kirjoitat syöttökenttiin, mitään ei tapahdu. Aivan kuin kenttien arvot ovat "jumissa" tyhjillä merkkijonoilla. Ensimmäisen `<input>` elementin `value` on asetettu aina vastaamaan `firstName` muuttujaa ja toisen `<input>` elementin `value` vastaamaan `lastName` muuttujaa. Tämä on tarkoituksenmukaista. Molemmilla kentillä on `onChange` tapahtumakäsittelijä, joka pyrkii päivittämään muuttujia käyttäjän syötteen (`e.target.value`) perusteella. Kuitenkaan, muuttujat eivät näytä "muistavan" niiden arvoja renderöintien välillä. Korjaa tämä käyttämällä tilamuuttujia tavallisten muuttujien sijaan.
+Kun kirjoitat syöttökenttiin, mitään ei tapahdu. Aivan kuin kenttien arvot ovat "jumissa" tyhjillä merkkijonoilla. Ensimmäisen `<input>` elementin `value` on asetettu aina vastaamaan `firstName` muuttujaa ja toisen `<input>` elementin `value` vastaamaan `lastName` muuttujaa. Tämä on tarkoituksenmukaista. Molemmilla kentillä on `onChange` Tapahtumankäsittelijä, joka pyrkii päivittämään muuttujia käyttäjän syötteen (`e.target.value`) perusteella. Kuitenkaan, muuttujat eivät näytä "muistavan" niiden arvoja renderöintien välillä. Korjaa tämä käyttämällä tilamuuttujia tavallisten muuttujien sijaan.
 
 <Sandpack>
 

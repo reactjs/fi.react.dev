@@ -193,9 +193,9 @@ Kuitenkin se on sallittua, koska olet luonut ne *saman renderöinnin aikana* `Te
 
 Vaikka funktionaalinen ohjelmointi nojaa pitkälti puhtauteen, jossain vaiheessa, jossain, _jonkin_ on muututtava. Tämähän on koodauksen koko pointti! Nämä muutokset—ruudunpäivitykset, animaation aloitukset, datan muuttaminen—ovat **sivuvaikutuksia**. Ne ovat asioita, jotka tapahtuvat _"siinä sivussa,"_ ei kesken renderöinnin.
 
-Reactissa, **sivuvaikutukset useimmiten kuuluvat [tapahtumakäsittelijöiden](/learn/responding-to-events) sisään.** Tapahtumakäsittelijät ovat funktioita, joita React suorittaa kun teet jotain toimintoja—esimerkiksi painat nappia. Vaikka tapahtumakäsittelijät on määritelty komponentin *sisällä*, niitä ei suoriteta renderöinnin *aikana*! **Joten tapahtumakäsittelijöiden ei tarvitse olla puhtaita.**
+Reactissa, **sivuvaikutukset useimmiten kuuluvat [Tapahtumankäsittelijöiden](/learn/responding-to-events) sisään.** Tapahtumankäsittelijät ovat funktioita, joita React suorittaa kun teet jotain toimintoja—esimerkiksi painat nappia. Vaikka Tapahtumankäsittelijät on määritelty komponentin *sisällä*, niitä ei suoriteta renderöinnin *aikana*! **Joten Tapahtumankäsittelijöiden ei tarvitse olla puhtaita.**
 
-Jos olet olet käyttänyt kaikki vaihtoehdot, etkä löydä oikeaa tapahtumakäsittelijää sivuvaikutuksellesi, voit silti kiinnittää sen palautettuun JSX:ään käyttäen [`useEffect`](/reference/react/useEffect) kutsua komponentissasi. Tämä kertoo Reactille, että kutsuu sitä myöhemmin renderöinnin jälkeen, jolloin sivuvaikutukset ovat sallittuja. **Huomaa, että tämän tavan pitäisi olla sinun viimeinen keino.**
+Jos olet olet käyttänyt kaikki vaihtoehdot, etkä löydä oikeaa Tapahtumankäsittelijää sivuvaikutuksellesi, voit silti kiinnittää sen palautettuun JSX:ään käyttäen [`useEffect`](/reference/react/useEffect) kutsua komponentissasi. Tämä kertoo Reactille, että kutsuu sitä myöhemmin renderöinnin jälkeen, jolloin sivuvaikutukset ovat sallittuja. **Huomaa, että tämän tavan pitäisi olla sinun viimeinen keino.**
 
 Kun mahdollista, kokeile muotoilla logiikkasi vain renderöinnillä. Yllätyt miten pitkälle sillä pääsee!
 
@@ -220,7 +220,7 @@ Jokainen uusi Reactin ominaisuus joita rakennamme hyödyntää puhtautta. Tiedon
   * **Samat sisääntulot, sama ulostulo.** Annettaen sama syöte, komponentin tulisi aina palauttaa sama JSX. 
 * Renderöinti voi tapahtua koska vain, joten komponenttien ei tulisi riippua toistensa renderöintijärjestyksestä.
 * Sinun ei pitäisi muuttaa lähtötietoja, joita komponenttisi käyttää renderöintiin. Tämä sisältää propsit, tilan sekä kontekstin. Ruudun päivittämiseksi ["aseta" tila](/learn/state-a-components-memory) olemassaolevien olioiden muuttamisen sijaan.
-* Pyri ilmaisemaan komponenttisi logiikka JSX:ssä jota palautat. Kun täytyy "muuttaa asioita", useimmiten teet sen tapahtumakäsittelijässä. Viimeisenä keinona voit käyttää `useEffect`:ia.
+* Pyri ilmaisemaan komponenttisi logiikka JSX:ssä jota palautat. Kun täytyy "muuttaa asioita", useimmiten teet sen Tapahtumankäsittelijässä. Viimeisenä keinona voit käyttää `useEffect`:ia.
 * Puhtaiden funktioiden kirjoittaminen vaatii hieman harjoittelua, mutta se avaa Reactin paradigman voiman.
 
 </Recap>

@@ -374,9 +374,9 @@ Huomaa, että `...` spread -syntaksi on "matala" (engl. shallow)--se kopioi asio
 
 <DeepDive>
 
-#### Yhden tapahtumakäsittelijän käyttäminen useille kentille {/*using-a-single-event-handler-for-multiple-fields*/}
+#### Yhden Tapahtumankäsittelijän käyttäminen useille kentille {/*using-a-single-event-handler-for-multiple-fields*/}
 
-Voit myös käyttää `[` ja `]` sulkeita olion määrittelyn sisällä määritelläksesi propertyn dynaamisella nimellä. Tässä on sama esimerkki, mutta yhdellä tapahtumakäsittelijällä kolmen sijaan:
+Voit myös käyttää `[` ja `]` sulkeita olion määrittelyn sisällä määritelläksesi propertyn dynaamisella nimellä. Tässä on sama esimerkki, mutta yhdellä Tapahtumankäsittelijällä kolmen sijaan:
 
 <Sandpack>
 

@@ -147,7 +147,7 @@ Nyt olet nähnyt ylhäällä miten lomake toteutetaan imperatiivisesti. Jotta ym
 2. **Määritä** mikä käynnistää nämä tilamuutokset
 3. **Edusta** tila muistissa käyttäen `useState` hookkia
 4. **Poista** kaikki epäolennaiset tilamuuttujat
-5. **Yhdistä** tapahtumakäsittelijät tilan asettamiseksi
+5. **Yhdistä** Tapahtumankäsittelijät tilan asettamiseksi
 
 ### 1. Vaihe: Tunnista komponenttisi eri visuaaliset tilat {/*step-1-identify-your-components-different-visual-states*/}
 
@@ -332,7 +332,7 @@ Molemmissa tapauksissa, **saatat asettaa [tilamuuttujia](/learn/state-a-componen
 
 <Note>
 
-Huomaa, että ihmisen syötteet usein vaativat [tapahtumakäsittelijöitä](/learn/responding-to-events)!
+Huomaa, että ihmisen syötteet usein vaativat [Tapahtumankäsittelijöitä](/learn/responding-to-events)!
 
 </Note>
 
@@ -391,15 +391,15 @@ Tiedät, että ne ovat välttämättömiä, kun et voi poistaa yhtään niistä 
 
 <DeepDive>
 
-#### Mahdottomien tilojen poistaminen reducerilla {/*eliminating-impossible-states-with-a-reducer*/}
+#### Mahdottomien tilojen poistaminen reduktorilla {/*eliminating-impossible-states-with-a-reducer*/}
 
-Nämä kolme muuttujaa ovat tarpeeksi kuvaamaan tämän lomakkeen tilaa. Kuitenkin, on jotain välitiloja, jotka eivät ole järkeviä. Esimerkiksi, ei-null `error` ei ole järkevä kun `status` on `success`. Tilan tarkemmaksi mallintamiseksi, voit käyttää [reduceria.](/learn/extracting-state-logic-into-a-reducer) Reducerien avulla voit yhdistää useita tilamuuttujia yhdeksi olioksi ja tiivistää liittyvät logiikat yhteen!
+Nämä kolme muuttujaa ovat tarpeeksi kuvaamaan tämän lomakkeen tilaa. Kuitenkin, on jotain välitiloja, jotka eivät ole järkeviä. Esimerkiksi, ei-null `error` ei ole järkevä kun `status` on `success`. Tilan tarkemmaksi mallintamiseksi, voit käyttää [reduktoria.](/learn/extracting-state-logic-into-a-reducer) Reduktorin avulla voit yhdistää useita tilamuuttujia yhdeksi olioksi ja tiivistää liittyvät logiikat yhteen!
 
 </DeepDive>
 
-### 5. Vaihe: Yhdistä tapahtumakäsittelijät tilan asettamiseen {/*step-5-connect-the-event-handlers-to-set-state*/}
+### 5. Vaihe: Yhdistä Tapahtumankäsittelijät tilan asettamiseen {/*step-5-connect-the-event-handlers-to-set-state*/}
 
-Lopuksi, luo tapahtumakäsittelijät, jotka asettavat tilamuuttujat. Alla on lopullinen lomake, jossa kaikki tapahtumakäsittelijät on kytketty:
+Lopuksi, luo Tapahtumankäsittelijät, jotka asettavat tilamuuttujat. Alla on lopullinen lomake, jossa kaikki Tapahtumankäsittelijät on kytketty:
 
 <Sandpack>
 
@@ -491,7 +491,7 @@ Vaikka tämä koodi ei ole enää alkuperäinen imperatiivinen esimerkki, se on 
   2. Määritä ihmisen ja tietokoneen aiheuttamat tilamuutokset.
   3. Mallinna tila `useState`:lla.
   4. Poista epäolennainen tila välttääksesi bugeja ja paradokseja.
-  5. Yhdistä tapahtumakäsittelijät tilan asettamiseen.
+  5. Yhdistä Tapahtumankäsittelijät tilan asettamiseen.
 
 </Recap>
 

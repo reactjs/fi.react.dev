@@ -4,14 +4,14 @@ title: 'Tapahtumien erottaminen Efekteistä'
 
 <Intro>
 
-Tapahtumakäsittelijät suoritetaan uudelleen ainoastaan kun suoritat saman vuorovaikutuksen uudelleen. Toisin kuin tapahtumakäsittelijät, Efektit synkronoituvat jos jokin arvo jota ne luki, kuten propsi tai tilamuuttuja, on muuttunut viimeisestä renderöinnistä. Joskus haluat myös sekoituksen molemmista käyttäytymisistä: Efekti joka suoritetaan uudelleen vastauksena joihinkin arvoihin mutta ei toisiin. Tällä sivulla opit miten se tehdään.
+Tapahtumankäsittelijät suoritetaan uudelleen ainoastaan kun suoritat saman vuorovaikutuksen uudelleen. Toisin kuin Tapahtumankäsittelijät, Efektit synkronoituvat jos jokin arvo jota ne luki, kuten propsi tai tilamuuttuja, on muuttunut viimeisestä renderöinnistä. Joskus haluat myös sekoituksen molemmista käyttäytymisistä: Efekti joka suoritetaan uudelleen vastauksena joihinkin arvoihin mutta ei toisiin. Tällä sivulla opit miten se tehdään.
 
 </Intro>
 
 <YouWillLearn>
 
-- Miten valita tapahtumakäsittelijän ja Efektin välillä
-- Miksi Efektit ovat reaktiivisia ja tapahtumakäsittelijät eivät
+- Miten valita Tapahtumankäsittelijän ja Efektin välillä
+- Miksi Efektit ovat reaktiivisia ja Tapahtumankäsittelijät eivät
 - Mitä tehdä kun haluat osan Efektin koodista ei reaktiivisen
 - Mitä Efekektitapahtumat ovat ja miten erottaa ne Efekteistä
 - Miten lukea viimeisin propsin ja tilan arvo Efekteistä käyttäen Efektitapahtumia
@@ -1555,7 +1555,7 @@ label { display: block; margin-top: 10px; }
 
 <Solution>
 
-Tapahtumakäsittelijän sisällä, `roomId` on arvoltaan *siinä ajassa kun Efektitapahtuma kutsuttiin*.
+Tapahtumankäsittelijän sisällä, `roomId` on arvoltaan *siinä ajassa kun Efektitapahtuma kutsuttiin*.
 
 Efektitapahtumasi on kutsuttu kahden sekuntin viiveellä. Jos nopeasti vaihdat travel huoneesta music huoneeseen, siihen mennessä kun travel huoneen ilmoitus näytetään, `roomId` on jo `"music"`. Tämän takia molemmat ilmoitukset sanovat "Welcome to music".
 
