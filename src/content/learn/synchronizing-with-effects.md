@@ -4,62 +4,62 @@ title: Synkronointi Efekteillä
 
 <Intro>
 
-Joidenkin komponenttien täytyy synkronoida ulkoisten järjestelmien kanssa. Esimerkiksi saatat haluta hallita ei-React-komponenttia perustuen Reactin tilaan, asettaa palvelinyhteyden tai lähettää analytiikkalokeja, kun komponentti näkyy näytöllä. *Effectit* mahdollistavat koodin suorittamisen renderöinnin jälkeen, jotta voit synkronoida komponentin jonkin ulkoisen järjestelmän kanssa Reactin ulkopuolella.
+Joidenkin komponenttien täytyy synkronoida ulkoisten järjestelmien kanssa. Esimerkiksi saatat haluta hallita ei-React-komponenttia perustuen Reactin tilaan, asettaa palvelinyhteyden tai lähettää analytiikkalokeja, kun komponentti näkyy näytöllä. *Efekti* mahdollistavat koodin suorittamisen renderöinnin jälkeen, jotta voit synkronoida komponentin jonkin ulkoisen järjestelmän kanssa Reactin ulkopuolella.
 
 </Intro>
 
 <YouWillLearn>
 
-- Mitä Effectit ovat
-- Miten Effectit eroavat tapahtumista
-- Miten määrittelet Effecti komponentissasi
-- Miten ohitat Effectin tarpeettoman suorittamisen
-- Miksi Effectit suoritetetaan kahdesti kehitysympäristössä ja miten sen voi korjata
+- Mitä Efektit ovat
+- Miten Efektit eroavat tapahtumista
+- Miten määrittelet Efektin komponentissasi
+- Miten ohitat Efektin tarpeettoman suorittamisen
+- Miksi Efekti suoritetetaan kahdesti kehitysympäristössä ja miten sen voi korjata
 
 </YouWillLearn>
 
-## Mitä Effectit ovat ja miten ne eroavat tapahtumista? {/*what-are-effects-and-how-are-they-different-from-events*/}
+## Mitä Efektit ovat ja miten ne eroavat tapahtumista? {/*what-are-effects-and-how-are-they-different-from-events*/}
 
-Ennen kuin siirrytään Effecteihin, tutustutaan kahdenlaiseen logiikkaan React-komponenteissa:
+Ennen kuin siirrytään Efekteihin, tutustutaan kahdenlaiseen logiikkaan React-komponenteissa:
 
 - **Renderöintikoodi** (esitellään [Käyttöliittymän kuvauksessa](/learn/describing-the-ui)) elää komponentin yläpuolella. Tässä on paikka missä otat propsit ja tilan, muunnet niitä ja palautat JSX:ää, jonka haluat nähdä näytöllä. [Renderöintikoodin on oltava puhdasta.](/learn/keeping-components-pure) Kuten matemaattinen kaava, sen tulisi vain _laskea_ tulos, mutta ei tehdä mitään muuta.
 
-- **Tapahtumakäsittelijät** (esitellään [Interaktiivisuuden lisäämisessä](/learn/adding-interactivity)) ovat komponenttien sisäisiä funktioita, jotka *tekevät* asioita sen sijaan, että vain laskisivat asioita. Tapahtumakäsittelijä saattavat päivittää syöttökenttää, lähettää HTTP POST -pyyntöjä ostaakseen tuoteen tai ohjata käyttäjän toiselle näytölle. Tapahtumakäsittelijät sisältävät ["sivuvaikutuksia"](https://en.wikipedia.org/wiki/Side_effect_(computer_science)) (ne muuttavat ohjelman tilaa) ja aiheutuvat tietystä käyttäjän toiminnasta (esimerkiksi painikkeen napsauttamisesta tai kirjoittamisesta).
+- **Tapahtumankäsittelijät** (esitellään [Interaktiivisuuden lisäämisessä](/learn/adding-interactivity)) ovat komponenttien sisäisiä funktioita, jotka *tekevät* asioita sen sijaan, että vain laskisivat asioita. Tapahtumankäsittelijä saattavat päivittää syöttökenttää, lähettää HTTP POST -pyyntöjä ostaakseen tuoteen tai ohjata käyttäjän toiselle näytölle. Tapahtumankäsittelijät sisältävät ["sivuvaikutuksia"](https://en.wikipedia.org/wiki/Side_effect_(computer_science)) (ne muuttavat ohjelman tilaa) ja aiheutuvat tietystä käyttäjän toiminnasta (esimerkiksi painikkeen napsauttamisesta tai kirjoittamisesta).
 
 Joskus tämä ei riitä. Harkitse `ChatRoom` -komponenttia, jonka täytyy yhdistää keskustelupalvelimeen, kun se näkyy näytöllä. Palvelimeen yhdistäminen ei ole puhdas laskenta (se on sivuvaikutus), joten se ei voi tapahtua renderöinnin aikana. Kuitenkaan ei ole yhtä tiettyä tapahtumaa, kuten napsautusta, joka aiheuttaisi `ChatRoom` -komponentin näkymisen.
 
-***Effectien* avulla voit määritellä sivuvaikutukset, jotka johtuvat renderöinnistä itsestään, eikä tietystä tapahtumasta.** Viestin lähettäminen keskustelussa on *tapahtuma*, koska se aiheutuu suoraan käyttäjän napsauttamasta tiettyä painiketta. Kuitenkin palvelimen yhdistäminen on *effect*, koska se on tehtävä riippumatta siitä, mikä vuorovaikutus aiheutti komponentin näkyvyyden. Effectit suoritetaan [renderöintiprosessin](/learn/render-and-commit) lopussa näytön päivityksen jälkeen. Tässä on hyvä aika synkronoida React-komponentit jonkin ulkoisen järjestelmän kanssa (kuten verkon tai kolmannen osapuolen kirjaston).
+***Efektien* avulla voit määritellä sivuvaikutukset, jotka johtuvat renderöinnistä itsestään, eikä tietystä tapahtumasta.** Viestin lähettäminen keskustelussa on *tapahtuma*, koska se aiheutuu suoraan käyttäjän napsauttamasta tiettyä painiketta. Kuitenkin palvelimen yhdistäminen on *Efekti*, koska se on tehtävä riippumatta siitä, mikä vuorovaikutus aiheutti komponentin näkyvyyden. Efektit suoritetaan [renderöintiprosessin](/learn/render-and-commit) lopussa näytön päivityksen jälkeen. Tässä on hyvä aika synkronoida React-komponentit jonkin ulkoisen järjestelmän kanssa (kuten verkon tai kolmannen osapuolen kirjaston).
 
 <Note>
 
-Tässä ja myöhemmin tekstissä, "Effect":llä viittaamme Reactin määritelmään, eli sivuvaikutukseen, joka aiheutuu renderöinnistä. Viittaaksemme laajempaan ohjelmointikäsitteeseen, sanomme "sivuvaikutus".
+Tässä ja myöhemmin tekstissä, "Efektillä":llä viittaamme Reactin määritelmään, eli sivuvaikutukseen, joka aiheutuu renderöinnistä. Viittaaksemme laajempaan ohjelmointikäsitteeseen, sanomme "sivuvaikutus".
 
 </Note>
 
 
-## Et välttämättä tarvitse Effectia {/*you-might-not-need-an-effect*/}
+## Et välttämättä tarvitse Efektiä {/*you-might-not-need-an-effect*/}
 
-**Älä kiiruhda lisäämään Effecteja komponentteihisi.** Pidä mielessä, että Effectit ovat tyypillisesti tapa "astua ulos" React-koodistasi ja synkronoida jonkin *ulkoisen* järjestelmän kanssa. Tämä sisältää selaimen API:t, kolmannen osapuolen pienoisohjelmat, verkon jne. Jos Effectisi vain muuttaa tilaa perustuen toiseen tilaan, [voit ehkä jättää Effectin pois.](/learn/you-might-not-need-an-effect)
+**Älä kiiruhda lisäämään Efektejä komponentteihisi.** Pidä mielessä, että Efektit ovat tyypillisesti tapa "astua ulos" React-koodistasi ja synkronoida jonkin *ulkoisen* järjestelmän kanssa. Tämä sisältää selaimen API:t, kolmannen osapuolen pienoisohjelmat, verkon jne. Jos Efektisi vain muuttaa tilaa perustuen toiseen tilaan, [voit ehkä jättää Efektin pois.](/learn/you-might-not-need-an-effect)
 
-## Miten kirjoitat Effectin {/*how-to-write-an-effect*/}
+## Miten kirjoitat Efektin {/*how-to-write-an-effect*/}
 
-Kirjoittaaksesi Effectin, seuraa näitä kolmea vaihetta:
+Kirjoittaaksesi Efektin, seuraa näitä kolmea vaihetta:
 
-1. **Määrittele Effect.** Oletuksena, Effectisi suoritetaan jokaisen renderöinnin jälkeen.
-2. **Määrittele Effectin riippuvuudet.** Useimmat Effectit pitäisi suorittaa vain *tarvittaessa* sen sijaan, että ne suoritettaisiin jokaisen renderöinnin jälkeen. Esimerkiksi fade-in -animaatio pitäisi käynnistyä vain, kun komponentti ilmestyy. Keskusteluhuoneeseen yhdistäminen ja sen katkaisu pitäisi tapahtua vain, kun komponentti ilmestyy ja häviää tai kun keskusteluhuone muuttuu. Opit hallitsemaan tätä määrittämällä *riippuvuudet.*
-3. **Lisää puhdistus, jos tarpeen.** Joidenkin Effectien täytyy määrittää, miten ne pysäytetään, peruutetaan, tai puhdistavat mitä ne ovat tehneet. Esimerkiksi "yhdistys" tarvitsee "katkaisun", "tila" tarvitsee "peruuta tilaus" ja "hae" tarvitsee joko "peruuta" tai "jätä huomiotta". Opit tekemään tämän palauttamalla *puhdistusfunktion*.
+1. **Määrittele Efekti.** Oletuksena, Efektisi suoritetaan jokaisen renderöinnin jälkeen.
+2. **Määrittele Efektin riippuvuudet.** Useimmat Efektit pitäisi suorittaa vain *tarvittaessa* sen sijaan, että ne suoritettaisiin jokaisen renderöinnin jälkeen. Esimerkiksi fade-in -animaatio pitäisi käynnistyä vain, kun komponentti ilmestyy. Keskusteluhuoneeseen yhdistäminen ja sen katkaisu pitäisi tapahtua vain, kun komponentti ilmestyy ja häviää tai kun keskusteluhuone muuttuu. Opit hallitsemaan tätä määrittämällä *riippuvuudet.*
+3. **Lisää puhdistus, jos tarpeen.** Joidenkin Efektien täytyy määrittää, miten ne pysäytetään, peruutetaan, tai puhdistavat mitä ne ovat tehneet. Esimerkiksi "yhdistys" tarvitsee "katkaisun", "tila" tarvitsee "peruuta tilaus" ja "hae" tarvitsee joko "peruuta" tai "jätä huomiotta". Opit tekemään tämän palauttamalla *puhdistusfunktion*.
 
 Katsotaan näitä vaiheita yksityiskohtaisesti.
 
-### 1. Vaihe: Määrittele Effect {/*step-1-declare-an-effect*/}
+### 1. Vaihe: Määrittele Efekti {/*step-1-declare-an-effect*/}
 
-Määritelläksesi Effectin komponentissasi, tuo [`useEffect` Hook](/reference/react/useEffect) Reactista:
+Määritelläksesi Efektin komponentissasi, tuo [`useEffect` Hook](/reference/react/useEffect) Reactista:
 
 ```js
 import { useEffect } from 'react';
 ```
 
-Sitten kutsu sitä komponentin yläpuolella ja laita koodia Effectin sisään:
+Sitten kutsu sitä komponentin yläpuolella ja laita koodia Efektin sisään:
 
 ```js {2-4}
 function MyComponent() {
@@ -72,7 +72,7 @@ function MyComponent() {
 
 Joka kerta kun komponenttisi renderöityy, React päivittää ruudun *ja sitten* suorittaa koodin `useEffect`:n sisällä. Toisin sanoen, **`useEffect` "viivästää" koodin suorittamista, kunnes renderöinti on näkyvissä ruudulla.**
 
-Katsotaan miten voit käyttää Effectia synkronoidaksesi ulkoisen järjestelmän kanssa. Harkitse `<VideoPlayer>` React komponenttia. Olisi mukavaa kontrolloida, onko video toistossa vai pysäytettynä, välittämällä `isPlaying` propsin sille:
+Katsotaan miten voit käyttää Efektiä synkronoidaksesi ulkoisen järjestelmän kanssa. Harkitse `<VideoPlayer>` React komponenttia. Olisi mukavaa kontrolloida, onko video toistossa vai pysäytettynä, välittämällä `isPlaying` propsin sille:
 
 ```js
 <VideoPlayer isPlaying={isPlaying} />;
@@ -137,7 +137,7 @@ Syy miksi tämä koodi ei ole oikein on, että se koittaa tehdä jotain DOM nood
 
 Lisäksi, kun `VideoPlayer` kutsutaan ensimmäistä kertaa, sen DOM ei vielä ole olemassa! Ei ole vielä DOM noodia josta kutsua `play()` tai `pause()` koska React ei tiedä mitä DOM:ia luoda ennen kuin palautat JSX:n.
 
-Ratkaisu tässä on **kääriä sivuvaikutus `useEffectilla` ja siirtää se pois renderöintilaskusta:**
+Ratkaisu tässä on **kääriä sivuvaikutus `useEffect`:lla ja siirtää se pois renderöintilaskusta:**
 
 ```js {6,12}
 import { useEffect, useRef } from 'react';
@@ -157,9 +157,9 @@ function VideoPlayer({ src, isPlaying }) {
 }
 ```
 
-Käärimällä DOM päivitys Effectiin, annat Reactin päivittää ensin ruudun. Sitten Effectisi suoritetaan.
+Käärimällä DOM päivitys Efektiin, annat Reactin päivittää ensin ruudun. Sitten Efektisi suoritetaan.
 
-Kun `VideoPlayer` komponenttisi renderöityy (joko ensimmäistä kertaa tai jos se renderöityy uudelleen), tapahtuu muutamia asioita. Ensimmäiseksi React päivittää ruudun, varmistaen että `<video>` tagi on DOM:issa oikeilla propseilla. Sitten React suorittaa Effectisi. Lopuksi, Effectisi kutsuu `play()` tai `pause()` riippuen `isPlaying` propin arvosta.
+Kun `VideoPlayer` komponenttisi renderöityy (joko ensimmäistä kertaa tai jos se renderöityy uudelleen), tapahtuu muutamia asioita. Ensimmäiseksi React päivittää ruudun, varmistaen että `<video>` tagi on DOM:issa oikeilla propseilla. Sitten React suorittaa Efektisi. Lopuksi, Efektisi kutsuu `play()` tai `pause()` riippuen `isPlaying` propin arvosta.
 
 Paina Play/Pause useita kertoja ja katso miten videoplayer pysyy synkronoituna `isPlaying` arvon kanssa:
 
@@ -211,7 +211,7 @@ Huomaa, että videoplayerin ohjaaminen on paljon monimutkaisempaa käytännöss�
 
 <Pitfall>
 
-Oletuksena Effectit suoritetaan *jokaisen* renderöinnin jälkeen. Tämä on syy miksi seuraavanlainen koodi **tuottaa loputtoman silmukan:**
+Oletuksena Efektit suoritetaan *jokaisen* renderöinnin jälkeen. Tämä on syy miksi seuraavanlainen koodi **tuottaa loputtoman silmukan:**
 
 ```js
 const [count, setCount] = useState(0);
@@ -220,20 +220,20 @@ useEffect(() => {
 });
 ```
 
-Effectit suoritetaan renderöinnin *johdosta*. Tilan asettaminen *aiheuttaa* renderöinnin. Tilan asettaminen välittömästi Effectissä on kuin pistäisi jatkojohdon kiinni itseensä. Effect suoritetaan, se asettaa tilan, joka aiheuttaa uudelleen renderöinnin, joka aiheuttaa Effectin suorittamisen, joka asettaa tilan uudelleen, joka aiheuttaa uudelleen renderöinnin, ja niin edelleen.
+Efektit suoritetaan renderöinnin *johdosta*. Tilan asettaminen *aiheuttaa* renderöinnin. Tilan asettaminen välittömästi Efektissä on kuin pistäisi jatkojohdon kiinni itseensä. Efekti suoritetaan, se asettaa tilan, joka aiheuttaa uudelleen renderöinnin, joka aiheuttaa Efektin suorittamisen, joka asettaa tilan uudelleen, joka aiheuttaa uudelleen renderöinnin, ja niin edelleen.
 
-Effectien tulisi yleensä synkronoida komponenttisi *ulkopuolisen* järjestelmän kanssa. Jos ei ole ulkopuolista järjestelmää ja haluat vain muuttaa tilaa perustuen toiseen tilaan, [voit ehkä jättää Effectin pois.](/learn/you-might-not-need-an-effect)
+Efektien tulisi yleensä synkronoida komponenttisi *ulkopuolisen* järjestelmän kanssa. Jos ei ole ulkopuolista järjestelmää ja haluat vain muuttaa tilaa perustuen toiseen tilaan, [voit ehkä jättää Efektin pois.](/learn/you-might-not-need-an-effect)
 
 </Pitfall>
 
-### 2. Vaihe: Määrittele Effectin riippuvuudet {/*step-2-specify-the-effect-dependencies*/}
+### 2. Vaihe: Määrittele Efektin riippuvuudet {/*step-2-specify-the-effect-dependencies*/}
 
-Oletuksena Effectit toistetaan *jokaisen* renderöinnin jälkeen. Usein tämä **ei ole mitä haluat:**
+Oletuksena Efektit toistetaan *jokaisen* renderöinnin jälkeen. Usein tämä **ei ole mitä haluat:**
 
 - Joskus, se on hidas. Synkronointi ulkoisen järjestelmän kanssa ei aina ole nopeaa, joten haluat ehkä ohittaa sen, ellei sitä ole tarpeen. Esimerkiksi, et halua yhdistää chat palvelimeen jokaisen näppäinpainalluksen jälkeen.
 - Joksus, se on väärin. Esimerkiksi, et halua käynnistää komponentin fade-in animaatiota jokaisen näppäinpainalluksen jälkeen. Animaation pitäisi toistua pelkästään kerran kun komponentti ilmestyy ensimmäisellä kerralla.
 
-Havainnollistaaksemme ongelmaa, tässä on edellinen esimerkki muutamalla `console.log` kutsulla ja tekstikentällä, joka päivittää vanhemman komponentin tilaa. Huomaa miten kirjoittaminen aiheuttaa Effectin uudelleen suorittamisen:
+Havainnollistaaksemme ongelmaa, tässä on edellinen esimerkki muutamalla `console.log` kutsulla ja tekstikentällä, joka päivittää vanhemman komponentin tilaa. Huomaa miten kirjoittaminen aiheuttaa Efektin uudelleen suorittamisen:
 
 <Sandpack>
 
@@ -281,7 +281,7 @@ video { width: 250px; }
 
 </Sandpack>
 
-Voit kertoa Reactin **ohittamaan tarpeettoman Effectin uudelleen suorittamisen** määrittelemällä *riippuvuus* taulukon toisena argumenttina `useEffect` kutsulle. Aloita lisäämällä tyhjä `[]` taulukko ylläolevaan esimerkkiin riville 14:
+Voit kertoa Reactin **ohittamaan tarpeettoman Efektin uudelleen suorittamisen** määrittelemällä *riippuvuus* taulukon toisena argumenttina `useEffect` kutsulle. Aloita lisäämällä tyhjä `[]` taulukko ylläolevaan esimerkkiin riville 14:
 
 ```js {3}
   useEffect(() => {
@@ -343,7 +343,7 @@ video { width: 250px; }
 
 </Sandpack>
 
-Ongelma on, että effectin sisällä oleva koodi *riippuu* `isPlaying` propsin arvosta päättääkseen mitä tehdä, mutta tätä riippuvuutta ei ole määritelty. Korjataksesi tämän ongelman, lisää `isPlaying` riippuvuustaulukkoon:
+Ongelma on, että Efektin sisällä oleva koodi *riippuu* `isPlaying` propsin arvosta päättääkseen mitä tehdä, mutta tätä riippuvuutta ei ole määritelty. Korjataksesi tämän ongelman, lisää `isPlaying` riippuvuuslistalle:
 
 
 ```js {2,7}
@@ -356,7 +356,7 @@ Ongelma on, että effectin sisällä oleva koodi *riippuu* `isPlaying` propsin a
   }, [isPlaying]); // ...joten se täytyy määritellä täällä!
 ```
 
-Nyt kaikki riippuvuudet on määritelty, joten virheitä ei ole. `[isPlaying]` riippuvuustaulukon määrittäminen kertoo Reactille, että se pitäisi ohittaa Effectin uudelleen suorittaminen jos `isPlaying` on sama kuin se oli edellisellä renderöinnillä. Tämän muutoksen jälkeen, tekstikenttään kirjoittaminen ei aiheuta Effectin uudelleen suorittamista, mutta Play/Pause painikkeen painaminen aiheuttaa:
+Nyt kaikki riippuvuudet on määritelty, joten virheitä ei ole. `[isPlaying]` riippuvuustaulukon määrittäminen kertoo Reactille, että se pitäisi ohittaa Efektin uudelleen suorittaminen jos `isPlaying` on sama kuin se oli edellisellä renderöinnillä. Tämän muutoksen jälkeen, tekstikenttään kirjoittaminen ei aiheuta Efektin uudelleen suorittamista, mutta Play/Pause painikkeen painaminen aiheuttaa:
 
 <Sandpack>
 
@@ -404,13 +404,13 @@ video { width: 250px; }
 
 </Sandpack>
 
-Riippuvuustaulukko voi sisältää useita riippuvuuksia. React ohittaa Effectin uudelleen suorittamisen *vain* jos *kaikki* riippuvuudet ovat samat kuin edellisellä renderöinnillä. React vertaa riippuvuuksien arvoja käyttäen [`Object.is`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is) vertailua. Katso [`useEffect` API viittaus](/reference/react/useEffect#reference) lisätietoja varten.
+Riippuvuuslista voi sisältää useita riippuvuuksia. React ohittaa Efektin uudelleen suorittamisen *vain* jos *kaikki* riippuvuudet ovat samat kuin edellisellä renderöinnillä. React vertaa riippuvuuksien arvoja käyttäen [`Object.is`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is) vertailua. Katso [`useEffect` API viittaus](/reference/react/useEffect#reference) lisätietoja varten.
 
-**Huomaa, että et voi "valita" riippuvuuksiasi.** Jos määrittelemäsi riippuvuudet eivät vastaa Reactin odottamia riippuvuuksia, saat linter virheen. Tämä auttaa löytämään useita virheitä koodissasi. Jos Effect käyttää jotain arvoa, mutta *et* halua suorittaa Effectiä uudelleen kun se muuttuu, sinun täytyy [*muokata Effectin koodia itse* jotta se ei "tarvitse" tätä riippuvuutta.](/learn/lifecycle-of-reactive-effects#what-to-do-when-you-dont-want-to-re-synchronize)
+**Huomaa, että et voi "valita" riippuvuuksiasi.** Jos määrittelemäsi riippuvuudet eivät vastaa Reactin odottamia riippuvuuksia, saat linter virheen. Tämä auttaa löytämään useita virheitä koodissasi. Jos Efektin käyttää jotain arvoa, mutta *et* halua suorittaa Efektiä uudelleen kun se muuttuu, sinun täytyy [*muokata Efektin koodia itse* jotta se ei "tarvitse" tätä riippuvuutta.](/learn/lifecycle-of-reactive-effects#what-to-do-when-you-dont-want-to-re-synchronize)
 
 <Pitfall>
 
-Käyttäytyminen *ilman* riippuvuustaulukkoa ja *tyhjällä* `[]` riippuvuustaulukolla ovat hyvin erilaisia:
+Käyttäytyminen *ilman* riippuvuuslistaa ja *tyhjällä* `[]` riippuvuustaulukolla ovat hyvin erilaisia:
 
 ```js {3,7,12}
 useEffect(() => {
@@ -435,7 +435,7 @@ Katsomme seuraavassa vaiheessa tarkemmin mitä "mount" tarkoittaa.
 
 #### Miksi ref oli jätetty riippuvuustaulukosta pois? {/*why-was-the-ref-omitted-from-the-dependency-array*/}
 
-Tämä Effecti käyttää _sekä_ `ref` että `isPlaying`:ä, mutta vain `isPlaying` on määritelty riippuvuustaulukkoon:
+Tämä Efekti käyttää _sekä_ `ref` että `isPlaying`:ä, mutta vain `isPlaying` on määritelty riippuvuuslistassa:
 
 ```js {9}
 function VideoPlayer({ src, isPlaying }) {
@@ -449,7 +449,7 @@ function VideoPlayer({ src, isPlaying }) {
   }, [isPlaying]);
 ```
 
-Tämä tapahtuu koska `ref` oliolla on *vakaa identiteetti:* React takaa [että saat aina saman olion](/reference/react/useRef#returns) samasta `useRef` kutsusta joka renderöinnillä. Se ei koskaan muutu, joten se ei koskaan itsessään aiheuta Effectin uudelleen suorittamista. Siksi ei ole merkityksellistä onko se määritelty riippuvuustaulukkoon vai ei. Sen sisällyttäminen on myös ok:
+Tämä tapahtuu koska `ref` oliolla on *vakaa identiteetti:* React takaa [että saat aina saman olion](/reference/react/useRef#returns) samasta `useRef` kutsusta joka renderöinnillä. Se ei koskaan muutu, joten se ei koskaan itsessään aiheuta Efektin uudelleen suorittamista. Siksi ei ole merkityksellistä onko se määritelty riippuvuuslistassa vai ei. Sen sisällyttäminen on myös ok:
 
 ```js {9}
 function VideoPlayer({ src, isPlaying }) {
@@ -465,7 +465,7 @@ function VideoPlayer({ src, isPlaying }) {
 
 `useState`:n palauttamilla [`set` funktioilla](/reference/react/useState#setstate) on myös vakaa identiteetti, joten näet usein että se jätetään riippuvuustaulukosta pois. Jos linter sallii riippuvuuden jättämisen pois ilman virheitä, se on turvallista tehdä.
 
-Aina-vakaiden riippuvuuksien jättäminen pois toimii vain kun linter voi "nähdä", että olio on vakaa. Esimerkiksi, jos `ref` välitetään yläkomponentilta, sinun täytyy määritellä se riippuvuustaulukkoon. Kuitenkin, tämä on hyvä tehdä koska et voi tietää, että yläkomponentti välittää aina saman refin, tai välittää yhden useista refeistä ehdollisesti. Joten Effectisi _riippuisi_ siitä, mikä ref välitetään.
+Aina-vakaiden riippuvuuksien jättäminen pois toimii vain kun linter voi "nähdä", että olio on vakaa. Esimerkiksi, jos `ref` välitetään yläkomponentilta, sinun täytyy määritellä se riippuvuuslistalle. Kuitenkin, tämä on hyvä tehdä koska et voi tietää, että yläkomponentti välittää aina saman refin, tai välittää yhden useista refeistä ehdollisesti. Joten Efektisi _riippuisi_ siitä, mikä ref välitetään.
 
 </DeepDive>
 
@@ -473,7 +473,7 @@ Aina-vakaiden riippuvuuksien jättäminen pois toimii vain kun linter voi "nähd
 
 Harkitse hieman erilaista esimerkkiä. Kirjoitat `ChatRoom` komponenttia, jonka tarvitsee yhdistää chat palvelimeen kun se ilmestyy. Sinulle annetaan `createConnection()` API joka palauttaa olion, jossa on `connect()` ja `disconnect()` metodit. Kuinka pidät komponentin yhdistettynä kun se näytetään käyttäjälle?
 
-Aloita kirjoittamalla Effectin logiikka:
+Aloita kirjoittamalla Efektin logiikka:
 
 ```js
 useEffect(() => {
@@ -491,7 +491,7 @@ useEffect(() => {
 }, []);
 ```
 
-**Effectin sisällä oleva koodi ei käytä yhtäkään propsia tai tilamuuttujaa, joten riippuvuustaulukkosi on `[]` (tyhjä). Tämä kertoo Reactille että suorittaa tämän koodin vain kun komponentti "mounttaa", eli näkyy ensimmäistä kertaa näytöllä.**
+**Efektin sisällä oleva koodi ei käytä yhtäkään propsia tai tilamuuttujaa, joten riippuvuuslistasi on `[]` (tyhjä). Tämä kertoo Reactille että suorittaa tämän koodin vain kun komponentti "mounttaa", eli näkyy ensimmäistä kertaa näytöllä.**
 
 Kokeillaan koodin suorittamista:
 
@@ -530,13 +530,13 @@ input { display: block; margin-bottom: 20px; }
 
 </Sandpack>
 
-Tämä Effecti suoritetaan vain mountissa, joten voit odottaa että `"✅ Connecting..."` tulostuu kerran konsoliin. **Kuitenkin, jos tarkistat konsolin, `"✅ Connecting..."` tulostuu kaksi kertaa. Miksi se tapahtuu?**
+Tämä Efektin suoritetaan vain mountissa, joten voit odottaa että `"✅ Connecting..."` tulostuu kerran konsoliin. **Kuitenkin, jos tarkistat konsolin, `"✅ Connecting..."` tulostuu kaksi kertaa. Miksi se tapahtuu?**
 
 Kuvittele, että `ChatRoom` komponentti on osa isompaa sovellusta, jossa on useita eri näyttöjä. Käyttäjä aloittaa matkansa `ChatRoom` sivulta. Komponentti mounttaa ja kutsuu `connection.connect()`. Sitten kuvittele, että käyttäjä navigoi toiselle näytölle--esimerkiksi asetussivulle. `ChatRoom` komponentti unmounttaa. Lopuksi, käyttäjä painaa Takaisin -nappia ja `ChatRoom` mounttaa uudelleen. Tämä yhdistäisi toiseen kertaan--mutta ensimmäistä yhdistämistä ei koskaan tuhottu! Kun käyttäjä navigoi sovelluksen läpi, yhteydet kasaantuisivat.
 
 Tämän kaltaiset bugit voivat helposti jäädä huomiotta ilman raskasta manuaalista testaamista. Helpottaaksesi näiden löytämistä, React kehitysvaiheessa remounttaa jokaisen komponentin kerran heti mountin jälkeen. **Nähdessäsi `"✅ Connecting..."` tulostuksen kahdesti, huomaat helposti ongelman: koodisi ei sulje yhteyttä kun komponentti unmounttaa.**
 
-Korjataksesi ongelman, palauta *siivousfunktio* Effectistäsi:
+Korjataksesi ongelman, palauta *siivousfunktio* Efektistäsi:
 
 ```js {4-6}
   useEffect(() => {
@@ -548,7 +548,7 @@ Korjataksesi ongelman, palauta *siivousfunktio* Effectistäsi:
   }, []);
 ```
 
-React kutsuu siivousfunktiotasi joka kerta ennen kuin Effectia suoritetaan uudelleen, ja kerran kun komponentti unmounttaa (poistetaan). Kokeillaan mitä tapahtuu kun siivousfunktio on toteutettu:
+React kutsuu siivousfunktiotasi joka kerta ennen kuin Efektiä suoritetaan uudelleen, ja kerran kun komponentti unmounttaa (poistetaan). Kokeillaan mitä tapahtuu kun siivousfunktio on toteutettu:
 
 <Sandpack>
 
@@ -592,21 +592,21 @@ Nyt saat kolme tulostusta konsoliin kehitysvaiheessa:
 2. `"❌ Disconnected."`
 3. `"✅ Connecting..."`
 
-**Tämä on kehitysvaiheen oikea käyttäytyminen.** Remounttaamalla komponenttisi, React varmistaa että navigointi pois ja takaisin ei riko koodiasi. Yhdistäminen ja sitten katkaiseminen on juuri se mitä pitäisi tapahtua! Kun toteutat siivouksen hyvin, käyttäjälle ei pitäisi olla näkyvissä eroa suorittamalla Effectiä kerran vs suorittamalla se, siivoamalla se ja suorittamalla se uudelleen. Ylimääräinen yhdistys/katkaisu pari on olemassa kehitysvaiheessa, koska React tutkii koodiasi virheiden löytämiseksi. Tämä on normaalia ja sinun ei tulisi yrittää saada sitä pois.
+**Tämä on kehitysvaiheen oikea käyttäytyminen.** Remounttaamalla komponenttisi, React varmistaa että navigointi pois ja takaisin ei riko koodiasi. Yhdistäminen ja sitten katkaiseminen on juuri se mitä pitäisi tapahtua! Kun toteutat siivouksen hyvin, käyttäjälle ei pitäisi olla näkyvissä eroa suorittamalla Efektiä kerran vs suorittamalla se, siivoamalla se ja suorittamalla se uudelleen. Ylimääräinen yhdistys/katkaisu pari on olemassa kehitysvaiheessa, koska React tutkii koodiasi virheiden löytämiseksi. Tämä on normaalia ja sinun ei tulisi yrittää saada sitä pois.
 
-**Tuotannossa, näkisit ainoastaan `"✅ Connecting..."` tulostuksen kerran.** Remounttaaminen tapahtuu vain kehitysvaiheessa auttaaksesi sinua löytämään Effectit, joissa on siivousfunktio. Voit kytkeä [Strict Mode:n](/reference/react/Strict-mode) pois päältä, jotta saat kehitysvaiheen toiminnon pois käytöstä, mutta suosittelemme että pidät sen päällä. Tämä auttaa sinua löytämään monia bugeja kuten yllä.
+**Tuotannossa, näkisit ainoastaan `"✅ Connecting..."` tulostuksen kerran.** Remounttaaminen tapahtuu vain kehitysvaiheessa auttaaksesi sinua löytämään Efektit, joissa on siivousfunktio. Voit kytkeä [Strict Mode:n](/reference/react/Strict-mode) pois päältä, jotta saat kehitysvaiheen toiminnon pois käytöstä, mutta suosittelemme että pidät sen päällä. Tämä auttaa sinua löytämään monia bugeja kuten yllä.
 
-## Miten käsittelet kahdesti toistuvan Effectin kehitysvaiheessa? {/*how-to-handle-the-effect-firing-twice-in-development*/}
+## Miten käsittelet kahdesti toistuvan Efektin kehitysvaiheessa? {/*how-to-handle-the-effect-firing-twice-in-development*/}
 
-React tarkoituksella remounttaa komponenttisi kehitysvaiheessa auttaaksesi sinua löytämään bugeja kuten edellisessä esimerkissä. **Oikea kysymys ei ole "miten suoritan Effectin kerran", vaan "miten korjaan Effectini niin että se toimii remounttauksen jälkeen".**
+React tarkoituksella remounttaa komponenttisi kehitysvaiheessa auttaaksesi sinua löytämään bugeja kuten edellisessä esimerkissä. **Oikea kysymys ei ole "miten suoritan Efektin kerran", vaan "miten korjaan Efektini niin että se toimii remounttauksen jälkeen".**
 
-Useiten vastaus on toteuttaa siivousfunktio. Siivousfunktion pitäisi pysäyttää tai peruuttaa se mitä Effect oli tekemässä. Yleinen sääntö on että käyttäjän ei pitäisi pystyä erottamaan Effectin suorittamista kerran (tuotannossa) ja _setup → cleanup → setup_ sekvenssistä (mitä näet kehitysvaiheessa).
+Useiten vastaus on toteuttaa siivousfunktio. Siivousfunktion pitäisi pysäyttää tai peruuttaa se mitä Efekti oli tekemässä. Yleinen sääntö on että käyttäjän ei pitäisi pystyä erottamaan Efektin suorittamista kerran (tuotannossa) ja _setup → cleanup → setup_ sekvenssistä (mitä näet kehitysvaiheessa).
 
-Useimmat Effectit jotka kirjoitat sopivat yhteen alla olevista yleisistä kuvioista.
+Useimmat Efektit jotka kirjoitat sopivat yhteen alla olevista yleisistä kuvioista.
 
 ### Ei-React komponenttien ohjaaminen {/*controlling-non-react-widgets*/}
 
-Joskus tarvitset UI pienoisohjelmia, jotka eivät ole kirjoitettu Reactiin. Esimerkiksi, sanotaan että lisäät kartta-komponentin sivullesi. Sillä on `setZoomLevel()` metodi, ja haluat pitää zoom tason synkronoituna `zoomLevel` tilamuuttujan kanssa React koodissasi. Effectisi näyttäisi tältä:
+Joskus tarvitset UI pienoisohjelmia, jotka eivät ole kirjoitettu Reactiin. Esimerkiksi, sanotaan että lisäät kartta-komponentin sivullesi. Sillä on `setZoomLevel()` metodi, ja haluat pitää zoom tason synkronoituna `zoomLevel` tilamuuttujan kanssa React koodissasi. Efektisi näyttäisi tältä:
 
 ```js
 useEffect(() => {
@@ -615,7 +615,7 @@ useEffect(() => {
 }, [zoomLevel]);
 ```
 
-Huomaa, että tässä tilanteessa siivousta ei tarvita. Kehitysvaiheessa React kutsuu Effectia kahdesti, mutta tässä se ei ole ongelma, koska `setZoomLevel`:n kutsuminen kahdesti samalla arvolla ei tee mitään. Se saattaa olla hieman hitaampaa, mutta tämä ei ole ongelma koska remounttaus tapahtuu kehitysvaiheessa eikä tuotannossa.
+Huomaa, että tässä tilanteessa siivousta ei tarvita. Kehitysvaiheessa React kutsuu Efektiä kahdesti, mutta tässä se ei ole ongelma, koska `setZoomLevel`:n kutsuminen kahdesti samalla arvolla ei tee mitään. Se saattaa olla hieman hitaampaa, mutta tämä ei ole ongelma koska remounttaus tapahtuu kehitysvaiheessa eikä tuotannossa.
 
 Jotkin API:t eivät salli kutsua niitä kahdesti peräkkäin. Esimerkiksi, sisäänrakennetun [`<dialog>`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLDialogElement) elementin [`showModal`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLDialogElement/showModal) metodi heittää virheen jos kutsut sitä kahdesti peräkkäin. Toteuta siivousfunktio, joka sulkee dialogin:
 
@@ -627,11 +627,11 @@ useEffect(() => {
 }, []);
 ```
 
-Kehitysvaiheessa Effectisi kutsuu `showModal()` metodia, jonka perään heti `close()`, ja sitten `showModal()` metodia uudelleen. Tämä on käyttäjälle sama kuin jos kutsuisit `showModal()` metodia vain kerran, kuten näet tuotannossa.
+Kehitysvaiheessa Efektisi kutsuu `showModal()` metodia, jonka perään heti `close()`, ja sitten `showModal()` metodia uudelleen. Tämä on käyttäjälle sama kuin jos kutsuisit `showModal()` metodia vain kerran, kuten näet tuotannossa.
 
 ### Tapahtumien tilaaminen {/*subscribing-to-events*/}
 
-Jos Effectisi tilaavat jotain, siivousfunktiosi pitäisi purkaa tilaus:
+Jos Efektisi tilaavat jotain, siivousfunktiosi pitäisi purkaa tilaus:
 
 ```js {6}
 useEffect(() => {
@@ -643,11 +643,11 @@ useEffect(() => {
 }, []);
 ```
 
-Kehitysvaiheessa Effectisi kutsuu `addEventListener()` metodia, jonka perään heti `removeEventListener()` metodia, ja sitten `addEventListener()` metodia uudelleen samalla käsittelijällä. Joten aina on vain yksi aktiivinen tilaus kerrallaan. Tämä on käyttäjälle sama kuin jos kutsuisit `addEventListener()` metodia vain kerran, kuten näet tuotannossa.
+Kehitysvaiheessa Efektisi kutsuu `addEventListener()` metodia, jonka perään heti `removeEventListener()` metodia, ja sitten `addEventListener()` metodia uudelleen samalla käsittelijällä. Joten aina on vain yksi aktiivinen tilaus kerrallaan. Tämä on käyttäjälle sama kuin jos kutsuisit `addEventListener()` metodia vain kerran, kuten näet tuotannossa.
 
 ### Animaatioiden käynnistäminen {/*triggering-animations*/}
 
-Jos Effectisi animoi jotain, siivousfunktiosi pitäisi palauttaa animaatio alkuperäiseen tilaan:
+Jos Efektisi animoi jotain, siivousfunktiosi pitäisi palauttaa animaatio alkuperäiseen tilaan:
 
 ```js {4-6}
 useEffect(() => {
@@ -663,7 +663,7 @@ Kehitysvaiheessa läpinäkyvyys asetetaan `1`:een, sitten `0`:aan, ja sitten `1`
 
 ### Tiedon haku {/*tiedon-haku*/}
 
-Jos Effectisi hakee jotain, siivousfunktiosi pitäisi joko [perua haku](https://developer.mozilla.org/en-US/docs/Web/API/AbortController) tai sivuuttaa sen tulos:
+Jos Efektisi hakee jotain, siivousfunktiosi pitäisi joko [perua haku](https://developer.mozilla.org/en-US/docs/Web/API/AbortController) tai sivuuttaa sen tulos:
 
 ```js {2,6,13-15}
 useEffect(() => {
@@ -686,7 +686,7 @@ useEffect(() => {
 
 Et voi "peruuttaa" verkkopyyntöä joka on jo tapahtunut, mutta siivousfunktiosi pitäisi varmistaa että pyyntö joka ei ole enää tarpeellinen ei vaikuta sovellukseesi. Jos `userId` muuttuu `'Alice'`:sta `'Bob'`:ksi, siivousfunktio varmistaa että `'Alice'` vastaus jätetään huomiotta vaikka se vastaanotettaisiin `'Bob'`:n vastauksen jälkeen.
 
-**Kehitysvaiheessa, näet kaksi verkkopyyntöä Network välilehdellä.** Tässä ei ole mitään vikaa. Yllä olevan menetelmän mukaan, ensimmäinen Effecti poistetaan välittömästi, joten sen kopio `ignore` muuttujasta asetetaan `true`:ksi. Joten vaikka onkin ylimääräinen pyyntö, se ei vaikuta tilaan kiitos `if (!ignore)` tarkistuksen.
+**Kehitysvaiheessa, näet kaksi verkkopyyntöä Network välilehdellä.** Tässä ei ole mitään vikaa. Yllä olevan menetelmän mukaan, ensimmäinen Efektisi poistetaan välittömästi, joten sen kopio `ignore` muuttujasta asetetaan `true`:ksi. Joten vaikka onkin ylimääräinen pyyntö, se ei vaikuta tilaan kiitos `if (!ignore)` tarkistuksen.
 
 **Tuotannossa tulee tapahtumaan vain yksi pyyntö.** Jos kehitysvaiheessa toinen pyyntö häiritsee sinua, paras tapa on käyttää ratkaisua joka deduplikoi pyynnöt ja asettaa niiden vastaukset välimuistiin komponenttien välillä:
 
@@ -696,25 +696,25 @@ function TodoList() {
   // ...
 ```
 
-Tämä ei vain paranna kehityskokemusta, vaan myös saa sovelluksesi tuntumaan nopeammalta. Esimerkiksi, käyttäjän ei tarvitse odottaa että jotain dataa ladataan uudelleen kun painaa Takaisin -painiketta, koska se on välimuistissa. Voit joko rakentaa tällaisen välimuistin itse tai effecteissa manuaalisen datahaun sijaan käyttää jotain olemassa olevaa vaihtoehtoa. 
+Tämä ei vain paranna kehityskokemusta, vaan myös saa sovelluksesi tuntumaan nopeammalta. Esimerkiksi, käyttäjän ei tarvitse odottaa että jotain dataa ladataan uudelleen kun painaa Takaisin -painiketta, koska se on välimuistissa. Voit joko rakentaa tällaisen välimuistin itse tai Efekteissä manuaalisen datahaun sijaan käyttää jotain olemassa olevaa vaihtoehtoa. 
 
 <DeepDive>
 
-#### Mitkä ovat hyviä vaihtoehtoja datan hakemiseen effecteissa? {/*what-are-good-alternatives-to-data-fetching-in-effects*/}
+#### Mitkä ovat hyviä vaihtoehtoja datan hakemiseen Efekteissä? {/*what-are-good-alternatives-to-data-fetching-in-effects*/}
 
-`fetch` kutsujen kirjoittaminen Effecteissa on [suosittu tapa hakea dataa](https://www.robinwieruch.de/react-hooks-fetch-data/), erityisesti täysin asiakaspuolen sovelluksissa. Tämä on kuitenkin hyvin manuaalinen tapa ja sillä on merkittäviä haittoja:
+`fetch` kutsujen kirjoittaminen Efekteissä on [suosittu tapa hakea dataa](https://www.robinwieruch.de/react-hooks-fetch-data/), erityisesti täysin asiakaspuolen sovelluksissa. Tämä on kuitenkin hyvin manuaalinen tapa ja sillä on merkittäviä haittoja:
 
-- **Effecteja ei ajeta palvelimella.** Tämä tarkoittaa, että palvelimella renderöity HTML sisältää vain lataus -tilan ilman dataa. Asiakkaan tietokoneen pitää ladata koko JavaScript ja renderöidä sovellus, jotta se huomaa, että nyt sen täytyy ladata dataa. Tämä ei ole erityisen tehokasta.
-- **Hakeminen Effectissa tekee "verkkovesiputouksien" toteuttamisesta helppoa.** Renderöit ylemmän komponentin, se hakee jotain dataa, renderöit lapsikomponentit, ja sitten ne alkavat hakea omaa dataansa. Jos verkkoyhteys ei ole erityisen nopea, tämä on huomattavasti hitaampaa kuin jos kaikki datat haettaisiin yhtäaikaisesti.
-- **Hakeminen suoraan Effecteissa useiten tarkoittaa ettet esilataa tai välimuista dataa.** Esimerkiksi, jos komponentti poistetaan ja sitten liitetään takaisin, se joutuu hakemaan datan uudelleen.
+- **Efektejä ei ajeta palvelimella.** Tämä tarkoittaa, että palvelimella renderöity HTML sisältää vain lataus -tilan ilman dataa. Asiakkaan tietokoneen pitää ladata koko JavaScript ja renderöidä sovellus, jotta se huomaa, että nyt sen täytyy ladata dataa. Tämä ei ole erityisen tehokasta.
+- **Hakeminen Efektissä tekee "verkkovesiputouksien" toteuttamisesta helppoa.** Renderöit ylemmän komponentin, se hakee jotain dataa, renderöit lapsikomponentit, ja sitten ne alkavat hakea omaa dataansa. Jos verkkoyhteys ei ole erityisen nopea, tämä on huomattavasti hitaampaa kuin jos kaikki datat haettaisiin yhtäaikaisesti.
+- **Hakeminen suoraan Efekteissä useiten tarkoittaa ettet esilataa tai välimuista dataa.** Esimerkiksi, jos komponentti poistetaan ja sitten liitetään takaisin, se joutuu hakemaan datan uudelleen.
 - **Se ei ole kovin ergonomista.** Pohjakoodia on aika paljon kirjoittaessa `fetch` kutsuja tavalla, joka ei kärsi bugeista kuten [kilpailutilanteista.](https://maxrozen.com/race-conditions-fetching-data-react-with-useeffect)
 
 Tämä lista huonoista puolista ei koske pelkästään Reactia. Se pätee mihin tahansa kirjastoon kun dataa haetaan mountissa. Kuten reitityksessä, datan hakeminen ei ole helppoa tehdä hyvin, joten suosittelemme seuraavia lähestymistapoja:
 
 - **Jos käytät [frameworkia](/learn/start-a-new-react-project#building-with-a-full-featured-framework), käytä sen sisäänrakennettua datan hakemiseen tarkoitettua mekanismia.** Modernit React frameworkit sisältävät tehokkaita datan hakemiseen tarkoitettuja mekanismeja, jotka eivät kärsi yllä mainituista ongelmista.
-- **Muussa tapauksessa, harkitse tai rakenna asiakaspuolen välimuisti.** Suosittuja avoimen lähdekoodin ratkaisuja ovat [React Query](https://tanstack.com/query/latest), [useSWR](https://swr.vercel.app/), ja [React Router 6.4+.](https://beta.reactrouter.com/en/main/start/overview) Voit myös rakentaa oman ratkaisusi, jolloin käytät Effecteja alustana mutta lisäät logiikkaa pyyntöjen deduplikointiin, vastausten välimuistitukseen ja verkkovesiputousten välttämiseen (esilataamalla dataa tai nostamalla datan vaatimukset reiteille).
+- **Muussa tapauksessa, harkitse tai rakenna asiakaspuolen välimuisti.** Suosittuja avoimen lähdekoodin ratkaisuja ovat [React Query](https://tanstack.com/query/latest), [useSWR](https://swr.vercel.app/), ja [React Router 6.4+.](https://beta.reactrouter.com/en/main/start/overview) Voit myös rakentaa oman ratkaisusi, jolloin käytät Efektejä alustana mutta lisäät logiikkaa pyyntöjen deduplikointiin, vastausten välimuistitukseen ja verkkovesiputousten välttämiseen (esilataamalla dataa tai nostamalla datan vaatimukset reiteille).
 
-Voit jatkaa datan hakemista suoraan Effecteissa jos nämä lähestymistavat eivät sovi sinulle.
+Voit jatkaa datan hakemista suoraan Efekteissä jos nämä lähestymistavat eivät sovi sinulle.
 
 </DeepDive>
 
@@ -732,9 +732,9 @@ Kehitysvaiheessa `logVisit` kutsutaan kahdesti jokaiselle URL:lle, joten saattaa
 
 **Tuotannossa ei ole kaksoiskappaleita vierailulokeista.**
 
-Analytiikkatapahtumien debuggauukseen voit joko julkaista sovelluksen testiympäristöön (joka suoritetaan tuotantotilassa) tai väliaikaisesti poistaa käytöstä [Strict Mode](/reference/react/StrictMode):n ja sen kehitysvaiheessa olevat remounttaus-tarkistukset. Voit myös lähettää analytiikkaa reitityksen tapahtumakäsittelijöistä Effectien sijaan. Entistäkin tarkemman analytiikan lähettämiseen voit käyttää [Intersection Observer API](https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API):a, jotka auttavat seuraamaan, mitkä komponentit ovat näkyvissä ja kuinka kauan.
+Analytiikkatapahtumien debuggauukseen voit joko julkaista sovelluksen testiympäristöön (joka suoritetaan tuotantotilassa) tai väliaikaisesti poistaa käytöstä [Strict Mode](/reference/react/StrictMode):n ja sen kehitysvaiheessa olevat remounttaus-tarkistukset. Voit myös lähettää analytiikkaa reitityksen Tapahtumankäsittelijöistä Efektien sijaan. Entistäkin tarkemman analytiikan lähettämiseen voit käyttää [Intersection Observer API](https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API):a, jotka auttavat seuraamaan, mitkä komponentit ovat näkyvissä ja kuinka kauan.
 
-### Ei ole Effect: Sovelluksen alustaminen {/*not-an-effect-initializing-the-application*/}
+### Ei ole Efekti: Sovelluksen alustaminen {/*not-an-effect-initializing-the-application*/}
 
 Jokin logiikka tulisi suorittaa vain kerran kun sovellus käynnistyy. Voit laittaa sen komponentin ulkopuolelle:
 
@@ -751,20 +751,20 @@ function App() {
 
 Tämä takaa, että tällainen logiikka suoritetaan vain kerran selaimen lataamisen jälkeen.
 
-### Ei ole Effect: Tuotteen ostaminen {/*not-an-effect-buying-a-product*/}
+### Ei ole Efekti: Tuotteen ostaminen {/*not-an-effect-buying-a-product*/}
 
-Joksus, vaikka kirjoittaisit siivousfunktion, ei ole tapaa estää käyttäjälle näkyviä seurauksia Effectin kahdesti suorittamisesta. Esimerkiksi, joskus Effecti voi lähettää POST pyynnön kuten tuotteen ostamisen:
+Joksus, vaikka kirjoittaisit siivousfunktion, ei ole tapaa estää käyttäjälle näkyviä seurauksia Efektin kahdesti suorittamisesta. Esimerkiksi, joskus Efekti voi lähettää POST pyynnön kuten tuotteen ostamisen:
 
 ```js {2-3}
 useEffect(() => {
-  // 🔴 Väärin: Tämä Effecti suoritetaan kahdesti tuotannossa, paljastaen ongelman koodissa.
+  // 🔴 Väärin: Tämä Efekti suoritetaan kahdesti tuotannossa, paljastaen ongelman koodissa.
   fetch('/api/buy', { method: 'POST' });
 }, []);
 ```
 
-Et halua ostaa tuotetta kahdesti. Kuitenkin, tämä on myös syy miksi et halua laittaa tätä logiikkaa Effectiin. Mitä jos käyttäjä menee toiselle sivulle ja tulee takaisin? Effectisi suoritetaan uudelleen. Et halua ostaa tuotetta koska käyttäjä *vieraili* sivulla; haluat ostaa sen kun käyttäjä *painaa* Osta -nappia.
+Et halua ostaa tuotetta kahdesti. Kuitenkin, tämä on myös syy miksi et halua laittaa tätä logiikkaa Efektiin. Mitä jos käyttäjä menee toiselle sivulle ja tulee takaisin? Efektisi suoritetaan uudelleen. Et halua ostaa tuotetta koska käyttäjä *vieraili* sivulla; haluat ostaa sen kun käyttäjä *painaa* Osta -nappia.
 
-Ostaminen ei aiheutunut renderöinnin takia. Se aiheutuu tietyn vuorovaikutuksen takia. Se suoritetaan vain kerran koska vuorovaikutus (napsautus) tapahtuu vain kerran. **Poista Effecti ja siirrä `/api/buy` pyyntö Osta -painkkeen tapahtumakäsittelijään:**
+Ostaminen ei aiheutunut renderöinnin takia. Se aiheutuu tietyn vuorovaikutuksen takia. Se suoritetaan vain kerran koska vuorovaikutus (napsautus) tapahtuu vain kerran. **Poista Efekti ja siirrä `/api/buy` pyyntö Osta -painkkeen Tapahtumankäsittelijään:**
 
 ```js {2-3}
   function handleClick() {
@@ -777,9 +777,9 @@ Ostaminen ei aiheutunut renderöinnin takia. Se aiheutuu tietyn vuorovaikutuksen
 
 ## Laitetaan kaikki yhteen {/*putting-it-all-together*/}
 
-Tämä hiekkalaatikko voi auttaa "saamaan tunteen" siitä, miten Effectit toimivat käytännössä.
+Tämä hiekkalaatikko voi auttaa "saamaan tunteen" siitä, miten Efektit toimivat käytännössä.
 
-Tämä esimerkki käyttää [`setTimeout`](https://developer.mozilla.org/en-US/docs/Web/API/setTimeout) funktiota aikatauluttaakseen konsolilokiin syötetyn tekstin ilmestyvän kolmen sekunnin kuluttua Effectin suorittamisen jälkeen. Siivoamisfunktio peruuttaa odottavan aikakatkaisun. Aloita painamalla "Mount the component":
+Tämä esimerkki käyttää [`setTimeout`](https://developer.mozilla.org/en-US/docs/Web/API/setTimeout) funktiota aikatauluttaakseen konsolilokiin syötetyn tekstin ilmestyvän kolmen sekunnin kuluttua Efektin suorittamisen jälkeen. Siivoamisfunktio peruuttaa odottavan aikakatkaisun. Aloita painamalla "Mount the component":
 
 <Sandpack>
 
@@ -835,19 +835,19 @@ export default function App() {
 
 Näet aluksi kolme eri lokia: `Schedule "a" log`, `Cancel "a" log`, ja `Schedule "a" log` uudelleen. Kolme sekuntia myöhemmin lokiin ilmestyy viesti `a`. Kuten opit aiemmin tällä sivulla, ylimääräinen schedule/cancel pari tapahtuu koska **React remounttaa komponentin kerran kehitysvaiheessa varmistaakseen, että olet toteuttanut siivouksen hyvin.**
 
-Nyt muokkaa syöttölaatikon arvoksi `abc`. Jos teet sen tarpeeksi nopeasti, näet `Schedule "ab" log` viestin, jonka jälkeen `Cancel "ab" log` ja `Schedule "abc" log`. **React siivoaa aina edellisen renderöinnin Effectin ennen seuraavan renderöinnin Effectiä.** Tämä on syy miksi vaikka kirjoittaisit syöttölaatikkoon nopeasti, aikakatkaisuja on aina enintään yksi kerrallaan. Muokkaa syöttölaatikkoa muutaman kerran ja katso konsolia saadaksesi käsityksen siitä, miten Effectit siivotaan.
+Nyt muokkaa syöttölaatikon arvoksi `abc`. Jos teet sen tarpeeksi nopeasti, näet `Schedule "ab" log` viestin, jonka jälkeen `Cancel "ab" log` ja `Schedule "abc" log`. **React siivoaa aina edellisen renderöinnin Efektin ennen seuraavan renderöinnin Efektiä.** Tämä on syy miksi vaikka kirjoittaisit syöttölaatikkoon nopeasti, aikakatkaisuja on aina enintään yksi kerrallaan. Muokkaa syöttölaatikkoa muutaman kerran ja katso konsolia saadaksesi käsityksen siitä, miten Efektit siivotaan.
 
-Kirjoita jotain syöttölaatikkoon ja heti perään paina "Unmount the component". **Huomaa kuinka unmounttaus siivoaa viimeisen renderöinnin Effectin.** Tässä esimerkissä se tyhjentää viimeisen aikakatkaisun ennen kuin se ehtii käynnistyä.
+Kirjoita jotain syöttölaatikkoon ja heti perään paina "Unmount the component". **Huomaa kuinka unmounttaus siivoaa viimeisen renderöinnin Efektin.** Tässä esimerkissä se tyhjentää viimeisen aikakatkaisun ennen kuin se ehtii käynnistyä.
 
 Lopuksi, muokkaa yllä olevaa komponenttia ja **kommentoi siivousfunktio**, jotta ajastuksia ei peruuteta. Kokeile kirjoittaa `abcde` nopeasti. Mitä odotat tapahtuvan kolmen sekuntin kuluttua? Tulisiko `console.log(text)` aikakatkaisussa tulostamaan *viimeisimmän* `text`:n ja tuottamaan viisi `abcde` lokia? Kokeile tarkistaaksesi intuitiosi!
 
-Kolmen sekuntin jälkeen lokeissa tulisi näkyä (`a`, `ab`, `abc`, `abcd`, ja `abcde`) viiden `abcde` lokin sijaan. **Kukin Effecti nappaa `text`:n arvon vastaavasta renderöinnistä.** Se ei ole väliä, että `text` tila muuttui: Effecti renderöinnistä `text = 'ab'` näkee aina `'ab'`. Toisin sanottuna, Effectit jokaisesta renderöinnistä ovat toisistaan erillisiä. Jos olet kiinnostunut siitä, miten tämä toimii, voit lukea [closureista](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Closures).
+Kolmen sekuntin jälkeen lokeissa tulisi näkyä (`a`, `ab`, `abc`, `abcd`, ja `abcde`) viiden `abcde` lokin sijaan. **Kukin Efekti nappaa `text`:n arvon vastaavasta renderöinnistä.** Se ei ole väliä, että `text` tila muuttui: Efekti renderöinnistä `text = 'ab'` näkee aina `'ab'`. Toisin sanottuna, Efektit jokaisesta renderöinnistä ovat toisistaan erillisiä. Jos olet kiinnostunut siitä, miten tämä toimii, voit lukea [closureista](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Closures).
 
 <DeepDive>
 
-#### Kullakin renderillä on sen omat Effectit {/*each-render-has-its-own-effects*/}
+#### Kullakin renderillä on sen omat Efektit {/*each-render-has-its-own-effects*/}
 
-Voit ajatella `useEffect`:ia "liittävän" palan toiminnallisuutta osana renderöinnin tulosta. Harkitse tätä Effectiä:
+Voit ajatella `useEffect`:ia "liittävän" palan toiminnallisuutta osana renderöinnin tulosta. Harkitse tätä Efektiä:
 
 ```js
 export default function ChatRoom({ roomId }) {
@@ -872,10 +872,10 @@ Käyttäjä vierailee `<ChatRoom roomId="general" />`. Katsotaan [mielikuvitusti
   return <h1>Welcome to general!</h1>;
 ```
 
-**Effecti on *myös* osa renderöinnin tulosta.** Ensimmäisen renderöinnin Effecti muuttuu:
+**Efekti on *myös* osa renderöinnin tulosta.** Ensimmäisen renderöinnin Efekti muuttuu:
 
 ```js
-  // Effecti ensimäisellä renderöinnillä (roomId = "general")
+  // Efekti ensimäisellä renderöinnillä (roomId = "general")
   () => {
     const connection = createConnection('general');
     connection.connect();
@@ -885,7 +885,7 @@ Käyttäjä vierailee `<ChatRoom roomId="general" />`. Katsotaan [mielikuvitusti
   ['general']
 ```
 
-React suorittaa tämän Effectin, joka yhdistää `'general'` keskusteluhuoneeseen.
+React suorittaa tämän Efekti, joka yhdistää `'general'` keskusteluhuoneeseen.
 
 #### Uudelleen renderöinti samoilla riippuvuuksilla {/*re-render-with-same-dependencies*/}
 
@@ -898,10 +898,10 @@ Sanotaan, että `<ChatRoom roomId="general" />` renderöidään uudelleen. JSX t
 
 React näkee, että renderöinnin tuloste ei ole muuttunut, joten se ei päivitä DOM:ia.
 
-Effecti toiselle renderöinnille näyttää tältä:
+Efekti toiselle renderöinnille näyttää tältä:
 
 ```js
-  // Effecti toisella renderöinnillä (roomId = "general")
+  // Efekti toisella renderöinnillä (roomId = "general")
   () => {
     const connection = createConnection('general');
     connection.connect();
@@ -911,7 +911,7 @@ Effecti toiselle renderöinnille näyttää tältä:
   ['general']
 ```
 
-React vertaa `['general']`:a toiselta renderöinniltä ensimmäisen renderöinnin `['general']` kanssa. **Koska kaikki riippuvuudet ovat samat, React *jättää huomiotta* toisen renderöinnin Effectin.** Sitä ei koskaan kutsuta.
+React vertaa `['general']`:a toiselta renderöinniltä ensimmäisen renderöinnin `['general']` kanssa. **Koska kaikki riippuvuudet ovat samat, React *jättää huomiotta* toisen renderöinnin Efektin.** Sitä ei koskaan kutsuta.
 
 #### Uudelleen renderöinti eri riippuvuuksilla {/*re-render-with-different-dependencies*/}
 
@@ -924,10 +924,10 @@ Sitten, käyttäjä vierailee `<ChatRoom roomId="travel" />`. Tällä kertaa kom
 
 React päivittää DOM:in muuttamalla `"Welcome to general"` lukemaan `"Welcome to travel"`.
 
-Effecti kolmannelle renderöinnille näyttää tältä:
+Efekti kolmannelle renderöinnille näyttää tältä:
 
 ```js
-  // Effecti kolmannella renderöinnillä (roomId = "travel")
+  // Efekti kolmannella renderöinnillä (roomId = "travel")
   () => {
     const connection = createConnection('travel');
     connection.connect();
@@ -937,33 +937,33 @@ Effecti kolmannelle renderöinnille näyttää tältä:
   ['travel']
 ```
 
-React vertaa `['travel']`:ia kolmannelta renderöinniltä toiselta renderöinnin `['general']` kanssa. Yksi riippuvuus on erilainen: `Object.is('travel', 'general')` on `false`. Effectiä ei voi jättää huomiotta.
+React vertaa `['travel']`:ia kolmannelta renderöinniltä toiselta renderöinnin `['general']` kanssa. Yksi riippuvuus on erilainen: `Object.is('travel', 'general')` on `false`. Efektiä ei voi jättää huomiotta.
 
-**Ennen kuin React voi ottaa käyttöön kolmannen renderöinnin Effectin, sen täytyy siivota viimeisin Effecti joka _suoritettiin_.** Toisen renderöinnin Effecti ohitettiin, joten Reactin täytyy siivota ensimmäisen renderöinnin Effecti. Jos selaat ylös ensimmäiseen renderöintiin, näet että sen siivous kutsuu `createConnection('general')`:lla luodun yhteyden `disconnect()` metodia. Tämä irroittaa sovelluksen `'general'` keskusteluhuoneesta.
+**Ennen kuin React voi ottaa käyttöön kolmannen renderöinnin Efektin, sen täytyy siivota viimeisin Efekti joka _suoritettiin_.** Toisen renderöinnin Efekti ohitettiin, joten Reactin täytyy siivota ensimmäisen renderöinnin Efekti. Jos selaat ylös ensimmäiseen renderöintiin, näet että sen siivous kutsuu `createConnection('general')`:lla luodun yhteyden `disconnect()` metodia. Tämä irroittaa sovelluksen `'general'` keskusteluhuoneesta.
 
-Sen jälkeen React suorittaa kolmannen renderöinnin Effectin. Se yhdistää sovelluksen `'travel'` keskusteluhuoneeseen.
+Sen jälkeen React suorittaa kolmannen renderöinnin Efektin. Se yhdistää sovelluksen `'travel'` keskusteluhuoneeseen.
 
 #### Unmount {/*unmount*/}
 
-Lopuksi, sanotaan, että käyttäjä siirtyy pois ja `ChatRoom` komponentti unmounttaa. React suorittaa viimeisen Effectin siivousfunktion. Viimeinen Effecti oli kolmannen renderöinnin. Kolmannen renderöinnin siivousfunktio tuhoaa `createConnection('travel')` yhteyden. Joten sovellus irroittaa itsensä `'travel'` keskusteluhuoneesta.
+Lopuksi, sanotaan, että käyttäjä siirtyy pois ja `ChatRoom` komponentti unmounttaa. React suorittaa viimeisen Efektin siivousfunktion. Viimeinen Efekti oli kolmannen renderöinnin. Kolmannen renderöinnin siivousfunktio tuhoaa `createConnection('travel')` yhteyden. Joten sovellus irroittaa itsensä `'travel'` keskusteluhuoneesta.
 
 #### Kehitysvaiheen käyttäytymiset {/*development-only-behaviors*/}
 
-Kun [Strict Mode](/reference/react/StrictMode) on käytössä, React remounttaa jokaisen komponentin kerran mountin jälkeen (tila ja DOM säilytetään). Tämä [helpottaa löytämään Effecteja jotka tarvitsevat siivousfunktiota](#step-3-add-cleanup-if-needed) ja paljastaa bugeja kuten kilpailutilanteita (engl. race conditions). Lisäksi, React remounttaa Effectit joka kerta kun tallennat tiedoston kehitysvaiheessa. Molemmat näistä käyttäytymisistä tapahtuu ainoastaan kehitysvaiheessa.
+Kun [Strict Mode](/reference/react/StrictMode) on käytössä, React remounttaa jokaisen komponentin kerran mountin jälkeen (tila ja DOM säilytetään). Tämä [helpottaa löytämään Effecteja jotka tarvitsevat siivousfunktiota](#step-3-add-cleanup-if-needed) ja paljastaa bugeja kuten kilpailutilanteita (engl. race conditions). Lisäksi, React remounttaa Efektit joka kerta kun tallennat tiedoston kehitysvaiheessa. Molemmat näistä käyttäytymisistä tapahtuu ainoastaan kehitysvaiheessa.
 
 </DeepDive>
 
 <Recap>
 
-- Toisin kuin tapahtumat, Effectit aiheutuvat renderöinnin seurauksena tietyn vuorovaikutuksen sijaan.
-- Effectien avulla voit synkronoida komponentin jonkin ulkoisen järjestelmän kanss (kolmannen osapuolen API:n, verkon, jne.).
-- Oletuksena, Effectit suoritetaan jokaisen renderöinnin jälkeen (mukaan lukien ensimmäinen renderöinti).
-- React ohittaa Effectin jos kaikki sen riippuvuudet ovat samat kuin viimeisellä renderöinnillä.
-- Et voi "valita" riippuvuuksiasi. Ne määräytyvät Effectin sisällä olevan koodin mukaan.
-- Tyhjä riippuvuustaulukko (`[]`) vastaa komponentin "mounttaamista", eli sitä kun komponentti lisätään näytölle.
+- Toisin kuin tapahtumat, Efektit aiheutuvat renderöinnin seurauksena tietyn vuorovaikutuksen sijaan.
+- Efektien avulla voit synkronoida komponentin jonkin ulkoisen järjestelmän kanss (kolmannen osapuolen API:n, verkon, jne.).
+- Oletuksena, Efektit suoritetaan jokaisen renderöinnin jälkeen (mukaan lukien ensimmäinen renderöinti).
+- React ohittaa Efektin jos kaikki sen riippuvuudet ovat samat kuin viimeisellä renderöinnillä.
+- Et voi "valita" riippuvuuksiasi. Ne määräytyvät Efektin sisällä olevan koodin mukaan.
+- Tyhjä riippuvuuslista (`[]`) vastaa komponentin "mounttaamista", eli sitä kun komponentti lisätään näytölle.
 - Kun Strict Mode on käytössä, React mounttaa komponentit kaksi kertaa (vain kehitysvaiheessa!) stressitestataksesi Effecteja.
-- Jos Effecti rikkoutuu remountin takia, sinun täytyy toteuttaa siivousfunktio.
-- React kutsuu siivousfunktiota ennen kuin Effectiasi suoritetaan seuraavan kerran, ja unmountin yhteydessä.
+- Jos Efekti rikkoutuu remountin takia, sinun täytyy toteuttaa siivousfunktio.
+- React kutsuu siivousfunktiota ennen kuin Efektiasi suoritetaan seuraavan kerran, ja unmountin yhteydessä.
 
 </Recap>
 
@@ -1055,9 +1055,9 @@ Tarkistaaksesi, että ratkaisusi toimii, paina "Show form" ja tarkista, että ke
 
 <Solution>
 
-`ref.current.focus()` kutsuminen renderöinnin aikana on väärin, koska se on *sivuvaikutus*. Sivuvaikutukset pitäisi sijoittaa tapahtumankäsittelijöihin tai määritellä `useEffect`:n avulla. Tässä tapauksessa sivuvaikutus on *aiheutettu* komponentin ilmestymisestä, eikä mistään tietystä vuorovaikutuksesta, joten on järkevää sijoittaa se Effectiin.
+`ref.current.focus()` kutsuminen renderöinnin aikana on väärin, koska se on *sivuvaikutus*. Sivuvaikutukset pitäisi sijoittaa tapahtumankäsittelijöihin tai määritellä `useEffect`:n avulla. Tässä tapauksessa sivuvaikutus on *aiheutettu* komponentin ilmestymisestä, eikä mistään tietystä vuorovaikutuksesta, joten on järkevää sijoittaa se Efektiin.
 
-Korjataksesi virheen, sijoita `ref.current.focus()` kutsu Effectin määrittelyyn. Sitten, varmistaaksesi, että tämä Effect suoritetaan vain mounttauksen yhteydessä eikä jokaisen renderöinnin jälkeen, lisää siihen tyhjä `[]` riippuvuustaulukko.
+Korjataksesi virheen, sijoita `ref.current.focus()` kutsu Efektin määrittelyyn. Sitten, varmistaaksesi, että tämä Effect suoritetaan vain mounttauksen yhteydessä eikä jokaisen renderöinnin jälkeen, lisää siihen tyhjä `[]` riippuvuuslista.
 
 <Sandpack>
 
@@ -1225,13 +1225,13 @@ Tarkistaaksesi ratkaisun, paina "Show form" ja "Hide form" toistuvasti. Kun loma
 
 <Hint>
 
-Et voi määritellä Effectia ehdollisesti, mutta Effect voi sisältää ehtologiikkaa.
+Et voi määritellä Efektia ehdollisesti, mutta Effect voi sisältää ehtologiikkaa.
 
 </Hint>
 
 <Solution>
 
-Laita ehdollinen logiikka Effectin sisään. Sinun täytyy määrittää `shouldFocus` -propsi riippuvuudeksi, koska käytät sitä Effectin sisällä. (Tämä tarkoittaa sitä, että jos jonkin syöttökentän `shouldFocus` -propsi muuttuu arvosta `false` arvoon `true`, se kohdistuu komponentin mounttaamisen jälkeen.)
+Laita ehdollinen logiikka Efektin sisään. Sinun täytyy määrittää `shouldFocus` -propsi riippuvuudeksi, koska käytät sitä Efektin sisällä. (Tämä tarkoittaa sitä, että jos jonkin syöttökentän `shouldFocus` -propsi muuttuu arvosta `false` arvoon `true`, se kohdistuu komponentin mounttaamisen jälkeen.)
 
 <Sandpack>
 
@@ -1441,7 +1441,7 @@ Kehitysvaiheessa, React remounttaa komponentin kerran varmistaakseen, että olet
 
 </Solution>
 
-#### Korjaa haku Effectin sisällä {/*fix-fetching-inside-an-effect*/}
+#### Korjaa haku Efektin sisällä {/*fix-fetching-inside-an-effect*/}
 
 Tämä komponentti näyttää valitun henkilön biografian. Se lataa biografian kutsumalla asynkronista funktiota `fetchBio(person)` mountissa ja aina kun `person` muuttuu. Tämä asynkroninen funktio palauttaa [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise):n, joka muuttuu merkkijonoksi. Kun haku on valmis, se kutsuu `setBio`:a näyttääkseen merkkijonon valintalaatikon alla.
 
@@ -1494,11 +1494,11 @@ export async function fetchBio(person) {
 
 Tässä koodissa on bugi. Aloita valitsemalla "Alice". Sitten valitse "Bob" ja heti sen jälkeen, että valitse "Taylor". Jos teet tämän tarpeeksi nopeasti, huomaat bugin: Taylor on valittuna, mutta kappaleen alla sanotaan "This is Bob's bio."
 
-Miksi tämä tapahtuu? Korjaa bugi Effectin sisällä.
+Miksi tämä tapahtuu? Korjaa bugi Efektin sisällä.
 
 <Hint>
 
-Jos Effecti kutsuu jotain asynkronisesti, se tarvitsee siivouksen.
+Jos Efekti kutsuu jotain asynkronisesti, se tarvitsee siivouksen.
 
 </Hint>
 
@@ -1509,9 +1509,9 @@ Käynnistääksesi bugin, asioiden on tapahduttava tässä järjestyksessä:
 - `'Bob'`:n valita käynnistää `fetchBio('Bob')`
 - `'Taylor'`:n valinta käynnistää `fetchBio('Taylor')`
 - **`'Taylor'` hakeminen suoriutuu loppuun *ennen* `'Bob'`:n hakua**
-- `'Taylor'` renderin Effecti kutsuu `setBio('This is Taylor’s bio')`
+- `'Taylor'` renderin Efekti kutsuu `setBio('This is Taylor’s bio')`
 - `'Bob'`:n haku suoriutuu loppuun
-- `'Bob'` renderin Effecti kutsuu `setBio('This is Bob’s bio')`
+- `'Bob'` renderin Efekti kutsuu `setBio('This is Bob’s bio')`
 
 Tämä on syy miksi näet Bobin bion vaikka Taylor on valittuna. Tämän kaltaisia bugeja kutsutaan [kilpailutilanteiksi (engl. race condition)](https://en.wikipedia.org/wiki/Race_condition) koska kaksi asynkronista operaatiota "kilpailevat" toistensa kanssa, ja ne saattavat saapua odottamattomassa järjestyksessä.
 
@@ -1569,14 +1569,14 @@ export async function fetchBio(person) {
 
 </Sandpack>
 
-Kunkin renderin Effectilla on sen oma `ignore` muuttuja. Aluksi, `ignore` muuttuja on `false`. Kuitenkin, jos Effecti siivotaan (kuten kun valitset eri henkilön), sen `ignore` muuttuja muuttuu `true`:ksi. Nyt ei ole väliä millä järjestyksellä pyynnöt suoriutuvat. Vain viimeisen henkilön Effectillä on `ignore` muuttuja on asetettu `false`:ksi, joten se kutsuu `setBio(result)`:ia. Menneet Effectit on siivottu, joten `if (!ignore)` tarkistus estää ne kutsumasta `setBio`:
+Kunkin renderin Efektillä on sen oma `ignore` muuttuja. Aluksi, `ignore` muuttuja on `false`. Kuitenkin, jos Efekti siivotaan (kuten kun valitset eri henkilön), sen `ignore` muuttuja muuttuu `true`:ksi. Nyt ei ole väliä millä järjestyksellä pyynnöt suoriutuvat. Vain viimeisen henkilön Efektillä on `ignore` muuttuja on asetettu `false`:ksi, joten se kutsuu `setBio(result)`:ia. Menneet Efektit on siivottu, joten `if (!ignore)` tarkistus estää ne kutsumasta `setBio`:
 
 - `'Bob'`:n valita käynnistää `fetchBio('Bob')`
-- - `'Taylor'`:n valinta käynnistää `fetchBio('Taylor')` **ja siivoaa edellisen (Bobin) Effectin**
+- - `'Taylor'`:n valinta käynnistää `fetchBio('Taylor')` **ja siivoaa edellisen (Bobin) Efektin**
 - `'Taylor'` hakeminen suoriutuu loppuun *ennen* `'Bob'`:n hakua
-- `'Taylor'` renderin Effecti kutsuu `setBio('This is Taylor’s bio')`
+- `'Taylor'` renderin Efekti kutsuu `setBio('This is Taylor’s bio')`
 - `'Bob'`:n haku suoriutuu loppuun
-- `'Bob'` renderin Effecti kutsuu `setBio('This is Bob’s bio')` **eikä tee mitään koska sen `ignore` muuttuja on asetettu `true`:ksi**
+- `'Bob'` renderin Efekti kutsuu `setBio('This is Bob’s bio')` **eikä tee mitään koska sen `ignore` muuttuja on asetettu `true`:ksi**
 
 Vanhentuneen API kutsun tuloksen ohittamisen lisäksi, voit myös käyttää [`AbortController`](https://developer.mozilla.org/en-US/docs/Web/API/AbortController):a peruuttaaksesi pyynnöt jotka eivät ole enää tarpeen. Kuitenkin, tämä ei ole tarpeeksi suojataksesi kilpailutilanteita vastaan. Asynkronisia vaiheita voisi olla ketjutettu pyynnön jälkeen lisää, joten luotettavin tapa korjata tällaisia ongelmia on käyttämällä selkeää ehtoa kuten `ignore` muuttujaa.
 

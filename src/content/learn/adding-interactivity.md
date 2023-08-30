@@ -22,9 +22,9 @@ Jotkin asiat ruudulla päivittyvät käyttäjän syötteen mukaan. Esimerkiksi, 
 
 ## Vastaaminen tapahtumiin {/*responding-to-events*/}
 
-Reactissa voit lisätä *tapahtumakäsittelijöitä* JSX koodiin. Tapahtumakäsittelijät ovat funktioitasi, joita kutsutaan vastauksena käyttäjän toimintoihin kuten klikkaukseen, hoverointiin, focusointiin ja niin edelleen.
+Reactissa voit lisätä *Tapahtumankäsittelijöitä* JSX koodiin. Tapahtumankäsittelijät ovat funktioitasi, joita kutsutaan vastauksena käyttäjän toimintoihin kuten klikkaukseen, hoverointiin, focusointiin ja niin edelleen.
 
-Sisäänrakennetut komponentit kuten `<button>` tukevat ainoastaan selaimen sisäänrakennettuja tapahtumia kuten `onClick`. Voit kuitenkin luoda omia komponentteja ja niiden tapahtumakäsittelijöiden nimet voivat olla niin sovelluskohtaisia kuin haluat.
+Sisäänrakennetut komponentit kuten `<button>` tukevat ainoastaan selaimen sisäänrakennettuja tapahtumia kuten `onClick`. Voit kuitenkin luoda omia komponentteja ja niiden Tapahtumankäsittelijöiden nimet voivat olla niin sovelluskohtaisia kuin haluat.
 
 <Sandpack>
 
@@ -62,7 +62,7 @@ button {
 
 <LearnMore path="/learn/responding-to-events">
 
-Lue **[Responding to Events](/learn/responding-to-events)** oppiaksesi miten lisätä tapahtumakäsittelijöitä.
+Lue **[Responding to Events](/learn/responding-to-events)** oppiaksesi miten lisätä Tapahtumankäsittelijöitä.
 
 </LearnMore>
 
@@ -347,7 +347,7 @@ textarea {
 
 <LearnMore path="/learn/state-as-a-snapshot">
 
-Lue **[Tila tilannekuvana](/learn/state-as-a-snapshot)** oppiaksesi miksi tila vaikuttaa "vakiolta" ja muuttumattomalta tapahtumakäsittelijöissä.
+Lue **[Tila tilannekuvana](/learn/state-as-a-snapshot)** oppiaksesi miksi tila vaikuttaa "vakiolta" ja muuttumattomalta Tapahtumankäsittelijöissä.
 
 </LearnMore>
 

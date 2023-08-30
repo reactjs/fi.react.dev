@@ -340,7 +340,7 @@ Tässä, `fullName` *ei* ole tilamuuttuja. Sen sijaan se lasketaan renderöinnin
 const fullName = firstName + ' ' + lastName;
 ```
 
-Näin ollen tapahtumakäsittelijöiden ei tarvitse tehdä mitään erityistä sen päivittämiseksi. Kun kutsut `setFirstnName` tai `setLastName` funktioita, kutsut uudelleenrenderöinnin, ja seuraavan kerran `fullName` tullaan laskemaan uusiksi uuden datan pohjalta.
+Näin ollen Tapahtumankäsittelijöiden ei tarvitse tehdä mitään erityistä sen päivittämiseksi. Kun kutsut `setFirstnName` tai `setLastName` funktioita, kutsut uudelleenrenderöinnin, ja seuraavan kerran `fullName` tullaan laskemaan uusiksi uuden datan pohjalta.
 
 <DeepDive>
 
@@ -2145,7 +2145,7 @@ ul, li { margin: 0; padding: 0; }
 
 <Solution>
 
-Vaikka voisit huolellisesti muuttaa jokaista tapahtumakäsittelijää päivittämään `update` ja `packed` laskurit oikein, juuriongelma on, että nämä tilamuuttujat ovat olemassa ylipäätään. Ne ovat tarpeettomia, koska voit aina laskea kohteiden määrät (pakatun tai ylipäätään) suoraan `items`-tilamuuttujasta. Poista tarpeeton tila korjataksesi bugi:
+Vaikka voisit huolellisesti muuttaa jokaista Tapahtumankäsittelijää päivittämään `update` ja `packed` laskurit oikein, juuriongelma on, että nämä tilamuuttujat ovat olemassa ylipäätään. Ne ovat tarpeettomia, koska voit aina laskea kohteiden määrät (pakatun tai ylipäätään) suoraan `items`-tilamuuttujasta. Poista tarpeeton tila korjataksesi bugi:
 
 <Sandpack>
 
@@ -2278,7 +2278,7 @@ ul, li { margin: 0; padding: 0; }
 
 </Sandpack>
 
-Huomaa miten tapahtumakäsittelijät kutsuvat vain `setItems` funktiota tämän muutoksen jälkeen. Kohteiden laskut lasketaan renderöinnin aikana `items` taulukosta, joten ne ovat aina ajan tasalla.
+Huomaa miten Tapahtumankäsittelijät kutsuvat vain `setItems` funktiota tämän muutoksen jälkeen. Kohteiden laskut lasketaan renderöinnin aikana `items` taulukosta, joten ne ovat aina ajan tasalla.
 
 </Solution>
 

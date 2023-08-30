@@ -189,7 +189,7 @@ Reduktorit ovat erilainen tapa käsitellä tilaa. Voit siirtyä `useState`sta `u
 
 ### 1. Vaihe: Päivitä tilan asettaminen toiminnon lähettämiseksi {/*step-1-move-from-setting-state-to-dispatching-actions*/}
 
-Tapahtumakäsittelijäsi määrittävät _mitä tehdä_ asettamalla tilan:
+Tapahtumankäsittelijäsi määrittävät _mitä tehdä_ asettamalla tilan:
 
 ```js
 function handleAddTask(text) {
@@ -1087,7 +1087,7 @@ Reduktorien on oltava puhtaita, joten niiden ei tulisi mutatoida tilaa. Mutta Im
 
 <Recap>
 
-- `useState`sta `useReduceriin` muuttaminen:
+- `useState`sta `useReducer`iin muuttaminen:
   1. Lähetä toimintoja tapahtumankäsittelijöistä.
   2. Kirjoita reduktorifunktio, joka palauttaa seuraavan tilan annetulle tilalle ja toiminnolle.
   3. Korvaa `useState` `useReducer`:lla.
@@ -1857,7 +1857,7 @@ textarea {
 
 Lopullinen tulos on sama. Pidä kuitenkin mielessä, että toiminto-tyyppien tulisi ideaalisti kuvata "mitä käyttäjä teki" toisin kuin "miten haluat tilan muuttuvan". Tämä tekee uusien ominaisuuksien lisäämisestä helpompaa myöhemmin.
 
-Molemmilla vaihtoehdoilla, on tärkeää, että **et* sijoita `alert` kutsua reduktorin sisään. Reduktorin tulisi olla puhdas funktio--sen tulisi laskea vain seuraava tila. Sen ei tulisi "tehdä" mitään, mukaanlukien näyttää käyttäjälle viestiä. Sen tulisi tapahtua tapahtumakäsittelijässä. (Helpottaaksesi tämän kaltaisten virheiden löytämistä, React kutsuu reduktoreitasi useita kertoja StrictModessa. Tämän takia jos laitat ilmoituksen reduktoriin, sitä kutsutaan kahdesti.)
+Molemmilla vaihtoehdoilla, on tärkeää, että **et* sijoita `alert` kutsua reduktorin sisään. Reduktorin tulisi olla puhdas funktio--sen tulisi laskea vain seuraava tila. Sen ei tulisi "tehdä" mitään, mukaanlukien näyttää käyttäjälle viestiä. Sen tulisi tapahtua Tapahtumankäsittelijässä. (Helpottaaksesi tämän kaltaisten virheiden löytämistä, React kutsuu reduktoreitasi useita kertoja StrictModessa. Tämän takia jos laitat ilmoituksen reduktoriin, sitä kutsutaan kahdesti.)
 
 </Solution>
 

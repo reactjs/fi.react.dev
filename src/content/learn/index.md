@@ -255,7 +255,7 @@ export default function Ostoslista() {
 
 ## Vastaaminen tapahtumiin {/*responding-to-events*/}
 
-Voit vastata tapahtumiin määrittelemällä *tapahtumakäsittelijän* komponenttiesi sisällä:
+Voit vastata tapahtumiin määrittelemällä *Tapahtumankäsittelijän* komponenttiesi sisällä:
 
 ```js {2-4,7}
 function Painonappi() {
@@ -271,7 +271,7 @@ function Painonappi() {
 }
 ```
 
-Huomaa miten `onClick={kunKlikataan}` ei sisällä sulkeita lopussa! Älä kutsu tapahtumakäsittelijää: sinun täytyy ainoastaan _välittää se_. React kutsuu tapahtumakäsittelijääsi kun käyttäjä napsauttaa painiketta.
+Huomaa miten `onClick={kunKlikataan}` ei sisällä sulkeita lopussa! Älä kutsu Tapahtumankäsittelijää: sinun täytyy ainoastaan _välittää se_. React kutsuu Tapahtumankäsittelijääsi kun käyttäjä napsauttaa painiketta.
 
 ## Ruudun päivittäminen {/*updating-the-screen*/}
 
@@ -427,7 +427,7 @@ function MyButton() {
 
 ```
 
-Sitten _anna tila alaspäin_ `MyApp` komponentissa kuhunkin `MyButton` komponenttiin yhdessä klikkauksen tapahtumakäsittelijän kanssa. Voit antaa tietoa `MyButton` komponenttiin käyttäen JSX aaltosulkeita, aivan kuten aiemmin teit sisäänrakennettujen `<img>` tagien kanssa:
+Sitten _anna tila alaspäin_ `MyApp` komponentissa kuhunkin `MyButton` komponenttiin yhdessä klikkauksen Tapahtumankäsittelijän kanssa. Voit antaa tietoa `MyButton` komponenttiin käyttäen JSX aaltosulkeita, aivan kuten aiemmin teit sisäänrakennettujen `<img>` tagien kanssa:
 
 ```js {11-12}
 export default function MyApp() {
@@ -447,7 +447,7 @@ export default function MyApp() {
 }
 ```
 
-Tietoa, jota annat alaspäin näin kutsutaan _propseiksi_ (engl. props). Nyt `MyApp` komponentti sisältää `count` tilan, `handleClick` tapahtumakäsittelijän, sekä _antaa molemmat näistä propseina_ kullekin painikkeelle.
+Tietoa, jota annat alaspäin näin kutsutaan _propseiksi_ (engl. props). Nyt `MyApp` komponentti sisältää `count` tilan, `handleClick` Tapahtumankäsittelijän, sekä _antaa molemmat näistä propseina_ kullekin painikkeelle.
 
 Lopuksi, mutta `MyButton` _lukemaan_ propsit, jotka annoit sille sen pääkomponentista:
 
@@ -461,7 +461,7 @@ function MyButton({count, onClick}) {
 }
 ```
 
-Kun klikkaat painiketta, `onClick` tapahtumakäsittelijää kutsutaan. Jokaisen painikkeen `onClick` propsi on asetettu `handleClick` funktioon `MyApp` komponentissa, joten koodi sen sisällä suoritetaan. Se koodi kutsuu `setCount(count + 1)`, nostaen `count` tilamuuttujaa. Uusi `count` tila välitetään propsina kullekin painikkeelle jolloin ne kaikki näyttävät samaa uutta arvoa. Tätä kutsutaan "tilan nostamiseksi ylös". Siirtämällä tilaa ylös jaamme sitä komponenttien välillä.
+Kun klikkaat painiketta, `onClick` Tapahtumankäsittelijää kutsutaan. Jokaisen painikkeen `onClick` propsi on asetettu `handleClick` funktioon `MyApp` komponentissa, joten koodi sen sisällä suoritetaan. Se koodi kutsuu `setCount(count + 1)`, nostaen `count` tilamuuttujaa. Uusi `count` tila välitetään propsina kullekin painikkeelle jolloin ne kaikki näyttävät samaa uutta arvoa. Tätä kutsutaan "tilan nostamiseksi ylös". Siirtämällä tilaa ylös jaamme sitä komponenttien välillä.
 
 <Sandpack>
 

@@ -46,7 +46,7 @@ Mutta kun verkkosivuista tuli interaktiivisempia, logiikka enimmäkseen määrä
 
 </Diagram>
 
-<Diagram name="writing_jsx_form" height={330} width={325} alt="React komponentti, jossa on HTML- ja JavaScript koodia edellisistä esimerkeistä sekoitettuna. Funktion nimi on Form, joka sisältää kaksi tapahtumakäsittelijää, onClick ja onSubmit korostettuna keltaisella. Tapahtumakäsittelijöiden jälkeen on HTML korostettuna violetilla. HTML sisältää lomakkeen ja syöttöelementin sisennettynä, kullakin elementillä onClick propsi.">
+<Diagram name="writing_jsx_form" height={330} width={325} alt="React komponentti, jossa on HTML- ja JavaScript koodia edellisistä esimerkeistä sekoitettuna. Funktion nimi on Form, joka sisältää kaksi Tapahtumankäsittelijää, onClick ja onSubmit korostettuna keltaisella. Tapahtumankäsittelijöiden jälkeen on HTML korostettuna violetilla. HTML sisältää lomakkeen ja syöttöelementin sisennettynä, kullakin elementillä onClick propsi.">
 
 `Form.js` React komponentti
 

@@ -318,7 +318,7 @@ Tämä osio kuvailee **kokeellista API:a, joka ei ole vielä julkaistu** Reactin
 
 </Wip>
 
-Tapahtumakäsittelijät suoritetaan uudelleen ainoastaan kun suoritat saman vuorovaikutuksen uudelleen. Toisin kuin tapahtumakäsittelijät, Efektit synkronoituvat jos jokin arvo jota ne luki, kuten propsi tai tilamuuttuja, on muuttunut viimeisestä renderöinnistä. Joskus haluat myös sekoituksen molemmista käyttäytymisistä: Efekti joka suoritetaan uudelleen vastauksena joihinkin arvoihin mutta ei toisiin.
+Tapahtumankäsittelijät suoritetaan uudelleen ainoastaan kun suoritat saman vuorovaikutuksen uudelleen. Toisin kuin Tapahtumankäsittelijät, Efektit synkronoituvat jos jokin arvo jota ne luki, kuten propsi tai tilamuuttuja, on muuttunut viimeisestä renderöinnistä. Joskus haluat myös sekoituksen molemmista käyttäytymisistä: Efekti joka suoritetaan uudelleen vastauksena joihinkin arvoihin mutta ei toisiin.
 
 Kaikki koodi Efektin sisällä on *reaktiivista.* Se suoritetaan uudelleen mikäli jokin reaktiivinen arvo jota se lukee on muuttunut renderöinnin yhteydessä. Esimerkiksi, tämä Efekti yhdistää uudelleen chattiin jos joko `roomId` tai `theme` on muuttunut:
 

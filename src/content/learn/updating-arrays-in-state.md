@@ -775,7 +775,7 @@ updateMyTodos(draft => {
 
 Tämä siksi koska et mutatoi _alkuperäistä_ tilaa, vaan mutatoit erityistä `draft` oliota, jonka Immer tarjoaa. Vastaavasti, voit käyttää mutatoivia metodeja kuten `push()` ja `pop()` `draft` olion sisällöille.
 
-Konepellin alla Immer luo aina uuden tilan alusta pohjautuen muutoksiin, joita teit `draft` oliolle. Tämä pitää tapahtumakäsittelijäsi todella tiiviinä mutatoimatta tilaa.
+Konepellin alla Immer luo aina uuden tilan alusta pohjautuen muutoksiin, joita teit `draft` oliolle. Tämä pitää Tapahtumankäsittelijäsi todella tiiviinä mutatoimatta tilaa.
 
 <Recap>
 
@@ -920,7 +920,7 @@ button { margin: 5px; }
 
 #### Poista kohde ostoskorista {/*remove-an-item-from-the-shopping-cart*/}
 
-Ostoskorissa on toimiva "+" painike, mutta "-" painike ei tee mitään. Sinun täytyy lisätä tapahtumakäsittelijä siihen, jotta painaminen vähentää `count` lukua kyseisestä tuotteesta. Jos painat "-" kun luku on 1, tuote tulisi automaattisesti poistua ostoskorista. Varmista, että se ei koskaan näytä lukua 0.
+Ostoskorissa on toimiva "+" painike, mutta "-" painike ei tee mitään. Sinun täytyy lisätä Tapahtumankäsittelijä siihen, jotta painaminen vähentää `count` lukua kyseisestä tuotteesta. Jos painat "-" kun luku on 1, tuote tulisi automaattisesti poistua ostoskorista. Varmista, että se ei koskaan näytä lukua 0.
 
 <Sandpack>
 
@@ -1081,7 +1081,7 @@ button { margin: 5px; }
 
 #### Korjaa mutaatiot käyttämällä ei-mutatoivia tapoja {/*fix-the-mutations-using-non-mutative-methods*/}
 
-Tässä esimerkissä, kaikki tapahtumakäsittelijät `App.js` tiedostossa käyttävät mutaatiota. Lopputuloksena on, että tehtävien muokkaaminen ja poistaminen ei toimi. Uudelleenkirjoita `handleAddTodo`, `handleChangeTodo` ja `handleDeleteTodo` käyttämään ei-mutatoivia metodeja:
+Tässä esimerkissä, kaikki Tapahtumankäsittelijät `App.js` tiedostossa käyttävät mutaatiota. Lopputuloksena on, että tehtävien muokkaaminen ja poistaminen ei toimi. Uudelleenkirjoita `handleAddTodo`, `handleChangeTodo` ja `handleDeleteTodo` käyttämään ei-mutatoivia metodeja:
 
 <Sandpack>
 

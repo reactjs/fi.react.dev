@@ -251,9 +251,9 @@ function List({ items }) {
 
 Nyt ei ole tarvetta "säätää" tilaa ollenkaan. Jos kohde valitulla ID:llä on listassa, se pysyy valittuna. Jos ei ole, renderöinnin aikana laskettu `selection` tulee olemaan `null` sillä yhtään vastaavaa kohdetta ei löytynyt. Tämä käyttäytyminen erilainen, mutta väitetysti parempi, koska useimmat muutokset `items`-propsissa säilyttävät valinnan.
 
-### Logiikan jakaminen tapahtumakäsittelijöiden kesken {/*sharing-logic-between-event-handlers*/}
+### Logiikan jakaminen Tapahtumankäsittelijöiden kesken {/*sharing-logic-between-event-handlers*/}
 
-Sanotaan, että sinulla on tuotesivu, jossa on kaksi painiketta (Osta ja Siirry kassalle), jotka molemmat antavat sinun ostaa tuotteen. Haluat näyttää ilmoituksen aina, kun käyttäjä laittaa tuotteen ostoskoriin. `showNotification()`-funktion kutsuminen molempien painikkeiden klikkaustapahtumankäsittelijöissä tuntuu toistuvalta, joten saatat tuntea houkutuksen laittaa tämä logiikka Effectiin:
+Sanotaan, että sinulla on tuotesivu, jossa on kaksi painiketta (Osta ja Siirry kassalle), jotka molemmat antavat sinun ostaa tuotteen. Haluat näyttää ilmoituksen aina, kun käyttäjä laittaa tuotteen ostoskoriin. `showNotification()`-funktion kutsuminen molempien painikkeiden klikkaustapahtumankäsittelijöissä tuntuu toistuvalta, joten saatat tuntea houkutuksen laittaa tämä logiikka Efektiin:
 
 ```js {2-7}
 function ProductPage({ product, addToCart }) {
@@ -350,7 +350,7 @@ function Form() {
 
   function handleSubmit(e) {
     e.preventDefault();
-    // ✅ Hyvä: Tapahtumakohtainen logiikka on tapahtumakäsittelijässä
+    // ✅ Hyvä: Tapahtumakohtainen logiikka on Tapahtumankäsittelijässä
     post('/api/register', { firstName, lastName });
   }
   // ...
@@ -427,7 +427,7 @@ function Game() {
       throw Error('Game already ended.');
     }
 
-    // ✅ Laske koko seuraava tila tapahtumakäsittelijässä
+    // ✅ Laske koko seuraava tila Tapahtumankäsittelijässä
     setCard(nextCard);
     if (nextCard.gold) {
       if (goldCardCount <= 3) {
@@ -449,7 +449,7 @@ Tämä on paljon tehokkaampaa. Myöskin, jos toteutat tavan katsoa siirtohistori
 
 Muista, että tapahtumankäsittelijöissä tila käyttäytyy kuin tilannekuva. Esimerkiksi, vaikka kutsuisit `setRound(round + 1)`, `round`-muuttuja heijastaa arvoa siihen aikaan, kun käyttäjä painoi nappia. Jos tarvitset seuraavan arvon laskutoimituksiin, määrittele se manuaalisesti kuten `const nextRound = round + 1`.
 
-Joissain tapauksissa, *et voi* laskea seuraavaa tilaa suoraan tapahtumankäsittelijässä. Esimerkiksi, kuvittele lomake, jossa on useita alasvetovalikoita, joiden seuraavat vaihtoehdot riippuvat edellisen alasvetovalikon valitusta arvosta. Tällöin Efektiketju on sopiva, koska synkronoit verkon kanssa.
+Joissain tapauksissa, *et voi* laskea seuraavaa tilaa suoraan tapahtumankäsittelijässä. Esimerkiksi, kuvittele lomake, jossa on useita pudotusvalikoita, joiden seuraavat vaihtoehdot riippuvat edellisen pudotusvalikon valitusta arvosta. Tällöin Efektiketju on sopiva, koska synkronoit verkon kanssa.
 
 ### Sovelluksen alustaminen {/*initializing-the-application*/}
 
@@ -716,7 +716,7 @@ function SearchResults({ query }) {
 
 Sinun *ei* tarvitse siirtää tätä hakua tapahtumankäsittelijään.
 
-Tämä saattaa kuulostaa ristiriitaiselta edellisten esimerkkien kanssa, jossa sinun täytyi asettaa logiikka tapahtumakäsittelijöihin! Kuitenkin, harkitse, että *kirjoitustapahtuma* ei ole itse pääsyy hakemiseen. Hakusyötteet ovat usein esitäytetty URL:stä, ja käyttäjä saattaa navigoida takaisin ja eteenpäin ilman että koskee syötteeseen.
+Tämä saattaa kuulostaa ristiriitaiselta edellisten esimerkkien kanssa, jossa sinun täytyi asettaa logiikka Tapahtumankäsittelijöihin! Kuitenkin, harkitse, että *kirjoitustapahtuma* ei ole itse pääsyy hakemiseen. Hakusyötteet ovat usein esitäytetty URL:stä, ja käyttäjä saattaa navigoida takaisin ja eteenpäin ilman että koskee syötteeseen.
 
 Ei ole väliä mistä `page` ja `query` tulevat. Vaikka tämä komponentti on näkyvissä, saatat haluta pitää `results` tilan [synkronoituna](/learn/synchronizing-with-effects) verkon datan kanssa nykyiselle `page`lle ja `querylle`. Tämän takia se on Efekti.
 
@@ -788,11 +788,11 @@ function useData(url) {
 
 Todennäköisesti haluat myös lisätä logiikkaa virheiden käsittelyyn ja seurata onko sisältö latautumassa. Voit rakentaa Hookin kuten tämän itse tai käyttää yhtä monista ratkaisuista, jotka ovat jo saatavilla React-ekosysteemissä. **Vaikka tämä yksinään ei ole yhtä tehokas kuin ohjelmistokehyksen sisäänrakennettu datan hakumekanismi, datan hakulogiikan siirtäminen omaan Hookiin tekee tehokkaan datan hakustrategian käyttöönotosta helpompaa myöhemmin.**
 
-Yleisesti ottaen aina kun joudut turvautumaan Effectien kirjoittamiseen, pidä silmällä milloin voit eristää toiminnallisuuden omaksi Hookiksi, jolla on deklaratiivisempi ja tarkoitukseen sopivampi API kuten `useData` yllä. Mitä vähemmän raakoja `useEffect`-kutsuja sinulla on komponenteissasi, sitä helpompaa sinun on ylläpitää sovellustasi.
+Yleisesti ottaen aina kun joudut turvautumaan Efektien kirjoittamiseen, pidä silmällä milloin voit eristää toiminnallisuuden omaksi Hookiksi, jolla on deklaratiivisempi ja tarkoitukseen sopivampi API kuten `useData` yllä. Mitä vähemmän raakoja `useEffect`-kutsuja sinulla on komponenteissasi, sitä helpompaa sinun on ylläpitää sovellustasi.
 
 <Recap>
 
-- Jos voit laskea jotain renderöinnin aikana, et tarvitse Effectiä.
+- Jos voit laskea jotain renderöinnin aikana, et tarvitse Efektiä.
 - Välimuistittaaksesi kalliit laskelmat, lisää `useMemo` `useEffect`n sijaan.
 - Nollataksesi kokonaisen komponenttipuun tilan, välitä eri `key` propsi komponentille.
 - Nollataksesi tilan propsin muutoksen jälkeen, aseta se renderöinnin aikana.

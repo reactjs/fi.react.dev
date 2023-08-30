@@ -4,21 +4,21 @@ title: Tapahtumiin vastaaminen
 
 <Intro>
 
-React antaa sinun lisätä *tapahtumakäsittelijöitä* JSX:sssä. Tapahtumakäsittelijät ovat omia funktioitasi, joita kutsutaan vastauksena vuorovaikutuksiin kuten klikkauseen, hoveriin, lomakkeiden kohteiden focusointiin, jne.
+React antaa sinun lisätä *Tapahtumankäsittelijöitä* JSX:sssä. Tapahtumankäsittelijät ovat omia funktioitasi, joita kutsutaan vastauksena vuorovaikutuksiin kuten klikkauseen, hoveriin, lomakkeiden kohteiden focusointiin, jne.
 
 </Intro>
 
 <YouWillLearn>
 
-* Eri tavat kirjoittaa tapahtumakäsittelijä
-* Miten välittää tapahtumakäsittelijän logiikka pääkomponentista
+* Eri tavat kirjoittaa Tapahtumankäsittelijä
+* Miten välittää Tapahtumankäsittelijän logiikka pääkomponentista
 * Miten tapahtumat leviävät ja miten sen voi estää
 
 </YouWillLearn>
 
-## Tapahtumakäsittelijöiden lisääminen {/*adding-event-handlers*/}
+## Tapahtumankäsittelijöiden lisääminen {/*adding-event-handlers*/}
 
-Lisätäksesi tapahtumakäsittelijän, täytyy ensiksi määritellä funktio ja sitten [välittää se propsina](/learn/passing-props-to-a-component) sopivalle JSX tagille. Esimerkiksi, tässä on painike, joka ei tee vielä mitään:
+Lisätäksesi Tapahtumankäsittelijän, täytyy ensiksi määritellä funktio ja sitten [välittää se propsina](/learn/passing-props-to-a-component) sopivalle JSX tagille. Esimerkiksi, tässä on painike, joka ei tee vielä mitään:
 
 <Sandpack>
 
@@ -62,14 +62,14 @@ button { margin-right: 10px; }
 
 </Sandpack>
 
-Määrittelit `handleClick` funktion ja [välitit sen propsina](/learn/passing-props-to-a-component) `<button>`:lle.  `handleClick` on **tapahtumaksäittelijä**. Tapahtumakäsittelijäfunktiot:
+Määrittelit `handleClick` funktion ja [välitit sen propsina](/learn/passing-props-to-a-component) `<button>`:lle.  `handleClick` on **tapahtumaksäittelijä**. Tapahtumankäsittelijäfunktiot:
 
 * ovat useimmiten määritelty komponenttien *sisällä*.
 * alkavat sanalla `handle`, jonka jälkeen nimeen tulee tapahtuman nimi.
 
-Tavanomaisesti tapahtumakäsittelijät alkavat sanalla `handle` ja sisältävät tapahtuman nimen. Näet usein `onClick={handleClick}`, `onMouseEnter={handleMouseEnter}`, ja niin edelleen.
+Tavanomaisesti Tapahtumankäsittelijät alkavat sanalla `handle` ja sisältävät tapahtuman nimen. Näet usein `onClick={handleClick}`, `onMouseEnter={handleMouseEnter}`, ja niin edelleen.
 
-Vaihtoehtoisesti voit määritellä tapahtumakäsittelijän samalla rivillä JSX:ssä.
+Vaihtoehtoisesti voit määritellä Tapahtumankäsittelijän samalla rivillä JSX:ssä.
 
 ```jsx
 <button onClick={function handleClick() {
@@ -85,17 +85,17 @@ Tai tiiviimmin nuolifunktioilla:
 }}>
 ```
 
-Kaikki nämä tyylit vastaavat toisiaan. Samalla rivillä olevat tapahtumakäsittelijät ovat käteviä lyhyihin funktioihin.
+Kaikki nämä tyylit vastaavat toisiaan. Samalla rivillä olevat Tapahtumankäsittelijät ovat käteviä lyhyihin funktioihin.
 
 <Pitfall>
 
-Tapahtumakäsittelijöihin annetut funktiot täytyy välitää, niitä ei pidä kutsua. Esimerkiksi:
+Tapahtumankäsittelijöihin annetut funktiot täytyy välitää, niitä ei pidä kutsua. Esimerkiksi:
 
 | funktion välittäminen (oikein)   | funktion kutsuminen (väärin)       |
 |----------------------------------|------------------------------------|
 | `<button onClick={handleClick}>` | `<button onClick={handleClick()}>` |
 
-Ero on hienovarainen. Ensimmäisessä esimerkissä `handleClick` funktio välitetään `onClick` tapahtumakäsittelijäksi. Tämä kertoo Reactille, että sen täytyy muistaa se ja kutsua sitä vain kun käyttäjä klikkaa painiketta.
+Ero on hienovarainen. Ensimmäisessä esimerkissä `handleClick` funktio välitetään `onClick` Tapahtumankäsittelijäksi. Tämä kertoo Reactille, että sen täytyy muistaa se ja kutsua sitä vain kun käyttäjä klikkaa painiketta.
 
 Toisessa esimerkissä `handleClick()` lopussa oleva `()` kutsuu funktiota *heti* [renderöinnin](/learn/render-and-commit) aikana ilman yhtään klikkausta. Näin tapahtuu, koska JSX aaltosulkeiden välissä [`{` ja `}`](/learn/javascript-in-jsx-with-curly-braces) oleva JavaScript suoritetaan heti. 
 
@@ -113,7 +113,7 @@ Tällä tavoin annettua koodia ei kutsuta klikkauksen yhteydessä. Sitä kutsuta
 <button onClick={alert('You clicked me!')}>
 ```
 
-Jos haluat määritellä tapahtumakäsittelijän samalla rivillä, kääri se anonyymiin funktioon tällä tavoin:
+Jos haluat määritellä Tapahtumankäsittelijän samalla rivillä, kääri se anonyymiin funktioon tällä tavoin:
 
 ```jsx
 <button onClick={() => alert('You clicked me!')}>
@@ -130,9 +130,9 @@ Molemmissa tilanteissa välität funktion:
 
 </Pitfall>
 
-### Propsien lukeminen tapahtumakäsittelijöissä {/*reading-props-in-event-handlers*/}
+### Propsien lukeminen Tapahtumankäsittelijöissä {/*reading-props-in-event-handlers*/}
 
-Sillä tapahtumakäsittelijät ovat määritelty komponentin sisällä, niillä on pääsy komponenttien propseihin. Tässä on painike, joka klikattaessa näyttää `message` prosin ilmoituksena:
+Sillä Tapahtumankäsittelijät ovat määritelty komponentin sisällä, niillä on pääsy komponenttien propseihin. Tässä on painike, joka klikattaessa näyttää `message` prosin ilmoituksena:
 
 <Sandpack>
 
@@ -167,11 +167,11 @@ button { margin-right: 10px; }
 
 Näin nämä kaksi painiketta voivat näyttää eri viestejä. Kokeile muuttaa niille välitettyjä viestejä.
 
-### Tapahtumakäsittelijöiden välittäminen propseina {/*passing-event-handlers-as-props*/}
+### Tapahtumankäsittelijöiden välittäminen propseina {/*passing-event-handlers-as-props*/}
 
-Usein haluat pääkomponentin pystyä määritellä alakomponentin tapahtumakäsittelijän. Esimerkiksi painikkeet: riippuen missä käytät `Button` komponenttia, saatat haluta kutsua eri funktiota. Ehkäpä yksi toistaa videota ja toinen lähettää kuvan palvelimelle.
+Usein haluat pääkomponentin pystyä määritellä alakomponentin Tapahtumankäsittelijän. Esimerkiksi painikkeet: riippuen missä käytät `Button` komponenttia, saatat haluta kutsua eri funktiota. Ehkäpä yksi toistaa videota ja toinen lähettää kuvan palvelimelle.
 
-Voit tehdä tämän välittämällä tapahtumakäsittelijän propsina alakomponentille: 
+Voit tehdä tämän välittämällä Tapahtumankäsittelijän propsina alakomponentille: 
 
 <Sandpack>
 
@@ -228,13 +228,13 @@ Tässä, `Toolbar` komponentti renderöi `PlayButton` komponentin sekä `UploadB
 
 Lopuksi, `Button` komponenttisi hyväksyy `onClick` propsin. Se välittää propsin suoraan selaimen sisäänrakennettuun `<button>` elementtiin `onClick={onClick}` koodilla. Tämä kertoo Reactille, että kutsuu välitettyä funktiota klikkauksen yhteydessä.
 
-Jos käytät [design system:iä](https://uxdesign.cc/everything-you-need-to-know-about-design-systems-54b109851969), on yleistä komponenttien kuten painikkeiden sisältää tyylit mutta ei käyttäytymistä. Sen sijaan komponentit kuten `PlayButton` ja `UploadButton` välittävät tapahtumakäsittelijät alaspäin.
+Jos käytät [design system:iä](https://uxdesign.cc/everything-you-need-to-know-about-design-systems-54b109851969), on yleistä komponenttien kuten painikkeiden sisältää tyylit mutta ei käyttäytymistä. Sen sijaan komponentit kuten `PlayButton` ja `UploadButton` välittävät Tapahtumankäsittelijät alaspäin.
 
-### Tapahtumakäsittelijän propsien nimeäminen {/*naming-event-handler-props*/}
+### Tapahtumankäsittelijän propsien nimeäminen {/*naming-event-handler-props*/}
 
-Sisäänrakennetut elementit kuten `<button>` ja `<div>` tukevat ainoastaan [selaimen tapahtumien nimiä](/reference/react-dom/components/common#common-props) kuten `onClick`. Kuitenkin, kun rakennat omia komponenttejasi, voit nimetä niiden tapahtumakäsittelijöiden propsit miten haluat.
+Sisäänrakennetut elementit kuten `<button>` ja `<div>` tukevat ainoastaan [selaimen tapahtumien nimiä](/reference/react-dom/components/common#common-props) kuten `onClick`. Kuitenkin, kun rakennat omia komponenttejasi, voit nimetä niiden Tapahtumankäsittelijöiden propsit miten haluat.
 
-Tavanomaisesti, tapahtumakäsittelijän propsien kuuluisi alkaa sanalla `on`, ja jatkua isolla kirjaimella.
+Tavanomaisesti, Tapahtumankäsittelijän propsien kuuluisi alkaa sanalla `on`, ja jatkua isolla kirjaimella.
 
 Esimerkiksi, `Button` komponentin `onClick` propsi voitaisiin kutusua `onSmash`:
 
@@ -271,7 +271,7 @@ button { margin-right: 10px; }
 
 Tässä esimerkissä, `<button onClick={onSmash}>` kertoo, että selaimen `<button>` elementti (pienin kirjaimin) tarvitsee silti propsin nimeltään `onClick`, mutta kustomoidun `Button` komponentin vastaanottaman propsin nimi voi olla mikä tahansa!
 
-Kun komponenttisi tukee useampia interaktioita, saatat nimetä tapahtumakäsittelijöiden propsit sovelluskohtaisin konseptein. Esimerkiksi tämä `Toolbar` komponentti vastaanottaa `onPlayMovie` sekä `onUploadImage` tapahtumakäsittelijät:
+Kun komponenttisi tukee useampia interaktioita, saatat nimetä Tapahtumankäsittelijöiden propsit sovelluskohtaisin konseptein. Esimerkiksi tämä `Toolbar` komponentti vastaanottaa `onPlayMovie` sekä `onUploadImage` Tapahtumankäsittelijät:
 
 <Sandpack>
 
@@ -313,7 +313,7 @@ button { margin-right: 10px; }
 
 </Sandpack>
 
-Huomaa, miten `App` komponentin ei tarvitse tietää *mitä* `Toolbar` tekee sen `onPlayMovie` tai `onUploadImage` tapahtumakäsittelijöillä. Se on `Toolbar` komponentin toteutusyksityiskohta. Tässä, `Toolbar` välittää ne `Button`:nien `onClick` käsittelijöinä, mutta se voisi myöhemmin myös kutsua niitä pikanäppäimestä. Propsien nimeäminen sovelluskohtaisten vuorovaikutusten kautta, kuten `onPlayMovie`, antaa joustavuuden muuttaa niitä myöhemmin.
+Huomaa, miten `App` komponentin ei tarvitse tietää *mitä* `Toolbar` tekee sen `onPlayMovie` tai `onUploadImage` Tapahtumankäsittelijöillä. Se on `Toolbar` komponentin toteutusyksityiskohta. Tässä, `Toolbar` välittää ne `Button`:nien `onClick` käsittelijöinä, mutta se voisi myöhemmin myös kutsua niitä pikanäppäimestä. Propsien nimeäminen sovelluskohtaisten vuorovaikutusten kautta, kuten `onPlayMovie`, antaa joustavuuden muuttaa niitä myöhemmin.
 
 <Note>
 
@@ -325,7 +325,7 @@ Varmista, että käytät asianmukaisia HTML-tageja tapahtumankäsittelijöillesi
 
 Komponenttisi tapahtumankäsittelijät nappaavat tapahtumia myös alakomponenteista. Tätä usein kutsutaan "kuplimiseksi" tai "propagoinniksi": se alkaa sieltä missä tapahtuma esiintyi ja nousee puussa ylemmäs. 
 
-Tämä `<div>` sisältää kaksi painiketta. Sekä `<div>` tagi *että* painikkeet omaavat ikioman `onClick` käsittelijän. Mitä arvelet mitä tapahtumakäsittelijää kutsutaan, kun painiketta klikataan?
+Tämä `<div>` sisältää kaksi painiketta. Sekä `<div>` tagi *että* painikkeet omaavat ikioman `onClick` käsittelijän. Mitä arvelet mitä Tapahtumankäsittelijää kutsutaan, kun painiketta klikataan?
 
 <Sandpack>
 
@@ -366,7 +366,7 @@ Kaikki tapahtumat propagoituvat Reactissa paitsi `onScroll`, joka toimii vain si
 
 ### Propagoinnin pysäyttäminen {/*stopping-propagation*/}
 
-Tapahtumakäsittelijät vastaanottavat **tapahtumaolion** niiden ainoana argumenttina. Tavanomaisesti sitä usein kutsutaan `e` kirjaimella, joka on lyhenne sanasta "event". Voit käyttää tätä oliota lukeaksesi tietoa tapahtumasta.
+Tapahtumankäsittelijät vastaanottavat **tapahtumaolion** niiden ainoana argumenttina. Tavanomaisesti sitä usein kutsutaan `e` kirjaimella, joka on lyhenne sanasta "event". Voit käyttää tätä oliota lukeaksesi tietoa tapahtumasta.
 
 Tämä tapahtumaolio mahdollistaa myös tapahtuman propagoinnin estämisen. Jos haluat estää tapahtuman propagoinnin pääkomponenteille, kutsu `e.stopPropagation()` funktiota kuten tämä `Button` komponentti tekee:
 
@@ -461,7 +461,7 @@ function Button({ onClick, children }) {
 }
 ```
 
-Voisit halutessasi lisätä lisää koodia tähän käsittelijään ennen `onClick` tapahtumakäsittelijän kutsumista. Tämä tapa mahdollistaa *vaihtoehdon* propagoinnille. Sen avulla alakomponentit käsittelevät tapahtuman, silti antaen pääkomponenttien määritellä lisäkäyttäytymisiä. Toisin kuin propagointi, se ei ole automaattista. Kuitenkin tällä tavalla voit selkeästi seurata koko koodiketjua, jota kutsutaan jonkin tapahtuman seurauksena.
+Voisit halutessasi lisätä lisää koodia tähän käsittelijään ennen `onClick` Tapahtumankäsittelijän kutsumista. Tämä tapa mahdollistaa *vaihtoehdon* propagoinnille. Sen avulla alakomponentit käsittelevät tapahtuman, silti antaen pääkomponenttien määritellä lisäkäyttäytymisiä. Toisin kuin propagointi, se ei ole automaattista. Kuitenkin tällä tavalla voit selkeästi seurata koko koodiketjua, jota kutsutaan jonkin tapahtuman seurauksena.
 
 Jos nojaat propagointiin ja on hankalaa jäljittää mikä käsittelijä suoritetaan ja miksi, kokeile tätä tapaa sen sijaan.
 
@@ -517,23 +517,23 @@ button { margin-left: 5px; }
 * [`e.stopPropagation()`](https://developer.mozilla.org/docs/Web/API/Event/stopPropagation) estää ylempien tagien käsittelijöiden suorittamisen.
 * [`e.preventDefault()` ](https://developer.mozilla.org/docs/Web/API/Event/preventDefault) estää selaimen oletustoiminnon muutamissa tapahtumissa, joissa sellainen on.
 
-## Voiko tapahtumakäsittelijöillä olla sivuvaikutuksia? {/*can-event-handlers-have-side-effects*/}
+## Voiko Tapahtumankäsittelijöillä olla sivuvaikutuksia? {/*can-event-handlers-have-side-effects*/}
 
-Totta kai! Tapahtumakäsittelijät ovat paras paikka sivuvaikutuksille.
+Totta kai! Tapahtumankäsittelijät ovat paras paikka sivuvaikutuksille.
 
-Toisin kuin renderöintifunktiot, tapahtumakäsittelijöiden ei tarvitse olla [puhtaita](/learn/keeping-components-pure), joten ne ovat hyvä hyvä paikka *muuttaa* jotain. Esimerkiksi, syöttökentän arvon muuttaminen kirjoituksen seurauksena, tai listan muuttaminen painikkeen painalluksen seurauksena. Kuitenkin, jotta voit muuttaa jotain tietoa, se täytyy ensiksi tallentaa. Reactissa tämä tapahtuu käyttämällä [tilaa, komponentin muistia](/learn/state-a-components-memory). Tulet oppimaan siitä kaiken seuraavalla sivulla.
+Toisin kuin renderöintifunktiot, Tapahtumankäsittelijöiden ei tarvitse olla [puhtaita](/learn/keeping-components-pure), joten ne ovat hyvä hyvä paikka *muuttaa* jotain. Esimerkiksi, syöttökentän arvon muuttaminen kirjoituksen seurauksena, tai listan muuttaminen painikkeen painalluksen seurauksena. Kuitenkin, jotta voit muuttaa jotain tietoa, se täytyy ensiksi tallentaa. Reactissa tämä tapahtuu käyttämällä [tilaa, komponentin muistia](/learn/state-a-components-memory). Tulet oppimaan siitä kaiken seuraavalla sivulla.
 
 <Recap>
 
 * Voit käsitellä tapahtumia välittämällä funktion propsina elementille kuten `<button>`.
-* Tapahtumakäsittelijät tulee välitää, **ei kutsua!** `onClick={handleClick}`, ei `onClick={handleClick()}`.
-* Voit määritellä tapahtumakäsittelijän funktion erikseen tai samalla rivillä.
-* Tapahtumakäsittelijät määritellään komponentin sisällä, jotta ne saavat pääsyn propseihin.
-* Voit määritellä tapahtumakäsittelijän yläkomponentissa ja välittää sen propsina alakomponentille.
-* Voit määritellä omian tapahtumakäsittelijäpropseja sovelluskohtaisilla nimillä.
+* Tapahtumankäsittelijät tulee välitää, **ei kutsua!** `onClick={handleClick}`, ei `onClick={handleClick()}`.
+* Voit määritellä Tapahtumankäsittelijän funktion erikseen tai samalla rivillä.
+* Tapahtumankäsittelijät määritellään komponentin sisällä, jotta ne saavat pääsyn propseihin.
+* Voit määritellä Tapahtumankäsittelijän yläkomponentissa ja välittää sen propsina alakomponentille.
+* Voit määritellä omian Tapahtumankäsittelijäpropseja sovelluskohtaisilla nimillä.
 * Tapahtumat propagoituvat ylöspäin. Kutsu `e.stopPropagation()` estääksesi sen.
 * Tapahtumilla saattaa olla ei toivottuja oletustoimintoja. Kutsu `e.preventDefault()` estääksesi sen.
-* Tapahtumakäsittelijän kutsuminen alakomponentista on hyvä vaihtoehto propagoinnille.
+* Tapahtumankäsittelijän kutsuminen alakomponentista on hyvä vaihtoehto propagoinnille.
 
 </Recap>
 
@@ -541,7 +541,7 @@ Toisin kuin renderöintifunktiot, tapahtumakäsittelijöiden ei tarvitse olla [p
 
 <Challenges>
 
-#### Korjaa tapahtumakäsittelijä {/*fix-an-event-handler*/}
+#### Korjaa Tapahtumankäsittelijä {/*fix-an-event-handler*/}
 
 Painikkeen painamisen on tarkoitus vaihtaa sivun taustaväriä valkoisen ja musta välillä. Klikattaessa mitään ei kuitenkaan tapahdu. Korjaa ongelma. (Älä huoli `handleClick`:n sisällä olevasta logiikasta, se on hyvä sellaisenaan.)
 
@@ -624,7 +624,7 @@ export default function LightSwitch() {
 
 #### Yhdistä tapahtumat {/*wire-up-the-events*/}
 
-Tää `ColorSwitch` komponentti renderöi painikkeen. Sen on tarkoitus muuttaa sivun väriä. Yhdistä se `onChangeColor` tapahtumakäsittelijään, jonka se saa propsina sen yläkomponentilta, jotta painikkeen klikkaaminen vaihtaa väriä.
+Tää `ColorSwitch` komponentti renderöi painikkeen. Sen on tarkoitus muuttaa sivun väriä. Yhdistä se `onChangeColor` Tapahtumankäsittelijään, jonka se saa propsina sen yläkomponentilta, jotta painikkeen klikkaaminen vaihtaa väriä.
 
 Kun olet tehnyt tämän, huomaa, että painikkeen klikkaaminen myös kasvattaa sivun lukua. Koodin kirjoittanut kollegasi vaatii, että `onChangeColor` ei kasvata laskuria. Mitä muuta saattaa tapahtua? Korjaa se, jotta painikkeen painaminen vaihtaa *vain* väriä, ja se _ei_ kasvata lukua.
 
@@ -680,7 +680,7 @@ export default function App() {
 
 <Solution>
 
-Ensiksi, sinun täytyy lisätä tapahtumakäsittelijä, tällä tavoin `<button onClick={onChangeColor}>`.
+Ensiksi, sinun täytyy lisätä Tapahtumankäsittelijä, tällä tavoin `<button onClick={onChangeColor}>`.
 
 Tämä kuitenkin luo ongelman kasvavasta luvusta. Jos `onChangeColor` ei tee tätä, kuten kollegasi niin väittää, silloin ongelma on, että tämä tapahtuma propagoituu ylöspäin ja jokin muu käsittelijä tekee sen. Ongelman ratkaisemiseksi, sinun täytyy estää propagointi. Älä unohda kutsua `onChangeColor` funktiota.
 

@@ -31,7 +31,7 @@ Verkkossa HTML antaa meidän luoda monipuoliset jäsennellyt dokumentit sen sis�
 </article>
 ```
 
-Tämä merkintä edustaa tätä artikkelia `<article>`, sen otsikkoa `<h1>`, ja (lyhennettyä) sisällysluetteloa järjestettynä listana `<ol>`. Tämänkaltainen merkintä yhdistettynä CSS:ään tyylejä varten ja JavaScriptiin vuorovaikutteisuutta varten, löytyy jokaisen sivupalkin, avatarin, modaalilaatikon ja alasvetovalikon takaa—kaikki palaset UI:ta verkossa jota näet. 
+Tämä merkintä edustaa tätä artikkelia `<article>`, sen otsikkoa `<h1>`, ja (lyhennettyä) sisällysluetteloa järjestettynä listana `<ol>`. Tämänkaltainen merkintä yhdistettynä CSS:ään tyylejä varten ja JavaScriptiin vuorovaikutteisuutta varten, löytyy jokaisen sivupalkin, avatarin, modaalilaatikon ja pudotusvalikon takaa—kaikki palaset UI:ta verkossa jota näet. 
 
 Reactilla voit yhdistää merkinnän, CSS ja JavaScriptin mukautetuiksi "komponenteiksi," **uudelleenkäytettäviksi UI elementeiksi sovelluksellesi.** Sisällysluettelon koodi yllä voitaisiin muuttaa `<TableOfContents>` komponentiksi, jota voisit renderöidä jokaisella sivulla. Konepellin alla se käyttää silti samoja HTML tageja, kuten `<article>`, `<h1>`, jne.
 

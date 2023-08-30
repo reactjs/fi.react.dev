@@ -37,7 +37,7 @@ Lopuksi, välitä se `ref` -attribuuttina JSX-tagille, jonka DOM-elementin halua
 <div ref={myRef}>
 ```
 
-`useRef` Hookki palauttaa olion yhdellä `current` propertyllä. Aluksi, `myRef.current` on `null`. Kun React luo DOM noodin tästä `<div>`:stä, React asettaa viitteen tähän noodiin `myRef.current`:iin. Voit sitten päästä käsiksi tähän DOM noodiin [tapahtumakäsittelijästäsi](/learn/responding-to-events) ja käyttää sisäänrakennettuja [selaimen rajapintoja](https://developer.mozilla.org/docs/Web/API/Element) jotka siihen on määritelty.
+`useRef` Hookki palauttaa olion yhdellä `current` propertyllä. Aluksi, `myRef.current` on `null`. Kun React luo DOM noodin tästä `<div>`:stä, React asettaa viitteen tähän noodiin `myRef.current`:iin. Voit sitten päästä käsiksi tähän DOM noodiin [Tapahtumankäsittelijästäsi](/learn/responding-to-events) ja käyttää sisäänrakennettuja [selaimen rajapintoja](https://developer.mozilla.org/docs/Web/API/Element) jotka siihen on määritelty.
 
 ```js
 // Voit käyttää mitä tahansa selaimen rajapintoja, esimerkiksi:
@@ -77,8 +77,8 @@ Toteuttaaksesi tämän:
 
 1. Määritä `inputRef` `useRef` Hookilla.
 2. Välitä se seuraavasti `<input ref={inputRef}>`. Tämä pyytää Reactia **asettamaan tämän `<input>`:n DOM noodin `inputRef.current`:iin.**
-3. `handleClick` tapahtumakäsittelijässä, lue tekstikentän DOM noodi `inputRef.current`:sta ja kutsu sen [`focus()`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/focus) funktiota, `inputRef.current.focus()`:lla.
-4. Välitä `handleClick` tapahtumakäsittelijä `<button>`:lle `onClick` attribuutilla.
+3. `handleClick` Tapahtumankäsittelijässä, lue tekstikentän DOM noodi `inputRef.current`:sta ja kutsu sen [`focus()`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/focus) funktiota, `inputRef.current.focus()`:lla.
+4. Välitä `handleClick` Tapahtumankäsittelijä `<button>`:lle `onClick` attribuutilla.
 
 Vaikka DOM manipulaatio on yleisin käyttötapaus refseille, `useRef` Hookia voidaan myös käyttää tallentamaan Reactin ulkopuolella olevia asioita, kuten ajastimien ID:tä. Juuri kuten tila, refit pysyvät renderöintien välillä. Refit ovat tilamuuttujia, jotka eivät aiheuta uudelleenrenderöintiä, kun niitä asetetaan. Lue refien esittely: [Viittausten käyttö Refseillä.](/learn/referencing-values-with-refs)
 
@@ -494,7 +494,7 @@ Yleensä [ei kannata](/learn/referencing-values-with-refs#best-practices-for-ref
 
 React asettaa `ref.current`:n kommitoinnin aikana. Ennen DOM:n päivittämistä, React asettaa `ref.current` arvot `null`:ksi. Päivittämisen jälkeen, React asettaa ne välittömästi vastaaviin DOM noodeihin.
 
-**Useiten saatat käyttää refseja tapahtumakäsittelijöiden sisällä.** Jos haluat tehdä jotain refin kanssa, mutta ei ole tiettyä tapahtumaa jota käyttää, saatat tarvita effectia. Seuraavilla sivuilla käymme läpi effectin.
+**Useiten saatat käyttää refseja Tapahtumankäsittelijöiden sisällä.** Jos haluat tehdä jotain refin kanssa, mutta ei ole tiettyä tapahtumaa jota käyttää, saatat tarvita Effektiä. Seuraavilla sivuilla käymme läpi Effektin.
 
 <DeepDive>
 
@@ -745,11 +745,11 @@ button { display: block; margin-bottom: 20px; }
 
 </Sandpack>
 
-Lisähaasteena, pidä "Play" painike synkronoituna videon toiston tilan kanssa, vaikka käyttäjä klikkaisi videota hiiren oikealla painikkeella ja toistaa sen käyttämällä selaimen sisäisiä media-ohjauksia. Saatat tarvita tapahtumakäsittelijää `onPlay` ja `onPause` video-elementillä tämän toteuttaaksesi.
+Lisähaasteena, pidä "Play" painike synkronoituna videon toiston tilan kanssa, vaikka käyttäjä klikkaisi videota hiiren oikealla painikkeella ja toistaa sen käyttämällä selaimen sisäisiä media-ohjauksia. Saatat tarvita Tapahtumankäsittelijää `onPlay` ja `onPause` video-elementillä tämän toteuttaaksesi.
 
 <Solution>
 
-Määritä ref ja aseta se `<video>` elementtiin. Sitten kutsu `ref.current.play()` ja `ref.current.pause()` tapahtumakäsittelijässä riippuen seuraavasta tilasta.
+Määritä ref ja aseta se `<video>` elementtiin. Sitten kutsu `ref.current.play()` ja `ref.current.pause()` Tapahtumankäsittelijässä riippuen seuraavasta tilasta.
 
 <Sandpack>
 
@@ -798,7 +798,7 @@ button { display: block; margin-bottom: 20px; }
 
 </Sandpack>
 
-Jotta voisit käsitellä selaimen sisäisiä media-ohjauksia, voit lisätä `onPlay` ja `onPause` tapahtumakäsittelijät `<video>` elementille ja kutsua `setIsPlaying` niistä. Tällä tavalla, jos käyttäjä toistaa videon käyttämällä selaimen sisäisiä media-ohjauksia, tila muuttuu vastaavasti.
+Jotta voisit käsitellä selaimen sisäisiä media-ohjauksia, voit lisätä `onPlay` ja `onPause` Tapahtumankäsittelijät `<video>` elementille ja kutsua `setIsPlaying` niistä. Tällä tavalla, jos käyttäjä toistaa videon käyttämällä selaimen sisäisiä media-ohjauksia, tila muuttuu vastaavasti.
 
 </Solution>
 

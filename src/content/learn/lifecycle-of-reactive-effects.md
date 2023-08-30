@@ -15,7 +15,7 @@ Efekteilla on eri elinkaari komponenteista. Komponentit voivat mountata, päivit
 - Milloin Efektisi täytyy synkronoida uudelleen ja miksi
 - Miten Effektisi riippuvuudet määritellään
 - Mitä tarkoittaa kun arvo on reaktiivinen
-- Mitä tyhjä riippuvuustaulukko tarkoittaa
+- Mitä tyhjä riippuvuuslista tarkoittaa
 - Miten React tarkistaa rippuuksien oikeudellisuuden linterin avulla
 - Mitä tehdä kun olet eri mieltä linterin kanssa
 
@@ -289,7 +289,7 @@ Kuitenkin, on myös epätavallisempia tapauksia, joissa uudelleen synkronointi o
 
 ### Miten React tietää, että sen täytyy synkronoida Efekti uudelleen {/*how-react-knows-that-it-needs-to-re-synchronize-the-effect*/}
 
-Saatat miettiä miten React tiesi, että Efektisi täytyi synkronoida uudelleen `roomId`:n muuttuessa. Se johtuu siitä, että *kerroit Reactille* koodin riippuvan `roomId`:sta sisällyttämällä sen [riippuvuustaulukkoon:](/learn/synchronizing-with-effects#step-2-specify-the-effect-dependencies)
+Saatat miettiä miten React tiesi, että Efektisi täytyi synkronoida uudelleen `roomId`:n muuttuessa. Se johtuu siitä, että *kerroit Reactille* koodin riippuvan `roomId`:sta sisällyttämällä sen [riippuvuuslistaan:](/learn/synchronizing-with-effects#step-2-specify-the-effect-dependencies)
 
 ```js {1,3,8}
 function ChatRoom({ roomId }) { // roomId propsi saattaa muuttua ajan kanssa
@@ -309,7 +309,7 @@ Tässä miten tämä toimii:
 2. Tiesit, että Efektisi lukee `roomId`:n (joten sen logiikka riippuu arvosta, joka saattaa muuttua myöhemmin).
 3. Tämä on miksi määritit sen Efektisi riippuvuudeksi (jotta se synkronoituu uudelleen kun `roomId` muuttuu).
 
-Joka kerta kun komponenttisi renderöityy uudelleen, React katsoo riippuvuustaulukkoa, jonka olet määrittänyt. Jos mikään arvoista taulukossa on eri kuin arvo samassa kohdassa, jonka annoit edellisellä renderöinnillä, React synkronoi Efektisi uudelleen.
+Joka kerta kun komponenttisi renderöityy uudelleen, React katsoo riippuvuuslistaa, jonka olet määrittänyt. Jos mikään arvoista taulukossa on eri kuin arvo samassa kohdassa, jonka annoit edellisellä renderöinnillä, React synkronoi Efektisi uudelleen.
 
 Esimerkiksi, jos välitit arvon `["general"]` ensimmäisen renderöinnin aikana, ja myöhemmin välitit `["travel"]` seuraavan renderöinnin aikana, React vertaa `"general"` ja `"travel"` arvoja. Nämä ovat eri arvoja (vertailtu [`Object.is`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is) avulla), joten React synkronoi Efektisi uudelleen. Toisaalta, jos komponenttisi uudelleen renderöityy mutta `roomId` ei ole muuttunut, Efektisi pysyy yhdistettynä samaan huoneeseen.
 
@@ -471,7 +471,7 @@ button { margin-left: 10px; }
 
 Aina kun muutat reaktiivista arvoa kuten `roomId` tai `serverUrl`, Efekti yhdistää uudelleen chat-palvelimeen.
 
-### Mitä tyhjä riippuvuustaulukko tarkoittaa {/*what-an-effect-with-empty-dependencies-means*/}
+### Mitä tyhjä riippuvuuslista tarkoittaa {/*what-an-effect-with-empty-dependencies-means*/}
 
 Mitä tapahtuu jos siirrät molemmat `serverUrl` ja `roomId` komponentin ulkopuolelle?
 
@@ -491,9 +491,9 @@ function ChatRoom() {
 }
 ```
 
-Nyt Efektisi koodi ei käytä *yhtään* reaktiivista arvoa, joten sen riippuvuustaulukko voi olla tyhjä (`[]`).
+Nyt Efektisi koodi ei käytä *yhtään* reaktiivista arvoa, joten sen riippuvuuslista voi olla tyhjä (`[]`).
 
-Ajattelu komponentin perspektiivista, tyhjä `[]` riippuvuustaulukko tarkoittaa, että tämä Efekti yhdistää chat-huoneeseen vain kun komponentti mounttaa, ja katkaisee yhteyden vain kun komponentti unmounttaa. (Pidä mielessä, että React silti [synkronoi ylimääräisen kerran](#how-react-verifies-that-your-effect-can-re-synchronize) kehityksessä testatakseen logiikkaasi.)
+Ajattelu komponentin perspektiivista, tyhjä `[]` riippuvuuslista tarkoittaa, että tämä Efekti yhdistää chat-huoneeseen vain kun komponentti mounttaa, ja katkaisee yhteyden vain kun komponentti unmounttaa. (Pidä mielessä, että React silti [synkronoi ylimääräisen kerran](#how-react-verifies-that-your-effect-can-re-synchronize) kehityksessä testatakseen logiikkaasi.)
 
 
 <Sandpack>
@@ -553,7 +553,7 @@ Kuitenkin, jos [ajattelet Efektin perspektiivista,](#thinking-from-the-effects-p
 
 ### Kaikki muuttujat komponentin sisällä ovat reaktiivisia {/*all-variables-declared-in-the-component-body-are-reactive*/}
 
-Propsit ja tila eivät ole ainoita reaktiivisia arvoja. Arvot jotka niistä lasket ovat myös reaktiivisia. Jos propsit tai tila muuttuu, komponenttisi tulee renderöitymään uudelleen, ja niistä lasketut arvot myös muuttuvat. Tämä on syy miksi kaikki Efektin tulisi lisätä Efektin riippuvuustaulukkoon kaikki komponentin sisällä olevat muuttujat, joita se käyttää.
+Propsit ja tila eivät ole ainoita reaktiivisia arvoja. Arvot jotka niistä lasket ovat myös reaktiivisia. Jos propsit tai tila muuttuu, komponenttisi tulee renderöitymään uudelleen, ja niistä lasketut arvot myös muuttuvat. Tämän takia kaikki Efektin muuttujat tulisi lisätä Efektin riippuvuuslistalle.
 
 Sanotaan, että käyttäjä voi valita chat-palvelimen pudotusvalikosta, mutta he voivat myös määrittää oletuspalvelimen asetuksissa. Oletetaan, että olet jo laittanut asetukset -tilan [kontekstiin](/learn/scaling-up-with-reducer-and-context), joten luet `settings`:in siitä kontekstista. Nyt lasket `serverUrl`:n valitun palvelimen ja oletuspalvelimen perusteella:
 
@@ -574,7 +574,7 @@ function ChatRoom({ roomId, selectedServerUrl }) { // roomId on reaktiivinen
 
 Tässä esimerkissä, `serverUrl` ei ole propsi tai tilamuuttuja. Se on tavallinen muuttuja, jonka lasket renderöinnin aikana. Mutta se on laskettu renderöinnin aikana, jolloin se voi muuttua uudelleen renderöinnin seurauksena. Tämä on syy miksi se on reaktiivinen.
 
-**Kaikki komponentin sisällä olevat arvot (mukaan lukien propsit, tila, ja muuttujat komponenttisi sisällä) ovat reaktiivisia. Mikä tahansa reaktiivinen arvo voi muuttua uudelleen renderöinnin seurauksena, joten sinun täytyy sisällyttää reaktiiviset arvot Efektin riippuvuustaulukkoon.**
+**Kaikki komponentin sisällä olevat arvot (mukaan lukien propsit, tila, ja muuttujat komponenttisi sisällä) ovat reaktiivisia. Mikä tahansa reaktiivinen arvo voi muuttua uudelleen renderöinnin seurauksena, joten sinun täytyy sisällyttää reaktiiviset arvot Efektin riippuvuuslistalle.**
 
 Toisin sanoen, Efektisi "reagoi" kaikkii arvoihin komponentin sisällä. 
 
@@ -862,7 +862,7 @@ button { margin-left: 10px; }
 
 <Solution>
 
-Tällä Efektilla ei ole riippuvuustaulukkoa ollenkaan, joten se synkronoituu uudelleen jokaisen renderöinnin jälkeen. Ensiksi, lisää riippuvuustaulukko. Sitten, varmista, että jokainen reaktiivinen arvo, jota Efekti käyttää on määritelty taulukossa. Esimerkiksi, `roomId` on reaktiivinen (koska se on propsi), joten sen tulisi olla mukana taulukossa. Tämä varmistaa, että kun käyttäjä valitsee eri huoneen, chat yhdistää uudelleen. Toisaalta, `serverUrl` on määritelty komponentin ulkopuolella. Tämän takia sen ei tarvitse olla taulukossa.
+Tällä Efektilla ei ole riippuvuuslistaa ollenkaan, joten se synkronoituu uudelleen jokaisen renderöinnin jälkeen. Ensiksi, lisää riippuvuuslista. Sitten, varmista, että jokainen reaktiivinen arvo, jota Efekti käyttää on määritelty taulukossa. Esimerkiksi, `roomId` on reaktiivinen (koska se on propsi), joten sen tulisi olla mukana taulukossa. Tämä varmistaa, että kun käyttäjä valitsee eri huoneen, chat yhdistää uudelleen. Toisaalta, `serverUrl` on määritelty komponentin ulkopuolella. Tämän takia sen ei tarvitse olla taulukossa.
 
 <Sandpack>
 
