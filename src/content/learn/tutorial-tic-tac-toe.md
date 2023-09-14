@@ -901,17 +901,17 @@ body {
 
 ### React kehitystyökalut {/*react-developer-tools*/}
 
-React DevTools let you check the props and the state of your React components. You can find the React DevTools tab at the bottom of the _browser_ section in CodeSandbox:
+React kehitystyökalujen avulla voit tarkastella React komponenttiesi propseja ja tilaa. React DevTools välilehti löytyy _browser_ osion alapuolelta CodeSandboxissa:
 
-![React DevTools in CodeSandbox](../images/tutorial/codesandbox-devtools.png)
+![React DevTools CodeSandboxissa](../images/tutorial/codesandbox-devtools.png)
 
-To inspect a particular component on the screen, use the button in the top left corner of React DevTools:
+Tarkastellaksesi tiettyä komponenttia ruudulla, käytä nappia React DevToolsin vasemmassa yläkulmassa:
 
-![Selecting components on the page with React DevTools](../images/tutorial/devtools-select.gif)
+![Komponentin valinta sivulla React DevToolsissa](../images/tutorial/devtools-select.gif)
 
 <Note>
 
-For local development, React DevTools is available as a [Chrome](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi?hl=en), [Firefox](https://addons.mozilla.org/en-US/firefox/addon/react-devtools/), and [Edge](https://microsoftedge.microsoft.com/addons/detail/react-developer-tools/gpphkfbcpidddadnkolkpfckpihlkkil) browser extension. Install it, and the *Components* tab will appear in your browser Developer Tools for sites using React.
+Paikallisessa kehityksessä, React DevTools on saatavilla [Chrome](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi?hl=en), [Firefox](https://addons.mozilla.org/en-US/firefox/addon/react-devtools/), ja [Edge](https://microsoftedge.microsoft.com/addons/detail/react-developer-tools/gpphkfbcpidddadnkolkpfckpihlkkil) selainlaajennuksena. Asenna se, ja *Components* välilehti ilmestyy selaimen kehitystyökaluihin sivuille, jotka käyttävät Reactia.
 
 </Note>
 
