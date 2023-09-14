@@ -706,7 +706,7 @@ body {
 
 ### Interaktiivisen komponentin luominen {/*making-an-interactive-component*/}
 
-Let's fill the `Square` component with an `X` when you click it. Declare a function called `handleClick` inside of the `Square`. Then, add `onClick` to the props of the button JSX element returned from the `Square`:
+Täytetään `Square` komponentti `X`:llä kun klikkaat sitä. Määritä funktio nimeltään `handleClick` `Square` komponentin sisällä. Sitten, lisää `onClick` prosi painonapin JSX elementtiin, joka palautetaan `Square` komponentista:
 
 ```js {2-4,9}
 function Square({ value }) {
@@ -725,19 +725,19 @@ function Square({ value }) {
 }
 ```
 
-If you click on a square now, you should see a log saying `"clicked!"` in the _Console_ tab at the bottom of the _Browser_ section in CodeSandbox. Clicking the square more than once will log `"clicked!"` again. Repeated console logs with the same message will not create more lines in the console. Instead, you will see an incrementing counter next to your first `"clicked!"` log.
+Jos painat neliöstä nyt, sinun tulisi nähdä loki, jossa lukee `"clicked!"` _Console_ välilehdellä _Browser_ osiossa CodeSandboxissa. Painamalla neliötä useammin kuin kerran, lokiin tulee uusi rivi, jossa lukee `"clicked!"`. Toistuvat lokit samalla viestillä eivät luo uusia rivejä lokiin. Sen sijaan, näet kasvavan laskurin ensimmäisen `"clicked!"` lokin vieressä.
 
 <Note>
 
-If you are following this tutorial using your local development environment, you need to open your browser's Console. For example, if you use the Chrome browser, you can view the Console with the keyboard shortcut **Shift + Ctrl + J** (on Windows/Linux) or **Option + ⌘ + J** (on macOS).
+Jos seuraat tätä opasta paikallisessa kehitysympäristössä, sinun tulee avata selaimen konsoli. Esimerkiksi, jos käytät Chrome selainta, voit avata konsolin näppäinyhdistelmällä **Shift + Ctrl + J** (Windows/Linux) tai **Option + ⌘ + J** (macOS).
 
 </Note>
 
-As a next step, you want the Square component to "remember" that it got clicked, and fill it with an "X" mark. To "remember" things, components use *state*.
+Seuraavaksi, haluat Square komponentin "muistavat", että sitä painettiin, ja täyttää sen "X" merkillä. Komponentit käyttävät *tilaa* muistaakseen asioita.
 
-React provides a special function called `useState` that you can call from your component to let it "remember" things. Let's store the current value of the `Square` in state, and change it when the `Square` is clicked.
+React tarjoaa erityisen funktion nimeltään `useState`, jota voit kutsua komponentistasi, jotta se "muistaa" asioita. Tallennetaan `Square` komponentin nykyinen arvo tilaan ja muutetaan sitä, kun `Square` painetaan.
 
-Import `useState` at the top of the file. Remove the `value` prop from the `Square` component. Instead, add a new line at the start of the `Square` that calls `useState`. Have it return a state variable called `value`:
+Importtaa `useState` tiedoston ylläosassa. Poista `value` propsi `Square` komponentista. Sen sijaan, lisää uusi rivi `Square` komponentin alkuun, joka kutsuu `useState`:a. Anna sen palauttaa tilamuuttuja nimeltään `value`:
 
 ```js {1,3,4}
 import { useState } from 'react';
@@ -749,9 +749,9 @@ function Square() {
     //...
 ```
 
-`value` stores the value and `setValue` is a function that can be used to change the value. The `null` passed to `useState` is used as the initial value for this state variable, so `value` here starts off equal to `null`.
+`value` pitää sisällään arvon ja `setValue` on funktio, jota voidaan käyttää muuttamaan arvoa. `null`, joka välitetään `useState`:lle, käytetään alkuperäisenä arvona tälle tilamuuttujalle, joten `value` on aluksi `null`.
 
-Since the `Square` component no longer accepts props anymore, you'll remove the `value` prop from all nine of the Square components created by the Board component:
+Koska `Square` komponentti ei enää hyväksy propseja, poistat `value` propin kaikista yhdeksästä `Square` komponentista, jotka `Board` komponentti luo:
 
 ```js {6-8,11-13,16-18}
 // ...
@@ -778,7 +778,7 @@ export default function Board() {
 }
 ```
 
-Now you'll change `Square` to display an "X" when clicked. Replace the `console.log("clicked!");` event handler with `setValue('X');`. Now your `Square` component looks like this:
+Nyt muutat `Square`:n näyttämään "X":n kun sitä painetaan. Korvaa `console.log("clicked!");` tapahtumankäsittelijä `setValue('X');`:lla. Nyt `Square` komponenttisi näyttää tältä:
 
 ```js {5}
 function Square() {
@@ -799,13 +799,13 @@ function Square() {
 }
 ```
 
-By calling this `set` function from an `onClick` handler, you're telling React to re-render that `Square` whenever its `<button>` is clicked. After the update, the `Square`'s `value` will be `'X'`, so you'll see the "X" on the game board. Click on any Square, and "X" should show up:
+Kutsumalla `set` funktiota `onClick` käsittelijästä, kerrot Reactille renderöidä `Square`:n uudelleen aina kun sen `<button>`:ia painetaan. Päivityksen jälkeen, `Square`n `value` on `'X'`, joten näet "X":n pelilaudalla. Paina mitä tahansa neliötä, ja "X":n tulisi näkyä:
 
-![adding xes to board](../images/tutorial/tictac-adding-x-s.gif)
+![x merkkien lisääminen pelilaudalle](../images/tutorial/tictac-adding-x-s.gif)
 
-Each Square has its own state: the `value` stored in each Square is completely independent of the others. When you call a `set` function in a component, React automatically updates the child components inside too.
+Jokaisella Squarella on sen oma tila: `value` joka on tallennettu jokaisessa Squaressa on täysin riippumaton muista. Kun kutsut `set` funktiota komponentissa, React päivittää automaattisesti myös alakomponentit.
 
-After you've made the above changes, your code will look like this:
+Kun olet tehnyt yllä olevat muutokset, koodisi tulisi näyttää tältä:
 
 <Sandpack>
 
