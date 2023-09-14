@@ -921,15 +921,15 @@ Tähän mennessä, sinulla on kaikki peruspalikat ristinolla-peliisi. Saadaksesi
 
 ### Tilan nostaminen ylös {/*lifting-state-up*/}
 
-Currently, each `Square` component maintains a part of the game's state. To check for a winner in a tic-tac-toe game, the `Board` would need to somehow know the state of each of the 9 `Square` components.
+Tällä hetkellä, jokainen `Square` komponentti ylläpitää osaa pelin tilasta. Voittaaksesi ristinolla-pelin, `Board` komponentin täytyy jotenkin tietää jokaisen yhdeksän `Square` komponentin tila.
 
-How would you approach that? At first, you might guess that the `Board` needs to "ask" each `Square` for that `Square`'s state. Although this approach is technically possible in React, we discourage it because the code becomes difficult to understand, susceptible to bugs, and hard to refactor. Instead, the best approach is to store the game's state in the parent `Board` component instead of in each `Square`. The `Board` component can tell each `Square` what to display by passing a prop, like you did when you passed a number to each Square.
+Miten lähestyisit tätä? Aluksi, kuten saatat arvata, `Board`:n täytyy "kysyä" jokaiselta `Square`:lta sen tila. Vaikka tämä lähestymistapa on teknisesti mahdollista Reactissa, emme suosittele sitä, koska koodista tulee vaikeaa ymmärtää, altistaen se bugeille, ja vaikea refaktoroida. Sen sijaan, paras lähestymistapa on tallentaa pelin tila ylemmässä `Board` komponentissa jokaisen `Square` komponentin sijaan. `Board` komponentti voi kertoa jokaiselle `Square` komponentille mitä näyttää välittämällä propseja, kuten teit kun välitit numeron jokaiselle `Square` komponentille.
 
-**To collect data from multiple children, or to have two child components communicate with each other, declare the shared state in their parent component instead. The parent component can pass that state back down to the children via props. This keeps the child components in sync with each other and with their parent.**
+**Kerätäksesi dataa useammista alakomponenteista, tai saadaksesi kahden alakomponentin kommunikoimaan toistensa kanssa, määritä jaettu tila niitä ylemmässä komponentissa. Ylempi komponentti voi välittää tilan takaisin alakomponenteilleen propseina. Tämä pitää alakomponentit synkronoituina toistensa ja yläkomponentin kanssa.**
 
-Lifting state into a parent component is common when React components are refactored.
+Tilan nostaminen yläkomponenttiin on yleistä kun React komponentteja refaktoroidaan.
 
-Let's take this opportunity to try it out. Edit the `Board` component so that it declares a state variable named `squares` that defaults to an array of 9 nulls corresponding to the 9 squares:
+Otetaan tilaisuus kokeilla tätä. Muokkaa `Board` komponenttia siten, että se määrittelee tilamuuttujan nimeltään `squares`, joka oletuksena on taulukko, jossa on yhdeksän `null` arvoa vastaten yhdeksää neliötä:
 
 ```js {3}
 // ...
@@ -941,13 +941,13 @@ export default function Board() {
 }
 ```
 
-`Array(9).fill(null)` creates an array with nine elements and sets each of them to `null`. The `useState()` call around it declares a `squares` state variable that's initially set to that array. Each entry in the array corresponds to the value of a square. When you fill the board in later, the `squares` array will look like this:
+`Array(9).fill(null)` luo taulukon yhdeksällä kohdalla ja asettaa jokaisen niistä `null` arvoon. `useState()` kutsu sen ympärillä määrittelee `squares` tilamuuttujan, jonka arvo on aluksi asetettu tuohon taulukkoon. Jokainen taulukon kohta vastaa neliön arvoa. Kun täytät pelilaudan myöhemmin, `squares` taulukko näyttää tältä:
 
 ```jsx
 ['O', null, 'X', 'X', 'X', 'O', 'O', null, null]
 ```
 
-Now your `Board` component needs to pass the `value` prop down to each `Square` that it renders:
+Nyt `Board` komponenttisi täytyy välittää `value` propsi jokaiselle `Square` komponentille, jonka se renderöi:
 
 ```js {6-8,11-13,16-18}
 export default function Board() {
@@ -974,7 +974,7 @@ export default function Board() {
 }
 ```
 
-Next, you'll edit the `Square` component to receive the `value` prop from the Board component. This will require removing the Square component's own stateful tracking of `value` and the button's `onClick` prop:
+Seuraavakasi, muokkaa `Square` komponentti vastaanottamaan `value` propsi Board komponentilta. Tämä vaatii `Square` komponentin oman tilamuuttujan `value` ja painonapin `onClick` propsin poistamisen:
 
 ```js {1,2}
 function Square({value}) {
@@ -982,11 +982,11 @@ function Square({value}) {
 }
 ```
 
-At this point you should see an empty tic-tac-toe board:
+Tässä kohtaa sinun tulisi nähdä tyhjä ristinolla-pelilauta:
 
-![empty board](../images/tutorial/empty-board.png)
+![tyhjä pelilauta](../images/tutorial/empty-board.png)
 
-And your code should look like this:
+Ja koodisi tulisi näyttää tältä:
 
 <Sandpack>
 
@@ -1068,11 +1068,11 @@ body {
 
 </Sandpack>
 
-Each Square will now receive a `value` prop that will either be `'X'`, `'O'`, or `null` for empty squares.
+Jokainen Square saa nyt `value` propsin, joka on joko `'X'`, `'O'`, tai `null` tyhjille neliöille.
 
-Next, you need to change what happens when a `Square` is clicked. The `Board` component now maintains which squares are filled. You'll need to create a way for the `Square` to update the `Board`'s state. Since state is private to a component that defines it, you cannot update the `Board`'s state directly from `Square`.
+Seuraavaksi, sinun täytyy muuttaa mitä tapahtuu kun `Square`:a klikataan. `Board` komponentti nyt ylläpitää mitkä neliöt ovat täytettyjä. Sinun täytyy luoda tapa `Square`:lle päivittää `Board`:n tila. Koska tila on yksityistä komponentille, joka sen määrittelee, et voi päivittää `Board`:n tilaa suoraan `Square`:sta.
 
-Instead, you'll pass down a function from the `Board` component to the `Square` component, and you'll have `Square` call that function when a square is clicked. You'll start with the function that the `Square` component will call when it is clicked. You'll call that function `onSquareClick`:
+Sen sijaan, välität funktion `Board` komponentista `Square` komponentille, ja kutsut sitä `Square`:sta kun neliötä painetaan. Aloitat funktiosta, jota `Square` komponentti kutsuu kun sitä painetaan. Kutsut sitä `onSquareClick`:ssa:
 
 ```js {3}
 function Square({ value }) {
@@ -1084,7 +1084,7 @@ function Square({ value }) {
 }
 ```
 
-Next, you'll add the `onSquareClick` function to the `Square` component's props:
+Seuraavaksi, lisäät `onSquareClick` funktion `Square` komponentin propseihin:
 
 ```js {1}
 function Square({ value, onSquareClick }) {
@@ -1096,7 +1096,7 @@ function Square({ value, onSquareClick }) {
 }
 ```
 
-Now you'll connect the `onSquareClick` prop to a function in the `Board` component that you'll name `handleClick`. To connect `onSquareClick` to `handleClick` you'll pass a function to the `onSquareClick` prop of the first `Square` component: 
+Nyt yhdistät `onSquareClick` propsin `Board` komponentin funktioon, jonka nimeät `handleClick`. Yhdistääksesi `onSquareClick` `handleClick`:iin, välität funktion `onSquareClick` propsin ensimmäiselle `Square` komponentille:
 
 ```js {7}
 export default function Board() {
@@ -1111,7 +1111,7 @@ export default function Board() {
 }
 ```
 
-Lastly, you will define the `handleClick` function inside the Board component to update the `squares` array holding your board's state:
+Lopuksi, määrittelet `handleClick` funktion Board komponentin sisällä päivittämään `squares` taulukon ylläpitämään pelilaudan tilaa:
 
 ```js {4-8}
 export default function Board() {
@@ -1129,17 +1129,17 @@ export default function Board() {
 }
 ```
 
-The `handleClick` function creates a copy of the `squares` array (`nextSquares`) with the JavaScript `slice()` Array method. Then, `handleClick` updates the `nextSquares` array to add `X` to the first (`[0]` index) square.
+`handleClick` funktio luo kopion `squares` taulukosta (`nextSquares`) JavaScriptin `slice()` taulukkometodilla. Sitten, `handleClick` päivittää `nextSquares` taulukon lisäämällä `X`:n ensimmäiseen (`[0]` indeksi) neliöön.
 
-Calling the `setSquares` function lets React know the state of the component has changed. This will trigger a re-render of the components that use the `squares` state (`Board`) as well as its child components (the `Square` components that make up the board).
+Kutsumalla `setSquares` funktiota kerrot Reactille, että komponentin tila on muuttunut. Tämä käynnistää renderöinnin komponenteille, jotka käyttävät `squares` tilaa (`Board`) sekä sen alakomponenteille (`Square` komponentit, jotka muodostavat pelilaudan).
 
 <Note>
 
-JavaScript supports [closures](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Closures) which means an inner function (e.g. `handleClick`) has access to variables and functions defined in a outer function (e.g. `Board`). The `handleClick` function can read the `squares` state and call the `setSquares` method because they are both defined inside of the `Board` function.
+JavaScript tukee [closureja](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Closures), mikä tarkoittaa, että sisäinen funktio (esim. `handleClick`) pääsee käsiksi muuttujiin ja funktioihin, jotka on määritelty ulomman funktion sisällä (esim. `Board`). `handleClick` funktio voi lukea `squares` tilaa ja kutsua `setSquares` metodia, koska ne molemmat on määritelty `Board` funktion sisällä.
 
 </Note>
 
-Now you can add X's to the board...  but only to the upper left square. Your `handleClick` function is hardcoded to update the index for the upper left square (`0`). Let's update `handleClick` to be able to update any square. Add an argument `i` to the `handleClick` function that takes the index of the square to update:
+Nyt voit lisätä X:ät pelilaudalle... mutta vain ylävasempaan neliöön. `handleClick` funktiosi on kovakoodattu päivittämään ylävasemman neliön indeksiä (`0`). Päivitetään `handleClick` funktio päivittämään mitä tahansa neliötä. Lisää argumentti `i` `handleClick` funktioon, joka ottaa neliön indeksin, jota päivittää:
 
 ```js {4,6}
 export default function Board() {
@@ -1157,13 +1157,13 @@ export default function Board() {
 }
 ```
 
-Next, you will need to pass that `i` to `handleClick`. You could try to set the `onSquareClick` prop of square to be `handleClick(0)` directly in the JSX like this, but it won't work:
+Seuraavaksi, sinun täytyy välittää `i` `handleClick`:lle. Voit yrittää asettaa `onSquareClick` propin neliölle suoraan JSX:ssä `handleClick(0)` näin, mutta se ei toimi:
 
 ```jsx
 <Square value={squares[0]} onSquareClick={handleClick(0)} />
 ```
 
-Here is why this doesn't work. The `handleClick(0)` call will be a part of rendering the board component. Because `handleClick(0)` alters the state of the board component by calling `setSquares`, your entire board component will be re-rendered again. But this runs `handleClick(0)` again, leading to an infinite loop:
+Syy miksi tämä ei toimi on, `handleClick(0)` kustu on osa pelilaudan renderöintiä. Koska `handleClick(0)` muuttaa pelilaudan tilaa kutsumalla `setSquares`:ia, koko pelilauta renderöidään uudelleen. Mutta tämä ajaa `handleClick(0)` uudelleen, mikä johtaa loputtomaan silmukkaan:
 
 <ConsoleBlock level="error">
 
@@ -1171,13 +1171,13 @@ Too many re-renders. React limits the number of renders to prevent an infinite l
 
 </ConsoleBlock>
 
-Why didn't this problem happen earlier?
+Miksi tämä ongelma ei tapahtunut aiemmin?
 
-When you were passing `onSquareClick={handleClick}`, you were passing the `handleClick` function down as a prop. You were not calling it! But now you are *calling* that function right away--notice the parentheses in `handleClick(0)`--and that's why it runs too early. You don't *want* to call `handleClick` until the user clicks!
+Kun välitit `onSquareClick={handleClick}`, välitit `handleClick` funktion propseina. Et kutsunut sitä! Mutta nyt kutsut sitä heti--huomaa sulkeet `handleClick(0)`--ja siksi se ajetaan liian aikaisin. Et *halua* kutsua `handleClick` ennen kuin käyttäjä klikkaa!
 
-You could fix this by creating a function like `handleFirstSquareClick` that calls `handleClick(0)`, a function like `handleSecondSquareClick` that calls `handleClick(1)`, and so on. You would pass (rather than call) these functions down as props like `onSquareClick={handleFirstSquareClick}`. This would solve the infinite loop.
+Voisit korjata tämän tekemällä funktion kuten `handleFirstSquareClick`, joka kutsuu `handleClick(0)`, funktion kuten `handleSecondSquareClick`, joka kutsuu `handleClick(1)`, ja niin edelleen. Välittäisit (et kutsuisi) näitä funktioita propseina kuten `onSquareClick={handleFirstSquareClick}`. Tämä korjaisi loputtoman silmukan.
 
-However, defining nine different functions and giving each of them a name is too verbose. Instead, let's do this:
+Yhdeksän eri funktion määritteleminen ja nimeäminen on liian raskasta. Sen sijaan tehdään näin:
 
 ```js {6}
 export default function Board() {
@@ -1191,9 +1191,9 @@ export default function Board() {
 }
 ```
 
-Notice the new `() =>` syntax. Here, `() => handleClick(0)` is an *arrow function,* which is a shorter way to define functions. When the square is clicked, the code after the `=>` "arrow" will run, calling `handleClick(0)`.
+Huomaa uusi `() =>` syntaksi. Tässä, `() => handleClick(0)` on *nuolifunktio*, joka on lyhyempi tapa määritellä funktioita. Kun neliötä painetaan, koodi `=>` "nuolen" jälkeen ajetaan, kutsuen `handleClick(0)`.
 
-Now you need to update the other eight squares to call `handleClick` from the arrow functions you pass. Make sure that the argument for each call of the `handleClick` corresponds to the index of the correct square:
+Nyt sinun tulee päivittää muut kahdeksan neliötä kutsumaan `handleClick` nuolifunktioista, jotka välität. Varmista, että argumentti jokaiselle `handleClick` kutsulle vastaa oikean neliön indeksiä:
 
 ```js {6-8,11-13,16-18}
 export default function Board() {
@@ -1220,13 +1220,13 @@ export default function Board() {
 };
 ```
 
-Now you can again add X's to any square on the board by clicking on them:
+Nyt voit taas lisätä X:ät mihin tahansa neliöön pelilaudalla painamalla niitä:
 
-![filling the board with X](../images/tutorial/tictac-adding-x-s.gif)
+![pelilaudan täyttäminen x:llä](../images/tutorial/tictac-adding-x-s.gif)
 
-But this time all the state management is handled by the `Board` component!
+Mutta tällä kertaa tilanhallinta on `Board` komponentin vastuulla!
 
-This is what your code should look like:
+Tämä on mitä koodisi tulisi näyttää:
 
 <Sandpack>
 
@@ -1319,19 +1319,19 @@ body {
 
 </Sandpack>
 
-Now that your state handling is in the `Board` component, the parent `Board` component passes props to the child `Square` components so that they can be displayed correctly. When clicking on a `Square`, the child `Square` component now asks the parent `Board` component to update the state of the board. When the `Board`'s state changes, both the `Board` component and every child `Square` re-renders automatically. Keeping the state of all squares in the `Board` component will allow it to determine the winner in the future.
+Nyt kun tilanhallintasi on `Board` komponentissa, yläkomponentti `Board` välittää propseja alakomponenteille `Square` komponenteille, jotta ne voidaan näyttää oikein. Kun neliötä painetaan, alakomponentti `Square` kysyy yläkomponentti `Board`:lta tilan päivittämistä pelilaudalla. Kun `Board`:n tila muuttuu, sekä `Board` komponentti että jokainen `Square` renderöidään uudelleen automaattisesti. Pitämällä kaikkien neliöiden tila `Board` komponentissa, se pystyy määrittämään voittajan tulevaisuudessa.
 
-Let's recap what happens when a user clicks the top left square on your board to add an `X` to it:
+Käydään läpi mitä tapahtuu kun käyttäjä painaa ylävasenta neliötä pelilaudalla lisätäkseen siihen `X`:n:
 
-1. Clicking on the upper left square runs the function that the `button` received as its `onClick` prop from the `Square`. The `Square` component received that function as its `onSquareClick` prop from the `Board`. The `Board` component defined that function directly in the JSX. It calls `handleClick` with an argument of `0`.
-1. `handleClick` uses the argument (`0`) to update the first element of the `squares` array from `null` to `X`.
-1. The `squares` state of the `Board` component was updated, so the `Board` and all of its children re-render. This causes the `value` prop of the `Square` component with index `0` to change from `null` to `X`.
+1. Ylävasemman neliön klikkaaminen suorittaa funktion, jonka `button` sai `onClick` propsina `Square` komponentilta. `Square` komponentti sai funktion `onSquareClick` propsina `Board` komponentilta. `Board` komponentti määritteli funktion suoraan JSX:ssä. Se kutsuu `handleClick` funktiota argumentilla `0`.
+1. `handleClick` käyttää argumenttia (`0`) päivittääkseen `squares` taulukon ensimmäisen elementin `null` arvosta `X` arvoon.
+1. `squares` tila `Board` komponentissa päivitettiin, joten `Board` ja kaikki sen alakomponentit renderöitiin uudelleen. Tämä aiheuttaa `Square` komponentin `value` propin muuttumisen indeksillä `0` `null` arvosta `X` arvoon.
 
-In the end the user sees that the upper left square has changed from empty to having a `X` after clicking it.
+Lopussa käyttäjä näkee, että ylävasen neliö on muuttunut tyhjästä `X`:ksi sen painamisen jälkeen.
 
 <Note>
 
-The DOM `<button>` element's `onClick` attribute has a special meaning to React because it is a built-in component. For custom components like Square, the naming is up to you. You could give any name to the `Square`'s `onSquareClick` prop or `Board`'s `handleClick` function, and the code would work the same. In React, it's conventional to use `onSomething` names for props which represent events and `handleSomething` for the function definitions which handle those events.
+DOM `<button>` elementin `onClick` attribuutilla on erityinen merkitys Reactissa, koska se on sisäänrakennettu komponentti. Mukautetuille komponenteille kuten `Square`, nimeäminen on sinusta kiinni. Voit antaa minkä tahansa nimen `Square` komponentin `onSquareClick` propsille tai `Board` komponentin `handleClick` funktiolle, ja koodi toimisi samalla tavalla. Reactissa, yleinen tapa on käyttää `onSomething` nimiä propseille, jotka edustavat tapahtumia ja `handleSomething` funktioille, jotka käsittelevät näitä tapahtumia.
 
 </Note>
 
