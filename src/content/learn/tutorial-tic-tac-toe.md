@@ -917,7 +917,7 @@ Paikallisessa kehityksessä, React DevTools on saatavilla [Chrome](https://chrom
 
 ## Pelin viimeistely {/*completing-the-game*/}
 
-By this point, you have all the basic building blocks for your tic-tac-toe game. To have a complete game, you now need to alternate placing "X"s and "O"s on the board, and you need a way to determine a winner.
+Tähän mennessä, sinulla on kaikki peruspalikat ristinolla-peliisi. Saadaksesi täydellisen pelin, sinun täytyy nyt vuorotella "X":n ja "O":n laittamista pelilaudalle, ja sinun täytyy keksiä tapa määrittää voittaja.
 
 ### Tilan nostaminen ylös {/*lifting-state-up*/}
 
