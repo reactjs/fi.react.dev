@@ -17,7 +17,7 @@ import Diagram from './Diagram';
 import DiagramGroup from './DiagramGroup';
 import ExpandableCallout from './ExpandableCallout';
 import ExpandableExample from './ExpandableExample';
-import {H1, H2, H3, H4} from './Heading';
+import {H1, H2, H3, H4, H5} from './Heading';
 import InlineCode from './InlineCode';
 import Intro from './Intro';
 import Link from './Link';
@@ -388,6 +388,7 @@ export const MDXComponents = {
   h2: H2,
   h3: H3,
   h4: H4,
+  h5: H5,
   hr: Divider,
   a: Link,
   img: Image,
