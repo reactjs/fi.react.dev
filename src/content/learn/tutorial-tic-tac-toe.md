@@ -2290,9 +2290,9 @@ Avainten ei tarvitse olla globaalisti uniikkeja. Riittää, että ne ovat uniikk
 
 ### Aikamatkustuksen toteutus {/*implementing-time-travel*/}
 
-In the tic-tac-toe game's history, each past move has a unique ID associated with it: it's the sequential number of the move. Moves will never be re-ordered, deleted, or inserted in the middle, so it's safe to use the move index as a key.
+Ristinolla-pelin historiassa, jokaisella aikaisemmalla siirrolla on uniikki ID: se on siirron järjestysnumero. Siirtoja ei koskaan järjestetä uudelleen, poisteta tai lisätä keskelle, joten on turvallista käyttää siirron indeksiä avaimena.
 
-In the `Game` function, you can add the key as `<li key={move}>`, and if you reload the rendered game, React's "key" error should disappear:
+`Game` funktiossa, voit lisätä avaimen `<li key={move}>`, ja jos lataat pelin uudelleen, Reactin "key" virheen tulisi kadota:
 
 ```js {4}
 const moves = history.map((squares, move) => {
@@ -2484,7 +2484,7 @@ export default function Game() {
 }
 ```
 
-Next, update the `jumpTo` function inside `Game` to update that `currentMove`. You'll also set `xIsNext` to `true` if the number that you're changing `currentMove` to is even.
+Seuraavaksi, päivitä `jumpTo` funktio `Game`:n sisällä päivittämään `currentMove`. Asetat myös `xIsNext` arvoon `true`, jos numero, jota olet muuttamassa `currentMove`:ksi on parillinen.
 
 ```js {4-5}
 export default function Game() {
@@ -2497,10 +2497,10 @@ export default function Game() {
 }
 ```
 
-You will now make two changes to the `Game`'s `handlePlay` function which is called when you click on a square.
+Teet nyt kaksi muutosta `Game` komponentin `handlePlay` funktioon, joka kutsutaan kun klikkaat ruutua.
 
-- If you "go back in time" and then make a new move from that point, you only want to keep the history up to that point. Instead of adding `nextSquares` after all items (`...` spread syntax) in `history`, you'll add it after all items in `history.slice(0, currentMove + 1)` so that you're only keeping that portion of the old history.
-- Each time a move is made, you need to update `currentMove` to point to the latest history entry.
+- Jos "palaat ajassa taaksepäin" ja teet uuden siirron siitä pisteestä, haluat pitää historian vain siihen pisteeseen asti. Sen sijaan, että lisäisit `nextSquares` kaikkien kohteiden (`...` spread-syntaksi) jälkeen `history`:ssa, lisäät sen kaikkien kohteiden jälkeen `history.slice(0, currentMove + 1)` jotta pidät vain sen osan vanhasta historiasta.
+- Joka kerta kun siirto tehdään, sinun täytyy päivittää `currentMove` osoittamaan viimeisimpään historiaan.
 
 ```js {2-4}
 function handlePlay(nextSquares) {
@@ -2511,7 +2511,7 @@ function handlePlay(nextSquares) {
 }
 ```
 
-Finally, you will modify the `Game` component to render the currently selected move, instead of always rendering the final move:
+Lopuksi, muutat `Game` komponenttia renderöimään valitun siirron, sen sijaan että renderöisit aina viimeisimmän siirron:
 
 ```js {5}
 export default function Game() {
@@ -2524,7 +2524,7 @@ export default function Game() {
 }
 ```
 
-If you click on any step in the game's history, the tic-tac-toe board should immediately update to show what the board looked like after that step occurred.
+Jos klikkaat mitä tahansa siirtoa pelin historiassa, ristinolla-pelin taulukko tulisi päivittyä näyttämään miltä taulukko näytti sen siirron jälkeen.
 
 <Sandpack>
 
