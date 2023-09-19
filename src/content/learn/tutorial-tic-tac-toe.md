@@ -57,9 +57,9 @@ function Board({ xIsNext, squares, onPlay }) {
   const winner = calculateWinner(squares);
   let status;
   if (winner) {
-    status = 'Winner: ' + winner;
+    status = 'Voittaja: ' + winner;
   } else {
-    status = 'Next player: ' + (xIsNext ? 'X' : 'O');
+    status = 'Seuraava pelaajaa: ' + (xIsNext ? 'X' : 'O');
   }
 
   return (
@@ -103,9 +103,9 @@ export default function Game() {
   const moves = history.map((squares, move) => {
     let description;
     if (move > 0) {
-      description = 'Go to move #' + move;
+      description = 'Siirry liikkeeseen #' + move;
     } else {
-      description = 'Go to game start';
+      description = 'Siirry pelin alkuun';
     }
     return (
       <li key={move}>
@@ -1570,7 +1570,7 @@ function handleClick(i) {
 }
 ```
 
-Antaaksesi pelaajiesi tietää milloin peli on ohi, voit näyttää tekstin kuten "Winner: X" tai "Winner: 0". Tämän tekemiseksi lisäät `status` osion `Board` komponenttiin. Status näyttää voittajan, jos peli on ohi ja jos peli on kesken, näytät kumman pelaajan vuoro on seuraavaksi:
+Antaaksesi pelaajiesi tietää milloin peli on ohi, voit näyttää tekstin kuten "Voittaja: X" tai "Voittaja: 0". Tämän tekemiseksi lisäät `status` osion `Board` komponenttiin. Status näyttää voittajan, jos peli on ohi ja jos peli on kesken, näytät kumman pelaajan vuoro on seuraavaksi:
 
 ```js {3-9,13}
 export default function Board() {
@@ -1578,9 +1578,9 @@ export default function Board() {
   const winner = calculateWinner(squares);
   let status;
   if (winner) {
-    status = "Winner: " + winner;
+    status = "Voittaja: " + winner;
   } else {
-    status = "Next player: " + (xIsNext ? "X" : "O");
+    status = "Seuraava pelaajaa: " + (xIsNext ? "X" : "O");
   }
 
   return (
@@ -1628,9 +1628,9 @@ export default function Board() {
   const winner = calculateWinner(squares);
   let status;
   if (winner) {
-    status = 'Winner: ' + winner;
+    status = 'Voittaja: ' + winner;
   } else {
-    status = 'Next player: ' + (xIsNext ? 'X' : 'O');
+    status = 'Seuraava pelaajaa: ' + (xIsNext ? 'X' : 'O');
   }
 
   return (
@@ -1902,9 +1902,9 @@ function Board({ xIsNext, squares, onPlay }) {
   const winner = calculateWinner(squares);
   let status;
   if (winner) {
-    status = 'Winner: ' + winner;
+    status = 'Voittaja: ' + winner;
   } else {
-    status = 'Next player: ' + (xIsNext ? 'X' : 'O');
+    status = 'Seuraava pelaajaa: ' + (xIsNext ? 'X' : 'O');
   }
 
   return (
@@ -2051,9 +2051,9 @@ export default function Game() {
   const moves = history.map((squares, move) => {
     let description;
     if (move > 0) {
-      description = 'Go to move #' + move;
+      description = 'Siirry liikkeeseen #' + move;
     } else {
-      description = 'Go to game start';
+      description = 'Siirry pelin alkuun';
     }
     return (
       <li>
@@ -2107,9 +2107,9 @@ function Board({ xIsNext, squares, onPlay }) {
   const winner = calculateWinner(squares);
   let status;
   if (winner) {
-    status = 'Winner: ' + winner;
+    status = 'Voittaja: ' + winner;
   } else {
-    status = 'Next player: ' + (xIsNext ? 'X' : 'O');
+    status = 'Seuraava pelaajaa: ' + (xIsNext ? 'X' : 'O');
   }
 
   return (
@@ -2151,9 +2151,9 @@ export default function Game() {
   const moves = history.map((squares, move) => {
     let description;
     if (move > 0) {
-      description = 'Go to move #' + move;
+      description = 'Siirry liikkeeseen #' + move;
     } else {
-      description = 'Go to game start';
+      description = 'Siirry pelin alkuun';
     }
     return (
       <li>
@@ -2335,9 +2335,9 @@ function Board({ xIsNext, squares, onPlay }) {
   const winner = calculateWinner(squares);
   let status;
   if (winner) {
-    status = 'Winner: ' + winner;
+    status = 'Voittaja: ' + winner;
   } else {
-    status = 'Next player: ' + (xIsNext ? 'X' : 'O');
+    status = 'Seuraava pelaajaa: ' + (xIsNext ? 'X' : 'O');
   }
 
   return (
@@ -2379,9 +2379,9 @@ export default function Game() {
   const moves = history.map((squares, move) => {
     let description;
     if (move > 0) {
-      description = 'Go to move #' + move;
+      description = 'Siirry liikkeeseen #' + move;
     } else {
-      description = 'Go to game start';
+      description = 'Siirry pelin alkuun';
     }
     return (
       <li key={move}>
@@ -2556,9 +2556,9 @@ function Board({ xIsNext, squares, onPlay }) {
   const winner = calculateWinner(squares);
   let status;
   if (winner) {
-    status = 'Winner: ' + winner;
+    status = 'Voittaja: ' + winner;
   } else {
-    status = 'Next player: ' + (xIsNext ? 'X' : 'O');
+    status = 'Seuraava pelaajaa: ' + (xIsNext ? 'X' : 'O');
   }
 
   return (
@@ -2604,9 +2604,9 @@ export default function Game() {
   const moves = history.map((squares, move) => {
     let description;
     if (move > 0) {
-      description = 'Go to move #' + move;
+      description = 'Siirry liikkeeseen #' + move;
     } else {
-      description = 'Go to game start';
+      description = 'Siirry pelin alkuun';
     }
     return (
       <li key={move}>
@@ -2766,9 +2766,9 @@ function Board({ xIsNext, squares, onPlay }) {
   const winner = calculateWinner(squares);
   let status;
   if (winner) {
-    status = 'Winner: ' + winner;
+    status = 'Voittaja: ' + winner;
   } else {
-    status = 'Next player: ' + (xIsNext ? 'X' : 'O');
+    status = 'Seuraava pelaajaa: ' + (xIsNext ? 'X' : 'O');
   }
 
   return (
@@ -2812,9 +2812,9 @@ export default function Game() {
   const moves = history.map((squares, move) => {
     let description;
     if (move > 0) {
-      description = 'Go to move #' + move;
+      description = 'Siirry liikkeeseen #' + move;
     } else {
-      description = 'Go to game start';
+      description = 'Siirry pelin alkuun';
     }
     return (
       <li key={move}>
@@ -2911,4 +2911,4 @@ Jos sinulla on ylimääräistä aikaa tai haluat harjoitella uusia React taitoja
 1. Kun joku voittaa, korosta kolme ruutua, jotka aiheuttivat voiton (ja kun kukaan ei voita, näytä viesti tuloksesta olevan tasapeli).
 1. Näytä jokaisen siirron sijainti muodossa (rivi, sarake) siirtohistorian listassa.
 
-Tämän oppaan aikana, olet käsitellyt Reactin käsitteitä, mukaan lukien elementit, komponentit, propsit ja tila. Nyt kun olet nähnyt miten nämä käsitteet toimivat peliä rakentaessa, katso [Thinking in React](/learn/thinking-in-react) nähdäksesi miten samat Reactin käsitteet toimivat kun rakennat sovelluksen käyttöliittymää.
+Tämän oppaan aikana, olet käsitellyt Reactin käsitteitä, mukaan lukien elementit, komponentit, propsit ja tila. Nyt kun olet nähnyt miten nämä käsitteet toimivat peliä rakentaessa, katso [Ajattelu Reactissa](/learn/thinking-in-react) nähdäksesi miten samat Reactin käsitteet toimivat kun rakennat sovelluksen käyttöliittymää.
