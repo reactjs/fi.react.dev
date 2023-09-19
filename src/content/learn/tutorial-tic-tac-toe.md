@@ -1337,29 +1337,29 @@ DOM `<button>` elementin `onClick` attribuutilla on erityinen merkitys Reactissa
 
 ### Miksi muuttumattomuus on tärkeää {/*why-immutability-is-important*/}
 
-Note how in `handleClick`, you call `.slice()` to create a copy of the `squares` array instead of modifying the existing array. To explain why, we need to discuss immutability and why immutability is important to learn.
+Huomaa miten `handleClick`:ssa kutsut `.slice()` luodaksesi kopion `squares` taulukosta sen sijaan, että muuttaisit olemassaolevaa taulukkoa. Selittääksemme miksi, meidän täytyy keskustella muuttumattomuudesta ja miksi muuttumattomuus on tärkeää oppia.
 
-There are generally two approaches to changing data. The first approach is to _mutate_ the data by directly changing the data's values. The second approach is to replace the data with a new copy which has the desired changes. Here is what it would look like if you mutated the `squares` array:
+On kaksi yleistä tapaa muuttaa dataa. Ensimmäinen tapa on *mutatoida* dataa muuttamalla suoraan datan arvoja. Toinen tapa on korvata data uudella kopiolla, jossa on halutut muutokset. Tässä on miltä se näyttäisi, jos mutatoisit `squares` taulukkoa:
 
 ```jsx
 const squares = [null, null, null, null, null, null, null, null, null];
 squares[0] = 'X';
-// Now `squares` is ["X", null, null, null, null, null, null, null, null];
+// Nyt`squares` on arvoltaan ["X", null, null, null, null, null, null, null, null];
 ```
 
-And here is what it would look like if you changed data without mutating the `squares` array:
+Ja tässä on miltä se näyttäisi jos muuttaisit dataa mutatoimatta `squares` taulukkoa:
 
 ```jsx
 const squares = [null, null, null, null, null, null, null, null, null];
 const nextSquares = ['X', null, null, null, null, null, null, null, null];
-// Now `squares` is unchanged, but `nextSquares` first element is 'X' rather than `null`
+// Nyt `squares` on muttumaton, mutta `nextSquares`:n ensimmäinen solu on 'X' `null`:n sijaan
 ```
 
-The result is the same but by not mutating (changing the underlying data) directly, you gain several benefits.
+Lopputulos on sama, mutta mutatoimatta (muuttamatta alla olevaa dataa) suoraan, saat useita etuja.
 
-Immutability makes complex features much easier to implement. Later in this tutorial, you will implement a "time travel" feature that lets you review the game's history and "jump back" to past moves. This functionality isn't specific to games--an ability to undo and redo certain actions is a common requirement for apps. Avoiding direct data mutation lets you keep previous versions of the data intact, and reuse them later.
+Muuttumattomuus tekee monimutkaisten ominaisuuksien toteuttamisesta paljon helpompaa. Myöhemmin tässä oppaassa, toteutat "aikamatkustuksen" ominaisuuden, joka antaa sinun tarkastella pelin historiaa ja "hypätä takaisin" menneisiin siirtoihin. Tämä toiminnallisuus ei ole pelien erityispiirre--kyky peruuttaa ja palauttaa tiettyjä toimintoja on yleinen vaatimus sovelluksille. Suoran datan mutaation välttäminen antaa sinun pitää edelliset versiot datasta ehjänä, ja käyttää niitä myöhemmin.
 
-There is also another benefit of immutability. By default, all child components re-render automatically when the state of a parent component changes. This includes even the child components that weren't affected by the change. Although re-rendering is not by itself noticeable to the user (you shouldn't actively try to avoid it!), you might want to skip re-rendering a part of the tree that clearly wasn't affected by it for performance reasons. Immutability makes it very cheap for components to compare whether their data has changed or not. You can learn more about how React chooses when to re-render a component in [the `memo` API reference](/reference/react/memo).
+On myös toinen etu muuttumattomuudessa. Oletuksena, kaikki lapsikomponentit renderöidään automaattisesti uudelleen, kun yläkomponentin tila muuttuu. Tämä sisältää jopa lapsikomponentit, jotka eivät olleet vaikuttuneita muutoksesta. Vaikka renderöinti ei ole itsessään huomattavaa käyttäjälle (sinun ei pitäisi aktiivisesti yrittää välttää sitä!), saatat haluta ohittaa renderöinnin puun osalta, joka ei selvästi ollut vaikuttunut siitä suorituskyky syistä. Muuttumattomuus tekee hyvin halvaksi komponenteille verrata onko niiden data muuttunut vai ei. Voit oppia lisää siitä, miten React valitsee milloin renderöidä komponentti uudelleen [`memo` API referenssistä](/reference/react/memo).
 
 ### Vuorojen ottaminen {/*taking-turns*/}
 
