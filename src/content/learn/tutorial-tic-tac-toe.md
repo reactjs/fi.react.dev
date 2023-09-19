@@ -1725,7 +1725,7 @@ body {
 
 ## Aikamatkustuksen lisääminen {/*adding-time-travel*/}
 
-As a final exercise, let's make it possible to "go back in time" to the previous moves in the game.
+Lopullisena harjoituksena, tehdään mahdolliseksi "aikamatkustus ajassa taaksepäin" edellisiin siirtoihin pelissä.
 
 ### Pelin siirtojen tallentaminen {/*storing-a-history-of-moves*/}
 
