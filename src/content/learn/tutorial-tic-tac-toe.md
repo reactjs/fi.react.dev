@@ -1363,9 +1363,9 @@ On myös toinen etu muuttumattomuudessa. Oletuksena, kaikki lapsikomponentit ren
 
 ### Vuorojen ottaminen {/*taking-turns*/}
 
-It's now time to fix a major defect in this tic-tac-toe game: the "O"s cannot be marked on the board.
+Nyt on aika korjata suuri vika tässä ristinolla-pelissä: "0":a ei voi merkitä pelilaudalle.
 
-You'll set the first move to be "X" by default. Let's keep track of this by adding another piece of state to the Board component:
+Asetat ensimmäisen siirron oletuksena "X":ksi. Pidetään kirjaa tästä lisäämällä toinen tilamuuttuja `Board` komponenttiin:
 
 ```js {2}
 function Board() {
@@ -1376,7 +1376,7 @@ function Board() {
 }
 ```
 
-Each time a player moves, `xIsNext` (a boolean) will be flipped to determine which player goes next and the game's state will be saved. You'll update the `Board`'s `handleClick` function to flip the value of `xIsNext`:
+Joka kerta kun pelaaja siirtää, `xIsNext` (totuusarvo) käännetään määrittämään kumpi pelaaja siirtää seuraavaksi ja pelin tila tallennetaan. Päivität `Board` komponentin `handleClick` funktion kääntämään `xIsNext` arvon:
 
 ```js {7,8,9,10,11,13}
 export default function Board() {
@@ -1400,15 +1400,15 @@ export default function Board() {
 }
 ```
 
-Now, as you click on different squares, they will alternate between `X` and `O`, as they should!
+Nyt kun klikkaat eri neliöitä, ne vaihtelevat `X` ja `0` välillä, kuten niiden pitäisi!
 
-But wait, there's a problem. Try clicking on the same square multiple times:
+Mutta hetkonen, tässä on ongelma. Kokeile klikata samaa neliötä useamman kerran:
 
-![O overwriting an X](../images/tutorial/o-replaces-x.gif)
+![0 ylikirjoittaa X:n](../images/tutorial/o-replaces-x.gif)
 
-The `X` is overwritten by an `O`! While this would add a very interesting twist to the game, we're going to stick to the original rules for now.
+`X` ylikirjoitetaan `0`:lla! Vaikka tämä lisäisikin mielenkiint0isen käänteen peliin, pysytään alkuperäisissä säännöissä toistaiseksi.
 
-When you mark a square with a `X` or an `O` you aren't first checking to see if the square already has a `X` or `O` value. You can fix this by *returning early*. You'll check to see if the square already has a `X` or an `O`. If the square is already filled, you will `return` in the `handleClick` function early--before it tries to update the board state.
+Kun merkitset neliön `X`:llä tai `0`:lla, et ensin tarkista onko neliöllä jo `X` tai `0` arvoa. Voit korjata tämän *palaamalla aikaisin*. Tarkistat onko neliöllä jo `X` tai `0` arvo. Jos neliö on jo täytetty, `return` `handleClick` funktiossa aikaisin--ennen kuin se yrittää päivittää pelilaudan tilaa.
 
 ```js {2,3,4}
 function handleClick(i) {
@@ -1420,7 +1420,7 @@ function handleClick(i) {
 }
 ```
 
-Now you can only add `X`'s or `O`'s to empty squares! Here is what your code should look like at this point:
+Nyt voit lisätä vain `X` tai `0` tyhjille neliöille! Tässä on mitä koodisi tulisi näyttää tässä vaiheessa:
 
 <Sandpack>
 
