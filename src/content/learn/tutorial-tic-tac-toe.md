@@ -2021,17 +2021,17 @@ body {
 
 ### Aikaisempien liikkeiden näyttäminen {/*showing-the-past-moves*/}
 
-Since you are recording the tic-tac-toe game's history, you can now display a list of past moves to the player.
+Kerta olet nauhoittamassa ristinolla-pelin historiaa, voit nyt näyttää listan aikaisemmista siirroista pelaajalle.
 
-React elements like `<button>` are regular JavaScript objects; you can pass them around in your application. To render multiple items in React, you can use an array of React elements.
+React-elementit kuten `<button>` ovat tavallisia JavaScript olioita; voit välittää niitä ympäri sovellustasi. Renderöidäksesi useita kohteita Reactissa, voit käyttää React elementtien taulukkoa.
 
-You already have an array of `history` moves in state, so now you need to transform it to an array of React elements. In JavaScript, to transform one array into another, you can use the [array `map` method:](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map)
+Sinulla on jo `history` taukukko siirroista tilassa, joten nyt sinun täytyy muuttaa se React elementtien taulukoksi. JavaScriptissä, muuttaaksesi yhden taulukon toiseksi, voit käyttää [taulukon `map` metodia:](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map)
 
 ```jsx
 [1, 2, 3].map((x) => x * 2) // [2, 4, 6]
 ```
 
-You'll use `map` to transform your `history` of moves into React elements representing buttons on the screen, and display a list of buttons to "jump" to past moves. Let's `map` over the `history` in the Game component:
+Haluat käyttää `map` metodia muuntaaksesi `history` siirroista React elementtien taulukoksi, jotka edustavat painikkeita näytöllä, ja näyttääksesi listan painikkeista "hyppäämään" aikaisempiin siirtoihin. Käytetään `map` metodia `history`:n yli `Game` komponentissa:
 
 ```js {11-13,15-27,35}
 export default function Game() {
@@ -2075,7 +2075,7 @@ export default function Game() {
 }
 ```
 
-You can see what your code should look like below. Note that you should see an error in the developer tools console that says: ``Warning: Each child in an array or iterator should have a unique "key" prop. Check the render method of `Game`.`` You'll fix this error in the next section.
+Voit nähdä miltä koodisi tulisi näyttää alla. Huomaa, että sinun tulisi nähdä virhe kehittäjätyökalujen konsolissa, joka sanoo: ``Warning: Each child in an array or iterator should have a unique "key" prop. Check the render method of `Game`.`` Korjaat tämän virheen seuraavassa osiossa.
 
 <Sandpack>
 
@@ -2243,11 +2243,11 @@ body {
 
 </Sandpack>
 
-As you iterate through `history` array inside the function you passed to `map`, the `squares` argument goes through each element of `history`, and the `move` argument goes through each array index: `0`, `1`, `2`, …. (In most cases, you'd need the actual array elements, but to render a list of moves you will only need indexes.)
+Kun iteroidaan `history` taulukon läpi funktiossa, jonka välitit `map`:lle, `squares` argumentti käy läpi jokaisen `history` alkion, ja `move` argumentti käy läpi jokaisen taulukon indeksin: `0`, `1`, `2`, …. (Useimmissa tapauksissa, tarvitsisit itse taulukon alkiot, mutta renderöidäksesi listan siirroista, tarvitset vain indeksit.)
 
-For each move in the tic-tac-toe game's history, you create a list item `<li>` which contains a button `<button>`. The button has an `onClick` handler which calls a function called `jumpTo` (that you haven't implemented yet).
+Jokaiselle liikkeelle ristinolla-pelin historiassa, luot listan kohteen `<li>`, joka sisältää painikkeen `<button>`. Painikkeella on `onClick` käsittelijä, joka kutsuu funktiota nimeltä `jumpTo` (jota et ole vielä toteuttanut).
 
-For now, you should see a list of the moves that occurred in the game and an error in the developer tools console. Let's discuss what the "key" error means.
+Toistaiseksi, sinun tulisi nähdä lista liikeistä, jotka tapahtuivat pelissä ja virhe kehittäjätyökalujen konsolissa. Keskustellaan mitä "key" virhe tarkoittaa.
 
 ### Avaimen valinta {/*picking-a-key*/}
 
