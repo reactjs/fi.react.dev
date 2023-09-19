@@ -1524,7 +1524,7 @@ body {
 
 ### Voittajan päättäminen {/*declaring-a-winner*/}
 
-Now that the players can take turns, you'll want to show when the game is won and there are no more turns to make. To do this you'll add a helper function called `calculateWinner` that takes an array of 9 squares, checks for a winner and returns `'X'`, `'O'`, or `null` as appropriate. Don't worry too much about the `calculateWinner` function; it's not specific to React:
+Nyt kun pelaajat voivat ottaa vuoroja, haluat näyttää kun peli on voitettu ja ei ole enää vuoroja tehtävänä. Tämän tekemiseksi lisäät apufunktion nimeltä `calculateWinner`, joka ottaa yhdeksän neliön taulukon, tarkistaa onko voittaja ja palauttaa `'X'`, `'O'`, tai `null` tarvittaessa. Älä huoli liikaa `calculateWinner` funktiosta; se ei ole Reactiin erityinen:
 
 ```js App.js
 export default function Board() {
@@ -1554,11 +1554,11 @@ function calculateWinner(squares) {
 
 <Note>
 
-It does not matter whether you define `calculateWinner` before or after the `Board`. Let's put it at the end so that you don't have to scroll past it every time you edit your components.
+Ei ole väliä määritteletkö `calculateWinner` ennen vai jälkeen `Board`:n. Laitetaan se loppuun, jotta sinun ei tarvitse selata sen ohi joka kerta kun muokkaat komponenttejasi.
 
 </Note>
 
-You will call `calculateWinner(squares)` in the `Board` component's `handleClick` function to check if a player has won. You can perform this check at the same time you check if a user has clicked a square that already has a `X` or and `O`. We'd like to return early in both cases:
+Kutsut `calculateWinner(squares)` `Board` komponentin `handleClick` funktiossa tarkistaaksesi onko pelaaja voittanut. Voit suorittaa tämän tarkistuksen samaan aikaan kun tarkistat onko käyttäjä klikannut neliötä, jossa on jo `X` tai `O`. Haluamme palata aikaisin molemmissa tapauksissa:
 
 ```js {2}
 function handleClick(i) {
@@ -1570,7 +1570,7 @@ function handleClick(i) {
 }
 ```
 
-To let the players know when the game is over, you can display text such as "Winner: X" or "Winner: O". To do that you'll add a `status` section to the `Board` component. The status will display the winner if the game is over and if the game is ongoing you'll display which player's turn is next:
+Antaaksesi pelaajiesi tietää milloin peli on ohi, voit näyttää tekstin kuten "Winner: X" tai "Winner: 0". Tämän tekemiseksi lisäät `status` osion `Board` komponenttiin. Status näyttää voittajan, jos peli on ohi ja jos peli on kesken, näytät kumman pelaajan vuoro on seuraavaksi:
 
 ```js {3-9,13}
 export default function Board() {
@@ -1592,7 +1592,7 @@ export default function Board() {
 }
 ```
 
-Congratulations! You now have a working tic-tac-toe game. And you've just learned the basics of React too. So _you_ are the real winner here. Here is what the code should look like:
+Onneksi olkoon! Sinulla on nyt toimi ristinolla-peli. Ja olet juuri oppinut Reactin perusteet. Joten *sinä* olet oikea voittaja tässä. Tässä on miltä koodisi tulisi näyttää:
 
 <Sandpack>
 
