@@ -1749,11 +1749,11 @@ Tallennat aikaisemmat `squares` taulukot toiseen taulukoon nimeltään `history`
 
 ### Tilan nostaminen ylös, uudestaan {/*lifting-state-up-again*/}
 
-You will now write a new top-level component called `Game` to display a list of past moves. That's where you will place the `history` state that contains the entire game history.
+Tulet kirjoittamaan uuden ylätason komponentin nimeltään `Game` näyttämään listan aiemmista liikkeistä. Tähän tulee `history` tila, joka sisältää koko pelin historian.
 
-Placing the `history` state into the `Game` component will let you remove the `squares` state from its child `Board` component. Just like you "lifted state up" from the `Square` component into the `Board` component, you will now lift it up from the `Board` into the top-level `Game` component. This gives the `Game` component full control over the `Board`'s data and lets it instruct the `Board` to render previous turns from the `history`.
+`history` tilan asettaminen `Game` komponenttiin antaa sinun poistaa `squares` tilan sen `Board` alakomponentista. Aivan kuten "nostit tilan ylös" `Square` komponentista `Board` komponenttiin, nostat sen nyt `Board` komponentista ylätason `Game` komponenttiin. Tämä antaa `Game` komponentille täyden kontrollin `Board`:n datan yli ja antaa sen ohjata `Board` komponenttia renderöimään edelliset vuorot `history`:sta.
 
-First, add a `Game` component with `export default`. Have it render the `Board` component and some markup:
+Ensiksi, lisää `Game` komponentti `export default`:lla. Aseta se renderöimään `Board` komponentti ja joitain merkintäkoodia:
 
 ```js {1,5-16}
 function Board() {
@@ -1774,9 +1774,9 @@ export default function Game() {
 }
 ```
 
-Note that you are removing the `export default` keywords before the `function Board() {` declaration and adding them before the `function Game() {` declaration. This tells your `index.js` file to use the `Game` component as the top-level component instead of your `Board` component. The additional `div`s returned by the `Game` component are making room for the game information you'll add to the board later.
+Huomaa, että olet poistamassa `export default` avainsanat ennen `function Board() {` määrittelyä ja lisäämässä ne ennen `function Game() {` määrittelyä. Tämä kertoo `index.js` tiedostolle käyttää `Game` komponenttia ylätason komponenttina sen sijaan, että käyttäisit `Board` komponenttia. Lisä `div`:t, jotka `Game` komponentti palauttaa, tekevät tilaa pelin tiedoille, jotka lisäät pelilaudalle myöhemmin.
 
-Add some state to the `Game` component to track which player is next and the history of moves:
+Lisää tila `Game` komponenttiin seuraamaan kumpi pelaaja on seuraavaksi ja pelin siirtojen historia:
 
 ```js {2-3}
 export default function Game() {
@@ -1785,9 +1785,9 @@ export default function Game() {
   // ...
 ```
 
-Notice how `[Array(9).fill(null)]` is an array with a single item, which itself is an array of 9 `null`s.
+Huomaa miten `[Array(9).fill(null)]` on taulukko, jossa on yksi alkio, joka on taulukko, jossa on 9 `null`:a.
 
-To render the squares for the current move, you'll want to read the last squares array from the `history`. You don't need `useState` for this--you already have enough information to calculate it during rendering:
+Renderöidäksesi neliöt nykyiselle siirrolle, luet viimeisen `squares` taulukon `history`:sta. Et tarvitse `useState`:a tähän--sinulla on jo tarpeeksi tietoa laskeaksesi se renderöinnin aikana:
 
 ```js {4}
 export default function Game() {
@@ -1797,7 +1797,7 @@ export default function Game() {
   // ...
 ```
 
-Next, create a `handlePlay` function inside the `Game` component that will be called by the `Board` component to update the game. Pass `xIsNext`, `currentSquares` and `handlePlay` as props to the `Board` component:
+Seuraavaksi, luo `handlePlay` funktio `Game` komponenttiin, jota kutsutaan `Board` komponentin toimesta päivittämään peliä. Välitä `xIsNext`, `currentSquares` ja `handlePlay` propseina `Board` komponentille:
 
 ```js {6-8,13}
 export default function Game() {
@@ -1818,7 +1818,7 @@ export default function Game() {
 }
 ```
 
-Let's make the `Board` component fully controlled by the props it receives. Change the `Board` component to take three props: `xIsNext`, `squares`, and a new `onPlay` function that `Board` can call with the updated squares array when a player makes a move. Next, remove the first two lines of the `Board` function that call `useState`:
+Tehdään `Board` komponentista täysin propseilla kontrolloitava. Muuta `Board` komponentti ottamaan kolme propia: `xIsNext`, `squares`, ja uusi `onPlay` funktio, jota `Board` voi kutsua päivitetyn taulukon kanssa, kun pelaaja tekee siirron. Poista seuraavaksi kaksi ensimmäistä riviä `Board` funktiosta, jotka kutsuvat `useState`:a:
 
 ```js {1}
 function Board({ xIsNext, squares, onPlay }) {
@@ -1829,7 +1829,7 @@ function Board({ xIsNext, squares, onPlay }) {
 }
 ```
 
-Now replace the `setSquares` and `setXIsNext` calls in `handleClick` in the `Board` component with a single call to your new `onPlay` function so the `Game` component can update the `Board` when the user clicks a square:
+Nyt korvaa `setSquares` ja `setXIsNext` kutsut `handleClick`:ssa `Board` komponentissa yhdellä kutsulla uuteen `onPlay` funktioon, jotta `Game` komponentti voi päivittää `Board`:n, kun käyttäjä klikkaa neliötä:
 
 ```js {12}
 function Board({ xIsNext, squares, onPlay }) {
@@ -1849,11 +1849,11 @@ function Board({ xIsNext, squares, onPlay }) {
 }
 ```
 
-The `Board` component is fully controlled by the props passed to it by the `Game` component. You need to implement the `handlePlay` function in the `Game` component to get the game working again.
+`Board` komponentti on täysin kontrolloitu propseilla, jotka sille välitetään `Game` komponentista. Sinun täytyy toteuttaa `handlePlay` funktio `Game` komponenttiin saadaksesi pelin toimimaan uudestaan.
 
-What should `handlePlay` do when called? Remember that Board used to call `setSquares` with an updated array; now it passes the updated `squares` array to `onPlay`.
+Mitä `handlePlay`:n tulisi tehdä kun sitä kutsutaan? Muista, että `Board` kutsui `setSquares`:ia päivitetyllä taulukolla. Nyt se välittää päivitetyn `squares` taulukon `onPlay`:lle.
 
-The `handlePlay` function needs to update `Game`'s state to trigger a re-render, but you don't have a `setSquares` function that you can call any more--you're now using the `history` state variable to store this information. You'll want to update `history` by appending the updated `squares` array as a new history entry. You also want to toggle `xIsNext`, just as Board used to do:
+`handlePlay` funktion täytyy päivittää `Game`:n tila käynnistääkseen renderöinnin, mutta sinulla ei ole enää `setSquares` funktiota, jota voit kutsua--käytät nyt `history` tilamuuttujaa tallentaaksesi tämän tiedon. Haluat päivittää `history`:n lisäämällä päivitetyn `squares` taulukon uutena historiaan. Haluat myös kääntää `xIsNext`:n, aivan kuten `Board` teki ennen:
 
 ```js {4-5}
 export default function Game() {
@@ -1866,11 +1866,11 @@ export default function Game() {
 }
 ```
 
-Here, `[...history, nextSquares]` creates a new array that contains all the items in `history`, followed by `nextSquares`. (You can read the `...history` [*spread syntax*](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax) as "enumerate all the items in `history`".)
+Tässä, `[...history, nextSquares]` luo uuden taulukon, joka sisältää kaikki `history`:n alkiot, seurattuna `nextSquares`:lla. (Voit lukea `...history` [*spread syntaksin*](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax) "luettele kaikki `history` taulukon alkiot".)
 
-For example, if `history` is `[[null,null,null], ["X",null,null]]` and `nextSquares` is `["X",null,"O"]`, then the new `[...history, nextSquares]` array will be `[[null,null,null], ["X",null,null], ["X",null,"O"]]`.
+Esimerkiksi, jos `history` on `[[null,null,null], ["X",null,null]]` ja `nextSquares` on `["X",null,"0"]`, niin uusi `[...history, nextSquares]` taulukko on `[[null,null,null], ["X",null,null], ["X",null,"0"]]`.
 
-At this point, you've moved the state to live in the `Game` component, and the UI should be fully working, just as it was before the refactor. Here is what the code should look like at this point:
+Tässä kohtaa, olet siirtänyt tilan `Game` komponenttiin, ja käyttöliittymä tulisi toimia täysin, aivan kuten ennen refaktorointia. Tässä on miltä koodisi tulisi näyttää tässä vaiheessa:
 
 <Sandpack>
 
