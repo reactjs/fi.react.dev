@@ -2697,9 +2697,9 @@ body {
 
 ### Loppusiivous {/*final-cleanup*/}
 
-If you look at the code very closely, you may notice that `xIsNext === true` when `currentMove` is even and `xIsNext === false` when `currentMove` is odd. In other words, if you know the value of `currentMove`, then you can always figure out what `xIsNext` should be.
+Jos katsot koodia tarkasti, saatat huomata, että `xIsNext === true` kun `currentMove` on parillinen ja `xIsNext === false` kun `currentMove` on pariton. Toisin sanoen, jos tiedät `currentMove` arvon, voit aina selvittää mitä `xIsNext` arvon tulisi olla.
 
-There's no reason for you to store both of these in state. In fact, always try to avoid redundant state. Simplifying what you store in state reduces bugs and makes your code easier to understand. Change `Game` so that it doesn't store `xIsNext` as a separate state variable and instead figures it out based on the `currentMove`:
+Ei ole mitään syytä säilyttää molempia näitä tilassa. Itse asiassa, yritä aina välttää turhaa tilaa. Yksinkertaistamalla mitä säilytät tilassa vähentää bugeja ja tekee koodistasi helpommin ymmärrettävää. Muuta `Game` niin, että se ei säilytä `xIsNext` erillisenä tilamuuttujana ja sen sijaan selvittää sen `currentMove`:n perusteella:
 
 ```js {4,11,15}
 export default function Game() {
@@ -2721,7 +2721,7 @@ export default function Game() {
 }
 ```
 
-You no longer need the `xIsNext` state declaration or the calls to `setXIsNext`. Now, there's no chance for `xIsNext` to get out of sync with `currentMove`, even if you make a mistake while coding the components.
+Et enää tarvitse `xIsNext` tilan määrittelyä tai kutsuja `setXIsNext`. Nyt, ei ole mahdollisuutta, että `xIsNext` pääsee epäsynkroniin `currentMove`:n kanssa, vaikka tekisit virheen koodatessasi komponentteja.
 
 ### Lopetus {/*wrapping-up*/}
 
