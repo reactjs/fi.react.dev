@@ -1729,19 +1729,19 @@ Lopullisena harjoituksena, tehdään mahdolliseksi "aikamatkustus ajassa taaksep
 
 ### Pelin siirtojen tallentaminen {/*storing-a-history-of-moves*/}
 
-If you mutated the `squares` array, implementing time travel would be very difficult.
+Jos mutatoit `squares` taulukkoa, aikamatkustuksen toteuttaminen olisi hyvin vaikeaa.
 
-However, you used `slice()` to create a new copy of the `squares` array after every move, and treated it as immutable. This will allow you to store every past version of the `squares` array, and navigate between the turns that have already happened.
+Kuitenkin, jos käytit `slice()`:a luodaksesi uuden kopion `squares` taulukosta jokaisen siirron jälkeen, ja käsitellä sitä muuttumattomana. Tämä antaa sinun tallentaa jokaisen edellisen version `squares` taulukosta, ja navigoida niiden välillä, jotka ovat jo tapahtuneet.
 
-You'll store the past `squares` arrays in another array called `history`, which you'll store as a new state variable. The `history` array represents all board states, from the first to the last move, and has a shape like this:
+Tallennat aikaisemmat `squares` taulukot toiseen taulukoon nimeltään `history`, jonka toteutat uutena tilamuuttujana. `history` taulukko edustaa kaikkia pelilaudan tiloja, ensimmäisestä viimeiseen siirtoon, ja sillä on tämän kaltainen muoto:
 
 ```jsx
 [
-  // Before first move
+  // Ennen ensimmäistä liikettä
   [null, null, null, null, null, null, null, null, null],
-  // After first move
+  // Ensimmäisen liikkeen jälkeen
   [null, null, null, null, 'X', null, null, null, null],
-  // After second move
+  // Toisen liikkeen jälkeen
   [null, null, null, null, 'X', null, null, null, 'O'],
   // ...
 ]
