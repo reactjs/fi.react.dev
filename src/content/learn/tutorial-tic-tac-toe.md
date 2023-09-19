@@ -2725,16 +2725,16 @@ Et enää tarvitse `xIsNext` tilan määrittelyä tai kutsuja `setXIsNext`. Nyt,
 
 ### Lopetus {/*wrapping-up*/}
 
-Congratulations! You've created a tic-tac-toe game that:
+Onneksi olkoon! Olet luonut ristinolla-pelin, joka:
 
-- Lets you play tic-tac-toe,
-- Indicates when a player has won the game,
-- Stores a game's history as a game progresses,
-- Allows players to review a game's history and see previous versions of a game's board.
+- Antaa sinun pelata ristinollaa,
+- Ilmoittaa kun pelaaja on voittanut peli,
+- Tallentaa pelin historian pelin edetessä,
+- Antaa pelaajan palata takaisin pelin historiassa ja katsoa edellisiä versioita pelin taulukosta.
 
-Nice work! We hope you now feel like you have a decent grasp of how React works.
+Hyvää työtä! Toivottavasti tunnet nyt, että sinulla on hyvä käsitys siitä miten React toimii. 
 
-Check out the final result here:
+Katso lopullinen tulos täältä:
 
 <Sandpack>
 
@@ -2903,12 +2903,12 @@ body {
 
 </Sandpack>
 
-If you have extra time or want to practice your new React skills, here are some ideas for improvements that you could make to the tic-tac-toe game, listed in order of increasing difficulty:
+Jos sinulla on ylimääräistä aikaa tai haluat harjoitella uusia React taitojasi, tässä on joitain ideoita parannuksista, joita voisit tehdä ristinolla-peliin, listattuna vaikeusjärjestyksessä:
 
-1. For the current move only, show "You are at move #..." instead of a button.
-1. Rewrite `Board` to use two loops to make the squares instead of hardcoding them.
-1. Add a toggle button that lets you sort the moves in either ascending or descending order.
-1. When someone wins, highlight the three squares that caused the win (and when no one wins, display a message about the result being a draw).
-1. Display the location for each move in the format (row, col) in the move history list.
+1. Nykyiselle siirrolle, näytä "Olet siirrossa #..." sen sijaan, että näyttäisit painikkeen.
+1. Kirjoita `Board` käyttämään kahta silmukkaa tehdäksesi ruudukon sen sijaan, että kovakoodaisit ne.
+1. Lisää painike, joka antaa sinun järjestää siirrot joko nousevaan tai laskevaan järjestykseen.
+1. Kun joku voittaa, korosta kolme ruutua, jotka aiheuttivat voiton (ja kun kukaan ei voita, näytä viesti tuloksesta olevan tasapeli).
+1. Näytä jokaisen siirron sijainti muodossa (rivi, sarake) siirtohistorian listassa.
 
-Throughout this tutorial, you've touched on React concepts including elements, components, props, and state. Now that you've seen how these concepts work when building a game, check out [Thinking in React](/learn/thinking-in-react) to see how the same React concepts work when build an app's UI.
+Tämän oppaan aikana, olet käsitellyt Reactin käsitteitä, mukaan lukien elementit, komponentit, propsit ja tila. Nyt kun olet nähnyt miten nämä käsitteet toimivat peliä rakentaessa, katso [Thinking in React](/learn/thinking-in-react) nähdäksesi miten samat Reactin käsitteet toimivat kun rakennat sovelluksen käyttöliittymää.
