@@ -2251,16 +2251,16 @@ Toistaiseksi, sinun tulisi nähdä lista liikeistä, jotka tapahtuivat pelissä 
 
 ### Avaimen valinta {/*picking-a-key*/}
 
-When you render a list, React stores some information about each rendered list item. When you update a list, React needs to determine what has changed. You could have added, removed, re-arranged, or updated the list's items.
+Kun renderöit listan, React tallentaa tietoa jokaisesta renderöidystä listan alkiosta. Kun päivität listaa, React tarvitsee määrittää mitä on muuttunut. Saatat olla lisännyt, poistanut, järjestänyt uudelleen, tai päivittänyt listan alkiot.
 
-Imagine transitioning from
+Kuvittele siirtyväsi tästä
 
 ```html
 <li>Alexa: 7 tasks left</li>
 <li>Ben: 5 tasks left</li>
 ```
 
-to
+tähän
 
 ```html
 <li>Ben: 9 tasks left</li>
@@ -2268,7 +2268,7 @@ to
 <li>Alexa: 5 tasks left</li>
 ```
 
-In addition to the updated counts, a human reading this would probably say that you swapped Alexa and Ben's ordering and inserted Claudia between Alexa and Ben. However, React is a computer program and can't know what you intended, so you need to specify a _key_ property for each list item to differentiate each list item from its siblings. If your data was from a database, Alexa, Ben, and Claudia's database IDs could be used as keys.
+Lukujen päivittämisen lisäksi, ihminen lukisi tämän todennäköisesti niin, että vaihdoit Alexan ja Benin järjestystä ja lisäsit Claudian Alexan ja Benin väliin. Kuitenkin, React on tietokoneohjelma eikä voi tietää mitä tarkoitit, joten sinun täytyy määrittää `key` ominaisuus jokaiselle listan alkiolle erottaaksesi jokaisen listan alkion sen sisaruksista. Jos datasi olisi tietokannasta, Alexan, Benin ja Claudian tietokannan ID:tä voitaisiin käyttää avaimina.
 
 ```js {1}
 <li key={user.id}>
@@ -2276,17 +2276,17 @@ In addition to the updated counts, a human reading this would probably say that 
 </li>
 ```
 
-When a list is re-rendered, React takes each list item's key and searches the previous list's items for a matching key. If the current list has a key that didn't exist before, React creates a component. If the current list is missing a key that existed in the previous list, React destroys the previous component. If two keys match, the corresponding component is moved.
+Kun lista renderöidään uudelleen, React ottaa jokaisen listan alkion avaimen ja etsii edellisen listan alkiot vastaavalla avaimella. Jos nykyisellä listalla on avain, jota ei ollut aiemmin, React luo komponentin. Jos nykyisellä listalla ei ole avainta, joka oli edellisellä listalla, React tuhoaa edellisen komponentin. Jos kaksi avainta vastaavat, vastaava komponentti siirretään.
 
-Keys tell React about the identity of each component, which allows React to maintain state between re-renders. If a component's key changes, the component will be destroyed and re-created with a new state.
+Avaimet kertovat reactille jokaisen komponentin identiteetistä, joka antaa Reactille mahdollisuuden ylläpitää tilaa uudelleenrenderöintien välillä. Jos komponentin avain muuttuu, komponentti tuhotaan ja luodaan uudelleen uudella tilalla.
 
-`key` is a special and reserved property in React. When an element is created, React extracts the `key` property and stores the key directly on the returned element. Even though `key` may look like it is passed as props, React automatically uses `key` to decide which components to update. There's no way for a component to ask what `key` its parent specified.
+`key` on erityinen ja varattu ominaisuus Reactissa. Kun elementti luodaan, React ottaa `key` ominaisuuden ja tallentaa avaimen suoraan palautettuun elementtiin. Vaikka `key` näyttäisi välitetyltä propseina, React käyttää automaattisesti `key`:tä päättääkseen mitä komponentteja päivittää. Komponentilla ei ole tapaa kysyä minkä `key`:n sen vanhempi on määrittänyt.
 
-**It's strongly recommended that you assign proper keys whenever you build dynamic lists.** If you don't have an appropriate key, you may want to consider restructuring your data so that you do.
+**On erittäin suositeltavaa, että asetat oikeat avaimet aina kun rakennat dynaamisia listoja.** Jos sinulla ei ole sopivaa avainta, saatat haluta harkita datan uudelleenjärjestämistä, jotta sinulla olisi.
 
-If no key is specified, React will report an error and use the array index as a key by default. Using the array index as a key is problematic when trying to re-order a list's items or inserting/removing list items. Explicitly passing `key={i}` silences the error but has the same problems as array indices and is not recommended in most cases.
+Jos avainta ei ole määritelty, React raportoi virheen ja käyttää taulukon indeksiä avaimena oletuksena. Taulukon indeksin käyttäminen avaimena on ongelmallista, kun yritetään järjestää listan kohteita uudelleen tai lisätä/poistaa listan kohteita. `key={i}` avaimen välittäminen hiljentää virheen, mutta sillä on samat ongelmat kuin taulukon indekseillä ja sitä ei suositella useimmissa tapauksissa.
 
-Keys do not need to be globally unique; they only need to be unique between components and their siblings.
+Avainten ei tarvitse olla globaalisti uniikkeja. Riittää, että ne ovat uniikkeja komponenttien ja niiden sisarusten välillä.
 
 ### Aikamatkustuksen toteutus {/*implementing-time-travel*/}
 
