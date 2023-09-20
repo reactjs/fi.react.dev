@@ -2268,7 +2268,7 @@ tähän
 <li>Alexa: 5 tasks left</li>
 ```
 
-Lukujen päivittämisen lisäksi, ihminen lukisi tämän todennäköisesti niin, että vaihdoit Alexan ja Benin järjestystä ja lisäsit Claudian Alexan ja Benin väliin. Kuitenkin, React on tietokoneohjelma eikä voi tietää mitä tarkoitit, joten sinun täytyy määrittää `key` ominaisuus jokaiselle listan alkiolle erottaaksesi jokaisen listan alkion sen sisaruksista. Jos datasi olisi tietokannasta, Alexan, Benin ja Claudian tietokannan ID:tä voitaisiin käyttää avaimina.
+Lukujen päivittämisen lisäksi, ihminen lukisi tämän todennäköisesti niin, että vaihdoit Alexan ja Benin järjestystä ja lisäsit Claudian Alexan ja Benin väliin. Kuitenkin, React on tietokoneohjelma eikä voi tietää mitä tarkoitit, joten sinun täytyy määrittää _key_ ominaisuus jokaiselle listan alkiolle erottaaksesi jokaisen listan alkion sen sisaruksista. Jos datasi olisi tietokannasta, Alexan, Benin ja Claudian tietokannan ID:tä voitaisiin käyttää avaimina.
 
 ```js {1}
 <li key={user.id}>

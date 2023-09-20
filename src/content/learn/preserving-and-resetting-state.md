@@ -932,7 +932,7 @@ Painetaan "Seuraava pelaaja" uudelleen
 
 </DiagramGroup>
 
-Kunkin `Counter`:n tila tuhotaan joka kerta kun sen poistetaan DOM:sta. Tämän takia ne nollautuvat joka kerta kun painat painiketta.
+Kunkin `Counter`:n tila tuhotaan joka kerta kun se poistetaan DOM:sta. Tämän takia ne nollautuvat joka kerta kun painat painiketta.
 
 Tämä ratkaisu on kätevä, kun sinulla on vain muutamia riippumattomia komponentteja, jotka renderöidään samassa paikassa. Tässä esimerkissä sinulla on vain kaksi, joten ei ole hankalaa renderöidä molemmat erikseen JSX:ssä.
 
