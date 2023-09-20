@@ -4,12 +4,12 @@ title: "<select>"
 
 <Intro>
 
-The [built-in browser `<select>` component](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/select) lets you render a select box with options.
+[Selaimen sisäänrakennettu `<select>`-komponentti](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/select) mahdollistaa valintalistan renderöimisen vaihtoehtoineen.
 
 ```js
 <select>
-  <option value="someOption">Some option</option>
-  <option value="otherOption">Other option</option>
+  <option value="someOption">Jokin vaihtoehto</option>
+  <option value="otherOption">Toinen vaihtoehto</option>
 </select>
 ```
 
@@ -78,7 +78,7 @@ These `<select>` props are relevant both for uncontrolled and controlled select 
 
 ## Käyttö {/*usage*/}
 
-### Displaying a select box with options {/*displaying-a-select-box-with-options*/}
+### Valintalistan näyttäminen vaihtoehdoilla {/*displaying-a-select-box-with-options*/}
 
 Render a `<select>` with a list of `<option>` components inside to display a select box. Give each `<option>` a `value` representing the data to be submitted with the form.
 
@@ -107,7 +107,7 @@ select { margin: 5px; }
 
 ---
 
-### Providing a label for a select box {/*providing-a-label-for-a-select-box*/}
+### Otsikon tarjoaminen valintalistalle {/*providing-a-label-for-a-select-box*/}
 
 Typically, you will place every `<select>` inside a [`<label>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/label) tag. This tells the browser that this label is associated with that select box. When the user clicks the label, the browser will automatically focus the select box. It's also essential for accessibility: a screen reader will announce the label caption when the user focuses the select box.
 
@@ -153,7 +153,7 @@ select { margin: 5px; }
 
 ---
 
-### Providing an initially selected option {/*providing-an-initially-selected-option*/}
+### Aluksi valintun valinnan tarjoaminen {/*providing-an-initially-selected-option*/}
 
 By default, the browser will select the first `<option>` in the list. To select a different option by default, pass that `<option>`'s `value` as the `defaultValue` to the `<select>` element.
 
@@ -188,7 +188,7 @@ Unlike in HTML, passing a `selected` attribute to an individual `<option>` is no
 
 ---
 
-### Enabling multiple selection {/*enabling-multiple-selection*/}
+### Usean valinnan mahdollistaminen {/*enabling-multiple-selection*/}
 
 Pass `multiple={true}` to the `<select>` to let the user select multiple options. In that case, if you also specify `defaultValue` to choose the initially selected options, it must be an array.
 
@@ -221,7 +221,7 @@ select { display: block; margin-top: 10px; width: 200px; }
 
 ---
 
-### Reading the select box value when submitting a form {/*reading-the-select-box-value-when-submitting-a-form*/}
+### Valintalistan arvon lukeminen lomakkeen lähetyksessä {/*reading-the-select-box-value-when-submitting-a-form*/}
 
 Add a [`<form>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/form) around your select box with a [`<button type="submit">`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button) inside. It will call your `<form onSubmit>` event handler. By default, the browser will send the form data to the current URL and refresh the page. You can override that behavior by calling `e.preventDefault()`. Read the form data with [`new FormData(e.target)`](https://developer.mozilla.org/en-US/docs/Web/API/FormData).
 <Sandpack>
@@ -298,7 +298,7 @@ By default, *any* `<button>` inside a `<form>` will submit it. This can be surpr
 
 ---
 
-### Controlling a select box with a state variable {/*controlling-a-select-box-with-a-state-variable*/}
+### Valintalistan ohjaaminen tilamuuttujalla {/*controlling-a-select-box-with-a-state-variable*/}
 
 A select box like `<select />` is *uncontrolled.* Even if you [pass an initially selected value](#providing-an-initially-selected-option) like `<select defaultValue="orange" />`, your JSX only specifies the initial value, not the value right now.
 
