@@ -4,7 +4,7 @@ title: "Common components (e.g. <div>)"
 
 <Intro>
 
-All built-in browser components, such as [`<div>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/div), support some common props and events.
+Kaikki selaimeen sisäänrakennetut komponentit, kuten [`<div>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/div), tukevat joitakin yleisiä propseja ja tapahtumia.
 
 </Intro>
 
@@ -14,13 +14,13 @@ All built-in browser components, such as [`<div>`](https://developer.mozilla.org
 
 ## Viite {/*reference*/}
 
-### Common components (e.g. `<div>`) {/*common*/}
+### Yleiset komponentit (kuten `<div>`) {/*common*/}
 
 ```js
-<div className="wrapper">Some content</div>
+<div className="wrapper">Jotain sisältöä</div>
 ```
 
-[See more examples below.](#usage)
+[Näe lisää esimerkkejä alla.](#usage)
 
 #### Propsit {/*common-props*/}
 
@@ -241,7 +241,7 @@ These events fire for resources like [`<audio>`](https://developer.mozilla.org/e
 
 ---
 
-### `ref` callback function {/*ref-callback*/}
+### `ref` callback-funktio {/*ref-callback*/}
 
 Instead of a ref object (like the one returned by [`useRef`](/reference/react/useRef#manipulating-the-dom-with-a-ref)), you may pass a function to the `ref` attribute.
 
@@ -265,7 +265,7 @@ Do not return anything from the `ref` callback.
 
 ---
 
-### React event object {/*react-event-object*/}
+### React tapahtumaolio {/*react-event-object*/}
 
 Your event handlers will receive a *React event object.* It is also sometimes known as a "synthetic event".
 
@@ -279,7 +279,7 @@ It conforms to the same standard as the underlying DOM events, but fixes some br
 
 Some React events do not map directly to the browser's native events. For example in `onMouseLeave`, `e.nativeEvent` will point to a `mouseout` event. The specific mapping is not part of the public API and may change in the future. If you need the underlying browser event for some reason, read it from `e.nativeEvent`.
 
-#### Properties {/*react-event-object-properties*/}
+#### Ominaisuudet {/*react-event-object-properties*/}
 
 React event objects implement some of the standard [`Event`](https://developer.mozilla.org/en-US/docs/Web/API/Event) properties:
 
@@ -296,7 +296,7 @@ Additionally, React event objects provide these properties:
 
 * `nativeEvent`: A DOM [`Event`](https://developer.mozilla.org/en-US/docs/Web/API/Event). The original browser event object.
 
-#### Methods {/*react-event-object-methods*/}
+#### Metodit {/*react-event-object-methods*/}
 
 React event objects implement some of the standard [`Event`](https://developer.mozilla.org/en-US/docs/Web/API/Event) methods:
 
@@ -316,7 +316,7 @@ Additionally, React event objects provide these methods:
 
 ---
 
-### `AnimationEvent` handler function {/*animationevent-handler*/}
+### `AnimationEvent` käsittelijäfunktio {/*animationevent-handler*/}
 
 An event handler type for the [CSS animation](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Animations/Using_CSS_animations) events.
 
@@ -337,7 +337,7 @@ An event handler type for the [CSS animation](https://developer.mozilla.org/en-U
 
 ---
 
-### `ClipboardEvent` handler function {/*clipboadevent-handler*/}
+### `ClipboardEvent` käsittelijäfunktio {/*clipboadevent-handler*/}
 
 An event handler type for the [Clipboard API](https://developer.mozilla.org/en-US/docs/Web/API/Clipboard_API) events.
 
@@ -357,7 +357,7 @@ An event handler type for the [Clipboard API](https://developer.mozilla.org/en-U
 
 ---
 
-### `CompositionEvent` handler function {/*compositionevent-handler*/}
+### `CompositionEvent` käsittelijäfunktio {/*compositionevent-handler*/}
 
 An event handler type for the [input method editor (IME)](https://developer.mozilla.org/en-US/docs/Glossary/Input_method_editor) events.
 
@@ -376,7 +376,7 @@ An event handler type for the [input method editor (IME)](https://developer.mozi
 
 ---
 
-### `DragEvent` handler function {/*dragevent-handler*/}
+### `DragEvent` käsittelijäfunktio {/*dragevent-handler*/}
 
 An event handler type for the [HTML Drag and Drop API](https://developer.mozilla.org/en-US/docs/Web/API/HTML_Drag_and_Drop_API) events.
 
@@ -432,7 +432,7 @@ An event handler type for the [HTML Drag and Drop API](https://developer.mozilla
 
 ---
 
-### `FocusEvent` handler function {/*focusevent-handler*/}
+### `FocusEvent` käsittelijäfunktio {/*focusevent-handler*/}
 
 An event handler type for the focus events.
 
@@ -457,7 +457,7 @@ An event handler type for the focus events.
 
 ---
 
-### `Event` handler function {/*event-handler*/}
+### `Event` käsittelijäfunktio {/*event-handler*/}
 
 An event handler type for generic events.
 
@@ -467,7 +467,7 @@ An event handler type for generic events.
 
 ---
 
-### `InputEvent` handler function {/*inputevent-handler*/}
+### `InputEvent` käsittelijäfunktio {/*inputevent-handler*/}
 
 An event handler type for the `onBeforeInput` event.
 
@@ -482,7 +482,7 @@ An event handler type for the `onBeforeInput` event.
 
 ---
 
-### `KeyboardEvent` handler function {/*keyboardevent-handler*/}
+### `KeyboardEvent` käsittelijäfunktio {/*keyboardevent-handler*/}
 
 An event handler type for keyboard events.
 
@@ -519,7 +519,7 @@ An event handler type for keyboard events.
 
 ---
 
-### `MouseEvent` handler function {/*mouseevent-handler*/}
+### `MouseEvent` käsittelijäfunktio {/*mouseevent-handler*/}
 
 An event handler type for mouse events.
 
@@ -563,7 +563,7 @@ An event handler type for mouse events.
 
 ---
 
-### `PointerEvent` handler function {/*pointerevent-handler*/}
+### `PointerEvent` käsittelijäfunktio {/*pointerevent-handler*/}
 
 An event handler type for [pointer events.](https://developer.mozilla.org/en-US/docs/Web/API/Pointer_events)
 
@@ -619,7 +619,7 @@ An event handler type for [pointer events.](https://developer.mozilla.org/en-US/
 
 ---
 
-### `TouchEvent` handler function {/*touchevent-handler*/}
+### `TouchEvent` käsittelijäfunktio {/*touchevent-handler*/}
 
 An event handler type for [touch events.](https://developer.mozilla.org/en-US/docs/Web/API/Touch_events)
 
@@ -651,7 +651,7 @@ An event handler type for [touch events.](https://developer.mozilla.org/en-US/do
 
 ---
 
-### `TransitionEvent` handler function {/*transitionevent-handler*/}
+### `TransitionEvent` käsittelijäfunktio {/*transitionevent-handler*/}
 
 An event handler type for the CSS transition events.
 
@@ -670,7 +670,7 @@ An event handler type for the CSS transition events.
 
 ---
 
-### `UIEvent` handler function {/*uievent-handler*/}
+### `UIEvent` käsittelijäfunktio {/*uievent-handler*/}
 
 An event handler type for generic UI events.
 
@@ -688,7 +688,7 @@ An event handler type for generic UI events.
 
 ---
 
-### `WheelEvent` handler function {/*wheelevent-handler*/}
+### `WheelEvent` käsittelijäfunktio {/*wheelevent-handler*/}
 
 An event handler type for the `onWheel` event.
 
@@ -735,7 +735,7 @@ An event handler type for the `onWheel` event.
 
 ## Käyttö {/*usage*/}
 
-### Applying CSS styles {/*applying-css-styles*/}
+### CSS tyylien käyttö {/*applying-css-styles*/}
 
 In React, you specify a CSS class with [`className`.](https://developer.mozilla.org/en-US/docs/Web/API/Element/className) It works like the `class` attribute in HTML:
 
@@ -811,7 +811,7 @@ export default function Avatar({ user }) {
 
 <DeepDive>
 
-#### How to apply multiple CSS classes conditionally? {/*how-to-apply-multiple-css-classes-conditionally*/}
+#### Miten käyttää useita CSS-luokkia ehdollisesti? {/*how-to-apply-multiple-css-classes-conditionally*/}
 
 To apply CSS classes conditionally, you need to produce the `className` string yourself using JavaScript.
 
@@ -853,7 +853,7 @@ function Row({ isSelected, size }) {
 
 ---
 
-### Manipulating a DOM node with a ref {/*manipulating-a-dom-node-with-a-ref*/}
+### DOM elemetin manipuolinti refillä {/*manipulating-a-dom-node-with-a-ref*/}
 
 Sometimes, you'll need to get the browser DOM node associated with a tag in JSX. For example, if you want to focus an `<input>` when a button is clicked, you need to call [`focus()`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/focus) on the browser `<input>` DOM node.
 
@@ -903,7 +903,7 @@ For more advanced use cases, the `ref` attribute also accepts a [callback functi
 
 ---
 
-### Dangerously setting the inner HTML {/*dangerously-setting-the-inner-html*/}
+### Sisäisen HTML sisällön asettaminen vaarallisesti {/*dangerously-setting-the-inner-html*/}
 
 You can pass a raw HTML string to an element like so:
 
@@ -1001,7 +1001,7 @@ The code embedded in the HTML will run. A hacker could use this security hole to
 
 ---
 
-### Handling mouse events {/*handling-mouse-events*/}
+### Hiiren tapahtumien käsitteleminen {/*handling-mouse-events*/}
 
 This example shows some common [mouse events](#mouseevent-handler) and when they fire.
 
@@ -1048,7 +1048,7 @@ input { margin-left: 10px; }
 
 ---
 
-### Handling pointer events {/*handling-pointer-events*/}
+### Osoittimen tapahtumien käsitteleminen {/*handling-pointer-events*/}
 
 This example shows some common [pointer events](#pointerevent-handler) and when they fire.
 
@@ -1096,7 +1096,7 @@ input { margin-left: 10px; }
 
 ---
 
-### Handling focus events {/*handling-focus-events*/}
+### Kohdennustapahtumien käsitteleminen {/*handling-focus-events*/}
 
 In React, [focus events](#focusevent-handler) bubble. You can use the `currentTarget` and `relatedTarget` to differentiate if the focusing or blurring events originated from outside of the parent element. The example shows how to detect focusing a child, focusing the parent element, and how to detect focus entering or leaving the whole subtree.
 
@@ -1152,7 +1152,7 @@ input { margin-left: 10px; }
 
 ---
 
-### Handling keyboard events {/*handling-keyboard-events*/}
+### Näppäimistötapahtumien käsitteleminen {/*handling-keyboard-events*/}
 
 This example shows some common [keyboard events](#keyboardevent-handler) and when they fire.
 
