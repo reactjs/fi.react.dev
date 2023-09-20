@@ -5,14 +5,14 @@ canary: true
 
 <Canary>
 
-`'use server'` is needed only if you're [using React Server Components](/learn/start-a-new-react-project#bleeding-edge-react-frameworks) or building a library compatible with them.
+`'use client'` tavitaan vain jos [käytät Reactin palvelinkomponentteja](/learn/start-a-new-react-project#bleeding-edge-react-frameworks) tai rakennat niiden kanssa yhteensopivia kirjastoja.
 
 </Canary>
 
 
 <Intro>
 
-`'use server'` marks server-side functions that can be called from client-side code.
+`'use server'` merkitsee palvelinpuolen funktioita, joita voidaan kutsua asiakaspuolen koodista.
 
 </Intro>
 
@@ -24,7 +24,7 @@ canary: true
 
 ### `'use server'` {/*use-server*/}
 
-Add `'use server';` at the very top of an async function to mark that the function can be executed by the client.
+Lisää `'use server';` async funktion alkuun merkitsemään että funktiota voidaan kutsua asiakaspuolelta.
 
 ```js
 async function addToCart(data) {
@@ -35,23 +35,23 @@ async function addToCart(data) {
 // <ProductDetailPage addToCart={addToCart} />
 ```
 
-This function can be passed to the client. When called on the client, it will make a network request to the server that includes a serialized copy of any arguments passed. If the server function returns a value, that value will be serialized and returned to the client.
+Tämä funktio voidaan välittää asiakkaalle. Kun sitä kutsutaan asiakaspuolella, se tekee verkkopyynnön palvelimelle, joka sisältää serialisoidun kopion kaikista annetuista argumenteista. Jos palvelimen funktio palauttaa arvon, se serialisoidaan ja palautetaan asiakkaalle.
 
-Alternatively, add `'use server';` at the very top of a file to mark all exports within that file as async server functions that can be used anywhere, including imported in client component files.
+Vaihtoehtoisesti, lisää `'use server';` tiedoston alkuun merkitsemään kaikki tiedoston exportit palvelinpuolen funktioiksi, joita voidaan käyttää missä tahansa, myös tuotuna asiakaspuolen komponenttitiedostoissa.
 
 #### Rajoitukset {/*caveats*/}
 
-* Remember that parameters to functions marked with `'use server'` are fully client-controlled. For security, always treat them as untrusted input, making sure to validate and escape the arguments as appropriate.
-* To avoid the confusion that might result from mixing client- and server-side code in the same file, `'use server'` can only be used in server-side files; the resulting functions can be passed to client components through props.
-* Because the underlying network calls are always asynchronous, `'use server'` can be used only on async functions.
-* Directives like `'use server'` must be at the very beginning of their function or file, above any other code including imports (comments above directives are OK). They must be written with single or double quotes, not backticks. (The `'use xyz'` directive format somewhat resembles the `useXyz()` Hook naming convention, but the similarity is coincidental.)
+* Muista, että `'use server'`-merkittyjen funktioiden parametrit ovat täysin asiakkaan hallinnassa. Turvallisuuden vuoksi käsittele niitä aina epäluotettavana syötteenä ja varmista, että validoit ja escapeet argumentit asianmukaisesti.
+* Välttääksesi sekaannusta, joka voi johtua asiakas- ja palvelinpuolen koodin sekoittamisesta samassa tiedostossa, `'use server'` voidaan käyttää vain palvelinpuolen tiedostoissa; tuloksena olevia funktioita voidaan välittää asiakaspuolen komponenteille propsina.
+* Koska taustalla olevat verkkopyynnöt ovat aina asynkronisia, `'use server'` voidaan käyttää vain async funktioissa.
+* Direktiivit kuten `'use server'` on oltava funktion tai tiedoston alussa, ennen kaikkia tuontilausekkeita tai muuta koodia (kommentit direktiivien yläpuolella on OK). Ne on kirjoitettava yksittäisillä tai kaksinkertaisilla lainausmerkeillä, ei gravismerkeillä. (Direktiivien muoto `'use xyz'` muistuttaa jonkin verran `useXyz()`-Hookin nimeämiskäytäntöä, mutta samankaltaisuus on sattumanvaraista.)
 
 ## Käyttö {/*usage*/}
 
 <Wip>
-This section is a work in progress. 
+Tämä osio on kesken.
 
-This API can be used in any framework that supports React Server Components. You may find additional documentation from them.
-* [Next.js documentation](https://nextjs.org/docs/getting-started/react-essentials)
-* More coming soon
+Tätä rajapintaa voidaan käyttää missä tahansa kehyksessä, joka tukee Reactin palvelinkomponentteja. Lisätietoja löytyy niiden dokumentaatiosta.
+* [Next.js dokumentaatio](https://nextjs.org/docs/getting-started/react-essentials)
+* Lisää tulossa pian
 </Wip>
