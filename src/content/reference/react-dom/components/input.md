@@ -4,7 +4,7 @@ title: "<input>"
 
 <Intro>
 
-The [built-in browser `<input>` component](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input) lets you render different kinds of form inputs.
+[Selaimen sisäänrakennettu `<input>`-komponentti](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input) mahdollistaa erilaisten lomakkeiden syöttökenttien renderöinnin.
 
 ```js
 <input />
@@ -99,7 +99,7 @@ These `<input>` props are relevant both for uncontrolled and controlled inputs:
 
 ## Käyttö {/*usage*/}
 
-### Displaying inputs of different types {/*displaying-inputs-of-different-types*/}
+### Eri tyyppisten syöttökenttien näyttäminen {/*displaying-inputs-of-different-types*/}
 
 To display an input, render an `<input>` component. By default, it will be a text input. You can pass `type="checkbox"` for a checkbox, `type="radio"` for a radio button, [or one of the other input types.](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#input_types)
 
@@ -146,7 +146,7 @@ input { margin: 5px; }
 
 ---
 
-### Providing a label for an input {/*providing-a-label-for-an-input*/}
+### Syöttökentän otsikko {/*providing-a-label-for-an-input*/}
 
 Typically, you will place every `<input>` inside a [`<label>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/label) tag. This tells the browser that this label is associated with that input. When the user clicks the label, the browser will automatically focus the input. It's also essential for accessibility: a screen reader will announce the label caption when the user focuses the associated input.
 
@@ -181,7 +181,7 @@ input { margin: 5px; }
 
 ---
 
-### Providing an initial value for an input {/*providing-an-initial-value-for-an-input*/}
+### Oletusarvon tarjoaminen syöttökentälle {/*providing-an-initial-value-for-an-input*/}
 
 You can optionally specify the initial value for any input. Pass it as the `defaultValue` string for text inputs. Checkboxes and radio buttons should specify the initial value with the `defaultChecked` boolean instead.
 
@@ -233,7 +233,7 @@ input { margin: 5px; }
 
 ---
 
-### Reading the input values when submitting a form {/*reading-the-input-values-when-submitting-a-form*/}
+### Syöttökentän arvon lukeminen lomakkeen lähetyksessä {/*reading-the-input-values-when-submitting-a-form*/}
 
 Add a [`<form>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/form) around your inputs with a [`<button type="submit">`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button) inside. It will call your `<form onSubmit>` event handler. By default, the browser will send the form data to the current URL and refresh the page. You can override that behavior by calling `e.preventDefault()`. Read the form data with [`new FormData(e.target)`](https://developer.mozilla.org/en-US/docs/Web/API/FormData).
 <Sandpack>
@@ -301,7 +301,7 @@ By default, *any* `<button>` inside a `<form>` will submit it. This can be surpr
 
 ---
 
-### Controlling an input with a state variable {/*controlling-an-input-with-a-state-variable*/}
+### Syöttökentän ohjaaminen tilamuuttujalla {/*controlling-an-input-with-a-state-variable*/}
 
 An input like `<input />` is *uncontrolled.* Even if you [pass an initial value](#providing-an-initial-value-for-an-input) like `<input defaultValue="Initial text" />`, your JSX only specifies the initial value. It does not control what the value should be right now.
 
@@ -414,7 +414,7 @@ p { font-weight: bold; }
 
 ---
 
-### Optimizing re-rendering on every keystroke {/*optimizing-re-rendering-on-every-keystroke*/}
+### Renderöinnin optimoiminen joka näppäinpainalluksella {/*optimizing-re-rendering-on-every-keystroke*/}
 
 When you use a controlled input, you set the state on every keystroke. If the component containing your state re-renders a large tree, this can get slow. There's a few ways you can optimize re-rendering performance.
 
@@ -464,7 +464,7 @@ If there is no way to avoid re-rendering (for example, if `PageContent` depends 
 
 ## Vianmääritys {/*troubleshooting*/}
 
-### My text input doesn't update when I type into it {/*my-text-input-doesnt-update-when-i-type-into-it*/}
+### Tekstikenttäni ei päivity kun kirjoitan siihen {/*my-text-input-doesnt-update-when-i-type-into-it*/}
 
 If you render an input with `value` but no `onChange`, you will see an error in the console:
 
@@ -502,7 +502,7 @@ If the value is intentionally read-only, add a `readOnly` prop to suppress the e
 
 ---
 
-### My checkbox doesn't update when I click on it {/*my-checkbox-doesnt-update-when-i-click-on-it*/}
+### Valintaruutuni ei päivity kun painan siitä {/*my-checkbox-doesnt-update-when-i-click-on-it*/}
 
 If you render a checkbox with `checked` but no `onChange`, you will see an error in the console:
 
@@ -546,7 +546,7 @@ If the checkbox is intentionally read-only, add a `readOnly` prop to suppress th
 
 ---
 
-### My input caret jumps to the beginning on every keystroke {/*my-input-caret-jumps-to-the-beginning-on-every-keystroke*/}
+### Syötön kursori hyppää alkuun jokaisen näppäinpainalluksen yhteydessä {/*my-input-caret-jumps-to-the-beginning-on-every-keystroke*/}
 
 If you [control an input,](#controlling-an-input-with-a-state-variable) you must update its state variable to the input's value from the DOM during `onChange`.
 
@@ -583,7 +583,7 @@ If this doesn't fix the problem, it's possible that the input gets removed and r
 
 ---
 
-### I'm getting an error: "A component is changing an uncontrolled input to be controlled" {/*im-getting-an-error-a-component-is-changing-an-uncontrolled-input-to-be-controlled*/}
+### Saan virheen: "A component is changing an uncontrolled input to be controlled" {/*im-getting-an-error-a-component-is-changing-an-uncontrolled-input-to-be-controlled*/}
 
 
 If you provide a `value` to the component, it must remain a string throughout its lifetime.
