@@ -43,3 +43,5 @@
 - **codebase**: koodipohja
 - **property**: en keksinyt järkevää suomennosta, property
 - **scope**: käyttöalue
+- **bubbles**: kuplii (bublling in JavaScript)
+- **capture**: nappaus (capture in JavaScript)

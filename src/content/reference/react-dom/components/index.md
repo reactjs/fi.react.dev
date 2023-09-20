@@ -1,40 +1,40 @@
 ---
-title: "React DOM Components"
+title: "React DOM komponentit"
 ---
 
 <Intro>
 
-React supports all of the browser built-in [HTML](https://developer.mozilla.org/en-US/docs/Web/HTML/Element) and [SVG](https://developer.mozilla.org/en-US/docs/Web/SVG/Element) components.
+React tukee kaikkia selaimen sisäänrakennettuja [HTML](https://developer.mozilla.org/en-US/docs/Web/HTML/Element) ja [SVG](https://developer.mozilla.org/en-US/docs/Web/SVG/Element) komponentteja.
 
 </Intro>
 
 ---
 
-## Common components {/*common-components*/}
+## Yleiset komponentit {/*common-components*/}
 
-All of the built-in browser components support some props and events.
+Kaikki selaimen sisäänrakennetut komponentit tukevat joitain propseja ja tapahtumia.
 
-* [Common components (e.g. `<div>`)](/reference/react-dom/components/common)
+* [Yleiset komponentit (kuten `<div>`)](/reference/react-dom/components/common)
 
-This includes React-specific props like `ref` and `dangerouslySetInnerHTML`.
+Tämä sisältää myös Reactin omat propsit, kuten `ref` ja `dangerouslySetInnerHTML`.
 
 ---
 
-## Form components {/*form-components*/}
+## Lomakekomponentit {/*form-components*/}
 
-These built-in browser components accept user input:
+Nämä selaimen sisäänrakennetut komponentit hyväksyvät käyttäjän syötteen:
 
 * [`<input>`](/reference/react-dom/components/input)
 * [`<select>`](/reference/react-dom/components/select)
 * [`<textarea>`](/reference/react-dom/components/textarea)
 
-They are special in React because passing the `value` prop to them makes them *[controlled.](/reference/react-dom/components/input#controlling-an-input-with-a-state-variable)*
+Ne ovat erityisiä Reactissa, koska `value`-propsin antaminen niille tekee niistä *[kontrolloituja.](/reference/react-dom/components/input#controlling-an-input-with-a-state-variable)*
 
 ---
 
-## All HTML components {/*all-html-components*/}
+## Kaikki HTML komponentit {/*all-html-components*/}
 
-React supports all built-in browser HTML components. This includes:
+React tukee kaikkia selaimen sisäänrakennettuja HTML komponentteja. Tämä sisältää:
 
 * [`<aside>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/aside)
 * [`<audio>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/audio)
@@ -140,38 +140,38 @@ React supports all built-in browser HTML components. This includes:
 
 <Note>
 
-Similar to the [DOM standard,](https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model) React uses a `camelCase` convention for prop names. For example, you'll write `tabIndex` instead of `tabindex`. You can convert existing HTML to JSX with an [online converter.](https://transform.tools/html-to-jsx)
+Vastaavasti kuten [DOM standardissa,](https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model) React käyttää `camelCase`-konventiota propsien nimissä. Esimerkiksi, kirjoitat `tabIndex` sen sijaan, että kirjoittaisit `tabindex`. Voit muuntaa olemassaolevaa HTML:ää JSX:ksi [verkkokonvertterilla.](https://transform.tools/html-to-jsx)
 
 </Note>
 
 ---
 
-### Custom HTML elements {/*custom-html-elements*/}
+### Mukautetut HTML elementit {/*custom-html-elements*/}
 
-If you render a tag with a dash, like `<my-element>`, React will assume you want to render a [custom HTML element.](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_custom_elements) In React, rendering custom elements works differently from rendering built-in browser tags:
+Jos renderöit tagin, jossa on viiva, kuten `<my-element>`, React olettaa, että haluat renderöidä [mukautetun HTML elementin.](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_custom_elements) Reactissa, mukautetun elementin renderöinti toimii eri tavalla kuin selaimen sisäänrakennetun tagin renderöinti:
 
-- All custom element props are serialized to strings and are always set using attributes.
-- Custom elements accept `class` rather than `className`, and `for` rather than `htmlFor`.
+- Kaikki mukautetun elementin propsit serialisoidaan merkkijonoiksi ja asetetaan aina attribuutteina.
+- Mukautetut elementit hyväksyvät `class`-propsin sijaan `className`-propsin, ja `for`-propsin sijaan `htmlFor`-propsin.
 
-If you render a built-in browser HTML element with an [`is`](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/is) attribute, it will also be treated as a custom element.
+Jos renderöit selaimen sisäänrakennetun HTML elementin [`is`](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/is) attribuutilla, se käsitellään myös mukautettuna elementtinä.
 
 <Note>
 
-[A future version of React will include more comprehensive support for custom elements.](https://github.com/facebook/react/issues/11347#issuecomment-1122275286)
+[Tulevaisuuden versio Reactista sisältää kattavamman tuen mukautetuille elementeille.](https://github.com/facebook/react/issues/11347#issuecomment-1122275286)
 
-You can try it by upgrading React packages to the most recent experimental version:
+Voit kokeilla sitä päivittämällä React paketit uusimpaan kokeelliseen versioon:
 
 - `react@experimental`
 - `react-dom@experimental`
 
-Experimental versions of React may contain bugs. Don't use them in production.
+Kokeelliset versiot Reactista saattavat sisältää bugeja. Älä käytä niitä tuotannossa.
 
 </Note>
 ---
 
-## All SVG components {/*all-svg-components*/}
+## Kaikki SVG komponentit {/*all-svg-components*/}
 
-React supports all built-in browser SVG components. This includes:
+React tukee kaikkia selaimen sisäänrakennettuja SVG komponentteja. Tämä sisältää:
 
 * [`<a>`](https://developer.mozilla.org/en-US/docs/Web/SVG/Element/a)
 * [`<animate>`](https://developer.mozilla.org/en-US/docs/Web/SVG/Element/animate)
@@ -242,20 +242,20 @@ React supports all built-in browser SVG components. This includes:
 
 <Note>
 
-Similar to the [DOM standard,](https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model) React uses a `camelCase` convention for prop names. For example, you'll write `tabIndex` instead of `tabindex`. You can convert existing SVG to JSX with an [online converter.](https://transform.tools/)
+Vastaaavasti kuten [DOM standardissa,](https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model) React käyttää `camelCase`-konventiota propsien nimissä. Esimerkiksi, kirjoitat `tabIndex` sen sijaan, että kirjoittaisit `tabindex`. Voit muuntaa olemassaolevaa SVG:ää JSX:ksi [verkkokonvertterilla.](https://transform.tools/)
 
-Namespaced attributes also have to be written without the colon:
+Attribuutit nimitilalla täytyy myös kirjoittaa ilman kaksoispistettä:
 
-* `xlink:actuate` becomes `xlinkActuate`.
-* `xlink:arcrole` becomes `xlinkArcrole`.
-* `xlink:href` becomes `xlinkHref`.
-* `xlink:role` becomes `xlinkRole`.
-* `xlink:show` becomes `xlinkShow`.
-* `xlink:title` becomes `xlinkTitle`.
-* `xlink:type` becomes `xlinkType`.
-* `xml:base` becomes `xmlBase`.
-* `xml:lang` becomes `xmlLang`.
-* `xml:space` becomes `xmlSpace`.
-* `xmlns:xlink` becomes `xmlnsXlink`.
+* `xlink:actuate` tulee `xlinkActuate`.
+* `xlink:arcrole` tulee `xlinkArcrole`.
+* `xlink:href` tulee `xlinkHref`.
+* `xlink:role` tulee `xlinkRole`.
+* `xlink:show` tulee `xlinkShow`.
+* `xlink:title` tulee `xlinkTitle`.
+* `xlink:type` tulee `xlinkType`.
+* `xml:base` tulee `xmlBase`.
+* `xml:lang` tulee `xmlLang`.
+* `xml:space` tulee `xmlSpace`.
+* `xmlns:xlink` tulee `xmlnsXlink`.
 
 </Note>
