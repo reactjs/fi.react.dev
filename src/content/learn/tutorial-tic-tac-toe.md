@@ -1,31 +1,31 @@
 ---
-title: 'Tutorial: Tic-Tac-Toe'
+title: 'Opas: Ristinolla'
 ---
 
 <Intro>
 
-You will build a small tic-tac-toe game during this tutorial. This tutorial does not assume any existing React knowledge. The techniques you'll learn in the tutorial are fundamental to building any React app, and fully understanding it will give you a deep understanding of React.
+Tulet rakentamaan pienen ristinolla-pelin tässä oppaassa. Tämä opas ei oleta aikaisempaa React-osaamista. Tekniikat, joita opit oppaan aikana ovat perustavanlaatuisia mille tahansa React-sovellukselle ja niiden ymmärtäminen antaa sinulle syvällisen ymmärryksen Reactista.
 
 </Intro>
 
 <Note>
 
-This tutorial is designed for people who prefer to **learn by doing** and want to quickly try making something tangible. If you prefer learning each concept step by step, start with [Describing the UI.](/learn/describing-the-ui)
+Tämä opas on tarkoitettu henkilöille, jotka suosivat **oppimaan tekemällä** ja haluavat nopeasti kokeilla tehdä jotain konkreettista. Jos suosit oppimista jokaisen käsitteen vaiheittain, aloita [Käyttöliittymän kuvaaminen](/learn/describing-the-ui) sivulta.
 
 </Note>
 
-The tutorial is divided into several sections:
+Tämä opas on jaettu useaan osaan:
 
-- [Setup for the tutorial](#setup-for-the-tutorial) will give you **a starting point** to follow the tutorial.
-- [Overview](#overview) will teach you **the fundamentals** of React: components, props, and state.
-- [Completing the game](#completing-the-game) will teach you **the most common techniques** in React development.
-- [Adding time travel](#adding-time-travel) will give you **a deeper insight** into the unique strengths of React.
+- [Oppaan asennusvaihe](#setup-for-the-tutorial) antaa sinulle *lähtökohdan** oppaan seuraamiseen.
+- [Yleiskatsaus](#overview) opettaa sinulle Reactin **perusteet**: komponentit, propsit, ja tilan.
+- [Pelin viimeistely](#completing-the-game) opettaa sinulle **yleisimmät tekniikat** React kehityksessä.
+- [Aikamatkustuksen lisääminen](#adding-time-travel) opettaa sinulle **syvällisen ymmärryksen** Reactin uniikkeihin vahvuuksiin.
 
-### What are you building? {/*what-are-you-building*/}
+### Mitä olet rakentamassa? {/*what-are-you-building*/}
 
-In this tutorial, you'll build an interactive tic-tac-toe game with React.
+Tässä oppaassa tulet rakentamaan interaktiivisen ristinolla-pelin Reactilla.
 
-You can see what it will look like when you're finished here:
+Näet alla miltä se tulee lopulta näyttämään kun saat sen valmiiksi:
 
 <Sandpack>
 
@@ -57,9 +57,9 @@ function Board({ xIsNext, squares, onPlay }) {
   const winner = calculateWinner(squares);
   let status;
   if (winner) {
-    status = 'Winner: ' + winner;
+    status = 'Voittaja: ' + winner;
   } else {
-    status = 'Next player: ' + (xIsNext ? 'X' : 'O');
+    status = 'Seuraava pelaajaa: ' + (xIsNext ? 'X' : 'O');
   }
 
   return (
@@ -103,9 +103,9 @@ export default function Game() {
   const moves = history.map((squares, move) => {
     let description;
     if (move > 0) {
-      description = 'Go to move #' + move;
+      description = 'Siirry liikkeeseen #' + move;
     } else {
-      description = 'Go to game start';
+      description = 'Siirry pelin alkuun';
     }
     return (
       <li key={move}>
@@ -194,15 +194,15 @@ body {
 
 </Sandpack>
 
-If the code doesn't make sense to you yet, or if you are unfamiliar with the code's syntax, don't worry! The goal of this tutorial is to help you understand React and its syntax.
+Jos et saa selvää koodista vielä taikka koodin syntaksi ei ole tuttua, älä huoli! Tämän oppaan tavoite on auttaa sinua ymmärtämään Reactia ja sen syntaksia.
 
-We recommend that you check out the tic-tac-toe game above before continuing with the tutorial. One of the features that you'll notice is that there is a numbered list to the right of the game's board. This list gives you a history of all of the moves that have occurred in the game, and it is updated as the game progresses.
+Suosittelemme, että kokeilet peliä ennen kuin jatkat oppaan kanssa. Yksi pelin ominaisuuksista on, että pelilaudan oikealla puolella on numeroitu lista. Tämä lista näyttää pelin kaikki siirrot ja päivittyy pelin edetessä.
 
-Once you've played around with the finished tic-tac-toe game, keep scrolling. You'll start with a simpler template in this tutorial. Our next step is to set you up so that you can start building the game.
+Kun olet pelannut peliä, jatka oppaan kanssa. Tulet aloittamaan yksinkertaisemmasta pohjasta. Seuraava askel on asentaa ympäristö, jotta voit aloittaa pelin rakentamisen.
 
-## Setup for the tutorial {/*setup-for-the-tutorial*/}
+## Oppaan asennusvaihe {/*setup-for-the-tutorial*/}
 
-In the live code editor below, click **Fork** in the top-right corner to open the editor in a new tab using the website CodeSandbox. CodeSandbox lets you write code in your browser and preview how your users will see the app you've created. The new tab should display an empty square and the starter code for this tutorial.
+Alla olevassa koodieditorissa, paina **Forkkaa* oikeassa yläreunassa avataksesi editorin uuteen välilehteen käyttäen CodeSandboxia. CodeSandbox antaa sinun kirjoittaa koodia selaimessasi ja esikatsella miten käyttäjäsi näkevät luomasi sovelluksen. Uuden välilehden tulisi näyttää tyhjä ruutu ja tämän oppaan aloituskoodi.
 
 <Sandpack>
 
@@ -263,31 +263,33 @@ body {
 
 You can also follow this tutorial using your local development environment. To do this, you need to:
 
-1. Install [Node.js](https://nodejs.org/en/)
-1. In the CodeSandbox tab you opened earlier, press the top-left corner button to open the menu, and then choose **File > Export to ZIP** in that menu to download an archive of the files locally
-1. Unzip the archive, then open a terminal and `cd` to the directory you unzipped
-1. Install the dependencies with `npm install`
-1. Run `npm start` to start a local server and follow the prompts to view the code running in a browser
+Voit myös seurata tätä opasta paikallisessa kehitysympäristössä. Tämä vaatii:
 
-If you get stuck, don't let this stop you! Follow along online instead and try a local setup again later.
+1. Asenna [Node.js](https://nodejs.org/en/)
+1. Aikaisemmin avatussa CodeSandbox -välilehdessä, paina vasemmassa yläreunassa olevaa painiketta ja valitse **File > Export to ZIP** ladataksesi arkiston tiedostoista.
+1. Pura arkisto, ja avaa sitten terminaali ja siirry `cd`:llä purettuun hakemistoon
+1. Asenna riippuvuudet `npm install` komennolla
+1. Suorita `npm start` käynnistääksesi paikallisen palvelimen ja seuraa kehotuksia nähdäksesi koodin selaimessa
+
+Jos jäät jumiin, älä anna tämän estää! Seuraa opasta verkossa ja kokeile paikallista asennusta myöhemmin uudelleen.
 
 </Note>
 
-## Overview {/*overview*/}
+## Yleiskatsaus {/*overview*/}
 
-Now that you're set up, let's get an overview of React!
+Nyt kun olet valmis, annetaan yleiskatsaus Reactista!
 
-### Inspecting the starter code {/*inspecting-the-starter-code*/}
+### Aloituskoodin tarkastelu {/*inspecting-the-starter-code*/}
 
-In CodeSandbox you'll see three main sections:
+CodeSandboxissa näet kolme eri osiota:
 
-![CodeSandbox with starter code](../images/tutorial/react-starter-code-codesandbox.png)
+![CodeSandbox aloituskoodilla](../images/tutorial/react-starter-code-codesandbox.png)
 
-1. The _Files_ section with a list of files like `App.js`, `index.js`, `styles.css` and a folder called `public`
-1. The _code editor_ where you'll see the source code of your selected file
-1. The _browser_ section where you'll see how the code you've written will be displayed
+1. _Files_ osio, jossa on listaus tiedostoista kuten `App.js`, `index.js`, `styles.css` ja hakemisto nimeltään `public`
+1. _Koodieditori_, jossa näet valitun tiedoston lähdekoodin
+1. _Selain_, jossa näet miltä kirjoittamasi koodi näyttää
 
-The `App.js` file should be selected in the _Files_ section. The contents of that file in the _code editor_ should be:
+`App.js` tiedoston tulisi olla valittuna _Files_ osiossa. Tiedoston sisältö _koodieditorissa_ tulisi olla seuraava:
 
 ```jsx
 export default function Square() {
@@ -295,15 +297,15 @@ export default function Square() {
 }
 ```
 
-The _browser_ section should be displaying a square with a X in it like this:
+_Selaimen_ tulisi näyttää neliö, jossa on X:
 
-![x-filled square](../images/tutorial/x-filled-square.png)
+![Neliö, jossa on X](../images/tutorial/x-filled-square.png)
 
-Now let's have a look at the files in the starter code.
+Katsotaan nyt aloituskoodin tiedostoja.
 
 #### `App.js` {/*appjs*/}
 
-The code in `App.js` creates a _component_. In React, a component is a piece of reusable code that represents a part of a user interface. Components are used to render, manage, and update the UI elements in your application. Let's look at the component line by line to see what's going on:
+Koodi `App.js` tiedostossa luo _komponentin_. Reactissa komponentti on pala uudelleenkäytettävää koodia, joka edustaa palan käyttöliittymää. Komponentteja käytetään renderöimään, hallitsemaan ja päivittämään sovelluksesi UI elementtejä. Katsotaan komponenttia rivi riviltä nähdäksemme mitä tapahtuu:
 
 ```js {1}
 export default function Square() {
@@ -311,7 +313,7 @@ export default function Square() {
 }
 ```
 
-The first line defines a function called `Square`. The `export` JavaScript keyword makes this function accessible outside of this file. The `default` keyword tells other files using your code that it's the main function in your file.
+Ensimmäinen rivi määrittelee funktion nimeltään `Square`. `export` -JavaScript avainsana tekee funktion saavutettavaksi tämän tiedoston ulkopuolelle. `default` avainsana kertoo muille tiedostoille, että tämä on pääfunktio tiedostossasi.
 
 ```js {2}
 export default function Square() {
@@ -319,15 +321,15 @@ export default function Square() {
 }
 ```
 
-The second line returns a button. The `return` JavaScript keyword means whatever comes after is returned as a value to the caller of the function. `<button>` is a *JSX element*. A JSX element is a combination of JavaScript code and HTML tags that describes what you'd like to display. `className="square"` is a button property or *prop* that tells CSS how to style the button. `X` is the text displayed inside of the button and `</button>` closes the JSX element to indicate that any following content shouldn't be placed inside the button.
+Seuraava koodirivi palauttaa painonapin. `return` -JavaScript avainsanan tarkoittaa, mitä ikinä sen jälkeen tulee, palautetaan se arvo funktion kutsujalle. `<button>` on *JSX elementti*. JSX elementti on yhdistelmä JavaScript koodia ja HTML tageja, jotka kuvaavat mitä haluaisit näyttää. `className="square"` on painikkeen ominaisuus taikka *propsi*, joka ekertoo CSS:lle miten painike tulisi tyylittää. `X` on teksti, joka näytetään painikkeen sisällä, ja `</button>` sulkee JSX elementin osoittaen, että mitään seuraavaa sisältöä ei tulisi sijoittaa painikkeen sisälle.
 
 #### `styles.css` {/*stylescss*/}
 
-Click on the file labeled `styles.css` in the _Files_ section of CodeSandbox. This file defines the styles for your React app. The first two _CSS selectors_ (`*` and `body`) define the style of large parts of your app while the `.square` selector defines the style of any component where the `className` property is set to `square`. In your code, that would match the button from your Square component in the `App.js` file.
+Paina tiedostosta nimeltään `styles.css` CodeSandboxin _Files_ osiossa. Tämä tiedosto määrittelee React sovelluksesi tyylin. Ensimmäiset kaksi _CSS selektoria_ (`*` ja `body`) määrittävät suuren osan sovelluksestasi tyyleistä, kun taas `.square` selektori määrittää minkä tahansa komponentin tyylin, jossa `className` ominaisuus on asetettu `square` arvoon. Koodissasi tämä vastaa painiketta `Square` komponentissa `App.js` tiedostossa.
 
 #### `index.js` {/*indexjs*/}
 
-Click on the file labeled `index.js` in the _Files_ section of CodeSandbox. You won't be editing this file during the tutorial but it is the bridge between the component you created in the `App.js` file and the web browser.
+Paina tiedostosta nimeltään `index.js` CodeSandboxin _Files_ osiossa. Et tule muokkaamaan tätä tiedostoa oppaan aikana, mutta se on silta `App.js` tiedostossa luomasi komponentin ja selaimen välillä.
 
 ```jsx
 import { StrictMode } from 'react';
@@ -337,20 +339,20 @@ import './styles.css';
 import App from './App';
 ```
 
-Lines 1-5 brings all the necessary pieces together: 
+Rivit 1-5 tuovat kaikki tarvittavat palaset yhteen:
 
 * React
-* React's library to talk to web browsers (React DOM)
-* the styles for your components
-* the component you created in `App.js`.
+* Reactin kirjasto, jolla se juttelee selaimen kanssa (React DOM)
+* komponenttiesi tyylit
+* luomasi komponentti `App.js` tiedostossa.
 
-The remainder of the file brings all the pieces together and injects the final product into `index.html` in the `public` folder.
+Loput tiedostosta tuo kaikki palaset yhteen ja palauttaa lopputuotteen `index.html` tiedostoon `public` hakemistossa.
 
-### Building the board {/*building-the-board*/}
+### Pelilaudan rakentaminen {/*building-the-board*/}
 
-Let's get back to `App.js`. This is where you'll spend the rest of the tutorial.
+Palataan takaisin `App.js` tiedostoon. Tämä on missä tulet viettämään lopun oppaan ajasta.
 
-Currently the board is only a single square, but you need nine! If you just try and copy paste your square to make two squares like this:
+Nykyisillään pelilauta on vain yksi neliö, mutta tarvitset yhdeksän! Voit yrittää vain kopioida ja liittää neliösi tehdäksesi kaksi neliötä näin:
 
 ```js {2}
 export default function Square() {
@@ -358,7 +360,7 @@ export default function Square() {
 }
 ```
 
-You'll get this error:
+Saat tämän virheen:
 
 <ConsoleBlock level="error">
 
@@ -366,7 +368,7 @@ You'll get this error:
 
 </ConsoleBlock>
 
-React components need to return a single JSX element and not multiple adjacent JSX elements like two buttons. To fix this you can use *fragments* (`<>` and `</>`) to wrap multiple adjacent JSX elements like this:
+React komponenttien täytyy palauttaa yksi JSX elementti, ei useampia vierekkäisiä JSX elementtejä kun kaksi painonappia. Korjataksesi tämän käytä *fragmenttejä* (`<>` ja `</>`) käärimään useampia vierekkäisiä JSX elementtejä näin:
 
 ```js {3-6}
 export default function Square() {
@@ -379,17 +381,17 @@ export default function Square() {
 }
 ```
 
-Now you should see:
+Nyt näet:
 
-![two x-filled squares](../images/tutorial/two-x-filled-squares.png)
+![kaksi x:llä täytettyä neliötä](../images/tutorial/two-x-filled-squares.png)
 
-Great! Now you just need to copy-paste a few times to add nine squares and...
+Hyvä! Nyt sinun tulee kopioida ja littää muutaman kerran saadaksesi yhdeksän neliötä ja sitten....
 
-![nine x-filled squares in a line](../images/tutorial/nine-x-filled-squares.png)
+![yhdeksän x:llä täyettyä neliötä rivissä](../images/tutorial/nine-x-filled-squares.png)
 
-Oh no! The squares are all in a single line, not in a grid like you need for our board. To fix this you'll need to group your squares into rows with `div`s and add some CSS classes. While you're at it, you'll give each square a number to make sure you know where each square is displayed.
+Voi ei! Neliöt ovat kaikki yhdessä rivissä eikä ruudukossa kuten tarvitset sen pelilaudalla. Korjataksesi tämän sinun tulee ryhmitellä neliöt riveihin `div` elementeillä ja lisätä muutama CSS luokka. Samalla kun teet tämän, annat jokaiselle neliölle numeron varmistaaksesi, että tiedät missä jokainen neliö näytetään.
 
-In the `App.js` file, update the `Square` component to look like this:
+`App.js` tiedostossa, päivitä `Square` komponentti näyttämään tältä:
 
 ```js {3-19}
 export default function Square() {
@@ -415,11 +417,11 @@ export default function Square() {
 }
 ```
 
-The CSS defined in `styles.css` styles the divs with the `className` of `board-row`. Now that you've grouped your components into rows with the styled `div`s you have your tic-tac-toe board:
+`styles.css` tiedostossa määritelty CSS tyylittää divit `className`:n `board-row` arvolla. Nyt kun olet ryhmitellyt komponenttisi riveihin tyylitetyillä `div` elementeillä, sinulla on ristinolla-pelilauta:
 
-![tic-tac-toe board filled with numbers 1 through 9](../images/tutorial/number-filled-board.png)
+![ristinolla-pelilauta numeroitu yhdestä yhdeksään](../images/tutorial/number-filled-board.png)
 
-But you now have a problem. Your component named `Square`, really isn't a square anymore. Let's fix that by changing the name to `Board`:
+Mutta nyt sinulla on ongelma. Komponenttisi `Square` ei enää ole neliö. Korjataksesi tämän, muuta nimi `Square` komponentille `Board`:iksi:
 
 ```js {1}
 export default function Board() {
@@ -427,7 +429,7 @@ export default function Board() {
 }
 ```
 
-At this point your code should look something like this:
+Tässä kohtaa, koodisi tuli näyttää tämänkaltaiselta:
 
 <Sandpack>
 
@@ -504,15 +506,15 @@ body {
 
 <Note>
 
-Psssst... That's a lot to type! It's okay to copy and paste code from this page. However, if you're up for a little challenge, we recommend only copying code that you've manually typed at least once yourself.
+Pst... Tuossa on aika paljon kirjoitettavaa! On ihan ok kopioida ja liittää koodia tältä sivulta. Jos kuitenkin haluat haastetta, suosittelemme kopioida vain koodia, jonka olet kirjoittanut ainakin kerran itse.
 
 </Note>
 
-### Passing data through props {/*passing-data-through-props*/}
+### Datan välittäminen propseilla {/*passing-data-through-props*/}
 
-Next, you'll want to change the value of a square from empty to "X" when the user clicks on the square. With how you've built the board so far you would need to copy-paste the code that updates the square nine times (once for each square you have)! Instead of copy-pasting, React's component architecture allows you to create a reusable component to avoid messy, duplicated code.
+Seuraavaksi haluat muuttaa neliön arvon tyhjästä X:ksi kun käyttäjä painaa neliötä. Tällä hetkellä sinun täytyisi kopioida ja liittää koodi, joka päivittää neliön yhdeksän kertaa (kerran jokaiselle neliölle)! Sen sijaan, että kopioisit ja liittäisit, Reactin komponenttiarkkitehtuuri antaa sinun luoda uudelleenkäytettävän komponentin välttääksesi sotkuisen, toistuvan koodin.
 
-First, you are going to copy the line defining your first square (`<button className="square">1</button>`) from your `Board` component into a new `Square` component:
+Ensiksi, kopioit rivin, joka määrittelee ensimmäisen neliösi (`<button className="square">1</button>`) `Board` komponentistasi uuteen `Square` komponenttiin:
 
 ```js {1-3}
 function Square() {
@@ -524,7 +526,7 @@ export default function Board() {
 }
 ```
 
-Then you'll update the Board component to render that `Square` component using JSX syntax:
+Sitten päivität `Board` komponentin renderöimään sen `Square` komponentin käyttäen JSX syntaksia:
 
 ```js {5-19}
 // ...
@@ -551,15 +553,15 @@ export default function Board() {
 }
 ```
 
-Note how unlike the browser `div`s, your own components `Board` and `Square` must start with a capital letter. 
+Huomaa miten toisin kuin selainten `div`:it, omat komponenttisi `Board` ja `Square` täytyy alkaa isolla kirjaimella.
 
-Let's take a look:
+Katsotaanpa:
 
-![one-filled board](../images/tutorial/board-filled-with-ones.png)
+![pelilauta täytetty ykkösillä](../images/tutorial/board-filled-with-ones.png)
 
-Oh no! You lost the numbered squares you had before. Now each square says "1". To fix this, you will use *props* to pass the value each square should have from the parent component (`Board`) to its child (`Square`).
+Voi ei! Menetit numeroidut neliöt, jotka sinulla oli aiemmin. Nyt jokaisessa neliössä lukee "1". Korjataksesi tämän, käytä *propseja* välittääksesi arvon, jonka jokaisen neliön tulisi saada vanhemmalta komponentilta (`Board`) sen alakomponentille (`Square`).
 
-Update the `Square` component to read the `value` prop that you'll pass from the `Board`:
+Päivitä `Square` komponentti lukemaan `value` propsi, jonka välität `Board` komponentilta:
 
 ```js {1}
 function Square({ value }) {
@@ -567,9 +569,9 @@ function Square({ value }) {
 }
 ```
 
-`function Square({ value })` indicates the Square component can be passed a prop called `value`.
+`function Square({ value })` kertoo, että `Square` komponentille voidaan välittää `value` niminen propsi.
 
-Now you want to display that `value` instead of `1` inside every square. Try doing it like this:
+Nyt haluat näyttää `value` arvon `1`:n sijaan jokaisessa neliössä. Kokeile tehdä se näin:
 
 ```js {2}
 function Square({ value }) {
@@ -577,11 +579,11 @@ function Square({ value }) {
 }
 ```
 
-Oops, this is not what you wanted:
+Oho, tämä ei ollut mitä halusit:
 
-![value-filled board](../images/tutorial/board-filled-with-value.png)
+![pelilauta täytetty value tekstillä](../images/tutorial/board-filled-with-value.png)
 
-You wanted to render the JavaScript variable called `value` from your component, not the word "value". To "escape into JavaScript" from JSX, you need curly braces. Add curly braces around `value` in JSX like so:
+Halusit renderöidä JavaScript muuttujan nimeltään `value` komponentistasi, et sanan "value". Päästäksesi "takaisin JavaScriptiin" JSX:stä, tarvitset aaltosulkeet. Lisää aaltosulkeet `value`:n ympärille JSX:ssä näin:
 
 ```js {2}
 function Square({ value }) {
@@ -589,11 +591,11 @@ function Square({ value }) {
 }
 ```
 
-For now, you should see an empty board:
+Toistaiseksi, sinun tulisi nähdä tyhjä pelilauta:
 
-![empty board](../images/tutorial/empty-board.png)
+![tyhjä pelilauta](../images/tutorial/empty-board.png)
 
-This is because the `Board` component hasn't passed the `value` prop to each `Square` component it renders yet. To fix it you'll add the `value` prop to each `Square` component rendered by the `Board` component:
+Näin tapahtuu, koska `Board` komponentti ei ole välittänyt `value` propseja jokaiselle `Square` komponentille, jonka se renderöi. Korjataksesi tämän, lisää `value` propsi jokaiselle `Square` komponentille, jonka `Board` komponentti renderöi:
 
 ```js {5-7,10-12,15-17}
 export default function Board() {
@@ -619,11 +621,11 @@ export default function Board() {
 }
 ```
 
-Now you should see a grid of numbers again:
+Nyt sinun tulisi nähdä numeroitu ruudukko taas:
 
-![tic-tac-toe board filled with numbers 1 through 9](../images/tutorial/number-filled-board.png)
+![ristinolla-pelilauta täytetty yhdestä yhdeksään](../images/tutorial/number-filled-board.png)
 
-Your updated code should look like this:
+Päivitetyn koodisi tulisi näyttää tämänkaltaiselta:
 
 <Sandpack>
 
@@ -702,9 +704,9 @@ body {
 
 </Sandpack>
 
-### Making an interactive component {/*making-an-interactive-component*/}
+### Interaktiivisen komponentin luominen {/*making-an-interactive-component*/}
 
-Let's fill the `Square` component with an `X` when you click it. Declare a function called `handleClick` inside of the `Square`. Then, add `onClick` to the props of the button JSX element returned from the `Square`:
+Täytetään `Square` komponentti `X`:llä kun klikkaat sitä. Määritä funktio nimeltään `handleClick` `Square` komponentin sisällä. Sitten, lisää `onClick` prosi painonapin JSX elementtiin, joka palautetaan `Square` komponentista:
 
 ```js {2-4,9}
 function Square({ value }) {
@@ -723,19 +725,19 @@ function Square({ value }) {
 }
 ```
 
-If you click on a square now, you should see a log saying `"clicked!"` in the _Console_ tab at the bottom of the _Browser_ section in CodeSandbox. Clicking the square more than once will log `"clicked!"` again. Repeated console logs with the same message will not create more lines in the console. Instead, you will see an incrementing counter next to your first `"clicked!"` log.
+Jos painat neliöstä nyt, sinun tulisi nähdä loki, jossa lukee `"clicked!"` _Console_ välilehdellä _Browser_ osiossa CodeSandboxissa. Painamalla neliötä useammin kuin kerran, lokiin tulee uusi rivi, jossa lukee `"clicked!"`. Toistuvat lokit samalla viestillä eivät luo uusia rivejä lokiin. Sen sijaan, näet kasvavan laskurin ensimmäisen `"clicked!"` lokin vieressä.
 
 <Note>
 
-If you are following this tutorial using your local development environment, you need to open your browser's Console. For example, if you use the Chrome browser, you can view the Console with the keyboard shortcut **Shift + Ctrl + J** (on Windows/Linux) or **Option + ⌘ + J** (on macOS).
+Jos seuraat tätä opasta paikallisessa kehitysympäristössä, sinun tulee avata selaimen konsoli. Esimerkiksi, jos käytät Chrome selainta, voit avata konsolin näppäinyhdistelmällä **Shift + Ctrl + J** (Windows/Linux) tai **Option + ⌘ + J** (macOS).
 
 </Note>
 
-As a next step, you want the Square component to "remember" that it got clicked, and fill it with an "X" mark. To "remember" things, components use *state*.
+Seuraavaksi, haluat Square komponentin "muistavat", että sitä painettiin, ja täyttää sen "X" merkillä. Komponentit käyttävät *tilaa* muistaakseen asioita.
 
-React provides a special function called `useState` that you can call from your component to let it "remember" things. Let's store the current value of the `Square` in state, and change it when the `Square` is clicked.
+React tarjoaa erityisen funktion nimeltään `useState`, jota voit kutsua komponentistasi, jotta se "muistaa" asioita. Tallennetaan `Square` komponentin nykyinen arvo tilaan ja muutetaan sitä, kun `Square` painetaan.
 
-Import `useState` at the top of the file. Remove the `value` prop from the `Square` component. Instead, add a new line at the start of the `Square` that calls `useState`. Have it return a state variable called `value`:
+Importtaa `useState` tiedoston ylläosassa. Poista `value` propsi `Square` komponentista. Sen sijaan, lisää uusi rivi `Square` komponentin alkuun, joka kutsuu `useState`:a. Anna sen palauttaa tilamuuttuja nimeltään `value`:
 
 ```js {1,3,4}
 import { useState } from 'react';
@@ -747,9 +749,9 @@ function Square() {
     //...
 ```
 
-`value` stores the value and `setValue` is a function that can be used to change the value. The `null` passed to `useState` is used as the initial value for this state variable, so `value` here starts off equal to `null`.
+`value` pitää sisällään arvon ja `setValue` on funktio, jota voidaan käyttää muuttamaan arvoa. `null`, joka välitetään `useState`:lle, käytetään alkuperäisenä arvona tälle tilamuuttujalle, joten `value` on aluksi `null`.
 
-Since the `Square` component no longer accepts props anymore, you'll remove the `value` prop from all nine of the Square components created by the Board component:
+Koska `Square` komponentti ei enää hyväksy propseja, poistat `value` propin kaikista yhdeksästä `Square` komponentista, jotka `Board` komponentti luo:
 
 ```js {6-8,11-13,16-18}
 // ...
@@ -776,7 +778,7 @@ export default function Board() {
 }
 ```
 
-Now you'll change `Square` to display an "X" when clicked. Replace the `console.log("clicked!");` event handler with `setValue('X');`. Now your `Square` component looks like this:
+Nyt muutat `Square`:n näyttämään "X":n kun sitä painetaan. Korvaa `console.log("clicked!");` tapahtumankäsittelijä `setValue('X');`:lla. Nyt `Square` komponenttisi näyttää tältä:
 
 ```js {5}
 function Square() {
@@ -797,13 +799,13 @@ function Square() {
 }
 ```
 
-By calling this `set` function from an `onClick` handler, you're telling React to re-render that `Square` whenever its `<button>` is clicked. After the update, the `Square`'s `value` will be `'X'`, so you'll see the "X" on the game board. Click on any Square, and "X" should show up:
+Kutsumalla `set` funktiota `onClick` käsittelijästä, kerrot Reactille renderöidä `Square`:n uudelleen aina kun sen `<button>`:ia painetaan. Päivityksen jälkeen, `Square`n `value` on `'X'`, joten näet "X":n pelilaudalla. Paina mitä tahansa neliötä, ja "X":n tulisi näkyä:
 
-![adding xes to board](../images/tutorial/tictac-adding-x-s.gif)
+![x merkkien lisääminen pelilaudalle](../images/tutorial/tictac-adding-x-s.gif)
 
-Each Square has its own state: the `value` stored in each Square is completely independent of the others. When you call a `set` function in a component, React automatically updates the child components inside too.
+Jokaisella Squarella on sen oma tila: `value` joka on tallennettu jokaisessa Squaressa on täysin riippumaton muista. Kun kutsut `set` funktiota komponentissa, React päivittää automaattisesti myös alakomponentit.
 
-After you've made the above changes, your code will look like this:
+Kun olet tehnyt yllä olevat muutokset, koodisi tulisi näyttää tältä:
 
 <Sandpack>
 
@@ -897,37 +899,37 @@ body {
 
 </Sandpack>
 
-### React Developer Tools {/*react-developer-tools*/}
+### React kehitystyökalut {/*react-developer-tools*/}
 
-React DevTools let you check the props and the state of your React components. You can find the React DevTools tab at the bottom of the _browser_ section in CodeSandbox:
+React kehitystyökalujen avulla voit tarkastella React komponenttiesi propseja ja tilaa. React DevTools välilehti löytyy _browser_ osion alapuolelta CodeSandboxissa:
 
-![React DevTools in CodeSandbox](../images/tutorial/codesandbox-devtools.png)
+![React DevTools CodeSandboxissa](../images/tutorial/codesandbox-devtools.png)
 
-To inspect a particular component on the screen, use the button in the top left corner of React DevTools:
+Tarkastellaksesi tiettyä komponenttia ruudulla, käytä nappia React DevToolsin vasemmassa yläkulmassa:
 
-![Selecting components on the page with React DevTools](../images/tutorial/devtools-select.gif)
+![Komponentin valinta sivulla React DevToolsissa](../images/tutorial/devtools-select.gif)
 
 <Note>
 
-For local development, React DevTools is available as a [Chrome](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi?hl=en), [Firefox](https://addons.mozilla.org/en-US/firefox/addon/react-devtools/), and [Edge](https://microsoftedge.microsoft.com/addons/detail/react-developer-tools/gpphkfbcpidddadnkolkpfckpihlkkil) browser extension. Install it, and the *Components* tab will appear in your browser Developer Tools for sites using React.
+Paikallisessa kehityksessä, React DevTools on saatavilla [Chrome](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi?hl=en), [Firefox](https://addons.mozilla.org/en-US/firefox/addon/react-devtools/), ja [Edge](https://microsoftedge.microsoft.com/addons/detail/react-developer-tools/gpphkfbcpidddadnkolkpfckpihlkkil) selainlaajennuksena. Asenna se, ja *Components* välilehti ilmestyy selaimen kehitystyökaluihin sivuille, jotka käyttävät Reactia.
 
 </Note>
 
-## Completing the game {/*completing-the-game*/}
+## Pelin viimeistely {/*completing-the-game*/}
 
-By this point, you have all the basic building blocks for your tic-tac-toe game. To have a complete game, you now need to alternate placing "X"s and "O"s on the board, and you need a way to determine a winner.
+Tähän mennessä, sinulla on kaikki peruspalikat ristinolla-peliisi. Saadaksesi täydellisen pelin, sinun täytyy nyt vuorotella "X":n ja "O":n laittamista pelilaudalle, ja sinun täytyy keksiä tapa määrittää voittaja.
 
-### Lifting state up {/*lifting-state-up*/}
+### Tilan nostaminen ylös {/*lifting-state-up*/}
 
-Currently, each `Square` component maintains a part of the game's state. To check for a winner in a tic-tac-toe game, the `Board` would need to somehow know the state of each of the 9 `Square` components.
+Tällä hetkellä, jokainen `Square` komponentti ylläpitää osaa pelin tilasta. Voittaaksesi ristinolla-pelin, `Board` komponentin täytyy jotenkin tietää jokaisen yhdeksän `Square` komponentin tila.
 
-How would you approach that? At first, you might guess that the `Board` needs to "ask" each `Square` for that `Square`'s state. Although this approach is technically possible in React, we discourage it because the code becomes difficult to understand, susceptible to bugs, and hard to refactor. Instead, the best approach is to store the game's state in the parent `Board` component instead of in each `Square`. The `Board` component can tell each `Square` what to display by passing a prop, like you did when you passed a number to each Square.
+Miten lähestyisit tätä? Aluksi, kuten saatat arvata, `Board`:n täytyy "kysyä" jokaiselta `Square`:lta sen tila. Vaikka tämä lähestymistapa on teknisesti mahdollista Reactissa, emme suosittele sitä, koska koodista tulee vaikeaa ymmärtää, altistaen se bugeille, ja vaikea refaktoroida. Sen sijaan, paras lähestymistapa on tallentaa pelin tila ylemmässä `Board` komponentissa jokaisen `Square` komponentin sijaan. `Board` komponentti voi kertoa jokaiselle `Square` komponentille mitä näyttää välittämällä propseja, kuten teit kun välitit numeron jokaiselle `Square` komponentille.
 
-**To collect data from multiple children, or to have two child components communicate with each other, declare the shared state in their parent component instead. The parent component can pass that state back down to the children via props. This keeps the child components in sync with each other and with their parent.**
+**Kerätäksesi dataa useammista alakomponenteista, tai saadaksesi kahden alakomponentin kommunikoimaan toistensa kanssa, määritä jaettu tila niitä ylemmässä komponentissa. Ylempi komponentti voi välittää tilan takaisin alakomponenteilleen propseina. Tämä pitää alakomponentit synkronoituina toistensa ja yläkomponentin kanssa.**
 
-Lifting state into a parent component is common when React components are refactored.
+Tilan nostaminen yläkomponenttiin on yleistä kun React komponentteja refaktoroidaan.
 
-Let's take this opportunity to try it out. Edit the `Board` component so that it declares a state variable named `squares` that defaults to an array of 9 nulls corresponding to the 9 squares:
+Otetaan tilaisuus kokeilla tätä. Muokkaa `Board` komponenttia siten, että se määrittelee tilamuuttujan nimeltään `squares`, joka oletuksena on taulukko, jossa on yhdeksän `null` arvoa vastaten yhdeksää neliötä:
 
 ```js {3}
 // ...
@@ -939,13 +941,13 @@ export default function Board() {
 }
 ```
 
-`Array(9).fill(null)` creates an array with nine elements and sets each of them to `null`. The `useState()` call around it declares a `squares` state variable that's initially set to that array. Each entry in the array corresponds to the value of a square. When you fill the board in later, the `squares` array will look like this:
+`Array(9).fill(null)` luo taulukon yhdeksällä kohdalla ja asettaa jokaisen niistä `null` arvoon. `useState()` kutsu sen ympärillä määrittelee `squares` tilamuuttujan, jonka arvo on aluksi asetettu tuohon taulukkoon. Jokainen taulukon kohta vastaa neliön arvoa. Kun täytät pelilaudan myöhemmin, `squares` taulukko näyttää tältä:
 
 ```jsx
 ['O', null, 'X', 'X', 'X', 'O', 'O', null, null]
 ```
 
-Now your `Board` component needs to pass the `value` prop down to each `Square` that it renders:
+Nyt `Board` komponenttisi täytyy välittää `value` propsi jokaiselle `Square` komponentille, jonka se renderöi:
 
 ```js {6-8,11-13,16-18}
 export default function Board() {
@@ -972,7 +974,7 @@ export default function Board() {
 }
 ```
 
-Next, you'll edit the `Square` component to receive the `value` prop from the Board component. This will require removing the Square component's own stateful tracking of `value` and the button's `onClick` prop:
+Seuraavakasi, muokkaa `Square` komponentti vastaanottamaan `value` propsi Board komponentilta. Tämä vaatii `Square` komponentin oman tilamuuttujan `value` ja painonapin `onClick` propsin poistamisen:
 
 ```js {1,2}
 function Square({value}) {
@@ -980,11 +982,11 @@ function Square({value}) {
 }
 ```
 
-At this point you should see an empty tic-tac-toe board:
+Tässä kohtaa sinun tulisi nähdä tyhjä ristinolla-pelilauta:
 
-![empty board](../images/tutorial/empty-board.png)
+![tyhjä pelilauta](../images/tutorial/empty-board.png)
 
-And your code should look like this:
+Ja koodisi tulisi näyttää tältä:
 
 <Sandpack>
 
@@ -1066,11 +1068,11 @@ body {
 
 </Sandpack>
 
-Each Square will now receive a `value` prop that will either be `'X'`, `'O'`, or `null` for empty squares.
+Jokainen Square saa nyt `value` propsin, joka on joko `'X'`, `'O'`, tai `null` tyhjille neliöille.
 
-Next, you need to change what happens when a `Square` is clicked. The `Board` component now maintains which squares are filled. You'll need to create a way for the `Square` to update the `Board`'s state. Since state is private to a component that defines it, you cannot update the `Board`'s state directly from `Square`.
+Seuraavaksi, sinun täytyy muuttaa mitä tapahtuu kun `Square`:a klikataan. `Board` komponentti nyt ylläpitää mitkä neliöt ovat täytettyjä. Sinun täytyy luoda tapa `Square`:lle päivittää `Board`:n tila. Koska tila on yksityistä komponentille, joka sen määrittelee, et voi päivittää `Board`:n tilaa suoraan `Square`:sta.
 
-Instead, you'll pass down a function from the `Board` component to the `Square` component, and you'll have `Square` call that function when a square is clicked. You'll start with the function that the `Square` component will call when it is clicked. You'll call that function `onSquareClick`:
+Sen sijaan, välität funktion `Board` komponentista `Square` komponentille, ja kutsut sitä `Square`:sta kun neliötä painetaan. Aloitat funktiosta, jota `Square` komponentti kutsuu kun sitä painetaan. Kutsut sitä `onSquareClick`:ssa:
 
 ```js {3}
 function Square({ value }) {
@@ -1082,7 +1084,7 @@ function Square({ value }) {
 }
 ```
 
-Next, you'll add the `onSquareClick` function to the `Square` component's props:
+Seuraavaksi, lisäät `onSquareClick` funktion `Square` komponentin propseihin:
 
 ```js {1}
 function Square({ value, onSquareClick }) {
@@ -1094,7 +1096,7 @@ function Square({ value, onSquareClick }) {
 }
 ```
 
-Now you'll connect the `onSquareClick` prop to a function in the `Board` component that you'll name `handleClick`. To connect `onSquareClick` to `handleClick` you'll pass a function to the `onSquareClick` prop of the first `Square` component: 
+Nyt yhdistät `onSquareClick` propsin `Board` komponentin funktioon, jonka nimeät `handleClick`. Yhdistääksesi `onSquareClick` `handleClick`:iin, välität funktion `onSquareClick` propsin ensimmäiselle `Square` komponentille:
 
 ```js {7}
 export default function Board() {
@@ -1109,7 +1111,7 @@ export default function Board() {
 }
 ```
 
-Lastly, you will define the `handleClick` function inside the Board component to update the `squares` array holding your board's state:
+Lopuksi, määrittelet `handleClick` funktion Board komponentin sisällä päivittämään `squares` taulukon ylläpitämään pelilaudan tilaa:
 
 ```js {4-8}
 export default function Board() {
@@ -1127,17 +1129,17 @@ export default function Board() {
 }
 ```
 
-The `handleClick` function creates a copy of the `squares` array (`nextSquares`) with the JavaScript `slice()` Array method. Then, `handleClick` updates the `nextSquares` array to add `X` to the first (`[0]` index) square.
+`handleClick` funktio luo kopion `squares` taulukosta (`nextSquares`) JavaScriptin `slice()` taulukkometodilla. Sitten, `handleClick` päivittää `nextSquares` taulukon lisäämällä `X`:n ensimmäiseen (`[0]` indeksi) neliöön.
 
-Calling the `setSquares` function lets React know the state of the component has changed. This will trigger a re-render of the components that use the `squares` state (`Board`) as well as its child components (the `Square` components that make up the board).
+Kutsumalla `setSquares` funktiota kerrot Reactille, että komponentin tila on muuttunut. Tämä käynnistää renderöinnin komponenteille, jotka käyttävät `squares` tilaa (`Board`) sekä sen alakomponenteille (`Square` komponentit, jotka muodostavat pelilaudan).
 
 <Note>
 
-JavaScript supports [closures](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Closures) which means an inner function (e.g. `handleClick`) has access to variables and functions defined in a outer function (e.g. `Board`). The `handleClick` function can read the `squares` state and call the `setSquares` method because they are both defined inside of the `Board` function.
+JavaScript tukee [closureja](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Closures), mikä tarkoittaa, että sisäinen funktio (esim. `handleClick`) pääsee käsiksi muuttujiin ja funktioihin, jotka on määritelty ulomman funktion sisällä (esim. `Board`). `handleClick` funktio voi lukea `squares` tilaa ja kutsua `setSquares` metodia, koska ne molemmat on määritelty `Board` funktion sisällä.
 
 </Note>
 
-Now you can add X's to the board...  but only to the upper left square. Your `handleClick` function is hardcoded to update the index for the upper left square (`0`). Let's update `handleClick` to be able to update any square. Add an argument `i` to the `handleClick` function that takes the index of the square to update:
+Nyt voit lisätä X:ät pelilaudalle... mutta vain ylävasempaan neliöön. `handleClick` funktiosi on kovakoodattu päivittämään ylävasemman neliön indeksiä (`0`). Päivitetään `handleClick` funktio päivittämään mitä tahansa neliötä. Lisää argumentti `i` `handleClick` funktioon, joka ottaa neliön indeksin, jota päivittää:
 
 ```js {4,6}
 export default function Board() {
@@ -1155,13 +1157,13 @@ export default function Board() {
 }
 ```
 
-Next, you will need to pass that `i` to `handleClick`. You could try to set the `onSquareClick` prop of square to be `handleClick(0)` directly in the JSX like this, but it won't work:
+Seuraavaksi, sinun täytyy välittää `i` `handleClick`:lle. Voit yrittää asettaa `onSquareClick` propin neliölle suoraan JSX:ssä `handleClick(0)` näin, mutta se ei toimi:
 
 ```jsx
 <Square value={squares[0]} onSquareClick={handleClick(0)} />
 ```
 
-Here is why this doesn't work. The `handleClick(0)` call will be a part of rendering the board component. Because `handleClick(0)` alters the state of the board component by calling `setSquares`, your entire board component will be re-rendered again. But this runs `handleClick(0)` again, leading to an infinite loop:
+Syy miksi tämä ei toimi on, `handleClick(0)` kustu on osa pelilaudan renderöintiä. Koska `handleClick(0)` muuttaa pelilaudan tilaa kutsumalla `setSquares`:ia, koko pelilauta renderöidään uudelleen. Mutta tämä ajaa `handleClick(0)` uudelleen, mikä johtaa loputtomaan silmukkaan:
 
 <ConsoleBlock level="error">
 
@@ -1169,13 +1171,13 @@ Too many re-renders. React limits the number of renders to prevent an infinite l
 
 </ConsoleBlock>
 
-Why didn't this problem happen earlier?
+Miksi tämä ongelma ei tapahtunut aiemmin?
 
-When you were passing `onSquareClick={handleClick}`, you were passing the `handleClick` function down as a prop. You were not calling it! But now you are *calling* that function right away--notice the parentheses in `handleClick(0)`--and that's why it runs too early. You don't *want* to call `handleClick` until the user clicks!
+Kun välitit `onSquareClick={handleClick}`, välitit `handleClick` funktion propseina. Et kutsunut sitä! Mutta nyt kutsut sitä heti--huomaa sulkeet `handleClick(0)`--ja siksi se ajetaan liian aikaisin. Et *halua* kutsua `handleClick` ennen kuin käyttäjä klikkaa!
 
-You could fix this by creating a function like `handleFirstSquareClick` that calls `handleClick(0)`, a function like `handleSecondSquareClick` that calls `handleClick(1)`, and so on. You would pass (rather than call) these functions down as props like `onSquareClick={handleFirstSquareClick}`. This would solve the infinite loop.
+Voisit korjata tämän tekemällä funktion kuten `handleFirstSquareClick`, joka kutsuu `handleClick(0)`, funktion kuten `handleSecondSquareClick`, joka kutsuu `handleClick(1)`, ja niin edelleen. Välittäisit (et kutsuisi) näitä funktioita propseina kuten `onSquareClick={handleFirstSquareClick}`. Tämä korjaisi loputtoman silmukan.
 
-However, defining nine different functions and giving each of them a name is too verbose. Instead, let's do this:
+Yhdeksän eri funktion määritteleminen ja nimeäminen on liian raskasta. Sen sijaan tehdään näin:
 
 ```js {6}
 export default function Board() {
@@ -1189,9 +1191,9 @@ export default function Board() {
 }
 ```
 
-Notice the new `() =>` syntax. Here, `() => handleClick(0)` is an *arrow function,* which is a shorter way to define functions. When the square is clicked, the code after the `=>` "arrow" will run, calling `handleClick(0)`.
+Huomaa uusi `() =>` syntaksi. Tässä, `() => handleClick(0)` on *nuolifunktio*, joka on lyhyempi tapa määritellä funktioita. Kun neliötä painetaan, koodi `=>` "nuolen" jälkeen ajetaan, kutsuen `handleClick(0)`.
 
-Now you need to update the other eight squares to call `handleClick` from the arrow functions you pass. Make sure that the argument for each call of the `handleClick` corresponds to the index of the correct square:
+Nyt sinun tulee päivittää muut kahdeksan neliötä kutsumaan `handleClick` nuolifunktioista, jotka välität. Varmista, että argumentti jokaiselle `handleClick` kutsulle vastaa oikean neliön indeksiä:
 
 ```js {6-8,11-13,16-18}
 export default function Board() {
@@ -1218,13 +1220,13 @@ export default function Board() {
 };
 ```
 
-Now you can again add X's to any square on the board by clicking on them:
+Nyt voit taas lisätä X:ät mihin tahansa neliöön pelilaudalla painamalla niitä:
 
-![filling the board with X](../images/tutorial/tictac-adding-x-s.gif)
+![pelilaudan täyttäminen x:llä](../images/tutorial/tictac-adding-x-s.gif)
 
-But this time all the state management is handled by the `Board` component!
+Mutta tällä kertaa tilanhallinta on `Board` komponentin vastuulla!
 
-This is what your code should look like:
+Tämä on mitä koodisi tulisi näyttää:
 
 <Sandpack>
 
@@ -1317,53 +1319,53 @@ body {
 
 </Sandpack>
 
-Now that your state handling is in the `Board` component, the parent `Board` component passes props to the child `Square` components so that they can be displayed correctly. When clicking on a `Square`, the child `Square` component now asks the parent `Board` component to update the state of the board. When the `Board`'s state changes, both the `Board` component and every child `Square` re-renders automatically. Keeping the state of all squares in the `Board` component will allow it to determine the winner in the future.
+Nyt kun tilanhallintasi on `Board` komponentissa, yläkomponentti `Board` välittää propseja alakomponenteille `Square` komponenteille, jotta ne voidaan näyttää oikein. Kun neliötä painetaan, alakomponentti `Square` kysyy yläkomponentti `Board`:lta tilan päivittämistä pelilaudalla. Kun `Board`:n tila muuttuu, sekä `Board` komponentti että jokainen `Square` renderöidään uudelleen automaattisesti. Pitämällä kaikkien neliöiden tila `Board` komponentissa, se pystyy määrittämään voittajan tulevaisuudessa.
 
-Let's recap what happens when a user clicks the top left square on your board to add an `X` to it:
+Käydään läpi mitä tapahtuu kun käyttäjä painaa ylävasenta neliötä pelilaudalla lisätäkseen siihen `X`:n:
 
-1. Clicking on the upper left square runs the function that the `button` received as its `onClick` prop from the `Square`. The `Square` component received that function as its `onSquareClick` prop from the `Board`. The `Board` component defined that function directly in the JSX. It calls `handleClick` with an argument of `0`.
-1. `handleClick` uses the argument (`0`) to update the first element of the `squares` array from `null` to `X`.
-1. The `squares` state of the `Board` component was updated, so the `Board` and all of its children re-render. This causes the `value` prop of the `Square` component with index `0` to change from `null` to `X`.
+1. Ylävasemman neliön klikkaaminen suorittaa funktion, jonka `button` sai `onClick` propsina `Square` komponentilta. `Square` komponentti sai funktion `onSquareClick` propsina `Board` komponentilta. `Board` komponentti määritteli funktion suoraan JSX:ssä. Se kutsuu `handleClick` funktiota argumentilla `0`.
+1. `handleClick` käyttää argumenttia (`0`) päivittääkseen `squares` taulukon ensimmäisen elementin `null` arvosta `X` arvoon.
+1. `squares` tila `Board` komponentissa päivitettiin, joten `Board` ja kaikki sen alakomponentit renderöitiin uudelleen. Tämä aiheuttaa `Square` komponentin `value` propin muuttumisen indeksillä `0` `null` arvosta `X` arvoon.
 
-In the end the user sees that the upper left square has changed from empty to having a `X` after clicking it.
+Lopussa käyttäjä näkee, että ylävasen neliö on muuttunut tyhjästä `X`:ksi sen painamisen jälkeen.
 
 <Note>
 
-The DOM `<button>` element's `onClick` attribute has a special meaning to React because it is a built-in component. For custom components like Square, the naming is up to you. You could give any name to the `Square`'s `onSquareClick` prop or `Board`'s `handleClick` function, and the code would work the same. In React, it's conventional to use `onSomething` names for props which represent events and `handleSomething` for the function definitions which handle those events.
+DOM `<button>` elementin `onClick` attribuutilla on erityinen merkitys Reactissa, koska se on sisäänrakennettu komponentti. Mukautetuille komponenteille kuten `Square`, nimeäminen on sinusta kiinni. Voit antaa minkä tahansa nimen `Square` komponentin `onSquareClick` propsille tai `Board` komponentin `handleClick` funktiolle, ja koodi toimisi samalla tavalla. Reactissa, yleinen tapa on käyttää `onSomething` nimiä propseille, jotka edustavat tapahtumia ja `handleSomething` funktioille, jotka käsittelevät näitä tapahtumia.
 
 </Note>
 
-### Why immutability is important {/*why-immutability-is-important*/}
+### Miksi muuttumattomuus on tärkeää {/*why-immutability-is-important*/}
 
-Note how in `handleClick`, you call `.slice()` to create a copy of the `squares` array instead of modifying the existing array. To explain why, we need to discuss immutability and why immutability is important to learn.
+Huomaa miten `handleClick`:ssa kutsut `.slice()` luodaksesi kopion `squares` taulukosta sen sijaan, että muuttaisit olemassaolevaa taulukkoa. Selittääksemme miksi, meidän täytyy keskustella muuttumattomuudesta ja miksi muuttumattomuus on tärkeää oppia.
 
-There are generally two approaches to changing data. The first approach is to _mutate_ the data by directly changing the data's values. The second approach is to replace the data with a new copy which has the desired changes. Here is what it would look like if you mutated the `squares` array:
+On kaksi yleistä tapaa muuttaa dataa. Ensimmäinen tapa on *mutatoida* dataa muuttamalla suoraan datan arvoja. Toinen tapa on korvata data uudella kopiolla, jossa on halutut muutokset. Tässä on miltä se näyttäisi, jos mutatoisit `squares` taulukkoa:
 
 ```jsx
 const squares = [null, null, null, null, null, null, null, null, null];
 squares[0] = 'X';
-// Now `squares` is ["X", null, null, null, null, null, null, null, null];
+// Nyt`squares` on arvoltaan ["X", null, null, null, null, null, null, null, null];
 ```
 
-And here is what it would look like if you changed data without mutating the `squares` array:
+Ja tässä on miltä se näyttäisi jos muuttaisit dataa mutatoimatta `squares` taulukkoa:
 
 ```jsx
 const squares = [null, null, null, null, null, null, null, null, null];
 const nextSquares = ['X', null, null, null, null, null, null, null, null];
-// Now `squares` is unchanged, but `nextSquares` first element is 'X' rather than `null`
+// Nyt `squares` on muttumaton, mutta `nextSquares`:n ensimmäinen solu on 'X' `null`:n sijaan
 ```
 
-The result is the same but by not mutating (changing the underlying data) directly, you gain several benefits.
+Lopputulos on sama, mutta mutatoimatta (muuttamatta alla olevaa dataa) suoraan, saat useita etuja.
 
-Immutability makes complex features much easier to implement. Later in this tutorial, you will implement a "time travel" feature that lets you review the game's history and "jump back" to past moves. This functionality isn't specific to games--an ability to undo and redo certain actions is a common requirement for apps. Avoiding direct data mutation lets you keep previous versions of the data intact, and reuse them later.
+Muuttumattomuus tekee monimutkaisten ominaisuuksien toteuttamisesta paljon helpompaa. Myöhemmin tässä oppaassa, toteutat "aikamatkustuksen" ominaisuuden, joka antaa sinun tarkastella pelin historiaa ja "hypätä takaisin" menneisiin siirtoihin. Tämä toiminnallisuus ei ole pelien erityispiirre--kyky peruuttaa ja palauttaa tiettyjä toimintoja on yleinen vaatimus sovelluksille. Suoran datan mutaation välttäminen antaa sinun pitää edelliset versiot datasta ehjänä, ja käyttää niitä myöhemmin.
 
-There is also another benefit of immutability. By default, all child components re-render automatically when the state of a parent component changes. This includes even the child components that weren't affected by the change. Although re-rendering is not by itself noticeable to the user (you shouldn't actively try to avoid it!), you might want to skip re-rendering a part of the tree that clearly wasn't affected by it for performance reasons. Immutability makes it very cheap for components to compare whether their data has changed or not. You can learn more about how React chooses when to re-render a component in [the `memo` API reference](/reference/react/memo).
+On myös toinen etu muuttumattomuudessa. Oletuksena, kaikki lapsikomponentit renderöidään automaattisesti uudelleen, kun yläkomponentin tila muuttuu. Tämä sisältää jopa lapsikomponentit, jotka eivät olleet vaikuttuneita muutoksesta. Vaikka renderöinti ei ole itsessään huomattavaa käyttäjälle (sinun ei pitäisi aktiivisesti yrittää välttää sitä!), saatat haluta ohittaa renderöinnin puun osalta, joka ei selvästi ollut vaikuttunut siitä suorituskyky syistä. Muuttumattomuus tekee hyvin halvaksi komponenteille verrata onko niiden data muuttunut vai ei. Voit oppia lisää siitä, miten React valitsee milloin renderöidä komponentti uudelleen [`memo` API referenssistä](/reference/react/memo).
 
-### Taking turns {/*taking-turns*/}
+### Vuorojen ottaminen {/*taking-turns*/}
 
-It's now time to fix a major defect in this tic-tac-toe game: the "O"s cannot be marked on the board.
+Nyt on aika korjata suuri vika tässä ristinolla-pelissä: "0":a ei voi merkitä pelilaudalle.
 
-You'll set the first move to be "X" by default. Let's keep track of this by adding another piece of state to the Board component:
+Asetat ensimmäisen siirron oletuksena "X":ksi. Pidetään kirjaa tästä lisäämällä toinen tilamuuttuja `Board` komponenttiin:
 
 ```js {2}
 function Board() {
@@ -1374,7 +1376,7 @@ function Board() {
 }
 ```
 
-Each time a player moves, `xIsNext` (a boolean) will be flipped to determine which player goes next and the game's state will be saved. You'll update the `Board`'s `handleClick` function to flip the value of `xIsNext`:
+Joka kerta kun pelaaja siirtää, `xIsNext` (totuusarvo) käännetään määrittämään kumpi pelaaja siirtää seuraavaksi ja pelin tila tallennetaan. Päivität `Board` komponentin `handleClick` funktion kääntämään `xIsNext` arvon:
 
 ```js {7,8,9,10,11,13}
 export default function Board() {
@@ -1398,15 +1400,15 @@ export default function Board() {
 }
 ```
 
-Now, as you click on different squares, they will alternate between `X` and `O`, as they should!
+Nyt kun klikkaat eri neliöitä, ne vaihtelevat `X` ja `0` välillä, kuten niiden pitäisi!
 
-But wait, there's a problem. Try clicking on the same square multiple times:
+Mutta hetkonen, tässä on ongelma. Kokeile klikata samaa neliötä useamman kerran:
 
-![O overwriting an X](../images/tutorial/o-replaces-x.gif)
+![0 ylikirjoittaa X:n](../images/tutorial/o-replaces-x.gif)
 
-The `X` is overwritten by an `O`! While this would add a very interesting twist to the game, we're going to stick to the original rules for now.
+`X` ylikirjoitetaan `0`:lla! Vaikka tämä lisäisikin mielenkiint0isen käänteen peliin, pysytään alkuperäisissä säännöissä toistaiseksi.
 
-When you mark a square with a `X` or an `O` you aren't first checking to see if the square already has a `X` or `O` value. You can fix this by *returning early*. You'll check to see if the square already has a `X` or an `O`. If the square is already filled, you will `return` in the `handleClick` function early--before it tries to update the board state.
+Kun merkitset neliön `X`:llä tai `0`:lla, et ensin tarkista onko neliöllä jo `X` tai `0` arvoa. Voit korjata tämän *palaamalla aikaisin*. Tarkistat onko neliöllä jo `X` tai `0` arvo. Jos neliö on jo täytetty, `return` `handleClick` funktiossa aikaisin--ennen kuin se yrittää päivittää pelilaudan tilaa.
 
 ```js {2,3,4}
 function handleClick(i) {
@@ -1418,7 +1420,7 @@ function handleClick(i) {
 }
 ```
 
-Now you can only add `X`'s or `O`'s to empty squares! Here is what your code should look like at this point:
+Nyt voit lisätä vain `X` tai `0` tyhjille neliöille! Tässä on mitä koodisi tulisi näyttää tässä vaiheessa:
 
 <Sandpack>
 
@@ -1520,9 +1522,9 @@ body {
 
 </Sandpack>
 
-### Declaring a winner {/*declaring-a-winner*/}
+### Voittajan päättäminen {/*declaring-a-winner*/}
 
-Now that the players can take turns, you'll want to show when the game is won and there are no more turns to make. To do this you'll add a helper function called `calculateWinner` that takes an array of 9 squares, checks for a winner and returns `'X'`, `'O'`, or `null` as appropriate. Don't worry too much about the `calculateWinner` function; it's not specific to React:
+Nyt kun pelaajat voivat ottaa vuoroja, haluat näyttää kun peli on voitettu ja ei ole enää vuoroja tehtävänä. Tämän tekemiseksi lisäät apufunktion nimeltä `calculateWinner`, joka ottaa yhdeksän neliön taulukon, tarkistaa onko voittaja ja palauttaa `'X'`, `'O'`, tai `null` tarvittaessa. Älä huoli liikaa `calculateWinner` funktiosta; se ei ole Reactiin erityinen:
 
 ```js App.js
 export default function Board() {
@@ -1552,11 +1554,11 @@ function calculateWinner(squares) {
 
 <Note>
 
-It does not matter whether you define `calculateWinner` before or after the `Board`. Let's put it at the end so that you don't have to scroll past it every time you edit your components.
+Ei ole väliä määritteletkö `calculateWinner` ennen vai jälkeen `Board`:n. Laitetaan se loppuun, jotta sinun ei tarvitse selata sen ohi joka kerta kun muokkaat komponenttejasi.
 
 </Note>
 
-You will call `calculateWinner(squares)` in the `Board` component's `handleClick` function to check if a player has won. You can perform this check at the same time you check if a user has clicked a square that already has a `X` or and `O`. We'd like to return early in both cases:
+Kutsut `calculateWinner(squares)` `Board` komponentin `handleClick` funktiossa tarkistaaksesi onko pelaaja voittanut. Voit suorittaa tämän tarkistuksen samaan aikaan kun tarkistat onko käyttäjä klikannut neliötä, jossa on jo `X` tai `O`. Haluamme palata aikaisin molemmissa tapauksissa:
 
 ```js {2}
 function handleClick(i) {
@@ -1568,7 +1570,7 @@ function handleClick(i) {
 }
 ```
 
-To let the players know when the game is over, you can display text such as "Winner: X" or "Winner: O". To do that you'll add a `status` section to the `Board` component. The status will display the winner if the game is over and if the game is ongoing you'll display which player's turn is next:
+Antaaksesi pelaajiesi tietää milloin peli on ohi, voit näyttää tekstin kuten "Voittaja: X" tai "Voittaja: 0". Tämän tekemiseksi lisäät `status` osion `Board` komponenttiin. Status näyttää voittajan, jos peli on ohi ja jos peli on kesken, näytät kumman pelaajan vuoro on seuraavaksi:
 
 ```js {3-9,13}
 export default function Board() {
@@ -1576,9 +1578,9 @@ export default function Board() {
   const winner = calculateWinner(squares);
   let status;
   if (winner) {
-    status = "Winner: " + winner;
+    status = "Voittaja: " + winner;
   } else {
-    status = "Next player: " + (xIsNext ? "X" : "O");
+    status = "Seuraava pelaajaa: " + (xIsNext ? "X" : "O");
   }
 
   return (
@@ -1590,7 +1592,7 @@ export default function Board() {
 }
 ```
 
-Congratulations! You now have a working tic-tac-toe game. And you've just learned the basics of React too. So _you_ are the real winner here. Here is what the code should look like:
+Onneksi olkoon! Sinulla on nyt toimi ristinolla-peli. Ja olet juuri oppinut Reactin perusteet. Joten *sinä* olet oikea voittaja tässä. Tässä on miltä koodisi tulisi näyttää:
 
 <Sandpack>
 
@@ -1626,9 +1628,9 @@ export default function Board() {
   const winner = calculateWinner(squares);
   let status;
   if (winner) {
-    status = 'Winner: ' + winner;
+    status = 'Voittaja: ' + winner;
   } else {
-    status = 'Next player: ' + (xIsNext ? 'X' : 'O');
+    status = 'Seuraava pelaajaa: ' + (xIsNext ? 'X' : 'O');
   }
 
   return (
@@ -1721,37 +1723,37 @@ body {
 
 </Sandpack>
 
-## Adding time travel {/*adding-time-travel*/}
+## Aikamatkustuksen lisääminen {/*adding-time-travel*/}
 
-As a final exercise, let's make it possible to "go back in time" to the previous moves in the game.
+Lopullisena harjoituksena, tehdään mahdolliseksi "aikamatkustus ajassa taaksepäin" edellisiin siirtoihin pelissä.
 
-### Storing a history of moves {/*storing-a-history-of-moves*/}
+### Pelin siirtojen tallentaminen {/*storing-a-history-of-moves*/}
 
-If you mutated the `squares` array, implementing time travel would be very difficult.
+Jos mutatoit `squares` taulukkoa, aikamatkustuksen toteuttaminen olisi hyvin vaikeaa.
 
-However, you used `slice()` to create a new copy of the `squares` array after every move, and treated it as immutable. This will allow you to store every past version of the `squares` array, and navigate between the turns that have already happened.
+Kuitenkin, jos käytit `slice()`:a luodaksesi uuden kopion `squares` taulukosta jokaisen siirron jälkeen, ja käsitellä sitä muuttumattomana. Tämä antaa sinun tallentaa jokaisen edellisen version `squares` taulukosta, ja navigoida niiden välillä, jotka ovat jo tapahtuneet.
 
-You'll store the past `squares` arrays in another array called `history`, which you'll store as a new state variable. The `history` array represents all board states, from the first to the last move, and has a shape like this:
+Tallennat aikaisemmat `squares` taulukot toiseen taulukoon nimeltään `history`, jonka toteutat uutena tilamuuttujana. `history` taulukko edustaa kaikkia pelilaudan tiloja, ensimmäisestä viimeiseen siirtoon, ja sillä on tämän kaltainen muoto:
 
 ```jsx
 [
-  // Before first move
+  // Ennen ensimmäistä liikettä
   [null, null, null, null, null, null, null, null, null],
-  // After first move
+  // Ensimmäisen liikkeen jälkeen
   [null, null, null, null, 'X', null, null, null, null],
-  // After second move
+  // Toisen liikkeen jälkeen
   [null, null, null, null, 'X', null, null, null, 'O'],
   // ...
 ]
 ```
 
-### Lifting state up, again {/*lifting-state-up-again*/}
+### Tilan nostaminen ylös, uudestaan {/*lifting-state-up-again*/}
 
-You will now write a new top-level component called `Game` to display a list of past moves. That's where you will place the `history` state that contains the entire game history.
+Tulet kirjoittamaan uuden ylätason komponentin nimeltään `Game` näyttämään listan aiemmista liikkeistä. Tähän tulee `history` tila, joka sisältää koko pelin historian.
 
-Placing the `history` state into the `Game` component will let you remove the `squares` state from its child `Board` component. Just like you "lifted state up" from the `Square` component into the `Board` component, you will now lift it up from the `Board` into the top-level `Game` component. This gives the `Game` component full control over the `Board`'s data and lets it instruct the `Board` to render previous turns from the `history`.
+`history` tilan asettaminen `Game` komponenttiin antaa sinun poistaa `squares` tilan sen `Board` alakomponentista. Aivan kuten "nostit tilan ylös" `Square` komponentista `Board` komponenttiin, nostat sen nyt `Board` komponentista ylätason `Game` komponenttiin. Tämä antaa `Game` komponentille täyden kontrollin `Board`:n datan yli ja antaa sen ohjata `Board` komponenttia renderöimään edelliset vuorot `history`:sta.
 
-First, add a `Game` component with `export default`. Have it render the `Board` component and some markup:
+Ensiksi, lisää `Game` komponentti `export default`:lla. Aseta se renderöimään `Board` komponentti ja joitain merkintäkoodia:
 
 ```js {1,5-16}
 function Board() {
@@ -1772,9 +1774,9 @@ export default function Game() {
 }
 ```
 
-Note that you are removing the `export default` keywords before the `function Board() {` declaration and adding them before the `function Game() {` declaration. This tells your `index.js` file to use the `Game` component as the top-level component instead of your `Board` component. The additional `div`s returned by the `Game` component are making room for the game information you'll add to the board later.
+Huomaa, että olet poistamassa `export default` avainsanat ennen `function Board() {` määrittelyä ja lisäämässä ne ennen `function Game() {` määrittelyä. Tämä kertoo `index.js` tiedostolle käyttää `Game` komponenttia ylätason komponenttina sen sijaan, että käyttäisit `Board` komponenttia. Lisä `div`:t, jotka `Game` komponentti palauttaa, tekevät tilaa pelin tiedoille, jotka lisäät pelilaudalle myöhemmin.
 
-Add some state to the `Game` component to track which player is next and the history of moves:
+Lisää tila `Game` komponenttiin seuraamaan kumpi pelaaja on seuraavaksi ja pelin siirtojen historia:
 
 ```js {2-3}
 export default function Game() {
@@ -1783,9 +1785,9 @@ export default function Game() {
   // ...
 ```
 
-Notice how `[Array(9).fill(null)]` is an array with a single item, which itself is an array of 9 `null`s.
+Huomaa miten `[Array(9).fill(null)]` on taulukko, jossa on yksi alkio, joka on taulukko, jossa on 9 `null`:a.
 
-To render the squares for the current move, you'll want to read the last squares array from the `history`. You don't need `useState` for this--you already have enough information to calculate it during rendering:
+Renderöidäksesi neliöt nykyiselle siirrolle, luet viimeisen `squares` taulukon `history`:sta. Et tarvitse `useState`:a tähän--sinulla on jo tarpeeksi tietoa laskeaksesi se renderöinnin aikana:
 
 ```js {4}
 export default function Game() {
@@ -1795,7 +1797,7 @@ export default function Game() {
   // ...
 ```
 
-Next, create a `handlePlay` function inside the `Game` component that will be called by the `Board` component to update the game. Pass `xIsNext`, `currentSquares` and `handlePlay` as props to the `Board` component:
+Seuraavaksi, luo `handlePlay` funktio `Game` komponenttiin, jota kutsutaan `Board` komponentin toimesta päivittämään peliä. Välitä `xIsNext`, `currentSquares` ja `handlePlay` propseina `Board` komponentille:
 
 ```js {6-8,13}
 export default function Game() {
@@ -1816,7 +1818,7 @@ export default function Game() {
 }
 ```
 
-Let's make the `Board` component fully controlled by the props it receives. Change the `Board` component to take three props: `xIsNext`, `squares`, and a new `onPlay` function that `Board` can call with the updated squares array when a player makes a move. Next, remove the first two lines of the `Board` function that call `useState`:
+Tehdään `Board` komponentista täysin propseilla kontrolloitava. Muuta `Board` komponentti ottamaan kolme propia: `xIsNext`, `squares`, ja uusi `onPlay` funktio, jota `Board` voi kutsua päivitetyn taulukon kanssa, kun pelaaja tekee siirron. Poista seuraavaksi kaksi ensimmäistä riviä `Board` funktiosta, jotka kutsuvat `useState`:a:
 
 ```js {1}
 function Board({ xIsNext, squares, onPlay }) {
@@ -1827,7 +1829,7 @@ function Board({ xIsNext, squares, onPlay }) {
 }
 ```
 
-Now replace the `setSquares` and `setXIsNext` calls in `handleClick` in the `Board` component with a single call to your new `onPlay` function so the `Game` component can update the `Board` when the user clicks a square:
+Nyt korvaa `setSquares` ja `setXIsNext` kutsut `handleClick`:ssa `Board` komponentissa yhdellä kutsulla uuteen `onPlay` funktioon, jotta `Game` komponentti voi päivittää `Board`:n, kun käyttäjä klikkaa neliötä:
 
 ```js {12}
 function Board({ xIsNext, squares, onPlay }) {
@@ -1847,11 +1849,11 @@ function Board({ xIsNext, squares, onPlay }) {
 }
 ```
 
-The `Board` component is fully controlled by the props passed to it by the `Game` component. You need to implement the `handlePlay` function in the `Game` component to get the game working again.
+`Board` komponentti on täysin kontrolloitu propseilla, jotka sille välitetään `Game` komponentista. Sinun täytyy toteuttaa `handlePlay` funktio `Game` komponenttiin saadaksesi pelin toimimaan uudestaan.
 
-What should `handlePlay` do when called? Remember that Board used to call `setSquares` with an updated array; now it passes the updated `squares` array to `onPlay`.
+Mitä `handlePlay`:n tulisi tehdä kun sitä kutsutaan? Muista, että `Board` kutsui `setSquares`:ia päivitetyllä taulukolla. Nyt se välittää päivitetyn `squares` taulukon `onPlay`:lle.
 
-The `handlePlay` function needs to update `Game`'s state to trigger a re-render, but you don't have a `setSquares` function that you can call any more--you're now using the `history` state variable to store this information. You'll want to update `history` by appending the updated `squares` array as a new history entry. You also want to toggle `xIsNext`, just as Board used to do:
+`handlePlay` funktion täytyy päivittää `Game`:n tila käynnistääkseen renderöinnin, mutta sinulla ei ole enää `setSquares` funktiota, jota voit kutsua--käytät nyt `history` tilamuuttujaa tallentaaksesi tämän tiedon. Haluat päivittää `history`:n lisäämällä päivitetyn `squares` taulukon uutena historiaan. Haluat myös kääntää `xIsNext`:n, aivan kuten `Board` teki ennen:
 
 ```js {4-5}
 export default function Game() {
@@ -1864,11 +1866,11 @@ export default function Game() {
 }
 ```
 
-Here, `[...history, nextSquares]` creates a new array that contains all the items in `history`, followed by `nextSquares`. (You can read the `...history` [*spread syntax*](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax) as "enumerate all the items in `history`".)
+Tässä, `[...history, nextSquares]` luo uuden taulukon, joka sisältää kaikki `history`:n alkiot, seurattuna `nextSquares`:lla. (Voit lukea `...history` [*spread syntaksin*](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax) "luettele kaikki `history` taulukon alkiot".)
 
-For example, if `history` is `[[null,null,null], ["X",null,null]]` and `nextSquares` is `["X",null,"O"]`, then the new `[...history, nextSquares]` array will be `[[null,null,null], ["X",null,null], ["X",null,"O"]]`.
+Esimerkiksi, jos `history` on `[[null,null,null], ["X",null,null]]` ja `nextSquares` on `["X",null,"0"]`, niin uusi `[...history, nextSquares]` taulukko on `[[null,null,null], ["X",null,null], ["X",null,"0"]]`.
 
-At this point, you've moved the state to live in the `Game` component, and the UI should be fully working, just as it was before the refactor. Here is what the code should look like at this point:
+Tässä kohtaa, olet siirtänyt tilan `Game` komponenttiin, ja käyttöliittymä tulisi toimia täysin, aivan kuten ennen refaktorointia. Tässä on miltä koodisi tulisi näyttää tässä vaiheessa:
 
 <Sandpack>
 
@@ -1900,9 +1902,9 @@ function Board({ xIsNext, squares, onPlay }) {
   const winner = calculateWinner(squares);
   let status;
   if (winner) {
-    status = 'Winner: ' + winner;
+    status = 'Voittaja: ' + winner;
   } else {
-    status = 'Next player: ' + (xIsNext ? 'X' : 'O');
+    status = 'Seuraava pelaajaa: ' + (xIsNext ? 'X' : 'O');
   }
 
   return (
@@ -2017,19 +2019,19 @@ body {
 
 </Sandpack>
 
-### Showing the past moves {/*showing-the-past-moves*/}
+### Aikaisempien liikkeiden näyttäminen {/*showing-the-past-moves*/}
 
-Since you are recording the tic-tac-toe game's history, you can now display a list of past moves to the player.
+Kerta olet nauhoittamassa ristinolla-pelin historiaa, voit nyt näyttää listan aikaisemmista siirroista pelaajalle.
 
-React elements like `<button>` are regular JavaScript objects; you can pass them around in your application. To render multiple items in React, you can use an array of React elements.
+React-elementit kuten `<button>` ovat tavallisia JavaScript olioita; voit välittää niitä ympäri sovellustasi. Renderöidäksesi useita kohteita Reactissa, voit käyttää React elementtien taulukkoa.
 
-You already have an array of `history` moves in state, so now you need to transform it to an array of React elements. In JavaScript, to transform one array into another, you can use the [array `map` method:](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map)
+Sinulla on jo `history` taukukko siirroista tilassa, joten nyt sinun täytyy muuttaa se React elementtien taulukoksi. JavaScriptissä, muuttaaksesi yhden taulukon toiseksi, voit käyttää [taulukon `map` metodia:](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map)
 
 ```jsx
 [1, 2, 3].map((x) => x * 2) // [2, 4, 6]
 ```
 
-You'll use `map` to transform your `history` of moves into React elements representing buttons on the screen, and display a list of buttons to "jump" to past moves. Let's `map` over the `history` in the Game component:
+Haluat käyttää `map` metodia muuntaaksesi `history` siirroista React elementtien taulukoksi, jotka edustavat painikkeita näytöllä, ja näyttääksesi listan painikkeista "hyppäämään" aikaisempiin siirtoihin. Käytetään `map` metodia `history`:n yli `Game` komponentissa:
 
 ```js {11-13,15-27,35}
 export default function Game() {
@@ -2049,9 +2051,9 @@ export default function Game() {
   const moves = history.map((squares, move) => {
     let description;
     if (move > 0) {
-      description = 'Go to move #' + move;
+      description = 'Siirry liikkeeseen #' + move;
     } else {
-      description = 'Go to game start';
+      description = 'Siirry pelin alkuun';
     }
     return (
       <li>
@@ -2073,7 +2075,7 @@ export default function Game() {
 }
 ```
 
-You can see what your code should look like below. Note that you should see an error in the developer tools console that says: ``Warning: Each child in an array or iterator should have a unique "key" prop. Check the render method of `Game`.`` You'll fix this error in the next section.
+Voit nähdä miltä koodisi tulisi näyttää alla. Huomaa, että sinun tulisi nähdä virhe kehittäjätyökalujen konsolissa, joka sanoo: ``Warning: Each child in an array or iterator should have a unique "key" prop. Check the render method of `Game`.`` Korjaat tämän virheen seuraavassa osiossa.
 
 <Sandpack>
 
@@ -2105,9 +2107,9 @@ function Board({ xIsNext, squares, onPlay }) {
   const winner = calculateWinner(squares);
   let status;
   if (winner) {
-    status = 'Winner: ' + winner;
+    status = 'Voittaja: ' + winner;
   } else {
-    status = 'Next player: ' + (xIsNext ? 'X' : 'O');
+    status = 'Seuraava pelaajaa: ' + (xIsNext ? 'X' : 'O');
   }
 
   return (
@@ -2149,9 +2151,9 @@ export default function Game() {
   const moves = history.map((squares, move) => {
     let description;
     if (move > 0) {
-      description = 'Go to move #' + move;
+      description = 'Siirry liikkeeseen #' + move;
     } else {
-      description = 'Go to game start';
+      description = 'Siirry pelin alkuun';
     }
     return (
       <li>
@@ -2241,24 +2243,24 @@ body {
 
 </Sandpack>
 
-As you iterate through `history` array inside the function you passed to `map`, the `squares` argument goes through each element of `history`, and the `move` argument goes through each array index: `0`, `1`, `2`, …. (In most cases, you'd need the actual array elements, but to render a list of moves you will only need indexes.)
+Kun iteroidaan `history` taulukon läpi funktiossa, jonka välitit `map`:lle, `squares` argumentti käy läpi jokaisen `history` alkion, ja `move` argumentti käy läpi jokaisen taulukon indeksin: `0`, `1`, `2`, …. (Useimmissa tapauksissa, tarvitsisit itse taulukon alkiot, mutta renderöidäksesi listan siirroista, tarvitset vain indeksit.)
 
-For each move in the tic-tac-toe game's history, you create a list item `<li>` which contains a button `<button>`. The button has an `onClick` handler which calls a function called `jumpTo` (that you haven't implemented yet).
+Jokaiselle liikkeelle ristinolla-pelin historiassa, luot listan kohteen `<li>`, joka sisältää painikkeen `<button>`. Painikkeella on `onClick` käsittelijä, joka kutsuu funktiota nimeltä `jumpTo` (jota et ole vielä toteuttanut).
 
-For now, you should see a list of the moves that occurred in the game and an error in the developer tools console. Let's discuss what the "key" error means.
+Toistaiseksi, sinun tulisi nähdä lista liikeistä, jotka tapahtuivat pelissä ja virhe kehittäjätyökalujen konsolissa. Keskustellaan mitä "key" virhe tarkoittaa.
 
-### Picking a key {/*picking-a-key*/}
+### Avaimen valinta {/*picking-a-key*/}
 
-When you render a list, React stores some information about each rendered list item. When you update a list, React needs to determine what has changed. You could have added, removed, re-arranged, or updated the list's items.
+Kun renderöit listan, React tallentaa tietoa jokaisesta renderöidystä listan alkiosta. Kun päivität listaa, React tarvitsee määrittää mitä on muuttunut. Saatat olla lisännyt, poistanut, järjestänyt uudelleen, tai päivittänyt listan alkiot.
 
-Imagine transitioning from
+Kuvittele siirtyväsi tästä
 
 ```html
 <li>Alexa: 7 tasks left</li>
 <li>Ben: 5 tasks left</li>
 ```
 
-to
+tähän
 
 ```html
 <li>Ben: 9 tasks left</li>
@@ -2266,7 +2268,7 @@ to
 <li>Alexa: 5 tasks left</li>
 ```
 
-In addition to the updated counts, a human reading this would probably say that you swapped Alexa and Ben's ordering and inserted Claudia between Alexa and Ben. However, React is a computer program and does not know what you intended, so you need to specify a _key_ property for each list item to differentiate each list item from its siblings. If your data was from a database, Alexa, Ben, and Claudia's database IDs could be used as keys.
+Lukujen päivittämisen lisäksi, ihminen lukisi tämän todennäköisesti niin, että vaihdoit Alexan ja Benin järjestystä ja lisäsit Claudian Alexan ja Benin väliin. Kuitenkin, React on tietokoneohjelma eikä voi tietää mitä tarkoitit, joten sinun täytyy määrittää _key_ ominaisuus jokaiselle listan alkiolle erottaaksesi jokaisen listan alkion sen sisaruksista. Jos datasi olisi tietokannasta, Alexan, Benin ja Claudian tietokannan ID:tä voitaisiin käyttää avaimina.
 
 ```js {1}
 <li key={user.id}>
@@ -2274,23 +2276,23 @@ In addition to the updated counts, a human reading this would probably say that 
 </li>
 ```
 
-When a list is re-rendered, React takes each list item's key and searches the previous list's items for a matching key. If the current list has a key that didn't exist before, React creates a component. If the current list is missing a key that existed in the previous list, React destroys the previous component. If two keys match, the corresponding component is moved.
+Kun lista renderöidään uudelleen, React ottaa jokaisen listan alkion avaimen ja etsii edellisen listan alkiot vastaavalla avaimella. Jos nykyisellä listalla on avain, jota ei ollut aiemmin, React luo komponentin. Jos nykyisellä listalla ei ole avainta, joka oli edellisellä listalla, React tuhoaa edellisen komponentin. Jos kaksi avainta vastaavat, vastaava komponentti siirretään.
 
-Keys tell React about the identity of each component, which allows React to maintain state between re-renders. If a component's key changes, the component will be destroyed and re-created with a new state.
+Avaimet kertovat reactille jokaisen komponentin identiteetistä, joka antaa Reactille mahdollisuuden ylläpitää tilaa uudelleenrenderöintien välillä. Jos komponentin avain muuttuu, komponentti tuhotaan ja luodaan uudelleen uudella tilalla.
 
-`key` is a special and reserved property in React. When an element is created, React extracts the `key` property and stores the key directly on the returned element. Even though `key` may look like it is passed as props, React automatically uses `key` to decide which components to update. There's no way for a component to ask what `key` its parent specified.
+`key` on erityinen ja varattu ominaisuus Reactissa. Kun elementti luodaan, React ottaa `key` ominaisuuden ja tallentaa avaimen suoraan palautettuun elementtiin. Vaikka `key` näyttäisi välitetyltä propseina, React käyttää automaattisesti `key`:tä päättääkseen mitä komponentteja päivittää. Komponentilla ei ole tapaa kysyä minkä `key`:n sen vanhempi on määrittänyt.
 
-**It's strongly recommended that you assign proper keys whenever you build dynamic lists.** If you don't have an appropriate key, you may want to consider restructuring your data so that you do.
+**On erittäin suositeltavaa, että asetat oikeat avaimet aina kun rakennat dynaamisia listoja.** Jos sinulla ei ole sopivaa avainta, saatat haluta harkita datan uudelleenjärjestämistä, jotta sinulla olisi.
 
-If no key is specified, React will report an error and use the array index as a key by default. Using the array index as a key is problematic when trying to re-order a list's items or inserting/removing list items. Explicitly passing `key={i}` silences the error but has the same problems as array indices and is not recommended in most cases.
+Jos avainta ei ole määritelty, React raportoi virheen ja käyttää taulukon indeksiä avaimena oletuksena. Taulukon indeksin käyttäminen avaimena on ongelmallista, kun yritetään järjestää listan kohteita uudelleen tai lisätä/poistaa listan kohteita. `key={i}` avaimen välittäminen hiljentää virheen, mutta sillä on samat ongelmat kuin taulukon indekseillä ja sitä ei suositella useimmissa tapauksissa.
 
-Keys do not need to be globally unique; they only need to be unique between components and their siblings.
+Avainten ei tarvitse olla globaalisti uniikkeja. Riittää, että ne ovat uniikkeja komponenttien ja niiden sisarusten välillä.
 
-### Implementing time travel {/*implementing-time-travel*/}
+### Aikamatkustuksen toteutus {/*implementing-time-travel*/}
 
-In the tic-tac-toe game's history, each past move has a unique ID associated with it: it's the sequential number of the move. Moves will never be re-ordered, deleted, or inserted in the middle, so it's safe to use the move index as a key.
+Ristinolla-pelin historiassa, jokaisella aikaisemmalla siirrolla on uniikki ID: se on siirron järjestysnumero. Siirtoja ei koskaan järjestetä uudelleen, poisteta tai lisätä keskelle, joten on turvallista käyttää siirron indeksiä avaimena.
 
-In the `Game` function, you can add the key as `<li key={move}>`, and if you reload the rendered game, React's "key" error should disappear:
+`Game` funktiossa, voit lisätä avaimen `<li key={move}>`, ja jos lataat pelin uudelleen, Reactin "key" virheen tulisi kadota:
 
 ```js {4}
 const moves = history.map((squares, move) => {
@@ -2333,9 +2335,9 @@ function Board({ xIsNext, squares, onPlay }) {
   const winner = calculateWinner(squares);
   let status;
   if (winner) {
-    status = 'Winner: ' + winner;
+    status = 'Voittaja: ' + winner;
   } else {
-    status = 'Next player: ' + (xIsNext ? 'X' : 'O');
+    status = 'Seuraava pelaajaa: ' + (xIsNext ? 'X' : 'O');
   }
 
   return (
@@ -2377,9 +2379,9 @@ export default function Game() {
   const moves = history.map((squares, move) => {
     let description;
     if (move > 0) {
-      description = 'Go to move #' + move;
+      description = 'Siirry liikkeeseen #' + move;
     } else {
-      description = 'Go to game start';
+      description = 'Siirry pelin alkuun';
     }
     return (
       <li key={move}>
@@ -2482,7 +2484,7 @@ export default function Game() {
 }
 ```
 
-Next, update the `jumpTo` function inside `Game` to update that `currentMove`. You'll also set `xIsNext` to `true` if the number that you're changing `currentMove` to is even.
+Seuraavaksi, päivitä `jumpTo` funktio `Game`:n sisällä päivittämään `currentMove`. Asetat myös `xIsNext` arvoon `true`, jos numero, jota olet muuttamassa `currentMove`:ksi on parillinen.
 
 ```js {4-5}
 export default function Game() {
@@ -2495,10 +2497,10 @@ export default function Game() {
 }
 ```
 
-You will now make two changes to the `Game`'s `handlePlay` function which is called when you click on a square.
+Teet nyt kaksi muutosta `Game` komponentin `handlePlay` funktioon, joka kutsutaan kun klikkaat ruutua.
 
-- If you "go back in time" and then make a new move from that point, you only want to keep the history up to that point. Instead of adding `nextSquares` after all items (`...` spread syntax) in `history`, you'll add it after all items in `history.slice(0, currentMove + 1)` so that you're only keeping that portion of the old history.
-- Each time a move is made, you need to update `currentMove` to point to the latest history entry.
+- Jos "palaat ajassa taaksepäin" ja teet uuden siirron siitä pisteestä, haluat pitää historian vain siihen pisteeseen asti. Sen sijaan, että lisäisit `nextSquares` kaikkien kohteiden (`...` spread-syntaksi) jälkeen `history`:ssa, lisäät sen kaikkien kohteiden jälkeen `history.slice(0, currentMove + 1)` jotta pidät vain sen osan vanhasta historiasta.
+- Joka kerta kun siirto tehdään, sinun täytyy päivittää `currentMove` osoittamaan viimeisimpään historiaan.
 
 ```js {2-4}
 function handlePlay(nextSquares) {
@@ -2509,7 +2511,7 @@ function handlePlay(nextSquares) {
 }
 ```
 
-Finally, you will modify the `Game` component to render the currently selected move, instead of always rendering the final move:
+Lopuksi, muutat `Game` komponenttia renderöimään valitun siirron, sen sijaan että renderöisit aina viimeisimmän siirron:
 
 ```js {5}
 export default function Game() {
@@ -2522,7 +2524,7 @@ export default function Game() {
 }
 ```
 
-If you click on any step in the game's history, the tic-tac-toe board should immediately update to show what the board looked like after that step occurred.
+Jos klikkaat mitä tahansa siirtoa pelin historiassa, ristinolla-pelin taulukko tulisi päivittyä näyttämään miltä taulukko näytti sen siirron jälkeen.
 
 <Sandpack>
 
@@ -2554,9 +2556,9 @@ function Board({ xIsNext, squares, onPlay }) {
   const winner = calculateWinner(squares);
   let status;
   if (winner) {
-    status = 'Winner: ' + winner;
+    status = 'Voittaja: ' + winner;
   } else {
-    status = 'Next player: ' + (xIsNext ? 'X' : 'O');
+    status = 'Seuraava pelaajaa: ' + (xIsNext ? 'X' : 'O');
   }
 
   return (
@@ -2602,9 +2604,9 @@ export default function Game() {
   const moves = history.map((squares, move) => {
     let description;
     if (move > 0) {
-      description = 'Go to move #' + move;
+      description = 'Siirry liikkeeseen #' + move;
     } else {
-      description = 'Go to game start';
+      description = 'Siirry pelin alkuun';
     }
     return (
       <li key={move}>
@@ -2693,11 +2695,11 @@ body {
 
 </Sandpack>
 
-### Final cleanup {/*final-cleanup*/}
+### Loppusiivous {/*final-cleanup*/}
 
-If you look at the code very closely, you may notice that `xIsNext === true` when `currentMove` is even and `xIsNext === false` when `currentMove` is odd. In other words, if you know the value of `currentMove`, then you can always figure out what `xIsNext` should be.
+Jos katsot koodia tarkasti, saatat huomata, että `xIsNext === true` kun `currentMove` on parillinen ja `xIsNext === false` kun `currentMove` on pariton. Toisin sanoen, jos tiedät `currentMove` arvon, voit aina selvittää mitä `xIsNext` arvon tulisi olla.
 
-There's no reason for you to store both of these in state. In fact, always try to avoid redundant state. Simplifying what you store in state reduces bugs and makes your code easier to understand. Change `Game` so that it doesn't store `xIsNext` as a separate state variable and instead figures it out based on the `currentMove`:
+Ei ole mitään syytä säilyttää molempia näitä tilassa. Itse asiassa, yritä aina välttää turhaa tilaa. Yksinkertaistamalla mitä säilytät tilassa vähentää bugeja ja tekee koodistasi helpommin ymmärrettävää. Muuta `Game` niin, että se ei säilytä `xIsNext` erillisenä tilamuuttujana ja sen sijaan selvittää sen `currentMove`:n perusteella:
 
 ```js {4,11,15}
 export default function Game() {
@@ -2719,20 +2721,20 @@ export default function Game() {
 }
 ```
 
-You no longer need the `xIsNext` state declaration or the calls to `setXIsNext`. Now, there's no chance for `xIsNext` to get out of sync with `currentMove`, even if you make a mistake while coding the components.
+Et enää tarvitse `xIsNext` tilan määrittelyä tai kutsuja `setXIsNext`. Nyt, ei ole mahdollisuutta, että `xIsNext` pääsee epäsynkroniin `currentMove`:n kanssa, vaikka tekisit virheen koodatessasi komponentteja.
 
-### Wrapping up {/*wrapping-up*/}
+### Lopetus {/*wrapping-up*/}
 
-Congratulations! You've created a tic-tac-toe game that:
+Onneksi olkoon! Olet luonut ristinolla-pelin, joka:
 
-- Lets you play tic-tac-toe,
-- Indicates when a player has won the game,
-- Stores a game's history as a game progresses,
-- Allows players to review a game's history and see previous versions of a game's board.
+- Antaa sinun pelata ristinollaa,
+- Ilmoittaa kun pelaaja on voittanut peli,
+- Tallentaa pelin historian pelin edetessä,
+- Antaa pelaajan palata takaisin pelin historiassa ja katsoa edellisiä versioita pelin taulukosta.
 
-Nice work! We hope you now feel like you have a decent grasp of how React works.
+Hyvää työtä! Toivottavasti tunnet nyt, että sinulla on hyvä käsitys siitä miten React toimii. 
 
-Check out the final result here:
+Katso lopullinen tulos täältä:
 
 <Sandpack>
 
@@ -2764,9 +2766,9 @@ function Board({ xIsNext, squares, onPlay }) {
   const winner = calculateWinner(squares);
   let status;
   if (winner) {
-    status = 'Winner: ' + winner;
+    status = 'Voittaja: ' + winner;
   } else {
-    status = 'Next player: ' + (xIsNext ? 'X' : 'O');
+    status = 'Seuraava pelaajaa: ' + (xIsNext ? 'X' : 'O');
   }
 
   return (
@@ -2810,9 +2812,9 @@ export default function Game() {
   const moves = history.map((squares, move) => {
     let description;
     if (move > 0) {
-      description = 'Go to move #' + move;
+      description = 'Siirry liikkeeseen #' + move;
     } else {
-      description = 'Go to game start';
+      description = 'Siirry pelin alkuun';
     }
     return (
       <li key={move}>
@@ -2901,12 +2903,12 @@ body {
 
 </Sandpack>
 
-If you have extra time or want to practice your new React skills, here are some ideas for improvements that you could make to the tic-tac-toe game, listed in order of increasing difficulty:
+Jos sinulla on ylimääräistä aikaa tai haluat harjoitella uusia React taitojasi, tässä on joitain ideoita parannuksista, joita voisit tehdä ristinolla-peliin, listattuna vaikeusjärjestyksessä:
 
-1. For the current move only, show "You are at move #..." instead of a button.
-1. Rewrite `Board` to use two loops to make the squares instead of hardcoding them.
-1. Add a toggle button that lets you sort the moves in either ascending or descending order.
-1. When someone wins, highlight the three squares that caused the win (and when no one wins, display a message about the result being a draw).
-1. Display the location for each move in the format (row, col) in the move history list.
+1. Nykyiselle siirrolle, näytä "Olet siirrossa #..." sen sijaan, että näyttäisit painikkeen.
+1. Kirjoita `Board` käyttämään kahta silmukkaa tehdäksesi ruudukon sen sijaan, että kovakoodaisit ne.
+1. Lisää painike, joka antaa sinun järjestää siirrot joko nousevaan tai laskevaan järjestykseen.
+1. Kun joku voittaa, korosta kolme ruutua, jotka aiheuttivat voiton (ja kun kukaan ei voita, näytä viesti tuloksesta olevan tasapeli).
+1. Näytä jokaisen siirron sijainti muodossa (rivi, sarake) siirtohistorian listassa.
 
-Throughout this tutorial, you've touched on React concepts including elements, components, props, and state. Now that you've seen how these concepts work when building a game, check out [Thinking in React](/learn/thinking-in-react) to see how the same React concepts work when build an app's UI.
+Tämän oppaan aikana, olet käsitellyt Reactin käsitteitä, mukaan lukien elementit, komponentit, propsit ja tila. Nyt kun olet nähnyt miten nämä käsitteet toimivat peliä rakentaessa, katso [Ajattelu Reactissa](/learn/thinking-in-react) nähdäksesi miten samat Reactin käsitteet toimivat kun rakennat sovelluksen käyttöliittymää.
