@@ -926,7 +926,7 @@ function ChatRoom() {
 
   useEffect(() => {
     const options = createOptions();
-    const connection = createConnection();
+    const connection = createConnection(options);
     connection.connect();
     return () => connection.disconnect();
   }, []); // ✅ All dependencies declared
@@ -1613,7 +1613,11 @@ label, button { display: block; margin-bottom: 5px; }
 
 Efektisi ajetaan uudelleen koska se riippuu `options` oliosta. Olioita voi luoda vahingossa, ja niitä tulisi välttää Efektien riippuvuuksina aina kun mahdollista.
 
+<<<<<<< HEAD
 Vähiten häiritsevä tapa korjata on lukea `roomId` ja `serverUrl` suoraan Efektin ulkopuolelta, ja tehdä Efektistä riippuvainen näistä primitiivisistä arvoista (jotka eivät voi muuttua tahattomasti). Efektin sisällä, luo olio ja välitä se `createConnection` funktiolle:
+=======
+The least invasive fix is to read `roomId` and `serverUrl` right outside the Effect, and then make the Effect depend on those primitive values (which can't change unintentionally). Inside the Effect, create an object and pass it to `createConnection`:
+>>>>>>> 2390627c9cb305216e6bd56e67c6603a89e76e7f
 
 <Sandpack>
 
