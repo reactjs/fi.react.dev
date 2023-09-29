@@ -4,12 +4,12 @@ title: "<select>"
 
 <Intro>
 
-The [built-in browser `<select>` component](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/select) lets you render a select box with options.
+[Selaimen sisäänrakennettu `<select>`-komponentti](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/select) mahdollistaa valintalistan renderöimisen vaihtoehtoineen.
 
 ```js
 <select>
-  <option value="someOption">Some option</option>
-  <option value="otherOption">Other option</option>
+  <option value="someOption">Jokin vaihtoehto</option>
+  <option value="otherOption">Toinen vaihtoehto</option>
 </select>
 ```
 
@@ -23,64 +23,64 @@ The [built-in browser `<select>` component](https://developer.mozilla.org/en-US/
 
 ### `<select>` {/*select*/}
 
-To display a select box, render the [built-in browser `<select>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/select) component.
+Näyttääksesi valintalistan, renderöi [selaimen sisäänrakennettu `<select>`-komponentti](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/select).
 
 ```js
 <select>
-  <option value="someOption">Some option</option>
-  <option value="otherOption">Other option</option>
+  <option value="someOption">Jokin vaihtoehto</option>
+  <option value="otherOption">Toinen vaihtoehto</option>
 </select>
 ```
 
-[See more examples below.](#usage)
+[Näe lisää esimerkkejä alla.](#usage)
 
 #### Propsit {/*props*/}
 
-`<select>` supports all [common element props.](/reference/react-dom/components/common#props)
+`<select>` tukee kaikkia [yleisten elementtien propseja.](/reference/react-dom/components/common#props)
 
-You can [make a select box controlled](#controlling-a-select-box-with-a-state-variable) by passing a `value` prop:
+Voit [tehdä valintalistan kontrolloiduksi](#controlling-a-select-box-with-a-state-variable) antamalla `value`-propsin:
 
-* `value`: A string (or an array of strings for [`multiple={true}`](#enabling-multiple-selection)). Controls which option is selected. Every value string match the `value` of some `<option>` nested inside the `<select>`.
+* `value`: Merkkijono (tai merkkijonojen taulukko [`multiple={true}`](#enabling-multiple-selection)). Ohjaa, mikä vaihtoehto on valittuna. Jokainen merkkijonon arvo vastaa jonkin `<option>`-komponentin `value`-arvoa, joka on upotettu `<select>`-komponenttiin.
 
-When you pass `value`, you must also pass an `onChange` handler that updates the passed value.
+Kun välität `value`:n, sinun täytyy myös välittää `onChange`-käsittelijäfunktio, joka päivittää välitetyn arvon.
 
-If your `<select>` is uncontrolled, you may pass the `defaultValue` prop instead:
+Jos `<select>` on kontrolloimaton, voit antaa `defaultValue`-propsin:
 
-* `defaultValue`: A string (or an array of strings for [`multiple={true}`](#enabling-multiple-selection)). Specifies [the initially selected option.](#providing-an-initially-selected-option)
+* `defaultValue`: Merkkijono (tai merkkijonojen taulukko [`multiple={true}`](#enabling-multiple-selection)). Määrittelee [aluksi valitun vaihtoehdon.](#providing-an-initially-selected-option)
 
-These `<select>` props are relevant both for uncontrolled and controlled select boxes:
+Nämä `<select>`-propsit ovat olennaisia sekä kontrolloimattomille että kontrolloiduille valintalistoille:
 
-* [`autoComplete`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/select#autocomplete): A string. Specifies one of the possible [autocomplete behaviors.](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/autocomplete#values)
-* [`autoFocus`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/select#autofocus): A boolean. If `true`, React will focus the element on mount.
-* `children`: `<select>` accepts [`<option>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/option), [`<optgroup>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/optgroup), and [`<datalist>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/datalist) components as children. You can also pass your own components as long as they eventually render one of the allowed components. If you pass your own components that eventually render `<option>` tags, each `<option>` you render must have a `value`.
-* [`disabled`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/select#disabled): A boolean. If `true`, the select box will not be interactive and will appear dimmed.
-* [`form`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/select#form): A string. Specifies the `id` of the `<form>` this select box belongs to. If omitted, it's the closest parent form.
-* [`multiple`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/select#multiple): A boolean. If `true`, the browser allows [multiple selection.](#enabling-multiple-selection)
-* [`name`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/select#name): A string. Specifies the name for this select box that's [submitted with the form.](#reading-the-select-box-value-when-submitting-a-form)
-* `onChange`: An [`Event` handler](/reference/react-dom/components/common#event-handler) function. Required for [controlled select boxes.](#controlling-a-select-box-with-a-state-variable) Fires immediately when the user picks a different option. Behaves like the browser [`input` event.](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/input_event)
-* `onChangeCapture`: A version of `onChange` that fires in the [capture phase.](/learn/responding-to-events#capture-phase-events)
-* [`onInput`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/input_event): An [`Event` handler](/reference/react-dom/components/common#event-handler) function. Fires immediately when the value is changed by the user. For historical reasons, in React it is idiomatic to use `onChange` instead which works similarly.
-* `onInputCapture`: A version of `onInput` that fires in the [capture phase.](/learn/responding-to-events#capture-phase-events)
-* [`onInvalid`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLInputElement/invalid_event): An [`Event` handler](/reference/react-dom/components/common#event-handler) function. Fires if an input fails validation on form submit. Unlike the built-in `invalid` event, the React `onInvalid` event bubbles.
-* `onInvalidCapture`: A version of `onInvalid` that fires in the [capture phase.](/learn/responding-to-events#capture-phase-events)
-* [`required`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/select#required): A boolean. If `true`, the value must be provided for the form to submit.
-* [`size`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/select#size): A number. For `multiple={true}` selects, specifies the preferred number of initially visible items.
+* [`autoComplete`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/select#autocomplete): Merkkijono. Määrittää yhden mahdollisista [automaattisen täydennyksen käyttäytymistavoista.](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/autocomplete#values)
+* [`autoFocus`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/select#autofocus): Totuusarvo. Jos `true`, React kohdistaa elementtiin mountatessa.
+* `children`: `<select>` hyväksyy [`<option>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/option), [`<optgroup>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/optgroup), ja [`<datalist>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/datalist) komponentit lapsina. Boit myös välittää omia komponentteja kunhan ne lopulta renderöivät jonkun sallituista komponenteista. Jos välität omia komponentteja, jotka lopulta renderöivät `<option>` tageja, jokaisen `<option>`:n täytyy omata `value`.
+* [`disabled`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/select#disabled): Totuusarvo. Jos `true`, valintalista ei ole interaktiivinen ja näkyy himmennettynä.
+* [`form`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/select#form): Merkkijono. Määrittää `<form>` lomakkeen `id` :n johon tämä kenttä kuuluu. Jos jätetty pois, se on lähin ylätason lomake.
+* [`multiple`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/select#multiple): Totuusarvo. Jos `true`, selain mahdollistaa [monen vaihtoehdon valinnan.](#enabling-multiple-selection)
+* [`name`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/select#name): Merkkijono. Määrittää nimen tälle kentälle, joka [lähetetään lomakkeessa.](#reading-the-select-box-value-when-submitting-a-form)
+* `onChange`: [`Event` käsittelijäfunktio](/reference/react-dom/components/common#event-handler). Vaaditaan [kontrolloituihin valintalistoihin.](#controlling-a-select-box-with-a-state-variable) Suoritetaan heti kun käyttäjä valitsee toisen vaihtoehdon. Käyttäytyy kuten selaimen [`input` tapahtuma.](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/input_event)
+* `onChangeCapture`: Versio `onChange`:sta joka suoritetaan [nappausvaiheessa.](/learn/responding-to-events#capture-phase-events)
+* [`onInput`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/input_event): [`Event` käsittelijäfunktio](/reference/react-dom/components/common#event-handler). Suoritetaan heti kun käyttäjä muuttaa kentän arvoa. Historiallisista syistä, Reactissa on idiomaattista käyttää tämän tilalla `onChange`, joka toimii samanlaisesti.
+* `onInputCapture`: Versio `onInput`:sta joka suoritetaan [nappausvaiheessa.](/learn/responding-to-events#capture-phase-events)
+* [`onInvalid`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLInputElement/invalid_event): [`Event` käsittelijäfunktio](/reference/react-dom/components/common#event-handler). Suoritetaan jos syöte ei läpäise validointia lomaketta lähetettäessä. Toisin kuin selaimen sisäänrakennettu `invalid`-tapahtuma, Reactin `onInvalid`-tapahtuma kuplii.
+* `onInvalidCapture`: Versio `onInvalid`:sta joka suoritetaan [nappausvaiheessa.](/learn/responding-to-events#capture-phase-events)
+* [`required`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/select#required): Totuusarvo. Jos `true`, arvon on oltava lomaketta lähettäessä.
+* [`size`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/select#size): Numero. `multiple={true}` valintalistoille, määrittelee halutun määrän aluksi näkyvillä olevia kohteita.
 
 #### Rajoitukset {/*caveats*/}
 
-- Unlike in HTML, passing a `selected` attribute to `<option>` is not supported. Instead, use [`<select defaultValue>`](#providing-an-initially-selected-option) for uncontrolled select boxes and [`<select value>`](#controlling-a-select-box-with-a-state-variable) for controlled select boxes.
-- If a select box receives a `value` prop, it will be [treated as controlled.](#controlling-a-select-box-with-a-state-variable)
-- A select box can't be both controlled and uncontrolled at the same time.
-- A select box cannot switch between being controlled or uncontrolled over its lifetime.
-- Every controlled select box needs an `onChange` event handler that synchronously updates its backing value.
+- Toisin kuin HTML:ssä, `<option>`-komponentin `selected`-attribuutti ei ole tuettu. Sen sijaan, käytä [`<select defaultValue>`](#providing-an-initially-selected-option) kontrolloimattomille valintalistoille ja [`<select value>`](#controlling-a-select-box-with-a-state-variable) kontrolloiduille valintalistoille.
+- Jos valintalista vastaanottaa `value`-propsin, se [käsitellään kontrolloituna.](#controlling-a-select-box-with-a-state-variable)
+- Valintalista ei voi olla sekä kontrolloitu että kontrolloimaton samaan aikaan.
+- Valintalista ei voi vaihtaa kontrolloidusta kontrolloimattomaan elinkaarensa aikana.
+- Jokainen kontrolloitu valintalista tarvitsee `onChange`-käsittelijäfunktion, joka päivittää arvon synkronisesti.
 
 ---
 
 ## Käyttö {/*usage*/}
 
-### Displaying a select box with options {/*displaying-a-select-box-with-options*/}
+### Valintalistan näyttäminen vaihtoehdoilla {/*displaying-a-select-box-with-options*/}
 
-Render a `<select>` with a list of `<option>` components inside to display a select box. Give each `<option>` a `value` representing the data to be submitted with the form.
+Renderöi `<select>`-komponentti, jossa on sisällä lista `<option>`-komponentteja näyttääksesi valintalistan. Anna jokaiselle `<option>`-komponentille `value`, joka edustaa dataa, joka lähetetään lomakkeen mukana.
 
 <Sandpack>
 
@@ -88,10 +88,10 @@ Render a `<select>` with a list of `<option>` components inside to display a sel
 export default function FruitPicker() {
   return (
     <label>
-      Pick a fruit:
+      Valitse hedelmä:
       <select name="selectedFruit">
-        <option value="apple">Apple</option>
-        <option value="banana">Banana</option>
+        <option value="apple">Omena</option>
+        <option value="banana">Banaani</option>
         <option value="orange">Orange</option>
       </select>
     </label>
@@ -107,11 +107,13 @@ select { margin: 5px; }
 
 ---
 
-### Providing a label for a select box {/*providing-a-label-for-a-select-box*/}
+### Otsikon tarjoaminen valintalistalle {/*providing-a-label-for-a-select-box*/}
 
-Typically, you will place every `<select>` inside a [`<label>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/label) tag. This tells the browser that this label is associated with that select box. When the user clicks the label, the browser will automatically focus the select box. It's also essential for accessibility: a screen reader will announce the label caption when the user focuses the select box.
+Tyypillisesti, laitat jokaisen `<select>`-komponentin [`<label>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/label) tagin sisälle. Tämä kertoo selaimelle, että tämä otsikko on yhdistetty tähän valintalistaan. Kun käyttäjä klikkaa otsikkoa, selain kohdistaa automaattisesti valintalistan. Tämä on myös olennaista saavutettavuuden kannalta: ruudunlukija ilmoittaa otsikon kuvauksen kun käyttäjä kohdistaa valintalistan.
 
 If you can't nest `<select>` into a `<label>`, associate them by passing the same ID to `<select id>` and [`<label htmlFor>`.](https://developer.mozilla.org/en-US/docs/Web/API/HTMLLabelElement/htmlFor) To avoid conflicts between multiple instances of one component, generate such an ID with [`useId`.](/reference/react/useId)
+
+Jos et voi sijoittaaa `<select>`-komponenttia `<label>`-komponentin sisään, yhdistä ne antamalla sama ID `<select id>`:lle ja [`<label htmlFor>`.](https://developer.mozilla.org/en-US/docs/Web/API/HTMLLabelElement/htmlFor) Välttääksesi konflikteja useiden saman komponentin instanssien välillä, generoi tällainen ID [`useId`-komponentilla.](/reference/react/useId)
 
 <Sandpack>
 
@@ -123,21 +125,21 @@ export default function Form() {
   return (
     <>
       <label>
-        Pick a fruit:
+        Valitse hedelmä:
         <select name="selectedFruit">
-          <option value="apple">Apple</option>
-          <option value="banana">Banana</option>
-          <option value="orange">Orange</option>
+          <option value="apple">Omena</option>
+          <option value="banana">Banaani</option>
+          <option value="orange">Appelsiini</option>
         </select>
       </label>
       <hr />
       <label htmlFor={vegetableSelectId}>
-        Pick a vegetable:
+        Valitse vihannes:
       </label>
       <select id={vegetableSelectId} name="selectedVegetable">
-        <option value="cucumber">Cucumber</option>
-        <option value="corn">Corn</option>
-        <option value="tomato">Tomato</option>
+        <option value="cucumber">Kurkku</option>
+        <option value="corn">Maissi</option>
+        <option value="tomato">Tomaatti</option>
       </select>
     </>
   );
@@ -153,9 +155,9 @@ select { margin: 5px; }
 
 ---
 
-### Providing an initially selected option {/*providing-an-initially-selected-option*/}
+### Aluksi valintun valinnan tarjoaminen {/*providing-an-initially-selected-option*/}
 
-By default, the browser will select the first `<option>` in the list. To select a different option by default, pass that `<option>`'s `value` as the `defaultValue` to the `<select>` element.
+Oletuksena, selain valitsee ensimmäisen `<option>`-komponentin listasta. Valitaksesi eri vaihtoehdon oletuksena, välitä sen `<option>`-komponentin `value`-arvo `<select>`-komponentille `defaultValue`-propsina.
 
 <Sandpack>
 
@@ -163,11 +165,11 @@ By default, the browser will select the first `<option>` in the list. To select 
 export default function FruitPicker() {
   return (
     <label>
-      Pick a fruit:
+      Valitse hedelmä:
       <select name="selectedFruit" defaultValue="orange">
-        <option value="apple">Apple</option>
-        <option value="banana">Banana</option>
-        <option value="orange">Orange</option>
+        <option value="apple">Omena</option>
+        <option value="banana">Banaani</option>
+        <option value="orange">Appelsiini</option>
       </select>
     </label>
   );
@@ -182,15 +184,15 @@ select { margin: 5px; }
 
 <Pitfall>
 
-Unlike in HTML, passing a `selected` attribute to an individual `<option>` is not supported.
+Toisin kuin HTML:ssä, `<option>`-komponentin `selected`-attribuutti ei ole tuettu.
 
 </Pitfall>
 
 ---
 
-### Enabling multiple selection {/*enabling-multiple-selection*/}
+### Usean valinnan mahdollistaminen {/*enabling-multiple-selection*/}
 
-Pass `multiple={true}` to the `<select>` to let the user select multiple options. In that case, if you also specify `defaultValue` to choose the initially selected options, it must be an array.
+Välitä `multiple={true}` `<select>`-komponentille, jotta käyttäjä voi valita useita vaihtoehtoja. Tässä tapauksessa, jos määrität myös `defaultValue`-propsin valitaksesi aluksi valitut vaihtoehdot, sen täytyy olla taulukko.
 
 <Sandpack>
 
@@ -198,15 +200,15 @@ Pass `multiple={true}` to the `<select>` to let the user select multiple options
 export default function FruitPicker() {
   return (
     <label>
-      Pick some fruits:
+      Valitse muutama hedelmä:
       <select
         name="selectedFruit"
         defaultValue={['orange', 'banana']}
         multiple={true}
       >
-        <option value="apple">Apple</option>
-        <option value="banana">Banana</option>
-        <option value="orange">Orange</option>
+        <option value="apple">Omena</option>
+        <option value="banana">Banaani</option>
+        <option value="orange">Appelsiini</option>
       </select>
     </label>
   );
@@ -221,55 +223,55 @@ select { display: block; margin-top: 10px; width: 200px; }
 
 ---
 
-### Reading the select box value when submitting a form {/*reading-the-select-box-value-when-submitting-a-form*/}
+### Valintalistan arvon lukeminen lomakkeen lähetyksessä {/*reading-the-select-box-value-when-submitting-a-form*/}
 
-Add a [`<form>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/form) around your select box with a [`<button type="submit">`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button) inside. It will call your `<form onSubmit>` event handler. By default, the browser will send the form data to the current URL and refresh the page. You can override that behavior by calling `e.preventDefault()`. Read the form data with [`new FormData(e.target)`](https://developer.mozilla.org/en-US/docs/Web/API/FormData).
+Lisää [`<form>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/form) valintalistan ympärille, jossa on [`<button type="submit">`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button) sisällä. Se kutsuu `<form onSubmit>`-käsittelijäfunktiota. Oletuksena, selain lähettää lomakkeen datan nykyiseen URL:iin ja päivittää sivun. Voit ohittaa tämän käyttäytymisen kutsumalla `e.preventDefault()`. Lue lomakkeen data [`new FormData(e.target)`](https://developer.mozilla.org/en-US/docs/Web/API/FormData) avulla.
 <Sandpack>
 
 ```js
 export default function EditPost() {
   function handleSubmit(e) {
-    // Prevent the browser from reloading the page
+    // Estä selainta lataamasta sivua uudelleen
     e.preventDefault();
-    // Read the form data
+    // Lue lomakkeen data
     const form = e.target;
     const formData = new FormData(form);
-    // You can pass formData as a fetch body directly:
+    // Voit välittää formData:n suoraan fetchin bodylle:
     fetch('/some-api', { method: form.method, body: formData });
-    // You can generate a URL out of it, as the browser does by default:
+    // Voit generoida siitä URL:n, kuten selain tekee oletuksena:
     console.log(new URLSearchParams(formData).toString());
-    // You can work with it as a plain object.
+    // Voit käsitellä sitä tavallisena oliona.
     const formJson = Object.fromEntries(formData.entries());
-    console.log(formJson); // (!) This doesn't include multiple select values
-    // Or you can get an array of name-value pairs.
+    console.log(formJson); // (!) Tämä ei sisällä usean valinnan arvoja
+    // Tai voit saada nimi-arvo parien taulukon.
     console.log([...formData.entries()]);
   }
 
   return (
     <form method="post" onSubmit={handleSubmit}>
       <label>
-        Pick your favorite fruit:
+        Valitse lempihedelmäsi:
         <select name="selectedFruit" defaultValue="orange">
-          <option value="apple">Apple</option>
-          <option value="banana">Banana</option>
-          <option value="orange">Orange</option>
+          <option value="apple">Omena</option>
+          <option value="banana">Banaani</option>
+          <option value="orange">Appelsiini</option>
         </select>
       </label>
       <label>
-        Pick all your favorite vegetables:
+        Valitse kaikki lempivihanneksesi:
         <select
           name="selectedVegetables"
           multiple={true}
           defaultValue={['corn', 'tomato']}
         >
-          <option value="cucumber">Cucumber</option>
-          <option value="corn">Corn</option>
-          <option value="tomato">Tomato</option>
+          <option value="cucumber">Kurkku</option>
+          <option value="corn">Maissi</option>
+          <option value="tomato">Tomaatti</option>
         </select>
       </label>
       <hr />
-      <button type="reset">Reset</button>
-      <button type="submit">Submit</button>
+      <button type="reset">Nollaa</button>
+      <button type="submit">Lähetä</button>
     </form>
   );
 }
@@ -284,44 +286,46 @@ label { margin-bottom: 20px; }
 
 <Note>
 
-Give a `name` to your `<select>`, for example `<select name="selectedFruit" />`. The `name` you specified will be used as a key in the form data, for example `{ selectedFruit: "orange" }`.
+Anna `<select>`:lle `name`, esimerkiksi `<select name="selectedFruit" />`. Määrittelemäsi `name` käytetään avaimena lomakkeen datassa, esimerkiksi `{ selectedFruit: "orange" }`.
 
-If you use `<select multiple={true}>`, the [`FormData`](https://developer.mozilla.org/en-US/docs/Web/API/FormData) you'll read from the form will include each selected value as a separate name-value pair. Look closely at the console logs in the example above.
+Jos käytät `<select multiple={true}>`, [`FormData`](https://developer.mozilla.org/en-US/docs/Web/API/FormData) jota luet lomakkeesta sisältää jokaisen valitun arvon erillisenä nimi-arvo parina. Katso tarkasti konsolin lokeja yllä olevassa esimerkissä.
 
 </Note>
 
 <Pitfall>
 
-By default, *any* `<button>` inside a `<form>` will submit it. This can be surprising! If you have your own custom `Button` React component, consider returning [`<button type="button">`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/button) instead of `<button>`. Then, to be explicit, use `<button type="submit">` for buttons that *are* supposed to submit the form.
+Oletuksena, *mikä tahansa*  `<form>`:n sisällä oleva `<button>` lähettää sen. Tämä voi olla yllättävää! Jos sinulla on oma `Button` React-komponentti, harkitse [`<button type="button">`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/button) palauttamista `<button>`:n sijaan. Sitten, ollaksesi eksplisiittinen, käytä `<button type="submit">` painikkeisiin, joiden *on* tarkoitus lähettää lomake.
 
 </Pitfall>
 
 ---
 
-### Controlling a select box with a state variable {/*controlling-a-select-box-with-a-state-variable*/}
+### Valintalistan ohjaaminen tilamuuttujalla {/*controlling-a-select-box-with-a-state-variable*/}
 
-A select box like `<select />` is *uncontrolled.* Even if you [pass an initially selected value](#providing-an-initially-selected-option) like `<select defaultValue="orange" />`, your JSX only specifies the initial value, not the value right now.
+Valintalista kuten `<select />` on *kontrolloimaton*. Vaikka [välittäisit aluksi valitun arvon](#providing-an-initially-selected-option) kuten `<select defaultValue="orange" />`, JSX:si määrittelee vain aluksi valitun arvon, ei arvoa juuri nyt.
 
 **To render a _controlled_ select box, pass the `value` prop to it.** React will force the select box to always have the `value` you passed. Typically, you will control a select box by declaring a [state variable:](/reference/react/useState)
 
+**Renderöidäksesi _kontrolloidun_ valintalistan, välitä sille `value`-propsi.** React pakottaa valintalistan aina sisältämään välittämäsi `value`-arvon. Tyypillisesti, ohjaat valintalistaa määrittämällä [tilamuuttujan:](/reference/react/useState)
+
 ```js {2,6,7}
 function FruitPicker() {
-  const [selectedFruit, setSelectedFruit] = useState('orange'); // Declare a state variable...
+  const [selectedFruit, setSelectedFruit] = useState('orange'); // Määritä tilamuuttuja...
   // ...
   return (
     <select
-      value={selectedFruit} // ...force the select's value to match the state variable...
-      onChange={e => setSelectedFruit(e.target.value)} // ... and update the state variable on any change!
+      value={selectedFruit} // ...pakota valintalistan arvo vastaamaan tilamuuttujaa...
+      onChange={e => setSelectedFruit(e.target.value)} // ... ja päivitä tilamuuttuja muutoksissa!
     >
-      <option value="apple">Apple</option>
-      <option value="banana">Banana</option>
-      <option value="orange">Orange</option>
+      <option value="apple">Omena</option>
+      <option value="banana">Banaani</option>
+      <option value="orange">Appelsiini</option>
     </select>
   );
 }
 ```
 
-This is useful if you want to re-render some part of the UI in response to every selection.
+Tämä on hyödyllistä, jos haluat renderöidä uudelleen osan käyttöliittymästä jokaisen valinnan jälkeen.
 
 <Sandpack>
 
@@ -334,19 +338,19 @@ export default function FruitPicker() {
   return (
     <>
       <label>
-        Pick a fruit:
+        Valitse hedelmä:
         <select
           value={selectedFruit}
           onChange={e => setSelectedFruit(e.target.value)}
         >
-          <option value="apple">Apple</option>
-          <option value="banana">Banana</option>
-          <option value="orange">Orange</option>
+          <option value="apple">Omena</option>
+          <option value="banana">Banaani</option>
+          <option value="orange">Appelsiini</option>
         </select>
       </label>
       <hr />
       <label>
-        Pick all your favorite vegetables:
+        Valitse kaikki lempivihanneksesi:
         <select
           multiple={true}
           value={selectedVegs}
@@ -356,14 +360,14 @@ export default function FruitPicker() {
             setSelectedVegs(values);
           }}
         >
-          <option value="cucumber">Cucumber</option>
-          <option value="corn">Corn</option>
-          <option value="tomato">Tomato</option>
+          <option value="cucumber">Kurkku</option>
+          <option value="corn">Maissi</option>
+          <option value="tomato">Tomaatti</option>
         </select>
       </label>
       <hr />
-      <p>Your favorite fruit: {selectedFruit}</p>
-      <p>Your favorite vegetables: {selectedVegs.join(', ')}</p>
+      <p>Lempihedelmäsi: {selectedFruit}</p>
+      <p>Lempivihanneksesi: {selectedVegs.join(', ')}</p>
     </>
   );
 }
@@ -377,8 +381,8 @@ select { margin-bottom: 10px; display: block; }
 
 <Pitfall>
 
-**If you pass `value` without `onChange`, it will be impossible to select an option.** When you control a select box by passing some `value` to it, you *force* it to always have the value you passed. So if you pass a state variable as a `value` but forget to update that state variable synchronously during the `onChange` event handler, React will revert the select box after every keystroke back to the `value` that you specified.
+**Jos välität `value`:n ilman `onChange`:a, vaihtoehdon valitseminen on mahdotonta.** Kun ohjaat valintalistaa välittämällä sille `value`:n, *pakotat* sen aina sisältämään välittämäsi arvon. Joten jos välität tilamuuttujan `value`:na mutta unohdat päivittää tilamuuttujaa synkronisesti `onChange`-käsittelijäfunktion aikana, React palauttaa valintalistan jokaisen näppäinpainalluksen jälkeen takaisin `value`:n, jonka määritit.
 
-Unlike in HTML, passing a `selected` attribute to an individual `<option>` is not supported.
+Toisin kuin HTML:ssä, `<option>`-komponentin `selected`-attribuutti ei ole tuettu.
 
 </Pitfall>
