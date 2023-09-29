@@ -52,7 +52,7 @@ Nämä `<select>`-propsit ovat olennaisia sekä kontrolloimattomille että kontr
 
 * [`autoComplete`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/select#autocomplete): Merkkijono. Määrittää yhden mahdollisista [automaattisen täydennyksen käyttäytymistavoista.](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/autocomplete#values)
 * [`autoFocus`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/select#autofocus): Totuusarvo. Jos `true`, React kohdistaa elementtiin mountatessa.
-* `children`: `<select>` hyväksyy [`<option>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/option), [`<optgroup>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/optgroup), ja [`<datalist>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/datalist) komponentit lapsina. Boit myös välittää omia komponentteja kunhan ne lopulta renderöivät jonkun sallituista komponenteista. Jos välität omia komponentteja, jotka lopulta renderöivät `<option>` tageja, jokaisen `<option>`:n täytyy omata `value`.
+* `children`: `<select>` hyväksyy [`<option>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/option), [`<optgroup>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/optgroup), ja [`<datalist>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/datalist) komponentit lapsina. Voit myös välittää omia komponentteja kunhan ne lopulta renderöivät jonkun sallituista komponenteista. Jos välität omia komponentteja, jotka lopulta renderöivät `<option>` tageja, jokaisen `<option>`:n täytyy omata `value`.
 * [`disabled`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/select#disabled): Totuusarvo. Jos `true`, valintalista ei ole interaktiivinen ja näkyy himmennettynä.
 * [`form`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/select#form): Merkkijono. Määrittää `<form>` lomakkeen `id` :n johon tämä kenttä kuuluu. Jos jätetty pois, se on lähin ylätason lomake.
 * [`multiple`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/select#multiple): Totuusarvo. Jos `true`, selain mahdollistaa [monen vaihtoehdon valinnan.](#enabling-multiple-selection)
@@ -155,7 +155,7 @@ select { margin: 5px; }
 
 ---
 
-### Aluksi valintun valinnan tarjoaminen {/*providing-an-initially-selected-option*/}
+### Aluksi valitun valinnan tarjoaminen {/*providing-an-initially-selected-option*/}
 
 Oletuksena, selain valitsee ensimmäisen `<option>`-komponentin listasta. Valitaksesi eri vaihtoehdon oletuksena, välitä sen `<option>`-komponentin `value`-arvo `<select>`-komponentille `defaultValue`-propsina.
 
@@ -303,8 +303,6 @@ Oletuksena, *mikä tahansa*  `<form>`:n sisällä oleva `<button>` lähettää s
 ### Valintalistan ohjaaminen tilamuuttujalla {/*controlling-a-select-box-with-a-state-variable*/}
 
 Valintalista kuten `<select />` on *kontrolloimaton*. Vaikka [välittäisit aluksi valitun arvon](#providing-an-initially-selected-option) kuten `<select defaultValue="orange" />`, JSX:si määrittelee vain aluksi valitun arvon, ei arvoa juuri nyt.
-
-**To render a _controlled_ select box, pass the `value` prop to it.** React will force the select box to always have the `value` you passed. Typically, you will control a select box by declaring a [state variable:](/reference/react/useState)
 
 **Renderöidäksesi _kontrolloidun_ valintalistan, välitä sille `value`-propsi.** React pakottaa valintalistan aina sisältämään välittämäsi `value`-arvon. Tyypillisesti, ohjaat valintalistaa määrittämällä [tilamuuttujan:](/reference/react/useState)
 

@@ -61,7 +61,7 @@ Nämä standardit DOM propsit tuetaan myös kaikissa sisäänrakennetuissa kompo
 * [`onAnimationIteration`](https://developer.mozilla.org/en-US/docs/Web/API/Element/animationiteration_event): [`AnimationEvent` käsittelijäfunktio](#animationevent-handler). Suoritetaan kun CSS animaation iteraatio päättyy ja toinen alkaa.
 * `onAnimationIterationCapture`: Versio `onAnimationIteration`:sta joka suoritetaan [nappausvaiheessa.](/learn/responding-to-events#capture-phase-events)
 * [`onAnimationStart`](https://developer.mozilla.org/en-US/docs/Web/API/Element/animationstart_event): [`AnimationEvent` käsittelijäfunktio](#animationevent-handler). Suoritetaan kun CSS animaatio alkaa.
-* `onAnimationStartCapture`: `onAnimationStart`, but fires in the [nappausvaiheessa.](/learn/responding-to-events#capture-phase-events)
+* `onAnimationStartCapture`: `onAnimationStart`, mutta suoritetaan [nappausvaiheessa.](/learn/responding-to-events#capture-phase-events)
 * [`onAuxClick`](https://developer.mozilla.org/en-US/docs/Web/API/Element/auxclick_event): [`MouseEvent` käsittelijäfunktio](#mouseevent-handler). Suoritetaan kun ei-pääpainiketta painetaan.
 * `onAuxClickCapture`: Versio `onAuxClick`:sta joka suoritetaan [nappausvaiheessa.](/learn/responding-to-events#capture-phase-events)
 * `onBeforeInput`: [`InputEvent` käsittelijäfunktio](#inputevent-handler). Suoritetaan ennen muokattavan elementin arvon muuttamista. React ei vielä käytä selaimen [`beforeinput`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/beforeinput_event) tapahtumaa, vaan yrittää polyfillata sen käyttäen muita eventtejä.
