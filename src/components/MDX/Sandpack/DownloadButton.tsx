@@ -2,13 +2,8 @@
  * Copyright (c) Facebook, Inc. and its affiliates.
  */
 
-<<<<<<< HEAD
-import {useSandpack} from '@codesandbox/sandpack-react';
-import {useSyncExternalStore} from 'react';
-=======
-import {useSyncExternalStore} from 'react';
 import {useSandpack} from '@codesandbox/sandpack-react/unstyled';
->>>>>>> 2390627c9cb305216e6bd56e67c6603a89e76e7f
+import {useSyncExternalStore} from 'react';
 import {IconDownload} from '../../Icon/IconDownload';
 export interface DownloadButtonProps {}
 

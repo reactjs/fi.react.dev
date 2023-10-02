@@ -4,12 +4,12 @@ title: "<option>"
 
 <Intro>
 
-The [built-in browser `<option>` component](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/option) lets you render an option inside a [`<select>`](/reference/react-dom/components/select) box.
+[Selaimen sisäänrakennettu `<option>`-komponentti](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/option) mahdollistaa vaihtoehdon renderöimisen [`<select>`](/reference/react-dom/components/select)-listaan.
 
 ```js
 <select>
-  <option value="someOption">Some option</option>
-  <option value="otherOption">Other option</option>
+  <option value="someOption">Jokin vaihtoehto</option>
+  <option value="otherOption">Toinen vaihtoehto</option>
 </select>
 ```
 
@@ -23,40 +23,40 @@ The [built-in browser `<option>` component](https://developer.mozilla.org/en-US/
 
 ### `<option>` {/*option*/}
 
-The [built-in browser `<option>` component](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/option) lets you render an option inside a [`<select>`](/reference/react-dom/components/select) box.
+[Selaimen sisäänrakennettu `<option>`-komponentti](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/option) mahdollistaa vaihtoehdon renderöimisen [`<select>`](/reference/react-dom/components/select)-listaan.
 
 ```js
 <select>
-  <option value="someOption">Some option</option>
-  <option value="otherOption">Other option</option>
+  <option value="someOption">Jokin vaihtoehto</option>
+  <option value="otherOption">Toinen vaihtoehto</option>
 </select>
 ```
 
-[See more examples below.](#usage)
+[Näe lisää esimerkkejä alla.](#usage)
 
 #### Propsit {/*props*/}
 
-`<option>` supports all [common element props.](/reference/react-dom/components/common#props)
+`<option>` tukee kaikkia [yleisten elementtien propseja.](/reference/react-dom/components/common#props)
 
-Additionally, `<option>` supports these props:
+Lisäksi, `<option>` tukee näitä propseja:
 
-* [`disabled`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/option#disabled): A boolean. If `true`, the option will not be selectable and will appear dimmed.
-* [`label`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/option#label): A string. Specifies the meaning of the option. If not specified, the text inside the option is used.
-* [`value`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/option#value): The value to be used [when submitting the parent `<select>` in a form](/reference/react-dom/components/select#reading-the-select-box-value-when-submitting-a-form) if this option is selected.
+* [`disabled`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/option#disabled): Totuusarvo. Jos `true`, valinta ei ole valittavissa ja näkyy himmennettynä.
+* [`label`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/option#label): Merkkijono. Määrittelee valinnan tarkoituksen. Jos ei määritelty, käytetään tekstiä valinnan sisällä.
+* [`value`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/option#value): Arvo, jota käytetään [kun ylätason `<select>` lähetetään lomakkeessa](/reference/react-dom/components/select#reading-the-select-box-value-when-submitting-a-form) jos tämä vaihtoehto on valittuna.
 
 #### Rajoitukset {/*caveats*/}
 
-* React does not support the `selected` attribute on `<option>`. Instead, pass this option's `value` to the parent [`<select defaultValue>`](/reference/react-dom/components/select#providing-an-initially-selected-option) for an uncontrolled select box, or [`<select value>`](/reference/react-dom/components/select#controlling-a-select-box-with-a-state-variable) for a controlled select.
+* React ei tue `<option>`-komponentin `selected`-attribuuttia. Sen sijaan, anna tämän vaihtoehdon `value`-arvo ylätason [`<select defaultValue>`](/reference/react-dom/components/select#providing-an-initially-selected-option)-komponentille, jos haluat luoda kontrolloimattoman valintalistan, tai [`<select value>`](/reference/react-dom/components/select#controlling-a-select-box-with-a-state-variable)-komponentille, jos haluat luoda kontrolloidun valintalista.
 
 ---
 
 ## Käyttö {/*usage*/}
 
-### Displaying a select box with options {/*displaying-a-select-box-with-options*/}
+### Valintalistan näyttäminen vaihtoehdoilla {/*displaying-a-select-box-with-options*/}
 
-Render a `<select>` with a list of `<option>` components inside to display a select box. Give each `<option>` a `value` representing the data to be submitted with the form.
+Renderöi `<select>`-komponentti, jossa on sisällä lista `<option>`-komponentteja näyttääksesi valintalistan. Anna jokaiselle `<option>`-komponentille `value`-arvo, joka edustaa dataa, joka lähetetään lomakkeen mukana.
 
-[Read more about displaying a `<select>` with a list of `<option>` components.](/reference/react-dom/components/select)
+[Lue lisää valintalistan näyttämisestä `<select>`-komponentilla, jossa on lista `<option>`-komponentteja.](/reference/react-dom/components/select)
 
 <Sandpack>
 
@@ -64,11 +64,11 @@ Render a `<select>` with a list of `<option>` components inside to display a sel
 export default function FruitPicker() {
   return (
     <label>
-      Pick a fruit:
+      Valitse hedelmä:
       <select name="selectedFruit">
-        <option value="apple">Apple</option>
-        <option value="banana">Banana</option>
-        <option value="orange">Orange</option>
+        <option value="apple">Omena</option>
+        <option value="banana">Banaani</option>
+        <option value="orange">Appelsiini</option>
       </select>
     </label>
   );

@@ -79,15 +79,9 @@ Toisin kuin valokuva tai elokuvan kehys, UI "tilannekuva", jonka palautat on int
 
 Kun React renderöi komponentin uudelleen:
 
-<<<<<<< HEAD
 1. React kutsuu funktiotasi uudelleen.
 2. Funktiosi palauttaa uuden JSX tilannekuvan.
 3. React sitten päivittää ruudun vastaamaan tilannekuvaa, jonka palautit.
-=======
-1. React calls your function again.
-2. Your function returns a new JSX snapshot.
-3. React then updates the screen to match the snapshot your function returned.
->>>>>>> 2390627c9cb305216e6bd56e67c6603a89e76e7f
 
 <IllustrationBlock sequential>
     <Illustration caption="React suorittamassa funktiota" src="/images/docs/illustrations/i_render1.png" />
