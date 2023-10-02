@@ -5,13 +5,13 @@ canary: true
 
 <Canary>
 
-`'use client'` is needed only if you're [using React Server Components](/learn/start-a-new-react-project#bleeding-edge-react-frameworks) or building a library compatible with them.
+`'use client'` tavitaan vain jos [käytät Reactin palvelinkomponentteja](/learn/start-a-new-react-project#bleeding-edge-react-frameworks) tai rakennat niiden kanssa yhteensopivia kirjastoja.
 </Canary>
 
 
 <Intro>
 
-`'use client'` marks source files whose components execute on the client.
+`'use client'` merkitsee tiedostoja, joiden komponentit suoritetaan asiakaspuolella.
 
 </Intro>
 
@@ -23,7 +23,7 @@ canary: true
 
 ### `'use client'` {/*use-client*/}
 
-Add `'use client';` at the very top of a file to mark that the file (including any child components it uses) executes on the client, regardless of where it's imported.
+Lisää `'use client';` tiedoston alkuun merkitsemään, että tiedosto (mukaan lukien kaikki sen käyttämät alikomponentit) suoritetaan asiakaspuolella, riippumatta siitä, missä se on tuotu.
 
 ```js
 'use client';
@@ -34,26 +34,26 @@ export default function RichTextEditor(props) {
   // ...
 ```
 
-When a file marked `'use client'` is imported from a server component, [compatible bundlers](/learn/start-a-new-react-project#bleeding-edge-react-frameworks) will treat the import as the "cut-off point" between server-only code and client code. Components at or below this point in the module graph can use client-only React features like [`useState`](/reference/react/useState).
+Kun `'use client'`:lla merkitty tiedosto tuodaan palvelinkomponentista, [yhteensopivat paketinhallintajärjestelmät](/learn/start-a-new-react-project#bleeding-edge-react-frameworks) käsittelevät tuonnin "katkaisupisteenä" palvelinpuolen ja asiakaspuolen koodin välillä. Tästä pisteestä alaspäin olevat komponentit voivat käyttää vain asiakaspuolen React-ominaisuuksia, kuten [`useState`](/reference/react/useState).
 
 #### Rajoitukset {/*caveats*/}
 
-* It's not necessary to add `'use client'` to every file that uses client-only React features, only the files that are imported from server component files. `'use client'` denotes the _boundary_ between server-only and client code; any components further down the tree will automatically be executed on the client. In order to be rendered from server components, components exported from `'use client'` files must have serializable props.
-* When a `'use client'` file is imported from a server file, the imported values can be rendered as a React component or passed via props to a client component. Any other use will throw an exception.
-* When a `'use client'` file is imported from another client file, the directive has no effect. This allows you to write client-only components that are simultaneously usable from server and client components.
-* All the code in `'use client'` file as well as any modules it imports (directly or indirectly) will become a part of the client module graph and must be sent to and executed by the client in order to be rendered by the browser. To reduce client bundle size and take full advantage of the server, move state (and the `'use client'` directives) lower in the tree when possible, and pass rendered server components [as children](/learn/passing-props-to-a-component#passing-jsx-as-children) to client components.
-* Because props are serialized across the server–client boundary, note that the placement of these directives can affect the amount of data sent to the client; avoid data structures that are larger than necessary.
-* Components like a `<MarkdownRenderer>` that use neither server-only nor client-only features should generally not be marked with `'use client'`. That way, they can render exclusively on the server when used from a server component, but they'll be added to the client bundle when used from a client component.
-* Libraries published to npm should include `'use client'` on exported React components that can be rendered with serializable props that use client-only React features, to allow those components to be imported and rendered by server components. Otherwise, users will need to wrap library components in their own `'use client'` files which can be cumbersome and prevents the library from moving logic to the server later. When publishing prebundled files to npm, ensure that `'use client'` source files end up in a bundle marked with `'use client'`, separate from any bundle containing exports that can be used directly on the server.
-* Client components will still run as part of server-side rendering (SSR) or build-time static site generation (SSG), which act as clients to transform React components' initial render output to HTML that can be rendered before JavaScript bundles are downloaded. But they can't use server-only features like reading directly from a database.
-* Directives like `'use client'` must be at the very beginning of a file, above any imports or other code (comments above directives are OK). They must be written with single or double quotes, not backticks. (The `'use xyz'` directive format somewhat resembles the `useXyz()` Hook naming convention, but the similarity is coincidental.)
+* `'use client'`:a ei ole tarpeen lisätä jokaiseen tiedostoon, joka käyttää asiakaspuolen React-ominaisuuksia, ainoastaan tiedostoihin, jotka tuodaan palvelinkomponenttitiedostoissa. `'use client'` merkitsee palvelin- ja asiakaspuolen koodin välistä _rajaa_; kaikki komponentit, jotka ovat alempana puussa, suoritetaan automaattisesti asiakaspuolella. Jotta niitä voitaisiin renderöidä palvelinkomponenteista, `'use client'`-tiedostoista tuoduilla komponenteilla on oltava serialisoitavat propsit.
+* Kun `'use client'`-tiedosto tuodaan palvelintiedostosta, tuodut arvot voidaan renderöidä React-komponenttina tai välittää propsina asiakaspuolen komponentille. Muu käyttö heittää poikkeuksen.
+* Kun `'use client'` tiedosto tuodaan toisesta asiakaspuolen tiedostosta, direktiivillä ei ole vaikutusta. Tämä mahdollistaa asiakaspuolen komponenttien kirjoittamisen, jotka ovat samanaikaisesti käytettävissä palvelin- ja asiakaspuolen komponenteista.
+* Kaikki koodi `'use client'` tiedostossa ja kaikki moduulit, joita se tukee (suoraan tai epäsuorasti), tulevat osaksi asiakaspuolen moduuligraafia ja ne on lähetettävä ja suoritettava asiakkaalla, jotta ne voidaan renderöidä selaimessa. Asiakaspuolen pakettikokojen pienentämiseksi ja palvelimen täyden potentiaalin hyödyntämiseksi siirrä tila (ja `'use client'`-direktiivit) mahdollisuuksien mukaan alemmas puussa ja välitä renderöidyt palvelinkomponentit [lapsina](/learn/passing-props-to-a-component#passing-jsx-as-children) asiakaspuolen komponenteille.
+* Koska propsit serialisoidaan palvelin-asiakaspuolen rajapinnan yli, huomaa, että näiden direktiivien sijoittelu voi vaikuttaa asiakkaalle lähetettävän datan määrään; vältä tarpeettoman suuria datarakenteita.
+* Komponentit kuten `<MarkdownRenderer>`, jotka eivät käytä palvelin- tai asiakaspuolen ominaisuuksia, eivät yleensä tarvitse `'use client'`-merkintää. Tällöin ne voidaan renderöidä yksinomaan palvelimella, kun niitä käytetään palvelinkomponentista, mutta ne lisätään asiakaspuolen pakettiin, kun niitä käytetään asiakaspuolen komponentista.
+* npm:ään julkaistujen kirjastojen tulisi sisältää `'use client'`-merkintä niille React-komponenteille, jotka voidaan renderöidä serialisoitavilla propsilla, jotka käyttävät vain asiakaspuolen React-ominaisuuksia, jotta nämä komponentit voidaan tuoda ja renderöidä palvelinkomponenteista. Muuten käyttäjien on käärittävä kirjaston komponentit omiin `'use client'`-tiedostoihinsa, mikä voi olla hankalaa ja estää kirjastoa siirtämästä logiikkaa palvelimelle myöhemmin. Kun julkaiset esikäännetyt tiedostot npm:ään, varmista, että `'use client'`-lähdetiedostot päätyvät bundleen, joka on merkitty `'use client'`:lla, erillään mistään bundlesta, joka sisältää suoraan palvelimella käytettäviä exportteja.
+* Asiakaspuolen komponentit suoritetaan silti osana palvelinpuolen renderöintiä (SSR) tai build-vaiheen staattisen sivun generointia (SSG), joka toimii asiakkaana muuttaakseen React-komponenttien alustavan renderöinnin HTML:ksi, joka voidaan renderöidä ennen kuin JavaScript-paketit on ladattu. Mutta ne eivät voi käyttää palvelinpuolen ominaisuuksia, kuten tietokannasta lukemista.
+* Direktiivit kuten `'use client'` on oltava tiedoston alussa, ennen kaikkia tuontilausekkeita tai muuta koodia (kommentit direktiivien yläpuolella on OK). Ne on kirjoitettava yksittäisillä tai kaksinkertaisilla lainausmerkeillä, ei gravismerkeillä. (Direktiivien muoto `'use xyz'` muistuttaa jonkin verran `useXyz()`-Hookin nimeämiskäytäntöä, mutta samankaltaisuus on sattumanvaraista.)
 
 ## Käyttö {/*usage*/}
 
 <Wip>
-This section is a work in progress. 
+Tämä osio on kesken.
 
-This API can be used in any framework that supports React Server Components. You may find additional documentation from them.
-* [Next.js documentation](https://nextjs.org/docs/getting-started/react-essentials)
-* More coming soon
+Tätä rajapintaa voidaan käyttää missä tahansa kehyksessä, joka tukee Reactin palvelinkomponentteja. Lisätietoja löytyy niiden dokumentaatiosta.
+* [Next.js dokumentaatio](https://nextjs.org/docs/getting-started/react-essentials)
+* Lisää tulossa pian
 </Wip>

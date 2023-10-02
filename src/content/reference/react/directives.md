@@ -1,23 +1,23 @@
 ---
-title: "Directives"
+title: "Direktiivit"
 canary: true
 ---
 
 <Canary>
 
-These directives are needed only if you're [using React Server Components](/learn/start-a-new-react-project#bleeding-edge-react-frameworks) or building a library compatible with them.
+Näitä direktiivejä tarvitaan vain, jos [käytät Reactin palvelinkomponentteja](/learn/start-a-new-react-project#bleeding-edge-react-frameworks) tai rakennat kirjastoa, joka on yhteensopiva niiden kanssa.
 
 </Canary>
 
 <Intro>
 
-Directives provide instructions to [bundlers compatible with React Server Components](/learn/start-a-new-react-project#bleeding-edge-react-frameworks).
+Direktiivit tarjoavat ohjeita [Reactin palvelinkomponenttien kanssa yhteensopiville paketointityökaluille](/learn/start-a-new-react-project#bleeding-edge-react-frameworks).
 
 </Intro>
 
 ---
 
-## Source code directives {/*source-code-directives*/}
+## Lähdekoodi-direktiivit {/*source-code-directives*/}
 
-* [`'use client'`](/reference/react/use-client) marks source files whose components execute on the client.
-* [`'use server'`](/reference/react/use-server) marks server-side functions that can be called from client-side code.
+* [`'use client'`](/reference/react/use-client) merkitsee lähdekooditiedostoja, joiden komponentit suoritetaan asiakaspuolella.
+* [`'use server'`](/reference/react/use-server) merkitsee palvelinpuolen funktioita, joita voidaan kutsua asiakaspuolen koodista.

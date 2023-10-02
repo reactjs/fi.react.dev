@@ -4,7 +4,7 @@ title: "<progress>"
 
 <Intro>
 
-The [built-in browser `<progress>` component](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/progress) lets you render a progress indicator.
+[Selaimen sisäänrakennettu `<progress>`-komponentti](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/progress) mahdollistaa edistymisindikaattorin renderöinnin.
 
 ```js
 <progress value={0.5} />
@@ -20,32 +20,32 @@ The [built-in browser `<progress>` component](https://developer.mozilla.org/en-U
 
 ### `<progress>` {/*progress*/}
 
-To display a progress indicator, render the [built-in browser `<progress>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/progress) component.
+Näyttääksesi edistymisindikaattorin, renderöi [selaimen sisäänrakennettu `<progress>`-komponentti](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/progress).
 
 ```js
 <progress value={0.5} />
 ```
 
-[See more examples below.](#usage)
+[Näe lisää esimerkkejä alla.](#usage)
 
 #### Propsit {/*props*/}
 
-`<progress>` supports all [common element props.](/reference/react-dom/components/common#props)
+`<progress>` tukee kaikkia [yleisien elementin propseja.](/reference/react-dom/components/common#props)
 
-Additionally, `<progress>` supports these props:
+Lisäksi, `<progress>` tukee näitä propseja:
 
-* [`max`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/progress#max): A number. Specifies the maximum `value`. Defaults to `1`.
-* [`value`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/progress#value): A number between `0` and `max`, or `null` for indeterminate progress. Specifies how much was done.
+* [`max`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/progress#max): Numero. Määrittelee `value`:n enimmäismäärän. Oletuksena `1`.
+* [`value`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/progress#value): Numero `0` ja `max`:n väliltä, tai `null` for määrittämättömään edistymiseen. Määrittelee miten paljon on tehty.
 
 ---
 
 ## Käyttö {/*usage*/}
 
-### Controlling a progress indicator {/*controlling-a-progress-indicator*/}
+### Edistymisindikaattorin ohjaaminen {/*controlling-a-progress-indicator*/}
 
-To display a progress indicator, render a `<progress>` component. You can pass a number `value` between `0` and the `max` value you specify. If you don't pass a `max` value, it will assumed to be `1` by default.
+Näyttääksesi edistymisindikaattorin, renderöi `<progress>`-komponentti. Voit antaa numeron `value` väliltä `0` ja `max`-arvon, jonka määrität. Jos et anna `max`-arvoa, oletetaan sen olevan `1` oletuksena.
 
-If the operation is not ongoing, pass `value={null}` to put the progress indicator into an indeterminate state.
+Jos operaatio ei ole käynnissä, anna `value={null}` asettaaksesi edistymisindikaattorin määrittelemättömään tilaan.
 
 <Sandpack>
 

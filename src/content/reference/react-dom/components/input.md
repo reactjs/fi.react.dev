@@ -4,7 +4,7 @@ title: "<input>"
 
 <Intro>
 
-The [built-in browser `<input>` component](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input) lets you render different kinds of form inputs.
+[Selaimen sisäänrakennettu `<input>`-komponentti](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input) mahdollistaa erilaisten lomakkeiden syöttökenttien renderöinnin.
 
 ```js
 <input />
@@ -20,88 +20,87 @@ The [built-in browser `<input>` component](https://developer.mozilla.org/en-US/d
 
 ### `<input>` {/*input*/}
 
-To display an input, render the [built-in browser `<input>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input) component.
+Näyttääksesi syöttökentän, renderöi [selaimen sisäänrakennettu `<input>`-komponentti.](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input)
 
 ```js
 <input name="myInput" />
 ```
 
-[See more examples below.](#usage)
+[Näe lisää esimerkkejä alla.](#usage)
 
 #### Propsit {/*props*/}
 
-`<input>` supports all [common element props.](/reference/react-dom/components/common#props)
+`<input>` tukee kaikkia [yleisten elementtien propseja.](/reference/react-dom/components/common#props)
 
-You can [make an input controlled](#controlling-an-input-with-a-state-variable) by passing one of these props:
+Voit [tehdä syöttökentästä kontrolloidun](#controlling-an-input-with-a-state-variable) antamalla yhden näistä propseista:
 
-* [`checked`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLInputElement#checked): A boolean. For a checkbox input or a radio button, controls whether it is selected.
-* [`value`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLInputElement#value): A string. For a text input, controls its text. (For a radio button, specifies its form data.)
+* [`checked`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLInputElement#checked): Totuusarvo. Valintaruudun tai radiopainikkeen kohdalla, kontrolloi onko se valittu.
+* [`value`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLInputElement#value): Merkkijono. Tekstikentän kohdalla, kontrolloi sen tekstiä. (Radiopainikkeen kohdalla, määrittää sen lomakedatan.)
 
-When you pass either of them, you must also pass an `onChange` handler that updates the passed value.
+Kun käytät `<input>`-komponenttia kontrolloidun syöttökentän kanssa, sinun täytyy myös antaa `onChange`-käsittelijäfunktio, joka päivittää `value`-arvon.
 
-These `<input>` props are only relevant for uncontrolled inputs:
+Nämä `<input>`-propit ovat olennaisia vain kontrolloimattomille syöttökentille:
 
-* [`defaultChecked`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLInputElement#defaultChecked): A boolean. Specifies [the initial value](#providing-an-initial-value-for-an-input) for `type="checkbox"` and `type="radio"` inputs.
-* [`defaultValue`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLInputElement#defaultValue): A string. Specifies [the initial value](#providing-an-initial-value-for-an-input) for a text input.
+* [`defaultChecked`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLInputElement#defaultChecked): Totuusarvo. Määrittää [alkuarvon](#providing-an-initial-value-for-an-input) `type="checkbox"` ja `type="radio"`-syöttökentille.
+* [`defaultValue`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLInputElement#defaultValue): Merkkijono. Määrittää [alkuarvon](#providing-an-initial-value-for-an-input) tekstisyöttökentälle.
 
-These `<input>` props are relevant both for uncontrolled and controlled inputs:
+Nämä `<input>`-propsit ovat olennaisia sekä kontrolloimattomille että kontrolloiduille syöttökentille:
 
-* [`accept`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#accept): A string. Specifies which filetypes are accepted by a `type="file"` input.
-* [`alt`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#alt): A string. Specifies the alternative image text for a `type="image"` input.
-* [`capture`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#capture): A string. Specifies the media (microphone, video, or camera) captured by a `type="file"` input.
-* [`autoComplete`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#autocomplete): A string. Specifies one of the possible [autocomplete behaviors.](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/autocomplete#values)
-* [`autoFocus`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#autofocus): A boolean. If `true`, React will focus the element on mount.
-* [`dirname`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#dirname): A string. Specifies the form field name for the element's directionality.
-* [`disabled`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#disabled): A boolean. If `true`, the input will not be interactive and will appear dimmed.
-* `children`: `<input>` does not accept children.
-* [`form`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#form): A string. Specifies the `id` of the `<form>` this input belongs to. If omitted, it's the closest parent form.
-* [`formAction`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#formaction): A string. Overrides the parent `<form action>` for `type="submit"` and `type="image"`.
-* [`formEnctype`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#formenctype): A string. Overrides the parent `<form enctype>` for `type="submit"` and `type="image"`.
-* [`formMethod`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#formmethod): A string. Overrides the parent `<form method>` for `type="submit"` and `type="image"`.
-* [`formNoValidate`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#formnovalidate): A string. Overrides the parent `<form noValidate>` for `type="submit"` and `type="image"`.
-* [`formTarget`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#formtarget): A string. Overrides the parent `<form target>` for `type="submit"` and `type="image"`.
-* [`height`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#height): A string. Specifies the image height for `type="image"`.
-* [`list`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#list): A string. Specifies the `id` of the `<datalist>` with the autocomplete options.
-* [`max`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#max): A number. Specifies the maximum value of numerical and datetime inputs.
-* [`maxLength`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#maxlength): A number. Specifies the maximum length of text and other inputs.
-* [`min`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#min): A number. Specifies the minimum value of numerical and datetime inputs.
-* [`minLength`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#minlength): A number. Specifies the minimum length of text and other inputs.
-* [`multiple`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#multiple): A boolean. Specifies whether multiple values are allowed for `<type="file"` and `type="email"`.
-* [`name`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#name): A string. Specifies the name for this input that's [submitted with the form.](#reading-the-input-values-when-submitting-a-form)
-* `onChange`: An [`Event` handler](/reference/react-dom/components/common#event-handler) function. Required for [controlled inputs.](#controlling-an-input-with-a-state-variable) Fires immediately when the input's value is changed by the user (for example, it fires on every keystroke). Behaves like the browser [`input` event.](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/input_event)
-* `onChangeCapture`: A version of `onChange` that fires in the [capture phase.](/learn/responding-to-events#capture-phase-events)
-* [`onInput`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/input_event): An [`Event` handler](/reference/react-dom/components/common#event-handler) function. Fires immediately when the value is changed by the user. For historical reasons, in React it is idiomatic to use `onChange` instead which works similarly.
-* `onInputCapture`: A version of `onInput` that fires in the [capture phase.](/learn/responding-to-events#capture-phase-events)
-* [`onInvalid`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLInputElement/invalid_event): An [`Event` handler](/reference/react-dom/components/common#event-handler) function. Fires if an input fails validation on form submit. Unlike the built-in `invalid` event, the React `onInvalid` event bubbles.
-* `onInvalidCapture`: A version of `onInvalid` that fires in the [capture phase.](/learn/responding-to-events#capture-phase-events)
-* [`onSelect`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLInputElement/select_event): An [`Event` handler](/reference/react-dom/components/common#event-handler) function. Fires after the selection inside the `<input>` changes. React extends the `onSelect` event to also fire for empty selection and on edits (which may affect the selection).
-* `onSelectCapture`: A version of `onSelect` that fires in the [capture phase.](/learn/responding-to-events#capture-phase-events)
-* [`pattern`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#pattern): A string. Specifies the pattern that the `value` must match.
-* [`placeholder`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#placeholder): A string. Displayed in a dimmed color when the input value is empty.
-* [`readOnly`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#readonly): A boolean. If `true`, the input is not editable by the user.
-* [`required`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#required): A boolean. If `true`, the value must be provided for the form to submit.
-* [`size`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#size): A number. Similar to setting width, but the unit depends on the control.
-* [`src`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#src): A string. Specifies the image source for a `type="image"` input.
-* [`step`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#step): A positive number or an `'any'` string. Specifies the distance between valid values.
-* [`type`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#type): A string. One of the [input types.](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#input_types)
-* [`width`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#width):  A string. Specifies the image width for a `type="image"` input.
+* [`accept`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#accept): Merkkijono. Määrittää mitä tiedostotyyppejä hyväksytään `type="file"`-kentällä.
+* [`alt`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#alt): Merkkijono. Määrittää vaihtoehtoisen kuvatekstin `type="image"`-kentälle.
+* [`capture`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#capture): Merkkijono. Määrittää median (mikrofoni, video, tai kamera) joka tallennetaan `type="file"`-kentällä.
+* [`autoComplete`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#autocomplete): Merkkijono. Määrittää yhden mahdollisista [autocomplete-käyttäytymisistä.](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/autocomplete#values)
+* [`autoFocus`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#autofocus): Totuusarvo. Jos `true`, React kohdistaa elementtiin mountatessa.
+* [`dirname`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#dirname): Merkkijono. Määrittää elementin suunnan lomakkeen kentän nimen.
+* [`disabled`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#disabled): Totuusarvo. Jos `true`, syöttökenttä ei ole interaktiivinen ja näkyy himmennettynä.
+* [`form`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#form): Merkkijono. Määrittää `<form>` lomakkeen `id` :n johon tämä kenttä kuuluu. Jos jätetty pois, se on lähin ylätason lomake.
+* [`formAction`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#formaction): Merkkijono. Ylikirjoittaa ylätason `<form action>`-arvon `type="submit"` ja `type="image"`-kentille.
+* [`formEnctype`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#formenctype): Merkkijono. Ylikirjoittaa ylätason `<form enctype>`-arvon `type="submit"` ja `type="image"`-kentille.
+* [`formMethod`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#formmethod): Merkkijono. Ylikirjoittaa ylätason `<form method>`-arvon `type="submit"` ja `type="image"`-kentille.
+* [`formNoValidate`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#formnovalidate): Merkkijono. Ylikirjoittaa ylätason `<form noValidate>`-arvon `type="submit"` ja `type="image"`-kentille.
+* [`formTarget`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#formtarget): Merkkijono. Ylikirjoittaa ylätason `<form target>`-arvon `type="submit"` ja `type="image"`-kentille.
+* [`height`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#height): Merkkijono. Määrittää kuvan korkeuden `type="image"`-kentälle.
+* [`list`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#list): Merkkijono. Määrittää `<datalist>`-elementin `id`:n, jossa on autocomplete-vaihtoehdot.
+* [`max`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#max): Numero. Määrittää numeeristen ja päivämääräkenttien maksimiarvon.
+* [`maxLength`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#maxlength): Numero. Määrittää tekstin ja muiden syöttökenttien maksimipituuden.
+* [`min`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#min): Numero. Määrittää numeeristen ja päivämääräkenttien minimiarvon.
+* [`minLength`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#minlength): Numero. Määrittää tekstin ja muiden syöttökenttien minimipituuden.
+* [`multiple`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#multiple): Totuusarvo. Määrittää onko useita arvoja sallittu `type="file"` ja `type="email"`-kentille.
+* [`name`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#name): Merkkijono. Määrittää nimen tälle kentälle, joka [lähetetään lomakkeessa.](#reading-the-input-values-when-submitting-a-form)
+* `onChange`: [`Event` käsittelijäfunktio](/reference/react-dom/components/common#event-handler). Vaaditaan [kontrolloituihin kenttiin.](#controlling-an-input-with-a-state-variable) Suoritetaan heti kun käyttäjä muuttaa kentän arvoa (esimerkiksi, suoritetaan jokaisella näppäinpainalluksella). Käyttäytyy kuten selaimen [`input` tapahtuma.](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/input_event)
+* `onChangeCapture`: Versio `onChange`:sta joka suoritetaan [nappausvaiheessa.](/learn/responding-to-events#capture-phase-events)
+* [`onInput`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/input_event): [`Event` käsittelijäfunktio](/reference/react-dom/components/common#event-handler). Suoritetaan heti kun käyttäjä muuttaa kentän arvoa. Historiallisista syistä, Reactissa on idiomaattista käyttää tämän tilalla `onChange`, joka toimii samanlaisesti.
+* `onInputCapture`: Versio `onInput`:sta joka suoritetaan [nappausvaiheessa.](/learn/responding-to-events#capture-phase-events)
+* [`onInvalid`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLInputElement/invalid_event): [`Event` käsittelijäfunktio](/reference/react-dom/components/common#event-handler). Suoritetaan jos syöttökenttä epäonnistuu lomakkeen lähetyksessä. Toisin kuin selaimen sisäänrakennettu `invalid`-tapahtuma, Reactin `onInvalid`-tapahtuma kuplii.
+* `onInvalidCapture`: Versio `onInvalid`:sta joka suoritetaan [nappausvaiheessa.](/learn/responding-to-events#capture-phase-events)
+* [`onSelect`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLInputElement/select_event): [`Event` käsittelijäfunktio](/reference/react-dom/components/common#event-handler). Suoritetaan kun valinta `<input>`-elementissä muuttuu. React laajentaa `onSelect`-tapahtuman myös tyhjälle valinnalle ja muokkauksille (jotka voivat vaikuttaa valintaan).
+* `onSelectCapture`: Versio `onSelect`:sta joka suoritetaan [nappausvaiheessa.](/learn/responding-to-events#capture-phase-events)
+* [`pattern`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#pattern): Merkkijono. Määrittää mallin, joka `value`:n täytyy täyttää.
+* [`placeholder`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#placeholder): Merkkijono. Näytetään himmennettynä kun syöttökentän arvo on tyhjä.
+* [`readOnly`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#readonly): Totuusarvo. Jos `true`, syöttökenttä ei ole muokattavissa käyttäjän toimesta.
+* [`required`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#required): Totuusarvo. Jos `true`, arvo täytyy antaa lomakkeen lähetyksessä.
+* [`size`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#size): Numero. Samanlainen kuin leveyden määrittäminen, mutta yksikkö riippuu kontrollista.
+* [`src`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#src): Merkkijono. Määrittää kuvan lähteen `type="image"`-kentälle.
+* [`step`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#step): Positiivinen numero tai `'any'`-merkkijono. Määrittää etäisyyden kelvollisten arvojen välillä.
+* [`type`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#type): Merkkijono. Yksi [syöttökenttien tyypeistä.](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#input_types)
+* [`width`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#width):  Merkkijono. Määrittää kuvan leveyden `type="image"`-kentälle.
 
 #### Rajoitukset {/*caveats*/}
 
-- Checkboxes need `checked` (or `defaultChecked`), not `value` (or `defaultValue`).
-- If a text input receives a string `value` prop, it will be [treated as controlled.](#controlling-an-input-with-a-state-variable)
-- If a checkbox or a radio button receives a boolean `checked` prop, it will be [treated as controlled.](#controlling-an-input-with-a-state-variable)
-- An input can't be both controlled and uncontrolled at the same time.
-- An input cannot switch between being controlled or uncontrolled over its lifetime.
-- Every controlled input needs an `onChange` event handler that synchronously updates its backing value.
+- Valintaruudut tarvitsevat `checked` (tai `defaultChecked`), ei `value` (tai `defaultValue`).
+- Jos tekstisyöttökenttä saa merkkijono `value`-propin, se [käsitellään kontrolloituna.](#controlling-an-input-with-a-state-variable)
+- Jos valintaruutu tai radiopainike saa boolean `checked`-propin, se [käsitellään kontrolloituna.](#controlling-an-input-with-a-state-variable)
+- Syöttökenttä ei voi olla sekä kontrolloitu että kontrolloimaton samaan aikaan.
+- Syöttökenttä ei voi vaihtaa kontrolloidusta kontrolloimattomaksi elinkaarensa aikana.
+- Jokainen kontrolloitu syöttökenttä tarvitsee `onChange`-käsittelijäfunktion, joka päivittää sen arvon synkronisesti.
 
 ---
 
 ## Käyttö {/*usage*/}
 
-### Displaying inputs of different types {/*displaying-inputs-of-different-types*/}
+### Eri tyyppisten syöttökenttien näyttäminen {/*displaying-inputs-of-different-types*/}
 
-To display an input, render an `<input>` component. By default, it will be a text input. You can pass `type="checkbox"` for a checkbox, `type="radio"` for a radio button, [or one of the other input types.](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#input_types)
+Näyttääksesi syöttökentän, renderöi `<input>`-komponentti. Oletuksena, se on tekstisyöttökenttä. Voit antaa `type="checkbox"` valintaruudulle, `type="radio"` radiopainikkeelle, [tai yhden muista syöttökenttien tyypeistä.](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#input_types)
 
 <Sandpack>
 
@@ -110,26 +109,26 @@ export default function MyForm() {
   return (
     <>
       <label>
-        Text input: <input name="myInput" />
+        Tekstisyöte: <input name="myInput" />
       </label>
       <hr />
       <label>
-        Checkbox: <input type="checkbox" name="myCheckbox" />
+        Valintaruutu: <input type="checkbox" name="myCheckbox" />
       </label>
       <hr />
       <p>
-        Radio buttons:
+        Monivalinta:
         <label>
           <input type="radio" name="myRadio" value="option1" />
-          Option 1
+          Valinta 1
         </label>
         <label>
           <input type="radio" name="myRadio" value="option2" />
-          Option 2
+          Valinta 2
         </label>
         <label>
           <input type="radio" name="myRadio" value="option3" />
-          Option 3
+          Valinta 3
         </label>
       </p>
     </>
@@ -146,11 +145,11 @@ input { margin: 5px; }
 
 ---
 
-### Providing a label for an input {/*providing-a-label-for-an-input*/}
+### Syöttökentän otsikko {/*providing-a-label-for-an-input*/}
 
-Typically, you will place every `<input>` inside a [`<label>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/label) tag. This tells the browser that this label is associated with that input. When the user clicks the label, the browser will automatically focus the input. It's also essential for accessibility: a screen reader will announce the label caption when the user focuses the associated input.
+Tyypillisesti, laitat jokaisen `<input>`-komponentin sisälle [`<label>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/label)-tagin. Tämä kertoo selaimelle, että tämä otsikko on yhdistetty tähän syöttökenttään. Kun käyttäjä klikkaa otsikkoa, selain kohdistaa automaattisesti syöttökenttään. Tämä on myös olennaista saavutettavuuden kannalta: ruudunlukija ilmoittaa otsikon käyttäjälle, kun tämä kohdistaa siihen liittyvään syöttökenttään.
 
-If you can't nest `<input>` into a `<label>`, associate them by passing the same ID to `<input id>` and [`<label htmlFor>`.](https://developer.mozilla.org/en-US/docs/Web/API/HTMLLabelElement/htmlFor) To avoid conflicts between multiple instances of one component, generate such an ID with [`useId`.](/reference/react/useId)
+Jos et voi sisällyttää `<input>`-komponenttia `<label>`-komponenttiin, yhdistä ne antamalla sama ID `<input id>`-komponentille ja [`<label htmlFor>`-komponentille.](https://developer.mozilla.org/en-US/docs/Web/API/HTMLLabelElement/htmlFor) Välttääksesi konflikteja useiden yhden komponentin instanssien välillä, generoi tällainen ID [`useId`-komponentilla.](/reference/react/useId)
 
 <Sandpack>
 
@@ -162,11 +161,11 @@ export default function Form() {
   return (
     <>
       <label>
-        Your first name:
+        Etunimi:
         <input name="firstName" />
       </label>
       <hr />
-      <label htmlFor={ageInputId}>Your age:</label>
+      <label htmlFor={ageInputId}>Ikä:</label>
       <input id={ageInputId} name="age" type="number" />
     </>
   );
@@ -181,9 +180,9 @@ input { margin: 5px; }
 
 ---
 
-### Providing an initial value for an input {/*providing-an-initial-value-for-an-input*/}
+### Oletusarvon tarjoaminen syöttökentälle {/*providing-an-initial-value-for-an-input*/}
 
-You can optionally specify the initial value for any input. Pass it as the `defaultValue` string for text inputs. Checkboxes and radio buttons should specify the initial value with the `defaultChecked` boolean instead.
+Voit vaihtoehtoisesti määrittää alkuarvon mille tahansa syöttökentälle. Anna se `defaultValue`-merkkijonona tekstisyöttökentille. Valintaruudut ja radiopainikkeet määrittävät alkuarvon `defaultChecked`-totuusarvona.
 
 <Sandpack>
 
@@ -233,25 +232,25 @@ input { margin: 5px; }
 
 ---
 
-### Reading the input values when submitting a form {/*reading-the-input-values-when-submitting-a-form*/}
+### Syöttökentän arvon lukeminen lomakkeen lähetyksessä {/*reading-the-input-values-when-submitting-a-form*/}
 
-Add a [`<form>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/form) around your inputs with a [`<button type="submit">`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button) inside. It will call your `<form onSubmit>` event handler. By default, the browser will send the form data to the current URL and refresh the page. You can override that behavior by calling `e.preventDefault()`. Read the form data with [`new FormData(e.target)`](https://developer.mozilla.org/en-US/docs/Web/API/FormData).
+Lisää [`<form>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/form) syöttökenttien ympärille. Lisää myös `<button type="submit">`-komponentti sen sisään. Se kutsuu `<form onSubmit>`-käsittelijäfunktiota. Oletuksena, selain lähettää lomakedatan nykyiselle URL:lle ja päivittää sivun. Voit ohittaa tämän käyttämällä `e.preventDefault()`. Lue lomakedata [`new FormData(e.target)`:lla.](https://developer.mozilla.org/en-US/docs/Web/API/FormData)
 <Sandpack>
 
 ```js
 export default function MyForm() {
   function handleSubmit(e) {
-    // Prevent the browser from reloading the page
+    // Estä selainta lataamasta sivua uudelleen
     e.preventDefault();
 
-    // Read the form data
+    // Lue lomakedata
     const form = e.target;
     const formData = new FormData(form);
 
-    // You can pass formData as a fetch body directly:
+    // Voit välittää formData:n suoraan fetchin bodylle:
     fetch('/some-api', { method: form.method, body: formData });
 
-    // Or you can work with it as a plain object:
+    // Tai voit käsitellä sitä tavallisena objektina:
     const formJson = Object.fromEntries(formData.entries());
     console.log(formJson);
   }
@@ -259,22 +258,22 @@ export default function MyForm() {
   return (
     <form method="post" onSubmit={handleSubmit}>
       <label>
-        Text input: <input name="myInput" defaultValue="Some initial value" />
+        Tekstisyöte: <input name="myInput" defaultValue="Some initial value" />
       </label>
       <hr />
       <label>
-        Checkbox: <input type="checkbox" name="myCheckbox" defaultChecked={true} />
+        Valintaruutu: <input type="checkbox" name="myCheckbox" defaultChecked={true} />
       </label>
       <hr />
       <p>
-        Radio buttons:
-        <label><input type="radio" name="myRadio" value="option1" /> Option 1</label>
-        <label><input type="radio" name="myRadio" value="option2" defaultChecked={true} /> Option 2</label>
-        <label><input type="radio" name="myRadio" value="option3" /> Option 3</label>
+        Monivalinta:
+        <label><input type="radio" name="myRadio" value="option1" /> Vaihtoehto 1</label>
+        <label><input type="radio" name="myRadio" value="option2" defaultChecked={true} /> Vaihtoehto 2</label>
+        <label><input type="radio" name="myRadio" value="option3" /> Vaihtoehto 3</label>
       </p>
       <hr />
-      <button type="reset">Reset form</button>
-      <button type="submit">Submit form</button>
+      <button type="reset">Nollaa lomake</button>
+      <button type="submit">Lähetä lomake</button>
     </form>
   );
 }
@@ -289,38 +288,38 @@ input { margin: 5px; }
 
 <Note>
 
-Give a `name` to every `<input>`, for example `<input name="firstName" defaultValue="Taylor" />`. The `name` you specified will be used as a key in the form data, for example `{ firstName: "Taylor" }`.
+Anna jokaiselle `<input>`:lle `name`, esimerkiksi `<input name="firstName" defaultValue="Taylor" />`. `name`-arvoa käytetään avaimena lomakedatassa, esimerkiksi `{ firstName: "Taylor" }`.
 
 </Note>
 
 <Pitfall>
 
-By default, *any* `<button>` inside a `<form>` will submit it. This can be surprising! If you have your own custom `Button` React component, consider returning [`<button type="button">`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/button) instead of `<button>`. Then, to be explicit, use `<button type="submit">` for buttons that *are* supposed to submit the form.
+Oletuksena *mikä tahansa* `<button>` `<form>`:n sisällä lähettää sen. Tämä voi olla yllättävää! Jos sinulla on oma `Button` React-komponentti, harkitse `<button type="button">`-komponentin palauttamista sen sijaan. Sitten, ollaksesi eksplisiittinen, käytä `<button type="submit">`-komponenttia napeille joiden *on* tarkoitus lähettää lomake.
 
 </Pitfall>
 
 ---
 
-### Controlling an input with a state variable {/*controlling-an-input-with-a-state-variable*/}
+### Syöttökentän ohjaaminen tilamuuttujalla {/*controlling-an-input-with-a-state-variable*/}
 
-An input like `<input />` is *uncontrolled.* Even if you [pass an initial value](#providing-an-initial-value-for-an-input) like `<input defaultValue="Initial text" />`, your JSX only specifies the initial value. It does not control what the value should be right now.
+Syöttökenttä kuten `<input />` on *kontrolloimaton.* Vaikka [antaisit alkuarvon](#providing-an-initial-value-for-an-input) kuten `<input defaultValue="Alkuteksti" />`, JSX:si määrittää vain alkuarvon. Se ei kontrolloi mitä arvoa sen pitäisi olla juuri nyt.
 
-**To render a _controlled_ input, pass the `value` prop to it (or `checked` for checkboxes and radios).** React will force the input to always have the `value` you passed. Usually, you would do this by declaring a [state variable:](/reference/react/useState)
+**Renderöidäksesi _kontrolloidun_ syöttökentän, anna sille `value`-prop.** React pakottaa syöttökentän aina olemaan `value` jonka annoit. Yleensä, teet tämän määrittämällä [tilamuuttujan:](/reference/react/useState)
 
 ```js {2,6,7}
 function Form() {
-  const [firstName, setFirstName] = useState(''); // Declare a state variable...
+  const [firstName, setFirstName] = useState(''); // Määritä tilamuuttuja...
   // ...
   return (
     <input
-      value={firstName} // ...force the input's value to match the state variable...
-      onChange={e => setFirstName(e.target.value)} // ... and update the state variable on any edits!
+      value={firstName} // ...pakota kentän arvo vastaamaan tilamuuttujaa...
+      onChange={e => setFirstName(e.target.value)} // ... ja päivitä tilamuuttuja jokaisella muutoksella!
     />
   );
 }
 ```
 
-A controlled input makes sense if you needed state anyway--for example, to re-render your UI on every edit:
+Kontrolloitu syöttökenttä on järkevä jos tarvitset tilamuuttujaa muutenkin--esimerkiksi, renderöidäksesi uudelleen käyttöliittymäsi jokaisella muutoksella:
 
 ```js {2,9}
 function Form() {
@@ -328,14 +327,14 @@ function Form() {
   return (
     <>
       <label>
-        First name:
+        Etunimi:
         <input value={firstName} onChange={e => setFirstName(e.target.value)} />
       </label>
-      {firstName !== '' && <p>Your name is {firstName}.</p>}
+      {firstName !== '' && <p>Nimesi on {firstName}.</p>}
       ...
 ```
 
-It's also useful if you want to offer multiple ways to adjust the input state (for example, by clicking a button):
+On myös hyödyllistä jos haluat tarjota useita tapoja muuttaa syöttökentän tilaa (esimerkiksi, klikkaamalla nappia):
 
 ```js {3-4,10-11,14}
 function Form() {
@@ -345,18 +344,18 @@ function Form() {
   return (
     <>
       <label>
-        Age:
+        Ikä:
         <input
           value={age}
           onChange={e => setAge(e.target.value)}
           type="number"
         />
         <button onClick={() => setAge(ageAsNumber + 10)}>
-          Add 10 years
+          Lisää 10 vuotta
         </button>
 ```
 
-The `value` you pass to controlled components should not be `undefined` or `null`. If you need the initial value to be empty (such as with the `firstName` field below), initialize your state variable to an empty string (`''`).
+`value` jonka välität kontrolloiduille komponenteille ei saa olla `undefined` tai `null`. Jos tarvitset tyhjän alkuarvon (esimerkiksi, `firstName`-kentän alla), alusta tilamuuttujasi tyhjällä merkkijonolla (`''`).
 
 <Sandpack>
 
@@ -370,28 +369,28 @@ export default function Form() {
   return (
     <>
       <label>
-        First name:
+        Etunimi:
         <input
           value={firstName}
           onChange={e => setFirstName(e.target.value)}
         />
       </label>
       <label>
-        Age:
+        Ikä:
         <input
           value={age}
           onChange={e => setAge(e.target.value)}
           type="number"
         />
         <button onClick={() => setAge(ageAsNumber + 10)}>
-          Add 10 years
+          Lisää 10 vuotta
         </button>
       </label>
       {firstName !== '' &&
-        <p>Your name is {firstName}.</p>
+        <p>Nimesi on {firstName}.</p>
       }
       {ageAsNumber > 0 &&
-        <p>Your age is {ageAsNumber}.</p>
+        <p>Ikäsi on {ageAsNumber}.</p>
       }
     </>
   );
@@ -408,17 +407,17 @@ p { font-weight: bold; }
 
 <Pitfall>
 
-**If you pass `value` without `onChange`, it will be impossible to type into the input.** When you control an input by passing some `value` to it, you *force* it to always have the value you passed. So if you pass a state variable as a `value` but forget to update that state variable synchronously during the `onChange` event handler, React will revert the input after every keystroke back to the `value` that you specified.
+**Jos välität `value`-arvon ilman `onChange`:a, syöttökenttään ei voi kirjoittaa.** Kun kontrolloit syöttökenttää välittämällä sille `value`-arvon, *pakotat* sen aina olemaan arvon jonka välitit. Joten jos välität tilamuuttujan `value`:n mutta unohdat päivittää tilamuuttujaa synkronisesti `onChange`-tapahtumakäsittelijässä, React palauttaa syöttökentän jokaisen näppäinpainalluksen jälkeen takaisin `value`:n arvoon jonka määritit.
 
 </Pitfall>
 
 ---
 
-### Optimizing re-rendering on every keystroke {/*optimizing-re-rendering-on-every-keystroke*/}
+### Renderöinnin optimoiminen joka näppäinpainalluksella {/*optimizing-re-rendering-on-every-keystroke*/}
 
-When you use a controlled input, you set the state on every keystroke. If the component containing your state re-renders a large tree, this can get slow. There's a few ways you can optimize re-rendering performance.
+Kun käytät kontrolloitua syöttökenttää, asetat tilamuuttujan jokaisella näppäinpainalluksella. Jos komponentti joka sisältää tilamuuttujan uudelleen renderöi suuren puun, tästä saattaa tulla hidasta. On muutamia tapoja joilla voit optimoida uudelleen renderöimisen suorityskykyä.
 
-For example, suppose you start with a form that re-renders all page content on every keystroke:
+Esimerkiksi, oletetaan että aloitat lomakkeella joka uudelleen renderöi kaiken sisällön jokaisella näppäinpainalluksella:
 
 ```js {5-8}
 function App() {
@@ -434,7 +433,7 @@ function App() {
 }
 ```
 
-Since `<PageContent />` doesn't rely on the input state, you can move the input state into its own component:
+Sillä `<PageContent />` ei nojaa syöttökentän tilaan, voit siirtää syöttökentän tilan omaan komponenttiinsa:
 
 ```js {4,10-17}
 function App() {
@@ -456,20 +455,20 @@ function SignupForm() {
 }
 ```
 
-This significantly improves performance because now only `SignupForm` re-renders on every keystroke.
+Tämä parantaa suorituskykyä merkittävästi koska nyt vain `SignupForm` uudelleen renderöi jokaisella näppäinpainalluksella.
 
-If there is no way to avoid re-rendering (for example, if `PageContent` depends on the search input's value), [`useDeferredValue`](/reference/react/useDeferredValue#deferring-re-rendering-for-a-part-of-the-ui) lets you keep the controlled input responsive even in the middle of a large re-render.
+Jos ei ole tapaa välttää uudelleen renderöintiä (esimerkiksi, jos `PageContent` riippuu hakukentän arvosta), [`useDeferredValue`](/reference/react/useDeferredValue#deferring-re-rendering-for-a-part-of-the-ui) antaa sinun pitää kontrolloidun syöttökentän reagoivana jopa suuren uudelleen renderöinnin keskellä.
 
 ---
 
 ## Vianmääritys {/*troubleshooting*/}
 
-### My text input doesn't update when I type into it {/*my-text-input-doesnt-update-when-i-type-into-it*/}
+### Tekstikenttäni ei päivity kun kirjoitan siihen {/*my-text-input-doesnt-update-when-i-type-into-it*/}
 
-If you render an input with `value` but no `onChange`, you will see an error in the console:
+Jos renderöit syöttökentän `value`-arvolla mutta ilman `onChange`:a, näet virheen konsolissa:
 
 ```js
-// 🔴 Bug: controlled text input with no onChange handler
+// 🔴 Bugi: kontrolloitu tekstisyöttökenttä ilman onChange-käsittelijää
 <input value={something} />
 ```
 
@@ -479,35 +478,35 @@ You provided a `value` prop to a form field without an `onChange` handler. This 
 
 </ConsoleBlock>
 
-As the error message suggests, if you only wanted to [specify the *initial* value,](#providing-an-initial-value-for-an-input) pass `defaultValue` instead:
+Kuten virheviesti ehdottaa, jos halusit vain [määrittää *alkuarvon*,](#providing-an-initial-value-for-an-input) välitä `defaultValue` sen sijaan:
 
 ```js
-// ✅ Good: uncontrolled input with an initial value
+// ✅ Hyvä: kontrolloimaton syöttökenttä alkuarvolla
 <input defaultValue={something} />
 ```
 
-If you want [to control this input with a state variable,](#controlling-an-input-with-a-state-variable) specify an `onChange` handler:
+Jos haluat [kontrolloida tätä syöttökenttää tilamuuttujalla,](#controlling-an-input-with-a-state-variable) määritä `onChange`-käsittelijä:
 
 ```js
-// ✅ Good: controlled input with onChange
+// ✅ Hyvä: kontrolloitu syöttökenttä onChange-käsittelijällä
 <input value={something} onChange={e => setSomething(e.target.value)} />
 ```
 
-If the value is intentionally read-only, add a `readOnly` prop to suppress the error:
+Jos arvo on tarkoituksella vain luettava, lisää `readOnly`-prop.
 
 ```js
-// ✅ Good: readonly controlled input without on change
+// ✅ Hyvä: vain luku -syöttökenttä ilman onChange-käsittelijää
 <input value={something} readOnly={true} />
 ```
 
 ---
 
-### My checkbox doesn't update when I click on it {/*my-checkbox-doesnt-update-when-i-click-on-it*/}
+### Valintaruutuni ei päivity kun painan siitä {/*my-checkbox-doesnt-update-when-i-click-on-it*/}
 
-If you render a checkbox with `checked` but no `onChange`, you will see an error in the console:
+Jos renderöit valintaruudun `checked`-arvolla mutta ilman `onChange`:a, näet virheen konsolissa:
 
 ```js
-// 🔴 Bug: controlled checkbox with no onChange handler
+// 🔴 Bugi: kontrolloitu valintaruutu ilman onChange-käsittelijää
 <input type="checkbox" checked={something} />
 ```
 
@@ -517,79 +516,79 @@ You provided a `checked` prop to a form field without an `onChange` handler. Thi
 
 </ConsoleBlock>
 
-As the error message suggests, if you only wanted to [specify the *initial* value,](#providing-an-initial-value-for-an-input) pass `defaultChecked` instead:
+Kuten virheviesti ehdottaa, jos halusit vain [määrittää *alkuarvon*,](#providing-an-initial-value-for-an-input) välitä `defaultChecked` sen sijaan:
 
 ```js
-// ✅ Good: uncontrolled checkbox with an initial value
+// ✅ Hyvä: kontrolloimaton valintaruutu alkuarvolla
 <input type="checkbox" defaultChecked={something} />
 ```
 
-If you want [to control this checkbox with a state variable,](#controlling-an-input-with-a-state-variable) specify an `onChange` handler:
+Jos haluat [kontrolloida tätä valintaruutua tilamuuttujalla,](#controlling-an-input-with-a-state-variable) määritä `onChange`-käsittelijä:
 
 ```js
-// ✅ Good: controlled checkbox with onChange
+// ✅ Hyvä: kontrolloitu valintaruutu onChange-käsittelijällä
 <input type="checkbox" checked={something} onChange={e => setSomething(e.target.checked)} />
 ```
 
 <Pitfall>
 
-You need to read `e.target.checked` rather than `e.target.value` for checkboxes.
+Sinun tulee lukea `e.target.checked` eikä `e.target.value` valintaruuduille.
 
 </Pitfall>
 
-If the checkbox is intentionally read-only, add a `readOnly` prop to suppress the error:
+Jos valintaruutu on tarkoituksella vain luettava, lisää `readOnly`-prop virheen poistamiseksi:
 
 ```js
-// ✅ Good: readonly controlled input without on change
+// ✅ Hyvä: vain luku -valintaruutu ilman onChange-käsittelijää
 <input type="checkbox" checked={something} readOnly={true} />
 ```
 
 ---
 
-### My input caret jumps to the beginning on every keystroke {/*my-input-caret-jumps-to-the-beginning-on-every-keystroke*/}
+### Syötön kursori hyppää alkuun jokaisen näppäinpainalluksen yhteydessä {/*my-input-caret-jumps-to-the-beginning-on-every-keystroke*/}
 
-If you [control an input,](#controlling-an-input-with-a-state-variable) you must update its state variable to the input's value from the DOM during `onChange`.
+Jos [kontrolloit syöttökenttää,](#controlling-an-input-with-a-state-variable) sinun täytyy päivittää sen tilamuuttuja syöttökentän arvoksi DOM:sta `onChange`:n aikana.
 
-You can't update it to something other than `e.target.value` (or `e.target.checked` for checkboxes):
+Et voi päivittää sitä joksikin muuksi kuin `e.target.value` (tai `e.target.checked` valintaruuduille):
 
 ```js
 function handleChange(e) {
-  // 🔴 Bug: updating an input to something other than e.target.value
+  // 🔴 Bugi: kentän päivittäminen joksikin muuksi kuin e.target.value
   setFirstName(e.target.value.toUpperCase());
 }
 ```
 
-You also can't update it asynchronously:
+Et voi myöskään päivittää sitä asynkronisesti:
 
 ```js
 function handleChange(e) {
-  // 🔴 Bug: updating an input asynchronously
+  // 🔴 Bugi: kentän päivittäminen asynkronisesti
   setTimeout(() => {
     setFirstName(e.target.value);
   }, 100);
 }
 ```
 
-To fix your code, update it synchronously to `e.target.value`:
+Korjataksesi koodisi, päivitä se synkronisesti `e.target.value`:lla:
 
 ```js
 function handleChange(e) {
-  // ✅ Updating a controlled input to e.target.value synchronously
+  // ✅ Kontrolloidun kentän päivittäminen e.target.value:lla synkronisesti
   setFirstName(e.target.value);
 }
 ```
 
-If this doesn't fix the problem, it's possible that the input gets removed and re-added from the DOM on every keystroke. This can happen if you're accidentally [resetting state](/learn/preserving-and-resetting-state) on every re-render, for example if the input or one of its parents always receives a different `key` attribute, or if you nest component function definitions (which is not supported and causes the "inner" component to always be considered a different tree).
+Jos tämä ei korjaa ongelmaa, on mahdollista että syöttökenttä poistetaan ja lisätään takaisin DOM:iin jokaisella näppäinpainalluksella. Tämä voi tapahtua jos olet vahingossa [nollannut tilan](/learn/preserving-and-resetting-state) jokaisella uudelleen renderöinnillä, esimerkiksi jos syöttökenttä tai jokin sen vanhemmista saa aina erilaisen `key`-attribuutin, tai jos upotat komponenttifunktioiden määrittelyjä (jota ei tueta ja aiheuttaa "sisemmän" komponentin aina olevan eri puu).
 
 ---
 
-### I'm getting an error: "A component is changing an uncontrolled input to be controlled" {/*im-getting-an-error-a-component-is-changing-an-uncontrolled-input-to-be-controlled*/}
+### Saan virheen: "A component is changing an uncontrolled input to be controlled" {/*im-getting-an-error-a-component-is-changing-an-uncontrolled-input-to-be-controlled*/}
 
 
-If you provide a `value` to the component, it must remain a string throughout its lifetime.
+Jos tarjoat `value`:n komponentille, sen täytyy pysyä merkkijonona koko elinkaarensa ajan.
 
-You cannot pass `value={undefined}` first and later pass `value="some string"` because React won't know whether you want the component to be uncontrolled or controlled. A controlled component should always receive a string `value`, not `null` or `undefined`.
+Et voi välittää `value={undefined}` ensin ja myöhemmin välittää `value="some string"` koska React ei tiedä haluatko komponentin olevan kontrolloimaton vai kontrolloitu. Kontrolloidun komponentin tulisi aina saada merkkijonona `value`, ei `null` tai `undefined`.
 
-If your `value` is coming from an API or a state variable, it might be initialized to `null` or `undefined`. In that case, either set it to an empty string (`''`) initially, or pass `value={someValue ?? ''}` to ensure `value` is a string.
+Jos `value` tulee API:sta tai tilamuuttujasta, se voi olla alustettu `null` tai `undefined`. Tässä tapauksessa, joko aseta se tyhjäksi merkkijonoksi (`''`) aluksi, tai välitä `value={someValue ?? ''}` varmistaaksesi, että `value` on merkkijono.
 
-Similarly, if you pass `checked` to a checkbox, ensure it's always a boolean.
+Vastaavasti, jos välität `checked` propsin valintaruudulle, varmista että se on aina totuusarvo.
