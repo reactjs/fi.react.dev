@@ -1488,8 +1488,6 @@ Tässä on korjattu versio, joka käyttää tavallista `name` muuttujaa määrit
 <Sandpack>
 
 ```js
-import { useState } from 'react';
-
 export default function FeedbackForm() {
   function handleClick() {
     const name = prompt('What is your name?');
