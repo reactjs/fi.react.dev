@@ -773,7 +773,11 @@ Ostaminen ei aiheutunut renderöinnin takia. Se aiheutuu tietyn vuorovaikutuksen
   }
 ```
 
+<<<<<<< HEAD
 **Tämä osoittaa, että jos remounttaus rikkoo sovelluksen logiikkaa, tämä usein paljastaa olemassa olevia virheitä.** Käyttäjän näkökulmasta, sivulla vierailu ei pitäisi olla sen erilaisempaa kuin vierailu, linkin napsautus ja sitten Takaisin -painikkeen napsauttaminen. React varmistaa, että komponenttisi eivät riko tätä periaatetta kehitysvaiheessa remounttaamalla niitä kerran.
+=======
+**This illustrates that if remounting breaks the logic of your application, this usually uncovers existing bugs.** From a user's perspective, visiting a page shouldn't be different from visiting it, clicking a link, then pressing Back to view the page again. React verifies that your components abide by this principle by remounting them once in development.
+>>>>>>> 68f417a600c7d7b8c4131e39f8a843a856ae3909
 
 ## Laitetaan kaikki yhteen {/*putting-it-all-together*/}
 
