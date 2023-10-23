@@ -694,7 +694,7 @@ Tapahtumakäsittelijätyyppi `onWheel` tapahtumalle.
 
 ```js
 <div
-  onScroll={e => console.log('onScroll')}
+  onWheel={e => console.log('onWheel')}
 />
 ```
 
