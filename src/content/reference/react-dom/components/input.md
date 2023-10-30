@@ -32,7 +32,18 @@ Näyttääksesi syöttökentän, renderöi [selaimen sisäänrakennettu `<input>
 
 `<input>` tukee kaikkia [yleisten elementtien propseja.](/reference/react-dom/components/common#props)
 
+<<<<<<< HEAD
 Voit [tehdä syöttökentästä kontrolloidun](#controlling-an-input-with-a-state-variable) antamalla yhden näistä propseista:
+=======
+<Canary>
+
+React's extensions to the `formAction` prop are currently only available in React's canary and experimental channels. In stable releases of React `formAction` works only as a [built-in browser HTML component](https://react.dev/reference/react-dom/components#all-html-components). Learn more about [React's release channels here](/community/versioning-policy#all-release-channels).
+</Canary>
+
+[`formAction`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#formaction): A string or function. Overrides the parent `<form action>` for `type="submit"` and `type="image"`. When a URL is passed to `action` the form will behave like a standard HTML form. When a function is passed to `formAction` the function will handle the form submission. See [`<form action>`](/reference/react-dom/components/form#props).
+
+You can [make an input controlled](#controlling-an-input-with-a-state-variable) by passing one of these props:
+>>>>>>> 4bdb87b172a7723d56d03a5630c8a9870f6f03ec
 
 * [`checked`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLInputElement#checked): Totuusarvo. Valintaruudun tai radiopainikkeen kohdalla, kontrolloi onko se valittu.
 * [`value`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLInputElement#value): Merkkijono. Tekstikentän kohdalla, kontrolloi sen tekstiä. (Radiopainikkeen kohdalla, määrittää sen lomakedatan.)
