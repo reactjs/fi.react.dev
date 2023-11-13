@@ -3,8 +3,11 @@
  */
 
 import {useRouter} from 'next/router';
+<<<<<<< HEAD
 import {useState} from 'react';
 import {ga} from '../../utils/analytics';
+=======
+>>>>>>> fcd00068bd1bdd4eb37e3e0ab0488a9d093670bc
 
 export function Feedback({onSubmit = () => {}}: {onSubmit?: () => void}) {
   const {asPath} = useRouter();
@@ -46,16 +49,16 @@ const thumbsDownIcon = (
 );
 
 function sendGAEvent(isPositive: boolean) {
+  const category = isPositive ? 'like_button' : 'dislike_button';
+  const value = isPositive ? 1 : 0;
   // Fragile. Don't change unless you've tested the network payload
   // and verified that the right events actually show up in GA.
-  ga(
-    'send',
-    'event',
-    'button',
-    'feedback',
-    window.location.pathname,
-    isPositive ? '1' : '0'
-  );
+  // @ts-ignore
+  gtag('event', 'feedback', {
+    event_category: category,
+    event_label: window.location.pathname,
+    event_value: value,
+  });
 }
 
 function SendFeedback({onSubmit}: {onSubmit: () => void}) {
