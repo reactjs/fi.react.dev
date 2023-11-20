@@ -84,7 +84,7 @@ function submitForm(answer) {
   // Oletetaan, että se yhdistäisi verkkoon.
   return new Promise((resolve, reject) => {
     setTimeout(() => {
-      if (answer.toLowerCase() == 'istanbul') {
+      if (answer.toLowerCase() === 'istanbul') {
         resolve();
       } else {
         reject(new Error('Good guess but a wrong answer. Try again!'));
