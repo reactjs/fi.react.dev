@@ -364,11 +364,15 @@ Saat tämän virheen:
 
 <ConsoleBlock level="error">
 
-/src/App.js: Adjacent JSX elements must be wrapped in an enclosing tag. Did you want a JSX fragment `<>...</>`?
+/src/App.js: Adjacent JSX elements must be wrapped in an enclosing tag. Did you want a JSX Fragment `<>...</>`?
 
 </ConsoleBlock>
 
+<<<<<<< HEAD
 React komponenttien täytyy palauttaa yksi JSX elementti, ei useampia vierekkäisiä JSX elementtejä kun kaksi painonappia. Korjataksesi tämän käytä *fragmenttejä* (`<>` ja `</>`) käärimään useampia vierekkäisiä JSX elementtejä näin:
+=======
+React components need to return a single JSX element and not multiple adjacent JSX elements like two buttons. To fix this you can use *Fragments* (`<>` and `</>`) to wrap multiple adjacent JSX elements like this:
+>>>>>>> af54fc873819892f6050340df236f33a18ba5fb8
 
 ```js {3-6}
 export default function Square() {
@@ -2075,7 +2079,17 @@ export default function Game() {
 }
 ```
 
+<<<<<<< HEAD
 Voit nähdä miltä koodisi tulisi näyttää alla. Huomaa, että sinun tulisi nähdä virhe kehittäjätyökalujen konsolissa, joka sanoo: ``Warning: Each child in an array or iterator should have a unique "key" prop. Check the render method of `Game`.`` Korjaat tämän virheen seuraavassa osiossa.
+=======
+You can see what your code should look like below. Note that you should see an error in the developer tools console that says: 
+
+<ConsoleBlock level="warning">
+Warning: Each child in an array or iterator should have a unique "key" prop. Check the render method of &#96;Game&#96;.
+</ConsoleBlock>
+  
+You'll fix this error in the next section.
+>>>>>>> af54fc873819892f6050340df236f33a18ba5fb8
 
 <Sandpack>
 

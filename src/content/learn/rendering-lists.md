@@ -1086,7 +1086,11 @@ Tässä `<Recipe {...recipe} key={recipe.id} />` on lyhytsyntaksi joka "välitt�
 
 #### Listat erottimella {/*list-with-a-separator*/}
 
+<<<<<<< HEAD
 Tämä esimerkki renderöi kuuluisan Katsushika Hokusain haikun, jokaisen rivin ollessa kääritty `<p>` tagin sisään. Tehtäväsi on sijoittaa `<hr />` erotin jokaisen kappaleen jälkeen. Lopputuloksen rakennelman pitäisi näyttää tältä:
+=======
+This example renders a famous haiku by Tachibana Hokushi, with each line wrapped in a `<p>` tag. Your job is to insert an `<hr />` separator between each paragraph. Your resulting structure should look like this:
+>>>>>>> af54fc873819892f6050340df236f33a18ba5fb8
 
 ```js
 <article>
@@ -1145,7 +1149,11 @@ hr {
 
 <Hint>
 
+<<<<<<< HEAD
 Sinun täytyy joko muuttaa `map` manuaaliseksi silmukaksi tai käyttää fragmentia.
+=======
+You'll either need to convert `map` to a manual loop, or use a Fragment.
+>>>>>>> af54fc873819892f6050340df236f33a18ba5fb8
 
 </Hint>
 
@@ -1208,7 +1216,11 @@ hr {
 
 Alkuperäisen rivin indeksin käyttäminen `key`.na ei enää toimi sillä erottimet ja kappaleet ovat nyt samassa taulukossa. Kuitenkin, voit antaa niille erillisen avaimen käyttämällä jälkiliitettä, esim. `key={i + '-text'}`.
 
+<<<<<<< HEAD
 Vaihtoehtoisesti voit renderöidä kokoelman fragmenteja, jotka sisältävät `<hr />` ja `<p>...</p>` tagit. Kuitenkin `<>...</>` lyhytsyntaksi ei tue avainten välittämistä, joten joutuisit kirjoittamaan `<Fragment>`:n eksplisiittisesti:
+=======
+Alternatively, you could render a collection of Fragments which contain `<hr />` and `<p>...</p>`. However, the `<>...</>` shorthand syntax doesn't support passing keys, so you'd have to write `<Fragment>` explicitly:
+>>>>>>> af54fc873819892f6050340df236f33a18ba5fb8
 
 <Sandpack>
 
@@ -1254,7 +1266,11 @@ hr {
 
 </Sandpack>
 
+<<<<<<< HEAD
 Muista, fragmentit (useiten kirjoitettuna `<> </>`) antavat sinun ryhmittää JSX-kohteita lisäämättä ylimääräisiä `<div>`-elementtejä!
+=======
+Remember, Fragments (often written as `<> </>`) let you group JSX nodes without adding extra `<div>`s!
+>>>>>>> af54fc873819892f6050340df236f33a18ba5fb8
 
 </Solution>
 
