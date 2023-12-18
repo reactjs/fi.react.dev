@@ -694,7 +694,7 @@ Tapahtumakäsittelijätyyppi `onWheel` tapahtumalle.
 
 ```js
 <div
-  onScroll={e => console.log('onScroll')}
+  onWheel={e => console.log('onWheel')}
 />
 ```
 
@@ -771,7 +771,7 @@ Ylläolevassa esimerkissä, `style={{}}` ei ole erikoissyntaksi, vaan tavallinen
 
 <Sandpack>
 
-```js App.js
+```js src/App.js
 import Avatar from './Avatar.js';
 
 const user = {
@@ -785,7 +785,7 @@ export default function App() {
 }
 ```
 
-```js Avatar.js active
+```js src/Avatar.js active
 export default function Avatar({ user }) {
   return (
     <img
@@ -801,7 +801,7 @@ export default function Avatar({ user }) {
 }
 ```
 
-```css styles.css
+```css src/styles.css
 .avatar {
   border-radius: 50%;
 }
@@ -940,7 +940,7 @@ export default function MarkdownEditor() {
 }
 ```
 
-```js MarkdownPreview.js active
+```js src/MarkdownPreview.js active
 import { Remarkable } from 'remarkable';
 
 const md = new Remarkable();
