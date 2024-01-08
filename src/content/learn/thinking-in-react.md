@@ -99,8 +99,13 @@ Voit rakentaa joko "ylhäältä alas" aloittamalla komponenteilla, jotka ovat hi
 
 <Sandpack>
 
+<<<<<<< HEAD
 ```jsx App.js
 function ProductCategoryRow({category}) {
+=======
+```jsx src/App.js
+function ProductCategoryRow({ category }) {
+>>>>>>> 315cb7a38a1645623fc55501429285ab680b8a6a
   return (
     <tr>
       <th colSpan="2">{category}</th>
@@ -310,8 +315,13 @@ Alat näkemään miten sovelluksesi tulee käyttäytymään. Muokkaa `filterText
 
 <Sandpack>
 
+<<<<<<< HEAD
 ```jsx App.js
 import {useState} from 'react';
+=======
+```jsx src/App.js
+import { useState } from 'react';
+>>>>>>> 315cb7a38a1645623fc55501429285ab680b8a6a
 
 function FilterableProductTable({products}) {
   const [filterText, setFilterText] = useState('');
@@ -492,8 +502,13 @@ Nyt sovellus toimii täysin!
 
 <Sandpack>
 
+<<<<<<< HEAD
 ```jsx App.js
 import {useState} from 'react';
+=======
+```jsx src/App.js
+import { useState } from 'react';
+>>>>>>> 315cb7a38a1645623fc55501429285ab680b8a6a
 
 function FilterableProductTable({products}) {
   const [filterText, setFilterText] = useState('');

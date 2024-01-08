@@ -35,7 +35,7 @@ Tässä imperatiivisen käyttöliittymäohjelmoinnin esimerkissä lomake on rake
 
 <Sandpack>
 
-```js index.js active
+```js src/index.js active
 async function handleFormSubmit(e) {
   e.preventDefault();
   disable(textarea);
@@ -84,7 +84,7 @@ function submitForm(answer) {
   // Oletetaan, että se yhdistäisi verkkoon.
   return new Promise((resolve, reject) => {
     setTimeout(() => {
-      if (answer.toLowerCase() == 'istanbul') {
+      if (answer.toLowerCase() === 'istanbul') {
         resolve();
       } else {
         reject(new Error('Good guess but a wrong answer. Try again!'));
@@ -246,7 +246,7 @@ Jos komponentilla on monia visuaalisia tiloja, voi olla kätevää näyttää ne
 
 <Sandpack>
 
-```js App.js active
+```js src/App.js active
 import Form from './Form.js';
 
 let statuses = [
@@ -271,7 +271,7 @@ export default function App() {
 }
 ```
 
-```js Form.js
+```js src/Form.js
 export default function Form({ status }) {
   if (status === 'success') {
     return <h1>That's right!</h1>
@@ -703,7 +703,7 @@ Tässä on pieni lomake toteutettuna perinteiselllä JavaScriptilla ja DOM:lla. 
 
 <Sandpack>
 
-```js index.js active
+```js src/index.js active
 function handleFormSubmit(e) {
   e.preventDefault();
   if (editButton.textContent === 'Edit Profile') {
@@ -905,7 +905,7 @@ Tässä on alkuperäinen hiekkalaatikko aikaisemmasta haasteesta, imperatiivises
 
 <Sandpack>
 
-```js index.js active
+```js src/index.js active
 function handleFormSubmit(e) {
   e.preventDefault();
   if (editButton.textContent === 'Edit Profile') {
@@ -1004,7 +1004,7 @@ Jos et tiedä mistä aloittaisit, alla on suurin osa rakenteesta valmiina. Jos a
 
 <Sandpack>
 
-```js index.js active
+```js src/index.js active
 let firstName = 'Jane';
 let lastName = 'Jacobs';
 let isEditing = false;
@@ -1111,7 +1111,7 @@ Puuttuva logiikka sisältää kenttien ja sisällön piilottamisen ja näyttämi
 
 <Sandpack>
 
-```js index.js active
+```js src/index.js active
 let firstName = 'Jane';
 let lastName = 'Jacobs';
 let isEditing = false;
