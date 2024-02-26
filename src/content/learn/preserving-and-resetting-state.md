@@ -10,6 +10,7 @@ Tila on eristetty komponenttien välillä. React pitää kirjaa siitä, mikä ti
 
 <YouWillLearn>
 
+<<<<<<< HEAD
 * Miten React "näkee" komponentin rakenteen
 * Milloin React päättää säilyttää tai nollata tilan
 * Miten pakottaa React nollaamaan komponentin tila
@@ -38,6 +39,21 @@ Komponenteista React luo käyttöliittymäpuun, jota React DOM käyttää render
 Kun annat komponentille tilan, saatat ajatella, että tila "asuu" komponentin sisällä. Mutta tila oikeasti pidetään Reactin sisällä. React yhdistää jokaisen hallussa olevan tilatiedon oikeaan komponenttiin sen mukaan, missä kohtaa käyttöliittymäpuuta kyseinen komponentti sijaitsee.
 
 Tässä esimerkissä on vain yksi `<Counter />` JSX tagi, mutta se on renderöity kahdessa eri kohdassa:
+=======
+* When React chooses to preserve or reset the state
+* How to force React to reset component's state
+* How keys and types affect whether the state is preserved
+
+</YouWillLearn>
+
+## State is tied to a position in the render tree {/*state-is-tied-to-a-position-in-the-tree*/}
+
+React builds [render trees](learn/understanding-your-ui-as-a-tree#the-render-tree) for the component structure in your UI.
+
+When you give a component state, you might think the state "lives" inside the component. But the state is actually held inside React. React associates each piece of state it's holding with the correct component by where that component sits in the render tree.
+
+Here, there is only one `<Counter />` JSX tag, but it's rendered at two different positions:
+>>>>>>> 081d1008dd1eebffb9550a3ff623860a7d977acf
 
 <Sandpack>
 
@@ -188,7 +204,12 @@ Tilan päivittäminen
 
 </DiagramGroup>
 
+<<<<<<< HEAD
 React pitää tilan muistissa niin kauan kuin renderlit samaa komponenttia samassa sijainnissa. Tämän nähdäksesi, korota molempia laskureita ja sitten poista toinen komponentti poistamalla valinta "Render the second counter" valintaruudusta, ja sitten lisää se takaisin valitsemalla se uudelleen:
+=======
+
+React will keep the state around for as long as you render the same component at the same position in the tree. To see this, increment both counters, then remove the second component by unchecking "Render the second counter" checkbox, and then add it back by ticking it again:
+>>>>>>> 081d1008dd1eebffb9550a3ff623860a7d977acf
 
 <Sandpack>
 
@@ -1038,7 +1059,7 @@ Tässä chat-sovelluksessa, `<Chat>` komponentti sisältää tilan tekstisyötte
 
 <Sandpack>
 
-```js App.js
+```js src/App.js
 import { useState } from 'react';
 import Chat from './Chat.js';
 import ContactList from './ContactList.js';
@@ -1064,7 +1085,7 @@ const contacts = [
 ];
 ```
 
-```js ContactList.js
+```js src/ContactList.js
 export default function ContactList({
   selectedContact,
   contacts,
@@ -1088,7 +1109,7 @@ export default function ContactList({
 }
 ```
 
-```js Chat.js
+```js src/Chat.js
 import { useState } from 'react';
 
 export default function Chat({ contact }) {
@@ -1143,7 +1164,7 @@ Nyt vaihtaminen vastaanottajien välillä tyhjää tekstisyötteen:
 
 <Sandpack>
 
-```js App.js
+```js src/App.js
 import { useState } from 'react';
 import Chat from './Chat.js';
 import ContactList from './ContactList.js';
@@ -1169,7 +1190,7 @@ const contacts = [
 ];
 ```
 
-```js ContactList.js
+```js src/ContactList.js
 export default function ContactList({
   selectedContact,
   contacts,
@@ -1193,7 +1214,7 @@ export default function ContactList({
 }
 ```
 
-```js Chat.js
+```js src/Chat.js
 import { useState } from 'react';
 
 export default function Chat({ contact }) {
@@ -1267,7 +1288,7 @@ Tämä esimerkki näyttää vistin kun painat painiketta. Kuitenkin painikkeen p
 
 <Sandpack>
 
-```js App.js
+```js src/App.js
 import { useState } from 'react';
 
 export default function App() {
@@ -1318,7 +1339,7 @@ Helpoin ratkaisu on yhdistää haarat siten, että `Form` renderöidään aina s
 
 <Sandpack>
 
-```js App.js
+```js src/App.js
 import { useState } from 'react';
 
 export default function App() {
@@ -1364,7 +1385,7 @@ Teknisesti ottaen, voisit myös lisätä `null` ennen `<Form />` ehtolauseen `el
 
 <Sandpack>
 
-```js App.js
+```js src/App.js
 import { useState } from 'react';
 
 export default function App() {
@@ -1426,7 +1447,7 @@ Näyttää siltä, että näille kentille sijainti pääkomponentin sisällä ei
 
 <Sandpack>
 
-```js App.js
+```js src/App.js
 import { useState } from 'react';
 
 export default function App() {
@@ -1488,7 +1509,7 @@ Anna molemmille `<Field>` komponenteille `key` kummassakin `if` ja `else` haaroi
 
 <Sandpack>
 
-```js App.js
+```js src/App.js
 import { useState } from 'react';
 
 export default function App() {
@@ -1554,7 +1575,7 @@ Kun valitset eri yhteystiedon (esimerkiksi, Alice), tila päivittyy, mutta lomak
 
 <Sandpack>
 
-```js App.js
+```js src/App.js
 import { useState } from 'react';
 import ContactList from './ContactList.js';
 import EditContact from './EditContact.js';
@@ -1606,7 +1627,7 @@ const initialContacts = [
 ];
 ```
 
-```js ContactList.js
+```js src/ContactList.js
 export default function ContactList({
   contacts,
   selectedId,
@@ -1633,7 +1654,7 @@ export default function ContactList({
 }
 ```
 
-```js EditContact.js
+```js src/EditContact.js
 import { useState } from 'react';
 
 export default function EditContact({ initialData, onSave }) {
@@ -1706,7 +1727,7 @@ Anna `key={selectedId}` propsi `EditContact` komponentille. Tällä tavalla vaih
 
 <Sandpack>
 
-```js App.js
+```js src/App.js
 import { useState } from 'react';
 import ContactList from './ContactList.js';
 import EditContact from './EditContact.js';
@@ -1759,7 +1780,7 @@ const initialContacts = [
 ];
 ```
 
-```js ContactList.js
+```js src/ContactList.js
 export default function ContactList({
   contacts,
   selectedId,
@@ -1786,7 +1807,7 @@ export default function ContactList({
 }
 ```
 
-```js EditContact.js
+```js src/EditContact.js
 import { useState } from 'react';
 
 export default function EditContact({ initialData, onSave }) {
@@ -2007,7 +2028,7 @@ Korjaa tila niin että laajennettu tila on yhdistetty jokaiseen yhteystietoon, r
 
 <Sandpack>
 
-```js App.js
+```js src/App.js
 import { useState } from 'react';
 import Contact from './Contact.js';
 
@@ -2049,7 +2070,7 @@ const contacts = [
 ];
 ```
 
-```js Contact.js
+```js src/Contact.js
 import { useState } from 'react';
 
 export default function Contact({ contact }) {
@@ -2106,7 +2127,7 @@ Yhteystiedon ID:n käyttäminen `key`:nä korjaa ongelman:
 
 <Sandpack>
 
-```js App.js
+```js src/App.js
 import { useState } from 'react';
 import Contact from './Contact.js';
 
@@ -2148,7 +2169,7 @@ const contacts = [
 ];
 ```
 
-```js Contact.js
+```js src/Contact.js
 import { useState } from 'react';
 
 export default function Contact({ contact }) {
