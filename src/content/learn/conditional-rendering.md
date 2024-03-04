@@ -626,7 +626,11 @@ export default function PackingList() {
 
 Huomaa, että sinun täytyy kirjoittaa `importance > 0 && ...` ennemmin kuin `importance && ...`, sillä jos `importance` on `0`, `0`:aa ei renderöidä pelkkänä vastauksena!
 
+<<<<<<< HEAD
 Tässä ratkaisussa kahta erillistä ehtolausetta käytetään asettamaan välilyönti nimen ja tärkeyden väliin. Vaihtoehtoisesti voit käyttää fragmenttia, jossa on johtava välilyönti: `importance > 0 && <> <i>...</i></>` tai lisätä välilyönnin suoraan `<i>`:n sisään:  `importance > 0 && <i> ...</i>`.
+=======
+In this solution, two separate conditions are used to insert a space between the name and the importance label. Alternatively, you could use a Fragment with a leading space: `importance > 0 && <> <i>...</i></>` or add a space immediately inside the `<i>`:  `importance > 0 && <i> ...</i>`.
+>>>>>>> 265fa26e3b39739f06c956140d9acf618c6b4e6b
 
 </Solution>
 
