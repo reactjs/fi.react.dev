@@ -32,7 +32,25 @@ Ne ovat erityisiä Reactissa, koska `value`-propsin antaminen niille tekee niist
 
 ---
 
+<<<<<<< HEAD
 ## Kaikki HTML komponentit {/*all-html-components*/}
+=======
+## Resource and Metadata Components {/*resource-and-metadata-components*/}
+
+These bulit-in browser components let you load external resources or annotate the document with metadata:
+
+* [`<link>`](/reference/react-dom/components/link)
+* [`<meta>`](/reference/react-dom/components/meta)
+* [`<script>`](/reference/react-dom/components/script)
+* [`<style>`](/reference/react-dom/components/style)
+* [`<title>`](/reference/react-dom/components/title)
+
+They are special in React because React can render them into the document head, suspend while resources are loading, and enact other behaviors that are described on the reference page for each specific component.
+
+---
+
+## All HTML components {/*all-html-components*/}
+>>>>>>> 5de85198a3c575d94a395138e3f471cc7172a51c
 
 React tukee kaikkia selaimen sisäänrakennettuja HTML komponentteja. Tämä sisältää:
 
