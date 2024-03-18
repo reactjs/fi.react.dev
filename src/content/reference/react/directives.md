@@ -19,5 +19,10 @@ Direktiivit tarjoavat ohjeita [Reactin palvelinkomponenttien kanssa yhteensopivi
 
 ## Lähdekoodi-direktiivit {/*source-code-directives*/}
 
+<<<<<<< HEAD
 * [`'use client'`](/reference/react/use-client) merkitsee lähdekooditiedostoja, joiden komponentit suoritetaan asiakaspuolella.
 * [`'use server'`](/reference/react/use-server) merkitsee palvelinpuolen funktioita, joita voidaan kutsua asiakaspuolen koodista.
+=======
+* [`'use client'`](/reference/react/use-client) lets you mark what code runs on the client.
+* [`'use server'`](/reference/react/use-server) marks server-side functions that can be called from client-side code.
+>>>>>>> f55d9487c6648570fc80f1421d7dca0a3b9b94b6
