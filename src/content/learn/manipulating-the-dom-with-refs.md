@@ -494,7 +494,11 @@ Yleensä [ei kannata](/learn/referencing-values-with-refs#best-practices-for-ref
 
 React asettaa `ref.current`:n kommitoinnin aikana. Ennen DOM:n päivittämistä, React asettaa `ref.current` arvot `null`:ksi. Päivittämisen jälkeen, React asettaa ne välittömästi vastaaviin DOM noodeihin.
 
+<<<<<<< HEAD
 **Useiten saatat käyttää refseja Tapahtumankäsittelijöiden sisällä.** Jos haluat tehdä jotain refin kanssa, mutta ei ole tiettyä tapahtumaa jota käyttää, saatat tarvita Effektiä. Seuraavilla sivuilla käymme läpi Effektin.
+=======
+**Usually, you will access refs from event handlers.** If you want to do something with a ref, but there is no particular event to do it in, you might need an Effect. We will discuss Effects on the next pages.
+>>>>>>> 97489434323b0c4cce78588cd0f48e3808e0eba4
 
 <DeepDive>
 
@@ -1106,7 +1110,7 @@ Sinun täytyy käyttää `forwardRef`:ia, jotta voit julkaista DOM noodin omasta
 
 <Sandpack>
 
-```js App.js
+```js src/App.js
 import SearchButton from './SearchButton.js';
 import SearchInput from './SearchInput.js';
 
@@ -1122,7 +1126,7 @@ export default function Page() {
 }
 ```
 
-```js SearchButton.js
+```js src/SearchButton.js
 export default function SearchButton() {
   return (
     <button>
@@ -1132,7 +1136,7 @@ export default function SearchButton() {
 }
 ```
 
-```js SearchInput.js
+```js src/SearchInput.js
 export default function SearchInput() {
   return (
     <input
@@ -1156,7 +1160,7 @@ Sinun täytyy lisätä `onClick` propsi `SearchButton`:iin ja laittaa `SearchBut
 
 <Sandpack>
 
-```js App.js
+```js src/App.js
 import { useRef } from 'react';
 import SearchButton from './SearchButton.js';
 import SearchInput from './SearchInput.js';
@@ -1176,7 +1180,7 @@ export default function Page() {
 }
 ```
 
-```js SearchButton.js
+```js src/SearchButton.js
 export default function SearchButton({ onClick }) {
   return (
     <button onClick={onClick}>
@@ -1186,7 +1190,7 @@ export default function SearchButton({ onClick }) {
 }
 ```
 
-```js SearchInput.js
+```js src/SearchInput.js
 import { forwardRef } from 'react';
 
 export default forwardRef(
