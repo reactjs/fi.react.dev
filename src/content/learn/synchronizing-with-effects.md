@@ -510,7 +510,7 @@ export default function ChatRoom() {
 }
 ```
 
-```js chat.js
+```js src/chat.js
 export function createConnection() {
   // Oikea toteutus yhdistäisi todellisuudessa palvelimeen
   return {
@@ -566,7 +566,7 @@ export default function ChatRoom() {
 }
 ```
 
-```js chat.js
+```js src/chat.js
 export function createConnection() {
   // Oikea toteutus yhdistäisi todellisuudessa palvelimeen
   return {
@@ -977,7 +977,7 @@ Käytä inputin [`focus()`](https://developer.mozilla.org/en-US/docs/Web/API/HTM
 
 <Sandpack>
 
-```js MyInput.js active
+```js src/MyInput.js active
 import { useEffect, useRef } from 'react';
 
 export default function MyInput({ value, onChange }) {
@@ -996,7 +996,7 @@ export default function MyInput({ value, onChange }) {
 }
 ```
 
-```js App.js hidden
+```js src/App.js hidden
 import { useState } from 'react';
 import MyInput from './MyInput.js';
 
@@ -1061,7 +1061,7 @@ Korjataksesi virheen, sijoita `ref.current.focus()` kutsu Efektin määrittelyyn
 
 <Sandpack>
 
-```js MyInput.js active
+```js src/MyInput.js active
 import { useEffect, useRef } from 'react';
 
 export default function MyInput({ value, onChange }) {
@@ -1081,7 +1081,7 @@ export default function MyInput({ value, onChange }) {
 }
 ```
 
-```js App.js hidden
+```js src/App.js hidden
 import { useState } from 'react';
 import MyInput from './MyInput.js';
 
@@ -1145,7 +1145,7 @@ Sanotaan, että haluat kohdentaa ensimmäisen kentän. Nyt ensimmäinen `<MyInpu
 
 <Sandpack>
 
-```js MyInput.js active
+```js src/MyInput.js active
 import { useEffect, useRef } from 'react';
 
 export default function MyInput({ shouldFocus, value, onChange }) {
@@ -1166,7 +1166,7 @@ export default function MyInput({ shouldFocus, value, onChange }) {
 }
 ```
 
-```js App.js hidden
+```js src/App.js hidden
 import { useState } from 'react';
 import MyInput from './MyInput.js';
 
@@ -1235,7 +1235,7 @@ Laita ehdollinen logiikka Efektin sisään. Sinun täytyy määrittää `shouldF
 
 <Sandpack>
 
-```js MyInput.js active
+```js src/MyInput.js active
 import { useEffect, useRef } from 'react';
 
 export default function MyInput({ shouldFocus, value, onChange }) {
@@ -1257,7 +1257,7 @@ export default function MyInput({ shouldFocus, value, onChange }) {
 }
 ```
 
-```js App.js hidden
+```js src/App.js hidden
 import { useState } from 'react';
 import MyInput from './MyInput.js';
 
@@ -1328,7 +1328,7 @@ Pidä mielessä, että `setInterval` palauttaa ajastimen ID:n, jonka voit antaa 
 
 <Sandpack>
 
-```js Counter.js active
+```js src/Counter.js active
 import { useState, useEffect } from 'react';
 
 export default function Counter() {
@@ -1346,7 +1346,7 @@ export default function Counter() {
 }
 ```
 
-```js App.js hidden
+```js src/App.js hidden
 import { useState } from 'react';
 import Counter from './Counter.js';
 
@@ -1387,7 +1387,7 @@ Korjataksesi tämän koodin, tallenna `setInterval`:n palauttama ajastimen ID, j
 
 <Sandpack>
 
-```js Counter.js active
+```js src/Counter.js active
 import { useState, useEffect } from 'react';
 
 export default function Counter() {
@@ -1406,7 +1406,7 @@ export default function Counter() {
 }
 ```
 
-```js App.js hidden
+```js src/App.js hidden
 import { useState } from 'react';
 import Counter from './Counter.js';
 
@@ -1447,7 +1447,7 @@ Tämä komponentti näyttää valitun henkilön biografian. Se lataa biografian 
 
 <Sandpack>
 
-```js App.js
+```js src/App.js
 import { useState, useEffect } from 'react';
 import { fetchBio } from './api.js';
 
@@ -1478,7 +1478,7 @@ export default function Page() {
 }
 ```
 
-```js api.js hidden
+```js src/api.js hidden
 export async function fetchBio(person) {
   const delay = person === 'Bob' ? 2000 : 200;
   return new Promise(resolve => {
@@ -1519,7 +1519,7 @@ Korjataksesi tämän kilpailutilanteen, lisää siivousfunktio:
 
 <Sandpack>
 
-```js App.js
+```js src/App.js
 import { useState, useEffect } from 'react';
 import { fetchBio } from './api.js';
 
@@ -1555,7 +1555,7 @@ export default function Page() {
 }
 ```
 
-```js api.js hidden
+```js src/api.js hidden
 export async function fetchBio(person) {
   const delay = person === 'Bob' ? 2000 : 200;
   return new Promise(resolve => {
