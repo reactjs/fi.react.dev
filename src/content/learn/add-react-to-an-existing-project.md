@@ -67,7 +67,7 @@ Lisää sitten nämä koodirivit pää-JavaScript-tiedostosi alkuun (se voi olla
 </html>
 ```
 
-```js index.js active
+```js src/index.js active
 import { createRoot } from 'react-dom/client';
 
 // Tyhjää olemassa oleva HTML sisältö
@@ -131,7 +131,7 @@ Tämän avulla voit etsiä kyseisen HTML elementin käyttäen [`document.getElem
 </html>
 ```
 
-```js index.js active
+```js src/index.js active
 import { createRoot } from 'react-dom/client';
 
 function NavigationBar() {

@@ -24,12 +24,20 @@ import Link from './Link';
 import {PackageImport} from './PackageImport';
 import Recap from './Recap';
 import Sandpack from './Sandpack';
+<<<<<<< HEAD
+=======
+import SandpackWithHTMLOutput from './SandpackWithHTMLOutput';
+import Diagram from './Diagram';
+import DiagramGroup from './DiagramGroup';
+>>>>>>> 93177e6ceac8ffb5c2a8f3ed4bd1f80b63097078
 import SimpleCallout from './SimpleCallout';
 import {TeamMember} from './TeamMember';
 import TerminalBlock from './TerminalBlock';
 import type {Toc, TocItem} from './TocContext';
 import {TocContext} from './TocContext';
 import YouWillLearnCard from './YouWillLearnCard';
+
+import ErrorDecoder from './ErrorDecoder';
 
 function CodeStep({children, step}: {children: any; step: number}) {
   return (
@@ -243,7 +251,7 @@ function Illustration({
           src={src}
           alt={alt}
           style={{maxHeight: 300}}
-          className="bg-white rounded-lg"
+          className="rounded-lg"
         />
         {caption ? (
           <figcaption className="text-center leading-tight mt-4">
@@ -275,7 +283,12 @@ function IllustrationBlock({
   const images = imageInfos.map((info, index) => (
     <figure key={index}>
       <div className="bg-white rounded-lg p-4 flex-1 flex xl:p-6 justify-center items-center my-4">
-        <img src={info.src} alt={info.alt} height={info.height} />
+        <img
+          className="text-primary"
+          src={info.src}
+          alt={info.alt}
+          height={info.height}
+        />
       </div>
       {info.caption ? (
         <figcaption className="text-secondary dark:text-secondary-dark text-center leading-tight mt-4">
@@ -427,6 +440,7 @@ export const MDXComponents = {
   Recap,
   Recipes,
   Sandpack,
+  SandpackWithHTMLOutput,
   TeamMember,
   TerminalBlock,
   YouWillLearn,
@@ -436,6 +450,7 @@ export const MDXComponents = {
   Solution,
   CodeStep,
   YouTubeIframe,
+  ErrorDecoder,
 };
 
 for (let key in MDXComponents) {
