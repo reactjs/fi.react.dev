@@ -284,7 +284,11 @@ Sinun ei myöskään tarvitse huolehtia [mutaatioiden välttämistä](/learn/upd
 
 ## Ref ja DOM {/*refs-and-the-dom*/}
 
+<<<<<<< HEAD
 Voit osoittaa refin mihin tahansa arvoon. Kuitenkin yleisin käyttökohde refille on DOM elementin käsittely. Esimerkiksi, tämä on kätevää jos haluat focusoida syöttölaatikon ohjelmakoodissa. Kun annat refin `ref`-attribuuttiin JSX:ssä, kuten `<div ref={myRef}>`, React asettaa vastaavan DOM elementin `myRef.current`:iin. Voit lukea lisää tästä [Manipulating the DOM with Refs.](/learn/manipulating-the-dom-with-refs)
+=======
+You can point a ref to any value. However, the most common use case for a ref is to access a DOM element. For example, this is handy if you want to focus an input programmatically. When you pass a ref to a `ref` attribute in JSX, like `<div ref={myRef}>`, React will put the corresponding DOM element into `myRef.current`. Once the element is removed from the DOM, React will update `myRef.current` to be `null`. You can read more about this in [Manipulating the DOM with Refs.](/learn/manipulating-the-dom-with-refs)
+>>>>>>> 9e1f5cd590fd066e72dda9022237bee30b499951
 
 <Recap>
 
