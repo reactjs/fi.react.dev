@@ -99,8 +99,13 @@ Voit rakentaa joko "ylhäältä alas" aloittamalla komponenteilla, jotka ovat hi
 
 <Sandpack>
 
+<<<<<<< HEAD
 ```jsx App.js
 function ProductCategoryRow({category}) {
+=======
+```jsx src/App.js
+function ProductCategoryRow({ category }) {
+>>>>>>> b7bf6c16fb3152626a71c115b3242df6eb93bc6e
   return (
     <tr>
       <th colSpan="2">{category}</th>
@@ -310,8 +315,13 @@ Alat näkemään miten sovelluksesi tulee käyttäytymään. Muokkaa `filterText
 
 <Sandpack>
 
+<<<<<<< HEAD
 ```jsx App.js
 import {useState} from 'react';
+=======
+```jsx src/App.js
+import { useState } from 'react';
+>>>>>>> b7bf6c16fb3152626a71c115b3242df6eb93bc6e
 
 function FilterableProductTable({products}) {
   const [filterText, setFilterText] = useState('');
@@ -479,6 +489,7 @@ function FilterableProductTable({ products }) {
 
 `SearchBar` komponentissa lisää `onChange` Tapahtumankäsittelijä ja muuta yläkomponentin tila sieltä käsin:
 
+<<<<<<< HEAD
 ```js {5}
 <input
   type="text"
@@ -486,14 +497,41 @@ function FilterableProductTable({ products }) {
   placeholder="Search..."
   onChange={(e) => onFilterTextChange(e.target.value)}
 />
+=======
+```js {4,5,13,19}
+function SearchBar({
+  filterText,
+  inStockOnly,
+  onFilterTextChange,
+  onInStockOnlyChange
+}) {
+  return (
+    <form>
+      <input
+        type="text"
+        value={filterText}
+        placeholder="Search..."
+        onChange={(e) => onFilterTextChange(e.target.value)}
+      />
+      <label>
+        <input
+          type="checkbox"
+          checked={inStockOnly}
+          onChange={(e) => onInStockOnlyChange(e.target.checked)}
+>>>>>>> b7bf6c16fb3152626a71c115b3242df6eb93bc6e
 ```
 
 Nyt sovellus toimii täysin!
 
 <Sandpack>
 
+<<<<<<< HEAD
 ```jsx App.js
 import {useState} from 'react';
+=======
+```jsx src/App.js
+import { useState } from 'react';
+>>>>>>> b7bf6c16fb3152626a71c115b3242df6eb93bc6e
 
 function FilterableProductTable({products}) {
   const [filterText, setFilterText] = useState('');

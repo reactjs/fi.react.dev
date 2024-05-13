@@ -24,8 +24,13 @@ import BlogCard from 'components/MDX/BlogCard';
 import CodeBlock from 'components/MDX/CodeBlock';
 import Link from 'components/MDX/Link';
 import sidebarBlog from '../../sidebarBlog.json';
+<<<<<<< HEAD
 import ButtonLink from '../ButtonLink';
 import {IconRestart} from '../Icon/IconRestart';
+=======
+import * as React from 'react';
+import Image from 'next/image';
+>>>>>>> b7bf6c16fb3152626a71c115b3242df6eb93bc6e
 
 function Section({children, background = null}) {
   return (
@@ -115,12 +120,22 @@ export function HomeContent() {
     <>
       <div className="ps-0">
         <div className="mx-5 mt-12 lg:mt-24 mb-20 lg:mb-32 flex flex-col justify-center">
+          <div className="uwu-visible flex justify-center">
+            <Image
+              alt="logo by @sawaratsuki1004"
+              title="logo by @sawaratsuki1004"
+              loading="eager"
+              width={313}
+              height={160}
+              src="/images/uwu.png"
+            />
+          </div>
           <Logo
             className={cn(
-              'mt-4 mb-3 text-link dark:text-link-dark w-24 lg:w-28 self-center text-sm me-0 flex origin-center transition-all ease-in-out'
+              'uwu-hidden mt-4 mb-3 text-brand dark:text-brand-dark w-24 lg:w-28 self-center text-sm me-0 flex origin-center transition-all ease-in-out'
             )}
           />
-          <h1 className="text-5xl font-display lg:text-6xl self-center flex font-semibold leading-snug text-primary dark:text-primary-dark">
+          <h1 className="uwu-hidden text-5xl font-display lg:text-6xl self-center flex font-semibold leading-snug text-primary dark:text-primary-dark">
             React
           </h1>
           <p className="text-4xl font-display max-w-lg md:max-w-full py-1 text-center text-secondary dark:text-primary-dark leading-snug self-center">
@@ -500,7 +515,15 @@ export function HomeContent() {
           </div>
 
           <div className="mt-20 px-5 lg:px-0 mb-6 max-w-4xl text-center text-opacity-80">
-            <Logo className="text-link dark:text-link-dark w-24 lg:w-28 mb-10 lg:mb-8 mt-12 h-auto mx-auto self-start" />
+            <div className="uwu-visible flex justify-center">
+              <img
+                alt="logo by @sawaratsuki1004"
+                title="logo by @sawaratsuki1004"
+                className="uwu-visible mb-10 lg:mb-8 h-24 lg:h-32"
+                src="/images/uwu.png"
+              />
+            </div>
+            <Logo className="uwu-hidden text-brand dark:text-brand-dark w-24 lg:w-28 mb-10 lg:mb-8 mt-12 h-auto mx-auto self-start" />
             <Header>
               Tervetuloa React <br className="hidden lg:inline" />
               yhteisöön
@@ -1510,7 +1533,7 @@ function ConferenceLayout({conf, children}) {
               navigate(e.target.value);
             });
           }}
-          className="appearance-none pe-8 bg-transparent text-primary-dark text-2xl font-bold mb-0.5"
+          className="appearance-none pe-8 ps-2 bg-transparent text-primary-dark text-2xl font-bold mb-0.5"
           style={{
             backgroundSize: '4px 4px, 4px 4px',
             backgroundRepeat: 'no-repeat',
@@ -1519,8 +1542,16 @@ function ConferenceLayout({conf, children}) {
             backgroundImage:
               'linear-gradient(45deg,transparent 50%,currentColor 50%),linear-gradient(135deg,currentColor 50%,transparent 50%)',
           }}>
-          <option value="react-conf-2021">React Conf 2021</option>
-          <option value="react-conf-2019">React Conf 2019</option>
+          <option
+            className="bg-wash dark:bg-wash-dark text-primary dark:text-primary-dark"
+            value="react-conf-2021">
+            React Conf 2021
+          </option>
+          <option
+            className="bg-wash dark:bg-wash-dark text-primary dark:text-primary-dark"
+            value="react-conf-2019">
+            React Conf 2019
+          </option>
         </select>
       </Cover>
       <div className="px-4 pb-4" key={conf.id}>
@@ -1623,7 +1654,7 @@ function Thumbnail({video}) {
           </div>
           <div className="mt-1">
             <span className="inline-flex text-xs font-normal items-center text-primary-dark py-1 whitespace-nowrap outline-link px-1.5 rounded-lg">
-              <Logo className="text-xs me-1 w-4 h-4 text-link-dark" />
+              <Logo className="text-xs me-1 w-4 h-4 text-brand text-brand-dark" />
               React Conf
             </span>
           </div>
