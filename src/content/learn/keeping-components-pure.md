@@ -49,7 +49,7 @@ React on suunniteltu tämän konseptin ympärille. **React olettaa, että jokain
 
 <Sandpack>
 
-```js App.js
+```js src/App.js
 function Recipe({ drinkers }) {
   return (
     <ol>    
@@ -243,7 +243,7 @@ Renderöinti on *laskenta*, sen ei tulisi "tehdä" asioita. Voitko ilmaista sama
 
 <Sandpack>
 
-```js Clock.js active
+```js src/Clock.js active
 export default function Clock({ time }) {
   let hours = time.getHours();
   if (hours >= 0 && hours <= 6) {
@@ -259,7 +259,7 @@ export default function Clock({ time }) {
 }
 ```
 
-```js App.js hidden
+```js src/App.js hidden
 import { useState, useEffect } from 'react';
 import Clock from './Clock.js';
 
@@ -305,7 +305,7 @@ Voit korjata tämän komponentin laskemalla `className`:n ja sisällyttämällä
 
 <Sandpack>
 
-```js Clock.js active
+```js src/Clock.js active
 export default function Clock({ time }) {
   let hours = time.getHours();
   let className;
@@ -322,7 +322,7 @@ export default function Clock({ time }) {
 }
 ```
 
-```js App.js hidden
+```js src/App.js hidden
 import { useState, useEffect } from 'react';
 import Clock from './Clock.js';
 
@@ -380,7 +380,7 @@ Buginen koodi on `Profile.js` tiedostossa. Luithan koko tiedoston?
 
 <Sandpack>
 
-```js Profile.js
+```js src/Profile.js
 import Panel from './Panel.js';
 import { getImageUrl } from './utils.js';
 
@@ -413,7 +413,7 @@ function Avatar() {
 }
 ```
 
-```js Panel.js hidden
+```js src/Panel.js hidden
 import { useState } from 'react';
 
 export default function Panel({ children }) {
@@ -429,7 +429,7 @@ export default function Panel({ children }) {
 }
 ```
 
-```js App.js
+```js src/App.js
 import Profile from './Profile.js';
 
 export default function App() {
@@ -448,7 +448,7 @@ export default function App() {
 }
 ```
 
-```js utils.js hidden
+```js src/utils.js hidden
 export function getImageUrl(person, size = 's') {
   return (
     'https://i.imgur.com/' +
@@ -481,7 +481,7 @@ Bugin korjaamiseksi poista `currentPerson` muuttuja. Sen sijaan välitä kaikki 
 
 <Sandpack>
 
-```js Profile.js active
+```js src/Profile.js active
 import Panel from './Panel.js';
 import { getImageUrl } from './utils.js';
 
@@ -511,7 +511,7 @@ function Avatar({ person }) {
 }
 ```
 
-```js Panel.js hidden
+```js src/Panel.js hidden
 import { useState } from 'react';
 
 export default function Panel({ children }) {
@@ -527,7 +527,7 @@ export default function Panel({ children }) {
 }
 ```
 
-```js App.js
+```js src/App.js
 import Profile from './Profile.js';
 
 export default function App() {
@@ -546,7 +546,7 @@ export default function App() {
 }
 ```
 
-```js utils.js hidden
+```js src/utils.js hidden
 export function getImageUrl(person, size = 's') {
   return (
     'https://i.imgur.com/' +
@@ -583,7 +583,7 @@ Olet toteuttanut "Create Story" paikanpitäjän lisäämällä yhden teko-stoory
 
 <Sandpack>
 
-```js StoryTray.js active
+```js src/StoryTray.js active
 export default function StoryTray({ stories }) {
   stories.push({
     id: 'create',
@@ -602,7 +602,7 @@ export default function StoryTray({ stories }) {
 }
 ```
 
-```js App.js hidden
+```js src/App.js hidden
 import { useState, useEffect } from 'react';
 import StoryTray from './StoryTray.js';
 
@@ -683,7 +683,7 @@ Yksinkertaisin ratkaisu on olla koskematta listaan ollenkaan, ja renderöindä "
 
 <Sandpack>
 
-```js StoryTray.js active
+```js src/StoryTray.js active
 export default function StoryTray({ stories }) {
   return (
     <ul>
@@ -698,7 +698,7 @@ export default function StoryTray({ stories }) {
 }
 ```
 
-```js App.js hidden
+```js src/App.js hidden
 import { useState, useEffect } from 'react';
 import StoryTray from './StoryTray.js';
 
@@ -767,7 +767,7 @@ Vaihtoehtoisesti, voit luoda _uuden_ listan (kopioimalla edellisen) ennen kuin l
 
 <Sandpack>
 
-```js StoryTray.js active
+```js src/StoryTray.js active
 export default function StoryTray({ stories }) {
   // Copy the array!
   let storiesToDisplay = stories.slice();
@@ -790,7 +790,7 @@ export default function StoryTray({ stories }) {
 }
 ```
 
-```js App.js hidden
+```js src/App.js hidden
 import { useState, useEffect } from 'react';
 import StoryTray from './StoryTray.js';
 
