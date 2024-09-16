@@ -963,8 +963,13 @@ Jos jokin odottamaton asia muuttuu, kyseessä on mutaatio. Etsi mutaatio tiedost
 
 <Sandpack>
 
+<<<<<<< HEAD
 ```js App.js
 import {useState} from 'react';
+=======
+```js src/App.js
+import { useState } from 'react';
+>>>>>>> 0f2284ddc8dcab8bbb9b42c04f3c7af94b5b2e73
 import Background from './Background.js';
 import Box from './Box.js';
 
@@ -1007,8 +1012,13 @@ export default function Canvas() {
 }
 ```
 
+<<<<<<< HEAD
 ```js Box.js
 import {useState} from 'react';
+=======
+```js src/Box.js
+import { useState } from 'react';
+>>>>>>> 0f2284ddc8dcab8bbb9b42c04f3c7af94b5b2e73
 
 export default function Box({children, color, position, onMove}) {
   const [lastCoordinates, setLastCoordinates] = useState(null);
@@ -1063,8 +1073,15 @@ export default function Box({children, color, position, onMove}) {
 }
 ```
 
+<<<<<<< HEAD
 ```js Background.js
 export default function Background({position}) {
+=======
+```js src/Background.js
+export default function Background({
+  position
+}) {
+>>>>>>> 0f2284ddc8dcab8bbb9b42c04f3c7af94b5b2e73
   return (
     <div
       style={{
@@ -1101,8 +1118,13 @@ Tämän voi korjata poistamalla mutaatio `handleMove`:sta ja käyttää levityss
 
 <Sandpack>
 
+<<<<<<< HEAD
 ```js App.js
 import {useState} from 'react';
+=======
+```js src/App.js
+import { useState } from 'react';
+>>>>>>> 0f2284ddc8dcab8bbb9b42c04f3c7af94b5b2e73
 import Background from './Background.js';
 import Box from './Box.js';
 
@@ -1150,8 +1172,13 @@ export default function Canvas() {
 }
 ```
 
+<<<<<<< HEAD
 ```js Box.js
 import {useState} from 'react';
+=======
+```js src/Box.js
+import { useState } from 'react';
+>>>>>>> 0f2284ddc8dcab8bbb9b42c04f3c7af94b5b2e73
 
 export default function Box({children, color, position, onMove}) {
   const [lastCoordinates, setLastCoordinates] = useState(null);
@@ -1206,8 +1233,15 @@ export default function Box({children, color, position, onMove}) {
 }
 ```
 
+<<<<<<< HEAD
 ```js Background.js
 export default function Background({position}) {
+=======
+```js src/Background.js
+export default function Background({
+  position
+}) {
+>>>>>>> 0f2284ddc8dcab8bbb9b42c04f3c7af94b5b2e73
   return (
     <div
       style={{
@@ -1244,9 +1278,15 @@ Tämä on sama virheellinen esimerkki kuin edellisessä haasteessa. Tällä kert
 
 <Sandpack>
 
+<<<<<<< HEAD
 ```js App.js
 import {useState} from 'react';
 import {useImmer} from 'use-immer';
+=======
+```js src/App.js
+import { useState } from 'react';
+import { useImmer } from 'use-immer';
+>>>>>>> 0f2284ddc8dcab8bbb9b42c04f3c7af94b5b2e73
 import Background from './Background.js';
 import Box from './Box.js';
 
@@ -1289,8 +1329,13 @@ export default function Canvas() {
 }
 ```
 
+<<<<<<< HEAD
 ```js Box.js
 import {useState} from 'react';
+=======
+```js src/Box.js
+import { useState } from 'react';
+>>>>>>> 0f2284ddc8dcab8bbb9b42c04f3c7af94b5b2e73
 
 export default function Box({children, color, position, onMove}) {
   const [lastCoordinates, setLastCoordinates] = useState(null);
@@ -1345,8 +1390,15 @@ export default function Box({children, color, position, onMove}) {
 }
 ```
 
+<<<<<<< HEAD
 ```js Background.js
 export default function Background({position}) {
+=======
+```js src/Background.js
+export default function Background({
+  position
+}) {
+>>>>>>> 0f2284ddc8dcab8bbb9b42c04f3c7af94b5b2e73
   return (
     <div
       style={{
@@ -1399,8 +1451,13 @@ Tämä on Immerin avulla uudelleen kirjoitettu ratkaisu. Huomaa, että tapahtuma
 
 <Sandpack>
 
+<<<<<<< HEAD
 ```js App.js
 import {useImmer} from 'use-immer';
+=======
+```js src/App.js
+import { useImmer } from 'use-immer';
+>>>>>>> 0f2284ddc8dcab8bbb9b42c04f3c7af94b5b2e73
 import Background from './Background.js';
 import Box from './Box.js';
 
@@ -1444,8 +1501,13 @@ export default function Canvas() {
 }
 ```
 
+<<<<<<< HEAD
 ```js Box.js
 import {useState} from 'react';
+=======
+```js src/Box.js
+import { useState } from 'react';
+>>>>>>> 0f2284ddc8dcab8bbb9b42c04f3c7af94b5b2e73
 
 export default function Box({children, color, position, onMove}) {
   const [lastCoordinates, setLastCoordinates] = useState(null);
@@ -1500,8 +1562,15 @@ export default function Box({children, color, position, onMove}) {
 }
 ```
 
+<<<<<<< HEAD
 ```js Background.js
 export default function Background({position}) {
+=======
+```js src/Background.js
+export default function Background({
+  position
+}) {
+>>>>>>> 0f2284ddc8dcab8bbb9b42c04f3c7af94b5b2e73
   return (
     <div
       style={{
