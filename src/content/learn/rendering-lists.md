@@ -113,9 +113,11 @@ const people = [{
   name: 'Mohammad Abdus Salam',
   profession: 'physicist',
 }, {
+  id: 3,
   name: 'Percy Lavon Julian',
   profession: 'chemist',  
 }, {
+  id: 4,
   name: 'Subrahmanyan Chandrasekhar',
   profession: 'astrophysicist',
 }];
@@ -159,7 +161,7 @@ return <ul>{listItems}</ul>;
 
 <Sandpack>
 
-```js App.js
+```js src/App.js
 import { people } from './data.js';
 import { getImageUrl } from './utils.js';
 
@@ -184,7 +186,7 @@ export default function List() {
 }
 ```
 
-```js data.js
+```js src/data.js
 export const people = [{
   id: 0,
   name: 'Creola Katherine Johnson',
@@ -218,7 +220,7 @@ export const people = [{
 }];
 ```
 
-```js utils.js
+```js src/utils.js
 export function getImageUrl(person) {
   return (
     'https://i.imgur.com/' +
@@ -292,7 +294,7 @@ Sen sijaan, että avaimet luotaisiin lennosta, kannattaa sisällyttää ne datas
 
 <Sandpack>
 
-```js App.js
+```js src/App.js
 import { people } from './data.js';
 import { getImageUrl } from './utils.js';
 
@@ -314,7 +316,7 @@ export default function List() {
 }
 ```
 
-```js data.js active
+```js src/data.js active
 export const people = [{
   id: 0, // Used in JSX as a key
   name: 'Creola Katherine Johnson',
@@ -348,7 +350,7 @@ export const people = [{
 }];
 ```
 
-```js utils.js
+```js src/utils.js
 export function getImageUrl(person) {
   return (
     'https://i.imgur.com/' +
@@ -448,7 +450,7 @@ Muuta se näyttämään kaksi erillistä listaa toinen toisensa jälkeen: **Chem
 
 <Sandpack>
 
-```js App.js
+```js src/App.js
 import { people } from './data.js';
 import { getImageUrl } from './utils.js';
 
@@ -475,7 +477,7 @@ export default function List() {
 }
 ```
 
-```js data.js
+```js src/data.js
 export const people = [{
   id: 0,
   name: 'Creola Katherine Johnson',
@@ -509,7 +511,7 @@ export const people = [{
 }];
 ```
 
-```js utils.js
+```js src/utils.js
 export function getImageUrl(person) {
   return (
     'https://i.imgur.com/' +
@@ -539,7 +541,7 @@ Voit myös käyttää `filter()` metodia kahdesti, luoden kaksi erillistä taulu
 
 <Sandpack>
 
-```js App.js
+```js src/App.js
 import { people } from './data.js';
 import { getImageUrl } from './utils.js';
 
@@ -590,7 +592,7 @@ export default function List() {
 }
 ```
 
-```js data.js
+```js src/data.js
 export const people = [{
   id: 0,
   name: 'Creola Katherine Johnson',
@@ -624,7 +626,7 @@ export const people = [{
 }];
 ```
 
-```js utils.js
+```js src/utils.js
 export function getImageUrl(person) {
   return (
     'https://i.imgur.com/' +
@@ -654,7 +656,7 @@ Tässä on vielä hieman koodin toistoa renderöityjen listojen kesken. Voit men
 
 <Sandpack>
 
-```js App.js
+```js src/App.js
 import { people } from './data.js';
 import { getImageUrl } from './utils.js';
 
@@ -704,7 +706,7 @@ export default function List() {
 }
 ```
 
-```js data.js
+```js src/data.js
 export const people = [{
   id: 0,
   name: 'Creola Katherine Johnson',
@@ -738,7 +740,7 @@ export const people = [{
 }];
 ```
 
-```js utils.js
+```js src/utils.js
 export function getImageUrl(person) {
   return (
     'https://i.imgur.com/' +
@@ -768,7 +770,7 @@ Itse asiassa, jos `people` ei koskaan muutu, voisit siirtää tämän koodin poi
 
 <Sandpack>
 
-```js App.js
+```js src/App.js
 import { people } from './data.js';
 import { getImageUrl } from './utils.js';
 
@@ -822,7 +824,7 @@ export default function List() {
 }
 ```
 
-```js data.js
+```js src/data.js
 export const people = [{
   id: 0,
   name: 'Creola Katherine Johnson',
@@ -856,7 +858,7 @@ export const people = [{
 }];
 ```
 
-```js utils.js
+```js src/utils.js
 export function getImageUrl(person) {
   return (
     'https://i.imgur.com/' +
@@ -894,7 +896,7 @@ Tämä vaatii kaksi sisäkkäistä `map` kutsua.
 
 <Sandpack>
 
-```js App.js
+```js src/App.js
 import { recipes } from './data.js';
 
 export default function RecipeList() {
@@ -906,7 +908,7 @@ export default function RecipeList() {
 }
 ```
 
-```js data.js
+```js src/data.js
 export const recipes = [{
   id: 'greek-salad',
   name: 'Greek Salad',
@@ -930,7 +932,7 @@ Tässä yksi tapa, jota voit käyttää:
 
 <Sandpack>
 
-```js App.js
+```js src/App.js
 import { recipes } from './data.js';
 
 export default function RecipeList() {
@@ -954,7 +956,7 @@ export default function RecipeList() {
 }
 ```
 
-```js data.js
+```js src/data.js
 export const recipes = [{
   id: 'greek-salad',
   name: 'Greek Salad',
@@ -982,7 +984,7 @@ Tämä `RecipeList` komponentti sisältää kaksi `map` kutsua. Yksinkertaistaak
 
 <Sandpack>
 
-```js App.js
+```js src/App.js
 import { recipes } from './data.js';
 
 export default function RecipeList() {
@@ -1006,7 +1008,7 @@ export default function RecipeList() {
 }
 ```
 
-```js data.js
+```js src/data.js
 export const recipes = [{
   id: 'greek-salad',
   name: 'Greek Salad',
@@ -1060,7 +1062,7 @@ export default function RecipeList() {
 }
 ```
 
-```js data.js
+```js src/data.js
 export const recipes = [{
   id: 'greek-salad',
   name: 'Greek Salad',
@@ -1086,7 +1088,11 @@ Tässä `<Recipe {...recipe} key={recipe.id} />` on lyhytsyntaksi joka "välitt�
 
 #### Listat erottimella {/*list-with-a-separator*/}
 
+<<<<<<< HEAD
 Tämä esimerkki renderöi kuuluisan Katsushika Hokusain haikun, jokaisen rivin ollessa kääritty `<p>` tagin sisään. Tehtäväsi on sijoittaa `<hr />` erotin jokaisen kappaleen jälkeen. Lopputuloksen rakennelman pitäisi näyttää tältä:
+=======
+This example renders a famous haiku by Tachibana Hokushi, with each line wrapped in a `<p>` tag. Your job is to insert an `<hr />` separator between each paragraph. Your resulting structure should look like this:
+>>>>>>> c003ac4eb130fca70b88cf3a1b80ce5f76c51ae3
 
 ```js
 <article>
@@ -1145,7 +1151,11 @@ hr {
 
 <Hint>
 
+<<<<<<< HEAD
 Sinun täytyy joko muuttaa `map` manuaaliseksi silmukaksi tai käyttää fragmentia.
+=======
+You'll either need to convert `map` to a manual loop, or use a Fragment.
+>>>>>>> c003ac4eb130fca70b88cf3a1b80ce5f76c51ae3
 
 </Hint>
 
@@ -1208,7 +1218,11 @@ hr {
 
 Alkuperäisen rivin indeksin käyttäminen `key`.na ei enää toimi sillä erottimet ja kappaleet ovat nyt samassa taulukossa. Kuitenkin, voit antaa niille erillisen avaimen käyttämällä jälkiliitettä, esim. `key={i + '-text'}`.
 
+<<<<<<< HEAD
 Vaihtoehtoisesti voit renderöidä kokoelman fragmenteja, jotka sisältävät `<hr />` ja `<p>...</p>` tagit. Kuitenkin `<>...</>` lyhytsyntaksi ei tue avainten välittämistä, joten joutuisit kirjoittamaan `<Fragment>`:n eksplisiittisesti:
+=======
+Alternatively, you could render a collection of Fragments which contain `<hr />` and `<p>...</p>`. However, the `<>...</>` shorthand syntax doesn't support passing keys, so you'd have to write `<Fragment>` explicitly:
+>>>>>>> c003ac4eb130fca70b88cf3a1b80ce5f76c51ae3
 
 <Sandpack>
 
@@ -1254,7 +1268,11 @@ hr {
 
 </Sandpack>
 
+<<<<<<< HEAD
 Muista, fragmentit (useiten kirjoitettuna `<> </>`) antavat sinun ryhmittää JSX-kohteita lisäämättä ylimääräisiä `<div>`-elementtejä!
+=======
+Remember, Fragments (often written as `<> </>`) let you group JSX nodes without adding extra `<div>`s!
+>>>>>>> c003ac4eb130fca70b88cf3a1b80ce5f76c51ae3
 
 </Solution>
 
