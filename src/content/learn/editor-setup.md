@@ -40,7 +40,11 @@ Koodilintterit taikka "nukan poistajat" etsivät ongelmia koodistasi kun kirjoit
 
 ### Muotoilu {/*formatting*/}
 
+<<<<<<< HEAD
 Vihoviimeinen asia on joutua keskustelemaan toisen kehittäjän kanssa aihesta [sarkain vs välilyönti](https://www.google.com/search?q=tabs+vs+spaces)! Onneksi [Prettier](https://prettier.io/) siivoaa koodisi uudelleen muotoilemalla sen pitäytymään muutettaviin esimääriteltyihin sääntöihin. Suorita Prettier ja kaikki välilehtesi muutetaan välilyönneiksi-ja kaikki sisennykset, lainausmerkit, jne tulee muuttumaan konfiguraation mukaiseksi. Ihanteellisessa tilanteessa Prettier suoritetaan kun tallennat tiedostosi, nopeasti tehden nämä muutokset sinulle.
+=======
+The last thing you want to do when sharing your code with another contributor is get into a discussion about [tabs vs spaces](https://www.google.com/search?q=tabs+vs+spaces)! Fortunately, [Prettier](https://prettier.io/) will clean up your code by reformatting it to conform to preset, configurable rules. Run Prettier, and all your tabs will be converted to spaces—and your indentation, quotes, etc will also all be changed to conform to the configuration. In the ideal setup, Prettier will run when you save your file, quickly making these edits for you.
+>>>>>>> 8201e7e9203321bd1648c3ab0b76ef943c9ec3ad
 
 Voit asentaa [Prettier lisäosan VSCodeen](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode) seuraamalla näitä vaiheita:
 
