@@ -407,9 +407,15 @@ function Game() {
 
 Tässä koodissa on kaksi ongelmaa.
 
+<<<<<<< HEAD
 Ensimmäinen ongelma on, että se on hyvin tehoton: komponentti (ja sen lapset) täytyy renderöidä uudelleen jokaisen `set`-kutsun välillä ketjussa. Yllä olevassa esimerkissä, pahimmassa tapauksessa (`setCard` → renderöi → `setGoldCardCount` → renderöi → `setRound` → renderöi → `setIsGameOver` → renderöi) on kolme tarpeetonta uudelleenrenderöintiä puussa.
 
 Vaikka se ei olisi hidas, koodisi eläessä tulet törmäämään tilanteisiin, joissa "ketju" jonka kirjoitit, ei vastaa uusia vaatimuksia. Kuvittele, että olet lisäämässä tapaa selata pelin siirtohistoriaa. Tämä tehdään päivittämällä jokainen tilamuuttuja arvoon menneisyydestä. Kuitenkin, `card`-tilan asettaminen menneisyyden arvoon aiheuttaisi Efektiketjun uudelleen ja muuttaisi näytettävää dataa. Tällainen koodi on usein jäykkää ja haurasta.
+=======
+The first problem is that it is very inefficient: the component (and its children) have to re-render between each `set` call in the chain. In the example above, in the worst case (`setCard` → render → `setGoldCardCount` → render → `setRound` → render → `setIsGameOver` → render) there are three unnecessary re-renders of the tree below.
+
+The second problem is that even if it weren't slow, as your code evolves, you will run into cases where the "chain" you wrote doesn't fit the new requirements. Imagine you are adding a way to step through the history of the game moves. You'd do it by updating each state variable to a value from the past. However, setting the `card` state to a value from the past would trigger the Effect chain again and change the data you're showing. Such code is often rigid and fragile.
+>>>>>>> 84f29eb20af17e9c154b9ad71c21af4c9171e4a2
 
 Tässä tilanteessa on parempi laskea mitä voit renderöinnin aikana ja säätää tilaa tapahtumankäsittelijässä:
 
@@ -882,7 +888,7 @@ function NewTodo({ onAdd }) {
 }
 ```
 
-```js todos.js
+```js src/todos.js
 let nextId = 0;
 
 export function createTodo(text, completed = false) {
@@ -975,7 +981,7 @@ function NewTodo({ onAdd }) {
 }
 ```
 
-```js todos.js
+```js src/todos.js
 let nextId = 0;
 
 export function createTodo(text, completed = false) {
@@ -1061,7 +1067,7 @@ export default function TodoList() {
 }
 ```
 
-```js todos.js
+```js src/todos.js
 let nextId = 0;
 let calls = 0;
 
@@ -1144,7 +1150,7 @@ export default function TodoList() {
 }
 ```
 
-```js todos.js
+```js src/todos.js
 let nextId = 0;
 let calls = 0;
 
@@ -1233,7 +1239,7 @@ function NewTodo({ onAdd }) {
 }
 ```
 
-```js todos.js
+```js src/todos.js
 let nextId = 0;
 let calls = 0;
 
@@ -1278,7 +1284,7 @@ Kun valitset yhteystiedon yläpuolella olevilla napeilla, lomake nollataan vasta
 
 <Sandpack>
 
-```js App.js hidden
+```js src/App.js hidden
 import { useState } from 'react';
 import ContactList from './ContactList.js';
 import EditContact from './EditContact.js';
@@ -1330,7 +1336,7 @@ const initialContacts = [
 ];
 ```
 
-```js ContactList.js hidden
+```js src/ContactList.js hidden
 export default function ContactList({
   contacts,
   selectedId,
@@ -1357,7 +1363,7 @@ export default function ContactList({
 }
 ```
 
-```js EditContact.js active
+```js src/EditContact.js active
 import { useState, useEffect } from 'react';
 
 export default function EditContact({ savedContact, onSave }) {
@@ -1442,7 +1448,7 @@ Jaa `EditContact` komponentti kahteen. Siirrä kaikki lomakkeen tila sisäiseen 
 
 <Sandpack>
 
-```js App.js hidden
+```js src/App.js hidden
 import { useState } from 'react';
 import ContactList from './ContactList.js';
 import EditContact from './EditContact.js';
@@ -1494,7 +1500,7 @@ const initialContacts = [
 ];
 ```
 
-```js ContactList.js hidden
+```js src/ContactList.js hidden
 export default function ContactList({
   contacts,
   selectedId,
@@ -1521,7 +1527,7 @@ export default function ContactList({
 }
 ```
 
-```js EditContact.js active
+```js src/EditContact.js active
 import { useState } from 'react';
 
 export default function EditContact(props) {
