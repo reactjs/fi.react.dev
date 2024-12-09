@@ -124,35 +124,35 @@ export default function CatFriends() {
     <>
       <nav>
         <button onClick={handleScrollToFirstCat}>
-          Tom
+          Neo
         </button>
         <button onClick={handleScrollToSecondCat}>
-          Maru
+          Millie
         </button>
         <button onClick={handleScrollToThirdCat}>
-          Jellylorum
+          Bella
         </button>
       </nav>
       <div>
         <ul>
           <li>
             <img
-              src="https://placekitten.com/g/200/200"
-              alt="Tom"
+              src="https://placecats.com/neo/300/200"
+              alt="Neo"
               ref={firstCatRef}
             />
           </li>
           <li>
             <img
-              src="https://placekitten.com/g/300/200"
-              alt="Maru"
+              src="https://placecats.com/millie/200/200"
+              alt="Millie"
               ref={secondCatRef}
             />
           </li>
           <li>
             <img
-              src="https://placekitten.com/g/250/200"
-              alt="Jellylorum"
+              src="https://placecats.com/bella/199/200"
+              alt="Bella"
               ref={thirdCatRef}
             />
           </li>
@@ -218,18 +218,19 @@ Tämä esimerkki näyttää miten voit käyttää tätä menetelmää scrollatak
 <Sandpack>
 
 ```js
-import { useRef } from 'react';
+import { useRef, useState } from "react";
 
 export default function CatFriends() {
   const itemsRef = useRef(null);
+  const [catList, setCatList] = useState(setupCatList);
 
-  function scrollToId(itemId) {
+  function scrollToCat(cat) {
     const map = getMap();
-    const node = map.get(itemId);
+    const node = map.get(cat);
     node.scrollIntoView({
-      behavior: 'smooth',
-      block: 'nearest',
-      inline: 'center'
+      behavior: "smooth",
+      block: "nearest",
+      inline: "center",
     });
   }
 
@@ -244,34 +245,25 @@ export default function CatFriends() {
   return (
     <>
       <nav>
-        <button onClick={() => scrollToId(0)}>
-          Tom
-        </button>
-        <button onClick={() => scrollToId(5)}>
-          Maru
-        </button>
-        <button onClick={() => scrollToId(9)}>
-          Jellylorum
-        </button>
+        <button onClick={() => scrollToCat(catList[0])}>Neo</button>
+        <button onClick={() => scrollToCat(catList[5])}>Millie</button>
+        <button onClick={() => scrollToCat(catList[9])}>Bella</button>
       </nav>
       <div>
         <ul>
-          {catList.map(cat => (
+          {catList.map((cat) => (
             <li
-              key={cat.id}
+              key={cat}
               ref={(node) => {
                 const map = getMap();
-                if (node) {
-                  map.set(cat.id, node);
-                } else {
-                  map.delete(cat.id);
-                }
+                map.set(cat, node);
+
+                return () => {
+                  map.delete(cat);
+                };
               }}
             >
-              <img
-                src={cat.imageUrl}
-                alt={'Cat #' + cat.id}
-              />
+              <img src={cat} />
             </li>
           ))}
         </ul>
@@ -280,12 +272,13 @@ export default function CatFriends() {
   );
 }
 
-const catList = [];
-for (let i = 0; i < 10; i++) {
-  catList.push({
-    id: i,
-    imageUrl: 'https://placekitten.com/250/200?image=' + i
-  });
+function setupCatList() {
+  const catList = [];
+  for (let i = 0; i < 10; i++) {
+    catList.push("https://loremflickr.com/320/240/cat?lock=" + i);
+  }
+
+  return catList;
 }
 
 ```
@@ -325,6 +318,7 @@ Tässä esimerkissä `itemsRef` ei sisällä yhtäkään DOM noodia. Sen sijaan 
   key={cat.id}
   ref={node => {
     const map = getMap();
+<<<<<<< HEAD
     if (node) {
       // Lisää Map:iin
       map.set(cat.id, node);
@@ -332,11 +326,28 @@ Tässä esimerkissä `itemsRef` ei sisällä yhtäkään DOM noodia. Sen sijaan 
       // Poista Map:sta
       map.delete(cat.id);
     }
+=======
+    // Add to the Map
+    map.set(cat, node);
+
+    return () => {
+      // Remove from the Map
+      map.delete(cat);
+    };
+>>>>>>> 69edd845b9a654c6ac9ed68da19d5b42897e636e
   }}
 >
 ```
 
 Tämän avulla voit lukea yksittäiset DOM noodit Map:sta myöhemmin.
+
+<Note>
+
+When Strict Mode is enabled, ref callbacks will run twice in development.
+
+Read more about [how this helps find bugs](/reference/react/StrictMode#fixing-bugs-found-by-re-running-ref-callbacks-in-development) in callback refs.
+
+</Note>
 
 </DeepDive>
 
@@ -494,7 +505,11 @@ Yleensä [ei kannata](/learn/referencing-values-with-refs#best-practices-for-ref
 
 React asettaa `ref.current`:n kommitoinnin aikana. Ennen DOM:n päivittämistä, React asettaa `ref.current` arvot `null`:ksi. Päivittämisen jälkeen, React asettaa ne välittömästi vastaaviin DOM noodeihin.
 
+<<<<<<< HEAD
 **Useiten saatat käyttää refseja Tapahtumankäsittelijöiden sisällä.** Jos haluat tehdä jotain refin kanssa, mutta ei ole tiettyä tapahtumaa jota käyttää, saatat tarvita Effektiä. Seuraavilla sivuilla käymme läpi Effektin.
+=======
+**Usually, you will access refs from event handlers.** If you want to do something with a ref, but there is no particular event to do it in, you might need an Effect. We will discuss Effects on the next pages.
+>>>>>>> 69edd845b9a654c6ac9ed68da19d5b42897e636e
 
 <DeepDive>
 
@@ -929,7 +944,7 @@ const catList = [];
 for (let i = 0; i < 10; i++) {
   catList.push({
     id: i,
-    imageUrl: 'https://placekitten.com/250/200?image=' + i
+    imageUrl: 'https://loremflickr.com/250/200/cat?lock=' + i
   });
 }
 
@@ -1046,7 +1061,7 @@ const catList = [];
 for (let i = 0; i < 10; i++) {
   catList.push({
     id: i,
-    imageUrl: 'https://placekitten.com/250/200?image=' + i
+    imageUrl: 'https://loremflickr.com/250/200/cat?lock=' + i
   });
 }
 
@@ -1106,7 +1121,7 @@ Sinun täytyy käyttää `forwardRef`:ia, jotta voit julkaista DOM noodin omasta
 
 <Sandpack>
 
-```js App.js
+```js src/App.js
 import SearchButton from './SearchButton.js';
 import SearchInput from './SearchInput.js';
 
@@ -1122,7 +1137,7 @@ export default function Page() {
 }
 ```
 
-```js SearchButton.js
+```js src/SearchButton.js
 export default function SearchButton() {
   return (
     <button>
@@ -1132,7 +1147,7 @@ export default function SearchButton() {
 }
 ```
 
-```js SearchInput.js
+```js src/SearchInput.js
 export default function SearchInput() {
   return (
     <input
@@ -1156,7 +1171,7 @@ Sinun täytyy lisätä `onClick` propsi `SearchButton`:iin ja laittaa `SearchBut
 
 <Sandpack>
 
-```js App.js
+```js src/App.js
 import { useRef } from 'react';
 import SearchButton from './SearchButton.js';
 import SearchInput from './SearchInput.js';
@@ -1176,7 +1191,7 @@ export default function Page() {
 }
 ```
 
-```js SearchButton.js
+```js src/SearchButton.js
 export default function SearchButton({ onClick }) {
   return (
     <button onClick={onClick}>
@@ -1186,7 +1201,7 @@ export default function SearchButton({ onClick }) {
 }
 ```
 
-```js SearchInput.js
+```js src/SearchInput.js
 import { forwardRef } from 'react';
 
 export default forwardRef(

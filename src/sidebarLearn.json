@@ -43,6 +43,11 @@
         {
           "title": "React kehitystyökalut",
           "path": "/learn/react-developer-tools"
+        },
+        {
+          "title": "React Compiler",
+          "path": "/learn/react-compiler",
+          "canary": true
         }
       ]
     },
@@ -86,6 +91,10 @@
         {
           "title": "Komponenttien pitäminen puhtaina",
           "path": "/learn/keeping-components-pure"
+        },
+        {
+          "title": "Your UI as a Tree",
+          "path": "/learn/understanding-your-ui-as-a-tree"
         }
       ]
     },
@@ -189,7 +198,11 @@
           "path": "/learn/separating-events-from-effects"
         },
         {
+<<<<<<< HEAD
           "title": "Efektin riippuvuuksien poistaminen",
+=======
+          "title": "Removing Effect Dependencies",
+>>>>>>> 69edd845b9a654c6ac9ed68da19d5b42897e636e
           "path": "/learn/removing-effect-dependencies"
         },
         {
