@@ -56,7 +56,7 @@ Kun sovelluksesi käynnistyy, sinun täytyy käynnistää ensimmäinen renderöi
 
 <Sandpack>
 
-```js index.js active
+```js src/index.js active
 import Image from './Image.js';
 import { createRoot } from 'react-dom/client';
 
@@ -64,7 +64,7 @@ const root = createRoot(document.getElementById('root'))
 root.render(<Image />);
 ```
 
-```js Image.js
+```js src/Image.js
 export default function Image() {
   return (
     <img
@@ -114,7 +114,7 @@ Seuraavassa esimerkissä, React kutsuu `Gallery()` ja `Image()` komponentteja us
 
 <Sandpack>
 
-```js Gallery.js active
+```js src/Gallery.js active
 export default function Gallery() {
   return (
     <section>
@@ -136,7 +136,7 @@ function Image() {
 }
 ```
 
-```js index.js
+```js src/index.js
 import Gallery from './Gallery.js';
 import { createRoot } from 'react-dom/client';
 
@@ -185,8 +185,13 @@ Komponenttisi renderöinnin (kutsumisen) jälkeen React muuttaa DOM:ia.
 
 <Sandpack>
 
+<<<<<<< HEAD
 ```js Clock.js active
 export default function Clock({time}) {
+=======
+```js src/Clock.js active
+export default function Clock({ time }) {
+>>>>>>> 3b02f828ff2a4f9d2846f077e442b8a405e2eb04
   return (
     <>
       <h1>{time}</h1>
@@ -196,8 +201,13 @@ export default function Clock({time}) {
 }
 ```
 
+<<<<<<< HEAD
 ```js App.js hidden
 import {useState, useEffect} from 'react';
+=======
+```js src/App.js hidden
+import { useState, useEffect } from 'react';
+>>>>>>> 3b02f828ff2a4f9d2846f077e442b8a405e2eb04
 import Clock from './Clock.js';
 
 function useTime() {

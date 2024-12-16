@@ -2,6 +2,14 @@
 title: forwardRef
 ---
 
+<Deprecated>
+
+In React 19, `forwardRef` is no longer necessary. Pass `ref` as a prop instead.
+
+`forwardRef` will deprecated in a future release. Learn more [here](/blog/2024/04/25/react-19#ref-as-a-prop).
+
+</Deprecated>
+
 <Intro>
 
 `forwardRef` rajapinnan avulla komponentti voi tarjota DOM noodin pääkomponenetille [ref](/learn/manipulating-the-dom-with-refs):llä.
@@ -42,7 +50,11 @@ const MyInput = forwardRef(function MyInput(props, ref) {
 
 #### Huomiot {/*caveats*/}
 
+<<<<<<< HEAD
 * Strict Modessa, React **kutsuu renderöintifunktiotasi kahdesti** auttaakseen sinua löytämään tahattomia epäpuhtauksia. Tämä on vain kehitystilassa tapahtuva käyttäytyminen, eikä vaikuta tuotantoon. Jos renderöintifunktiosi on puhdas (kuten sen pitäisi olla), tämä ei vaikuta komponenttisi logiikkaan. Toinen kutsuista jätetään huomiotta.
+=======
+* In Strict Mode, React will **call your render function twice** in order to [help you find accidental impurities.](/reference/react/useState#my-initializer-or-updater-function-runs-twice) This is development-only behavior and does not affect production. If your render function is pure (as it should be), this should not affect the logic of your component. The result from one of the calls will be ignored.
+>>>>>>> 3b02f828ff2a4f9d2846f077e442b8a405e2eb04
 
 
 ---
@@ -165,7 +177,7 @@ export default function Form() {
 }
 ```
 
-```js MyInput.js
+```js src/MyInput.js
 import { forwardRef } from 'react';
 
 const MyInput = forwardRef(function MyInput(props, ref) {
@@ -223,7 +235,7 @@ export default function App() {
 }
 ```
 
-```js MyVideoPlayer.js
+```js src/MyVideoPlayer.js
 import { forwardRef } from 'react';
 
 const VideoPlayer = forwardRef(function VideoPlayer({ src, type, width }, ref) {
@@ -316,7 +328,7 @@ export default function Form() {
 }
 ```
 
-```js FormField.js
+```js src/FormField.js
 import { forwardRef, useState } from 'react';
 import MyInput from './MyInput.js';
 
@@ -341,7 +353,7 @@ export default FormField;
 ```
 
 
-```js MyInput.js
+```js src/MyInput.js
 import { forwardRef } from 'react';
 
 const MyInput = forwardRef((props, ref) => {
@@ -432,7 +444,7 @@ export default function Form() {
 }
 ```
 
-```js MyInput.js
+```js src/MyInput.js
 import { forwardRef, useRef, useImperativeHandle } from 'react';
 
 const MyInput = forwardRef(function MyInput(props, ref) {
