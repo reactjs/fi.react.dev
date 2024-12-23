@@ -99,8 +99,13 @@ Voit rakentaa joko "ylhäältä alas" aloittamalla komponenteilla, jotka ovat hi
 
 <Sandpack>
 
+<<<<<<< HEAD
 ```jsx App.js
 function ProductCategoryRow({category}) {
+=======
+```jsx src/App.js
+function ProductCategoryRow({ category }) {
+>>>>>>> 6ae99dddc3b503233291da96e8fd4b118ed6d682
   return (
     <tr>
       <th colSpan="2">{category}</th>
@@ -277,11 +282,19 @@ Edellisessä vaiheessa sait kaksi tilan palaa sovelluksessa: hakulauseen sekä v
 
 Käydään läpi strategiaa tälle tilalle:
 
+<<<<<<< HEAD
 1. **Tunnista komponentit, jotka käyttävät tilaa:**
    - `ProductTable`:n täytyy suodataa tuotelista tilan perusteella (hakulauseella ja valintaruudun arvolla).
    - `SearchBar`:n täytyy näyttää tila (hakulause ja valintaruudun arvo).
 2. **Etsi niiden yhteinen pääkomponentti:** Ensimmäinen komponentti, jonka molemmat jakavat on `FilterableProductTable`.
 3. **Päätä missä tila elää**: Pidämme hakulauseen ja valintaruudun arvon `FilterableProductTable` komponentissa.
+=======
+1. **Identify components that use state:**
+    * `ProductTable` needs to filter the product list based on that state (search text and checkbox value). 
+    * `SearchBar` needs to display that state (search text and checkbox value).
+2. **Find their common parent:** The first parent component both components share is `FilterableProductTable`.
+3. **Decide where the state lives**: We'll keep the filter text and checked state values in `FilterableProductTable`.
+>>>>>>> 6ae99dddc3b503233291da96e8fd4b118ed6d682
 
 Joten tila elää `FilterableProductTable` komponentissa.
 
@@ -310,8 +323,13 @@ Alat näkemään miten sovelluksesi tulee käyttäytymään. Muokkaa `filterText
 
 <Sandpack>
 
+<<<<<<< HEAD
 ```jsx App.js
 import {useState} from 'react';
+=======
+```jsx src/App.js
+import { useState } from 'react';
+>>>>>>> 6ae99dddc3b503233291da96e8fd4b118ed6d682
 
 function FilterableProductTable({products}) {
   const [filterText, setFilterText] = useState('');
@@ -479,6 +497,7 @@ function FilterableProductTable({ products }) {
 
 `SearchBar` komponentissa lisää `onChange` Tapahtumankäsittelijä ja muuta yläkomponentin tila sieltä käsin:
 
+<<<<<<< HEAD
 ```js {5}
 <input
   type="text"
@@ -486,14 +505,41 @@ function FilterableProductTable({ products }) {
   placeholder="Search..."
   onChange={(e) => onFilterTextChange(e.target.value)}
 />
+=======
+```js {4,5,13,19}
+function SearchBar({
+  filterText,
+  inStockOnly,
+  onFilterTextChange,
+  onInStockOnlyChange
+}) {
+  return (
+    <form>
+      <input
+        type="text"
+        value={filterText}
+        placeholder="Search..."
+        onChange={(e) => onFilterTextChange(e.target.value)}
+      />
+      <label>
+        <input
+          type="checkbox"
+          checked={inStockOnly}
+          onChange={(e) => onInStockOnlyChange(e.target.checked)}
+>>>>>>> 6ae99dddc3b503233291da96e8fd4b118ed6d682
 ```
 
 Nyt sovellus toimii täysin!
 
 <Sandpack>
 
+<<<<<<< HEAD
 ```jsx App.js
 import {useState} from 'react';
+=======
+```jsx src/App.js
+import { useState } from 'react';
+>>>>>>> 6ae99dddc3b503233291da96e8fd4b118ed6d682
 
 function FilterableProductTable({products}) {
   const [filterText, setFilterText] = useState('');
