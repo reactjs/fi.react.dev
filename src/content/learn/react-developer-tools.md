@@ -53,6 +53,7 @@ Lataa sivu uudelleen selaimessa näähdäksesi sen kehitystyökalussa.
 
 ![Itsenäinen React Developer Tools](/images/docs/react-devtools-standalone.png)
 
+<<<<<<< HEAD
 ## Mobiili (React Native) {/*mobile-react-native*/}
 
 React kehistystyökalulla voidaan katsoa myöskin [React Native](https://reactnative.dev/):lla rakennettuja sovelluksia.
@@ -61,11 +62,15 @@ Helpoin tapa käyttää React kehitystyökaluja on asentamalla se globaalisti:
 ```bash
 # Yarn
 yarn global add react-devtools
+=======
+## Mobile (React Native) {/*mobile-react-native*/}
 
-# Npm
-npm install -g react-devtools
-```
+To inspect apps built with [React Native](https://reactnative.dev/), you can use [React Native DevTools](https://reactnative.dev/docs/react-native-devtools), the built-in debugger that deeply integrates React Developer Tools. All features work identically to the browser extension, including native element highlighting and selection.
+>>>>>>> b1a249d597016c6584e4c186daa28b180cc9aafc
 
+[Learn more about debugging in React Native.](https://reactnative.dev/docs/debugging)
+
+<<<<<<< HEAD
 Sitten avaa kehitystyökalut terminaalista.
 ```bash
 react-devtools
@@ -76,3 +81,6 @@ Sen pitäisi yhdistää mihin tahansa paikalliseen, käynnissäolevaan React Nat
 > Kokeile käynnistää sovellus uudelleen mikäli kehitystyökalu ei yhdistä muutaman sekuntin kuluttua.
 
 [Lue lisää React Nativen debuggaamisesta.](https://reactnative.dev/docs/debugging)
+=======
+> For versions of React Native earlier than 0.76, please use the standalone build of React DevTools by following the [Safari and other browsers](#safari-and-other-browsers) guide above.
+>>>>>>> b1a249d597016c6584e4c186daa28b180cc9aafc
