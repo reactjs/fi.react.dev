@@ -37,7 +37,11 @@ export default function App() {
 
 Voit muokata sitä suoraan tai avata sen uudessa välilehdessä painamalla "Forkkaa" painiketta oikeasta yläreunasta.
 
+<<<<<<< HEAD
 Useimmat sivut Reactin dokumentaatiossa sisältävät hiekkalaatikkoja kuten tämän. Reactin dokumentaation ulkopuolelta löytyy monia hiekkalaatikkoja, jotka tukevat Reactia: esimerkiksi [CodeSandbox](https://codesandbox.io/s/new), [Stackblitz](https://stackblitz.com/fork/react), tai [CodePen](https://codepen.io/pen?&editors=0010&layout=left&prefill_data_id=3f4569d1-1b11-4bce-bd46-89090eed5ddb).
+=======
+Most pages in the React documentation contain sandboxes like this. Outside of the React documentation, there are many online sandboxes that support React: for example, [CodeSandbox](https://codesandbox.io/s/new), [StackBlitz](https://stackblitz.com/fork/react), or [CodePen.](https://codepen.io/pen?template=QWYVwWN)
+>>>>>>> b1a249d597016c6584e4c186daa28b180cc9aafc
 
 ## Kokeile Reactia paikallisesti {/*try-react-locally*/}
 
