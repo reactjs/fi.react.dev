@@ -20,9 +20,15 @@ Sanotaan, että sinulla on olemassa oleva verkkosovellus osoitteessa `example.co
 
 Tässä miten suosittelemme sen asentamista:
 
+<<<<<<< HEAD
 1. **Rakenna React-osuus sovelluksestasi** käyttäen yhtä [React-pohjaista ohjelmistokehystä](/learn/start-a-new-react-project).
 2. **Määrittele `/some-app` *aloituspoluksi*** ohjelmistokehyksesi konfiguroinnissa (tässä miten: [Next.js](https://nextjs.org/docs/api-reference/next.config.js/basepath), [Gatsby](https://www.gatsbyjs.com/docs/how-to/previews-deploys-hosting/path-prefix/)).
 3. **Määrittele verkkopalvelimesi tai välityspalvelimesi** siten, jotta kaikki pyynnöt `/some-app/` reittiin käsitellään React sovelluksessasi.
+=======
+1. **Build the React part of your app** using one of the [React-based frameworks](/learn/start-a-new-react-project).
+2. **Specify `/some-app` as the *base path*** in your framework's configuration (here's how: [Next.js](https://nextjs.org/docs/app/api-reference/config/next-config-js/basePath), [Gatsby](https://www.gatsbyjs.com/docs/how-to/previews-deploys-hosting/path-prefix/)).
+3. **Configure your server or a proxy** so that all requests under `/some-app/` are handled by your React app.
+>>>>>>> 9000e6e003854846c4ce5027703b5ce6f81aad80
 
 Tämä varmistaa, että React -osa sovelluksestasi voi [hyötyä parhaista käytännöistä](/learn/start-a-new-react-project#can-i-use-react-without-a-framework), jotka on sisällytetty näihin kehyksiin.
 
@@ -67,7 +73,7 @@ Lisää sitten nämä koodirivit pää-JavaScript-tiedostosi alkuun (se voi olla
 </html>
 ```
 
-```js index.js active
+```js src/index.js active
 import { createRoot } from 'react-dom/client';
 
 // Tyhjää olemassa oleva HTML sisältö
@@ -131,7 +137,7 @@ Tämän avulla voit etsiä kyseisen HTML elementin käyttäen [`document.getElem
 </html>
 ```
 
-```js index.js active
+```js src/index.js active
 import { createRoot } from 'react-dom/client';
 
 function NavigationBar() {
