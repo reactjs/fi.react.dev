@@ -5,6 +5,11 @@
 import cn from 'classnames';
 import {ExternalLink} from 'components/ExternalLink';
 import {IconFacebookCircle} from 'components/Icon/IconFacebookCircle';
+<<<<<<< HEAD
+=======
+import {IconTwitter} from 'components/Icon/IconTwitter';
+import {IconBsky} from 'components/Icon/IconBsky';
+>>>>>>> b22cbc3fed310b39c99fdd0f01621ac1903d1e8e
 import {IconGitHub} from 'components/Icon/IconGitHub';
 import {IconTwitter} from 'components/Icon/IconTwitter';
 import NextLink from 'next/link';
@@ -283,7 +288,31 @@ export function Footer() {
           <div
             className="text-xs text-left rtl:text-right mt-2 pe-0.5"
             dir="ltr">
-            &copy;{new Date().getFullYear()}
+            Copyright &copy; Meta Platforms, Inc
+          </div>
+          <div
+            className="uwu-visible text-xs cursor-pointer hover:text-link hover:dark:text-link-dark hover:underline"
+            onClick={() => {
+              // @ts-ignore
+              window.__setUwu(false);
+            }}>
+            no uwu plz
+          </div>
+          <div
+            className="uwu-hidden text-xs cursor-pointer hover:text-link hover:dark:text-link-dark hover:underline"
+            onClick={() => {
+              // @ts-ignore
+              window.__setUwu(true);
+            }}>
+            uwu?
+          </div>
+          <div className="uwu-visible text-xs">
+            Logo by
+            <ExternalLink
+              className="ms-1"
+              href="https://twitter.com/sawaratsuki1004">
+              @sawaratsuki1004
+            </ExternalLink>
           </div>
         </div>
         <div className="flex flex-col">
@@ -333,7 +362,7 @@ export function Footer() {
           <FooterLink href="https://opensource.fb.com/legal/terms/">
             Ehdot
           </FooterLink>
-          <div className="flex flex-row mt-8 gap-x-2">
+          <div className="flex flex-row items-center mt-8 gap-x-2">
             <ExternalLink
               aria-label="React Facebookissa"
               href="https://www.facebook.com/react"
@@ -347,7 +376,17 @@ export function Footer() {
               <IconTwitter />
             </ExternalLink>
             <ExternalLink
+<<<<<<< HEAD
               aria-label="React GitHubissa"
+=======
+              aria-label="React on Bluesky"
+              href="https://bsky.app/profile/react.dev"
+              className={socialLinkClasses}>
+              <IconBsky />
+            </ExternalLink>
+            <ExternalLink
+              aria-label="React on Github"
+>>>>>>> b22cbc3fed310b39c99fdd0f01621ac1903d1e8e
               href="https://github.com/facebook/react"
               className={socialLinkClasses}>
               <IconGitHub />
