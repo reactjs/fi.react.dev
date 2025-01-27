@@ -10,6 +10,7 @@ React on JavaScript kirjasto käyttöliittymien (UI) renderöintiin. Käyttölii
 
 <YouWillLearn isChapter={true}>
 
+<<<<<<< HEAD
 - [Miten kirjoitat ensimmäisen komponenttisi](/learn/your-first-component)
 - [Miten ja milloin luot monikomponenttisia tiedostoja](/learn/importing-and-exporting-components)
 - [Miten lisäät merkintäkoodia JavaScriptiin JSX hyödyntäen](/learn/writing-markup-with-jsx)
@@ -18,6 +19,17 @@ React on JavaScript kirjasto käyttöliittymien (UI) renderöintiin. Käyttölii
 - [Miten renderöidä ehdollisesti komponentteja](/learn/conditional-rendering)
 - [Miten renderöidä useita komponentteja samanaikaisesti](/learn/rendering-lists)
 - [Miten välttää bugeja pitämällä komponentit puhtaina](/learn/keeping-components-pure)
+=======
+* [How to write your first React component](/learn/your-first-component)
+* [When and how to create multi-component files](/learn/importing-and-exporting-components)
+* [How to add markup to JavaScript with JSX](/learn/writing-markup-with-jsx)
+* [How to use curly braces with JSX to access JavaScript functionality from your components](/learn/javascript-in-jsx-with-curly-braces)
+* [How to configure components with props](/learn/passing-props-to-a-component)
+* [How to conditionally render components](/learn/conditional-rendering)
+* [How to render multiple components at a time](/learn/rendering-lists)
+* [How to avoid confusing bugs by keeping components pure](/learn/keeping-components-pure)
+* [Why understanding your UI as trees is useful](/learn/understanding-your-ui-as-a-tree)
+>>>>>>> a5aad0d5e92872ef715b462b1dd6dcbeb45cf781
 
 </YouWillLearn>
 
@@ -65,7 +77,7 @@ Voit määritellä monia komponentteja yhdessä tiedostossa, mutta navigointi is
 
 <Sandpack>
 
-```js App.js hidden
+```js src/App.js hidden
 import Gallery from './Gallery.js';
 
 export default function App() {
@@ -73,7 +85,7 @@ export default function App() {
 }
 ```
 
-```js Gallery.js active
+```js src/Gallery.js active
 import Profile from './Profile.js';
 
 export default function Gallery() {
@@ -88,7 +100,7 @@ export default function Gallery() {
 }
 ```
 
-```js Profile.js
+```js src/Profile.js
 export default function Profile() {
   return <img src="https://i.imgur.com/QIrZWGIs.jpg" alt="Alan L. Hart" />;
 }
@@ -277,7 +289,7 @@ function Card({children}) {
 }
 ```
 
-```js utils.js
+```js src/utils.js
 export function getImageUrl(person, size = 's') {
   return 'https://i.imgur.com/' + person.imageId + size + '.jpg';
 }
@@ -320,7 +332,7 @@ Tässä esimerkissä JavaScript `&&` operaattoria käytetään valintamerkin ehd
 function Item({name, isPacked}) {
   return (
     <li className="item">
-      {name} {isPacked && '✔'}
+      {name} {isPacked && '✅'}
     </li>
   );
 }
@@ -355,9 +367,15 @@ Jokaiselle listan kohteelle täytyy määrittää `key` propsi. Yleensä voit k�
 
 <Sandpack>
 
+<<<<<<< HEAD
 ```js App.js
 import {people} from './data.js';
 import {getImageUrl} from './utils.js';
+=======
+```js src/App.js
+import { people } from './data.js';
+import { getImageUrl } from './utils.js';
+>>>>>>> a5aad0d5e92872ef715b462b1dd6dcbeb45cf781
 
 export default function List() {
   const listItems = people.map((person) => (
@@ -379,6 +397,7 @@ export default function List() {
 }
 ```
 
+<<<<<<< HEAD
 ```js data.js
 export const people = [
   {
@@ -418,9 +437,43 @@ export const people = [
     imageId: 'lrWQx8l',
   },
 ];
+=======
+```js src/data.js
+export const people = [{
+  id: 0,
+  name: 'Creola Katherine Johnson',
+  profession: 'mathematician',
+  accomplishment: 'spaceflight calculations',
+  imageId: 'MK3eW3A'
+}, {
+  id: 1,
+  name: 'Mario José Molina-Pasquel Henríquez',
+  profession: 'chemist',
+  accomplishment: 'discovery of Arctic ozone hole',
+  imageId: 'mynHUSa'
+}, {
+  id: 2,
+  name: 'Mohammad Abdus Salam',
+  profession: 'physicist',
+  accomplishment: 'electromagnetism theory',
+  imageId: 'bE7W1ji'
+}, {
+  id: 3,
+  name: 'Percy Lavon Julian',
+  profession: 'chemist',
+  accomplishment: 'pioneering cortisone drugs, steroids and birth control pills',
+  imageId: 'IOjWm71'
+}, {
+  id: 4,
+  name: 'Subrahmanyan Chandrasekhar',
+  profession: 'astrophysicist',
+  accomplishment: 'white dwarf star mass calculations',
+  imageId: 'lrWQx8l'
+}];
+>>>>>>> a5aad0d5e92872ef715b462b1dd6dcbeb45cf781
 ```
 
-```js utils.js
+```js src/utils.js
 export function getImageUrl(person) {
   return 'https://i.imgur.com/' + person.imageId + 's.jpg';
 }
@@ -519,7 +572,42 @@ Lue **[Komponenttien pitäminen puhtaana](/learn/keeping-components-pure)** oppi
 
 </LearnMore>
 
+<<<<<<< HEAD
 ## Mitä seuraavaksi? {/*whats-next*/}
+=======
+## Your UI as a tree {/*your-ui-as-a-tree*/}
+
+React uses trees to model the relationships between components and modules. 
+
+A React render tree is a representation of the parent and child relationship between components. 
+
+<Diagram name="generic_render_tree" height={250} width={500} alt="A tree graph with five nodes, with each node representing a component. The root node is located at the top the tree graph and is labelled 'Root Component'. It has two arrows extending down to two nodes labelled 'Component A' and 'Component C'. Each of the arrows is labelled with 'renders'. 'Component A' has a single 'renders' arrow to a node labelled 'Component B'. 'Component C' has a single 'renders' arrow to a node labelled 'Component D'.">
+
+An example React render tree.
+
+</Diagram>
+
+Components near the top of the tree, near the root component, are considered top-level components. Components with no child components are leaf components. This categorization of components is useful for understanding data flow and rendering performance.
+
+Modelling the relationship between JavaScript modules is another useful way to understand your app. We refer to it as a module dependency tree. 
+
+<Diagram name="generic_dependency_tree" height={250} width={500} alt="A tree graph with five nodes. Each node represents a JavaScript module. The top-most node is labelled 'RootModule.js'. It has three arrows extending to the nodes: 'ModuleA.js', 'ModuleB.js', and 'ModuleC.js'. Each arrow is labelled as 'imports'. 'ModuleC.js' node has a single 'imports' arrow that points to a node labelled 'ModuleD.js'.">
+
+An example module dependency tree.
+
+</Diagram>
+
+A dependency tree is often used by build tools to bundle all the relevant JavaScript code for the client to download and render. A large bundle size regresses user experience for React apps. Understanding the module dependency tree is helpful to debug such issues. 
+
+<LearnMore path="/learn/understanding-your-ui-as-a-tree">
+
+Read **[Your UI as a Tree](/learn/understanding-your-ui-as-a-tree)** to learn how to create a render and module dependency trees for a React app and how they're useful mental models for improving user experience and performance.
+
+</LearnMore>
+
+
+## What's next? {/*whats-next*/}
+>>>>>>> a5aad0d5e92872ef715b462b1dd6dcbeb45cf781
 
 Siirry seuraavaksi [Ensimmäinen komponenttisi](/learn/your-first-component) lukeaksesi tämän luvun sivu kerrallaan!
 
