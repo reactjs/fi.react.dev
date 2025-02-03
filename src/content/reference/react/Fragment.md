@@ -4,7 +4,7 @@ title: <Fragment> (<>...</>)
 
 <Intro>
 
-`<Fragment>`, often used via `<>...</>` syntax, lets you group elements without a wrapper node.
+`<Fragment>`, useiten käytetty `<></>` syntaksin kautta, antaa sinun ryhmitellä elementtejä ilman wrapper-elementtiä.
 
 ```js
 <>
@@ -23,25 +23,25 @@ title: <Fragment> (<>...</>)
 
 ### `<Fragment>` {/*fragment*/}
 
-Wrap elements in `<Fragment>` to group them together in situations where you need a single element. Grouping elements in `Fragment` has no effect on the resulting DOM; it is the same as if the elements were not grouped. The empty JSX tag `<></>` is shorthand for `<Fragment></Fragment>` in most cases.
+Kääri elementtejä `<Fragment>`:n sisään ryhmitelläksesi ne yhteen tilanteissa, joissa tarvitset yhden elementin. Elementtien ryhmittely `Fragment`:n sisään ei vaikuta lopulliseen DOM:iin; se on sama kuin elementtejä ei oltaisi ryhmitelty. Tyhjä JSX-tagi `<></>` on lyhenne `<Fragment></Fragment>`:sta useimmissa tapauksissa.
 
 #### Propsit {/*props*/}
 
-- **optional** `key`: Fragments declared with the explicit `<Fragment>` syntax may have [keys.](/learn/rendering-lists#keeping-list-items-in-order-with-key)
+- **valinnainen** `key`: Fragmentit jotka on määritelty `<Fragment>` syntaksilla voivat sisältää [avaimia.](/learn/rendering-lists#keeping-list-items-in-order-with-key)
 
 #### Rajoitukset {/*caveats*/}
 
-- If you want to pass `key` to a Fragment, you can't use the `<>...</>` syntax. You have to explicitly import `Fragment` from `'react'` and render `<Fragment key={yourKey}>...</Fragment>`.
+- Jos haluat välittää `key`:n Fragmentille, et voi käyttää `<></>` syntaksia. Sinun täytyy tuoda `Fragment` `'react'`-kirjastosta ja renderöidä `<Fragment key={yourKey}>...</Fragment>`.
 
-- React does not [reset state](/learn/preserving-and-resetting-state) when you go from rendering `<><Child /></>` to `[<Child />]` or back, or when you go from rendering `<><Child /></>` to `<Child />` and back. This only works a single level deep: for example, going from `<><><Child /></></>` to `<Child />` resets the state. See the precise semantics [here.](https://gist.github.com/clemmy/b3ef00f9507909429d8aa0d3ee4f986b)
+- React ei [nollaa tilaa](/learn/preserving-and-resetting-state) kun siirryt renderöimästä `<><Child /></>`:n `[<Child />]`:iin tai takaisin, tai kun siirryt renderöimästä `<><Child /></>`:n `<Child />`:iin ja takaisin. Tämä toimii vain yhden tason syvyyteen asti: esimerkiksi siirtyminen `<><><Child /></></>` `<Child />` nollaa tilan. Katso tarkat semantiikat [täältä.](https://gist.github.com/clemmy/b3ef00f9507909429d8aa0d3ee4f986b)
 
 ---
 
 ## Käyttö {/*usage*/}
 
-### Returning multiple elements {/*returning-multiple-elements*/}
+### Useiden elementtien palauttaminen {/*returning-multiple-elements*/}
 
-Use `Fragment`, or the equivalent `<>...</>` syntax, to group multiple elements together. You can use it to put multiple elements in any place where a single element can go. For example, a component can only return one element, but by using a Fragment you can group multiple elements together and then return them as a group:
+Käytä `Fragment`:ia, tai sitä vastaavaa `<></>` syntaksia, ryhmitelläksesi useita elementtejä yhteen. Voit käyttää sitä laittamaan useita elementtejä mihin tahansa paikkaan, johon yksi elementti voi mennä. Esimerkiksi komponentti voi palauttaa vain yhden elementin, mutta käyttämällä Fragmenttia voit ryhmitellä useita elementtejä yhteen ja palauttaa ne ryhmänä:
 
 ```js {3,6}
 function Post() {
@@ -54,7 +54,7 @@ function Post() {
 }
 ```
 
-Fragments are useful because grouping elements with a Fragment has no effect on layout or styles, unlike if you wrapped the elements in another container like a DOM element. If you inspect this example with the browser tools, you'll see that all `<h1>` and `<article>` DOM nodes appear as siblings without wrappers around them:
+Fragmentit ovat hyödyllisiä koska elementtien ryhmittely Fragmentin sisään ei vaikuta layouttiin tai tyyleihin, toisin kuin jos käärisit elementit toiseen DOM-elementtiin. Jos tarkastelet tätä esimerkkiä selaimen työkaluilla, näet että kaikki `<h1>` ja `<article>` DOM-nodet näkyvät sisaruksina ilman wrapper-elementtejä niiden ympärillä:
 
 <Sandpack>
 
@@ -62,8 +62,8 @@ Fragments are useful because grouping elements with a Fragment has no effect on 
 export default function Blog() {
   return (
     <>
-      <Post title="An update" body="It's been a while since I posted..." />
-      <Post title="My new blog" body="I am starting a new blog!" />
+      <Post title="Päivitys" body="Siitä on hetki kun viimeksi julkaisin..." />
+      <Post title="Uusi blogini" body="Aloitan uuden blogin!" />
     </>
   )
 }
@@ -94,9 +94,9 @@ function PostBody({ body }) {
 
 <DeepDive>
 
-#### How to write a Fragment without the special syntax? {/*how-to-write-a-fragment-without-the-special-syntax*/}
+#### Miten kirjoittaa Fragment ilman erityissyntaksia? {/*how-to-write-a-fragment-without-the-special-syntax*/}
 
-The example above is equivalent to importing `Fragment` from React:
+Tämä esimerkki vastaa `Fragment`:in tuomista Reactista:
 
 ```js {1,5,8}
 import { Fragment } from 'react';
@@ -111,15 +111,14 @@ function Post() {
 }
 ```
 
-Usually you won't need this unless you need to [pass a `key` to your `Fragment`.](#rendering-a-list-of-fragments)
+Useimmiten et tule tarvitsemaan tätä ellei sinun tarvitse [välittää `key` Fragmentille.](#rendering-a-list-of-fragments)
 
 </DeepDive>
 
 ---
+### Useiden elementtien määrittäminen muuttujaan {/*assigning-multiple-elements-to-a-variable*/}
 
-### Assigning multiple elements to a variable {/*assigning-multiple-elements-to-a-variable*/}
-
-Like any other element, you can assign Fragment elements to variables, pass them as props, and so on:
+Kuten mitä tahansa muita elementtejä, voit määrittää Fragmentin elementtejä muuttujiin, välittää niitä propseina, jne:
 
 ```js
 function CloseDialog() {
@@ -131,25 +130,24 @@ function CloseDialog() {
   );
   return (
     <AlertDialog buttons={buttons}>
-      Are you sure you want to leave this page?
+      Oletko varma, että haluat poistua tältä sivulta?
     </AlertDialog>
   );
 }
 ```
 
 ---
+### Tekstin ryhmittäminen elementteihin {/*grouping-elements-with-text*/}
 
-### Grouping elements with text {/*grouping-elements-with-text*/}
-
-You can use `Fragment` to group text together with components:
+Voit käyttää `Fragment`:ia ryhmitelläksesi tekstin yhteen komponenttien kanssa:
 
 ```js
 function DateRangePicker({ start, end }) {
   return (
     <>
-      From
+      Aloituspäivä:
       <DatePicker date={start} />
-      to
+      Lopetuspäivä:
       <DatePicker date={end} />
     </>
   );
@@ -158,9 +156,9 @@ function DateRangePicker({ start, end }) {
 
 ---
 
-### Rendering a list of Fragments {/*rendering-a-list-of-fragments*/}
+### Fragment-listan renderöiminen {/*rendering-a-list-of-fragments*/}
 
-Here's a situation where you need to write `Fragment` explicitly instead of using the `<></>` syntax. When you [render multiple elements in a loop](/learn/rendering-lists), you need to assign a `key` to each element. If the elements within the loop are Fragments, you need to use the normal JSX element syntax in order to provide the `key` attribute:
+Tässä on tilanne, jossa sinun täytyy kirjoittaa `Fragment` eksplisiittisesti sen sijaan, että käyttäisit `<></>` syntaksia. Kun [renderöit useita elementtejä silmukassa](/learn/rendering-lists), sinun täytyy määrittää `key` jokaiselle elementille. Jos elementit silmukan sisällä ovat Fragmentteja, sinun täytyy käyttää normaalia JSX-elementti -syntaksia, jotta voit välittää `key` attribuutin:
 
 ```js {3,6}
 function Blog() {
@@ -173,7 +171,7 @@ function Blog() {
 }
 ```
 
-You can inspect the DOM to verify that there are no wrapper elements around the Fragment children:
+Voit tarkastella DOM:ia varmistaaksesi, että Fragmentin lapsilla ei ole wrapper-elementtejä:
 
 <Sandpack>
 
@@ -181,8 +179,8 @@ You can inspect the DOM to verify that there are no wrapper elements around the 
 import { Fragment } from 'react';
 
 const posts = [
-  { id: 1, title: 'An update', body: "It's been a while since I posted..." },
-  { id: 2, title: 'My new blog', body: 'I am starting a new blog!' }
+  { id: 1, title: 'Päivitys', body: "Siitä on hetki kun viimeksi julkaisin..." },
+  { id: 2, title: 'Uusi blogini', body: 'Aloitan uuden blogin!' }
 ];
 
 export default function Blog() {
