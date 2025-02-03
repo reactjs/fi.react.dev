@@ -20,9 +20,15 @@ Sanotaan, että sinulla on olemassa oleva verkkosovellus osoitteessa `example.co
 
 Tässä miten suosittelemme sen asentamista:
 
+<<<<<<< HEAD
 1. **Rakenna React-osuus sovelluksestasi** käyttäen yhtä [React-pohjaista ohjelmistokehystä](/learn/start-a-new-react-project).
 2. **Määrittele `/some-app` *aloituspoluksi*** ohjelmistokehyksesi konfiguroinnissa (tässä miten: [Next.js](https://nextjs.org/docs/api-reference/next.config.js/basepath), [Gatsby](https://www.gatsbyjs.com/docs/how-to/previews-deploys-hosting/path-prefix/)).
 3. **Määrittele verkkopalvelimesi tai välityspalvelimesi** siten, jotta kaikki pyynnöt `/some-app/` reittiin käsitellään React sovelluksessasi.
+=======
+1. **Build the React part of your app** using one of the [React-based frameworks](/learn/start-a-new-react-project).
+2. **Specify `/some-app` as the *base path*** in your framework's configuration (here's how: [Next.js](https://nextjs.org/docs/app/api-reference/config/next-config-js/basePath), [Gatsby](https://www.gatsbyjs.com/docs/how-to/previews-deploys-hosting/path-prefix/)).
+3. **Configure your server or a proxy** so that all requests under `/some-app/` are handled by your React app.
+>>>>>>> 6fc98fffdaad3b84e6093d1eb8def8f2cedeee16
 
 Tämä varmistaa, että React -osa sovelluksestasi voi [hyötyä parhaista käytännöistä](/learn/start-a-new-react-project#can-i-use-react-without-a-framework), jotka on sisällytetty näihin kehyksiin.
 
@@ -45,7 +51,13 @@ Modulaarisella JavaScript ympäristöllä voit kirjoittaa React komponenttisi yk
 
 * **Jos sovelluksesi on jo jaettu tiedostoihin, jotka käyttävät `import` lausetta,** kokeile käyttää asenusta, joka sinulla jo on. Tarkista aiheuttaako `<div />`:n kirjoittaminen JS koodissasi syntaksivirheen. Jos se aiheuttaa syntaksivirheen, saatat tarvita [JavaScript koodin muuntamista Babelilla](https://babeljs.io/setup), ja [Babel React preset](https://babeljs.io/docs/babel-preset-react):n käyttöön ottamista käyttääksesi JSX:ää.
 
+<<<<<<< HEAD
 * **Jos sovelluksellasi ei ole olemassa olevaa ympäristöä JavaScript-moduulien kääntämistä varten,** luo se [Vite](https://vitejs.dev/):n avulla. Vite-yhteisö ylläpitää [monia integraatioita backend-kehysratkaisujen kanssa](https://github.com/vitejs/awesome-vite#integrations-with-backends), mukaan lukien Rails, Django ja Laravel. Jos backend-kehysratkaisua ei ole listattu, [seuraa tätä opasta](https://vitejs.dev/guide/backend-integration.html) integroidaksesi Vite-rakentamisen manuaalisesti backendiisi.
+=======
+* **If your app doesn't have an existing setup for compiling JavaScript modules,** set it up with [Vite](https://vite.dev/). The Vite community maintains [many integrations with backend frameworks](https://github.com/vitejs/awesome-vite#integrations-with-backends), including Rails, Django, and Laravel. If your backend framework is not listed, [follow this guide](https://vite.dev/guide/backend-integration.html) to manually integrate Vite builds with your backend.
+
+To check whether your setup works, run this command in your project folder:
+>>>>>>> 6fc98fffdaad3b84e6093d1eb8def8f2cedeee16
 
 Tarkistaaksesi, toimiiko asennus, suorita tämä komento projektisi kansiossa:
 <TerminalBlock>
@@ -57,17 +69,22 @@ Lisää sitten nämä koodirivit pää-JavaScript-tiedostosi alkuun (se voi olla
 
 <Sandpack>
 
-```html index.html hidden
+```html public/index.html hidden
 <!DOCTYPE html>
 <html>
   <head><title>My app</title></head>
   <body>
+<<<<<<< HEAD
     <!-- Olemassa oleva sivun sisältö (tässä esimerkissä, se korvataan) -->
+=======
+    <!-- Your existing page content (in this example, it gets replaced) -->
+    <div id="root"></div>
+>>>>>>> 6fc98fffdaad3b84e6093d1eb8def8f2cedeee16
   </body>
 </html>
 ```
 
-```js index.js active
+```js src/index.js active
 import { createRoot } from 'react-dom/client';
 
 // Tyhjää olemassa oleva HTML sisältö
@@ -84,7 +101,11 @@ Jos koko sivusi sisältö korvattiin "Hello, world!" -tekstillä, kaikki toimi! 
 
 <Note>
 
+<<<<<<< HEAD
 Modulaarisen JavaScript ympäristön integrointi olemassa olevaan projektiin ensimmäistä kertaa saattaa tuntua pelottavalta, mutta se kannattaa! Jos jäät jumiin, kokeile [yhteisöresurssejamme](/community) tai [Vite Chat](https://chat.vitejs.dev/).
+=======
+Integrating a modular JavaScript environment into an existing project for the first time can feel intimidating, but it's worth it! If you get stuck, try our [community resources](/community) or the [Vite Chat](https://chat.vite.dev/).
+>>>>>>> 6fc98fffdaad3b84e6093d1eb8def8f2cedeee16
 
 </Note>
 
@@ -119,7 +140,7 @@ Tämän avulla voit etsiä kyseisen HTML elementin käyttäen [`document.getElem
 
 <Sandpack>
 
-```html index.html
+```html public/index.html
 <!DOCTYPE html>
 <html>
   <head><title>Minun appi</title></head>
@@ -131,7 +152,7 @@ Tämän avulla voit etsiä kyseisen HTML elementin käyttäen [`document.getElem
 </html>
 ```
 
-```js index.js active
+```js src/index.js active
 import { createRoot } from 'react-dom/client';
 
 function NavigationBar() {
