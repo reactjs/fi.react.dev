@@ -10,26 +10,15 @@ React on JavaScript kirjasto käyttöliittymien (UI) renderöintiin. Käyttölii
 
 <YouWillLearn isChapter={true}>
 
-<<<<<<< HEAD
-- [Miten kirjoitat ensimmäisen komponenttisi](/learn/your-first-component)
-- [Miten ja milloin luot monikomponenttisia tiedostoja](/learn/importing-and-exporting-components)
-- [Miten lisäät merkintäkoodia JavaScriptiin JSX hyödyntäen](/learn/writing-markup-with-jsx)
-- [Miten käyttää aaltosulkeita JSX:n kanssa JavaScript toiminnallisuuksien hyödyntämiseksi komponenteissa](/learn/javascript-in-jsx-with-curly-braces)
-- [Miten mukauttaa komponentteja propeilla](/learn/passing-props-to-a-component)
-- [Miten renderöidä ehdollisesti komponentteja](/learn/conditional-rendering)
-- [Miten renderöidä useita komponentteja samanaikaisesti](/learn/rendering-lists)
-- [Miten välttää bugeja pitämällä komponentit puhtaina](/learn/keeping-components-pure)
-=======
-* [How to write your first React component](/learn/your-first-component)
-* [When and how to create multi-component files](/learn/importing-and-exporting-components)
-* [How to add markup to JavaScript with JSX](/learn/writing-markup-with-jsx)
-* [How to use curly braces with JSX to access JavaScript functionality from your components](/learn/javascript-in-jsx-with-curly-braces)
-* [How to configure components with props](/learn/passing-props-to-a-component)
-* [How to conditionally render components](/learn/conditional-rendering)
-* [How to render multiple components at a time](/learn/rendering-lists)
-* [How to avoid confusing bugs by keeping components pure](/learn/keeping-components-pure)
-* [Why understanding your UI as trees is useful](/learn/understanding-your-ui-as-a-tree)
->>>>>>> a0cacd7d3a89375e5689ccfba0461e293bfe9eeb
+* [Miten kirjoitat ensimmäisen komponenttisi](/learn/your-first-component)
+* [Miten ja milloin luot monikomponenttisia tiedostoja](/learn/importing-and-exporting-components)
+* [Miten lisäät merkintäkoodia JavaScriptiin JSX hyödyntäen](/learn/writing-markup-with-jsx)
+* [Miten käyttää aaltosulkeita JSX:n kanssa JavaScript toiminnallisuuksien hyödyntämiseksi komponenteissa](/learn/javascript-in-jsx-with-curly-braces)
+* [Miten mukauttaa komponentteja propeilla](/learn/passing-props-to-a-component)
+* [Miten renderöidä ehdollisesti komponentteja](/learn/conditional-rendering)
+* [Miten renderöidä useita komponentteja samanaikaisesti](/learn/rendering-lists)
+* [Miten välttää bugeja pitämällä komponentit puhtaina](/learn/keeping-components-pure)
+* [Miten UI:n ajatteleminen puuna on hyödyllistä](/learn/understanding-your-ui-as-a-tree)
 
 </YouWillLearn>
 
@@ -531,34 +520,30 @@ Lue **[Komponenttien pitäminen puhtaana](/learn/keeping-components-pure)** oppi
 
 </LearnMore>
 
-<<<<<<< HEAD
-## Mitä seuraavaksi? {/*whats-next*/}
-=======
-## Your UI as a tree {/*your-ui-as-a-tree*/}
+## UI puuna {/*your-ui-as-a-tree*/}
 
-React uses trees to model the relationships between components and modules. 
+React käyttää puita mallintaakseen relaatioita komponenttien ja moduulien välillä.
 
-A React render tree is a representation of the parent and child relationship between components. 
+React-renderöintipuu on esitys ylä- ja alatason suhteesta komponenttien välillä.
 
-<Diagram name="generic_render_tree" height={250} width={500} alt="A tree graph with five nodes, with each node representing a component. The root node is located at the top the tree graph and is labelled 'Root Component'. It has two arrows extending down to two nodes labelled 'Component A' and 'Component C'. Each of the arrows is labelled with 'renders'. 'Component A' has a single 'renders' arrow to a node labelled 'Component B'. 'Component C' has a single 'renders' arrow to a node labelled 'Component D'.">An example React render tree.</Diagram>
+<Diagram name="generic_render_tree" height={250} width={500} alt="Puukaavio, jossa on viisi noodia, joissa jokainen noodi esittää komponenttia. Päänoodi sijaitsee ylhäällä ja on otsikoitu 'Root Component'. Sillä on kaksi nuolta, jotka osoittavat kahteen noodiin 'Component A' ja 'Component B'. Kumpikin nuoli on otsikoitu 'renders'. 'Component A':lla on yksi 'renders' nuoli noodiin 'Component B'. 'Component C':lla on yksi 'renders' nuoli noodiin otsikoitu 'Component D'.">Esimerkki React-renderöintipuusta.</Diagram>
 
-Components near the top of the tree, near the root component, are considered top-level components. Components with no child components are leaf components. This categorization of components is useful for understanding data flow and rendering performance.
+Komponentit lähellä puun juurta, lähellä yläosaa, ajatellaan olevan ylätason komponentteja. Komponentteja, joilla ei ole alakomponentteja ovat lehti-komponentteja. Tämä kategorisointi komponenteista on hyvä ymmärtää datavirtauksen ja renderöintitehon kannalta.
 
-Modelling the relationship between JavaScript modules is another useful way to understand your app. We refer to it as a module dependency tree. 
+JavaScript-moduulien välisen suhteen mallintaminen on toinen hyödyllinen tapa ymmärtää sovellustasi. Viittaamme siihen moduuliriippuvuuspuuna.
 
-<Diagram name="generic_dependency_tree" height={250} width={500} alt="A tree graph with five nodes. Each node represents a JavaScript module. The top-most node is labelled 'RootModule.js'. It has three arrows extending to the nodes: 'ModuleA.js', 'ModuleB.js', and 'ModuleC.js'. Each arrow is labelled as 'imports'. 'ModuleC.js' node has a single 'imports' arrow that points to a node labelled 'ModuleD.js'.">An example module dependency tree.</Diagram>
+<Diagram name="generic_dependency_tree" height={250} width={500} alt="Puugraafi, jossa on viisi noodia. Jokainen noodi edustaa JavaScript-moduulia. Ylin noodi on merkitty nimellä 'RootModule.js'. Siitä ulottuu kolme nuolta noodeihin: 'ModuleA.js', 'ModuleB.js' ja 'ModuleC.js'. Jokainen nuoli on merkitty 'imports'. 'ModuleC.js' -noodilla on yksi 'imports' -nuoli, joka osoittaa noodiin, joka on merkitty nimellä 'ModuleD.js'.">Esimerkki moduuliriippuvuuspuu.</Diagram>
 
-A dependency tree is often used by build tools to bundle all the relevant JavaScript code for the client to download and render. A large bundle size regresses user experience for React apps. Understanding the module dependency tree is helpful to debug such issues. 
+Riippuvuuspuuta käytetään usein rakennustyökaluissa, jotta kaikki relevantti JavaScript-koodi voidaan pakata selaimen ladattavaksi ja renderöitavaksi. Suuri pakkauskoko heikentää käyttäjäkokemusta React-sovelluksissa. Moduuliriippuvuuspuun ymmärtäminen on hyödyllistä tällaisia ongelmia debugatessa.
 
 <LearnMore path="/learn/understanding-your-ui-as-a-tree">
 
-Read **[Your UI as a Tree](/learn/understanding-your-ui-as-a-tree)** to learn how to create a render and module dependency trees for a React app and how they're useful mental models for improving user experience and performance.
+Lue **[Your UI as a Tree](/learn/understanding-your-ui-as-a-tree)** oppiaksesi, miten luoda renderöinti- ja moduuliriippuvuuspuut React-sovellukselle sekä miten ne ovat hyödyllisiä ajatusmalleja käyttäjäkokemuksen ja suorituskyvyn parantamiseksi.
 
 </LearnMore>
 
 
-## What's next? {/*whats-next*/}
->>>>>>> a0cacd7d3a89375e5689ccfba0461e293bfe9eeb
+## Mitä seuraavaksi? {/*whats-next*/}
 
 Siirry seuraavaksi [Ensimmäinen komponenttisi](/learn/your-first-component) lukeaksesi tämän luvun sivu kerrallaan!
 

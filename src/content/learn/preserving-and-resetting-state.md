@@ -10,7 +10,6 @@ Tila on eristetty komponenttien välillä. React pitää kirjaa siitä, mikä ti
 
 <YouWillLearn>
 
-<<<<<<< HEAD
 * Miten React "näkee" komponentin rakenteen
 * Milloin React päättää säilyttää tai nollata tilan
 * Miten pakottaa React nollaamaan komponentin tila
@@ -18,42 +17,13 @@ Tila on eristetty komponenttien välillä. React pitää kirjaa siitä, mikä ti
 
 </YouWillLearn>
 
-## Käyttöliittymäpuu {/*the-ui-tree*/}
-
-Selaimet käyttävät monia puumalleja käyttöliittymän mallintamiseen. [DOM](https://developer.mozilla.org/docs/Web/API/Document_Object_Model/Introduction) edustaa HTML-elementtejä, [CSSOM](https://developer.mozilla.org/docs/Web/API/CSS_Object_Model) tekee saman CSS:lle. On olemassa jopa [saavutettavuuspuu](https://developer.mozilla.org/docs/Glossary/Accessibility_tree)!
-
-React käyttää myös puurakenteita käyttöliittymäsi hallintaan ja mallintamiseen. React rakentaa **UI puita** JSX koodistasi. Sitten React DOM päivittää selaimen DOM elementit vastaamaan tuota UI puuta. (React Native kääntää nämä puut näkymiksi, jotka voidaan näyttää puhelinalustoilla.)
-
-<DiagramGroup>
-
-<Diagram name="preserving_state_dom_tree" height={193} width={864} alt="Kaavio, jossa on kolme vaakasuoraan sijoitettua osaa. Ensimmäisessä osassa on kolme pystysuoraan pinottua suorakulmiota, joissa on merkinnät 'Komponentti A', 'Komponentti B' ja 'Komponentti C'. Seuraavaan osioon siirtyy nuoli, jonka yläpuolella on React-logo ja jossa on merkintä 'React'. Keskimmäisessä osassa on komponenttien puu, jonka juuressa on merkintä 'A' ja kahdessa alakomponentissa merkinnät 'B' ja 'C'. Seuraavaan osioon siirrytään jälleen nuolella, jonka yläosassa on React-logo ja jossa on merkintä 'React'. Kolmas ja viimeinen osio on selaimen rautalankamalli, joka sisältää kahdeksan solmun puun, josta on korostettu vain osajoukko (joka osoittaa keskimmäisen osion alipuun).">
-
-Komponenteista React luo käyttöliittymäpuun, jota React DOM käyttää renderöidäkseen DOM:n 
-
-</Diagram>
-
-</DiagramGroup>
-
 ## Tila on sidottu sijaintiin puussa {/*state-is-tied-to-a-position-in-the-tree*/}
+
+React rakentaa [renderöintipuun](learn/understanding-your-ui-as-a-tree#the-render-tree) UI:n komponenttirakenteesta.
 
 Kun annat komponentille tilan, saatat ajatella, että tila "asuu" komponentin sisällä. Mutta tila oikeasti pidetään Reactin sisällä. React yhdistää jokaisen hallussa olevan tilatiedon oikeaan komponenttiin sen mukaan, missä kohtaa käyttöliittymäpuuta kyseinen komponentti sijaitsee.
 
 Tässä esimerkissä on vain yksi `<Counter />` JSX tagi, mutta se on renderöity kahdessa eri kohdassa:
-=======
-* When React chooses to preserve or reset the state
-* How to force React to reset component's state
-* How keys and types affect whether the state is preserved
-
-</YouWillLearn>
-
-## State is tied to a position in the render tree {/*state-is-tied-to-a-position-in-the-tree*/}
-
-React builds [render trees](learn/understanding-your-ui-as-a-tree#the-render-tree) for the component structure in your UI.
-
-When you give a component state, you might think the state "lives" inside the component. But the state is actually held inside React. React associates each piece of state it's holding with the correct component by where that component sits in the render tree.
-
-Here, there is only one `<Counter />` JSX tag, but it's rendered at two different positions:
->>>>>>> a0cacd7d3a89375e5689ccfba0461e293bfe9eeb
 
 <Sandpack>
 
@@ -204,12 +174,7 @@ Tilan päivittäminen
 
 </DiagramGroup>
 
-<<<<<<< HEAD
-React pitää tilan muistissa niin kauan kuin renderlit samaa komponenttia samassa sijainnissa. Tämän nähdäksesi, korota molempia laskureita ja sitten poista toinen komponentti poistamalla valinta "Render the second counter" valintaruudusta, ja sitten lisää se takaisin valitsemalla se uudelleen:
-=======
-
-React will keep the state around for as long as you render the same component at the same position in the tree. To see this, increment both counters, then remove the second component by unchecking "Render the second counter" checkbox, and then add it back by ticking it again:
->>>>>>> a0cacd7d3a89375e5689ccfba0461e293bfe9eeb
+React pitää tilan muistissa niin kauan kuin renderöit samaa komponenttia samassa sijainnissa. Tämän nähdäksesi, korota molempia laskureita ja sitten poista toinen komponentti poistamalla valinta "Render the second counter" valintaruudusta, ja sitten lisää se takaisin valitsemalla se uudelleen:
 
 <Sandpack>
 
