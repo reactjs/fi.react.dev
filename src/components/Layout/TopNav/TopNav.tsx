@@ -2,9 +2,7 @@
  * Copyright (c) Facebook, Inc. and its affiliates.
  */
 
-<<<<<<< HEAD
 import {disableBodyScroll, enableBodyScroll} from 'body-scroll-lock';
-=======
 import {
   useState,
   useRef,
@@ -14,20 +12,10 @@ import {
   Suspense,
 } from 'react';
 import Image from 'next/image';
-import * as React from 'react';
->>>>>>> 6fc98fffdaad3b84e6093d1eb8def8f2cedeee16
 import cn from 'classnames';
 import NextLink from 'next/link';
 import {useRouter} from 'next/router';
 import * as React from 'react';
-import {
-  Suspense,
-  startTransition,
-  useCallback,
-  useEffect,
-  useRef,
-  useState,
-} from 'react';
 
 import {IconClose} from 'components/Icon/IconClose';
 import {IconHamburger} from 'components/Icon/IconHamburger';
@@ -265,13 +253,8 @@ export default function TopNav({
             <div className="flex flex-row 3xl:flex-1 items-centers">
               <button
                 type="button"
-<<<<<<< HEAD
                 aria-label="Valikko"
-                onClick={() => setIsOpen(!isOpen)}
-=======
-                aria-label="Menu"
                 onClick={() => setIsMenuOpen(!isMenuOpen)}
->>>>>>> 6fc98fffdaad3b84e6093d1eb8def8f2cedeee16
                 className={cn(
                   'active:scale-95 transition-transform flex lg:hidden w-12 h-12 rounded-full items-center justify-center hover:bg-primary/5 hover:dark:bg-primary-dark/5 outline-link',
                   {
@@ -324,15 +307,9 @@ export default function TopNav({
                   'flex 3xl:w-[56rem] 3xl:mx-0 relative ps-4 pe-1 py-1 h-10 bg-gray-30/20 dark:bg-gray-40/20 outline-none focus:outline-link betterhover:hover:bg-opacity-80 pointer items-center text-start w-full text-gray-30 rounded-full align-middle text-base'
                 )}
                 onClick={onOpenSearch}>
-<<<<<<< HEAD
-                <IconSearch className="me-3 align-middle text-gray-30 shrink-0 group-betterhover:hover:text-gray-70" />
-                Hae
-                <span className="ms-auto hidden sm:flex item-center me-1">
-=======
                 <IconSearch className="align-middle me-3 text-gray-30 shrink-0 group-betterhover:hover:text-gray-70" />
                 Search
                 <span className="hidden ms-auto sm:flex item-center me-1">
->>>>>>> 6fc98fffdaad3b84e6093d1eb8def8f2cedeee16
                   <Kbd data-platform="mac">⌘</Kbd>
                   <Kbd data-platform="win" wide>
                     Ctrl
