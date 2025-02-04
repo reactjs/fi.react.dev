@@ -2075,17 +2075,13 @@ export default function Game() {
 }
 ```
 
-<<<<<<< HEAD
-Voit nähdä miltä koodisi tulisi näyttää alla. Huomaa, että sinun tulisi nähdä virhe kehittäjätyökalujen konsolissa, joka sanoo: ``Warning: Each child in an array or iterator should have a unique "key" prop. Check the render method of `Game`.`` Korjaat tämän virheen seuraavassa osiossa.
-=======
-You can see what your code should look like below. Note that you should see an error in the developer tools console that says: 
+Voit nähdä miltä koodisi tulisi näyttää alla. Huomaa, että sinun tulisi nähdä virhe kehittäjätyökalujen konsolissa, jossa lukee: 
 
 <ConsoleBlock level="warning">
 Warning: Each child in an array or iterator should have a unique "key" prop. Check the render method of &#96;Game&#96;.
 </ConsoleBlock>
   
-You'll fix this error in the next section.
->>>>>>> e85b71de88a20cda9588f51f01d4a70e5cbe1cb4
+Korjaat tämän virheen seuraavassa osiossa.
 
 <Sandpack>
 

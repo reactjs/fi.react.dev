@@ -1086,11 +1086,7 @@ Tässä `<Recipe {...recipe} key={recipe.id} />` on lyhytsyntaksi joka "välitt�
 
 #### Listat erottimella {/*list-with-a-separator*/}
 
-<<<<<<< HEAD
-Tämä esimerkki renderöi kuuluisan Katsushika Hokusain haikun, jokaisen rivin ollessa kääritty `<p>` tagin sisään. Tehtäväsi on sijoittaa `<hr />` erotin jokaisen kappaleen jälkeen. Lopputuloksen rakennelman pitäisi näyttää tältä:
-=======
-This example renders a famous haiku by Tachibana Hokushi, with each line wrapped in a `<p>` tag. Your job is to insert an `<hr />` separator between each paragraph. Your resulting structure should look like this:
->>>>>>> e85b71de88a20cda9588f51f01d4a70e5cbe1cb4
+Tämä esimerkki renderöi kuuluisan Tachibana Hokushin haikun, jokaisen rivin ollessa kääritty `<p>` tagin sisään. Tehtäväsi on sijoittaa `<hr />` erotin jokaisen kappaleen jälkeen. Lopputuloksen rakennelman pitäisi näyttää tältä:
 
 ```js
 <article>
