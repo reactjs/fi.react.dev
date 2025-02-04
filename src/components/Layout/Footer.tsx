@@ -5,11 +5,7 @@
 import cn from 'classnames';
 import {ExternalLink} from 'components/ExternalLink';
 import {IconFacebookCircle} from 'components/Icon/IconFacebookCircle';
-<<<<<<< HEAD
-=======
-import {IconTwitter} from 'components/Icon/IconTwitter';
 import {IconBsky} from 'components/Icon/IconBsky';
->>>>>>> 6fc98fffdaad3b84e6093d1eb8def8f2cedeee16
 import {IconGitHub} from 'components/Icon/IconGitHub';
 import {IconTwitter} from 'components/Icon/IconTwitter';
 import NextLink from 'next/link';
@@ -376,17 +372,13 @@ export function Footer() {
               <IconTwitter />
             </ExternalLink>
             <ExternalLink
-<<<<<<< HEAD
-              aria-label="React GitHubissa"
-=======
-              aria-label="React on Bluesky"
+              aria-label="React Blueskyssa"
               href="https://bsky.app/profile/react.dev"
               className={socialLinkClasses}>
               <IconBsky />
             </ExternalLink>
             <ExternalLink
-              aria-label="React on Github"
->>>>>>> 6fc98fffdaad3b84e6093d1eb8def8f2cedeee16
+              aria-label="React GitHubissa"
               href="https://github.com/facebook/react"
               className={socialLinkClasses}>
               <IconGitHub />
