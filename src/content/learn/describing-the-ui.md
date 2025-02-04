@@ -10,14 +10,15 @@ React on JavaScript kirjasto käyttöliittymien (UI) renderöintiin. Käyttölii
 
 <YouWillLearn isChapter={true}>
 
-- [Miten kirjoitat ensimmäisen komponenttisi](/learn/your-first-component)
-- [Miten ja milloin luot monikomponenttisia tiedostoja](/learn/importing-and-exporting-components)
-- [Miten lisäät merkintäkoodia JavaScriptiin JSX hyödyntäen](/learn/writing-markup-with-jsx)
-- [Miten käyttää aaltosulkeita JSX:n kanssa JavaScript toiminnallisuuksien hyödyntämiseksi komponenteissa](/learn/javascript-in-jsx-with-curly-braces)
-- [Miten mukauttaa komponentteja propeilla](/learn/passing-props-to-a-component)
-- [Miten renderöidä ehdollisesti komponentteja](/learn/conditional-rendering)
-- [Miten renderöidä useita komponentteja samanaikaisesti](/learn/rendering-lists)
-- [Miten välttää bugeja pitämällä komponentit puhtaina](/learn/keeping-components-pure)
+* [Miten kirjoitat ensimmäisen komponenttisi](/learn/your-first-component)
+* [Miten ja milloin luot monikomponenttisia tiedostoja](/learn/importing-and-exporting-components)
+* [Miten lisäät merkintäkoodia JavaScriptiin JSX hyödyntäen](/learn/writing-markup-with-jsx)
+* [Miten käyttää aaltosulkeita JSX:n kanssa JavaScript toiminnallisuuksien hyödyntämiseksi komponenteissa](/learn/javascript-in-jsx-with-curly-braces)
+* [Miten mukauttaa komponentteja propeilla](/learn/passing-props-to-a-component)
+* [Miten renderöidä ehdollisesti komponentteja](/learn/conditional-rendering)
+* [Miten renderöidä useita komponentteja samanaikaisesti](/learn/rendering-lists)
+* [Miten välttää bugeja pitämällä komponentit puhtaina](/learn/keeping-components-pure)
+* [Miten UI:n ajatteleminen puuna on hyödyllistä](/learn/understanding-your-ui-as-a-tree)
 
 </YouWillLearn>
 
@@ -518,6 +519,29 @@ export default function TeaSet() {
 Lue **[Komponenttien pitäminen puhtaana](/learn/keeping-components-pure)** oppiaksesi miten kirjoitetaan puhtaita, ennalta-arvattavia komponentteja.
 
 </LearnMore>
+
+## UI puuna {/*your-ui-as-a-tree*/}
+
+React käyttää puita mallintaakseen relaatioita komponenttien ja moduulien välillä.
+
+React-renderöintipuu on esitys ylä- ja alatason suhteesta komponenttien välillä.
+
+<Diagram name="generic_render_tree" height={250} width={500} alt="Puukaavio, jossa on viisi noodia, joissa jokainen noodi esittää komponenttia. Päänoodi sijaitsee ylhäällä ja on otsikoitu 'Root Component'. Sillä on kaksi nuolta, jotka osoittavat kahteen noodiin 'Component A' ja 'Component B'. Kumpikin nuoli on otsikoitu 'renders'. 'Component A':lla on yksi 'renders' nuoli noodiin 'Component B'. 'Component C':lla on yksi 'renders' nuoli noodiin otsikoitu 'Component D'.">Esimerkki React-renderöintipuusta.</Diagram>
+
+Komponentit lähellä puun juurta, lähellä yläosaa, ajatellaan olevan ylätason komponentteja. Komponentteja, joilla ei ole alakomponentteja ovat lehti-komponentteja. Tämä kategorisointi komponenteista on hyvä ymmärtää datavirtauksen ja renderöintitehon kannalta.
+
+JavaScript-moduulien välisen suhteen mallintaminen on toinen hyödyllinen tapa ymmärtää sovellustasi. Viittaamme siihen moduuliriippuvuuspuuna.
+
+<Diagram name="generic_dependency_tree" height={250} width={500} alt="Puugraafi, jossa on viisi noodia. Jokainen noodi edustaa JavaScript-moduulia. Ylin noodi on merkitty nimellä 'RootModule.js'. Siitä ulottuu kolme nuolta noodeihin: 'ModuleA.js', 'ModuleB.js' ja 'ModuleC.js'. Jokainen nuoli on merkitty 'imports'. 'ModuleC.js' -noodilla on yksi 'imports' -nuoli, joka osoittaa noodiin, joka on merkitty nimellä 'ModuleD.js'.">Esimerkki moduuliriippuvuuspuu.</Diagram>
+
+Riippuvuuspuuta käytetään usein rakennustyökaluissa, jotta kaikki relevantti JavaScript-koodi voidaan pakata selaimen ladattavaksi ja renderöitavaksi. Suuri pakkauskoko heikentää käyttäjäkokemusta React-sovelluksissa. Moduuliriippuvuuspuun ymmärtäminen on hyödyllistä tällaisia ongelmia debugatessa.
+
+<LearnMore path="/learn/understanding-your-ui-as-a-tree">
+
+Lue **[Your UI as a Tree](/learn/understanding-your-ui-as-a-tree)** oppiaksesi, miten luoda renderöinti- ja moduuliriippuvuuspuut React-sovellukselle sekä miten ne ovat hyödyllisiä ajatusmalleja käyttäjäkokemuksen ja suorituskyvyn parantamiseksi.
+
+</LearnMore>
+
 
 ## Mitä seuraavaksi? {/*whats-next*/}
 

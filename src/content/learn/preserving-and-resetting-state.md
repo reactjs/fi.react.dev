@@ -17,23 +17,9 @@ Tila on eristetty komponenttien välillä. React pitää kirjaa siitä, mikä ti
 
 </YouWillLearn>
 
-## Käyttöliittymäpuu {/*the-ui-tree*/}
-
-Selaimet käyttävät monia puumalleja käyttöliittymän mallintamiseen. [DOM](https://developer.mozilla.org/docs/Web/API/Document_Object_Model/Introduction) edustaa HTML-elementtejä, [CSSOM](https://developer.mozilla.org/docs/Web/API/CSS_Object_Model) tekee saman CSS:lle. On olemassa jopa [saavutettavuuspuu](https://developer.mozilla.org/docs/Glossary/Accessibility_tree)!
-
-React käyttää myös puurakenteita käyttöliittymäsi hallintaan ja mallintamiseen. React rakentaa **UI puita** JSX koodistasi. Sitten React DOM päivittää selaimen DOM elementit vastaamaan tuota UI puuta. (React Native kääntää nämä puut näkymiksi, jotka voidaan näyttää puhelinalustoilla.)
-
-<DiagramGroup>
-
-<Diagram name="preserving_state_dom_tree" height={193} width={864} alt="Kaavio, jossa on kolme vaakasuoraan sijoitettua osaa. Ensimmäisessä osassa on kolme pystysuoraan pinottua suorakulmiota, joissa on merkinnät 'Komponentti A', 'Komponentti B' ja 'Komponentti C'. Seuraavaan osioon siirtyy nuoli, jonka yläpuolella on React-logo ja jossa on merkintä 'React'. Keskimmäisessä osassa on komponenttien puu, jonka juuressa on merkintä 'A' ja kahdessa alakomponentissa merkinnät 'B' ja 'C'. Seuraavaan osioon siirrytään jälleen nuolella, jonka yläosassa on React-logo ja jossa on merkintä 'React'. Kolmas ja viimeinen osio on selaimen rautalankamalli, joka sisältää kahdeksan solmun puun, josta on korostettu vain osajoukko (joka osoittaa keskimmäisen osion alipuun).">
-
-Komponenteista React luo käyttöliittymäpuun, jota React DOM käyttää renderöidäkseen DOM:n 
-
-</Diagram>
-
-</DiagramGroup>
-
 ## Tila on sidottu sijaintiin puussa {/*state-is-tied-to-a-position-in-the-tree*/}
+
+React rakentaa [renderöintipuun](learn/understanding-your-ui-as-a-tree#the-render-tree) UI:n komponenttirakenteesta.
 
 Kun annat komponentille tilan, saatat ajatella, että tila "asuu" komponentin sisällä. Mutta tila oikeasti pidetään Reactin sisällä. React yhdistää jokaisen hallussa olevan tilatiedon oikeaan komponenttiin sen mukaan, missä kohtaa käyttöliittymäpuuta kyseinen komponentti sijaitsee.
 
@@ -188,7 +174,7 @@ Tilan päivittäminen
 
 </DiagramGroup>
 
-React pitää tilan muistissa niin kauan kuin renderlit samaa komponenttia samassa sijainnissa. Tämän nähdäksesi, korota molempia laskureita ja sitten poista toinen komponentti poistamalla valinta "Render the second counter" valintaruudusta, ja sitten lisää se takaisin valitsemalla se uudelleen:
+React pitää tilan muistissa niin kauan kuin renderöit samaa komponenttia samassa sijainnissa. Tämän nähdäksesi, korota molempia laskureita ja sitten poista toinen komponentti poistamalla valinta "Render the second counter" valintaruudusta, ja sitten lisää se takaisin valitsemalla se uudelleen:
 
 <Sandpack>
 
