@@ -284,7 +284,7 @@ Sinun ei myöskään tarvitse huolehtia [mutaatioiden välttämistä](/learn/upd
 
 ## Ref ja DOM {/*refs-and-the-dom*/}
 
-Voit osoittaa refin mihin tahansa arvoon. Kuitenkin yleisin käyttökohde refille on DOM elementin käsittely. Esimerkiksi, tämä on kätevää jos haluat focusoida syöttölaatikon ohjelmakoodissa. Kun annat refin `ref`-attribuuttiin JSX:ssä, kuten `<div ref={myRef}>`, React asettaa vastaavan DOM elementin `myRef.current`:iin. Kun elementti poistetaan DOM:sta, React päivittää `myRef.current` arvoksi `null`. Voit lukea lisää tästä [Manipulating the DOM with Refs.](/learn/manipulating-the-dom-with-refs)
+Voit osoittaa refin mihin tahansa arvoon. Kuitenkin yleisin käyttökohde refille on DOM elementin käsittely. Esimerkiksi, tämä on kätevää jos haluat kohdentaa syöttölaatikon ohjelmakoodissa. Kun annat refin `ref`-attribuuttiin JSX:ssä, kuten `<div ref={myRef}>`, React asettaa vastaavan DOM elementin `myRef.current`:iin. Kun elementti poistetaan DOM:sta, React päivittää `myRef.current` arvoksi `null`. Voit lukea lisää tästä [Manipulating the DOM with Refs.](/learn/manipulating-the-dom-with-refs)
 
 <Recap>
 

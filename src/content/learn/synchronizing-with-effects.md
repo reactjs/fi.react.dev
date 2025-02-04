@@ -773,7 +773,7 @@ Ostaminen ei aiheutunut renderöinnin takia. Se aiheutuu tietyn vuorovaikutuksen
   }
 ```
 
-**Tämä osoittaa, että jos remounttaus rikkoo sovelluksen logiikkaa, tämä usein paljastaa olemassa olevia virheitä.** Käyttäjän näkökulmasta, sivulla vierailu ei pitäisi olla sen erilaisempaa kuin vierailu, linkin napsautus ja sitten Takaisin -painikkeen napsauttaminen. React varmistaa, että komponenttisi eivät riko tätä periaatetta kehitysvaiheessa remounttaamalla niitä kerran.
+**Tämä havainnollistaa, että jos remount rikkoo sovelluksen logiikkaa, se usein johtuu olemassa olevista virheista.** Käyttäjän näkökulmasta, sivulla vierailu ei pitäisi olla sen erilaisempaa kuin vierailu, linkin napsautus ja sitten Takaisin -painikkeen napsauttaminen. React varmistaa, että komponenttisi eivät riko tätä periaatetta kehitysvaiheessa remounttaamalla niitä kerran.
 
 ## Laitetaan kaikki yhteen {/*putting-it-all-together*/}
 

@@ -2080,7 +2080,7 @@ Voit nähdä miltä koodisi tulisi näyttää alla. Huomaa, että sinun tulisi n
 <ConsoleBlock level="warning">
 Warning: Each child in an array or iterator should have a unique "key" prop. Check the render method of &#96;Game&#96;.
 </ConsoleBlock>
-  
+
 Korjaat tämän virheen seuraavassa osiossa.
 
 <Sandpack>
