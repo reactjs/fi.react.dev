@@ -3,12 +3,8 @@
  */
 
 import {useRouter} from 'next/router';
-<<<<<<< HEAD
 import {useState} from 'react';
-import {ga} from '../../utils/analytics';
-=======
 import cn from 'classnames';
->>>>>>> 6fc98fffdaad3b84e6093d1eb8def8f2cedeee16
 
 export function Feedback({onSubmit = () => {}}: {onSubmit?: () => void}) {
   const {asPath} = useRouter();
@@ -65,19 +61,13 @@ function sendGAEvent(isPositive: boolean) {
 function SendFeedback({onSubmit}: {onSubmit: () => void}) {
   const [isSubmitted, setIsSubmitted] = useState(false);
   return (
-<<<<<<< HEAD
-    <div className="max-w-xs w-80 lg:w-auto py-3 shadow-lg rounded-lg m-4 bg-wash dark:bg-gray-95 px-4 flex">
-      <p className="w-full font-bold text-primary dark:text-primary-dark text-lg me-4">
-        {isSubmitted ? 'Kiitos palautteestasi!' : 'Onko tämä sivu hyödyllinen?'}
-=======
     <div
       className={cn(
         'max-w-custom-xs w-80 lg:w-auto py-3 shadow-lg rounded-lg m-4 bg-wash dark:bg-gray-95 px-4 flex',
         {exit: isSubmitted}
       )}>
       <p className="w-full text-lg font-bold text-primary dark:text-primary-dark me-4">
-        {isSubmitted ? 'Thank you for your feedback!' : 'Is this page useful?'}
->>>>>>> 6fc98fffdaad3b84e6093d1eb8def8f2cedeee16
+        {isSubmitted ? 'Kiitos palautteestasi!' : 'Onko tämä sivu hyödyllinen?'}
       </p>
       {!isSubmitted && (
         <button
