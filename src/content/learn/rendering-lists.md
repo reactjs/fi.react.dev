@@ -1086,7 +1086,7 @@ Tässä `<Recipe {...recipe} key={recipe.id} />` on lyhytsyntaksi joka "välitt�
 
 #### Listat erottimella {/*list-with-a-separator*/}
 
-Tämä esimerkki renderöi kuuluisan Tachibana Hokushi haikun, jokaisen rivin ollessa kääritty `<p>` tagin sisään. Tehtäväsi on sijoittaa `<hr />` erotin jokaisen kappaleen jälkeen. Lopputuloksen rakennelman pitäisi näyttää tältä:
+Tämä esimerkki renderöi kuuluisan Tachibana Hokushin haikun, jokaisen rivin ollessa kääritty `<p>` tagin sisään. Tehtäväsi on sijoittaa `<hr />` erotin jokaisen kappaleen jälkeen. Lopputuloksen rakennelman pitäisi näyttää tältä:
 
 ```js
 <article>

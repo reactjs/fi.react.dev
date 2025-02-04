@@ -26,7 +26,7 @@ npx create-next-app@latest
 
 Jos olet uusi Next.js:ään, tutustu [Next.js tutoriaaliin.](https://nextjs.org/learn/foundations/about-nextjs)
 
-Next.js:ää ylläpitää [Vercel](https://vercel.com/). Voit [julkaista Next.js-sovelluksen](https://nextjs.org/docs/app/building-your-application/deploying) mihin tahansa Node.js- tai serverless-ympäristöön, tai omalla palvelimellasi. Next.js tukee myös [staattista exporttia](https://nextjs.org/docs/pages/building-your-application/deploying/static-exports), joka ei vaadi palvelinta
+Next.js:ää ylläpitää [Vercel](https://vercel.com/). Voit [julkaista Next.js-sovelluksen](https://nextjs.org/docs/app/building-your-application/deploying) mihin tahansa Node.js- tai serverless-ympäristöön, tai omalla palvelimellasi. Next.js tukee myös [staattista exporttia](https://nextjs.org/docs/pages/building-your-application/deploying/static-exports), joka ei edellytä palvelinta.
 
 ### Remix {/*remix*/}
 
