@@ -3,12 +3,9 @@
  */
 
 import cn from 'classnames';
-<<<<<<< HEAD
 import * as React from 'react';
 import {Children, useContext, useMemo} from 'react';
-=======
 import type {HTMLAttributes} from 'react';
->>>>>>> 6fc98fffdaad3b84e6093d1eb8def8f2cedeee16
 
 import ButtonLink from 'components/ButtonLink';
 import {IconNavArrow} from '../Icon/IconNavArrow';
@@ -16,13 +13,7 @@ import BlogCard from './BlogCard';
 import {Challenges, Hint, Solution} from './Challenges';
 import CodeBlock from './CodeBlock';
 import {CodeDiagram} from './CodeDiagram';
-<<<<<<< HEAD
-import ConsoleBlock from './ConsoleBlock';
-import Diagram from './Diagram';
-import DiagramGroup from './DiagramGroup';
-=======
 import {ConsoleBlock, ConsoleLogLine, ConsoleBlockMulti} from './ConsoleBlock';
->>>>>>> 6fc98fffdaad3b84e6093d1eb8def8f2cedeee16
 import ExpandableCallout from './ExpandableCallout';
 import ExpandableExample from './ExpandableExample';
 import {H1, H2, H3, H4, H5} from './Heading';
@@ -32,26 +23,20 @@ import Link from './Link';
 import {PackageImport} from './PackageImport';
 import Recap from './Recap';
 import Sandpack from './Sandpack';
-<<<<<<< HEAD
-=======
 import SandpackWithHTMLOutput from './SandpackWithHTMLOutput';
 import Diagram from './Diagram';
 import DiagramGroup from './DiagramGroup';
->>>>>>> 6fc98fffdaad3b84e6093d1eb8def8f2cedeee16
 import SimpleCallout from './SimpleCallout';
 import {TeamMember} from './TeamMember';
-<<<<<<< HEAD
 import TerminalBlock from './TerminalBlock';
 import type {Toc, TocItem} from './TocContext';
 import {TocContext} from './TocContext';
 import YouWillLearnCard from './YouWillLearnCard';
-=======
 import {LanguagesContext} from './LanguagesContext';
 import {finishedTranslations} from 'utils/finishedTranslations';
 
 import ErrorDecoder from './ErrorDecoder';
 import {IconCanary} from '../Icon/IconCanary';
->>>>>>> 6fc98fffdaad3b84e6093d1eb8def8f2cedeee16
 
 function CodeStep({children, step}: {children: any; step: number}) {
   return (
