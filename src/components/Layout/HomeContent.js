@@ -24,13 +24,9 @@ import BlogCard from 'components/MDX/BlogCard';
 import CodeBlock from 'components/MDX/CodeBlock';
 import Link from 'components/MDX/Link';
 import sidebarBlog from '../../sidebarBlog.json';
-<<<<<<< HEAD
 import ButtonLink from '../ButtonLink';
 import {IconRestart} from '../Icon/IconRestart';
-=======
-import * as React from 'react';
 import Image from 'next/image';
->>>>>>> 6fc98fffdaad3b84e6093d1eb8def8f2cedeee16
 
 function Section({children, background = null}) {
   return (
