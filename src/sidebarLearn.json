@@ -198,11 +198,7 @@
           "path": "/learn/separating-events-from-effects"
         },
         {
-<<<<<<< HEAD
           "title": "Efektin riippuvuuksien poistaminen",
-=======
-          "title": "Removing Effect Dependencies",
->>>>>>> 6fc98fffdaad3b84e6093d1eb8def8f2cedeee16
           "path": "/learn/removing-effect-dependencies"
         },
         {

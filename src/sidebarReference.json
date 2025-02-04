@@ -11,13 +11,8 @@
       "path": "/reference/react"
     },
     {
-<<<<<<< HEAD
       "title": "Hookit",
       "path": "/reference/react",
-=======
-      "title": "Hooks",
-      "path": "/reference/react/hooks",
->>>>>>> 6fc98fffdaad3b84e6093d1eb8def8f2cedeee16
       "routes": [
         {
           "title": "useActionState",
@@ -138,21 +133,6 @@
         {
           "title": "startTransition",
           "path": "/reference/react/startTransition"
-<<<<<<< HEAD
-        }
-      ]
-    },
-    {
-      "title": "Direktiivit",
-      "path": "/reference/react/directives",
-      "canary": true,
-      "routes": [
-        {
-          "title": "'use client'",
-          "path": "/reference/react/use-client",
-          "canary": true
-=======
->>>>>>> 6fc98fffdaad3b84e6093d1eb8def8f2cedeee16
         },
         {
           "title": "use",
@@ -362,7 +342,7 @@
       "path": "/reference/rsc/server-functions"
     },
     {
-      "title": "Directives",
+      "title": "Direktiivit",
       "path": "/reference/rsc/directives",
       "routes": [
         {
