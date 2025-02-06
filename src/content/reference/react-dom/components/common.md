@@ -257,42 +257,30 @@ Ref olion sijaan (kuten [`useRef`](/reference/react/useRef#manipulating-the-dom-
 
 [Esimerkki `ref` callbackin käytöstä.](/learn/manipulating-the-dom-with-refs#how-to-manage-a-list-of-refs-using-a-ref-callback)
 
-<<<<<<< HEAD
-Kun `<div>` DOM noodi lisätään näytölle, React kutsuu `ref` callbackia DOM `node` argumentilla. Kun `<div>` DOM noodi poistetaan, React kutsuu `ref` callbackia `null` argumentilla.
-=======
-When the `<div>` DOM node is added to the screen, React will call your `ref` callback with the DOM `node` as the argument. When that `<div>` DOM node is removed, React will call your the cleanup function returned from the callback.
->>>>>>> 6fc98fffdaad3b84e6093d1eb8def8f2cedeee16
+Kun `<div>` DOM noodi lisätään näytölle, React kutsuu `ref` callbackia DOM `node` argumentilla. Kun `<div>` DOM noodi poistetaan, React kutsuu callbackissa välittämääsi siivousfunktiota.
 
 React kutsuu myös `ref` callbackia aina kun välität *erilaisen* `ref` callbackin. Yllä olevassa esimerkissä, `(node) => { ... }` on eri funktio joka renderöinnillä. Kun komponenttisi renderöidään uudelleen, *edellinen* funktio kutsutaan `null` argumentilla, ja *seuraava* funktio kutsutaan DOM nodella.
 
 #### Parametrit {/*ref-callback-parameters*/}
 
-<<<<<<< HEAD
-* `node`: DOM noodi tai `null`. React välittää DOM noden kun ref liitetään, ja `null` kun ref irrotetaan. Ellei välitä samaa funktiota `ref` callbackiin joka renderöinnillä, callback irrotetaan ja liitetään uudelleen jokaisella komponentin renderöinnillä.
-=======
-* `node`: A DOM node. React will pass you the DOM node when the ref gets attached. Unless you pass the same function reference for the `ref` callback on every render, the callback will get temporarily cleanup and re-create during every re-render of the component.
+* `node`: DOM noodi. React välittää DOM noden kun ref liitetään. Ellet välitä samaa funktiota `ref` callbackiin joka renderöinnillä, callback tilapäisesti siivotaan ja luodaan uudelleen jokaisella komponentin renderöinnillä.
 
 <Note>
 
-#### React 19 added cleanup functions for `ref` callbacks. {/*react-19-added-cleanup-functions-for-ref-callbacks*/}
+#### React 19 lisäsi siivousfunktion `ref` callbackeille. {/*react-19-added-cleanup-functions-for-ref-callbacks*/}
 
-To support backwards compatibility, if a cleanup function is not returned from the `ref` callback, `node` will be called with `null` when the `ref` is detached. This behavior will be removed in a future version.
+Tukeakseen taaksepäinyhteensopivuutta, jos siivousfunktiota ei palauteta `ref` callbackissa, `node`:a kutsutaan `null` arvolla kun `ref` irroitetaan. Tämä toiminto tullaan poistamaan tulevissa versioissa.
 
 </Note>
->>>>>>> 6fc98fffdaad3b84e6093d1eb8def8f2cedeee16
 
 #### Palautukset {/*returns*/}
 
-<<<<<<< HEAD
-Ei palauta mitään `ref` callbackista.
-=======
-* **optional** `cleanup function`: When the `ref` is detached, React will call the cleanup function. If a function is not returned by the `ref` callback, React will call the callback again with `null` as the argument when the `ref` gets detached. This behavior will be removed in a future version.
+* **optional** `siivousfunktio`: Kun `ref` irroitetaan, React kutsuu siivousfunktiota. Jos funktiota ei palauteta `ref` callbackista, React kutsuu callbackia uudelleen `null` arvolla kun `ref` irroitetaan. Tämä toiminto tullaan poistamaan tulevissa versioissa.
 
-#### Caveats {/*caveats*/}
+#### Rajoitukset {/*caveats*/}
 
-* When Strict Mode is on, React will **run one extra development-only setup+cleanup cycle** before the first real setup. This is a stress-test that ensures that your cleanup logic "mirrors" your setup logic and that it stops or undoes whatever the setup is doing. If this causes a problem, implement the cleanup function.
-* When you pass a *different* `ref` callback, React will call the *previous* callback's cleanup function if provided. If no cleanup function is defined, the `ref` callback will be called with `null` as the argument. The *next* function will be called with the DOM node.
->>>>>>> 6fc98fffdaad3b84e6093d1eb8def8f2cedeee16
+* Kun Strict Mode on päällä, React **kutsuu asetus-ja siivousfunktiota kerran kehitysvaiheessa** ennen ensimmäistä, oikeaa asennusta. Tämä on stressi-testi, joka varmistaa, että siivousfunktiosi "peilaa" asennuslogiikkaasi, ja että se lopettaa tai kumoaa mitä ikinä asetusvaihe suoritti. Jos tämä tuottaa ongelmia, toteuta siivousfunktio
+* Kun välität *eri* `ref` callbackin, React kutsuu *edellisen* callbackin siivousfunktiota, jos saatavilla. Jos siivousfunktiota ei ole määritelty, `ref` callbackia kutsutaan argumentilla `null`. *Seuraavaa* funktiota kutsutaan DOM noodilla.
 
 ---
 
@@ -1013,13 +1001,9 @@ textarea { display: block; margin-top: 5px; margin-bottom: 10px; }
 
 </Sandpack>
 
-<<<<<<< HEAD
-Nähdäksesi miksi mielivaltaisen HTML renderöiminen on vaarallista, korvaa ylläoleva koodi tällä:
-=======
-The `{__html}` object should be created as close to where the HTML is generated as possible, like the above example does in the `renderMarkdownToHTML` function. This ensures that all raw HTML being used in your code is explicitly marked as such, and that only variables that you expect to contain HTML are passed to `dangerouslySetInnerHTML`. It is not recommended to create the object inline like `<div dangerouslySetInnerHTML={{__html: markup}} />`.
+`{__html}` objekti tulisi luoda niin lähellä HTML luontia kuin mahdollista, kuten yllä olevassa esimerkissä, `renderMarkdownToHTML` funktiossa. Tämä varmistaa sen, että kaikki koodissasi käyttämä raaka-HTML on eksplisiittisesti merkitty siten, ja jotta muuttujat joiden oletat sisältävän HTML koodia välitetään `dangerouslySetInnerHTML`:lle. Ei ole suositeltavaa luoda objektia samalla rivillä kuten `<div dangerouslySetInnerHTML={{__html: markup}} />`.
 
-To see why rendering arbitrary HTML is dangerous, replace the code above with this:
->>>>>>> 6fc98fffdaad3b84e6093d1eb8def8f2cedeee16
+Nähdäksesi miksi mielivaltaisen HTML renderöiminen on vaarallista, korvaa ylläoleva koodi tällä:
 
 ```js {1-4,7,8}
 const post = {
