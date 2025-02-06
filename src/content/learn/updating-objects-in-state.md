@@ -56,12 +56,8 @@ Tässä esimerkissä pidetään oliota tilasa, joka edustaa pointterin nykyistä
 <Sandpack>
 
 ```js
-<<<<<<< HEAD
-import {useState} from 'react';
-=======
 import { useState } from 'react';
 
->>>>>>> 6fc98fffdaad3b84e6093d1eb8def8f2cedeee16
 export default function MovingDot() {
   const [position, setPosition] = useState({
     x: 0,
@@ -136,12 +132,8 @@ Huomaa miten punainen piste nyt seuraa sinun kursoria kun kosketat tai liikutat 
 <Sandpack>
 
 ```js
-<<<<<<< HEAD
-import {useState} from 'react';
-=======
 import { useState } from 'react';
 
->>>>>>> 6fc98fffdaad3b84e6093d1eb8def8f2cedeee16
 export default function MovingDot() {
   const [position, setPosition] = useState({
     x: 0,
@@ -384,13 +376,9 @@ Huomaa, että `...` spread -syntaksi on "matala" (engl. shallow)--se kopioi asio
 
 <DeepDive>
 
-#### Yhden Tapahtumankäsittelijän käyttäminen useille kentille {/*using-a-single-event-handler-for-multiple-fields*/}
+#### Yhden tapahtumankäsittelijän käyttäminen useille kentille {/*using-a-single-event-handler-for-multiple-fields*/}
 
-<<<<<<< HEAD
-Voit myös käyttää `[` ja `]` sulkeita olion määrittelyn sisällä määritelläksesi propertyn dynaamisella nimellä. Tässä on sama esimerkki, mutta yhdellä Tapahtumankäsittelijällä kolmen sijaan:
-=======
-You can also use the `[` and `]` braces inside your object definition to specify a property with a dynamic name. Here is the same example, but with a single event handler instead of three different ones:
->>>>>>> 6fc98fffdaad3b84e6093d1eb8def8f2cedeee16
+Voit myös käyttää `[` ja `]` sulkeita olion määrittelyn sisällä määritelläksesi propertyn dynaamisella nimellä. Tässä on sama esimerkki, mutta yhdellä tapahtumankäsittelijällä kolmen sijaan:
 
 <Sandpack>
 
@@ -977,13 +965,8 @@ Jos jokin odottamaton asia muuttuu, kyseessä on mutaatio. Etsi mutaatio tiedost
 
 <Sandpack>
 
-<<<<<<< HEAD
-```js App.js
-import {useState} from 'react';
-=======
 ```js src/App.js
 import { useState } from 'react';
->>>>>>> 6fc98fffdaad3b84e6093d1eb8def8f2cedeee16
 import Background from './Background.js';
 import Box from './Box.js';
 
@@ -1026,13 +1009,8 @@ export default function Canvas() {
 }
 ```
 
-<<<<<<< HEAD
-```js Box.js
-import {useState} from 'react';
-=======
 ```js src/Box.js
 import { useState } from 'react';
->>>>>>> 6fc98fffdaad3b84e6093d1eb8def8f2cedeee16
 
 export default function Box({children, color, position, onMove}) {
   const [lastCoordinates, setLastCoordinates] = useState(null);
@@ -1087,15 +1065,10 @@ export default function Box({children, color, position, onMove}) {
 }
 ```
 
-<<<<<<< HEAD
-```js Background.js
-export default function Background({position}) {
-=======
 ```js src/Background.js
 export default function Background({
   position
 }) {
->>>>>>> 6fc98fffdaad3b84e6093d1eb8def8f2cedeee16
   return (
     <div
       style={{
@@ -1132,13 +1105,8 @@ Tämän voi korjata poistamalla mutaatio `handleMove`:sta ja käyttää levityss
 
 <Sandpack>
 
-<<<<<<< HEAD
-```js App.js
-import {useState} from 'react';
-=======
 ```js src/App.js
 import { useState } from 'react';
->>>>>>> 6fc98fffdaad3b84e6093d1eb8def8f2cedeee16
 import Background from './Background.js';
 import Box from './Box.js';
 
@@ -1186,13 +1154,8 @@ export default function Canvas() {
 }
 ```
 
-<<<<<<< HEAD
-```js Box.js
-import {useState} from 'react';
-=======
 ```js src/Box.js
 import { useState } from 'react';
->>>>>>> 6fc98fffdaad3b84e6093d1eb8def8f2cedeee16
 
 export default function Box({children, color, position, onMove}) {
   const [lastCoordinates, setLastCoordinates] = useState(null);
@@ -1247,15 +1210,10 @@ export default function Box({children, color, position, onMove}) {
 }
 ```
 
-<<<<<<< HEAD
-```js Background.js
-export default function Background({position}) {
-=======
 ```js src/Background.js
 export default function Background({
   position
 }) {
->>>>>>> 6fc98fffdaad3b84e6093d1eb8def8f2cedeee16
   return (
     <div
       style={{
@@ -1292,15 +1250,9 @@ Tämä on sama virheellinen esimerkki kuin edellisessä haasteessa. Tällä kert
 
 <Sandpack>
 
-<<<<<<< HEAD
-```js App.js
-import {useState} from 'react';
-import {useImmer} from 'use-immer';
-=======
 ```js src/App.js
 import { useState } from 'react';
 import { useImmer } from 'use-immer';
->>>>>>> 6fc98fffdaad3b84e6093d1eb8def8f2cedeee16
 import Background from './Background.js';
 import Box from './Box.js';
 
@@ -1343,13 +1295,8 @@ export default function Canvas() {
 }
 ```
 
-<<<<<<< HEAD
-```js Box.js
-import {useState} from 'react';
-=======
 ```js src/Box.js
 import { useState } from 'react';
->>>>>>> 6fc98fffdaad3b84e6093d1eb8def8f2cedeee16
 
 export default function Box({children, color, position, onMove}) {
   const [lastCoordinates, setLastCoordinates] = useState(null);
@@ -1404,15 +1351,10 @@ export default function Box({children, color, position, onMove}) {
 }
 ```
 
-<<<<<<< HEAD
-```js Background.js
-export default function Background({position}) {
-=======
 ```js src/Background.js
 export default function Background({
   position
 }) {
->>>>>>> 6fc98fffdaad3b84e6093d1eb8def8f2cedeee16
   return (
     <div
       style={{
@@ -1465,13 +1407,8 @@ Tämä on Immerin avulla uudelleen kirjoitettu ratkaisu. Huomaa, että tapahtuma
 
 <Sandpack>
 
-<<<<<<< HEAD
-```js App.js
-import {useImmer} from 'use-immer';
-=======
 ```js src/App.js
 import { useImmer } from 'use-immer';
->>>>>>> 6fc98fffdaad3b84e6093d1eb8def8f2cedeee16
 import Background from './Background.js';
 import Box from './Box.js';
 
@@ -1515,13 +1452,8 @@ export default function Canvas() {
 }
 ```
 
-<<<<<<< HEAD
-```js Box.js
-import {useState} from 'react';
-=======
 ```js src/Box.js
 import { useState } from 'react';
->>>>>>> 6fc98fffdaad3b84e6093d1eb8def8f2cedeee16
 
 export default function Box({children, color, position, onMove}) {
   const [lastCoordinates, setLastCoordinates] = useState(null);
@@ -1576,15 +1508,10 @@ export default function Box({children, color, position, onMove}) {
 }
 ```
 
-<<<<<<< HEAD
-```js Background.js
-export default function Background({position}) {
-=======
 ```js src/Background.js
 export default function Background({
   position
 }) {
->>>>>>> 6fc98fffdaad3b84e6093d1eb8def8f2cedeee16
   return (
     <div
       style={{
