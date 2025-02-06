@@ -32,12 +32,9 @@ Ne ovat erityisiä Reactissa, koska `value`-propsin antaminen niille tekee niist
 
 ---
 
-<<<<<<< HEAD
-## Kaikki HTML komponentit {/*all-html-components*/}
-=======
-## Resource and Metadata Components {/*resource-and-metadata-components*/}
+## Resurssi- ja metadatakomponentit {/*resource-and-metadata-components*/}
 
-These built-in browser components let you load external resources or annotate the document with metadata:
+Näiden selaimeen sisäänrakennettujen komponenttien avulla voit ladata ulkoisia resursseja tai merkata dokumenttia metadatalla:
 
 * [`<link>`](/reference/react-dom/components/link)
 * [`<meta>`](/reference/react-dom/components/meta)
@@ -45,12 +42,11 @@ These built-in browser components let you load external resources or annotate th
 * [`<style>`](/reference/react-dom/components/style)
 * [`<title>`](/reference/react-dom/components/title)
 
-They are special in React because React can render them into the document head, suspend while resources are loading, and enact other behaviors that are described on the reference page for each specific component.
+Nämä ovat erityisiä Reactissa, sillä React voi renderöidä ne dokumentin headiin, suspendoida kun resurssit lataavat, ja suorittaa muita toimintoja, jotka on kuvattu jokaisen komponentin omalla viitesivulla.
 
 ---
 
-## All HTML components {/*all-html-components*/}
->>>>>>> 6fc98fffdaad3b84e6093d1eb8def8f2cedeee16
+## Kaikki HTML komponentit {/*all-html-components*/}
 
 React tukee kaikkia selaimen sisäänrakennettuja HTML komponentteja. Tämä sisältää:
 
