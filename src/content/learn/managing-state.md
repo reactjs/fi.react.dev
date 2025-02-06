@@ -289,13 +289,8 @@ Kuitenkin, joskus tämä ei ole sitä mitä haluat. Tässä sovelluksessa viesti
 
 <Sandpack>
 
-<<<<<<< HEAD
-```js App.js
-import {useState} from 'react';
-=======
 ```js src/App.js
 import { useState } from 'react';
->>>>>>> 6fc98fffdaad3b84e6093d1eb8def8f2cedeee16
 import Chat from './Chat.js';
 import ContactList from './ContactList.js';
 
@@ -320,17 +315,12 @@ const contacts = [
 ];
 ```
 
-<<<<<<< HEAD
-```js ContactList.js
-export default function ContactList({selectedContact, contacts, onSelect}) {
-=======
 ```js src/ContactList.js
 export default function ContactList({
   selectedContact,
   contacts,
   onSelect
 }) {
->>>>>>> 6fc98fffdaad3b84e6093d1eb8def8f2cedeee16
   return (
     <section className="contact-list">
       <ul>
@@ -350,13 +340,8 @@ export default function ContactList({
 }
 ```
 
-<<<<<<< HEAD
-```js Chat.js
-import {useState} from 'react';
-=======
 ```js src/Chat.js
 import { useState } from 'react';
->>>>>>> 6fc98fffdaad3b84e6093d1eb8def8f2cedeee16
 
 export default function Chat({contact}) {
   const [text, setText] = useState('');
@@ -402,13 +387,8 @@ Reactilla voit ohittaa oletuskäytännön _pakottamalla_ komponentin tyhjäämä
 
 <Sandpack>
 
-<<<<<<< HEAD
-```js App.js
-import {useState} from 'react';
-=======
 ```js src/App.js
 import { useState } from 'react';
->>>>>>> 6fc98fffdaad3b84e6093d1eb8def8f2cedeee16
 import Chat from './Chat.js';
 import ContactList from './ContactList.js';
 
@@ -433,17 +413,12 @@ const contacts = [
 ];
 ```
 
-<<<<<<< HEAD
-```js ContactList.js
-export default function ContactList({selectedContact, contacts, onSelect}) {
-=======
 ```js src/ContactList.js
 export default function ContactList({
   selectedContact,
   contacts,
   onSelect
 }) {
->>>>>>> 6fc98fffdaad3b84e6093d1eb8def8f2cedeee16
   return (
     <section className="contact-list">
       <ul>
@@ -462,13 +437,8 @@ export default function ContactList({
 }
 ```
 
-<<<<<<< HEAD
-```js Chat.js
-import {useState} from 'react';
-=======
 ```js src/Chat.js
 import { useState } from 'react';
->>>>>>> 6fc98fffdaad3b84e6093d1eb8def8f2cedeee16
 
 export default function Chat({contact}) {
   const [text, setText] = useState('');
@@ -522,13 +492,8 @@ Komponentit, joissa on useita tilapäivityksiä, jotka on hajallaan useisiin Tap
 
 <Sandpack>
 
-<<<<<<< HEAD
-```js App.js
-import {useReducer} from 'react';
-=======
 ```js src/App.js
 import { useReducer } from 'react';
->>>>>>> 6fc98fffdaad3b84e6093d1eb8def8f2cedeee16
 import AddTask from './AddTask.js';
 import TaskList from './TaskList.js';
 
@@ -608,13 +573,8 @@ const initialTasks = [
 ];
 ```
 
-<<<<<<< HEAD
-```js AddTask.js hidden
-import {useState} from 'react';
-=======
 ```js src/AddTask.js hidden
 import { useState } from 'react';
->>>>>>> 6fc98fffdaad3b84e6093d1eb8def8f2cedeee16
 
 export default function AddTask({onAddTask}) {
   const [text, setText] = useState('');
@@ -637,13 +597,8 @@ export default function AddTask({onAddTask}) {
 }
 ```
 
-<<<<<<< HEAD
-```js TaskList.js hidden
-import {useState} from 'react';
-=======
 ```js src/TaskList.js hidden
 import { useState } from 'react';
->>>>>>> 6fc98fffdaad3b84e6093d1eb8def8f2cedeee16
 
 export default function TaskList({tasks, onChangeTask, onDeleteTask}) {
   return (
@@ -760,15 +715,9 @@ export default function Page() {
 }
 ```
 
-<<<<<<< HEAD
-```js Section.js
-import {useContext} from 'react';
-import {LevelContext} from './LevelContext.js';
-=======
 ```js src/Section.js
 import { useContext } from 'react';
 import { LevelContext } from './LevelContext.js';
->>>>>>> 6fc98fffdaad3b84e6093d1eb8def8f2cedeee16
 
 export default function Section({children}) {
   const level = useContext(LevelContext);
@@ -782,15 +731,9 @@ export default function Section({children}) {
 }
 ```
 
-<<<<<<< HEAD
-```js Heading.js
-import {useContext} from 'react';
-import {LevelContext} from './LevelContext.js';
-=======
 ```js src/Heading.js
 import { useContext } from 'react';
 import { LevelContext } from './LevelContext.js';
->>>>>>> 6fc98fffdaad3b84e6093d1eb8def8f2cedeee16
 
 export default function Heading({children}) {
   const level = useContext(LevelContext);
@@ -815,13 +758,8 @@ export default function Heading({children}) {
 }
 ```
 
-<<<<<<< HEAD
-```js LevelContext.js
-import {createContext} from 'react';
-=======
 ```js src/LevelContext.js
 import { createContext } from 'react';
->>>>>>> 6fc98fffdaad3b84e6093d1eb8def8f2cedeee16
 
 export const LevelContext = createContext(0);
 ```
@@ -867,13 +805,8 @@ export default function TaskApp() {
 }
 ```
 
-<<<<<<< HEAD
-```js TasksContext.js
-import {createContext, useContext, useReducer} from 'react';
-=======
 ```js src/TasksContext.js
 import { createContext, useContext, useReducer } from 'react';
->>>>>>> 6fc98fffdaad3b84e6093d1eb8def8f2cedeee16
 
 const TasksContext = createContext(null);
 const TasksDispatchContext = createContext(null);
@@ -935,15 +868,9 @@ const initialTasks = [
 ];
 ```
 
-<<<<<<< HEAD
-```js AddTask.js
-import {useState, useContext} from 'react';
-import {useTasksDispatch} from './TasksContext.js';
-=======
 ```js src/AddTask.js
 import { useState, useContext } from 'react';
 import { useTasksDispatch } from './TasksContext.js';
->>>>>>> 6fc98fffdaad3b84e6093d1eb8def8f2cedeee16
 
 export default function AddTask({onAddTask}) {
   const [text, setText] = useState('');
@@ -973,15 +900,9 @@ export default function AddTask({onAddTask}) {
 let nextId = 3;
 ```
 
-<<<<<<< HEAD
-```js TaskList.js
-import {useState, useContext} from 'react';
-import {useTasks, useTasksDispatch} from './TasksContext.js';
-=======
 ```js src/TaskList.js
 import { useState, useContext } from 'react';
 import { useTasks, useTasksDispatch } from './TasksContext.js';
->>>>>>> 6fc98fffdaad3b84e6093d1eb8def8f2cedeee16
 
 export default function TaskList() {
   const tasks = useTasks();
