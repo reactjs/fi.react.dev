@@ -554,13 +554,7 @@ button { margin-top: 10px; }
 
 </Sandpack>
 
-<<<<<<< HEAD
-(Vaihtoehtoisesti, voisit pitää valitun indeksin tilasa.)
-
 Tila oli aiemmin monistettu näin:
-=======
-The state used to be duplicated like this:
->>>>>>> 6fc98fffdaad3b84e6093d1eb8def8f2cedeee16
 
 * `items = [{ id: 0, title: 'pretzels'}, ...]`
 * `selectedItem = {id: 0, title: 'pretzels'}`
