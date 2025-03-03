@@ -75,7 +75,7 @@ export default function App() {
 }
 ```
 
-```js chat.js
+```js src/chat.js
 export function createConnection(serverUrl, roomId) {
   // Todellinen toteutus yhdistäisi palvelimeen oikeasti
   return {
@@ -150,7 +150,7 @@ export default function App() {
 }
 ```
 
-```js chat.js
+```js src/chat.js
 export function createConnection(serverUrl, roomId) {
   // Todellinen toteutus yhdistäisi palvelimeen oikeasti
   return {
@@ -242,7 +242,7 @@ export default function ChatRoom() {
 }
 ```
 
-```js chat.js
+```js src/chat.js
 export function createConnection(serverUrl, roomId) {
   // Todellinen toteutus yhdistäisi palvelimeen oikeasti
   return {
@@ -846,7 +846,7 @@ export default function App() {
 }
 ```
 
-```js chat.js
+```js src/chat.js
 export function createConnection({ serverUrl, roomId }) {
   // Todellinen toteutus yhdistäisi palvelimeen oikeasti
   return {
@@ -1023,7 +1023,7 @@ export default function App() {
 }
 ```
 
-```js chat.js
+```js src/chat.js
 export function createConnection({ serverUrl, roomId }) {
   // Todellinen toteutus yhdistäisi palvelimeen oikeasti
   return {
@@ -1335,7 +1335,7 @@ export default function App() {
 }
 ```
 
-```js animation.js
+```js src/animation.js
 export class FadeInAnimation {
   constructor(node) {
     this.node = node;
@@ -1466,7 +1466,7 @@ export default function App() {
 }
 ```
 
-```js animation.js
+```js src/animation.js
 export class FadeInAnimation {
   constructor(node) {
     this.node = node;
@@ -1523,7 +1523,7 @@ On useita tapoja ratkaista tämä, mutta lopulta haluat välttää olion käytt�
 
 <Sandpack>
 
-```js App.js
+```js src/App.js
 import { useState } from 'react';
 import ChatRoom from './ChatRoom.js';
 
@@ -1567,7 +1567,7 @@ export default function App() {
 }
 ```
 
-```js ChatRoom.js active
+```js src/ChatRoom.js active
 import { useEffect } from 'react';
 import { createConnection } from './chat.js';
 
@@ -1582,7 +1582,7 @@ export default function ChatRoom({ options }) {
 }
 ```
 
-```js chat.js
+```js src/chat.js
 export function createConnection({ serverUrl, roomId }) {
   // A real implementation would actually connect to the server
   if (typeof serverUrl !== 'string') {
@@ -1617,7 +1617,7 @@ Vähiten häiritsevä tapa korjata on lukea `roomId` ja `serverUrl` suoraan Efek
 
 <Sandpack>
 
-```js App.js
+```js src/App.js
 import { useState } from 'react';
 import ChatRoom from './ChatRoom.js';
 
@@ -1661,7 +1661,7 @@ export default function App() {
 }
 ```
 
-```js ChatRoom.js active
+```js src/ChatRoom.js active
 import { useEffect } from 'react';
 import { createConnection } from './chat.js';
 
@@ -1680,7 +1680,7 @@ export default function ChatRoom({ options }) {
 }
 ```
 
-```js chat.js
+```js src/chat.js
 export function createConnection({ serverUrl, roomId }) {
   // Todellinen toteutus yhdistäisi palvelimeen oikeasti
   if (typeof serverUrl !== 'string') {
@@ -1711,7 +1711,7 @@ Olisi vielä parempi korvata `options` olio-propsi tarkemmilla `roomId` ja `serv
 
 <Sandpack>
 
-```js App.js
+```js src/App.js
 import { useState } from 'react';
 import ChatRoom from './ChatRoom.js';
 
@@ -1753,7 +1753,7 @@ export default function App() {
 }
 ```
 
-```js ChatRoom.js active
+```js src/ChatRoom.js active
 import { useState, useEffect } from 'react';
 import { createConnection } from './chat.js';
 
@@ -1771,7 +1771,7 @@ export default function ChatRoom({ roomId, serverUrl }) {
 }
 ```
 
-```js chat.js
+```js src/chat.js
 export function createConnection({ serverUrl, roomId }) {
   // Todellinen toteutus yhdistäisi palvelimeen oikeasti
   if (typeof serverUrl !== 'string') {
@@ -1839,7 +1839,7 @@ Toinen näistä funktioista on olemassa vain välittääkseen tilaa tuodulle API
 }
 ```
 
-```js App.js
+```js src/App.js
 import { useState } from 'react';
 import ChatRoom from './ChatRoom.js';
 import {
@@ -1905,7 +1905,7 @@ export default function App() {
 }
 ```
 
-```js ChatRoom.js active
+```js src/ChatRoom.js active
 import { useState, useEffect } from 'react';
 import { experimental_useEffectEvent as useEffectEvent } from 'react';
 
@@ -1921,7 +1921,7 @@ export default function ChatRoom({ roomId, createConnection, onMessage }) {
 }
 ```
 
-```js chat.js
+```js src/chat.js
 export function createEncryptedConnection({ serverUrl, roomId }) {
   // A real implementation would actually connect to the server
   if (typeof serverUrl !== 'string') {
@@ -2005,7 +2005,7 @@ export function createUnencryptedConnection({ serverUrl, roomId }) {
 }
 ```
 
-```js notifications.js
+```js src/notifications.js
 import Toastify from 'toastify-js';
 import 'toastify-js/src/toastify.css';
 
@@ -2134,7 +2134,7 @@ Lopputuloksena, chat yhdistää uudelleen vain kun jotain merkityksellistä (`ro
 }
 ```
 
-```js App.js
+```js src/App.js
 import { useState } from 'react';
 import ChatRoom from './ChatRoom.js';
 
@@ -2187,7 +2187,7 @@ export default function App() {
 }
 ```
 
-```js ChatRoom.js active
+```js src/ChatRoom.js active
 import { useState, useEffect } from 'react';
 import { experimental_useEffectEvent as useEffectEvent } from 'react';
 import {
@@ -2221,7 +2221,7 @@ export default function ChatRoom({ roomId, isEncrypted, onMessage }) {
 }
 ```
 
-```js chat.js
+```js src/chat.js
 export function createEncryptedConnection({ serverUrl, roomId }) {
   // Todellinen toteutus yhdistäisi palvelimeen oikeasti
   if (typeof serverUrl !== 'string') {
@@ -2305,7 +2305,7 @@ export function createUnencryptedConnection({ serverUrl, roomId }) {
 }
 ```
 
-```js notifications.js
+```js src/notifications.js
 import Toastify from 'toastify-js';
 import 'toastify-js/src/toastify.css';
 
