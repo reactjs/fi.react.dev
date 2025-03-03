@@ -52,13 +52,17 @@ export default function PackingList() {
 
 </Sandpack>
 
+<<<<<<< HEAD
 Huomaa, että joillain `Item` komponenteilla on niiden `isPacked` propsi asetettu arvoon `true` eikä `false`. Haluat kuitenkin lisätä valintamerkin (✔) pakattuihin itemeihin jos `isPacked={true}`.
+=======
+Notice that some of the `Item` components have their `isPacked` prop set to `true` instead of `false`. You want to add a checkmark (✅) to packed items if `isPacked={true}`.
+>>>>>>> 6326e7b1b9fa2a7e36a555792e2f1b97cfcf2669
 
 Voit kirjoittaa tämän [`if`/`else` lauseena](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/if...else) seuraavasti:
 
 ```js
 if (isPacked) {
-  return <li className="item">{name} ✔</li>;
+  return <li className="item">{name} ✅</li>;
 }
 return <li className="item">{name}</li>;
 ```
@@ -70,7 +74,7 @@ Jos `isPacked` propsi on `true`, tämä koodi **palauttaa eri JSX puun**. Täll�
 ```js
 function Item({ name, isPacked }) {
   if (isPacked) {
-    return <li className="item">{name} ✔</li>;
+    return <li className="item">{name} ✅</li>;
   }
   return <li className="item">{name}</li>;
 }
@@ -159,7 +163,7 @@ Käytännössä `null`:n palauttaminen komponentista ei ole yleistä, sillä se 
 Aikaisemmassa esimerkissä hallitsit kumpi (jos kumpikaan!) JSX puu tulisi komponentin palauttaa. Saatoit huomata hieman toistoa renderöinnin ulostulossa:
 
 ```js
-<li className="item">{name} ✔</li>
+<li className="item">{name} ✅</li>
 ```
 
 on hyvin samanlainen kuin
@@ -172,7 +176,7 @@ Molemmat ehtohaarat palauttavat `<li className="item">...</li>`:
 
 ```js
 if (isPacked) {
-  return <li className="item">{name} ✔</li>;
+  return <li className="item">{name} ✅</li>;
 }
 return <li className="item">{name}</li>;
 ```
@@ -187,7 +191,7 @@ Tämän sijaan:
 
 ```js
 if (isPacked) {
-  return <li className="item">{name} ✔</li>;
+  return <li className="item">{name} ✅</li>;
 }
 return <li className="item">{name}</li>;
 ```
@@ -197,12 +201,16 @@ Voit kirjoittaa tämän:
 ```js
 return (
   <li className="item">
-    {isPacked ? name + ' ✔' : name}
+    {isPacked ? name + ' ✅' : name}
   </li>
 );
 ```
 
+<<<<<<< HEAD
 Voit lukea sen kuin *"jos `isPacked` on tosi, sitten (`?`) renderöi `name + ' ✔'`, muussa tapauksessa (`:`) renderöi `nimi`."*)
+=======
+You can read it as *"if `isPacked` is true, then (`?`) render `name + ' ✅'`, otherwise (`:`) render `name`"*.
+>>>>>>> 6326e7b1b9fa2a7e36a555792e2f1b97cfcf2669
 
 <DeepDive>
 
@@ -222,7 +230,7 @@ function Item({ name, isPacked }) {
     <li className="item">
       {isPacked ? (
         <del>
-          {name + ' ✔'}
+          {name + ' ✅'}
         </del>
       ) : (
         name
@@ -265,7 +273,7 @@ Toinen yleinen lyhytoperaatio, johon törmäät on [JavaScriptin looginen AND (`
 ```js
 return (
   <li className="item">
-    {name} {isPacked && '✔'}
+    {name} {isPacked && '✅'}
   </li>
 );
 ```
@@ -280,7 +288,7 @@ Tässä se toiminnassa:
 function Item({ name, isPacked }) {
   return (
     <li className="item">
-      {name} {isPacked && '✔'}
+      {name} {isPacked && '✅'}
     </li>
   );
 }
@@ -337,7 +345,7 @@ Käytä `if` lausetta uudelleenmärittelemään JSX-lause muotoon `itemContent` 
 
 ```js
 if (isPacked) {
-  itemContent = name + " ✔";
+  itemContent = name + " ✅";
 }
 ```
 
@@ -357,7 +365,7 @@ Tämä tyyli on kaikista monisanainen, mutta se on myös joustavin. Tässä se v
 function Item({ name, isPacked }) {
   let itemContent = name;
   if (isPacked) {
-    itemContent = name + " ✔";
+    itemContent = name + " ✅";
   }
   return (
     <li className="item">
@@ -401,7 +409,7 @@ function Item({ name, isPacked }) {
   if (isPacked) {
     itemContent = (
       <del>
-        {name + " ✔"}
+        {name + " ✅"}
       </del>
     );
   }
@@ -464,7 +472,7 @@ Käytä ehdollista operaattoria (`cond ? a : b`) renderöidäksesi ❌ jos `isPa
 function Item({ name, isPacked }) {
   return (
     <li className="item">
-      {name} {isPacked && '✔'}
+      {name} {isPacked && '✅'}
     </li>
   );
 }
@@ -502,7 +510,7 @@ export default function PackingList() {
 function Item({ name, isPacked }) {
   return (
     <li className="item">
-      {name} {isPacked ? '✔' : '❌'}
+      {name} {isPacked ? '✅' : '❌'}
     </li>
   );
 }
@@ -626,7 +634,11 @@ export default function PackingList() {
 
 Huomaa, että sinun täytyy kirjoittaa `importance > 0 && ...` ennemmin kuin `importance && ...`, sillä jos `importance` on `0`, `0`:aa ei renderöidä pelkkänä vastauksena!
 
+<<<<<<< HEAD
 Tässä ratkaisussa kahta erillistä ehtolausetta käytetään asettamaan välilyönti nimen ja tärkeyden väliin. Vaihtoehtoisesti voit käyttää fragmenttia, jossa on johtava välilyönti: `importance > 0 && <> <i>...</i></>` tai lisätä välilyönnin suoraan `<i>`:n sisään:  `importance > 0 && <i> ...</i>`.
+=======
+In this solution, two separate conditions are used to insert a space between the name and the importance label. Alternatively, you could use a Fragment with a leading space: `importance > 0 && <> <i>...</i></>` or add a space immediately inside the `<i>`:  `importance > 0 && <i> ...</i>`.
+>>>>>>> 6326e7b1b9fa2a7e36a555792e2f1b97cfcf2669
 
 </Solution>
 
