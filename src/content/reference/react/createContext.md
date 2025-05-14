@@ -84,7 +84,11 @@ function Button() {
 }
 ```
 
+<<<<<<< HEAD
 Vaikka tämä vanhempi tapa silti toimii, **uuden koodin tulisi lukea konteksti [`useContext()`](/reference/react/useContext) -hookilla:**
+=======
+Although this older way still works, **newly written code should read context with [`useContext()`](/reference/react/useContext) instead:**
+>>>>>>> a3e9466dfeea700696211533a3570bc48d7bc3d3
 
 ```js
 function Button() {
