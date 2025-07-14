@@ -75,7 +75,7 @@ export default function App() {
 }
 ```
 
-```js chat.js
+```js src/chat.js
 export function createConnection(serverUrl, roomId) {
   // Todellinen toteutus yhdistäisi palvelimeen oikeasti
   return {
@@ -150,7 +150,7 @@ export default function App() {
 }
 ```
 
-```js chat.js
+```js src/chat.js
 export function createConnection(serverUrl, roomId) {
   // Todellinen toteutus yhdistäisi palvelimeen oikeasti
   return {
@@ -242,7 +242,7 @@ export default function ChatRoom() {
 }
 ```
 
-```js chat.js
+```js src/chat.js
 export function createConnection(serverUrl, roomId) {
   // Todellinen toteutus yhdistäisi palvelimeen oikeasti
   return {
@@ -846,7 +846,7 @@ export default function App() {
 }
 ```
 
-```js chat.js
+```js src/chat.js
 export function createConnection({ serverUrl, roomId }) {
   // Todellinen toteutus yhdistäisi palvelimeen oikeasti
   return {
@@ -1023,7 +1023,7 @@ export default function App() {
 }
 ```
 
-```js chat.js
+```js src/chat.js
 export function createConnection({ serverUrl, roomId }) {
   // Todellinen toteutus yhdistäisi palvelimeen oikeasti
   return {
@@ -1241,7 +1241,11 @@ export default function Timer() {
 
 </Sandpack>
 
+<<<<<<< HEAD
 Sen sijaan että lukisit `count` tilamuuttujan Efektissä, välitä `c => c + 1` ohje ("kasvata tätä lukua!") Reactille. React soveltaa sitä seuraavalla renderöinnillä. Ja koska et enää tarvitse lukea `count` arvoa Efektissäsi, voit pitää Efektisi riippuvuudet tyhjinä (`[]`). Tämä estää Efektisi luomasta uudelleen laskuria joka tikillä.
+=======
+Instead of reading `count` inside the Effect, you pass a `c => c + 1` instruction ("increment this number!") to React. React will apply it on the next render. And since you don't need to read the value of `count` inside your Effect anymore, you can keep your Effect's dependencies empty (`[]`). This prevents your Effect from re-creating the interval on every tick.
+>>>>>>> 84a56968d92b9a9e9bbac1ca13011e159e815dc1
 
 </Solution>
 
@@ -1335,7 +1339,7 @@ export default function App() {
 }
 ```
 
-```js animation.js
+```js src/animation.js
 export class FadeInAnimation {
   constructor(node) {
     this.node = node;
@@ -1466,7 +1470,7 @@ export default function App() {
 }
 ```
 
-```js animation.js
+```js src/animation.js
 export class FadeInAnimation {
   constructor(node) {
     this.node = node;
@@ -1523,7 +1527,7 @@ On useita tapoja ratkaista tämä, mutta lopulta haluat välttää olion käytt�
 
 <Sandpack>
 
-```js App.js
+```js src/App.js
 import { useState } from 'react';
 import ChatRoom from './ChatRoom.js';
 
@@ -1567,7 +1571,7 @@ export default function App() {
 }
 ```
 
-```js ChatRoom.js active
+```js src/ChatRoom.js active
 import { useEffect } from 'react';
 import { createConnection } from './chat.js';
 
@@ -1582,7 +1586,7 @@ export default function ChatRoom({ options }) {
 }
 ```
 
-```js chat.js
+```js src/chat.js
 export function createConnection({ serverUrl, roomId }) {
   // A real implementation would actually connect to the server
   if (typeof serverUrl !== 'string') {
@@ -1617,7 +1621,7 @@ Vähiten häiritsevä tapa korjata on lukea `roomId` ja `serverUrl` suoraan Efek
 
 <Sandpack>
 
-```js App.js
+```js src/App.js
 import { useState } from 'react';
 import ChatRoom from './ChatRoom.js';
 
@@ -1661,7 +1665,7 @@ export default function App() {
 }
 ```
 
-```js ChatRoom.js active
+```js src/ChatRoom.js active
 import { useEffect } from 'react';
 import { createConnection } from './chat.js';
 
@@ -1680,7 +1684,7 @@ export default function ChatRoom({ options }) {
 }
 ```
 
-```js chat.js
+```js src/chat.js
 export function createConnection({ serverUrl, roomId }) {
   // Todellinen toteutus yhdistäisi palvelimeen oikeasti
   if (typeof serverUrl !== 'string') {
@@ -1711,7 +1715,7 @@ Olisi vielä parempi korvata `options` olio-propsi tarkemmilla `roomId` ja `serv
 
 <Sandpack>
 
-```js App.js
+```js src/App.js
 import { useState } from 'react';
 import ChatRoom from './ChatRoom.js';
 
@@ -1753,7 +1757,7 @@ export default function App() {
 }
 ```
 
-```js ChatRoom.js active
+```js src/ChatRoom.js active
 import { useState, useEffect } from 'react';
 import { createConnection } from './chat.js';
 
@@ -1771,7 +1775,7 @@ export default function ChatRoom({ roomId, serverUrl }) {
 }
 ```
 
-```js chat.js
+```js src/chat.js
 export function createConnection({ serverUrl, roomId }) {
   // Todellinen toteutus yhdistäisi palvelimeen oikeasti
   if (typeof serverUrl !== 'string') {
@@ -1839,7 +1843,7 @@ Toinen näistä funktioista on olemassa vain välittääkseen tilaa tuodulle API
 }
 ```
 
-```js App.js
+```js src/App.js
 import { useState } from 'react';
 import ChatRoom from './ChatRoom.js';
 import {
@@ -1905,7 +1909,7 @@ export default function App() {
 }
 ```
 
-```js ChatRoom.js active
+```js src/ChatRoom.js active
 import { useState, useEffect } from 'react';
 import { experimental_useEffectEvent as useEffectEvent } from 'react';
 
@@ -1921,7 +1925,7 @@ export default function ChatRoom({ roomId, createConnection, onMessage }) {
 }
 ```
 
-```js chat.js
+```js src/chat.js
 export function createEncryptedConnection({ serverUrl, roomId }) {
   // A real implementation would actually connect to the server
   if (typeof serverUrl !== 'string') {
@@ -2005,7 +2009,7 @@ export function createUnencryptedConnection({ serverUrl, roomId }) {
 }
 ```
 
-```js notifications.js
+```js src/notifications.js
 import Toastify from 'toastify-js';
 import 'toastify-js/src/toastify.css';
 
@@ -2134,7 +2138,7 @@ Lopputuloksena, chat yhdistää uudelleen vain kun jotain merkityksellistä (`ro
 }
 ```
 
-```js App.js
+```js src/App.js
 import { useState } from 'react';
 import ChatRoom from './ChatRoom.js';
 
@@ -2187,7 +2191,7 @@ export default function App() {
 }
 ```
 
-```js ChatRoom.js active
+```js src/ChatRoom.js active
 import { useState, useEffect } from 'react';
 import { experimental_useEffectEvent as useEffectEvent } from 'react';
 import {
@@ -2221,7 +2225,7 @@ export default function ChatRoom({ roomId, isEncrypted, onMessage }) {
 }
 ```
 
-```js chat.js
+```js src/chat.js
 export function createEncryptedConnection({ serverUrl, roomId }) {
   // Todellinen toteutus yhdistäisi palvelimeen oikeasti
   if (typeof serverUrl !== 'string') {
@@ -2305,7 +2309,7 @@ export function createUnencryptedConnection({ serverUrl, roomId }) {
 }
 ```
 
-```js notifications.js
+```js src/notifications.js
 import Toastify from 'toastify-js';
 import 'toastify-js/src/toastify.css';
 
