@@ -45,9 +45,15 @@ Tässä ja myöhemmin tekstissä, "Efektillä":llä viittaamme Reactin määrite
 
 Kirjoittaaksesi Efektin, seuraa näitä kolmea vaihetta:
 
+<<<<<<< HEAD
 1. **Määrittele Efekti.** Oletuksena, Efektisi suoritetaan jokaisen renderöinnin jälkeen.
 2. **Määrittele Efektin riippuvuudet.** Useimmat Efektit pitäisi suorittaa vain *tarvittaessa* sen sijaan, että ne suoritettaisiin jokaisen renderöinnin jälkeen. Esimerkiksi fade-in -animaatio pitäisi käynnistyä vain, kun komponentti ilmestyy. Keskusteluhuoneeseen yhdistäminen ja sen katkaisu pitäisi tapahtua vain, kun komponentti ilmestyy ja häviää tai kun keskusteluhuone muuttuu. Opit hallitsemaan tätä määrittämällä *riippuvuudet.*
 3. **Lisää puhdistus, jos tarpeen.** Joidenkin Efektien täytyy määrittää, miten ne pysäytetään, peruutetaan, tai puhdistavat mitä ne ovat tehneet. Esimerkiksi "yhdistys" tarvitsee "katkaisun", "tila" tarvitsee "peruuta tilaus" ja "hae" tarvitsee joko "peruuta" tai "jätä huomiotta". Opit tekemään tämän palauttamalla *puhdistusfunktion*.
+=======
+1. **Declare an Effect.** By default, your Effect will run after every [commit](/learn/render-and-commit).
+2. **Specify the Effect dependencies.** Most Effects should only re-run *when needed* rather than after every render. For example, a fade-in animation should only trigger when a component appears. Connecting and disconnecting to a chat room should only happen when the component appears and disappears, or when the chat room changes. You will learn how to control this by specifying *dependencies.*
+3. **Add cleanup if needed.** Some Effects need to specify how to stop, undo, or clean up whatever they were doing. For example, "connect" needs "disconnect", "subscribe" needs "unsubscribe", and "fetch" needs either "cancel" or "ignore". You will learn how to do this by returning a *cleanup function*.
+>>>>>>> e07ac94bc2c1ffd817b13930977be93325e5bea9
 
 Katsotaan näitä vaiheita yksityiskohtaisesti.
 
@@ -510,7 +516,7 @@ export default function ChatRoom() {
 }
 ```
 
-```js chat.js
+```js src/chat.js
 export function createConnection() {
   // Oikea toteutus yhdistäisi todellisuudessa palvelimeen
   return {
@@ -566,7 +572,7 @@ export default function ChatRoom() {
 }
 ```
 
-```js chat.js
+```js src/chat.js
 export function createConnection() {
   // Oikea toteutus yhdistäisi todellisuudessa palvelimeen
   return {
@@ -604,9 +610,42 @@ Useiten vastaus on toteuttaa siivousfunktio. Siivousfunktion pitäisi pysäyttä
 
 Useimmat Efektit jotka kirjoitat sopivat yhteen alla olevista yleisistä kuvioista.
 
+<<<<<<< HEAD
 ### Ei-React komponenttien ohjaaminen {/*controlling-non-react-widgets*/}
 
 Joskus tarvitset UI pienoisohjelmia, jotka eivät ole kirjoitettu Reactiin. Esimerkiksi, sanotaan että lisäät kartta-komponentin sivullesi. Sillä on `setZoomLevel()` metodi, ja haluat pitää zoom tason synkronoituna `zoomLevel` tilamuuttujan kanssa React koodissasi. Efektisi näyttäisi tältä:
+=======
+<Pitfall>
+
+#### Don't use refs to prevent Effects from firing {/*dont-use-refs-to-prevent-effects-from-firing*/}
+
+A common pitfall for preventing Effects firing twice in development is to use a `ref` to prevent the Effect from running more than once. For example, you could "fix" the above bug with a `useRef`:
+
+```js {1,3-4}
+  const connectionRef = useRef(null);
+  useEffect(() => {
+    // 🚩 This wont fix the bug!!!
+    if (!connectionRef.current) {
+      connectionRef.current = createConnection();
+      connectionRef.current.connect();
+    }
+  }, []);
+```
+
+This makes it so you only see `"✅ Connecting..."` once in development, but it doesn't fix the bug.
+
+When the user navigates away, the connection still isn't closed and when they navigate back, a new connection is created. As the user navigates across the app, the connections would keep piling up, the same as it would before the "fix". 
+
+To fix the bug, it is not enough to just make the Effect run once. The effect needs to work after re-mounting, which means the connection needs to be cleaned up like in the solution above.
+
+See the examples below for how to handle common patterns.
+
+</Pitfall>
+
+### Controlling non-React widgets {/*controlling-non-react-widgets*/}
+
+Sometimes you need to add UI widgets that aren't written in React. For example, let's say you're adding a map component to your page. It has a `setZoomLevel()` method, and you'd like to keep the zoom level in sync with a `zoomLevel` state variable in your React code. Your Effect would look similar to this:
+>>>>>>> e07ac94bc2c1ffd817b13930977be93325e5bea9
 
 ```js
 useEffect(() => {
@@ -711,8 +750,13 @@ Tämä ei vain paranna kehityskokemusta, vaan myös saa sovelluksesi tuntumaan n
 
 Tämä lista huonoista puolista ei koske pelkästään Reactia. Se pätee mihin tahansa kirjastoon kun dataa haetaan mountissa. Kuten reitityksessä, datan hakeminen ei ole helppoa tehdä hyvin, joten suosittelemme seuraavia lähestymistapoja:
 
+<<<<<<< HEAD
 - **Jos käytät [frameworkia](/learn/start-a-new-react-project#building-with-a-full-featured-framework), käytä sen sisäänrakennettua datan hakemiseen tarkoitettua mekanismia.** Modernit React frameworkit sisältävät tehokkaita datan hakemiseen tarkoitettuja mekanismeja, jotka eivät kärsi yllä mainituista ongelmista.
 - **Muussa tapauksessa, harkitse tai rakenna asiakaspuolen välimuisti.** Suosittuja avoimen lähdekoodin ratkaisuja ovat [React Query](https://tanstack.com/query/latest), [useSWR](https://swr.vercel.app/), ja [React Router 6.4+.](https://beta.reactrouter.com/en/main/start/overview) Voit myös rakentaa oman ratkaisusi, jolloin käytät Efektejä alustana mutta lisäät logiikkaa pyyntöjen deduplikointiin, vastausten välimuistitukseen ja verkkovesiputousten välttämiseen (esilataamalla dataa tai nostamalla datan vaatimukset reiteille).
+=======
+- **If you use a [framework](/learn/start-a-new-react-project#full-stack-frameworks), use its built-in data fetching mechanism.** Modern React frameworks have integrated data fetching mechanisms that are efficient and don't suffer from the above pitfalls.
+- **Otherwise, consider using or building a client-side cache.** Popular open source solutions include [React Query](https://tanstack.com/query/latest), [useSWR](https://swr.vercel.app/), and [React Router 6.4+.](https://beta.reactrouter.com/en/main/start/overview) You can build your own solution too, in which case you would use Effects under the hood, but add logic for deduplicating requests, caching responses, and avoiding network waterfalls (by preloading data or hoisting data requirements to routes).
+>>>>>>> e07ac94bc2c1ffd817b13930977be93325e5bea9
 
 Voit jatkaa datan hakemista suoraan Efekteissä jos nämä lähestymistavat eivät sovi sinulle.
 
@@ -977,7 +1021,7 @@ Käytä inputin [`focus()`](https://developer.mozilla.org/en-US/docs/Web/API/HTM
 
 <Sandpack>
 
-```js MyInput.js active
+```js src/MyInput.js active
 import { useEffect, useRef } from 'react';
 
 export default function MyInput({ value, onChange }) {
@@ -996,7 +1040,7 @@ export default function MyInput({ value, onChange }) {
 }
 ```
 
-```js App.js hidden
+```js src/App.js hidden
 import { useState } from 'react';
 import MyInput from './MyInput.js';
 
@@ -1061,7 +1105,7 @@ Korjataksesi virheen, sijoita `ref.current.focus()` kutsu Efektin määrittelyyn
 
 <Sandpack>
 
-```js MyInput.js active
+```js src/MyInput.js active
 import { useEffect, useRef } from 'react';
 
 export default function MyInput({ value, onChange }) {
@@ -1081,7 +1125,7 @@ export default function MyInput({ value, onChange }) {
 }
 ```
 
-```js App.js hidden
+```js src/App.js hidden
 import { useState } from 'react';
 import MyInput from './MyInput.js';
 
@@ -1145,7 +1189,7 @@ Sanotaan, että haluat kohdentaa ensimmäisen kentän. Nyt ensimmäinen `<MyInpu
 
 <Sandpack>
 
-```js MyInput.js active
+```js src/MyInput.js active
 import { useEffect, useRef } from 'react';
 
 export default function MyInput({ shouldFocus, value, onChange }) {
@@ -1166,7 +1210,7 @@ export default function MyInput({ shouldFocus, value, onChange }) {
 }
 ```
 
-```js App.js hidden
+```js src/App.js hidden
 import { useState } from 'react';
 import MyInput from './MyInput.js';
 
@@ -1235,7 +1279,7 @@ Laita ehdollinen logiikka Efektin sisään. Sinun täytyy määrittää `shouldF
 
 <Sandpack>
 
-```js MyInput.js active
+```js src/MyInput.js active
 import { useEffect, useRef } from 'react';
 
 export default function MyInput({ shouldFocus, value, onChange }) {
@@ -1257,7 +1301,7 @@ export default function MyInput({ shouldFocus, value, onChange }) {
 }
 ```
 
-```js App.js hidden
+```js src/App.js hidden
 import { useState } from 'react';
 import MyInput from './MyInput.js';
 
@@ -1328,7 +1372,7 @@ Pidä mielessä, että `setInterval` palauttaa ajastimen ID:n, jonka voit antaa 
 
 <Sandpack>
 
-```js Counter.js active
+```js src/Counter.js active
 import { useState, useEffect } from 'react';
 
 export default function Counter() {
@@ -1346,7 +1390,7 @@ export default function Counter() {
 }
 ```
 
-```js App.js hidden
+```js src/App.js hidden
 import { useState } from 'react';
 import Counter from './Counter.js';
 
@@ -1387,7 +1431,7 @@ Korjataksesi tämän koodin, tallenna `setInterval`:n palauttama ajastimen ID, j
 
 <Sandpack>
 
-```js Counter.js active
+```js src/Counter.js active
 import { useState, useEffect } from 'react';
 
 export default function Counter() {
@@ -1406,7 +1450,7 @@ export default function Counter() {
 }
 ```
 
-```js App.js hidden
+```js src/App.js hidden
 import { useState } from 'react';
 import Counter from './Counter.js';
 
@@ -1447,7 +1491,7 @@ Tämä komponentti näyttää valitun henkilön biografian. Se lataa biografian 
 
 <Sandpack>
 
-```js App.js
+```js src/App.js
 import { useState, useEffect } from 'react';
 import { fetchBio } from './api.js';
 
@@ -1478,7 +1522,7 @@ export default function Page() {
 }
 ```
 
-```js api.js hidden
+```js src/api.js hidden
 export async function fetchBio(person) {
   const delay = person === 'Bob' ? 2000 : 200;
   return new Promise(resolve => {
@@ -1519,7 +1563,7 @@ Korjataksesi tämän kilpailutilanteen, lisää siivousfunktio:
 
 <Sandpack>
 
-```js App.js
+```js src/App.js
 import { useState, useEffect } from 'react';
 import { fetchBio } from './api.js';
 
@@ -1555,7 +1599,7 @@ export default function Page() {
 }
 ```
 
-```js api.js hidden
+```js src/api.js hidden
 export async function fetchBio(person) {
   const delay = person === 'Bob' ? 2000 : 200;
   return new Promise(resolve => {
@@ -1578,7 +1622,11 @@ Kunkin renderin Efektillä on sen oma `ignore` muuttuja. Aluksi, `ignore` muuttu
 - `'Bob'`:n haku suoriutuu loppuun
 - `'Bob'` renderin Efekti kutsuu `setBio('This is Bob’s bio')` **eikä tee mitään koska sen `ignore` muuttuja on asetettu `true`:ksi**
 
+<<<<<<< HEAD
 Vanhentuneen API kutsun tuloksen ohittamisen lisäksi, voit myös käyttää [`AbortController`](https://developer.mozilla.org/en-US/docs/Web/API/AbortController):a peruuttaaksesi pyynnöt jotka eivät ole enää tarpeen. Kuitenkin, tämä ei ole tarpeeksi suojataksesi kilpailutilanteita vastaan. Asynkronisia vaiheita voisi olla ketjutettu pyynnön jälkeen lisää, joten luotettavin tapa korjata tällaisia ongelmia on käyttämällä selkeää ehtoa kuten `ignore` muuttujaa.
+=======
+In addition to ignoring the result of an outdated API call, you can also use [`AbortController`](https://developer.mozilla.org/en-US/docs/Web/API/AbortController) to cancel the requests that are no longer needed. However, by itself this is not enough to protect against race conditions. More asynchronous steps could be chained after the fetch, so using an explicit flag like `ignore` is the most reliable way to fix this type of problem.
+>>>>>>> e07ac94bc2c1ffd817b13930977be93325e5bea9
 
 </Solution>
 
