@@ -252,7 +252,7 @@ export default function App() {
 }
 ```
 
-```js chat.js
+```js src/chat.js
 export function createConnection(serverUrl, roomId) {
   // A real implementation would actually connect to the server
   return {
@@ -448,7 +448,7 @@ export default function App() {
 }
 ```
 
-```js chat.js
+```js src/chat.js
 export function createConnection(serverUrl, roomId) {
   // Todellinen toteutus yhdistäisi palvelimeen oikeasti
   return {
@@ -528,7 +528,7 @@ export default function App() {
 }
 ```
 
-```js chat.js
+```js src/chat.js
 export function createConnection(serverUrl, roomId) {
   // Todellinen toteutus yhdistäisi palvelimeen oikeasti
   return {
@@ -647,7 +647,7 @@ export default function App() {
 }
 ```
 
-```js chat.js
+```js src/chat.js
 export function createConnection(serverUrl, roomId) {
   // Todellinen toteutus yhdistäisi palvelimeen oikeasti
   return {
@@ -839,7 +839,7 @@ export default function App() {
 }
 ```
 
-```js chat.js
+```js src/chat.js
 export function createConnection(serverUrl, roomId) {
   // Todellinen toteutus yhdistäisi palvelimeen oikeasti
   return {
@@ -914,7 +914,7 @@ export default function App() {
 }
 ```
 
-```js chat.js
+```js src/chat.js
 export function createConnection(serverUrl, roomId) {
   // Todellinen toteutus yhdistäisi palvelimeen oikeasti
   return {
@@ -1331,7 +1331,7 @@ Linterin hiljentäminen on aina epäilyttävää. Voisiko tämä olla bugi?
 
 <Sandpack>
 
-```js App.js
+```js src/App.js
 import { useState } from 'react';
 import ChatRoom from './ChatRoom.js';
 import {
@@ -1376,7 +1376,7 @@ export default function App() {
 }
 ```
 
-```js ChatRoom.js active
+```js src/ChatRoom.js active
 import { useState, useEffect } from 'react';
 
 export default function ChatRoom({ roomId, createConnection }) {
@@ -1391,7 +1391,7 @@ export default function ChatRoom({ roomId, createConnection }) {
 }
 ```
 
-```js chat.js
+```js src/chat.js
 export function createEncryptedConnection(roomId) {
   // Todellinen toteutus yhdistäisi palvelimeen oikeasti
   return {
@@ -1429,7 +1429,7 @@ Jos poistat linterin hiljennyksen, näet linter virheen. Ongelma on siinä, ett�
 
 <Sandpack>
 
-```js App.js
+```js src/App.js
 import { useState } from 'react';
 import ChatRoom from './ChatRoom.js';
 import {
@@ -1474,7 +1474,7 @@ export default function App() {
 }
 ```
 
-```js ChatRoom.js active
+```js src/ChatRoom.js active
 import { useState, useEffect } from 'react';
 
 export default function ChatRoom({ roomId, createConnection }) {
@@ -1488,7 +1488,7 @@ export default function ChatRoom({ roomId, createConnection }) {
 }
 ```
 
-```js chat.js
+```js src/chat.js
 export function createEncryptedConnection(roomId) {
   // Todellinen toteutus yhdistäisi palvelimeen oikeasti
   return {
@@ -1524,7 +1524,7 @@ On oikein, että `createConnection` on riippuvuus. Kuitenkin, tämä koodi on hi
 
 <Sandpack>
 
-```js App.js
+```js src/App.js
 import { useState } from 'react';
 import ChatRoom from './ChatRoom.js';
 
@@ -1562,7 +1562,7 @@ export default function App() {
 }
 ```
 
-```js ChatRoom.js active
+```js src/ChatRoom.js active
 import { useState, useEffect } from 'react';
 import {
   createEncryptedConnection,
@@ -1583,7 +1583,7 @@ export default function ChatRoom({ roomId, isEncrypted }) {
 }
 ```
 
-```js chat.js
+```js src/chat.js
 export function createEncryptedConnection(roomId) {
   // Todellinen toteutus yhdistäisi palvelimeen oikeasti
   return {
@@ -1635,7 +1635,7 @@ Jos sinulla on kaksi synkronisointiprosessia, ne täytyy kirjoittaa kahteen eril
 
 <Sandpack>
 
-```js App.js
+```js src/App.js
 import { useState, useEffect } from 'react';
 import { fetchData } from './api.js';
 
@@ -1689,7 +1689,7 @@ export default function Page() {
 }
 ```
 
-```js api.js hidden
+```js src/api.js hidden
 export function fetchData(url) {
   if (url === '/planets') {
     return fetchPlanets();
@@ -1784,7 +1784,7 @@ This is why it makes sense to describe them as two separate Effects. Here's an e
 
 <Sandpack>
 
-```js App.js
+```js src/App.js
 import { useState, useEffect } from 'react';
 import { fetchData } from './api.js';
 
@@ -1857,7 +1857,7 @@ export default function Page() {
 }
 ```
 
-```js api.js hidden
+```js src/api.js hidden
 export function fetchData(url) {
   if (url === '/planets') {
     return fetchPlanets();
@@ -1947,7 +1947,7 @@ Sen sijaan, välttääksesi toistoa, voit erottaa logiikan omaksi hookiksi kuten
 
 <Sandpack>
 
-```js App.js
+```js src/App.js
 import { useState } from 'react';
 import { useSelectOptions } from './useSelectOptions.js';
 
@@ -1993,7 +1993,7 @@ export default function Page() {
 }
 ```
 
-```js useSelectOptions.js
+```js src/useSelectOptions.js
 import { useState, useEffect } from 'react';
 import { fetchData } from './api.js';
 
@@ -2020,7 +2020,7 @@ export function useSelectOptions(url) {
 }
 ```
 
-```js api.js hidden
+```js src/api.js hidden
 export function fetchData(url) {
   if (url === '/planets') {
     return fetchPlanets();
