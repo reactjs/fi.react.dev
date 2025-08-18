@@ -106,7 +106,7 @@ Nyt voit määritellä `Avatar`:n renderöimään monella erilaisella tavalla er
 
 <Sandpack>
 
-```js App.js
+```js src/App.js
 import { getImageUrl } from './utils.js';
 
 function Avatar({ person, size }) {
@@ -150,7 +150,7 @@ export default function Profile() {
 }
 ```
 
-```js utils.js
+```js src/utils.js
 export function getImageUrl(person, size = 's') {
   return (
     'https://i.imgur.com/' +
@@ -274,7 +274,7 @@ Kun upotat sisältöä JSX tagiin, pääkomponentti vastaanottaa sisällön prop
 
 <Sandpack>
 
-```js App.js
+```js src/App.js
 import Avatar from './Avatar.js';
 
 function Card({ children }) {
@@ -300,7 +300,7 @@ export default function Profile() {
 }
 ```
 
-```js Avatar.js
+```js src/Avatar.js
 import { getImageUrl } from './utils.js';
 
 export default function Avatar({ person, size }) {
@@ -316,7 +316,7 @@ export default function Avatar({ person, size }) {
 }
 ```
 
-```js utils.js
+```js src/utils.js
 export function getImageUrl(person, size = 's') {
   return (
     'https://i.imgur.com/' +
@@ -360,7 +360,7 @@ Kokeile muuttaa väriä valintaruudusta alla:
 
 <Sandpack>
 
-```js Clock.js active
+```js src/Clock.js active
 export default function Clock({ color, time }) {
   return (
     <h1 style={{ color: color }}>
@@ -370,7 +370,7 @@ export default function Clock({ color, time }) {
 }
 ```
 
-```js App.js hidden
+```js src/App.js hidden
 import { useState, useEffect } from 'react';
 import Clock from './Clock.js';
 
@@ -435,7 +435,7 @@ Tämä `Gallery` komponentti sisältää samanlaista merkintäkoodia kahdelle pr
 
 <Sandpack>
 
-```js App.js
+```js src/App.js
 import { getImageUrl } from './utils.js';
 
 export default function Gallery() {
@@ -495,7 +495,7 @@ export default function Gallery() {
 }
 ```
 
-```js utils.js
+```js src/utils.js
 export function getImageUrl(imageId, size = 's') {
   return (
     'https://i.imgur.com/' +
@@ -536,7 +536,7 @@ Huomaa, että `imageSize` propsilla on oletusarvo, jonka takia emme välitä sit
 
 <Sandpack>
 
-```js App.js
+```js src/App.js
 import { getImageUrl } from './utils.js';
 
 function Profile({
@@ -603,7 +603,7 @@ export default function Gallery() {
 }
 ```
 
-```js utils.js
+```js src/utils.js
 export function getImageUrl(imageId, size = 's') {
   return (
     'https://i.imgur.com/' +
@@ -636,7 +636,7 @@ Toinen ratkaisu, joka on lähempänä aikaisempia esimerkkejä tällä sivulla o
 
 <Sandpack>
 
-```js App.js
+```js src/App.js
 import { getImageUrl } from './utils.js';
 
 function Profile({ person, imageSize = 70 }) {
@@ -700,7 +700,7 @@ export default function Gallery() {
 }
 ```
 
-```js utils.js
+```js src/utils.js
 export function getImageUrl(person, size = 's') {
   return (
     'https://i.imgur.com/' +
@@ -739,7 +739,7 @@ Muuta `Avatar` komponentti pyytämään lähimpää kuvan kokoa `size` propsin p
 
 <Sandpack>
 
-```js App.js
+```js src/App.js
 import { getImageUrl } from './utils.js';
 
 function Avatar({ person, size }) {
@@ -767,7 +767,7 @@ export default function Profile() {
 }
 ```
 
-```js utils.js
+```js src/utils.js
 export function getImageUrl(person, size) {
   return (
     'https://i.imgur.com/' +
@@ -790,7 +790,7 @@ Tässä miten voisit tehdä sen:
 
 <Sandpack>
 
-```js App.js
+```js src/App.js
 import { getImageUrl } from './utils.js';
 
 function Avatar({ person, size }) {
@@ -831,7 +831,7 @@ export default function Profile() {
 }
 ```
 
-```js utils.js
+```js src/utils.js
 export function getImageUrl(person, size) {
   return (
     'https://i.imgur.com/' +
@@ -852,7 +852,7 @@ Voit myös näyttää tarkemman kuvan korkean pikselitiheyden näytöille huomio
 
 <Sandpack>
 
-```js App.js
+```js src/App.js
 import { getImageUrl } from './utils.js';
 
 const ratio = window.devicePixelRatio;
@@ -902,7 +902,7 @@ export default function Profile() {
 }
 ```
 
-```js utils.js
+```js src/utils.js
 export function getImageUrl(person, size) {
   return (
     'https://i.imgur.com/' +
