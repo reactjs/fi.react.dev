@@ -25,13 +25,28 @@
       "path": "/learn/installation",
       "routes": [
         {
+<<<<<<< HEAD
           "title": "Aloita uusi React-projekti",
           "path": "/learn/start-a-new-react-project"
+=======
+          "title": "Creating a React App",
+          "path": "/learn/creating-a-react-app"
+        },
+        {
+          "title": "Build a React App from Scratch",
+          "path": "/learn/build-a-react-app-from-scratch"
+>>>>>>> 27d86ffe6ec82e3642c6490d2187bae2271020a4
         },
         {
           "title": "Lisää React olemassa olevaan projektiin",
           "path": "/learn/add-react-to-an-existing-project"
-        },
+        }
+      ]
+    },
+    {
+      "title": "Setup",
+      "path": "/learn/setup",
+      "routes": [
         {
           "title": "Editorin asentaminen",
           "path": "/learn/editor-setup"
@@ -43,6 +58,29 @@
         {
           "title": "React kehitystyökalut",
           "path": "/learn/react-developer-tools"
+        }
+      ]
+    },
+    {
+      "title": "React Compiler",
+      "path": "/learn/react-compiler",
+      "canary": true,
+      "routes": [
+        {
+          "title": "Introduction",
+          "path": "/learn/react-compiler/introduction"
+        },
+        {
+          "title": "Installation",
+          "path": "/learn/react-compiler/installation"
+        },
+        {
+          "title": "Incremental Adoption",
+          "path": "/learn/react-compiler/incremental-adoption"
+        },
+        {
+          "title": "Debugging and Troubleshooting",
+          "path": "/learn/react-compiler/debugging"
         }
       ]
     },
@@ -193,7 +231,11 @@
           "path": "/learn/separating-events-from-effects"
         },
         {
+<<<<<<< HEAD
           "title": "Efektin riippuvuuksien poistaminen",
+=======
+          "title": "Removing Effect Dependencies",
+>>>>>>> 27d86ffe6ec82e3642c6490d2187bae2271020a4
           "path": "/learn/removing-effect-dependencies"
         },
         {
