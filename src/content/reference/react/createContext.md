@@ -38,14 +38,22 @@ const ThemeContext = createContext('light');
 
 `createContext` palauttaa kontekstiolion.
 
+<<<<<<< HEAD
 **Kontekstiolio itsessään ei sisällä mitään tietoa.** Se edustaa _minkä_ kontekstin muita komponentteja lukee tai tarjoaa. Tyypillisesti käytät [`SomeContext.Provider`](#provider) ylemmissä komponenteissa määrittääksesi kontekstin arvon ja kutsut [`useContext(SomeContext)`](/reference/react/useContext) -komponenttia alempana lukeaksesi sen. Kontekstioliossa on muutama ominaisuus:
 
 * `SomeContext.Provider` avulla voit tarjota kontekstin arvon komponenteille.
 * `SomeContext.Consumer` on vaihtoehtoinen ja harvoin käytetty tapa lukea kontekstin arvo.
+=======
+**The context object itself does not hold any information.** It represents _which_ context other components read or provide. Typically, you will use [`SomeContext`](#provider) in components above to specify the context value, and call [`useContext(SomeContext)`](/reference/react/useContext) in components below to read it. The context object has a few properties:
+
+* `SomeContext` lets you provide the context value to components.
+* `SomeContext.Consumer` is an alternative and rarely used way to read the context value.
+* `SomeContext.Provider` is a legacy way to provide the context value before React 19.
+>>>>>>> 2774ddfa0c39b8c2f0563b987dcb90a01ee723cf
 
 ---
 
-### `SomeContext.Provider` {/*provider*/}
+### `SomeContext` Provider {/*provider*/}
 
 Kääri komponenttisi kontekstin tarjoajaan määrittääksesi tämän kontekstin arvon kaikille sisäpuolella oleville komponenteille:
 
@@ -54,14 +62,26 @@ function App() {
   const [theme, setTheme] = useState('light');
   // ...
   return (
-    <ThemeContext.Provider value={theme}>
+    <ThemeContext value={theme}>
       <Page />
-    </ThemeContext.Provider>
+    </ThemeContext>
   );
 }
 ```
 
+<<<<<<< HEAD
 #### Propsitit {/*provider-props*/}
+=======
+<Note>
+
+Starting in React 19, you can render `<SomeContext>` as a provider. 
+
+In older versions of React, use `<SomeContext.Provider>`.
+
+</Note>
+
+#### Props {/*provider-props*/}
+>>>>>>> 2774ddfa0c39b8c2f0563b987dcb90a01ee723cf
 
 * `value`: Arvo, jonka haluat välittää kaikille tämän tarjoajan sisällä oleville kontekstin lukeville komponenteille, riippumatta siitä, kuinka syvällä ne ovat. Kontekstin arvo voi olla mitä tahansa tyyppiä. Komponentti, joka kutsuu [`useContext(SomeContext)`](/reference/react/useContext) -Hookkia tarjoajan sisällä, saa `value`:n vastaavasta kontekstin tarjoajasta, joka on sen yläpuolella.
 
@@ -84,7 +104,11 @@ function Button() {
 }
 ```
 
+<<<<<<< HEAD
 Vaikka tämä vanhempi tapa silti toimii, **uuden koodin tulisi lukea konteksti [`useContext()`](/reference/react/useContext) -hookilla:**
+=======
+Although this older way still works, **newly written code should read context with [`useContext()`](/reference/react/useContext) instead:**
+>>>>>>> 2774ddfa0c39b8c2f0563b987dcb90a01ee723cf
 
 ```js
 function Button() {
@@ -142,11 +166,11 @@ function App() {
   // ...
 
   return (
-    <ThemeContext.Provider value={theme}>
-      <AuthContext.Provider value={currentUser}>
+    <ThemeContext value={theme}>
+      <AuthContext value={currentUser}>
         <Page />
-      </AuthContext.Provider>
-    </ThemeContext.Provider>
+      </AuthContext>
+    </ThemeContext>
   );
 }
 ```
@@ -188,11 +212,11 @@ import { ThemeContext, AuthContext } from './Contexts.js';
 function App() {
   // ...
   return (
-    <ThemeContext.Provider value={theme}>
-      <AuthContext.Provider value={currentUser}>
+    <ThemeContext value={theme}>
+      <AuthContext value={currentUser}>
         <Page />
-      </AuthContext.Provider>
-    </ThemeContext.Provider>
+      </AuthContext>
+    </ThemeContext>
   );
 }
 ```
@@ -214,5 +238,9 @@ const ThemeContext = createContext('light');
 
 Tämä arvo ei koskaan muutu. React käyttää tätä arvoa vain varmuusarvona, jos se ei löydä vastaavaa tarjoajaa yläpuolelta.
 
+<<<<<<< HEAD
 Jotta konteksti muuttuisi ajan myötä, [lisää tila ja kääri komponentit kontekstin tarjoajaan.](/reference/react/useContext#updating-data-passed-via-context)
 
+=======
+To make context change over time, [add state and wrap components in a context provider.](/reference/react/useContext#updating-data-passed-via-context)
+>>>>>>> 2774ddfa0c39b8c2f0563b987dcb90a01ee723cf
