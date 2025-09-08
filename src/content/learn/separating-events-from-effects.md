@@ -44,7 +44,11 @@ function ChatRoom({ roomId }) {
   return (
     <>
       <input value={message} onChange={e => setMessage(e.target.value)} />
+<<<<<<< HEAD
       <button onClick={handleSendClick}>Lähetä</button>;
+=======
+      <button onClick={handleSendClick}>Send</button>
+>>>>>>> d34c6a2c6fa49fc6f64b07aa4fa979d86d41c4e8
     </>
   );
 }
@@ -130,7 +134,7 @@ export default function App() {
 }
 ```
 
-```js chat.js
+```js src/chat.js
 export function sendMessage(message) {
   console.log('🔵 You sent: ' + message);
 }
@@ -333,7 +337,7 @@ export default function App() {
 }
 ```
 
-```js chat.js
+```js src/chat.js
 export function createConnection(serverUrl, roomId) {
   // Todellinen toteutus yhdistäisi palvelimeen
   let connectedCallback;
@@ -362,7 +366,7 @@ export function createConnection(serverUrl, roomId) {
 }
 ```
 
-```js notifications.js
+```js src/notifications.js
 import Toastify from 'toastify-js';
 import 'toastify-js/src/toastify.css';
 
@@ -439,7 +443,11 @@ function ChatRoom({ roomId, theme }) {
   // ...
 ```
 
+<<<<<<< HEAD
 Tämä korjaa ongelman. Huomaa, että sinun täytyi *poistaa* `onConnected` Efektisi riippuvuuksien listalta. **Efektitapahtumat eivät ole reaktiivisia ja ne täytyy jättää pois riippuvuuksien listalta.**
+=======
+This solves the problem. Note that you had to *remove* `theme` from the list of your Effect's dependencies, because it's no longer used in the Effect. You also don't need to *add* `onConnected` to it, because **Effect Events are not reactive and must be omitted from dependencies.**
+>>>>>>> d34c6a2c6fa49fc6f64b07aa4fa979d86d41c4e8
 
 Varmista, että uusi käyttäytyminen toimii odotetusti:
 
@@ -521,7 +529,7 @@ export default function App() {
 }
 ```
 
-```js chat.js
+```js src/chat.js
 export function createConnection(serverUrl, roomId) {
   // Todellinen toteutus yhdistäisi palvelimeen oikeasti
   let connectedCallback;
@@ -550,7 +558,7 @@ export function createConnection(serverUrl, roomId) {
 }
 ```
 
-```js notifications.js hidden
+```js src/notifications.js hidden
 import Toastify from 'toastify-js';
 import 'toastify-js/src/toastify.css';
 
@@ -973,6 +981,23 @@ Korjataksesi tämä koodi, riittää että seuraat sääntöjä.
 
 <Sandpack>
 
+```json package.json hidden
+{
+  "dependencies": {
+    "react": "experimental",
+    "react-dom": "experimental",
+    "react-scripts": "latest"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  }
+}
+```
+
+
 ```js
 import { useState, useEffect } from 'react';
 
@@ -1025,6 +1050,22 @@ Kuten yleensä, kun etsit bugeja Efekteista, aloita etsimällä linterin hiljenn
 Jos poistat hiljennykommentin, React kertoo sinulle, että tämän Efektin koodi riippuu `increment`:sta, mutta "valehtelit" Reactille väittämällä, että tämä Efekti ei riipu mistään reaktiivisista arvoista (`[]`). Lisää `increment` riippuvuuslistalle:
 
 <Sandpack>
+
+```json package.json hidden
+{
+  "dependencies": {
+    "react": "experimental",
+    "react-dom": "experimental",
+    "react-scripts": "latest"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  }
+}
+```
 
 ```js
 import { useState, useEffect } from 'react';
@@ -1500,7 +1541,7 @@ export default function App() {
 }
 ```
 
-```js chat.js
+```js src/chat.js
 export function createConnection(serverUrl, roomId) {
   // Todellinen toteutus yhdistäisi palvelimeen oikeasti
   let connectedCallback;
@@ -1529,7 +1570,7 @@ export function createConnection(serverUrl, roomId) {
 }
 ```
 
-```js notifications.js hidden
+```js src/notifications.js hidden
 import Toastify from 'toastify-js';
 import 'toastify-js/src/toastify.css';
 
@@ -1641,7 +1682,7 @@ export default function App() {
 }
 ```
 
-```js chat.js
+```js src/chat.js
 export function createConnection(serverUrl, roomId) {
   // Todellinen toteutus yhdistäisi palvelimeen oikeasti
   let connectedCallback;
@@ -1670,7 +1711,7 @@ export function createConnection(serverUrl, roomId) {
 }
 ```
 
-```js notifications.js hidden
+```js src/notifications.js hidden
 import Toastify from 'toastify-js';
 import 'toastify-js/src/toastify.css';
 
@@ -1784,7 +1825,7 @@ export default function App() {
 }
 ```
 
-```js chat.js
+```js src/chat.js
 export function createConnection(serverUrl, roomId) {
   // Oikea toteutus yhdistäisi palvelimeen oikeasti
   let connectedCallback;
@@ -1813,7 +1854,7 @@ export function createConnection(serverUrl, roomId) {
 }
 ```
 
-```js notifications.js hidden
+```js src/notifications.js hidden
 import Toastify from 'toastify-js';
 import 'toastify-js/src/toastify.css';
 
