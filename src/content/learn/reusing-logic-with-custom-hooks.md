@@ -184,7 +184,7 @@ export default function App() {
 }
 ```
 
-```js useOnlineStatus.js
+```js src/useOnlineStatus.js
 import { useState, useEffect } from 'react';
 
 export function useOnlineStatus() {
@@ -402,7 +402,7 @@ export default function Form() {
 }
 ```
 
-```js useFormInput.js active
+```js src/useFormInput.js active
 import { useState } from 'react';
 
 export function useFormInput(initialValue) {
@@ -453,7 +453,7 @@ Koska omat Hookit renderöidään yhdessä komponenttisi kanssa, ne saavat aina 
 
 <Sandpack>
 
-```js App.js
+```js src/App.js
 import { useState } from 'react';
 import ChatRoom from './ChatRoom.js';
 
@@ -481,7 +481,7 @@ export default function App() {
 }
 ```
 
-```js ChatRoom.js active
+```js src/ChatRoom.js active
 import { useState, useEffect } from 'react';
 import { createConnection } from './chat.js';
 import { showNotification } from './notifications.js';
@@ -514,7 +514,7 @@ export default function ChatRoom({ roomId }) {
 }
 ```
 
-```js chat.js
+```js src/chat.js
 export function createConnection({ serverUrl, roomId }) {
   // Todellinen toteutus yhdistäisi palvelimeen oikeasti
   if (typeof serverUrl !== 'string') {
@@ -557,7 +557,7 @@ export function createConnection({ serverUrl, roomId }) {
 }
 ```
 
-```js notifications.js
+```js src/notifications.js
 import Toastify from 'toastify-js';
 import 'toastify-js/src/toastify.css';
 
@@ -649,7 +649,7 @@ Huomaa miten logiikka *silti reagoi* propsin ja tilan muutoksiin. Kokeile muokat
 
 <Sandpack>
 
-```js App.js
+```js src/App.js
 import { useState } from 'react';
 import ChatRoom from './ChatRoom.js';
 
@@ -677,7 +677,7 @@ export default function App() {
 }
 ```
 
-```js ChatRoom.js active
+```js src/ChatRoom.js active
 import { useState } from 'react';
 import { useChatRoom } from './useChatRoom.js';
 
@@ -701,7 +701,7 @@ export default function ChatRoom({ roomId }) {
 }
 ```
 
-```js useChatRoom.js
+```js src/useChatRoom.js
 import { useEffect } from 'react';
 import { createConnection } from './chat.js';
 import { showNotification } from './notifications.js';
@@ -722,7 +722,7 @@ export function useChatRoom({ serverUrl, roomId }) {
 }
 ```
 
-```js chat.js
+```js src/chat.js
 export function createConnection({ serverUrl, roomId }) {
   // Todellinen toteutus yhdistäisi palvelimeen oikeasti
   if (typeof serverUrl !== 'string') {
@@ -765,7 +765,7 @@ export function createConnection({ serverUrl, roomId }) {
 }
 ```
 
-```js notifications.js
+```js src/notifications.js
 import Toastify from 'toastify-js';
 import 'toastify-js/src/toastify.css';
 
@@ -820,7 +820,11 @@ export default function ChatRoom({ roomId }) {
   // ...
 ```
 
+<<<<<<< HEAD
 ja välität sen toisen Hookin sisään:
+=======
+and passing it as an input to another Hook:
+>>>>>>> d34c6a2c6fa49fc6f64b07aa4fa979d86d41c4e8
 
 ```js {6}
 export default function ChatRoom({ roomId }) {
@@ -927,7 +931,7 @@ Nyt chatti ei enää yhdistä uudelleen joka kerta, kun `ChatRoom` komponentti r
 
 <Sandpack>
 
-```js App.js
+```js src/App.js
 import { useState } from 'react';
 import ChatRoom from './ChatRoom.js';
 
@@ -955,7 +959,7 @@ export default function App() {
 }
 ```
 
-```js ChatRoom.js active
+```js src/ChatRoom.js active
 import { useState } from 'react';
 import { useChatRoom } from './useChatRoom.js';
 import { showNotification } from './notifications.js';
@@ -983,7 +987,7 @@ export default function ChatRoom({ roomId }) {
 }
 ```
 
-```js useChatRoom.js
+```js src/useChatRoom.js
 import { useEffect } from 'react';
 import { experimental_useEffectEvent as useEffectEvent } from 'react';
 import { createConnection } from './chat.js';
@@ -1006,7 +1010,7 @@ export function useChatRoom({ serverUrl, roomId, onReceiveMessage }) {
 }
 ```
 
-```js chat.js
+```js src/chat.js
 export function createConnection({ serverUrl, roomId }) {
   // Todellinen toteutus yhdistäisi palvelimeen oikeasti
   if (typeof serverUrl !== 'string') {
@@ -1049,7 +1053,7 @@ export function createConnection({ serverUrl, roomId }) {
 }
 ```
 
-```js notifications.js
+```js src/notifications.js
 import Toastify from 'toastify-js';
 import 'toastify-js/src/toastify.css';
 
@@ -1306,7 +1310,7 @@ export default function App() {
 }
 ```
 
-```js useOnlineStatus.js active
+```js src/useOnlineStatus.js active
 import { useState, useEffect } from 'react';
 
 export function useOnlineStatus() {
@@ -1333,7 +1337,11 @@ export function useOnlineStatus() {
 
 Yllä olevassa esimerkissä, `useOnlineStatus` on toteutettu [`useState`](/reference/react/useState) ja [`useEffect`.](/reference/react/useEffect) Hookeilla. Kuitenkin, tämä ei ole paras ratkaisu. On useita reunatapauksia, joita se ei huomioi. Esimerkiksi, se olettaa komponentin mountatessa, `isOnline` olisi jo `true`, vaikka tämä voi olla väärin jos verkkoyhteys on jo katkennut. Voit käyttää selaimen [`navigator.onLine`](https://developer.mozilla.org/en-US/docs/Web/API/Navigator/onLine) API:a tarkistaaksesi tämän, mutta sitä ei voi käyttää suoraan palvelimella HTML:n generointiin. Lyhyesti, tätä koodia voisi parantaa.
 
+<<<<<<< HEAD
 Onneksi, React 18 sisältää dedikoidun APIn nimeltään [`useSyncExternalStore`](/reference/react/useSyncExternalStore), joka huolehtii kaikista näistä ongelmista puolestasi. Tässä on miten `useOnlineStatus` Hookkisi kirjoitetaan uudelleen hyödyntämään tätä uutta API:a:
+=======
+React includes a dedicated API called [`useSyncExternalStore`](/reference/react/useSyncExternalStore) which takes care of all of these problems for you. Here is your `useOnlineStatus` Hook, rewritten to take advantage of this new API:
+>>>>>>> d34c6a2c6fa49fc6f64b07aa4fa979d86d41c4e8
 
 <Sandpack>
 
@@ -1369,7 +1377,7 @@ export default function App() {
 }
 ```
 
-```js useOnlineStatus.js active
+```js src/useOnlineStatus.js active
 import { useSyncExternalStore } from 'react';
 
 function subscribe(callback) {
@@ -1419,10 +1427,36 @@ Samoin kuin [design -järjestelmissä,](https://uxdesign.cc/everything-you-need-
 
 #### Tuleeko React tarjoamaan sisäänrakennetun ratkaisun tiedonhakuun? {/*will-react-provide-any-built-in-solution-for-data-fetching*/}
 
+<<<<<<< HEAD
 Työstämme yksityiskohtia, mutta odotamme että tulevaisuudessa, kirjoitat datan hakemisen näin:
 
 ```js {1,4,6}
 import { use } from 'react'; // Ei vielä saatavilla!
+=======
+Today, with the [`use`](/reference/react/use#streaming-data-from-server-to-client) API, data can be read in render by passing a [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) to `use`:
+
+```js {1,4,11}
+import { use, Suspense } from "react";
+
+function Message({ messagePromise }) {
+  const messageContent = use(messagePromise);
+  return <p>Here is the message: {messageContent}</p>;
+}
+
+export function MessageContainer({ messagePromise }) {
+  return (
+    <Suspense fallback={<p>⌛Downloading message...</p>}>
+      <Message messagePromise={messagePromise} />
+    </Suspense>
+  );
+}
+```
+
+We're still working out the details, but we expect that in the future, you'll write data fetching like this:
+
+```js {1,4,6}
+import { use } from 'react';
+>>>>>>> d34c6a2c6fa49fc6f64b07aa4fa979d86d41c4e8
 
 function ShippingForm({ country }) {
   const cities = use(fetch(`/api/cities?country=${country}`));
@@ -1554,7 +1588,7 @@ export default function App() {
 }
 ```
 
-```js useFadeIn.js
+```js src/useFadeIn.js
 import { useEffect } from 'react';
 
 export function useFadeIn(ref, duration) {
@@ -1645,7 +1679,7 @@ export default function App() {
 }
 ```
 
-```js useFadeIn.js active
+```js src/useFadeIn.js active
 import { useState, useEffect } from 'react';
 import { experimental_useEffectEvent as useEffectEvent } from 'react';
 
@@ -1749,7 +1783,7 @@ export default function App() {
 }
 ```
 
-```js useFadeIn.js active
+```js src/useFadeIn.js active
 import { useState, useEffect } from 'react';
 import { FadeInAnimation } from './animation.js';
 
@@ -1764,7 +1798,7 @@ export function useFadeIn(ref, duration) {
 }
 ```
 
-```js animation.js
+```js src/animation.js
 export class FadeInAnimation {
   constructor(node) {
     this.node = node;
@@ -1845,12 +1879,12 @@ export default function App() {
 }
 ```
 
-```css styles.css
+```css src/styles.css
 label, button { display: block; margin-bottom: 20px; }
 html, body { min-height: 300px; }
 ```
 
-```css welcome.css active
+```css src/welcome.css active
 .welcome {
   color: white;
   padding: 50px;
@@ -1899,7 +1933,11 @@ export default function Counter() {
 }
 ```
 
+<<<<<<< HEAD
 Sinun täytyy kirjoittaa oma Hookkisi `useCounter.js` tiedostoon ja tuoda se `Counter.js` tiedostoon.
+=======
+You'll need to write your custom Hook in `useCounter.js` and import it into the `App.js` file.
+>>>>>>> d34c6a2c6fa49fc6f64b07aa4fa979d86d41c4e8
 
 <Sandpack>
 
@@ -1918,8 +1956,13 @@ export default function Counter() {
 }
 ```
 
+<<<<<<< HEAD
 ```js useCounter.js
 // Kirjoita oma Hookkisi tähän tiedostoon!
+=======
+```js src/useCounter.js
+// Write your custom Hook in this file!
+>>>>>>> d34c6a2c6fa49fc6f64b07aa4fa979d86d41c4e8
 ```
 
 </Sandpack>
@@ -1939,7 +1982,7 @@ export default function Counter() {
 }
 ```
 
-```js useCounter.js
+```js src/useCounter.js
 import { useState, useEffect } from 'react';
 
 export function useCounter() {
@@ -1993,7 +2036,7 @@ export default function Counter() {
 }
 ```
 
-```js useCounter.js
+```js src/useCounter.js
 import { useState, useEffect } from 'react';
 
 export function useCounter() {
@@ -2043,7 +2086,7 @@ export default function Counter() {
 }
 ```
 
-```js useCounter.js
+```js src/useCounter.js
 import { useState, useEffect } from 'react';
 
 export function useCounter(delay) {
@@ -2081,7 +2124,6 @@ Kirjoita `useInterval` `useInterval.js` tiedostoon ja tuo se `useCounter.js` tie
 <Sandpack>
 
 ```js
-import { useState } from 'react';
 import { useCounter } from './useCounter.js';
 
 export default function Counter() {
@@ -2090,7 +2132,7 @@ export default function Counter() {
 }
 ```
 
-```js useCounter.js
+```js src/useCounter.js
 import { useState, useEffect } from 'react';
 
 export function useCounter(delay) {
@@ -2105,8 +2147,13 @@ export function useCounter(delay) {
 }
 ```
 
+<<<<<<< HEAD
 ```js useInterval.js
 // Kirjoita oma Hookkisi tähän tiedostoon!
+=======
+```js src/useInterval.js
+// Write your Hook here!
+>>>>>>> d34c6a2c6fa49fc6f64b07aa4fa979d86d41c4e8
 ```
 
 </Sandpack>
@@ -2126,7 +2173,7 @@ export default function Counter() {
 }
 ```
 
-```js useCounter.js
+```js src/useCounter.js
 import { useState } from 'react';
 import { useInterval } from './useInterval.js';
 
@@ -2139,7 +2186,7 @@ export function useCounter(delay) {
 }
 ```
 
-```js useInterval.js active
+```js src/useInterval.js active
 import { useEffect } from 'react';
 
 export function useInterval(onTick, delay) {
@@ -2219,7 +2266,7 @@ export default function Counter() {
 }
 ```
 
-```js useCounter.js
+```js src/useCounter.js
 import { useState } from 'react';
 import { useInterval } from './useInterval.js';
 
@@ -2232,7 +2279,7 @@ export function useCounter(delay) {
 }
 ```
 
-```js useInterval.js
+```js src/useInterval.js
 import { useEffect } from 'react';
 import { experimental_useEffectEvent as useEffectEvent } from 'react';
 
@@ -2291,7 +2338,7 @@ export default function Counter() {
 }
 ```
 
-```js useCounter.js
+```js src/useCounter.js
 import { useState } from 'react';
 import { useInterval } from './useInterval.js';
 
@@ -2304,7 +2351,7 @@ export function useCounter(delay) {
 }
 ```
 
-```js useInterval.js active
+```js src/useInterval.js active
 import { useEffect } from 'react';
 import { experimental_useEffectEvent as useEffectEvent } from 'react';
 
@@ -2384,7 +2431,7 @@ function Dot({ position, opacity }) {
 }
 ```
 
-```js usePointerPosition.js
+```js src/usePointerPosition.js
 import { useState, useEffect } from 'react';
 
 export function usePointerPosition() {
@@ -2463,7 +2510,7 @@ function Dot({ position, opacity }) {
 }
 ```
 
-```js usePointerPosition.js
+```js src/usePointerPosition.js
 import { useState, useEffect } from 'react';
 
 export function usePointerPosition() {

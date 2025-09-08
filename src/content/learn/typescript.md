@@ -11,18 +11,29 @@ TypeScript on suosittu tapa lisätä tyyppimääritteitä JavaScript koodiin. Ty
 
 <YouWillLearn>
 
+<<<<<<< HEAD
 * [TypeScript React komponenteissa](/learn/typescript#typescript-with-react-components)
 * [Esimerkkejä koodaamisesta hookkien avulla](/learn/typescript#example-hooks)
 * [Yleisiä tyyppejä `@types/react` paketista](/learn/typescript/#useful-types)
 * [Osaamisen laajentaminen](/learn/typescript/#further-learning)
+=======
+* [TypeScript with React Components](/learn/typescript#typescript-with-react-components)
+* [Examples of typing with Hooks](/learn/typescript#example-hooks)
+* [Common types from `@types/react`](/learn/typescript#useful-types)
+* [Further learning locations](/learn/typescript#further-learning)
+>>>>>>> d34c6a2c6fa49fc6f64b07aa4fa979d86d41c4e8
 
 </YouWillLearn>
 
 ## Asennus {/*installation*/}
 
+<<<<<<< HEAD
 Kaikki [tuotantokäyttöön tarkoitetut React frameworkit](/learn/start-a-new-react-project#production-grade-react-frameworks) tarjoavat tuen TypeScriptin käyttöön. Seuraa frameworkin omaa asennusohjetta:
+=======
+All [production-grade React frameworks](/learn/start-a-new-react-project#full-stack-frameworks) offer support for using TypeScript. Follow the framework specific guide for installation:
+>>>>>>> d34c6a2c6fa49fc6f64b07aa4fa979d86d41c4e8
 
-- [Next.js](https://nextjs.org/docs/pages/building-your-application/configuring/typescript)
+- [Next.js](https://nextjs.org/docs/app/building-your-application/configuring/typescript)
 - [Remix](https://remix.run/docs/en/1.19.2/guides/typescript)
 - [Gatsby](https://www.gatsbyjs.com/docs/how-to/custom-configuration/typescript/)
 - [Expo](https://docs.expo.dev/guides/typescript/)
@@ -32,13 +43,18 @@ Kaikki [tuotantokäyttöön tarkoitetut React frameworkit](/learn/start-a-new-re
 Asentaaksesi uusimman version Reactin tyyppimäärittelyistä:
 
 <TerminalBlock>
-npm install @types/react @types/react-dom
+npm install --save-dev @types/react @types/react-dom
 </TerminalBlock>
 
 Seuraavat compiler-asetukset on oltava asetettuna `tsconfig.json` tiedostossasi:
 
+<<<<<<< HEAD
 1. `dom` täytyy olla sisällytettynä [`lib`](https://www.typescriptlang.org/tsconfig/#lib):ssa (Huomaa: Jos `lib` vaihtoehtoa ei ole määritelty, `dom` sisällytetään oletuksena).
 2. [`jsx`](https://www.typescriptlang.org/tsconfig/#jsx):n täytyy olla yksi sallituista vaihtoehdoista. `preserve` riittää useimmille sovelluksille.
+=======
+1. `dom` must be included in [`lib`](https://www.typescriptlang.org/tsconfig/#lib) (Note: If no `lib` option is specified, `dom` is included by default).
+2. [`jsx`](https://www.typescriptlang.org/tsconfig/#jsx) must be set to one of the valid options. `preserve` should suffice for most applications.
+>>>>>>> d34c6a2c6fa49fc6f64b07aa4fa979d86d41c4e8
   If you're publishing a library, consult the [`jsx` documentation](https://www.typescriptlang.org/tsconfig/#jsx) on what value to choose.
   Jos olet julkaisemassa kirjastoa, tutustu [`jsx` dokumentaatioon](https://www.typescriptlang.org/tsconfig/#jsx) mitä arvoa valita.
 
@@ -56,7 +72,7 @@ TypeScriptin kirjoittaminen Reactin kanssa on hyvin samanlaista kuin JavaScripti
 
 <Sandpack>
 
-```tsx App.tsx active
+```tsx src/App.tsx active
 function MyButton({ title }: { title: string }) {
   return (
     <button>{title}</button>
@@ -73,7 +89,7 @@ export default function MyApp() {
 }
 ```
 
-```js App.js hidden
+```js src/App.js hidden
 import AppTSX from "./App.tsx";
 export default App = AppTSX;
 ```
@@ -89,7 +105,7 @@ Tämä sisäinen syntaksi on yksinkertaisin tapa määritellä tyypit komponenti
 
 <Sandpack>
 
-```tsx App.tsx active
+```tsx src/App.tsx active
 interface MyButtonProps {
   /** Teksti jota näytetään painikkeen sisällä */
   title: string;
@@ -113,7 +129,7 @@ export default function MyApp() {
 }
 ```
 
-```js App.js hidden
+```js src/App.js hidden
 import AppTSX from "./App.tsx";
 export default App = AppTSX;
 ```
@@ -126,21 +142,38 @@ Tyyppi joka kuvaa komponentin propseja voi olla yhtä yksinkertainen tai monimut
 
 Tyyppimäärittelyt `@types/react` paketissa sisältävät tyypit sisäänrakennetuille hookkeille, joten voit käyttää niitä komponenteissasi ilman lisäasetuksia. Ne on rakennettu ottamaan huomioon koodi jonka kirjoitat komponenttiisi, joten saat [pääteltyjä tyyppejä](https://www.typescriptlang.org/docs/handbook/type-inference.html) usein ja sinun ei pitäisi tarvita käsitellä yksityiskohtia tyypittämisestä.
 
+<<<<<<< HEAD
 Kuitenkin, voimme katsoa muutamia esimerkkejä kuinka tarjota tyyppejä hookkeille.
 
 ### `useState` {/*typing-usestate*/}
 
 [`useState` hookki](/reference/react/useState) käyttää uuddelleen arvoa joka annetaan alustavaksi tilaksi määrittääkseen minkä tyyppinen arvo on kyseessä. Esimerkiksi:
+=======
+The type definitions from `@types/react` include types for the built-in Hooks, so you can use them in your components without any additional setup. They are built to take into account the code you write in your component, so you will get [inferred types](https://www.typescriptlang.org/docs/handbook/type-inference.html) a lot of the time and ideally do not need to handle the minutiae of providing the types.
+
+However, we can look at a few examples of how to provide types for Hooks.
+
+### `useState` {/*typing-usestate*/}
+
+The [`useState` Hook](/reference/react/useState) will re-use the value passed in as the initial state to determine what the type of the value should be. For example:
+>>>>>>> d34c6a2c6fa49fc6f64b07aa4fa979d86d41c4e8
 
 ```ts
 // Päättele arvoksi "boolean":ksi
 const [enabled, setEnabled] = useState(false);
 ```
 
+<<<<<<< HEAD
 Päättelee `enabled` tyypiksi `boolean` ja `setEnabled` on funktio joka hyväksyy joko `boolean` argumentin tai funktion joka palauttaa `boolean` arvon. Jos haluat määrittää tyypin tilalle, voit tehdä sen antamalla tyypin argumentin `useState` kutsulle:
 
 ```ts 
 // Eksplisiittisesti aseta tyyppi "boolean":ksi
+=======
+This will assign the type of `boolean` to `enabled`, and `setEnabled` will be a function accepting either a `boolean` argument, or a function that returns a `boolean`. If you want to explicitly provide a type for the state, you can do so by providing a type argument to the `useState` call:
+
+```ts
+// Explicitly set the type to "boolean"
+>>>>>>> d34c6a2c6fa49fc6f64b07aa4fa979d86d41c4e8
 const [enabled, setEnabled] = useState<boolean>(false);
 ```
 
@@ -166,15 +199,19 @@ const [requestState, setRequestState] = useState<RequestState>({ status: 'idle' 
 
 ### `useReducer` {/*typing-usereducer*/}
 
+<<<<<<< HEAD
 [`useReducer` hookki](/reference/react/useReducer) on monimutkaisempi hookki joka ottaa reduktorifunktion ja alustavan tilan. Tyypit reducer funktiolle päätellään alustavasta tilasta. Voit valinnaisesti antaa tyypin argumentin `useReducer` kutsulle antaaksesi tyypin tilalle, mutta on usein parempi asettaa tyyppi alustavalle tilalle:
+=======
+The [`useReducer` Hook](/reference/react/useReducer) is a more complex Hook that takes a reducer function and an initial state. The types for the reducer function are inferred from the initial state. You can optionally provide a type argument to the `useReducer` call to provide a type for the state, but it is often better to set the type on the initial state instead:
+>>>>>>> d34c6a2c6fa49fc6f64b07aa4fa979d86d41c4e8
 
 <Sandpack>
 
-```tsx App.tsx active
+```tsx src/App.tsx active
 import {useReducer} from 'react';
 
 interface State {
-   count: number 
+   count: number
 };
 
 type CounterAction =
@@ -213,7 +250,7 @@ export default function App() {
 
 ```
 
-```js App.js hidden
+```js src/App.js hidden
 import AppTSX from "./App.tsx";
 export default App = AppTSX;
 ```
@@ -242,13 +279,17 @@ export default function App() {
 
 ### `useContext` {/*typing-usecontext*/}
 
+<<<<<<< HEAD
 [`useContext` hookki](/reference/react/useContext) on tekniikka datan välittämiseen komponenttipuun läpi ilman että tarvitsee välittää propseja komponenttien läpi. Sitä käytetään luomalla tarjoaja komponentti ja usein luomalla hookki arvon käyttöön lapsikomponentissa.
+=======
+The [`useContext` Hook](/reference/react/useContext) is a technique for passing data down the component tree without having to pass props through components. It is used by creating a provider component and often by creating a Hook to consume the value in a child component.
+>>>>>>> d34c6a2c6fa49fc6f64b07aa4fa979d86d41c4e8
 
 Kontekstin tarjoaman arvon tyyppi päätellään arvosta joka annetaan `createContext` kutsulle:
 
 <Sandpack>
 
-```tsx App.tsx active
+```tsx src/App.tsx active
 import { createContext, useContext, useState } from 'react';
 
 type Theme = "light" | "dark" | "system";
@@ -260,9 +301,9 @@ export default function MyApp() {
   const [theme, setTheme] = useState<Theme>('light');
 
   return (
-    <ThemeContext.Provider value={theme}>
+    <ThemeContext value={theme}>
       <MyComponent />
-    </ThemeContext.Provider>
+    </ThemeContext>
   )
 }
 
@@ -277,16 +318,22 @@ function MyComponent() {
 }
 ```
 
-```js App.js hidden
+```js src/App.js hidden
 import AppTSX from "./App.tsx";
 export default App = AppTSX;
 ```
 
 </Sandpack>
 
+<<<<<<< HEAD
 Tämä tekniikka toimii kun sinulla on oletusarvo joka on järkevä - mutta on tapauksia jolloin sitä ei ole, ja näissä tapauksissa `null` voi tuntua järkevältä oletusarvolta. Kuitenkin, jotta tyyppijärjestelmä ymmärtäisi koodisi, sinun täytyy eksplisiittisesti asettaa `ContextShape | null` `createContext`:lle.
 
 Tämä aiheuttaa ongelman jossa sinun täytyy eliminoida `| null` tyyppi kontekstin kuluttajilta. Suosituksemme on että hookki tekee runtime tarkistuksen sen olemassaolosta ja heittää virheen kun sitä ei ole:
+=======
+This technique works when you have a default value which makes sense - but there are occasionally cases when you do not, and in those cases `null` can feel reasonable as a default value. However, to allow the type-system to understand your code, you need to explicitly set `ContextShape | null` on the `createContext`.
+
+This causes the issue that you need to eliminate the `| null` in the type for context consumers. Our recommendation is to have the Hook do a runtime check for it's existence and throw an error when not present:
+>>>>>>> d34c6a2c6fa49fc6f64b07aa4fa979d86d41c4e8
 
 ```js {5, 16-20}
 import { createContext, useContext, useState, useMemo } from 'react';
@@ -299,7 +346,11 @@ type ComplexObject = {
 // Konteksti luodaan `| null` tyypillä, jotta oletusarvo heijastuu tarkasti.
 const Context = createContext<ComplexObject | null>(null);
 
+<<<<<<< HEAD
 // `| null` tullaan poistamaan tarkistuksen kautta hookissa.
+=======
+// The `| null` will be removed via the check in the Hook.
+>>>>>>> d34c6a2c6fa49fc6f64b07aa4fa979d86d41c4e8
 const useGetComplexObject = () => {
   const object = useContext(Context);
   if (!object) { throw new Error("useGetComplexObject must be used within a Provider") }
@@ -310,9 +361,9 @@ export default function MyApp() {
   const object = useMemo(() => ({ kind: "complex" }), []);
 
   return (
-    <Context.Provider value={object}>
+    <Context value={object}>
       <MyComponent />
-    </Context.Provider>
+    </Context>
   )
 }
 
@@ -329,7 +380,17 @@ function MyComponent() {
 
 ### `useMemo` {/*typing-usememo*/}
 
+<<<<<<< HEAD
 [`useMemo`](/reference/react/useMemo) hookki luo/uudelleen käyttää muistettua arvoa funktiokutsusta, ajamalla funktiota uudelleen vain kun riippuvuudet jotka on annettu toisena parametrina muuttuvat. Kutsun tulosta päätellään palautusarvosta funktiossa ensimmäisenä parametrina. Voit olla eksplisiittisempi antamalla tyypin argumentin hookille.
+=======
+<Note>
+
+[React Compiler](/learn/react-compiler) automatically memoizes values and functions, reducing the need for manual `useMemo` calls. You can use the compiler to handle memoization automatically.
+
+</Note>
+
+The [`useMemo`](/reference/react/useMemo) Hooks will create/re-access a memorized value from a function call, re-running the function only when dependencies passed as the 2nd parameter are changed. The result of calling the Hook is inferred from the return value from the function in the first parameter. You can be more explicit by providing a type argument to the Hook.
+>>>>>>> d34c6a2c6fa49fc6f64b07aa4fa979d86d41c4e8
 
 ```ts
 // visibleTodos:n tyyppi päätellään filterTodos:n palautusarvosta
@@ -339,7 +400,17 @@ const visibleTodos = useMemo(() => filterTodos(todos, tab), [todos, tab]);
 
 ### `useCallback` {/*typing-usecallback*/}
 
+<<<<<<< HEAD
 [`useCallback`](/reference/react/useCallback) tarjoaa vakaan viitteen funktioon niin kauan kun riippuvuudet jotka on annettu toisena parametrina pysyvät samana. Kuten `useMemo`, funktion tyyppi päätellään funktiosta palautusarvona ensimmäisenä parametrina, ja voit olla eksplisiittisempi antamalla tyypin argumentin hookille.
+=======
+<Note>
+
+[React Compiler](/learn/react-compiler) automatically memoizes values and functions, reducing the need for manual `useCallback` calls. You can use the compiler to handle memoization automatically.
+
+</Note>
+
+The [`useCallback`](/reference/react/useCallback) provide a stable reference to a function as long as the dependencies passed into the second parameter are the same. Like `useMemo`, the function's type is inferred from the return value of the function in the first parameter, and you can be more explicit by providing a type argument to the Hook.
+>>>>>>> d34c6a2c6fa49fc6f64b07aa4fa979d86d41c4e8
 
 
 ```ts
@@ -350,7 +421,11 @@ const handleClick = useCallback(() => {
 
 Kun työskentelet TypeScriptin strict-moodissa `useCallback` vaatii lisäämään tyypit parametreille callbackissasi. Tämä johtuu siitä että callbackin tyyppi päätellään funktion palautusarvosta, ja ilman parametreja tyyppiä ei voida ymmärtää täysin.
 
+<<<<<<< HEAD
 Riippuen koodityylistäsi, voit käyttää `*EventHandler` funktioita Reactin tyypeistä tarjotaksesi tyypin tapahtumankäsittelijälle samaan aikaan kun määrittelet callbackin:
+=======
+Depending on your code-style preferences, you could use the `*EventHandler` functions from the React types to provide the type for the event handler at the same time as defining the callback:
+>>>>>>> d34c6a2c6fa49fc6f64b07aa4fa979d86d41c4e8
 
 ```ts
 import { useState, useCallback } from 'react';
@@ -361,7 +436,7 @@ export default function Form() {
   const handleChange = useCallback<React.ChangeEventHandler<HTMLInputElement>>((event) => {
     setValue(event.currentTarget.value);
   }, [setValue])
-  
+
   return (
     <>
       <input value={value} onChange={handleChange} />
@@ -381,7 +456,7 @@ Kun työskentelet DOM tapahtumien kanssa Reactissa, tapahtuman tyyppi voidaan us
 
 <Sandpack>
 
-```tsx App.tsx active
+```tsx src/App.tsx active
 import { useState } from 'react';
 
 export default function Form() {
@@ -400,7 +475,7 @@ export default function Form() {
 }
 ```
 
-```js App.js hidden
+```js src/App.js hidden
 import AppTSX from "./App.tsx";
 export default App = AppTSX;
 ```
@@ -433,9 +508,15 @@ interface ModalRendererProps {
 }
 ```
 
+<<<<<<< HEAD
 Huomaa, että et voi käyttää TypeScriptiä kuvaamaan että lapset ovat tietyn tyyppisiä JSX elementtejä, joten et voi käyttää tyyppijärjestelmää kuvaamaan komponenttia joka hyväksyy vain `<li>` lapsia.
 
 Näet esimerkin sekä `React.ReactNode`:sta että `React.ReactElement`:sta tyyppitarkistuksella [tässä TypeScript hiekkalaatikossa](https://www.typescriptlang.org/play?#code/JYWwDg9gTgLgBAJQKYEMDG8BmUIjgIilQ3wChSB6CxYmAOmXRgDkIATJOdNJMGAZzgwAFpxAR+8YADswAVwGkZMJFEzpOjDKw4AFHGEEBvUnDhphwADZsi0gFw0mDWjqQBuUgF9yaCNMlENzgAXjgACjADfkctFnYkfQhDAEpQgD44AB42YAA3dKMo5P46C2tbJGkvLIpcgt9-QLi3AEEwMFCItJDMrPTTbIQ3dKywdIB5aU4kKyQQKpha8drhhIGzLLWODbNs3b3s8YAxKBQAcwXpAThMaGWDvbH0gFloGbmrgQfBzYpd1YjQZbEYARkB6zMwO2SHSAAlZlYIBCdtCRkZpHIrFYahQYQD8UYYFA5EhcfjyGYqHAXnJAsIUHlOOUbHYhMIIHJzsI0Qk4P9SLUBuRqXEXEwAKKfRZcNA8PiCfxWACecAAUgBlAAacFm80W-CU11U6h4TgwUv11yShjgJjMLMqDnN9Dilq+nh8pD8AXgCHdMrCkWisVoAet0R6fXqhWKhjKllZVVxMcavpd4Zg7U6Qaj+2hmdG4zeRF10uu-Aeq0LBfLMEe-V+T2L7zLVu+FBWLdLeq+lc7DYFf39deFVOotMCACNOCh1dq219a+30uC8YWoZsRyuEdjkevR8uvoVMdjyTWt4WiSSydXD4NqZP4AymeZE072ZzuUeZQKheQgA).
+=======
+Note, that you cannot use TypeScript to describe that the children are a certain type of JSX elements, so you cannot use the type-system to describe a component which only accepts `<li>` children.
+
+You can see an example of both `React.ReactNode` and `React.ReactElement` with the type-checker in [this TypeScript playground](https://www.typescriptlang.org/play?#code/JYWwDg9gTgLgBAJQKYEMDG8BmUIjgIilQ3wChSB6CxYmAOmXRgDkIATJOdNJMGAZzgwAFpxAR+8YADswAVwGkZMJFEzpOjDKw4AFHGEEBvUnDhphwADZsi0gFw0mDWjqQBuUgF9yaCNMlENzgAXjgACjADfkctFnYkfQhDAEpQgD44AB42YAA3dKMo5P46C2tbJGkvLIpcgt9-QLi3AEEwMFCItJDMrPTTbIQ3dKywdIB5aU4kKyQQKpha8drhhIGzLLWODbNs3b3s8YAxKBQAcwXpAThMaGWDvbH0gFloGbmrgQfBzYpd1YjQZbEYARkB6zMwO2SHSAAlZlYIBCdtCRkZpHIrFYahQYQD8UYYFA5EhcfjyGYqHAXnJAsIUHlOOUbHYhMIIHJzsI0Qk4P9SLUBuRqXEXEwAKKfRZcNA8PiCfxWACecAAUgBlAAacFm80W-CU11U6h4TgwUv11yShjgJjMLMqDnN9Dilq+nh8pD8AXgCHdMrCkWisVoAet0R6fXqhWKhjKllZVVxMcavpd4Zg7U6Qaj+2hmdG4zeRF10uu-Aeq0LBfLMEe-V+T2L7zLVu+FBWLdLeq+lc7DYFf39deFVOotMCACNOCh1dq219a+30uC8YWoZsRyuEdjkevR8uvoVMdjyTWt4WiSSydXD4NqZP4AymeZE072ZzuUeZQKheQgA).
+>>>>>>> d34c6a2c6fa49fc6f64b07aa4fa979d86d41c4e8
 
 ### Tyylipropsit {/*typing-style-props*/}
 
@@ -456,7 +537,11 @@ Suosittelemme seuraavia resursseja:
 
  - [The TypeScript handbook](https://www.typescriptlang.org/docs/handbook/) on virallinen dokumentaatio TypeScriptille, ja kattaa suurimman osan tärkeimmistä ominaisuuksista.
 
+<<<<<<< HEAD
  - [The TypeScript release notes](https://devblogs.microsoft.com/typescript/) kattaa jokaisen uuden ominaisuuden syvällisesti.
+=======
+ - [The TypeScript release notes](https://devblogs.microsoft.com/typescript/) cover new features in depth.
+>>>>>>> d34c6a2c6fa49fc6f64b07aa4fa979d86d41c4e8
 
  - [React TypeScript Cheatsheet](https://react-typescript-cheatsheet.netlify.app/) on yhteisön ylläpitämä lunttilappu TypeScriptin käyttöön Reactin kanssa, kattaa paljon hyödyllisiä reunoja ja tarjoaa enemmän syvyyttä kuin tämä dokumentti.
 
