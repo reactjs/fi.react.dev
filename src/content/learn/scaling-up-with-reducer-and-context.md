@@ -22,7 +22,7 @@ Tässä esimerkissä [reduktoriin tutustumisesta](/learn/extracting-state-logic-
 
 <Sandpack>
 
-```js App.js
+```js src/App.js
 import { useReducer } from 'react';
 import AddTask from './AddTask.js';
 import TaskList from './TaskList.js';
@@ -105,7 +105,7 @@ const initialTasks = [
 ];
 ```
 
-```js AddTask.js
+```js src/AddTask.js
 import { useState } from 'react';
 
 export default function AddTask({ onAddTask }) {
@@ -126,7 +126,7 @@ export default function AddTask({ onAddTask }) {
 }
 ```
 
-```js TaskList.js
+```js src/TaskList.js
 import { useState } from 'react';
 
 export default function TaskList({
@@ -256,7 +256,7 @@ Exporttaa ne erillisestä tiedostosta, jotta voit myöhemmin importata ne muista
 
 <Sandpack>
 
-```js App.js
+```js src/App.js
 import { useReducer } from 'react';
 import AddTask from './AddTask.js';
 import TaskList from './TaskList.js';
@@ -339,14 +339,14 @@ const initialTasks = [
 ];
 ```
 
-```js TasksContext.js active
+```js src/TasksContext.js active
 import { createContext } from 'react';
 
 export const TasksContext = createContext(null);
 export const TasksDispatchContext = createContext(null);
 ```
 
-```js AddTask.js
+```js src/AddTask.js
 import { useState } from 'react';
 
 export default function AddTask({ onAddTask }) {
@@ -367,7 +367,7 @@ export default function AddTask({ onAddTask }) {
 }
 ```
 
-```js TaskList.js
+```js src/TaskList.js
 import { useState } from 'react';
 
 export default function TaskList({
@@ -461,11 +461,11 @@ export default function TaskApp() {
   const [tasks, dispatch] = useReducer(tasksReducer, initialTasks);
   // ...
   return (
-    <TasksContext.Provider value={tasks}>
-      <TasksDispatchContext.Provider value={dispatch}>
+    <TasksContext value={tasks}>
+      <TasksDispatchContext value={dispatch}>
         ...
-      </TasksDispatchContext.Provider>
-    </TasksContext.Provider>
+      </TasksDispatchContext>
+    </TasksContext>
   );
 }
 ```
@@ -474,7 +474,7 @@ Tällä hetkellä välität tiedon sekä propsien että kontekstin kautta:
 
 <Sandpack>
 
-```js App.js
+```js src/App.js
 import { useReducer } from 'react';
 import AddTask from './AddTask.js';
 import TaskList from './TaskList.js';
@@ -509,8 +509,8 @@ export default function TaskApp() {
   }
 
   return (
-    <TasksContext.Provider value={tasks}>
-      <TasksDispatchContext.Provider value={dispatch}>
+    <TasksContext value={tasks}>
+      <TasksDispatchContext value={dispatch}>
         <h1>Day off in Kyoto</h1>
         <AddTask
           onAddTask={handleAddTask}
@@ -520,8 +520,8 @@ export default function TaskApp() {
           onChangeTask={handleChangeTask}
           onDeleteTask={handleDeleteTask}
         />
-      </TasksDispatchContext.Provider>
-    </TasksContext.Provider>
+      </TasksDispatchContext>
+    </TasksContext>
   );
 }
 
@@ -560,14 +560,14 @@ const initialTasks = [
 ];
 ```
 
-```js TasksContext.js
+```js src/TasksContext.js
 import { createContext } from 'react';
 
 export const TasksContext = createContext(null);
 export const TasksDispatchContext = createContext(null);
 ```
 
-```js AddTask.js
+```js src/AddTask.js
 import { useState } from 'react';
 
 export default function AddTask({ onAddTask }) {
@@ -588,7 +588,7 @@ export default function AddTask({ onAddTask }) {
 }
 ```
 
-```js TaskList.js
+```js src/TaskList.js
 import { useState } from 'react';
 
 export default function TaskList({
@@ -676,16 +676,20 @@ Seuraavassa vaiheessa, tulet poistamaan propsien välittämisen.
 Nyt sinun ei tarvitse välittää listaa tehtävistä tai tapahtumankäsittelijöistä:
 
 ```js {4-5}
-<TasksContext.Provider value={tasks}>
-  <TasksDispatchContext.Provider value={dispatch}>
+<TasksContext value={tasks}>
+  <TasksDispatchContext value={dispatch}>
     <h1>Day off in Kyoto</h1>
     <AddTask />
     <TaskList />
-  </TasksDispatchContext.Provider>
-</TasksContext.Provider>
+  </TasksDispatchContext>
+</TasksContext>
 ```
 
+<<<<<<< HEAD
 Sen sijaan, mikä tahansa komponentti, joka tarvitsee tehtävälistan, voi lukea sen `TaskContext`:sta:
+=======
+Instead, any component that needs the task list can read it from the `TasksContext`:
+>>>>>>> 366b5fbdadefecbbf9f6ef36c0342c083248c691
 
 ```js {2}
 export default function TaskList() {
@@ -717,7 +721,7 @@ export default function AddTask() {
 
 <Sandpack>
 
-```js App.js
+```js src/App.js
 import { useReducer } from 'react';
 import AddTask from './AddTask.js';
 import TaskList from './TaskList.js';
@@ -730,13 +734,13 @@ export default function TaskApp() {
   );
 
   return (
-    <TasksContext.Provider value={tasks}>
-      <TasksDispatchContext.Provider value={dispatch}>
+    <TasksContext value={tasks}>
+      <TasksDispatchContext value={dispatch}>
         <h1>Day off in Kyoto</h1>
         <AddTask />
         <TaskList />
-      </TasksDispatchContext.Provider>
-    </TasksContext.Provider>
+      </TasksDispatchContext>
+    </TasksContext>
   );
 }
 
@@ -774,14 +778,14 @@ const initialTasks = [
 ];
 ```
 
-```js TasksContext.js
+```js src/TasksContext.js
 import { createContext } from 'react';
 
 export const TasksContext = createContext(null);
 export const TasksDispatchContext = createContext(null);
 ```
 
-```js AddTask.js
+```js src/AddTask.js
 import { useState, useContext } from 'react';
 import { TasksDispatchContext } from './TasksContext.js';
 
@@ -810,7 +814,7 @@ export default function AddTask() {
 let nextId = 3;
 ```
 
-```js TaskList.js active
+```js src/TaskList.js active
 import { useState, useContext } from 'react';
 import { TasksContext, TasksDispatchContext } from './TasksContext.js';
 
@@ -921,11 +925,11 @@ export function TasksProvider({ children }) {
   const [tasks, dispatch] = useReducer(tasksReducer, initialTasks);
 
   return (
-    <TasksContext.Provider value={tasks}>
-      <TasksDispatchContext.Provider value={dispatch}>
+    <TasksContext value={tasks}>
+      <TasksDispatchContext value={dispatch}>
         {children}
-      </TasksDispatchContext.Provider>
-    </TasksContext.Provider>
+      </TasksDispatchContext>
+    </TasksContext>
   );
 }
 ```
@@ -934,7 +938,7 @@ export function TasksProvider({ children }) {
 
 <Sandpack>
 
-```js App.js
+```js src/App.js
 import AddTask from './AddTask.js';
 import TaskList from './TaskList.js';
 import { TasksProvider } from './TasksContext.js';
@@ -950,7 +954,7 @@ export default function TaskApp() {
 }
 ```
 
-```js TasksContext.js
+```js src/TasksContext.js
 import { createContext, useReducer } from 'react';
 
 export const TasksContext = createContext(null);
@@ -963,11 +967,11 @@ export function TasksProvider({ children }) {
   );
 
   return (
-    <TasksContext.Provider value={tasks}>
-      <TasksDispatchContext.Provider value={dispatch}>
+    <TasksContext value={tasks}>
+      <TasksDispatchContext value={dispatch}>
         {children}
-      </TasksDispatchContext.Provider>
-    </TasksContext.Provider>
+      </TasksDispatchContext>
+    </TasksContext>
   );
 }
 
@@ -1005,7 +1009,7 @@ const initialTasks = [
 ];
 ```
 
-```js AddTask.js
+```js src/AddTask.js
 import { useState, useContext } from 'react';
 import { TasksDispatchContext } from './TasksContext.js';
 
@@ -1034,7 +1038,7 @@ export default function AddTask() {
 let nextId = 3;
 ```
 
-```js TaskList.js
+```js src/TaskList.js
 import { useState, useContext } from 'react';
 import { TasksContext, TasksDispatchContext } from './TasksContext.js';
 
@@ -1144,7 +1148,7 @@ Tämä ei muuta toiminnallisuutta mitenkään, mutta sen avulla voit myöhemmin 
 
 <Sandpack>
 
-```js App.js
+```js src/App.js
 import AddTask from './AddTask.js';
 import TaskList from './TaskList.js';
 import { TasksProvider } from './TasksContext.js';
@@ -1160,7 +1164,7 @@ export default function TaskApp() {
 }
 ```
 
-```js TasksContext.js
+```js src/TasksContext.js
 import { createContext, useContext, useReducer } from 'react';
 
 const TasksContext = createContext(null);
@@ -1174,11 +1178,11 @@ export function TasksProvider({ children }) {
   );
 
   return (
-    <TasksContext.Provider value={tasks}>
-      <TasksDispatchContext.Provider value={dispatch}>
+    <TasksContext value={tasks}>
+      <TasksDispatchContext value={dispatch}>
         {children}
-      </TasksDispatchContext.Provider>
-    </TasksContext.Provider>
+      </TasksDispatchContext>
+    </TasksContext>
   );
 }
 
@@ -1224,7 +1228,7 @@ const initialTasks = [
 ];
 ```
 
-```js AddTask.js
+```js src/AddTask.js
 import { useState } from 'react';
 import { useTasksDispatch } from './TasksContext.js';
 
@@ -1253,7 +1257,7 @@ export default function AddTask() {
 let nextId = 3;
 ```
 
-```js TaskList.js active
+```js src/TaskList.js active
 import { useState } from 'react';
 import { useTasks, useTasksDispatch } from './TasksContext.js';
 
@@ -1363,4 +1367,3 @@ Kun sovelluksesi kasvaa, sinulla voi olla useita context-reducer-paria kuten tä
 - Sinulla voi olla useita konteksti-reduktori -pareja sovelluksessasi.
 
 </Recap>
-
