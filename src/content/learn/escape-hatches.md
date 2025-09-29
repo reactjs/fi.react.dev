@@ -163,7 +163,7 @@ export default function ChatRoom() {
 }
 ```
 
-```js chat.js
+```js src/chat.js
 export function createConnection() {
   // Todellinen toteutus yhdistäisi palvelimeen oikeasti
   return {
@@ -201,7 +201,7 @@ On kaksi yleistä tapaa missä et tarvitse Efektiä:
 
 Esimerkiksi, et tarvitse Efektiä säätääksesi jotain tilaa toisen tilan perusteella:
 
-```js {5-9}
+```js {expectedErrors: {'react-compiler': [8]}} {5-9}
 function Form() {
   const [firstName, setFirstName] = useState('Taylor');
   const [lastName, setLastName] = useState('Swift');
@@ -281,7 +281,7 @@ export default function App() {
 }
 ```
 
-```js chat.js
+```js src/chat.js
 export function createConnection(serverUrl, roomId) {
   // Todellinen toteutus yhdistäisi palvelimeen oikeasti
   return {
@@ -395,7 +395,7 @@ export default function App() {
 }
 ```
 
-```js chat.js
+```js src/chat.js
 export function createConnection(serverUrl, roomId) {
   // Todellinen toteutus yhdistäisi palvelimeen oikeasti
   let connectedCallback;
@@ -424,7 +424,7 @@ export function createConnection(serverUrl, roomId) {
 }
 ```
 
-```js notifications.js
+```js src/notifications.js
 import Toastify from 'toastify-js';
 import 'toastify-js/src/toastify.css';
 
@@ -455,8 +455,8 @@ Tämä ei ole ihanteellista. Haluat yhdistää uudelleen chattiin vain jos `room
 ```json package.json hidden
 {
   "dependencies": {
-    "react": "experimental",
-    "react-dom": "experimental",
+    "react": "canary",
+    "react-dom": "canary",
     "react-scripts": "latest",
     "toastify-js": "1.12.0"
   },
@@ -471,7 +471,7 @@ Tämä ei ole ihanteellista. Haluat yhdistää uudelleen chattiin vain jos `room
 
 ```js
 import { useState, useEffect } from 'react';
-import { experimental_useEffectEvent as useEffectEvent } from 'react';
+import { useEffectEvent } from 'react';
 import { createConnection, sendMessage } from './chat.js';
 import { showNotification } from './notifications.js';
 
@@ -528,7 +528,7 @@ export default function App() {
 }
 ```
 
-```js chat.js
+```js src/chat.js
 export function createConnection(serverUrl, roomId) {
   // Todellinen toteutus yhdistäisi palvelimeen oikeasti
   let connectedCallback;
@@ -557,7 +557,7 @@ export function createConnection(serverUrl, roomId) {
 }
 ```
 
-```js notifications.js hidden
+```js src/notifications.js hidden
 import Toastify from 'toastify-js';
 import 'toastify-js/src/toastify.css';
 
@@ -647,7 +647,7 @@ export default function App() {
 }
 ```
 
-```js chat.js
+```js src/chat.js
 export function createConnection({ serverUrl, roomId }) {
   // Todellinen toteutus yhdistäisi palvelimeen oikeasti
   return {
@@ -721,7 +721,7 @@ export default function App() {
 }
 ```
 
-```js chat.js
+```js src/chat.js
 export function createConnection({ serverUrl, roomId }) {
   // Todellinen toteutus yhdistäisi palvelimeen oikeasti
   return {
@@ -797,7 +797,7 @@ function Dot({ position, opacity }) {
 }
 ```
 
-```js usePointerPosition.js
+```js src/usePointerPosition.js
 import { useState, useEffect } from 'react';
 
 export function usePointerPosition() {
@@ -813,7 +813,7 @@ export function usePointerPosition() {
 }
 ```
 
-```js useDelayedValue.js
+```js src/useDelayedValue.js
 import { useState, useEffect } from 'react';
 
 export function useDelayedValue(value, delay) {

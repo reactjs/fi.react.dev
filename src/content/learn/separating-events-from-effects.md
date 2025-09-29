@@ -44,7 +44,11 @@ function ChatRoom({ roomId }) {
   return (
     <>
       <input value={message} onChange={e => setMessage(e.target.value)} />
+<<<<<<< HEAD
       <button onClick={handleSendClick}>Lähetä</button>;
+=======
+      <button onClick={handleSendClick}>Send</button>
+>>>>>>> 49c2d26722fb1b5865ce0221a4cadc71b615e4cf
     </>
   );
 }
@@ -130,7 +134,7 @@ export default function App() {
 }
 ```
 
-```js chat.js
+```js src/chat.js
 export function sendMessage(message) {
   console.log('🔵 You sent: ' + message);
 }
@@ -333,7 +337,7 @@ export default function App() {
 }
 ```
 
-```js chat.js
+```js src/chat.js
 export function createConnection(serverUrl, roomId) {
   // Todellinen toteutus yhdistäisi palvelimeen
   let connectedCallback;
@@ -362,7 +366,7 @@ export function createConnection(serverUrl, roomId) {
 }
 ```
 
-```js notifications.js
+```js src/notifications.js
 import Toastify from 'toastify-js';
 import 'toastify-js/src/toastify.css';
 
@@ -400,13 +404,23 @@ Tarvitset tavan erottaa tämän ei-reaktiivisen logiikan reaktiivisesta Efektist
 
 ### Efektitapahtuman määrittäminen {/*declaring-an-effect-event*/}
 
-<Wip>
+<Canary>
 
+<<<<<<< HEAD
 Tämä kohta kuvailee **kokeellista API:a joka ei ole vielä julkaistu** Reactin vakaassa versiossa.
+=======
+**The `useEffectEvent` API is currently only available in React’s Canary and Experimental channels.** 
+>>>>>>> 49c2d26722fb1b5865ce0221a4cadc71b615e4cf
 
-</Wip>
+[Learn more about React’s release channels here.](/community/versioning-policy#all-release-channels)
 
+<<<<<<< HEAD
 Käytä erityistä Hookia nimeltä [`useEffectEvent`](/reference/react/experimental_useEffectEvent) irroittaaksesi tämän ei-reaktiivisen logiikan Efektistä:
+=======
+</Canary>
+
+Use a special Hook called [`useEffectEvent`](/reference/react/useEffectEvent) to extract this non-reactive logic out of your Effect:
+>>>>>>> 49c2d26722fb1b5865ce0221a4cadc71b615e4cf
 
 ```js {1,4-6}
 import { useEffect, useEffectEvent } from 'react';
@@ -439,7 +453,11 @@ function ChatRoom({ roomId, theme }) {
   // ...
 ```
 
+<<<<<<< HEAD
 Tämä korjaa ongelman. Huomaa, että sinun täytyi *poistaa* `onConnected` Efektisi riippuvuuksien listalta. **Efektitapahtumat eivät ole reaktiivisia ja ne täytyy jättää pois riippuvuuksien listalta.**
+=======
+This solves the problem. Note that you had to *remove* `theme` from the list of your Effect's dependencies, because it's no longer used in the Effect. You also don't need to *add* `onConnected` to it, because **Effect Events are not reactive and must be omitted from dependencies.**
+>>>>>>> 49c2d26722fb1b5865ce0221a4cadc71b615e4cf
 
 Varmista, että uusi käyttäytyminen toimii odotetusti:
 
@@ -448,8 +466,8 @@ Varmista, että uusi käyttäytyminen toimii odotetusti:
 ```json package.json hidden
 {
   "dependencies": {
-    "react": "experimental",
-    "react-dom": "experimental",
+    "react": "canary",
+    "react-dom": "canary",
     "react-scripts": "latest",
     "toastify-js": "1.12.0"
   },
@@ -464,7 +482,7 @@ Varmista, että uusi käyttäytyminen toimii odotetusti:
 
 ```js
 import { useState, useEffect } from 'react';
-import { experimental_useEffectEvent as useEffectEvent } from 'react';
+import { useEffectEvent } from 'react';
 import { createConnection, sendMessage } from './chat.js';
 import { showNotification } from './notifications.js';
 
@@ -521,7 +539,7 @@ export default function App() {
 }
 ```
 
-```js chat.js
+```js src/chat.js
 export function createConnection(serverUrl, roomId) {
   // Todellinen toteutus yhdistäisi palvelimeen oikeasti
   let connectedCallback;
@@ -550,7 +568,7 @@ export function createConnection(serverUrl, roomId) {
 }
 ```
 
-```js notifications.js hidden
+```js src/notifications.js hidden
 import Toastify from 'toastify-js';
 import 'toastify-js/src/toastify.css';
 
@@ -578,11 +596,17 @@ Voit ajatella Efektitapahtumien olevat hyvin samanlaisia kuin tapahtumankäsitte
 
 ### Viimeisimmän propsin ja tilan lukeminen Efektitapahtumilla {/*reading-latest-props-and-state-with-effect-events*/}
 
-<Wip>
+<Canary>
 
+<<<<<<< HEAD
 Tämä kohta kuvailee **kokeellista API:a joka ei ole vielä julkaistu** Reactin vakaassa versiossa.
+=======
+**The `useEffectEvent` API is currently only available in React’s Canary and Experimental channels.** 
+>>>>>>> 49c2d26722fb1b5865ce0221a4cadc71b615e4cf
 
-</Wip>
+[Learn more about React’s release channels here.](/community/versioning-policy#all-release-channels)
+
+</Canary>
 
 Efektitapahtumien avulla voit korjata monia tapauksia, joissa saattaisit kokea houkutuksen linterin hiljentämiseen.
 
@@ -711,7 +735,7 @@ Tässä, `url` `onVisit`:n sisällä vastaa *viimeisintä* `url`:ää (joka saat
 
 Olemassa olevissa koodipohjissa, saatat törmätä linterin hiljentämiseen tällä tavalla:
 
-```js {7-9}
+```js {expectedErrors: {'react-compiler': [8]}} {7-9}
 function Page({ url }) {
   const { items } = useContext(ShoppingCartContext);
   const numberOfItems = items.length;
@@ -735,7 +759,7 @@ Löydätkö miksi?
 
 <Sandpack>
 
-```js
+```js {expectedErrors: {'react-compiler': [16]}}
 import { useState, useEffect } from 'react';
 
 export default function App() {
@@ -803,8 +827,8 @@ Käyttämällä `useEffectEvent` hookkia, ei ole tarpeen "valehdella" linterille
 ```json package.json hidden
 {
   "dependencies": {
-    "react": "experimental",
-    "react-dom": "experimental",
+    "react": "canary",
+    "react-dom": "canary",
     "react-scripts": "latest"
   },
   "scripts": {
@@ -818,7 +842,7 @@ Käyttämällä `useEffectEvent` hookkia, ei ole tarpeen "valehdella" linterille
 
 ```js
 import { useState, useEffect } from 'react';
-import { experimental_useEffectEvent as useEffectEvent } from 'react';
+import { useEffectEvent } from 'react';
 
 export default function App() {
   const [position, setPosition] = useState({ x: 0, y: 0 });
@@ -878,11 +902,17 @@ Lue [Riippuvuuksien poistaminen Efektista](/learn/removing-effect-dependencies) 
 
 ### Efektitapahtumien rajoitteet {/*limitations-of-effect-events*/}
 
-<Wip>
+<Canary>
 
+<<<<<<< HEAD
 Tämä kohta kuvailee **kokeellista API:a joka ei ole vielä julkaistu** Reactin vakaassa versiossa.
+=======
+**The `useEffectEvent` API is currently only available in React’s Canary and Experimental channels.** 
+>>>>>>> 49c2d26722fb1b5865ce0221a4cadc71b615e4cf
 
-</Wip>
+[Learn more about React’s release channels here.](/community/versioning-policy#all-release-channels)
+
+</Canary>
 
 Efektitapahtumat ovat hyvin rajattuja siinä miten voit käyttää niitä:
 
@@ -973,7 +1003,24 @@ Korjataksesi tämä koodi, riittää että seuraat sääntöjä.
 
 <Sandpack>
 
-```js
+```json package.json hidden
+{
+  "dependencies": {
+    "react": "canary",
+    "react-dom": "canary",
+    "react-scripts": "latest"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  }
+}
+```
+
+
+```js {expectedErrors: {'react-compiler': [14]}}
 import { useState, useEffect } from 'react';
 
 export default function Timer() {
@@ -1025,6 +1072,22 @@ Kuten yleensä, kun etsit bugeja Efekteista, aloita etsimällä linterin hiljenn
 Jos poistat hiljennykommentin, React kertoo sinulle, että tämän Efektin koodi riippuu `increment`:sta, mutta "valehtelit" Reactille väittämällä, että tämä Efekti ei riipu mistään reaktiivisista arvoista (`[]`). Lisää `increment` riippuvuuslistalle:
 
 <Sandpack>
+
+```json package.json hidden
+{
+  "dependencies": {
+    "react": "canary",
+    "react-dom": "canary",
+    "react-scripts": "latest"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  }
+}
+```
 
 ```js
 import { useState, useEffect } from 'react';
@@ -1091,8 +1154,8 @@ Näyttää siltä, että Efekti joka asettaa ajastimen "reagoi" `increment` arvo
 ```json package.json hidden
 {
   "dependencies": {
-    "react": "experimental",
-    "react-dom": "experimental",
+    "react": "canary",
+    "react-dom": "canary",
     "react-scripts": "latest"
   },
   "scripts": {
@@ -1106,7 +1169,7 @@ Näyttää siltä, että Efekti joka asettaa ajastimen "reagoi" `increment` arvo
 
 ```js
 import { useState, useEffect } from 'react';
-import { experimental_useEffectEvent as useEffectEvent } from 'react';
+import { useEffectEvent } from 'react';
 
 export default function Timer() {
   const [count, setCount] = useState(0);
@@ -1160,8 +1223,8 @@ Korjataksesi ongelman, irroita `onTick` Efektitapahtuma Efektistä:
 ```json package.json hidden
 {
   "dependencies": {
-    "react": "experimental",
-    "react-dom": "experimental",
+    "react": "canary",
+    "react-dom": "canary",
     "react-scripts": "latest"
   },
   "scripts": {
@@ -1175,7 +1238,7 @@ Korjataksesi ongelman, irroita `onTick` Efektitapahtuma Efektistä:
 
 ```js
 import { useState, useEffect } from 'react';
-import { experimental_useEffectEvent as useEffectEvent } from 'react';
+import { useEffectEvent } from 'react';
 
 export default function Timer() {
   const [count, setCount] = useState(0);
@@ -1242,8 +1305,8 @@ Koodi Efektitapahtuman sisällä ei ole reaktiivista. Onko tapauksia joissa halu
 ```json package.json hidden
 {
   "dependencies": {
-    "react": "experimental",
-    "react-dom": "experimental",
+    "react": "canary",
+    "react-dom": "canary",
     "react-scripts": "latest"
   },
   "scripts": {
@@ -1257,7 +1320,7 @@ Koodi Efektitapahtuman sisällä ei ole reaktiivista. Onko tapauksia joissa halu
 
 ```js
 import { useState, useEffect } from 'react';
-import { experimental_useEffectEvent as useEffectEvent } from 'react';
+import { useEffectEvent } from 'react';
 
 export default function Timer() {
   const [count, setCount] = useState(0);
@@ -1329,8 +1392,8 @@ Ongelma yllä olevassa esimerkissä on, että se erotti Efektitapahtuman nimelt�
 ```json package.json hidden
 {
   "dependencies": {
-    "react": "experimental",
-    "react-dom": "experimental",
+    "react": "canary",
+    "react-dom": "canary",
     "react-scripts": "latest"
   },
   "scripts": {
@@ -1344,7 +1407,7 @@ Ongelma yllä olevassa esimerkissä on, että se erotti Efektitapahtuman nimelt�
 
 ```js
 import { useState, useEffect } from 'react';
-import { experimental_useEffectEvent as useEffectEvent } from 'react';
+import { useEffectEvent } from 'react';
 
 export default function Timer() {
   const [count, setCount] = useState(0);
@@ -1425,8 +1488,8 @@ Efektisi tietää mihin huoneeseen se on yhdistetty. Onko mitään tietoa, jonka
 ```json package.json hidden
 {
   "dependencies": {
-    "react": "experimental",
-    "react-dom": "experimental",
+    "react": "canary",
+    "react-dom": "canary",
     "react-scripts": "latest",
     "toastify-js": "1.12.0"
   },
@@ -1441,7 +1504,7 @@ Efektisi tietää mihin huoneeseen se on yhdistetty. Onko mitään tietoa, jonka
 
 ```js
 import { useState, useEffect } from 'react';
-import { experimental_useEffectEvent as useEffectEvent } from 'react';
+import { useEffectEvent } from 'react';
 import { createConnection, sendMessage } from './chat.js';
 import { showNotification } from './notifications.js';
 
@@ -1500,7 +1563,7 @@ export default function App() {
 }
 ```
 
-```js chat.js
+```js src/chat.js
 export function createConnection(serverUrl, roomId) {
   // Todellinen toteutus yhdistäisi palvelimeen oikeasti
   let connectedCallback;
@@ -1529,7 +1592,7 @@ export function createConnection(serverUrl, roomId) {
 }
 ```
 
-```js notifications.js hidden
+```js src/notifications.js hidden
 import Toastify from 'toastify-js';
 import 'toastify-js/src/toastify.css';
 
@@ -1566,8 +1629,8 @@ Korjataksesi ongelma, sen sijaan että lukisit *uusimman* `roomId` arvon Efektit
 ```json package.json hidden
 {
   "dependencies": {
-    "react": "experimental",
-    "react-dom": "experimental",
+    "react": "canary",
+    "react-dom": "canary",
     "react-scripts": "latest",
     "toastify-js": "1.12.0"
   },
@@ -1582,7 +1645,7 @@ Korjataksesi ongelma, sen sijaan että lukisit *uusimman* `roomId` arvon Efektit
 
 ```js
 import { useState, useEffect } from 'react';
-import { experimental_useEffectEvent as useEffectEvent } from 'react';
+import { useEffectEvent } from 'react';
 import { createConnection, sendMessage } from './chat.js';
 import { showNotification } from './notifications.js';
 
@@ -1641,7 +1704,7 @@ export default function App() {
 }
 ```
 
-```js chat.js
+```js src/chat.js
 export function createConnection(serverUrl, roomId) {
   // Todellinen toteutus yhdistäisi palvelimeen oikeasti
   let connectedCallback;
@@ -1670,7 +1733,7 @@ export function createConnection(serverUrl, roomId) {
 }
 ```
 
-```js notifications.js hidden
+```js src/notifications.js hidden
 import Toastify from 'toastify-js';
 import 'toastify-js/src/toastify.css';
 
@@ -1703,8 +1766,8 @@ Ratkaistaksesi lisähaasteen, tallenna ilmoituksen viiveen ID ja siivoa se Efekt
 ```json package.json hidden
 {
   "dependencies": {
-    "react": "experimental",
-    "react-dom": "experimental",
+    "react": "canary",
+    "react-dom": "canary",
     "react-scripts": "latest",
     "toastify-js": "1.12.0"
   },
@@ -1719,7 +1782,7 @@ Ratkaistaksesi lisähaasteen, tallenna ilmoituksen viiveen ID ja siivoa se Efekt
 
 ```js
 import { useState, useEffect } from 'react';
-import { experimental_useEffectEvent as useEffectEvent } from 'react';
+import { useEffectEvent } from 'react';
 import { createConnection, sendMessage } from './chat.js';
 import { showNotification } from './notifications.js';
 
@@ -1784,7 +1847,7 @@ export default function App() {
 }
 ```
 
-```js chat.js
+```js src/chat.js
 export function createConnection(serverUrl, roomId) {
   // Oikea toteutus yhdistäisi palvelimeen oikeasti
   let connectedCallback;
@@ -1813,7 +1876,7 @@ export function createConnection(serverUrl, roomId) {
 }
 ```
 
-```js notifications.js hidden
+```js src/notifications.js hidden
 import Toastify from 'toastify-js';
 import 'toastify-js/src/toastify.css';
 
