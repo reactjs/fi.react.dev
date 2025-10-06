@@ -32,7 +32,15 @@
           "path": "/community/docs-contributors"
         },
         {
+<<<<<<< HEAD
           "title": "Tunnustukset",
+=======
+          "title": "Translations",
+          "path": "/community/translations"
+        },
+        {
+          "title": "Acknowledgements",
+>>>>>>> 11cb6b591571caf5fa2a192117b6a6445c3f2027
           "path": "/community/acknowledgements"
         },
         {

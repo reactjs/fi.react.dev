@@ -4,7 +4,11 @@ title: Pika-aloitus
 
 <Intro>
 
+<<<<<<< HEAD
 Tervetuloa Reactin dokumentaatioon. Tällä sivulla esitellään 80% Reactin konsepteista, joita käytät päivittäin.
+=======
+Welcome to the React documentation! This page will give you an introduction to 80% of the React concepts that you will use on a daily basis.
+>>>>>>> 11cb6b591571caf5fa2a192117b6a6445c3f2027
 
 </Intro>
 
