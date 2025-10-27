@@ -547,7 +547,7 @@ Painikkeen painamisen on tarkoitus vaihtaa sivun taustaväriä valkoisen ja must
 
 <Sandpack>
 
-```js
+```js {expectedErrors: {'react-compiler': [5, 7]}}
 export default function LightSwitch() {
   function handleClick() {
     let bodyStyle = document.body.style;
@@ -630,7 +630,7 @@ Kun olet tehnyt tämän, huomaa, että painikkeen klikkaaminen myös kasvattaa s
 
 <Sandpack>
 
-```js ColorSwitch.js active
+```js src/ColorSwitch.js active
 export default function ColorSwitch({
   onChangeColor
 }) {
@@ -642,7 +642,7 @@ export default function ColorSwitch({
 }
 ```
 
-```js App.js hidden
+```js src/App.js hidden
 import { useState } from 'react';
 import ColorSwitch from './ColorSwitch.js';
 
@@ -686,7 +686,7 @@ Tämä kuitenkin luo ongelman kasvavasta luvusta. Jos `onChangeColor` ei tee tä
 
 <Sandpack>
 
-```js ColorSwitch.js active
+```js src/ColorSwitch.js active
 export default function ColorSwitch({
   onChangeColor
 }) {
@@ -701,7 +701,7 @@ export default function ColorSwitch({
 }
 ```
 
-```js App.js hidden
+```js src/App.js hidden
 import { useState } from 'react';
 import ColorSwitch from './ColorSwitch.js';
 
