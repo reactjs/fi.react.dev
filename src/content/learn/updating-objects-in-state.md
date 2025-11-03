@@ -55,8 +55,14 @@ Tässä esimerkissä pidetään oliota tilasa, joka edustaa pointterin nykyistä
 
 <Sandpack>
 
+<<<<<<< HEAD
 ```js
 import {useState} from 'react';
+=======
+```js {expectedErrors: {'react-compiler': [11]}}
+import { useState } from 'react';
+
+>>>>>>> f9e2c1396769bb5da87db60f9ff03683d18711e2
 export default function MovingDot() {
   const [position, setPosition] = useState({
     x: 0,
@@ -131,7 +137,12 @@ Huomaa miten punainen piste nyt seuraa sinun kursoria kun kosketat tai liikutat 
 <Sandpack>
 
 ```js
+<<<<<<< HEAD
 import {useState} from 'react';
+=======
+import { useState } from 'react';
+
+>>>>>>> f9e2c1396769bb5da87db60f9ff03683d18711e2
 export default function MovingDot() {
   const [position, setPosition] = useState({
     x: 0,
@@ -218,8 +229,13 @@ Nämä syöttökentät eivät toimi koska `onChange`-käsittelijät mutatoivat t
 
 <Sandpack>
 
+<<<<<<< HEAD
 ```js
 import {useState} from 'react';
+=======
+```js {expectedErrors: {'react-compiler': [11, 15, 19]}}
+import { useState } from 'react';
+>>>>>>> f9e2c1396769bb5da87db60f9ff03683d18711e2
 
 export default function Form() {
   const [person, setPerson] = useState({
@@ -376,7 +392,11 @@ Huomaa, että `...` spread -syntaksi on "matala" (engl. shallow)--se kopioi asio
 
 #### Yhden Tapahtumankäsittelijän käyttäminen useille kentille {/*using-a-single-event-handler-for-multiple-fields*/}
 
+<<<<<<< HEAD
 Voit myös käyttää `[` ja `]` sulkeita olion määrittelyn sisällä määritelläksesi propertyn dynaamisella nimellä. Tässä on sama esimerkki, mutta yhdellä Tapahtumankäsittelijällä kolmen sijaan:
+=======
+You can also use the `[` and `]` braces inside your object definition to specify a property with a dynamic name. Here is the same example, but with a single event handler instead of three different ones:
+>>>>>>> f9e2c1396769bb5da87db60f9ff03683d18711e2
 
 <Sandpack>
 
@@ -814,8 +834,13 @@ Your task is to fix all of these bugs. As you fix them, explain why each of them
 
 <Sandpack>
 
+<<<<<<< HEAD
 ```js
 import {useState} from 'react';
+=======
+```js {expectedErrors: {'react-compiler': [11]}}
+import { useState } from 'react';
+>>>>>>> f9e2c1396769bb5da87db60f9ff03683d18711e2
 
 export default function Scoreboard() {
   const [player, setPlayer] = useState({
@@ -963,8 +988,13 @@ Jos jokin odottamaton asia muuttuu, kyseessä on mutaatio. Etsi mutaatio tiedost
 
 <Sandpack>
 
+<<<<<<< HEAD
 ```js App.js
 import {useState} from 'react';
+=======
+```js {expectedErrors: {'react-compiler': [17]}} src/App.js
+import { useState } from 'react';
+>>>>>>> f9e2c1396769bb5da87db60f9ff03683d18711e2
 import Background from './Background.js';
 import Box from './Box.js';
 
@@ -1007,8 +1037,13 @@ export default function Canvas() {
 }
 ```
 
+<<<<<<< HEAD
 ```js Box.js
 import {useState} from 'react';
+=======
+```js src/Box.js
+import { useState } from 'react';
+>>>>>>> f9e2c1396769bb5da87db60f9ff03683d18711e2
 
 export default function Box({children, color, position, onMove}) {
   const [lastCoordinates, setLastCoordinates] = useState(null);
@@ -1063,8 +1098,15 @@ export default function Box({children, color, position, onMove}) {
 }
 ```
 
+<<<<<<< HEAD
 ```js Background.js
 export default function Background({position}) {
+=======
+```js src/Background.js
+export default function Background({
+  position
+}) {
+>>>>>>> f9e2c1396769bb5da87db60f9ff03683d18711e2
   return (
     <div
       style={{
@@ -1101,8 +1143,13 @@ Tämän voi korjata poistamalla mutaatio `handleMove`:sta ja käyttää levityss
 
 <Sandpack>
 
+<<<<<<< HEAD
 ```js App.js
 import {useState} from 'react';
+=======
+```js src/App.js
+import { useState } from 'react';
+>>>>>>> f9e2c1396769bb5da87db60f9ff03683d18711e2
 import Background from './Background.js';
 import Box from './Box.js';
 
@@ -1150,8 +1197,13 @@ export default function Canvas() {
 }
 ```
 
+<<<<<<< HEAD
 ```js Box.js
 import {useState} from 'react';
+=======
+```js src/Box.js
+import { useState } from 'react';
+>>>>>>> f9e2c1396769bb5da87db60f9ff03683d18711e2
 
 export default function Box({children, color, position, onMove}) {
   const [lastCoordinates, setLastCoordinates] = useState(null);
@@ -1206,8 +1258,15 @@ export default function Box({children, color, position, onMove}) {
 }
 ```
 
+<<<<<<< HEAD
 ```js Background.js
 export default function Background({position}) {
+=======
+```js src/Background.js
+export default function Background({
+  position
+}) {
+>>>>>>> f9e2c1396769bb5da87db60f9ff03683d18711e2
   return (
     <div
       style={{
@@ -1244,9 +1303,15 @@ Tämä on sama virheellinen esimerkki kuin edellisessä haasteessa. Tällä kert
 
 <Sandpack>
 
+<<<<<<< HEAD
 ```js App.js
 import {useState} from 'react';
 import {useImmer} from 'use-immer';
+=======
+```js {expectedErrors: {'react-compiler': [18]}} src/App.js
+import { useState } from 'react';
+import { useImmer } from 'use-immer';
+>>>>>>> f9e2c1396769bb5da87db60f9ff03683d18711e2
 import Background from './Background.js';
 import Box from './Box.js';
 
@@ -1289,8 +1354,13 @@ export default function Canvas() {
 }
 ```
 
+<<<<<<< HEAD
 ```js Box.js
 import {useState} from 'react';
+=======
+```js src/Box.js
+import { useState } from 'react';
+>>>>>>> f9e2c1396769bb5da87db60f9ff03683d18711e2
 
 export default function Box({children, color, position, onMove}) {
   const [lastCoordinates, setLastCoordinates] = useState(null);
@@ -1345,8 +1415,15 @@ export default function Box({children, color, position, onMove}) {
 }
 ```
 
+<<<<<<< HEAD
 ```js Background.js
 export default function Background({position}) {
+=======
+```js src/Background.js
+export default function Background({
+  position
+}) {
+>>>>>>> f9e2c1396769bb5da87db60f9ff03683d18711e2
   return (
     <div
       style={{
@@ -1399,8 +1476,13 @@ Tämä on Immerin avulla uudelleen kirjoitettu ratkaisu. Huomaa, että tapahtuma
 
 <Sandpack>
 
+<<<<<<< HEAD
 ```js App.js
 import {useImmer} from 'use-immer';
+=======
+```js src/App.js
+import { useImmer } from 'use-immer';
+>>>>>>> f9e2c1396769bb5da87db60f9ff03683d18711e2
 import Background from './Background.js';
 import Box from './Box.js';
 
@@ -1444,8 +1526,13 @@ export default function Canvas() {
 }
 ```
 
+<<<<<<< HEAD
 ```js Box.js
 import {useState} from 'react';
+=======
+```js src/Box.js
+import { useState } from 'react';
+>>>>>>> f9e2c1396769bb5da87db60f9ff03683d18711e2
 
 export default function Box({children, color, position, onMove}) {
   const [lastCoordinates, setLastCoordinates] = useState(null);
@@ -1500,8 +1587,15 @@ export default function Box({children, color, position, onMove}) {
 }
 ```
 
+<<<<<<< HEAD
 ```js Background.js
 export default function Background({position}) {
+=======
+```js src/Background.js
+export default function Background({
+  position
+}) {
+>>>>>>> f9e2c1396769bb5da87db60f9ff03683d18711e2
   return (
     <div
       style={{
