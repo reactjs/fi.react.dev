@@ -36,7 +36,11 @@ Näyttääksesi valintalistan, renderöi [selaimen sisäänrakennettu `<select>`
 
 #### Propsit {/*props*/}
 
+<<<<<<< HEAD
 `<select>` tukee kaikkia [yleisten elementtien propseja.](/reference/react-dom/components/common#props)
+=======
+`<select>` supports all [common element props.](/reference/react-dom/components/common#common-props)
+>>>>>>> a1ddcf51a08cc161182b90a24b409ba11289f73e
 
 Voit [tehdä valintalistan kontrolloiduksi](#controlling-a-select-box-with-a-state-variable) antamalla `value`-propsin:
 

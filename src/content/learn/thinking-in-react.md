@@ -51,9 +51,15 @@ Aloita piirtämällä laatikkoja jokaisen komponentin ja alakomponentin ympäril
 
 Riippuen taustastasi, voit ajatella mallin jakamista osiin eri tavoin:
 
+<<<<<<< HEAD
 - **Ohjelmointi**--käytä samaa tekniikkaa päättääkseen mikäli sinun pitää luoda uusi funktio tai olio. Yksi tekniikka on [single responsibility -periaate](https://en.wikipedia.org/wiki/Single_responsibility_principle), joka tarkoittaa, että komponentin täytyisi tehdä vain yksi asia. Mikäli se päätyy kasvamaan, se pitäisi jakaa pienempiin alakomponentteihin.
 - **CSS**--harkitse mille tekisit luokka-valitsimia. (Kuitenkin, komponentit koostuvat pienistä palasista.)
 - **Design**--harkiste miten järjestäisit mallin eri tasoihin.
+=======
+* **Programming**--use the same techniques for deciding if you should create a new function or object. One such technique is the [separation of concerns](https://en.wikipedia.org/wiki/Separation_of_concerns), that is, a component should ideally only be concerned with one thing. If it ends up growing, it should be decomposed into smaller subcomponents. 
+* **CSS**--consider what you would make class selectors for. (However, components are a bit less granular.)
+* **Design**--consider how you would organize the design's layers.
+>>>>>>> a1ddcf51a08cc161182b90a24b409ba11289f73e
 
 Huomaat jos JSON:isi on hyvin määriteltyä, se usein mäppäytyy komponentin rakenteeseen käyttöliittymässäsi. Tämä siksi, koska UI ja tietomalleilla usein on sama tietoarkkitehtuuri--eli, sama muoto. Erota käyttöliittymäsi komponenteiksi, jossa jokainen komponentti vastaa yhtä palasta tietomalliasi.
 
@@ -99,8 +105,13 @@ Voit rakentaa joko "ylhäältä alas" aloittamalla komponenteilla, jotka ovat hi
 
 <Sandpack>
 
+<<<<<<< HEAD
 ```jsx App.js
 function ProductCategoryRow({category}) {
+=======
+```jsx src/App.js
+function ProductCategoryRow({ category }) {
+>>>>>>> a1ddcf51a08cc161182b90a24b409ba11289f73e
   return (
     <tr>
       <th colSpan="2">{category}</th>
@@ -277,11 +288,19 @@ Edellisessä vaiheessa sait kaksi tilan palaa sovelluksessa: hakulauseen sekä v
 
 Käydään läpi strategiaa tälle tilalle:
 
+<<<<<<< HEAD
 1. **Tunnista komponentit, jotka käyttävät tilaa:**
    - `ProductTable`:n täytyy suodataa tuotelista tilan perusteella (hakulauseella ja valintaruudun arvolla).
    - `SearchBar`:n täytyy näyttää tila (hakulause ja valintaruudun arvo).
 2. **Etsi niiden yhteinen pääkomponentti:** Ensimmäinen komponentti, jonka molemmat jakavat on `FilterableProductTable`.
 3. **Päätä missä tila elää**: Pidämme hakulauseen ja valintaruudun arvon `FilterableProductTable` komponentissa.
+=======
+1. **Identify components that use state:**
+    * `ProductTable` needs to filter the product list based on that state (search text and checkbox value). 
+    * `SearchBar` needs to display that state (search text and checkbox value).
+2. **Find their common parent:** The first parent component both components share is `FilterableProductTable`.
+3. **Decide where the state lives**: We'll keep the filter text and checked state values in `FilterableProductTable`.
+>>>>>>> a1ddcf51a08cc161182b90a24b409ba11289f73e
 
 Joten tila elää `FilterableProductTable` komponentissa.
 
@@ -310,8 +329,13 @@ Alat näkemään miten sovelluksesi tulee käyttäytymään. Muokkaa `filterText
 
 <Sandpack>
 
+<<<<<<< HEAD
 ```jsx App.js
 import {useState} from 'react';
+=======
+```jsx src/App.js
+import { useState } from 'react';
+>>>>>>> a1ddcf51a08cc161182b90a24b409ba11289f73e
 
 function FilterableProductTable({products}) {
   const [filterText, setFilterText] = useState('');
@@ -479,6 +503,7 @@ function FilterableProductTable({ products }) {
 
 `SearchBar` komponentissa lisää `onChange` Tapahtumankäsittelijä ja muuta yläkomponentin tila sieltä käsin:
 
+<<<<<<< HEAD
 ```js {5}
 <input
   type="text"
@@ -486,14 +511,41 @@ function FilterableProductTable({ products }) {
   placeholder="Search..."
   onChange={(e) => onFilterTextChange(e.target.value)}
 />
+=======
+```js {4,5,13,19}
+function SearchBar({
+  filterText,
+  inStockOnly,
+  onFilterTextChange,
+  onInStockOnlyChange
+}) {
+  return (
+    <form>
+      <input
+        type="text"
+        value={filterText}
+        placeholder="Search..."
+        onChange={(e) => onFilterTextChange(e.target.value)}
+      />
+      <label>
+        <input
+          type="checkbox"
+          checked={inStockOnly}
+          onChange={(e) => onInStockOnlyChange(e.target.checked)}
+>>>>>>> a1ddcf51a08cc161182b90a24b409ba11289f73e
 ```
 
 Nyt sovellus toimii täysin!
 
 <Sandpack>
 
+<<<<<<< HEAD
 ```jsx App.js
 import {useState} from 'react';
+=======
+```jsx src/App.js
+import { useState } from 'react';
+>>>>>>> a1ddcf51a08cc161182b90a24b409ba11289f73e
 
 function FilterableProductTable({products}) {
   const [filterText, setFilterText] = useState('');
