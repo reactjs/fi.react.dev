@@ -554,9 +554,13 @@ button { margin-top: 10px; }
 
 </Sandpack>
 
+<<<<<<< HEAD
 (Vaihtoehtoisesti, voisit pitää valitun indeksin tilasa.)
 
 Tila oli aiemmin monistettu näin:
+=======
+The state used to be duplicated like this:
+>>>>>>> 38b52cfdf059b2efc5ee3223a758efe00319fcc7
 
 * `items = [{ id: 0, title: 'pretzels'}, ...]`
 * `selectedItem = {id: 0, title: 'pretzels'}`
@@ -612,7 +616,7 @@ export default function TravelPlan() {
 }
 ```
 
-```js places.js active
+```js src/places.js active
 export const initialTravelPlan = {
   id: 0,
   title: '(Root)',
@@ -868,7 +872,7 @@ export default function TravelPlan() {
 }
 ```
 
-```js places.js active
+```js src/places.js active
 export const initialTravelPlan = {
   0: {
     id: 0,
@@ -1204,7 +1208,7 @@ function PlaceTree({ id, parentId, placesById, onComplete }) {
 }
 ```
 
-```js places.js
+```js src/places.js
 export const initialTravelPlan = {
   0: {
     id: 0,
@@ -1543,7 +1547,7 @@ function PlaceTree({ id, parentId, placesById, onComplete }) {
 }
 ```
 
-```js places.js
+```js src/places.js
 export const initialTravelPlan = {
   0: {
     id: 0,
@@ -1718,7 +1722,7 @@ export const initialTravelPlan = {
   34: {
     id: 34,
     title: 'Oceania',
-    childIds: [35, 36, 37, 38, 39, 40,, 41],   
+    childIds: [35, 36, 37, 38, 39, 40, 41],   
   },
   35: {
     id: 35,
@@ -1841,7 +1845,7 @@ Tämä `Clock` komponentti vastaanottaa kaksi propsia: `color` ja `time`. Kun va
 
 <Sandpack>
 
-```js Clock.js active
+```js src/Clock.js active
 import { useState } from 'react';
 
 export default function Clock(props) {
@@ -1854,7 +1858,7 @@ export default function Clock(props) {
 }
 ```
 
-```js App.js hidden
+```js src/App.js hidden
 import { useState, useEffect } from 'react';
 import Clock from './Clock.js';
 
@@ -1896,7 +1900,7 @@ Ongelma on, että tällä komponentilla on `color` tilamuuttuja alustettuna `col
 
 <Sandpack>
 
-```js Clock.js active
+```js src/Clock.js active
 import { useState } from 'react';
 
 export default function Clock(props) {
@@ -1908,7 +1912,7 @@ export default function Clock(props) {
 }
 ```
 
-```js App.js hidden
+```js src/App.js hidden
 import { useState, useEffect } from 'react';
 import Clock from './Clock.js';
 
@@ -1948,7 +1952,7 @@ Tai käyttämällä olion levityssyntaksia:
 
 <Sandpack>
 
-```js Clock.js active
+```js src/Clock.js active
 import { useState } from 'react';
 
 export default function Clock({ color, time }) {
@@ -1960,7 +1964,7 @@ export default function Clock({ color, time }) {
 }
 ```
 
-```js App.js hidden
+```js src/App.js hidden
 import { useState, useEffect } from 'react';
 import Clock from './Clock.js';
 
@@ -2010,7 +2014,7 @@ Onko yhtään tilaa, joka olisi tarpeetonta?
 
 <Sandpack>
 
-```js App.js
+```js src/App.js
 import { useState } from 'react';
 import AddItem from './AddItem.js';
 import PackingList from './PackingList.js';
@@ -2078,7 +2082,7 @@ export default function TravelPlan() {
 }
 ```
 
-```js AddItem.js hidden
+```js src/AddItem.js hidden
 import { useState } from 'react';
 
 export default function AddItem({ onAddItem }) {
@@ -2099,7 +2103,7 @@ export default function AddItem({ onAddItem }) {
 }
 ```
 
-```js PackingList.js hidden
+```js src/PackingList.js hidden
 import { useState } from 'react';
 
 export default function PackingList({
@@ -2149,7 +2153,7 @@ Vaikka voisit huolellisesti muuttaa jokaista Tapahtumankäsittelijää päivitt�
 
 <Sandpack>
 
-```js App.js
+```js src/App.js
 import { useState } from 'react';
 import AddItem from './AddItem.js';
 import PackingList from './PackingList.js';
@@ -2213,7 +2217,7 @@ export default function TravelPlan() {
 }
 ```
 
-```js AddItem.js hidden
+```js src/AddItem.js hidden
 import { useState } from 'react';
 
 export default function AddItem({ onAddItem }) {
@@ -2234,7 +2238,7 @@ export default function AddItem({ onAddItem }) {
 }
 ```
 
-```js PackingList.js hidden
+```js src/PackingList.js hidden
 import { useState } from 'react';
 
 export default function PackingList({
@@ -2290,7 +2294,7 @@ Koodi toimii, mutta siinä on lievä käyttöliittymäbugi. Kun painat "Star" ta
 
 <Sandpack>
 
-```js App.js
+```js src/App.js
 import { useState } from 'react';
 import { initialLetters } from './data.js';
 import Letter from './Letter.js';
@@ -2337,7 +2341,7 @@ export default function MailClient() {
 }
 ```
 
-```js Letter.js
+```js src/Letter.js
 export default function Letter({
   letter,
   isHighlighted,
@@ -2367,7 +2371,7 @@ export default function Letter({
 }
 ```
 
-```js data.js
+```js src/data.js
 export const initialLetters = [{
   id: 0,
   subject: 'Ready for adventure?',
@@ -2399,7 +2403,7 @@ Korjataksesi ongelman, poista tilan toisto. Sen sijaan että tallentaisit *viest
 
 <Sandpack>
 
-```js App.js
+```js src/App.js
 import { useState } from 'react';
 import { initialLetters } from './data.js';
 import Letter from './Letter.js';
@@ -2446,7 +2450,7 @@ export default function MailClient() {
 }
 ```
 
-```js Letter.js
+```js src/Letter.js
 export default function Letter({
   letter,
   isHighlighted,
@@ -2476,7 +2480,7 @@ export default function Letter({
 }
 ```
 
-```js data.js
+```js src/data.js
 export const initialLetters = [{
   id: 0,
   subject: 'Ready for adventure?',
@@ -2516,7 +2520,7 @@ Yksittäisen valitun ID:n sijasta saatat haluat pitää hallussasi taulukkoa tai
 
 <Sandpack>
 
-```js App.js
+```js src/App.js
 import { useState } from 'react';
 import { letters } from './data.js';
 import Letter from './Letter.js';
@@ -2559,7 +2563,7 @@ export default function MailClient() {
 }
 ```
 
-```js Letter.js
+```js src/Letter.js
 export default function Letter({
   letter,
   onToggle,
@@ -2584,7 +2588,7 @@ export default function Letter({
 }
 ```
 
-```js data.js
+```js src/data.js
 export const letters = [{
   id: 0,
   subject: 'Ready for adventure?',
@@ -2615,7 +2619,7 @@ Yksittäisen `selectedId`:n sijaan, pidä `selectedIds` *taulukko* tilassa. Esim
 
 <Sandpack>
 
-```js App.js
+```js src/App.js
 import { useState } from 'react';
 import { letters } from './data.js';
 import Letter from './Letter.js';
@@ -2667,7 +2671,7 @@ export default function MailClient() {
 }
 ```
 
-```js Letter.js
+```js src/Letter.js
 export default function Letter({
   letter,
   onToggle,
@@ -2692,7 +2696,7 @@ export default function Letter({
 }
 ```
 
-```js data.js
+```js src/data.js
 export const letters = [{
   id: 0,
   subject: 'Ready for adventure?',
@@ -2723,7 +2727,7 @@ Tämän korjataksesi, voit sen sijaan pitää [Set](https://developer.mozilla.or
 
 <Sandpack>
 
-```js App.js
+```js src/App.js
 import { useState } from 'react';
 import { letters } from './data.js';
 import Letter from './Letter.js';
@@ -2772,7 +2776,7 @@ export default function MailClient() {
 }
 ```
 
-```js Letter.js
+```js src/Letter.js
 export default function Letter({
   letter,
   onToggle,
@@ -2797,7 +2801,7 @@ export default function Letter({
 }
 ```
 
-```js data.js
+```js src/data.js
 export const letters = [{
   id: 0,
   subject: 'Ready for adventure?',
