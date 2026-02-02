@@ -211,7 +211,7 @@ Jos yrität toteuttaa tämän refillä, React ei koskaan renderöi komponenttia 
 
 <Sandpack>
 
-```js
+```js {expectedErrors: {'react-compiler': [13]}}
 import { useRef } from 'react';
 
 export default function Counter() {
@@ -313,7 +313,7 @@ Tavalliset muuttujat kuten `let timeoutID` eivät "selviä" uudelleenrenderöinn
 
 <Sandpack>
 
-```js
+```js {expectedErrors: {'react-compiler': [10]}}
 import { useState } from 'react';
 
 export default function Chat() {
@@ -418,7 +418,7 @@ Tämän painikkeen on tarkoitus vaihtaa "On" ja "Off" välillä. Kuitenkin, se n
 
 <Sandpack>
 
-```js
+```js {expectedErrors: {'react-compiler': [10]}}
 import { useRef } from 'react';
 
 export default function Toggle() {
@@ -464,7 +464,11 @@ export default function Toggle() {
 
 #### Korjaa debounce {/*fix-debouncing*/}
 
+<<<<<<< HEAD
 Tässä esimerkissä kaikki painikkeiden klikkaukset ovat ["debounced".](https://redd.one/blog/debounce-vs-throttle) Nähdäksesi mitä tämä tarkoittaa, paina yhtä painikkeista. Huomaa, kuinka viesti ilmestyy sekunnin kuluttua. Jos painat painiketta odottaessasi viestiä, ajanlaskuri nollautuu. Joten jos painat samaa painiketta nopeasti useita kertoja, viestiä ei näy ennen kuin sekunti *jälkeen* kun lopetat painamisen. Debouncing antaa sinun viivästyttää jotain toimintoa, kunnes käyttäjä "lopettaa tekemästä asioita".
+=======
+In this example, all button click handlers are ["debounced".](https://kettanaito.com/blog/debounce-vs-throttle) To see what this means, press one of the buttons. Notice how the message appears a second later. If you press the button while waiting for the message, the timer will reset. So if you keep clicking the same button fast many times, the message won't appear until a second *after* you stop clicking. Debouncing lets you delay some action until the user "stops doing things".
+>>>>>>> 38b52cfdf059b2efc5ee3223a758efe00319fcc7
 
 Tämä esimerkki toimii, mutta ei ihan niin kuin tarkoitettiin. Painikkeet eivät ole riippumattomia. Nähdäksesi ongelman, paina yhtä painikkeista, ja paina sitten välittömästi toista painiketta. Odota hetki, ja näet molempien painikkeiden viestit. Mutta vain viimeisen painikkeen viesti näkyy. Ensimmäisen painikkeen viesti katoaa.
 
