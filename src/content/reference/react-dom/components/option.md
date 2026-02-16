@@ -36,7 +36,11 @@ title: "<option>"
 
 #### Propsit {/*props*/}
 
+<<<<<<< HEAD
 `<option>` tukee kaikkia [yleisten elementtien propseja.](/reference/react-dom/components/common#props)
+=======
+`<option>` supports all [common element props.](/reference/react-dom/components/common#common-props)
+>>>>>>> 55a317d40781a0054a05a9f6c443ae0bd71f7d7e
 
 Lisäksi, `<option>` tukee näitä propseja:
 

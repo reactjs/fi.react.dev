@@ -75,7 +75,7 @@ export default function App() {
 }
 ```
 
-```js chat.js
+```js src/chat.js
 export function createConnection(serverUrl, roomId) {
   // Todellinen toteutus yhdistäisi palvelimeen oikeasti
   return {
@@ -150,7 +150,7 @@ export default function App() {
 }
 ```
 
-```js chat.js
+```js src/chat.js
 export function createConnection(serverUrl, roomId) {
   // Todellinen toteutus yhdistäisi palvelimeen oikeasti
   return {
@@ -242,7 +242,7 @@ export default function ChatRoom() {
 }
 ```
 
-```js chat.js
+```js src/chat.js
 export function createConnection(serverUrl, roomId) {
   // Todellinen toteutus yhdistäisi palvelimeen oikeasti
   return {
@@ -303,7 +303,7 @@ Linterin hiljentäminen johtaa erittäin epäintuitiivisiin bugeihin, jotka ovat
 
 <Sandpack>
 
-```js
+```js {expectedErrors: {'react-compiler': [14]}}
 import { useState, useEffect } from 'react';
 
 export default function Timer() {
@@ -609,6 +609,7 @@ function ChatRoom({ roomId }) {
 
 ### Haluatko lukea arvon "reagoimatta" sen muutoksiin? {/*do-you-want-to-read-a-value-without-reacting-to-its-changes*/}
 
+<<<<<<< HEAD
 <Wip>
 
 Tämä osio kuvailee **kokeellista API:a, joka ei ole vielä julkaistu** vakaassa Reactin versiossa.
@@ -616,6 +617,9 @@ Tämä osio kuvailee **kokeellista API:a, joka ei ole vielä julkaistu** vakaass
 </Wip>
 
 Oletetaan, että haluat toistaa äänen kun käyttäjä vastaanottaa uuden viestin, ellei `isMuted` ole `true`:
+=======
+Suppose that you want to play a sound when the user receives a new message unless `isMuted` is `true`:
+>>>>>>> 55a317d40781a0054a05a9f6c443ae0bd71f7d7e
 
 ```js {3,10-12}
 function ChatRoom({ roomId }) {
@@ -794,7 +798,7 @@ On tärkeää määritellä se riippuvuudeksi! Tämä takaa, jos esimerkiksi `ro
 
 <Sandpack>
 
-```js
+```js {expectedErrors: {'react-compiler': [10]}}
 import { useState, useEffect } from 'react';
 import { createConnection } from './chat.js';
 
@@ -846,7 +850,7 @@ export default function App() {
 }
 ```
 
-```js chat.js
+```js src/chat.js
 export function createConnection({ serverUrl, roomId }) {
   // Todellinen toteutus yhdistäisi palvelimeen oikeasti
   return {
@@ -1023,7 +1027,7 @@ export default function App() {
 }
 ```
 
-```js chat.js
+```js src/chat.js
 export function createConnection({ serverUrl, roomId }) {
   // Todellinen toteutus yhdistäisi palvelimeen oikeasti
   return {
@@ -1241,7 +1245,11 @@ export default function Timer() {
 
 </Sandpack>
 
+<<<<<<< HEAD
 Sen sijaan että lukisit `count` tilamuuttujan Efektissä, välitä `c => c + 1` ohje ("kasvata tätä lukua!") Reactille. React soveltaa sitä seuraavalla renderöinnillä. Ja koska et enää tarvitse lukea `count` arvoa Efektissäsi, voit pitää Efektisi riippuvuudet tyhjinä (`[]`). Tämä estää Efektisi luomasta uudelleen laskuria joka tikillä.
+=======
+Instead of reading `count` inside the Effect, you pass a `c => c + 1` instruction ("increment this number!") to React. React will apply it on the next render. And since you don't need to read the value of `count` inside your Effect anymore, you can keep your Effect's dependencies empty (`[]`). This prevents your Effect from re-creating the interval on every tick.
+>>>>>>> 55a317d40781a0054a05a9f6c443ae0bd71f7d7e
 
 </Solution>
 
@@ -1259,25 +1267,9 @@ Onko Efektissäsi rivi koodia jonka ei tulisi olla reaktiivista? Miten voit siir
 
 <Sandpack>
 
-```json package.json hidden
-{
-  "dependencies": {
-    "react": "experimental",
-    "react-dom": "experimental",
-    "react-scripts": "latest"
-  },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
-  }
-}
-```
-
 ```js
 import { useState, useEffect, useRef } from 'react';
-import { experimental_useEffectEvent as useEffectEvent } from 'react';
+import { useEffectEvent } from 'react';
 import { FadeInAnimation } from './animation.js';
 
 function Welcome({ duration }) {
@@ -1335,7 +1327,7 @@ export default function App() {
 }
 ```
 
-```js animation.js
+```js src/animation.js
 export class FadeInAnimation {
   constructor(node) {
     this.node = node;
@@ -1386,26 +1378,10 @@ Efektisi täytyy lukea viimeisin `duration` arvo, mutta et halua sen "reagoivan"
 
 <Sandpack>
 
-```json package.json hidden
-{
-  "dependencies": {
-    "react": "experimental",
-    "react-dom": "experimental",
-    "react-scripts": "latest"
-  },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
-  }
-}
-```
-
 ```js
 import { useState, useEffect, useRef } from 'react';
 import { FadeInAnimation } from './animation.js';
-import { experimental_useEffectEvent as useEffectEvent } from 'react';
+import { useEffectEvent } from 'react';
 
 function Welcome({ duration }) {
   const ref = useRef(null);
@@ -1466,7 +1442,7 @@ export default function App() {
 }
 ```
 
-```js animation.js
+```js src/animation.js
 export class FadeInAnimation {
   constructor(node) {
     this.node = node;
@@ -1523,7 +1499,7 @@ On useita tapoja ratkaista tämä, mutta lopulta haluat välttää olion käytt�
 
 <Sandpack>
 
-```js App.js
+```js src/App.js
 import { useState } from 'react';
 import ChatRoom from './ChatRoom.js';
 
@@ -1567,7 +1543,7 @@ export default function App() {
 }
 ```
 
-```js ChatRoom.js active
+```js src/ChatRoom.js active
 import { useEffect } from 'react';
 import { createConnection } from './chat.js';
 
@@ -1582,7 +1558,7 @@ export default function ChatRoom({ options }) {
 }
 ```
 
-```js chat.js
+```js src/chat.js
 export function createConnection({ serverUrl, roomId }) {
   // A real implementation would actually connect to the server
   if (typeof serverUrl !== 'string') {
@@ -1617,7 +1593,7 @@ Vähiten häiritsevä tapa korjata on lukea `roomId` ja `serverUrl` suoraan Efek
 
 <Sandpack>
 
-```js App.js
+```js src/App.js
 import { useState } from 'react';
 import ChatRoom from './ChatRoom.js';
 
@@ -1661,7 +1637,7 @@ export default function App() {
 }
 ```
 
-```js ChatRoom.js active
+```js src/ChatRoom.js active
 import { useEffect } from 'react';
 import { createConnection } from './chat.js';
 
@@ -1680,7 +1656,7 @@ export default function ChatRoom({ options }) {
 }
 ```
 
-```js chat.js
+```js src/chat.js
 export function createConnection({ serverUrl, roomId }) {
   // Todellinen toteutus yhdistäisi palvelimeen oikeasti
   if (typeof serverUrl !== 'string') {
@@ -1711,7 +1687,7 @@ Olisi vielä parempi korvata `options` olio-propsi tarkemmilla `roomId` ja `serv
 
 <Sandpack>
 
-```js App.js
+```js src/App.js
 import { useState } from 'react';
 import ChatRoom from './ChatRoom.js';
 
@@ -1753,7 +1729,7 @@ export default function App() {
 }
 ```
 
-```js ChatRoom.js active
+```js src/ChatRoom.js active
 import { useState, useEffect } from 'react';
 import { createConnection } from './chat.js';
 
@@ -1771,7 +1747,7 @@ export default function ChatRoom({ roomId, serverUrl }) {
 }
 ```
 
-```js chat.js
+```js src/chat.js
 export function createConnection({ serverUrl, roomId }) {
   // Todellinen toteutus yhdistäisi palvelimeen oikeasti
   if (typeof serverUrl !== 'string') {
@@ -1825,8 +1801,8 @@ Toinen näistä funktioista on olemassa vain välittääkseen tilaa tuodulle API
 ```json package.json hidden
 {
   "dependencies": {
-    "react": "experimental",
-    "react-dom": "experimental",
+    "react": "latest",
+    "react-dom": "latest",
     "react-scripts": "latest",
     "toastify-js": "1.12.0"
   },
@@ -1839,7 +1815,7 @@ Toinen näistä funktioista on olemassa vain välittääkseen tilaa tuodulle API
 }
 ```
 
-```js App.js
+```js src/App.js
 import { useState } from 'react';
 import ChatRoom from './ChatRoom.js';
 import {
@@ -1905,9 +1881,9 @@ export default function App() {
 }
 ```
 
-```js ChatRoom.js active
+```js src/ChatRoom.js active
 import { useState, useEffect } from 'react';
-import { experimental_useEffectEvent as useEffectEvent } from 'react';
+import { useEffectEvent } from 'react';
 
 export default function ChatRoom({ roomId, createConnection, onMessage }) {
   useEffect(() => {
@@ -1921,7 +1897,7 @@ export default function ChatRoom({ roomId, createConnection, onMessage }) {
 }
 ```
 
-```js chat.js
+```js src/chat.js
 export function createEncryptedConnection({ serverUrl, roomId }) {
   // A real implementation would actually connect to the server
   if (typeof serverUrl !== 'string') {
@@ -2005,7 +1981,7 @@ export function createUnencryptedConnection({ serverUrl, roomId }) {
 }
 ```
 
-```js notifications.js
+```js src/notifications.js
 import Toastify from 'toastify-js';
 import 'toastify-js/src/toastify.css';
 
@@ -2120,8 +2096,8 @@ Lopputuloksena, chat yhdistää uudelleen vain kun jotain merkityksellistä (`ro
 ```json package.json hidden
 {
   "dependencies": {
-    "react": "experimental",
-    "react-dom": "experimental",
+    "react": "latest",
+    "react-dom": "latest",
     "react-scripts": "latest",
     "toastify-js": "1.12.0"
   },
@@ -2134,7 +2110,7 @@ Lopputuloksena, chat yhdistää uudelleen vain kun jotain merkityksellistä (`ro
 }
 ```
 
-```js App.js
+```js src/App.js
 import { useState } from 'react';
 import ChatRoom from './ChatRoom.js';
 
@@ -2187,9 +2163,9 @@ export default function App() {
 }
 ```
 
-```js ChatRoom.js active
+```js src/ChatRoom.js active
 import { useState, useEffect } from 'react';
-import { experimental_useEffectEvent as useEffectEvent } from 'react';
+import { useEffectEvent } from 'react';
 import {
   createEncryptedConnection,
   createUnencryptedConnection,
@@ -2221,7 +2197,7 @@ export default function ChatRoom({ roomId, isEncrypted, onMessage }) {
 }
 ```
 
-```js chat.js
+```js src/chat.js
 export function createEncryptedConnection({ serverUrl, roomId }) {
   // Todellinen toteutus yhdistäisi palvelimeen oikeasti
   if (typeof serverUrl !== 'string') {
@@ -2305,7 +2281,7 @@ export function createUnencryptedConnection({ serverUrl, roomId }) {
 }
 ```
 
-```js notifications.js
+```js src/notifications.js
 import Toastify from 'toastify-js';
 import 'toastify-js/src/toastify.css';
 
