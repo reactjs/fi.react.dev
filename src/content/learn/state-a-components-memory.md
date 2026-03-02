@@ -23,7 +23,7 @@ Tässä on komponentti, joka renderöi kuvan veistoksesta. Klikkaamalla "Next" p
 
 <Sandpack>
 
-```js
+```js {expectedErrors: {'react-compiler': [7]}}
 import { sculptureList } from './data.js';
 
 export default function Gallery() {
@@ -58,7 +58,7 @@ export default function Gallery() {
 }
 ```
 
-```js data.js
+```js src/data.js
 export const sculptureList = [{
   name: 'Homenaje a la Neurocirugía',
   artist: 'Marta Colvin Andrade',
@@ -238,7 +238,7 @@ export default function Gallery() {
 }
 ```
 
-```js data.js
+```js src/data.js
 export const sculptureList = [{
   name: 'Homenaje a la Neurocirugía',
   artist: 'Marta Colvin Andrade',
@@ -427,7 +427,7 @@ export default function Gallery() {
 }
 ```
 
-```js data.js
+```js src/data.js
 export const sculptureList = [{
   name: 'Homenaje a la Neurocirugía',
   artist: 'Marta Colvin Andrade',
@@ -536,7 +536,7 @@ Tämä esimerkki **ei käytä Reactia**, mutta antaa idean siitä miten `useStat
 
 <Sandpack>
 
-```js index.js active
+```js src/index.js active
 let componentHooks = [];
 let currentHookIndex = 0;
 
@@ -750,7 +750,7 @@ export default function Page() {
 
 ```
 
-```js Gallery.js
+```js src/Gallery.js
 import { useState } from 'react';
 import { sculptureList } from './data.js';
 
@@ -792,7 +792,7 @@ export default function Gallery() {
 }
 ```
 
-```js data.js
+```js src/data.js
 export const sculptureList = [{
   name: 'Homenaje a la Neurocirugía',
   artist: 'Marta Colvin Andrade',
@@ -963,7 +963,7 @@ export default function Gallery() {
 }
 ```
 
-```js data.js
+```js src/data.js
 export const sculptureList = [{
   name: 'Homenaje a la Neurocirugía',
   artist: 'Marta Colvin Andrade',
@@ -1125,7 +1125,7 @@ export default function Gallery() {
 }
 ```
 
-```js data.js hidden
+```js src/data.js hidden
 export const sculptureList = [{
   name: 'Homenaje a la Neurocirugía',
   artist: 'Marta Colvin Andrade',
@@ -1229,7 +1229,7 @@ Kun kirjoitat syöttökenttiin, mitään ei tapahdu. Aivan kuin kenttien arvot o
 
 <Sandpack>
 
-```js
+```js {expectedErrors: {'react-compiler': [6]}}
 export default function Form() {
   let firstName = '';
   let lastName = '';
@@ -1337,7 +1337,7 @@ Onko mitään rajoituksia _missä_ hookkeja voidaan kutsua? Rikkooko tämä komp
 
 <Sandpack>
 
-```js
+```js {expectedErrors: {'react-compiler': [9]}}
 import { useState } from 'react';
 
 export default function FeedbackForm() {
@@ -1452,7 +1452,11 @@ Jos lintterisi on [määritelty Reactille](/learn/editor-setup#linting), pitäis
 
 #### Poista tarpeeton tila {/*remove-unnecessary-state*/}
 
+<<<<<<< HEAD
 Kun painiketta painetaan, tämän esimerkin tulisi kysyä käyttäjän nimeä ja sitten tervehtiä ilmoituksella. Yritit tallentaa nimen tilaan, mutta jostain syystä se näyttää "Hello, !".
+=======
+When the button is clicked, this example should ask for the user's name and then display an alert greeting them. You tried to use state to keep the name, but for some reason the first time it shows "Hello, !", and then "Hello, [name]!" with the previous input every time after.
+>>>>>>> 427f24d694674be458f0fe7cb97ab1c8fe736586
 
 Korjataksesi tämän koodin, poista tarpeeton tilamuuttuja. (Katsotaan myöhemmin [miksi tämä ei toiminut](/learn/state-as-a-snapshot).)
 
