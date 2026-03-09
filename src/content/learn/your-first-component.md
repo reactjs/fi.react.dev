@@ -215,7 +215,11 @@ React sovelluksesi alkaa "juurikomponentista". Useimmiten se luodaan automaattis
 
 Useimmat React sovellukset käyttävät komponentteja loppuun asti. Tämä tarkoittaa, että et ainoastaan käytä komponentteja uudelleenkäytettäviin palasiin kuten painikkeisiin, mutta myös suurempiin paloihin kuten sivuplakkeihin, listoihin ja lopulta kokonaisiin sivuihin! Komponentit ovat näppärä tapa järjestää merkintä- ja UI-koodia vaikka joitain käytettäisiin vain kerran.
 
+<<<<<<< HEAD
 [React-pohjaiset ohjelmistokehykset](/learn/start-a-new-react-project) vievät tämän askeleen eteenpäin. Sen sijaan, että käyttäisit tyhjää HTML tiedostoa ja annat Reactin "ottaa sivu haltuun" halliten sivua JavaScriptilla, ne **myös* generoivat HTML:n autoaattisesti React komponenteistasi. Tämä mahdollistaa sovelluksesi näyttämään sisältöä enne kuin JavaScript koodi on latautunut.
+=======
+[React-based frameworks](/learn/creating-a-react-app) take this a step further. Instead of using an empty HTML file and letting React "take over" managing the page with JavaScript, they *also* generate the HTML automatically from your React components. This allows your app to show some content before the JavaScript code loads.
+>>>>>>> 7c90c6eb4bb93a5eacb9cb4ad4ca496c32984636
 
 Kuitenkin monet verkkosivut käyttävät Reactia [lisätäkseen "ripausta interkatiivisuutta".](/learn/add-react-to-an-existing-project#using-react-for-a-part-of-your-existing-page) Niillä on useita juurikomponentteja yhden sijasta koko verkkosivulle. Voit käyttää niin paljon tai niin vähän Reactia kuin tarvitset.
 
