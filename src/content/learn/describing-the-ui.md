@@ -66,7 +66,7 @@ Voit määritellä monia komponentteja yhdessä tiedostossa, mutta navigointi is
 
 <Sandpack>
 
-```js App.js hidden
+```js src/App.js hidden
 import Gallery from './Gallery.js';
 
 export default function App() {
@@ -74,7 +74,7 @@ export default function App() {
 }
 ```
 
-```js Gallery.js active
+```js src/Gallery.js active
 import Profile from './Profile.js';
 
 export default function Gallery() {
@@ -89,7 +89,7 @@ export default function Gallery() {
 }
 ```
 
-```js Profile.js
+```js src/Profile.js
 export default function Profile() {
   return <img src="https://i.imgur.com/QIrZWGIs.jpg" alt="Alan L. Hart" />;
 }
@@ -278,7 +278,7 @@ function Card({children}) {
 }
 ```
 
-```js utils.js
+```js src/utils.js
 export function getImageUrl(person, size = 's') {
   return 'https://i.imgur.com/' + person.imageId + size + '.jpg';
 }
@@ -321,7 +321,7 @@ Tässä esimerkissä JavaScript `&&` operaattoria käytetään valintamerkin ehd
 function Item({name, isPacked}) {
   return (
     <li className="item">
-      {name} {isPacked && '✔'}
+      {name} {isPacked && '✅'}
     </li>
   );
 }
@@ -356,9 +356,15 @@ Jokaiselle listan kohteelle täytyy määrittää `key` propsi. Yleensä voit k�
 
 <Sandpack>
 
+<<<<<<< HEAD
 ```js App.js
 import {people} from './data.js';
 import {getImageUrl} from './utils.js';
+=======
+```js src/App.js
+import { people } from './data.js';
+import { getImageUrl } from './utils.js';
+>>>>>>> 1207ee36e1c7e3f2737d8f1022015473ffa99adf
 
 export default function List() {
   const listItems = people.map((person) => (
@@ -380,6 +386,7 @@ export default function List() {
 }
 ```
 
+<<<<<<< HEAD
 ```js data.js
 export const people = [
   {
@@ -419,9 +426,43 @@ export const people = [
     imageId: 'lrWQx8l',
   },
 ];
+=======
+```js src/data.js
+export const people = [{
+  id: 0,
+  name: 'Creola Katherine Johnson',
+  profession: 'mathematician',
+  accomplishment: 'spaceflight calculations',
+  imageId: 'MK3eW3A'
+}, {
+  id: 1,
+  name: 'Mario José Molina-Pasquel Henríquez',
+  profession: 'chemist',
+  accomplishment: 'discovery of Arctic ozone hole',
+  imageId: 'mynHUSa'
+}, {
+  id: 2,
+  name: 'Mohammad Abdus Salam',
+  profession: 'physicist',
+  accomplishment: 'electromagnetism theory',
+  imageId: 'bE7W1ji'
+}, {
+  id: 3,
+  name: 'Percy Lavon Julian',
+  profession: 'chemist',
+  accomplishment: 'pioneering cortisone drugs, steroids and birth control pills',
+  imageId: 'IOjWm71'
+}, {
+  id: 4,
+  name: 'Subrahmanyan Chandrasekhar',
+  profession: 'astrophysicist',
+  accomplishment: 'white dwarf star mass calculations',
+  imageId: 'lrWQx8l'
+}];
+>>>>>>> 1207ee36e1c7e3f2737d8f1022015473ffa99adf
 ```
 
-```js utils.js
+```js src/utils.js
 export function getImageUrl(person) {
   return 'https://i.imgur.com/' + person.imageId + 's.jpg';
 }
@@ -470,7 +511,7 @@ Tiukasti kirjoittamalla vain puhtaita komponentteja, voit välttää kokonaisen 
 
 <Sandpack>
 
-```js
+```js {expectedErrors: {'react-compiler': [5]}}
 let guest = 0;
 
 function Cup() {
@@ -526,13 +567,29 @@ React käyttää puita mallintaakseen relaatioita komponenttien ja moduulien vä
 
 React-renderöintipuu on esitys ylä- ja alatason suhteesta komponenttien välillä.
 
+<<<<<<< HEAD
 <Diagram name="generic_render_tree" height={250} width={500} alt="Puukaavio, jossa on viisi noodia, joissa jokainen noodi esittää komponenttia. Päänoodi sijaitsee ylhäällä ja on otsikoitu 'Root Component'. Sillä on kaksi nuolta, jotka osoittavat kahteen noodiin 'Component A' ja 'Component B'. Kumpikin nuoli on otsikoitu 'renders'. 'Component A':lla on yksi 'renders' nuoli noodiin 'Component B'. 'Component C':lla on yksi 'renders' nuoli noodiin otsikoitu 'Component D'.">Esimerkki React-renderöintipuusta.</Diagram>
+=======
+<Diagram name="generic_render_tree" height={250} width={500} alt="A tree graph with five nodes, with each node representing a component. The root node is located at the top the tree graph and is labelled 'Root Component'. It has two arrows extending down to two nodes labelled 'Component A' and 'Component C'. Each of the arrows is labelled with 'renders'. 'Component A' has a single 'renders' arrow to a node labelled 'Component B'. 'Component C' has a single 'renders' arrow to a node labelled 'Component D'.">
+
+An example React render tree.
+
+</Diagram>
+>>>>>>> 1207ee36e1c7e3f2737d8f1022015473ffa99adf
 
 Komponentit lähellä puun juurta, lähellä yläosaa, ajatellaan olevan ylätason komponentteja. Komponentteja, joilla ei ole alakomponentteja ovat lehti-komponentteja. Tämä kategorisointi komponenteista on hyvä ymmärtää datavirtauksen ja renderöintitehon kannalta.
 
 JavaScript-moduulien välisen suhteen mallintaminen on toinen hyödyllinen tapa ymmärtää sovellustasi. Viittaamme siihen moduuliriippuvuuspuuna.
 
+<<<<<<< HEAD
 <Diagram name="generic_dependency_tree" height={250} width={500} alt="Puugraafi, jossa on viisi noodia. Jokainen noodi edustaa JavaScript-moduulia. Ylin noodi on merkitty nimellä 'RootModule.js'. Siitä ulottuu kolme nuolta noodeihin: 'ModuleA.js', 'ModuleB.js' ja 'ModuleC.js'. Jokainen nuoli on merkitty 'imports'. 'ModuleC.js' -noodilla on yksi 'imports' -nuoli, joka osoittaa noodiin, joka on merkitty nimellä 'ModuleD.js'.">Esimerkki moduuliriippuvuuspuu.</Diagram>
+=======
+<Diagram name="generic_dependency_tree" height={250} width={500} alt="A tree graph with five nodes. Each node represents a JavaScript module. The top-most node is labelled 'RootModule.js'. It has three arrows extending to the nodes: 'ModuleA.js', 'ModuleB.js', and 'ModuleC.js'. Each arrow is labelled as 'imports'. 'ModuleC.js' node has a single 'imports' arrow that points to a node labelled 'ModuleD.js'.">
+
+An example module dependency tree.
+
+</Diagram>
+>>>>>>> 1207ee36e1c7e3f2737d8f1022015473ffa99adf
 
 Riippuvuuspuuta käytetään usein rakennustyökaluissa, jotta kaikki relevantti JavaScript-koodi voidaan pakata selaimen ladattavaksi ja renderöitavaksi. Suuri pakkauskoko heikentää käyttäjäkokemusta React-sovelluksissa. Moduuliriippuvuuspuun ymmärtäminen on hyödyllistä tällaisia ongelmia debugatessa.
 
