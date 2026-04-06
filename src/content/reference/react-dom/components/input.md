@@ -30,7 +30,13 @@ Näyttääksesi syöttökentän, renderöi [selaimen sisäänrakennettu `<input>
 
 #### Propsit {/*props*/}
 
+<<<<<<< HEAD
 `<input>` tukee kaikkia [yleisten elementtien propseja.](/reference/react-dom/components/common#props)
+=======
+`<input>` supports all [common element props.](/reference/react-dom/components/common#common-props)
+
+- [`formAction`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#formaction): A string or function. Overrides the parent `<form action>` for `type="submit"` and `type="image"`. When a URL is passed to `action` the form will behave like a standard HTML form. When a function is passed to `formAction` the function will handle the form submission. See [`<form action>`](/reference/react-dom/components/form#props).
+>>>>>>> 1207ee36e1c7e3f2737d8f1022015473ffa99adf
 
 Voit [tehdä syöttökentästä kontrolloidun](#controlling-an-input-with-a-state-variable) antamalla yhden näistä propseista:
 
@@ -294,7 +300,11 @@ Anna jokaiselle `<input>`:lle `name`, esimerkiksi `<input name="firstName" defau
 
 <Pitfall>
 
+<<<<<<< HEAD
 Oletuksena *mikä tahansa* `<button>` `<form>`:n sisällä lähettää sen. Tämä voi olla yllättävää! Jos sinulla on oma `Button` React-komponentti, harkitse `<button type="button">`-komponentin palauttamista sen sijaan. Sitten, ollaksesi eksplisiittinen, käytä `<button type="submit">`-komponenttia napeille joiden *on* tarkoitus lähettää lomake.
+=======
+By default, a `<button>` inside a `<form>` without a `type` attribute will submit it. This can be surprising! If you have your own custom `Button` React component, consider using [`<button type="button">`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button) instead of `<button>` (with no type). Then, to be explicit, use `<button type="submit">` for buttons that *are* supposed to submit the form.
+>>>>>>> 1207ee36e1c7e3f2737d8f1022015473ffa99adf
 
 </Pitfall>
 
