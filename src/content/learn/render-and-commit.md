@@ -56,7 +56,7 @@ Kun sovelluksesi käynnistyy, sinun täytyy käynnistää ensimmäinen renderöi
 
 <Sandpack>
 
-```js index.js active
+```js src/index.js active
 import Image from './Image.js';
 import { createRoot } from 'react-dom/client';
 
@@ -64,11 +64,11 @@ const root = createRoot(document.getElementById('root'))
 root.render(<Image />);
 ```
 
-```js Image.js
+```js src/Image.js
 export default function Image() {
   return (
     <img
-      src="https://i.imgur.com/ZF6s192.jpg"
+      src="https://react.dev/images/docs/scientists/ZF6s192.jpg"
       alt="'Floralis Genérica' by Eduardo Catalano: a gigantic metallic flower sculpture with reflective petals"
     />
   );
@@ -84,6 +84,7 @@ Kokeile kommentoida `root.render()` kutsu ja näet komponentin katoavan!
 Kun komponentti on renderöity aluksi, voit käynnistää uusia renderöintejä päivittämällä sen tilaa [`set` funktiolla.](/reference/react/useState#setstate) Komponentin tilan päivittäminen automaattisesti lisää renderöinnin jonoon. (Voit kuvitella tätä ravintolan vieraana tilaamassa teetä, jälkiruokaa, ja kaikkea muuta alkuperäisen tilauksen jälkeen, janon tai nälän tilasta riippuen.)
 
 <IllustrationBlock sequential>
+<<<<<<< HEAD
   <Illustration
     caption="Tilapäivitys..."
     alt="React toimii palvelimena ravintolassa, joka tarjoilee käyttäjälle kortin käyttöliittymän, jota edustaa asiakas, jonka pää on kursori. Asiakas ilmaisee haluavansa vaaleanpunaisen kortin, ei mustaa!"
@@ -99,6 +100,11 @@ Kun komponentti on renderöity aluksi, voit käynnistää uusia renderöintejä 
     alt="Korttikokki antaa Reactille vaaleanpunaisen kortin."
     src="/images/docs/illustrations/i_rerender3.png"
   />
+=======
+  <Illustration caption="State update..." alt="React as a server in a restaurant, serving a Card UI to the user, represented as a patron with a cursor for their head. The patron expresses they want a pink card, not a black one!" src="/images/docs/illustrations/i_rerender1.png" />
+  <Illustration caption="...triggers..." alt="React returns to the Component Kitchen and tells the Card Chef they need a pink Card." src="/images/docs/illustrations/i_rerender2.png" />
+  <Illustration caption="...render!" alt="The Card Chef gives React the pink Card." src="/images/docs/illustrations/i_rerender3.png" />
+>>>>>>> abe931a8cb3aee3e8b15ef7e187214789164162a
 </IllustrationBlock>
 
 ## 2. Vaihe: React renderöi komponenttisi {/*step-2-react-renders-your-components*/}
@@ -110,11 +116,15 @@ Sen jälkeen kun olet käynnistänyt renderin, React kutsuu komponenttejasi pä�
 
 Tämä prosessi on rekursiivinen: jos päivitetty komponentti palauttaa jonkin toisen komponentin, React kutsuu _sen_ komponentin seuraavaksi, ja jos se komponentti myös palauttaa jotain, se renderöi _sen_ komponentin seuraavaksi, ja niin edelleen. Tämä prosessi jatkuu kunnes ei ole enempää sisennettyjä komponentteja ja React tietää tarkalleen mitä ruudulla tulisi näkyä.
 
+<<<<<<< HEAD
 Seuraavassa esimerkissä, React kutsuu `Gallery()` ja `Image()` komponentteja useita kertoja:
+=======
+In the following example, React will call `Gallery()` and `Image()` several times:
+>>>>>>> abe931a8cb3aee3e8b15ef7e187214789164162a
 
 <Sandpack>
 
-```js Gallery.js active
+```js src/Gallery.js active
 export default function Gallery() {
   return (
     <section>
@@ -129,14 +139,19 @@ export default function Gallery() {
 function Image() {
   return (
     <img
+<<<<<<< HEAD
       src="https://i.imgur.com/ZF6s192.jpg"
       alt="'Floralis Genérica' by Eduardo Catalano: jättimäinen metallinen kukkaveistos, jossa on heijastavat terälehdet."
+=======
+      src="https://react.dev/images/docs/scientists/ZF6s192.jpg"
+      alt="'Floralis Genérica' by Eduardo Catalano: a gigantic metallic flower sculpture with reflective petals"
+>>>>>>> abe931a8cb3aee3e8b15ef7e187214789164162a
     />
   );
 }
 ```
 
-```js index.js
+```js src/index.js
 import Gallery from './Gallery.js';
 import { createRoot } from 'react-dom/client';
 
@@ -152,8 +167,13 @@ img {
 
 </Sandpack>
 
+<<<<<<< HEAD
 - **Ensimmäisen renderöinnin aikana** React [luo DOM nodet](https://developer.mozilla.org/docs/Web/API/Document/createElement) `<section>`, `<h1>`, ja kolmelle `<img>` tagille.
 - **Uudelleenrenderöinnin aikana,** React laskee mitkä niiden propertyistä, jos mitkään, ovat muuttuneet sitten aiemman renderöinnin. Se ei tee näillä tiedoilla mitään ennen seuraavaa commit-vaihetta.
+=======
+* **During the initial render,** React will [create the DOM nodes](https://developer.mozilla.org/docs/Web/API/Document/createElement) for `<section>`, `<h1>`, and three `<img>` tags.
+* **During a re-render,** React will calculate which of their properties, if any, have changed since the previous render. It won't do anything with that information until the next step, the commit phase.
+>>>>>>> abe931a8cb3aee3e8b15ef7e187214789164162a
 
 <Pitfall>
 
@@ -176,17 +196,29 @@ Päivitetyn komponentin sisäkkäisten komponenttien renderöinti oletuksena ei 
 
 ## 3. Vaihe: React committaa muutokset DOM:iin {/*step-3-react-commits-changes-to-the-dom*/}
 
+<<<<<<< HEAD
 Komponenttisi renderöinnin (kutsumisen) jälkeen React muuttaa DOM:ia.
 
 - **Ensimmäisen renderöinnin jälkeen** React käyttää [`appendChild()`](https://developer.mozilla.org/docs/Web/API/Node/appendChild) DOM API:a asettaakseen luomansa DOM nodet ruudulle.
 - **Uudelleenrenderöinteihin** React käyttää minimaalisen verran vaadittuja operaatioita (jotka lasketaan renderöinnin aikana!), jotta DOM vastaa viimeisintä renderöintitulosta.
+=======
+After rendering (calling) your components, React will modify the DOM.
+
+* **For the initial render,** React will use the [`appendChild()`](https://developer.mozilla.org/docs/Web/API/Node/appendChild) DOM API to put all the DOM nodes it has created on screen.
+* **For re-renders,** React will apply the minimal necessary operations (calculated while rendering!) to make the DOM match the latest rendering output.
+>>>>>>> abe931a8cb3aee3e8b15ef7e187214789164162a
 
 **React muuttaa DOM nodeja vain jos renderöintien välissä on eroja.** Esimerkiksi, tässä on komponentti, joka uudelleenrenderöityy eri propseilla joka sekunti. Huomaa miten voit lisätä tekstiä `<input>` kenttään, päivittäen sen `value`:ta, mutta teksti ei poistu kun komponentti uudelleenrenderöityy:
 
 <Sandpack>
 
+<<<<<<< HEAD
 ```js Clock.js active
 export default function Clock({time}) {
+=======
+```js src/Clock.js active
+export default function Clock({ time }) {
+>>>>>>> abe931a8cb3aee3e8b15ef7e187214789164162a
   return (
     <>
       <h1>{time}</h1>
@@ -196,8 +228,13 @@ export default function Clock({time}) {
 }
 ```
 
+<<<<<<< HEAD
 ```js App.js hidden
 import {useState, useEffect} from 'react';
+=======
+```js src/App.js hidden
+import { useState, useEffect } from 'react';
+>>>>>>> abe931a8cb3aee3e8b15ef7e187214789164162a
 import Clock from './Clock.js';
 
 function useTime() {

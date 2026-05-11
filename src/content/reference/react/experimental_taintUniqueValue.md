@@ -1,8 +1,9 @@
 ---
 title: experimental_taintUniqueValue
+version: experimental
 ---
 
-<Wip>
+<Experimental>
 
 **This API is experimental and is not available in a stable version of React yet.**
 
@@ -14,9 +15,9 @@ You can try it by upgrading React packages to the most recent experimental versi
 
 Experimental versions of React may contain bugs. Don't use them in production.
 
-This API is only available inside [React Server Components](/reference/react/use-client).
+This API is only available inside [React Server Components](/reference/rsc/use-client).
 
-</Wip>
+</Experimental>
 
 
 <Intro>
@@ -67,7 +68,8 @@ experimental_taintUniqueValue(
 
 #### Caveats {/*caveats*/}
 
-- Deriving new values from tainted values can compromise tainting protection. New values created by uppercasing tainted values, concatenating tainted string values into a larger string, converting tainted values to base64, substringing tainted values, and other similar transformations are not tainted unless you explicity call `taintUniqueValue` on these newly created values.
+* Deriving new values from tainted values can compromise tainting protection. New values created by uppercasing tainted values, concatenating tainted string values into a larger string, converting tainted values to base64, substringing tainted values, and other similar transformations are not tainted unless you explicitly call `taintUniqueValue` on these newly created values.
+* Do not use `taintUniqueValue` to protect low-entropy values such as PIN codes or phone numbers. If any value in a request is controlled by an attacker, they could infer which value is tainted by enumerating all possible values of the secret.
 
 ---
 
@@ -75,7 +77,7 @@ experimental_taintUniqueValue(
 
 ### Prevent a token from being passed to Client Components {/*prevent-a-token-from-being-passed-to-client-components*/}
 
-To ensure that sensitive information such as passwords, session tokens, or other unique values do not inadvertently get passed to Client Components, the `taintUniqueValue` function provides a layer of protection. When a value is tainted, any attempt to pass it to a Client Component will result in an error. 
+To ensure that sensitive information such as passwords, session tokens, or other unique values do not inadvertently get passed to Client Components, the `taintUniqueValue` function provides a layer of protection. When a value is tainted, any attempt to pass it to a Client Component will result in an error.
 
 The `lifetime` argument defines the duration for which the value remains tainted. For values that should remain tainted indefinitely, objects like [`globalThis`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/globalThis) or `process` can serve as the `lifetime` argument. These objects have a lifespan that spans the entire duration of your app's execution.
 
@@ -130,7 +132,7 @@ In this example, the constant `password` is tainted. Then `password` is used to 
 
 Other similar ways of deriving new values from tainted values like concatenating it into a larger string, converting it to base64, or returning a substring create untained values.
 
-Tainting only protects against simple mistakes like explictly passing secret values to the client. Mistakes in calling the `taintUniqueValue` like using a global store outside of React, without the corresponding lifetime object, can cause the tainted value to become untainted. Tainting is a layer of protection; a secure app will have multiple layers of protection, well designed APIs, and isolation patterns.
+Tainting only protects against simple mistakes like explicitly passing secret values to the client. Mistakes in calling the `taintUniqueValue` like using a global store outside of React, without the corresponding lifetime object, can cause the tainted value to become untainted. Tainting is a layer of protection; a secure app will have multiple layers of protection, well designed APIs, and isolation patterns.
 
 </Pitfall>
 
@@ -176,7 +178,7 @@ export function fetchAPI(url) {
 }
 ```
 
-Sometimes mistakes happen during refactoring and not all of your colleagues might know about this. 
+Sometimes mistakes happen during refactoring and not all of your colleagues might know about this.
 To protect against this mistakes happening down the line we can "taint" the actual password:
 
 ```js
@@ -191,7 +193,7 @@ experimental_taintUniqueValue(
 );
 ```
 
-Now whenever anyone tries to pass this password to a Client Component, or send the password to a Client Component with a Server Action, a error will be thrown with message you defined when you called `taintUniqueValue`.
+Now whenever anyone tries to pass this password to a Client Component, or send the password to a Client Component with a Server Function, an error will be thrown with message you defined when you called `taintUniqueValue`.
 
 </DeepDive>
 
