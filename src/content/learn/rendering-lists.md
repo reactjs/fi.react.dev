@@ -113,9 +113,11 @@ const people = [{
   name: 'Mohammad Abdus Salam',
   profession: 'physicist',
 }, {
+  id: 3,
   name: 'Percy Lavon Julian',
-  profession: 'chemist',  
+  profession: 'chemist',
 }, {
+  id: 4,
   name: 'Subrahmanyan Chandrasekhar',
   profession: 'astrophysicist',
 }];
@@ -159,7 +161,7 @@ return <ul>{listItems}</ul>;
 
 <Sandpack>
 
-```js App.js
+```js src/App.js
 import { people } from './data.js';
 import { getImageUrl } from './utils.js';
 
@@ -184,7 +186,7 @@ export default function List() {
 }
 ```
 
-```js data.js
+```js src/data.js
 export const people = [{
   id: 0,
   name: 'Creola Katherine Johnson',
@@ -218,10 +220,10 @@ export const people = [{
 }];
 ```
 
-```js utils.js
+```js src/utils.js
 export function getImageUrl(person) {
   return (
-    'https://i.imgur.com/' +
+    'https://react.dev/images/docs/scientists/' +
     person.imageId +
     's.jpg'
   );
@@ -230,9 +232,9 @@ export function getImageUrl(person) {
 
 ```css
 ul { list-style-type: none; padding: 0px 10px; }
-li { 
-  margin-bottom: 10px; 
-  display: grid; 
+li {
+  margin-bottom: 10px;
+  display: grid;
   grid-template-columns: auto 1fr;
   gap: 20px;
   align-items: center;
@@ -292,7 +294,7 @@ Sen sijaan, että avaimet luotaisiin lennosta, kannattaa sisällyttää ne datas
 
 <Sandpack>
 
-```js App.js
+```js src/App.js
 import { people } from './data.js';
 import { getImageUrl } from './utils.js';
 
@@ -314,7 +316,7 @@ export default function List() {
 }
 ```
 
-```js data.js active
+```js src/data.js active
 export const people = [{
   id: 0, // Used in JSX as a key
   name: 'Creola Katherine Johnson',
@@ -348,10 +350,10 @@ export const people = [{
 }];
 ```
 
-```js utils.js
+```js src/utils.js
 export function getImageUrl(person) {
   return (
-    'https://i.imgur.com/' +
+    'https://react.dev/images/docs/scientists/' +
     person.imageId +
     's.jpg'
   );
@@ -360,9 +362,9 @@ export function getImageUrl(person) {
 
 ```css
 ul { list-style-type: none; padding: 0px 10px; }
-li { 
-  margin-bottom: 10px; 
-  display: grid; 
+li {
+  margin-bottom: 10px;
+  display: grid;
   grid-template-columns: auto 1fr;
   gap: 20px;
   align-items: center;
@@ -448,7 +450,7 @@ Muuta se näyttämään kaksi erillistä listaa toinen toisensa jälkeen: **Chem
 
 <Sandpack>
 
-```js App.js
+```js src/App.js
 import { people } from './data.js';
 import { getImageUrl } from './utils.js';
 
@@ -475,7 +477,7 @@ export default function List() {
 }
 ```
 
-```js data.js
+```js src/data.js
 export const people = [{
   id: 0,
   name: 'Creola Katherine Johnson',
@@ -509,10 +511,10 @@ export const people = [{
 }];
 ```
 
-```js utils.js
+```js src/utils.js
 export function getImageUrl(person) {
   return (
-    'https://i.imgur.com/' +
+    'https://react.dev/images/docs/scientists/' +
     person.imageId +
     's.jpg'
   );
@@ -539,7 +541,7 @@ Voit myös käyttää `filter()` metodia kahdesti, luoden kaksi erillistä taulu
 
 <Sandpack>
 
-```js App.js
+```js src/App.js
 import { people } from './data.js';
 import { getImageUrl } from './utils.js';
 
@@ -590,7 +592,7 @@ export default function List() {
 }
 ```
 
-```js data.js
+```js src/data.js
 export const people = [{
   id: 0,
   name: 'Creola Katherine Johnson',
@@ -624,10 +626,10 @@ export const people = [{
 }];
 ```
 
-```js utils.js
+```js src/utils.js
 export function getImageUrl(person) {
   return (
-    'https://i.imgur.com/' +
+    'https://react.dev/images/docs/scientists/' +
     person.imageId +
     's.jpg'
   );
@@ -654,7 +656,7 @@ Tässä on vielä hieman koodin toistoa renderöityjen listojen kesken. Voit men
 
 <Sandpack>
 
-```js App.js
+```js src/App.js
 import { people } from './data.js';
 import { getImageUrl } from './utils.js';
 
@@ -704,7 +706,7 @@ export default function List() {
 }
 ```
 
-```js data.js
+```js src/data.js
 export const people = [{
   id: 0,
   name: 'Creola Katherine Johnson',
@@ -738,10 +740,10 @@ export const people = [{
 }];
 ```
 
-```js utils.js
+```js src/utils.js
 export function getImageUrl(person) {
   return (
-    'https://i.imgur.com/' +
+    'https://react.dev/images/docs/scientists/' +
     person.imageId +
     's.jpg'
   );
@@ -768,7 +770,7 @@ Itse asiassa, jos `people` ei koskaan muutu, voisit siirtää tämän koodin poi
 
 <Sandpack>
 
-```js App.js
+```js src/App.js
 import { people } from './data.js';
 import { getImageUrl } from './utils.js';
 
@@ -822,7 +824,7 @@ export default function List() {
 }
 ```
 
-```js data.js
+```js src/data.js
 export const people = [{
   id: 0,
   name: 'Creola Katherine Johnson',
@@ -856,10 +858,10 @@ export const people = [{
 }];
 ```
 
-```js utils.js
+```js src/utils.js
 export function getImageUrl(person) {
   return (
-    'https://i.imgur.com/' +
+    'https://react.dev/images/docs/scientists/' +
     person.imageId +
     's.jpg'
   );
@@ -894,7 +896,7 @@ Tämä vaatii kaksi sisäkkäistä `map` kutsua.
 
 <Sandpack>
 
-```js App.js
+```js src/App.js
 import { recipes } from './data.js';
 
 export default function RecipeList() {
@@ -906,7 +908,7 @@ export default function RecipeList() {
 }
 ```
 
-```js data.js
+```js src/data.js
 export const recipes = [{
   id: 'greek-salad',
   name: 'Greek Salad',
@@ -930,7 +932,7 @@ Tässä yksi tapa, jota voit käyttää:
 
 <Sandpack>
 
-```js App.js
+```js src/App.js
 import { recipes } from './data.js';
 
 export default function RecipeList() {
@@ -954,7 +956,7 @@ export default function RecipeList() {
 }
 ```
 
-```js data.js
+```js src/data.js
 export const recipes = [{
   id: 'greek-salad',
   name: 'Greek Salad',
@@ -982,7 +984,7 @@ Tämä `RecipeList` komponentti sisältää kaksi `map` kutsua. Yksinkertaistaak
 
 <Sandpack>
 
-```js App.js
+```js src/App.js
 import { recipes } from './data.js';
 
 export default function RecipeList() {
@@ -1006,7 +1008,7 @@ export default function RecipeList() {
 }
 ```
 
-```js data.js
+```js src/data.js
 export const recipes = [{
   id: 'greek-salad',
   name: 'Greek Salad',
@@ -1060,7 +1062,7 @@ export default function RecipeList() {
 }
 ```
 
-```js data.js
+```js src/data.js
 export const recipes = [{
   id: 'greek-salad',
   name: 'Greek Salad',
@@ -1145,7 +1147,11 @@ hr {
 
 <Hint>
 
+<<<<<<< HEAD
 Sinun täytyy joko muuttaa `map` manuaaliseksi silmukaksi tai käyttää fragmentia.
+=======
+You'll either need to convert `map` to a manual loop, or use a Fragment.
+>>>>>>> 47e64bf7ad81aab8bacfa791a37816ee869135eb
 
 </Hint>
 
@@ -1208,7 +1214,11 @@ hr {
 
 Alkuperäisen rivin indeksin käyttäminen `key`.na ei enää toimi sillä erottimet ja kappaleet ovat nyt samassa taulukossa. Kuitenkin, voit antaa niille erillisen avaimen käyttämällä jälkiliitettä, esim. `key={i + '-text'}`.
 
+<<<<<<< HEAD
 Vaihtoehtoisesti voit renderöidä kokoelman fragmenteja, jotka sisältävät `<hr />` ja `<p>...</p>` tagit. Kuitenkin `<>...</>` lyhytsyntaksi ei tue avainten välittämistä, joten joutuisit kirjoittamaan `<Fragment>`:n eksplisiittisesti:
+=======
+Alternatively, you could render a collection of Fragments which contain `<hr />` and `<p>...</p>`. However, the `<>...</>` shorthand syntax doesn't support passing keys, so you'd have to write `<Fragment>` explicitly:
+>>>>>>> 47e64bf7ad81aab8bacfa791a37816ee869135eb
 
 <Sandpack>
 
@@ -1254,7 +1264,11 @@ hr {
 
 </Sandpack>
 
+<<<<<<< HEAD
 Muista, fragmentit (useiten kirjoitettuna `<> </>`) antavat sinun ryhmittää JSX-kohteita lisäämättä ylimääräisiä `<div>`-elementtejä!
+=======
+Remember, Fragments (often written as `<> </>`) let you group JSX nodes without adding extra `<div>`s!
+>>>>>>> 47e64bf7ad81aab8bacfa791a37816ee869135eb
 
 </Solution>
 
