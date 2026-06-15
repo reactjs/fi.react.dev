@@ -177,7 +177,11 @@ Seuraavan renderöinnin aikana React käy läpi tilajonon:
 | "replace with `5`" | `0` (käyttämätön) | `5` |
 | `n => n + 1` | `5` | `5 + 1 = 6` |
 
+<<<<<<< HEAD
 React tallentaa `6` lopulliseksi tulokseksi ja palauttaa sen `useState`:sta.
+=======
+React stores `6` as the final result and returns it from `useState`.
+>>>>>>> 6ec61348646040795fdaa9de14a9bec603260f87
 
 <Note>
 
@@ -305,7 +309,11 @@ export default function RequestTracker() {
         Toteutunut: {completed}
       </h3>
       <button onClick={handleClick}>
+<<<<<<< HEAD
         Osta
+=======
+        Buy
+>>>>>>> 6ec61348646040795fdaa9de14a9bec603260f87
       </button>
     </>
   );
@@ -349,7 +357,7 @@ export default function RequestTracker() {
         Completed: {completed}
       </h3>
       <button onClick={handleClick}>
-        Buy     
+        Buy
       </button>
     </>
   );
@@ -404,7 +412,7 @@ Täytä puuttuvat rivit!
 
 <Sandpack>
 
-```js processQueue.js active
+```js src/processQueue.js active
 export function getFinalState(baseState, queue) {
   let finalState = baseState;
 
@@ -414,7 +422,7 @@ export function getFinalState(baseState, queue) {
 }
 ```
 
-```js App.js
+```js src/App.js
 import { getFinalState } from './processQueue.js';
 
 function increment(n) {
@@ -499,7 +507,7 @@ Tämä on täsmälleen tällä sivulla kuvattu algoritmi, jota React käyttää 
 
 <Sandpack>
 
-```js processQueue.js active
+```js src/processQueue.js active
 export function getFinalState(baseState, queue) {
   let finalState = baseState;
 
@@ -517,7 +525,7 @@ export function getFinalState(baseState, queue) {
 }
 ```
 
-```js App.js
+```js src/App.js
 import { getFinalState } from './processQueue.js';
 
 function increment(n) {

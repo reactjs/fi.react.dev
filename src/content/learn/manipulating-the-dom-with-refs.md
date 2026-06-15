@@ -124,35 +124,35 @@ export default function CatFriends() {
     <>
       <nav>
         <button onClick={handleScrollToFirstCat}>
-          Tom
+          Neo
         </button>
         <button onClick={handleScrollToSecondCat}>
-          Maru
+          Millie
         </button>
         <button onClick={handleScrollToThirdCat}>
-          Jellylorum
+          Bella
         </button>
       </nav>
       <div>
         <ul>
           <li>
             <img
-              src="https://placekitten.com/g/200/200"
-              alt="Tom"
+              src="https://placecats.com/neo/300/200"
+              alt="Neo"
               ref={firstCatRef}
             />
           </li>
           <li>
             <img
-              src="https://placekitten.com/g/300/200"
-              alt="Maru"
+              src="https://placecats.com/millie/200/200"
+              alt="Millie"
               ref={secondCatRef}
             />
           </li>
           <li>
             <img
-              src="https://placekitten.com/g/250/200"
-              alt="Jellylorum"
+              src="https://placecats.com/bella/199/200"
+              alt="Bella"
               ref={thirdCatRef}
             />
           </li>
@@ -211,25 +211,30 @@ Tämä tapahtuu koska **Hookit on kutsuttava vain komponentin ylimmällä tasoll
 
 Yksi mahdollinen tapa ratkaista tämä on hakea yksi ref ylemmälle elementille, ja käyttää sitten DOM manipulaatiomenetelmiä kuten [`querySelectorAll`](https://developer.mozilla.org/en-US/docs/Web/API/Document/querySelectorAll) löytääksesi yksittäiset lapsinoodit. Tämä on kuitenkin herkkä ja voi rikkoutua, jos DOM-rakenne muuttuu.
 
+<<<<<<< HEAD
 Toinen mahdollinen ratkaisu on **välittää funktio `ref` attribuuttiin.** Tätä kutsutaan [`ref` callbackiksi.](/reference/react-dom/components/common#ref-callback) React kutsuu ref-callbackkia DOM noodilla kun on aika asettaa ref, ja `null`:lla kun se on aika tyhjentää se. Tämä mahdollistaa omien taulukoiden tai [Map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map):n ylläpidon, ja mahdollistaa refin hakemisen indeksin tai jonkinlaisen ID:n perusteella.
+=======
+Another solution is to **pass a function to the `ref` attribute.** This is called a [`ref` callback.](/reference/react-dom/components/common#ref-callback) React will call your ref callback with the DOM node when it's time to set the ref, and call the cleanup function returned from the callback when it's time to clear it. This lets you maintain your own array or a [Map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map), and access any ref by its index or some kind of ID.
+>>>>>>> 6ec61348646040795fdaa9de14a9bec603260f87
 
 Tämä esimerkki näyttää miten voit käyttää tätä menetelmää scrollataksesi mihin tahansa kohtaan pitkässä listassa:
 
 <Sandpack>
 
 ```js
-import { useRef } from 'react';
+import { useRef, useState } from "react";
 
 export default function CatFriends() {
   const itemsRef = useRef(null);
+  const [catList, setCatList] = useState(setupCatList);
 
-  function scrollToId(itemId) {
+  function scrollToCat(cat) {
     const map = getMap();
-    const node = map.get(itemId);
+    const node = map.get(cat);
     node.scrollIntoView({
-      behavior: 'smooth',
-      block: 'nearest',
-      inline: 'center'
+      behavior: "smooth",
+      block: "nearest",
+      inline: "center",
     });
   }
 
@@ -244,34 +249,25 @@ export default function CatFriends() {
   return (
     <>
       <nav>
-        <button onClick={() => scrollToId(0)}>
-          Tom
-        </button>
-        <button onClick={() => scrollToId(5)}>
-          Maru
-        </button>
-        <button onClick={() => scrollToId(9)}>
-          Jellylorum
-        </button>
+        <button onClick={() => scrollToCat(catList[0])}>Neo</button>
+        <button onClick={() => scrollToCat(catList[5])}>Millie</button>
+        <button onClick={() => scrollToCat(catList[8])}>Bella</button>
       </nav>
       <div>
         <ul>
-          {catList.map(cat => (
+          {catList.map((cat) => (
             <li
               key={cat.id}
               ref={(node) => {
                 const map = getMap();
-                if (node) {
-                  map.set(cat.id, node);
-                } else {
-                  map.delete(cat.id);
-                }
+                map.set(cat, node);
+
+                return () => {
+                  map.delete(cat);
+                };
               }}
             >
-              <img
-                src={cat.imageUrl}
-                alt={'Cat #' + cat.id}
-              />
+              <img src={cat.imageUrl} />
             </li>
           ))}
         </ul>
@@ -280,12 +276,24 @@ export default function CatFriends() {
   );
 }
 
-const catList = [];
-for (let i = 0; i < 10; i++) {
-  catList.push({
-    id: i,
-    imageUrl: 'https://placekitten.com/250/200?image=' + i
-  });
+function setupCatList() {
+  const catCount = 10;
+  const catList = new Array(catCount)
+  for (let i = 0; i < catCount; i++) {
+    let imageUrl = '';
+    if (i < 5) {
+      imageUrl = "https://placecats.com/neo/320/240";
+    } else if (i < 8) {
+      imageUrl = "https://placecats.com/millie/320/240";
+    } else {
+      imageUrl = "https://placecats.com/bella/320/240";
+    }
+    catList[i] = {
+      id: i,
+      imageUrl,
+    };
+  }
+  return catList;
 }
 
 ```
@@ -325,6 +333,7 @@ Tässä esimerkissä `itemsRef` ei sisällä yhtäkään DOM noodia. Sen sijaan 
   key={cat.id}
   ref={node => {
     const map = getMap();
+<<<<<<< HEAD
     if (node) {
       // Lisää Map:iin
       map.set(cat.id, node);
@@ -332,28 +341,70 @@ Tässä esimerkissä `itemsRef` ei sisällä yhtäkään DOM noodia. Sen sijaan 
       // Poista Map:sta
       map.delete(cat.id);
     }
+=======
+    // Add to the Map
+    map.set(cat, node);
+
+    return () => {
+      // Remove from the Map
+      map.delete(cat);
+    };
+>>>>>>> 6ec61348646040795fdaa9de14a9bec603260f87
   }}
 >
 ```
 
 Tämän avulla voit lukea yksittäiset DOM noodit Map:sta myöhemmin.
 
+<Note>
+
+When Strict Mode is enabled, ref callbacks will run twice in development.
+
+Read more about [how this helps find bugs](/reference/react/StrictMode#fixing-bugs-found-by-re-running-ref-callbacks-in-development) in callback refs.
+
+</Note>
+
 </DeepDive>
 
 ## Pääsy toisen komponentin DOM-noodiin {/*pääsy-toisen-komponentin-dom-solmiin*/}
 
+<<<<<<< HEAD
 Kun asetat refin sisäänrakennettuun komponenttiin, joka tuottaa selaimen elementin kuten `<input />`:n, React asettaa refin `current` propertyn vastaamaan DOM noodia (kuten todellista `<input />`:ia selaimessa).
 
 Kuitenkin, jos yrität asettaa refin **omalle** komponentillesi, kuten `<MyInput />`, oletuksena saat `null`:n. Näet sen tässä esimerkissä. Huomaa miten painikkeen painaminen **ei** keskitä inputia:
 
+=======
+<Pitfall>
+Refs are an escape hatch. Manually manipulating _another_ component's DOM nodes can make your code fragile.
+</Pitfall>
+
+You can pass refs from parent component to child components [just like any other prop](/learn/passing-props-to-a-component).
+
+```js {3-4,9}
+import { useRef } from 'react';
+
+function MyInput({ ref }) {
+  return <input ref={ref} />;
+}
+
+function MyForm() {
+  const inputRef = useRef(null);
+  return <MyInput ref={inputRef} />
+}
+```
+
+In the above example, a ref is created in the parent component, `MyForm`, and is passed to the child component, `MyInput`. `MyInput` then passes the ref to `<input>`. Because `<input>` is a [built-in component](/reference/react-dom/components/common) React sets the `.current` property of the ref to the `<input>` DOM element.
+
+The `inputRef` created in `MyForm` now points to the `<input>` DOM element returned by `MyInput`. A click handler created in `MyForm` can access `inputRef` and call `focus()` to set the focus on `<input>`.
+>>>>>>> 6ec61348646040795fdaa9de14a9bec603260f87
 
 <Sandpack>
 
 ```js
 import { useRef } from 'react';
 
-function MyInput(props) {
-  return <input {...props} />;
+function MyInput({ ref }) {
+  return <input ref={ref} />;
 }
 
 export default function MyForm() {
@@ -376,6 +427,7 @@ export default function MyForm() {
 
 </Sandpack>
 
+<<<<<<< HEAD
 Helpottaaksesi ongelman havaitsemista, React tulostaa myös virheen konsoliin:
 
 <ConsoleBlock level="error">
@@ -433,22 +485,24 @@ export default function Form() {
 
 Design-järjestelmissä yleinen malli on, että alhaisen tason komponentit kuten painikkeet, inputit ja muut, välittävät refit DOM noodeihinsa. Toisaalta, korkean tason komponentit kuten lomakkeet, listat tai sivun osat eivät yleensä välitä DOM noodejaan, jotta välteittäisiin tahallinen riippuvuus DOM rakenteesta.
 
+=======
+>>>>>>> 6ec61348646040795fdaa9de14a9bec603260f87
 <DeepDive>
 
 #### API:n osajoukon julkaisu imperatiivisella käsittelyllä {/*exposing-a-subset-of-the-api-with-an-imperative-handle*/}
 
+<<<<<<< HEAD
 Yllä olevassa esimerkissä `MyInput` julkaisee alkuperäisen DOM input elementin. Tämä mahdollistaa ylemmän tason komponentin kutsun `focus()`:iin. Kuitenkin, tämä mahdollistaa myös sen, että ylemmän tason komponentti voi tehdä jotain muuta--esimerkiksi muuttaa sen CSS tyylejä. Harvoin tapahtuvissa tapauksissa, saatat haluta rajoittaa julkistettua toiminnallisuutta. Voit tehdä sen `useImperativeHandle`:n avulla:
+=======
+In the above example, the ref passed to `MyInput` is passed on to the original DOM input element. This lets the parent component call `focus()` on it. However, this also lets the parent component do something else--for example, change its CSS styles. In uncommon cases, you may want to restrict the exposed functionality. You can do that with [`useImperativeHandle`](/reference/react/useImperativeHandle):
+>>>>>>> 6ec61348646040795fdaa9de14a9bec603260f87
 
 <Sandpack>
 
 ```js
-import {
-  forwardRef, 
-  useRef, 
-  useImperativeHandle
-} from 'react';
+import { useRef, useImperativeHandle } from "react";
 
-const MyInput = forwardRef((props, ref) => {
+function MyInput({ ref }) {
   const realInputRef = useRef(null);
   useImperativeHandle(ref, () => ({
     // Julkaise vain focus eikä mitään muuta
@@ -456,8 +510,8 @@ const MyInput = forwardRef((props, ref) => {
       realInputRef.current.focus();
     },
   }));
-  return <input {...props} ref={realInputRef} />;
-});
+  return <input ref={realInputRef} />;
+};
 
 export default function Form() {
   const inputRef = useRef(null);
@@ -469,9 +523,7 @@ export default function Form() {
   return (
     <>
       <MyInput ref={inputRef} />
-      <button onClick={handleClick}>
-        Focus the input
-      </button>
+      <button onClick={handleClick}>Focus the input</button>
     </>
   );
 }
@@ -479,7 +531,11 @@ export default function Form() {
 
 </Sandpack>
 
+<<<<<<< HEAD
 Tässä, `MyInput`:n sisällä `realInputRef` sisältää oikean input DOM noodin. Kuitenkin, `useImperativeHandle` ohjeistaa Reactia antamaan oman erityisen olion refin arvona ylemmälle komponentille. Joten `Form`:n sisällä `inputRef.current` pitää sisällään vain `focus` metodin. Tässä tapauksessa, ref "handle" ei ole DOM noodi, vaan oma olio, joka luotiin `useImperativeHandle` kutsussa.
+=======
+Here, `realInputRef` inside `MyInput` holds the actual input DOM node. However, [`useImperativeHandle`](/reference/react/useImperativeHandle) instructs React to provide your own special object as the value of a ref to the parent component. So `inputRef.current` inside the `Form` component will only have the `focus` method. In this case, the ref "handle" is not the DOM node, but the custom object you create inside [`useImperativeHandle`](/reference/react/useImperativeHandle) call.
+>>>>>>> 6ec61348646040795fdaa9de14a9bec603260f87
 
 </DeepDive>
 
@@ -494,7 +550,11 @@ Yleensä [ei kannata](/learn/referencing-values-with-refs#best-practices-for-ref
 
 React asettaa `ref.current`:n kommitoinnin aikana. Ennen DOM:n päivittämistä, React asettaa `ref.current` arvot `null`:ksi. Päivittämisen jälkeen, React asettaa ne välittömästi vastaaviin DOM noodeihin.
 
+<<<<<<< HEAD
 **Useiten saatat käyttää refseja Tapahtumankäsittelijöiden sisällä.** Jos haluat tehdä jotain refin kanssa, mutta ei ole tiettyä tapahtumaa jota käyttää, saatat tarvita Effektiä. Seuraavilla sivuilla käymme läpi Effektin.
+=======
+**Usually, you will access refs from event handlers.** If you want to do something with a ref, but there is no particular event to do it in, you might need an Effect. We will discuss Effects on the next pages.
+>>>>>>> 6ec61348646040795fdaa9de14a9bec603260f87
 
 <DeepDive>
 
@@ -591,7 +651,7 @@ export default function TodoList() {
     const newTodo = { id: nextId++, text: text };
     flushSync(() => {
       setText('');
-      setTodos([ ...todos, newTodo]);      
+      setTodos([ ...todos, newTodo]);
     });
     listRef.current.lastChild.scrollIntoView({
       behavior: 'smooth',
@@ -690,12 +750,21 @@ Kuitenkin, tämä ei tarkoita, etteikö sitä voisi tehdä ollenkaan. Tämä vaa
 
 <Recap>
 
+<<<<<<< HEAD
 - Refit ovat yleinen konsepti, mutta yleensä käytät niitä pitämään DOM elementtejä.
 - Ohjeistat Reactia laittamaan DOM noodin `myRef.current`-propertyyn `<div ref={myRef}>`:lla.
 - Useiten, käytät refejä ei-destruktivisille toiminnoille kuten kohdentamiselle, scrollaamiselle tai DOM elementtien mitoittamiselle.
 - Komponentti ei julkaise sen DOM noodia oletuksena. Voit julkaista DOM noodin käyttämällä `forwardRef`:ia ja välittämällä toisen `ref`-argumentin alas tiettyyn noodiin.
 - Vältä Reactin hallinnoimien DOM elementtien muuttamista.
 - Mikäli muokkaat Reactin hallinnoimaa DOM noodia, muokkaa osia, joita Reactilla ei ole syytä päivittää.
+=======
+- Refs are a generic concept, but most often you'll use them to hold DOM elements.
+- You instruct React to put a DOM node into `myRef.current` by passing `<div ref={myRef}>`.
+- Usually, you will use refs for non-destructive actions like focusing, scrolling, or measuring DOM elements.
+- A component doesn't expose its DOM nodes by default. You can opt into exposing a DOM node by using the `ref` prop.
+- Avoid changing DOM nodes managed by React.
+- If you do modify DOM nodes managed by React, modify parts that React has no reason to update.
+>>>>>>> 6ec61348646040795fdaa9de14a9bec603260f87
 
 </Recap>
 
@@ -925,12 +994,30 @@ export default function CatFriends() {
   );
 }
 
-const catList = [];
-for (let i = 0; i < 10; i++) {
-  catList.push({
+const catCount = 10;
+const catList = new Array(catCount);
+for (let i = 0; i < catCount; i++) {
+  const bucket = Math.floor(Math.random() * catCount) % 2;
+  let imageUrl = '';
+  switch (bucket) {
+    case 0: {
+      imageUrl = "https://placecats.com/neo/250/200";
+      break;
+    }
+    case 1: {
+      imageUrl = "https://placecats.com/millie/250/200";
+      break;
+    }
+    case 2:
+    default: {
+      imageUrl = "https://placecats.com/bella/250/200";
+      break;
+    }
+  }
+  catList[i] = {
     id: i,
-    imageUrl: 'https://placekitten.com/250/200?image=' + i
-  });
+    imageUrl,
+  };
 }
 
 ```
@@ -1010,7 +1097,7 @@ export default function CatFriends() {
             behavior: 'smooth',
             block: 'nearest',
             inline: 'center'
-          });            
+          });
         }}>
           Next
         </button>
@@ -1042,12 +1129,30 @@ export default function CatFriends() {
   );
 }
 
-const catList = [];
-for (let i = 0; i < 10; i++) {
-  catList.push({
+const catCount = 10;
+const catList = new Array(catCount);
+for (let i = 0; i < catCount; i++) {
+  const bucket = Math.floor(Math.random() * catCount) % 2;
+  let imageUrl = '';
+  switch (bucket) {
+    case 0: {
+      imageUrl = "https://placecats.com/neo/250/200";
+      break;
+    }
+    case 1: {
+      imageUrl = "https://placecats.com/millie/250/200";
+      break;
+    }
+    case 2:
+    default: {
+      imageUrl = "https://placecats.com/bella/250/200";
+      break;
+    }
+  }
+  catList[i] = {
     id: i,
-    imageUrl: 'https://placekitten.com/250/200?image=' + i
-  });
+    imageUrl,
+  };
 }
 
 ```
@@ -1100,13 +1205,17 @@ Tee niin, että "Search" -nappia painamalla hakukenttään kohdistetaan. Huomaa,
 
 <Hint>
 
+<<<<<<< HEAD
 Sinun täytyy käyttää `forwardRef`:ia, jotta voit julkaista DOM noodin omasta komponentistasi kuten `SearchInput`:sta.
+=======
+You'll need to pass `ref` as a prop to opt into exposing a DOM node from your own component like `SearchInput`.
+>>>>>>> 6ec61348646040795fdaa9de14a9bec603260f87
 
 </Hint>
 
 <Sandpack>
 
-```js App.js
+```js src/App.js
 import SearchButton from './SearchButton.js';
 import SearchInput from './SearchInput.js';
 
@@ -1122,7 +1231,7 @@ export default function Page() {
 }
 ```
 
-```js SearchButton.js
+```js src/SearchButton.js
 export default function SearchButton() {
   return (
     <button>
@@ -1132,7 +1241,7 @@ export default function SearchButton() {
 }
 ```
 
-```js SearchInput.js
+```js src/SearchInput.js
 export default function SearchInput() {
   return (
     <input
@@ -1156,7 +1265,7 @@ Sinun täytyy lisätä `onClick` propsi `SearchButton`:iin ja laittaa `SearchBut
 
 <Sandpack>
 
-```js App.js
+```js src/App.js
 import { useRef } from 'react';
 import SearchButton from './SearchButton.js';
 import SearchInput from './SearchInput.js';
@@ -1176,7 +1285,7 @@ export default function Page() {
 }
 ```
 
-```js SearchButton.js
+```js src/SearchButton.js
 export default function SearchButton({ onClick }) {
   return (
     <button onClick={onClick}>
@@ -1186,19 +1295,15 @@ export default function SearchButton({ onClick }) {
 }
 ```
 
-```js SearchInput.js
-import { forwardRef } from 'react';
-
-export default forwardRef(
-  function SearchInput(props, ref) {
-    return (
-      <input
-        ref={ref}
-        placeholder="Looking for something?"
-      />
-    );
-  }
-);
+```js src/SearchInput.js
+export default function SearchInput({ ref }) {
+  return (
+    <input
+      ref={ref}
+      placeholder="Looking for something?"
+    />
+  );
+}
 ```
 
 ```css
