@@ -458,7 +458,7 @@ export default function Menu() {
 
   return (
     <>
-      <h2>What's your travel snack?</h2> 
+      <h2>What's your travel snack?</h2>
       <ul>
         {items.map((item, index) => (
           <li key={item.id}>
@@ -554,9 +554,13 @@ button { margin-top: 10px; }
 
 </Sandpack>
 
+<<<<<<< HEAD
 (Vaihtoehtoisesti, voisit pitää valitun indeksin tilasa.)
 
 Tila oli aiemmin monistettu näin:
+=======
+The state used to be duplicated like this:
+>>>>>>> 6ec61348646040795fdaa9de14a9bec603260f87
 
 * `items = [{ id: 0, title: 'pretzels'}, ...]`
 * `selectedItem = {id: 0, title: 'pretzels'}`
@@ -612,7 +616,7 @@ export default function TravelPlan() {
 }
 ```
 
-```js places.js active
+```js src/places.js active
 export const initialTravelPlan = {
   id: 0,
   title: '(Root)',
@@ -806,7 +810,7 @@ export const initialTravelPlan = {
     }, {
       id: 48,
       title: 'Green Hill',
-      childPlaces: []      
+      childPlaces: []
     }]
   }]
 };
@@ -868,7 +872,7 @@ export default function TravelPlan() {
 }
 ```
 
-```js places.js active
+```js src/places.js active
 export const initialTravelPlan = {
   0: {
     id: 0,
@@ -884,7 +888,7 @@ export const initialTravelPlan = {
     id: 2,
     title: 'Africa',
     childIds: [3, 4, 5, 6 , 7, 8, 9]
-  }, 
+  },
   3: {
     id: 3,
     title: 'Botswana',
@@ -904,7 +908,7 @@ export const initialTravelPlan = {
     id: 6,
     title: 'Madagascar',
     childIds: []
-  }, 
+  },
   7: {
     id: 7,
     title: 'Morocco',
@@ -923,7 +927,7 @@ export const initialTravelPlan = {
   10: {
     id: 10,
     title: 'Americas',
-    childIds: [11, 12, 13, 14, 15, 16, 17, 18],   
+    childIds: [11, 12, 13, 14, 15, 16, 17, 18],
   },
   11: {
     id: 11,
@@ -939,7 +943,7 @@ export const initialTravelPlan = {
     id: 13,
     title: 'Barbados',
     childIds: []
-  }, 
+  },
   14: {
     id: 14,
     title: 'Canada',
@@ -968,7 +972,7 @@ export const initialTravelPlan = {
   19: {
     id: 19,
     title: 'Asia',
-    childIds: [20, 21, 22, 23, 24, 25],   
+    childIds: [20, 21, 22, 23, 24, 25],
   },
   20: {
     id: 20,
@@ -1003,7 +1007,7 @@ export const initialTravelPlan = {
   26: {
     id: 26,
     title: 'Europe',
-    childIds: [27, 28, 29, 30, 31, 32, 33],   
+    childIds: [27, 28, 29, 30, 31, 32, 33],
   },
   27: {
     id: 27,
@@ -1043,7 +1047,7 @@ export const initialTravelPlan = {
   34: {
     id: 34,
     title: 'Oceania',
-    childIds: [35, 36, 37, 38, 39, 40, 41],   
+    childIds: [35, 36, 37, 38, 39, 40, 41],
   },
   35: {
     id: 35,
@@ -1204,7 +1208,7 @@ function PlaceTree({ id, parentId, placesById, onComplete }) {
 }
 ```
 
-```js places.js
+```js src/places.js
 export const initialTravelPlan = {
   0: {
     id: 0,
@@ -1220,7 +1224,7 @@ export const initialTravelPlan = {
     id: 2,
     title: 'Africa',
     childIds: [3, 4, 5, 6 , 7, 8, 9]
-  }, 
+  },
   3: {
     id: 3,
     title: 'Botswana',
@@ -1240,7 +1244,7 @@ export const initialTravelPlan = {
     id: 6,
     title: 'Madagascar',
     childIds: []
-  }, 
+  },
   7: {
     id: 7,
     title: 'Morocco',
@@ -1259,7 +1263,7 @@ export const initialTravelPlan = {
   10: {
     id: 10,
     title: 'Americas',
-    childIds: [11, 12, 13, 14, 15, 16, 17, 18],   
+    childIds: [11, 12, 13, 14, 15, 16, 17, 18],
   },
   11: {
     id: 11,
@@ -1275,7 +1279,7 @@ export const initialTravelPlan = {
     id: 13,
     title: 'Barbados',
     childIds: []
-  }, 
+  },
   14: {
     id: 14,
     title: 'Canada',
@@ -1304,7 +1308,7 @@ export const initialTravelPlan = {
   19: {
     id: 19,
     title: 'Asia',
-    childIds: [20, 21, 22, 23, 24, 25],   
+    childIds: [20, 21, 22, 23, 24, 25],
   },
   20: {
     id: 20,
@@ -1339,7 +1343,7 @@ export const initialTravelPlan = {
   26: {
     id: 26,
     title: 'Europe',
-    childIds: [27, 28, 29, 30, 31, 32, 33],   
+    childIds: [27, 28, 29, 30, 31, 32, 33],
   },
   27: {
     id: 27,
@@ -1379,7 +1383,7 @@ export const initialTravelPlan = {
   34: {
     id: 34,
     title: 'Oceania',
-    childIds: [35, 36, 37, 38, 39, 40, 41],   
+    childIds: [35, 36, 37, 38, 39, 40, 41],
   },
   35: {
     id: 35,
@@ -1543,7 +1547,7 @@ function PlaceTree({ id, parentId, placesById, onComplete }) {
 }
 ```
 
-```js places.js
+```js src/places.js
 export const initialTravelPlan = {
   0: {
     id: 0,
@@ -1559,7 +1563,7 @@ export const initialTravelPlan = {
     id: 2,
     title: 'Africa',
     childIds: [3, 4, 5, 6 , 7, 8, 9]
-  }, 
+  },
   3: {
     id: 3,
     title: 'Botswana',
@@ -1579,7 +1583,7 @@ export const initialTravelPlan = {
     id: 6,
     title: 'Madagascar',
     childIds: []
-  }, 
+  },
   7: {
     id: 7,
     title: 'Morocco',
@@ -1598,7 +1602,7 @@ export const initialTravelPlan = {
   10: {
     id: 10,
     title: 'Americas',
-    childIds: [11, 12, 13, 14, 15, 16, 17, 18],   
+    childIds: [11, 12, 13, 14, 15, 16, 17, 18],
   },
   11: {
     id: 11,
@@ -1614,7 +1618,7 @@ export const initialTravelPlan = {
     id: 13,
     title: 'Barbados',
     childIds: []
-  }, 
+  },
   14: {
     id: 14,
     title: 'Canada',
@@ -1643,7 +1647,7 @@ export const initialTravelPlan = {
   19: {
     id: 19,
     title: 'Asia',
-    childIds: [20, 21, 22, 23, 24, 25,],   
+    childIds: [20, 21, 22, 23, 24, 25,],
   },
   20: {
     id: 20,
@@ -1678,7 +1682,7 @@ export const initialTravelPlan = {
   26: {
     id: 26,
     title: 'Europe',
-    childIds: [27, 28, 29, 30, 31, 32, 33],   
+    childIds: [27, 28, 29, 30, 31, 32, 33],
   },
   27: {
     id: 27,
@@ -1718,7 +1722,7 @@ export const initialTravelPlan = {
   34: {
     id: 34,
     title: 'Oceania',
-    childIds: [35, 36, 37, 38, 39, 40,, 41],   
+    childIds: [35, 36, 37, 38, 39, 40, 41],
   },
   35: {
     id: 35,
@@ -1823,6 +1827,7 @@ Joskus voit myös vähentää tilan sisennystä siirtämällä tilan osia sen al
 
 <Recap>
 
+<<<<<<< HEAD
 * Jos kaksi tilamuuttujaa päivittyvät yhdessä, harkitse niiden yhdistämistä yhdeksi. 
 * Valitse tilamuuttujasi huolellisesti välttääksesi "mahdottomia" tiloja.
 * Järjestä tilasi tavalla, joka vähentää mahdollisuuksiasi tehdä ongelmia sitä päivittäessä.
@@ -1830,6 +1835,15 @@ Joskus voit myös vähentää tilan sisennystä siirtämällä tilan osia sen al
 * Älä välitä propseja *suoraan* tilaan, ellet nimenomaan halua välttää päivityksiä.
 * Käyttöliittymämalleihin kuten valintoihin, pidä ID tai indeksi tilassa koko kohteen olion sijaan.
 * Jos syvään sisäkkäisen olion päivittäminen on sekavaa, kokeile sen tasaamista.
+=======
+* If two state variables always update together, consider merging them into one.
+* Choose your state variables carefully to avoid creating "impossible" states.
+* Structure your state in a way that reduces the chances that you'll make a mistake updating it.
+* Avoid redundant and duplicate state so that you don't need to keep it in sync.
+* Don't put props *into* state unless you specifically want to prevent updates.
+* For UI patterns like selection, keep ID or index in state instead of the object itself.
+* If updating deeply nested state is complicated, try flattening it.
+>>>>>>> 6ec61348646040795fdaa9de14a9bec603260f87
 
 </Recap>
 
@@ -1841,7 +1855,7 @@ Tämä `Clock` komponentti vastaanottaa kaksi propsia: `color` ja `time`. Kun va
 
 <Sandpack>
 
-```js Clock.js active
+```js src/Clock.js active
 import { useState } from 'react';
 
 export default function Clock(props) {
@@ -1854,7 +1868,7 @@ export default function Clock(props) {
 }
 ```
 
-```js App.js hidden
+```js src/App.js hidden
 import { useState, useEffect } from 'react';
 import Clock from './Clock.js';
 
@@ -1896,7 +1910,7 @@ Ongelma on, että tällä komponentilla on `color` tilamuuttuja alustettuna `col
 
 <Sandpack>
 
-```js Clock.js active
+```js src/Clock.js active
 import { useState } from 'react';
 
 export default function Clock(props) {
@@ -1908,7 +1922,7 @@ export default function Clock(props) {
 }
 ```
 
-```js App.js hidden
+```js src/App.js hidden
 import { useState, useEffect } from 'react';
 import Clock from './Clock.js';
 
@@ -1948,7 +1962,7 @@ Tai käyttämällä olion levityssyntaksia:
 
 <Sandpack>
 
-```js Clock.js active
+```js src/Clock.js active
 import { useState } from 'react';
 
 export default function Clock({ color, time }) {
@@ -1960,7 +1974,7 @@ export default function Clock({ color, time }) {
 }
 ```
 
-```js App.js hidden
+```js src/App.js hidden
 import { useState, useEffect } from 'react';
 import Clock from './Clock.js';
 
@@ -2010,7 +2024,7 @@ Onko yhtään tilaa, joka olisi tarpeetonta?
 
 <Sandpack>
 
-```js App.js
+```js src/App.js
 import { useState } from 'react';
 import AddItem from './AddItem.js';
 import PackingList from './PackingList.js';
@@ -2062,7 +2076,7 @@ export default function TravelPlan() {
   }
 
   return (
-    <>  
+    <>
       <AddItem
         onAddItem={handleAddItem}
       />
@@ -2078,7 +2092,7 @@ export default function TravelPlan() {
 }
 ```
 
-```js AddItem.js hidden
+```js src/AddItem.js hidden
 import { useState } from 'react';
 
 export default function AddItem({ onAddItem }) {
@@ -2099,7 +2113,7 @@ export default function AddItem({ onAddItem }) {
 }
 ```
 
-```js PackingList.js hidden
+```js src/PackingList.js hidden
 import { useState } from 'react';
 
 export default function PackingList({
@@ -2149,7 +2163,7 @@ Vaikka voisit huolellisesti muuttaa jokaista Tapahtumankäsittelijää päivitt�
 
 <Sandpack>
 
-```js App.js
+```js src/App.js
 import { useState } from 'react';
 import AddItem from './AddItem.js';
 import PackingList from './PackingList.js';
@@ -2197,7 +2211,7 @@ export default function TravelPlan() {
   }
 
   return (
-    <>  
+    <>
       <AddItem
         onAddItem={handleAddItem}
       />
@@ -2213,7 +2227,7 @@ export default function TravelPlan() {
 }
 ```
 
-```js AddItem.js hidden
+```js src/AddItem.js hidden
 import { useState } from 'react';
 
 export default function AddItem({ onAddItem }) {
@@ -2234,7 +2248,7 @@ export default function AddItem({ onAddItem }) {
 }
 ```
 
-```js PackingList.js hidden
+```js src/PackingList.js hidden
 import { useState } from 'react';
 
 export default function PackingList({
@@ -2290,7 +2304,7 @@ Koodi toimii, mutta siinä on lievä käyttöliittymäbugi. Kun painat "Star" ta
 
 <Sandpack>
 
-```js App.js
+```js src/App.js
 import { useState } from 'react';
 import { initialLetters } from './data.js';
 import Letter from './Letter.js';
@@ -2337,7 +2351,7 @@ export default function MailClient() {
 }
 ```
 
-```js Letter.js
+```js src/Letter.js
 export default function Letter({
   letter,
   isHighlighted,
@@ -2350,7 +2364,7 @@ export default function Letter({
         isHighlighted ? 'highlighted' : ''
       }
       onFocus={() => {
-        onHover(letter);        
+        onHover(letter);
       }}
       onPointerMove={() => {
         onHover(letter);
@@ -2367,7 +2381,7 @@ export default function Letter({
 }
 ```
 
-```js data.js
+```js src/data.js
 export const initialLetters = [{
   id: 0,
   subject: 'Ready for adventure?',
@@ -2399,7 +2413,7 @@ Korjataksesi ongelman, poista tilan toisto. Sen sijaan että tallentaisit *viest
 
 <Sandpack>
 
-```js App.js
+```js src/App.js
 import { useState } from 'react';
 import { initialLetters } from './data.js';
 import Letter from './Letter.js';
@@ -2446,7 +2460,7 @@ export default function MailClient() {
 }
 ```
 
-```js Letter.js
+```js src/Letter.js
 export default function Letter({
   letter,
   isHighlighted,
@@ -2459,7 +2473,7 @@ export default function Letter({
         isHighlighted ? 'highlighted' : ''
       }
       onFocus={() => {
-        onHover(letter.id);        
+        onHover(letter.id);
       }}
       onPointerMove={() => {
         onHover(letter.id);
@@ -2476,7 +2490,7 @@ export default function Letter({
 }
 ```
 
-```js data.js
+```js src/data.js
 export const initialLetters = [{
   id: 0,
   subject: 'Ready for adventure?',
@@ -2516,7 +2530,7 @@ Yksittäisen valitun ID:n sijasta saatat haluat pitää hallussasi taulukkoa tai
 
 <Sandpack>
 
-```js App.js
+```js src/App.js
 import { useState } from 'react';
 import { letters } from './data.js';
 import Letter from './Letter.js';
@@ -2559,7 +2573,7 @@ export default function MailClient() {
 }
 ```
 
-```js Letter.js
+```js src/Letter.js
 export default function Letter({
   letter,
   onToggle,
@@ -2584,7 +2598,7 @@ export default function Letter({
 }
 ```
 
-```js data.js
+```js src/data.js
 export const letters = [{
   id: 0,
   subject: 'Ready for adventure?',
@@ -2615,7 +2629,7 @@ Yksittäisen `selectedId`:n sijaan, pidä `selectedIds` *taulukko* tilassa. Esim
 
 <Sandpack>
 
-```js App.js
+```js src/App.js
 import { useState } from 'react';
 import { letters } from './data.js';
 import Letter from './Letter.js';
@@ -2667,7 +2681,7 @@ export default function MailClient() {
 }
 ```
 
-```js Letter.js
+```js src/Letter.js
 export default function Letter({
   letter,
   onToggle,
@@ -2692,7 +2706,7 @@ export default function Letter({
 }
 ```
 
-```js data.js
+```js src/data.js
 export const letters = [{
   id: 0,
   subject: 'Ready for adventure?',
@@ -2723,7 +2737,7 @@ Tämän korjataksesi, voit sen sijaan pitää [Set](https://developer.mozilla.or
 
 <Sandpack>
 
-```js App.js
+```js src/App.js
 import { useState } from 'react';
 import { letters } from './data.js';
 import Letter from './Letter.js';
@@ -2772,7 +2786,7 @@ export default function MailClient() {
 }
 ```
 
-```js Letter.js
+```js src/Letter.js
 export default function Letter({
   letter,
   onToggle,
@@ -2797,7 +2811,7 @@ export default function Letter({
 }
 ```
 
-```js data.js
+```js src/data.js
 export const letters = [{
   id: 0,
   subject: 'Ready for adventure?',

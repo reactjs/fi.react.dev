@@ -36,7 +36,11 @@ title: "<option>"
 
 #### Propsit {/*props*/}
 
+<<<<<<< HEAD
 `<option>` tukee kaikkia [yleisten elementtien propseja.](/reference/react-dom/components/common#props)
+=======
+`<option>` supports all [common element props.](/reference/react-dom/components/common#common-props)
+>>>>>>> 6ec61348646040795fdaa9de14a9bec603260f87
 
 Lisäksi, `<option>` tukee näitä propseja:
 
@@ -79,5 +83,5 @@ export default function FruitPicker() {
 select { margin: 5px; }
 ```
 
-</Sandpack>  
+</Sandpack>
 
