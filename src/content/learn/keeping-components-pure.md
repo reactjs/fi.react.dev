@@ -27,6 +27,7 @@ Saatat ehkä jo tietää yhden esimerkin puhtaista funktioista: kaavat matematii
 
 Harkitse tätä matemaattista kaavaa: <Math><MathI>y</MathI> = 2<MathI>x</MathI></Math>.
 
+<<<<<<< HEAD
 Jos <Math><MathI>x</MathI> = 2</Math> silloin <Math><MathI>y</MathI> = 4</Math>. Aina. 
 
 Jos <Math><MathI>x</MathI> = 3</Math> silloin <Math><MathI>y</MathI> = 6</Math>. Aina. 
@@ -34,6 +35,15 @@ Jos <Math><MathI>x</MathI> = 3</Math> silloin <Math><MathI>y</MathI> = 6</Math>.
 Jos <Math><MathI>x</MathI> = 3</Math>, <MathI>y</MathI> ei joskus ole <Math>9</Math> tai <Math>–1</Math> tai <Math>2.5</Math> riippuen kellonajasta taikka markkinatalouden tilasta. 
 
 Jos <Math><MathI>y</MathI> = 2<MathI>x</MathI></Math> ja <Math><MathI>x</MathI> = 3</Math>, <MathI>y</MathI> on _aina_ <Math>6</Math>. 
+=======
+If <Math><MathI>x</MathI> = 2</Math> then <Math><MathI>y</MathI> = 4</Math>. Always.
+
+If <Math><MathI>x</MathI> = 3</Math> then <Math><MathI>y</MathI> = 6</Math>. Always.
+
+If <Math><MathI>x</MathI> = 3</Math>, <MathI>y</MathI> won't sometimes be <Math>9</Math> or <Math>–1</Math> or <Math>2.5</Math> depending on the time of day or the state of the stock market.
+
+If <Math><MathI>y</MathI> = 2<MathI>x</MathI></Math> and <Math><MathI>x</MathI> = 3</Math>, <MathI>y</MathI> will _always_ be <Math>6</Math>.
+>>>>>>> 8bb31acb86bf68fa33d97dd0f1b834dfa71e2b1a
 
 Jos tästä tehtäisiin JavaScript funktio, se voisi näyttää tältä:
 
@@ -49,10 +59,10 @@ React on suunniteltu tämän konseptin ympärille. **React olettaa, että jokain
 
 <Sandpack>
 
-```js App.js
+```js src/App.js
 function Recipe({ drinkers }) {
   return (
-    <ol>    
+    <ol>
       <li>Boil {drinkers} cups of water.</li>
       <li>Add {drinkers} spoons of tea and {0.5 * drinkers} spoons of spice.</li>
       <li>Add {0.5 * drinkers} cups of milk to boil and sugar to taste.</li>
@@ -75,11 +85,19 @@ export default function App() {
 
 </Sandpack>
 
+<<<<<<< HEAD
 Kun välität `drinkers={2}` komponentille `Recipe`, se palauttaa JSX:n sisältäen `2 cups of water`. Aina. 
+=======
+When you pass `drinkers={2}` to `Recipe`, it will return JSX containing `2 cups of water`. Always.
+>>>>>>> 8bb31acb86bf68fa33d97dd0f1b834dfa71e2b1a
 
 Kun välität `drinkers={4}`, se palauttaa JSX:n sisältäen `4 cups of water`. Aina. 
 
+<<<<<<< HEAD
 Juuri kuten matemaattinen kaava.
+=======
+Just like a math formula.
+>>>>>>> 8bb31acb86bf68fa33d97dd0f1b834dfa71e2b1a
 
 Voit ajatella komponenttisi reseptinä: jos seuraat sitä, etkä esittele uusia ainesosia kesken ruoanlaiton aikana, saat saman aterian joka kerta. Tuo "ateria" on JSX jonka komponentti tarjoaa Reactille [renderöitäväksi.](/learn/render-and-commit)
 
@@ -93,7 +111,7 @@ Tässä komponentti joka rikkoo tätä sääntöä:
 
 <Sandpack>
 
-```js
+```js {expectedErrors: {'react-compiler': [5]}}
 let guest = 0;
 
 function Cup() {
@@ -175,7 +193,7 @@ function Cup({ guest }) {
 }
 
 export default function TeaGathering() {
-  let cups = [];
+  const cups = [];
   for (let i = 1; i <= 12; i++) {
     cups.push(<Cup key={i} guest={i} />);
   }
@@ -215,6 +233,7 @@ Jokainen uusi Reactin ominaisuus joita rakennamme hyödyntää puhtautta. Tiedon
 
 <Recap>
 
+<<<<<<< HEAD
 * Komponentin on oltava puhdas, tarkoittaen:
   * **Pitää huoli sen omista asioistaan.** It should not change any objects or variables that existed before rendering.
   * **Samat sisääntulot, sama ulostulo.** Annettaen sama syöte, komponentin tulisi aina palauttaa sama JSX. 
@@ -222,11 +241,20 @@ Jokainen uusi Reactin ominaisuus joita rakennamme hyödyntää puhtautta. Tiedon
 * Sinun ei pitäisi muuttaa lähtötietoja, joita komponenttisi käyttää renderöintiin. Tämä sisältää propsit, tilan sekä kontekstin. Ruudun päivittämiseksi ["aseta" tila](/learn/state-a-components-memory) olemassaolevien olioiden muuttamisen sijaan.
 * Pyri ilmaisemaan komponenttisi logiikka JSX:ssä jota palautat. Kun täytyy "muuttaa asioita", useimmiten teet sen Tapahtumankäsittelijässä. Viimeisenä keinona voit käyttää `useEffect`:ia.
 * Puhtaiden funktioiden kirjoittaminen vaatii hieman harjoittelua, mutta se avaa Reactin paradigman voiman.
+=======
+* A component must be pure, meaning:
+  * **It minds its own business.** It should not change any objects or variables that existed before rendering.
+  * **Same inputs, same output.** Given the same inputs, a component should always return the same JSX.
+* Rendering can happen at any time, so components should not depend on each others' rendering sequence.
+* You should not mutate any of the inputs that your components use for rendering. That includes props, state, and context. To update the screen, ["set" state](/learn/state-a-components-memory) instead of mutating preexisting objects.
+* Strive to express your component's logic in the JSX you return. When you need to "change things", you'll usually want to do it in an event handler. As a last resort, you can `useEffect`.
+* Writing pure functions takes a bit of practice, but it unlocks the power of React's paradigm.
+>>>>>>> 8bb31acb86bf68fa33d97dd0f1b834dfa71e2b1a
 
 </Recap>
 
 
-  
+
 <Challenges>
 
 #### Korjaa rikkinäinen kello {/*fix-a-broken-clock*/}
@@ -243,9 +271,9 @@ Renderöinti on *laskenta*, sen ei tulisi "tehdä" asioita. Voitko ilmaista sama
 
 <Sandpack>
 
-```js Clock.js active
+```js src/Clock.js active
 export default function Clock({ time }) {
-  let hours = time.getHours();
+  const hours = time.getHours();
   if (hours >= 0 && hours <= 6) {
     document.getElementById('time').className = 'night';
   } else {
@@ -259,7 +287,7 @@ export default function Clock({ time }) {
 }
 ```
 
-```js App.js hidden
+```js src/App.js hidden
 import { useState, useEffect } from 'react';
 import Clock from './Clock.js';
 
@@ -305,9 +333,9 @@ Voit korjata tämän komponentin laskemalla `className`:n ja sisällyttämällä
 
 <Sandpack>
 
-```js Clock.js active
+```js src/Clock.js active
 export default function Clock({ time }) {
-  let hours = time.getHours();
+  const hours = time.getHours();
   let className;
   if (hours >= 0 && hours <= 6) {
     className = 'night';
@@ -322,7 +350,7 @@ export default function Clock({ time }) {
 }
 ```
 
-```js App.js hidden
+```js src/App.js hidden
 import { useState, useEffect } from 'react';
 import Clock from './Clock.js';
 
@@ -380,7 +408,7 @@ Buginen koodi on `Profile.js` tiedostossa. Luithan koko tiedoston?
 
 <Sandpack>
 
-```js Profile.js
+```js {expectedErrors: {'react-compiler': [7]}} src/Profile.js
 import Panel from './Panel.js';
 import { getImageUrl } from './utils.js';
 
@@ -413,7 +441,7 @@ function Avatar() {
 }
 ```
 
-```js Panel.js hidden
+```js src/Panel.js hidden
 import { useState } from 'react';
 
 export default function Panel({ children }) {
@@ -429,7 +457,7 @@ export default function Panel({ children }) {
 }
 ```
 
-```js App.js
+```js src/App.js
 import Profile from './Profile.js';
 
 export default function App() {
@@ -448,10 +476,10 @@ export default function App() {
 }
 ```
 
-```js utils.js hidden
+```js src/utils.js hidden
 export function getImageUrl(person, size = 's') {
   return (
-    'https://i.imgur.com/' +
+    'https://react.dev/images/docs/scientists/' +
     person.imageId +
     size +
     '.jpg'
@@ -481,7 +509,7 @@ Bugin korjaamiseksi poista `currentPerson` muuttuja. Sen sijaan välitä kaikki 
 
 <Sandpack>
 
-```js Profile.js active
+```js src/Profile.js active
 import Panel from './Panel.js';
 import { getImageUrl } from './utils.js';
 
@@ -511,7 +539,7 @@ function Avatar({ person }) {
 }
 ```
 
-```js Panel.js hidden
+```js src/Panel.js hidden
 import { useState } from 'react';
 
 export default function Panel({ children }) {
@@ -527,7 +555,7 @@ export default function Panel({ children }) {
 }
 ```
 
-```js App.js
+```js src/App.js
 import Profile from './Profile.js';
 
 export default function App() {
@@ -546,10 +574,10 @@ export default function App() {
 }
 ```
 
-```js utils.js hidden
+```js src/utils.js hidden
 export function getImageUrl(person, size = 's') {
   return (
-    'https://i.imgur.com/' +
+    'https://react.dev/images/docs/scientists/' +
     person.imageId +
     size +
     '.jpg'
@@ -583,7 +611,7 @@ Olet toteuttanut "Create Story" paikanpitäjän lisäämällä yhden teko-stoory
 
 <Sandpack>
 
-```js StoryTray.js active
+```js src/StoryTray.js active
 export default function StoryTray({ stories }) {
   stories.push({
     id: 'create',
@@ -602,18 +630,18 @@ export default function StoryTray({ stories }) {
 }
 ```
 
-```js App.js hidden
+```js {expectedErrors: {'react-compiler': [16]}} src/App.js hidden
 import { useState, useEffect } from 'react';
 import StoryTray from './StoryTray.js';
 
-let initialStories = [
+const initialStories = [
   {id: 0, label: "Ankit's Story" },
   {id: 1, label: "Taylor's Story" },
 ];
 
 export default function App() {
-  let [stories, setStories] = useState([...initialStories])
-  let time = useTime();
+  const [stories, setStories] = useState([...initialStories])
+  const time = useTime();
 
   // HACK: Prevent the memory from growing forever while you read docs.
   // We're breaking our own rules here.
@@ -683,7 +711,7 @@ Yksinkertaisin ratkaisu on olla koskematta listaan ollenkaan, ja renderöindä "
 
 <Sandpack>
 
-```js StoryTray.js active
+```js src/StoryTray.js active
 export default function StoryTray({ stories }) {
   return (
     <ul>
@@ -698,18 +726,18 @@ export default function StoryTray({ stories }) {
 }
 ```
 
-```js App.js hidden
+```js {expectedErrors: {'react-compiler': [16]}} src/App.js hidden
 import { useState, useEffect } from 'react';
 import StoryTray from './StoryTray.js';
 
-let initialStories = [
+const initialStories = [
   {id: 0, label: "Ankit's Story" },
   {id: 1, label: "Taylor's Story" },
 ];
 
 export default function App() {
-  let [stories, setStories] = useState([...initialStories])
-  let time = useTime();
+  const [stories, setStories] = useState([...initialStories])
+  const time = useTime();
 
   // HACK: Prevent the memory from growing forever while you read docs.
   // We're breaking our own rules here.
@@ -767,10 +795,10 @@ Vaihtoehtoisesti, voit luoda _uuden_ listan (kopioimalla edellisen) ennen kuin l
 
 <Sandpack>
 
-```js StoryTray.js active
+```js src/StoryTray.js active
 export default function StoryTray({ stories }) {
   // Copy the array!
-  let storiesToDisplay = stories.slice();
+  const storiesToDisplay = stories.slice();
 
   // Does not affect the original array:
   storiesToDisplay.push({
@@ -790,18 +818,18 @@ export default function StoryTray({ stories }) {
 }
 ```
 
-```js App.js hidden
+```js {expectedErrors: {'react-compiler': [16]}} src/App.js hidden
 import { useState, useEffect } from 'react';
 import StoryTray from './StoryTray.js';
 
-let initialStories = [
+const initialStories = [
   {id: 0, label: "Ankit's Story" },
   {id: 1, label: "Taylor's Story" },
 ];
 
 export default function App() {
-  let [stories, setStories] = useState([...initialStories])
-  let time = useTime();
+  const [stories, setStories] = useState([...initialStories])
+  const time = useTime();
 
   // HACK: Prevent the memory from growing forever while you read docs.
   // We're breaking our own rules here.

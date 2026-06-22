@@ -29,7 +29,7 @@ function Avatar() {
   return (
     <img
       className="avatar"
-      src="https://i.imgur.com/1bX5QH6.jpg"
+      src="https://react.dev/images/docs/scientists/1bX5QH6.jpg"
       alt="Lin Lanying"
       width={100}
       height={100}
@@ -106,7 +106,7 @@ Nyt voit määritellä `Avatar`:n renderöimään monella erilaisella tavalla er
 
 <Sandpack>
 
-```js App.js
+```js src/App.js
 import { getImageUrl } from './utils.js';
 
 function Avatar({ person, size }) {
@@ -126,21 +126,21 @@ export default function Profile() {
     <div>
       <Avatar
         size={100}
-        person={{ 
-          name: 'Katsuko Saruhashi', 
+        person={{
+          name: 'Katsuko Saruhashi',
           imageId: 'YfeOqp2'
         }}
       />
       <Avatar
         size={80}
         person={{
-          name: 'Aklilu Lemma', 
+          name: 'Aklilu Lemma',
           imageId: 'OKS67lh'
         }}
       />
       <Avatar
         size={50}
-        person={{ 
+        person={{
           name: 'Lin Lanying',
           imageId: '1bX5QH6'
         }}
@@ -150,10 +150,10 @@ export default function Profile() {
 }
 ```
 
-```js utils.js
+```js src/utils.js
 export function getImageUrl(person, size = 's') {
   return (
-    'https://i.imgur.com/' +
+    'https://react.dev/images/docs/scientists/' +
     person.imageId +
     size +
     '.jpg'
@@ -274,7 +274,7 @@ Kun upotat sisältöä JSX tagiin, pääkomponentti vastaanottaa sisällön prop
 
 <Sandpack>
 
-```js App.js
+```js src/App.js
 import Avatar from './Avatar.js';
 
 function Card({ children }) {
@@ -290,7 +290,7 @@ export default function Profile() {
     <Card>
       <Avatar
         size={100}
-        person={{ 
+        person={{
           name: 'Katsuko Saruhashi',
           imageId: 'YfeOqp2'
         }}
@@ -300,7 +300,7 @@ export default function Profile() {
 }
 ```
 
-```js Avatar.js
+```js src/Avatar.js
 import { getImageUrl } from './utils.js';
 
 export default function Avatar({ person, size }) {
@@ -316,10 +316,10 @@ export default function Avatar({ person, size }) {
 }
 ```
 
-```js utils.js
+```js src/utils.js
 export function getImageUrl(person, size = 's') {
   return (
-    'https://i.imgur.com/' +
+    'https://react.dev/images/docs/scientists/' +
     person.imageId +
     size +
     '.jpg'
@@ -360,7 +360,7 @@ Kokeile muuttaa väriä valintaruudusta alla:
 
 <Sandpack>
 
-```js Clock.js active
+```js src/Clock.js active
 export default function Clock({ color, time }) {
   return (
     <h1 style={{ color: color }}>
@@ -370,7 +370,7 @@ export default function Clock({ color, time }) {
 }
 ```
 
-```js App.js hidden
+```js src/App.js hidden
 import { useState, useEffect } from 'react';
 import Clock from './Clock.js';
 
@@ -435,7 +435,7 @@ Tämä `Gallery` komponentti sisältää samanlaista merkintäkoodia kahdelle pr
 
 <Sandpack>
 
-```js App.js
+```js src/App.js
 import { getImageUrl } from './utils.js';
 
 export default function Gallery() {
@@ -453,11 +453,11 @@ export default function Gallery() {
         />
         <ul>
           <li>
-            <b>Profession: </b> 
+            <b>Profession: </b>
             physicist and chemist
           </li>
           <li>
-            <b>Awards: 4 </b> 
+            <b>Awards: 4 </b>
             (Nobel Prize in Physics, Nobel Prize in Chemistry, Davy Medal, Matteucci Medal)
           </li>
           <li>
@@ -477,11 +477,11 @@ export default function Gallery() {
         />
         <ul>
           <li>
-            <b>Profession: </b> 
+            <b>Profession: </b>
             geochemist
           </li>
           <li>
-            <b>Awards: 2 </b> 
+            <b>Awards: 2 </b>
             (Miyake Prize for geochemistry, Tanaka Prize)
           </li>
           <li>
@@ -495,10 +495,10 @@ export default function Gallery() {
 }
 ```
 
-```js utils.js
+```js src/utils.js
 export function getImageUrl(imageId, size = 's') {
   return (
-    'https://i.imgur.com/' +
+    'https://react.dev/images/docs/scientists/' +
     imageId +
     size +
     '.jpg'
@@ -536,7 +536,7 @@ Huomaa, että `imageSize` propsilla on oletusarvo, jonka takia emme välitä sit
 
 <Sandpack>
 
-```js App.js
+```js src/App.js
 import { getImageUrl } from './utils.js';
 
 function Profile({
@@ -603,10 +603,10 @@ export default function Gallery() {
 }
 ```
 
-```js utils.js
+```js src/utils.js
 export function getImageUrl(imageId, size = 's') {
   return (
-    'https://i.imgur.com/' +
+    'https://react.dev/images/docs/scientists/' +
     imageId +
     size +
     '.jpg'
@@ -636,7 +636,7 @@ Toinen ratkaisu, joka on lähempänä aikaisempia esimerkkejä tällä sivulla o
 
 <Sandpack>
 
-```js App.js
+```js src/App.js
 import { getImageUrl } from './utils.js';
 
 function Profile({ person, imageSize = 70 }) {
@@ -700,10 +700,10 @@ export default function Gallery() {
 }
 ```
 
-```js utils.js
+```js src/utils.js
 export function getImageUrl(person, size = 's') {
   return (
-    'https://i.imgur.com/' +
+    'https://react.dev/images/docs/scientists/' +
     person.imageId +
     size +
     '.jpg'
@@ -739,7 +739,7 @@ Muuta `Avatar` komponentti pyytämään lähimpää kuvan kokoa `size` propsin p
 
 <Sandpack>
 
-```js App.js
+```js src/App.js
 import { getImageUrl } from './utils.js';
 
 function Avatar({ person, size }) {
@@ -758,8 +758,8 @@ export default function Profile() {
   return (
     <Avatar
       size={40}
-      person={{ 
-        name: 'Gregorio Y. Zara', 
+      person={{
+        name: 'Gregorio Y. Zara',
         imageId: '7vQD0fP'
       }}
     />
@@ -767,10 +767,10 @@ export default function Profile() {
 }
 ```
 
-```js utils.js
+```js src/utils.js
 export function getImageUrl(person, size) {
   return (
-    'https://i.imgur.com/' +
+    'https://react.dev/images/docs/scientists/' +
     person.imageId +
     size +
     '.jpg'
@@ -790,7 +790,7 @@ Tässä miten voisit tehdä sen:
 
 <Sandpack>
 
-```js App.js
+```js src/App.js
 import { getImageUrl } from './utils.js';
 
 function Avatar({ person, size }) {
@@ -814,15 +814,15 @@ export default function Profile() {
     <>
       <Avatar
         size={40}
-        person={{ 
-          name: 'Gregorio Y. Zara', 
+        person={{
+          name: 'Gregorio Y. Zara',
           imageId: '7vQD0fP'
         }}
       />
       <Avatar
         size={120}
-        person={{ 
-          name: 'Gregorio Y. Zara', 
+        person={{
+          name: 'Gregorio Y. Zara',
           imageId: '7vQD0fP'
         }}
       />
@@ -831,10 +831,10 @@ export default function Profile() {
 }
 ```
 
-```js utils.js
+```js src/utils.js
 export function getImageUrl(person, size) {
   return (
-    'https://i.imgur.com/' +
+    'https://react.dev/images/docs/scientists/' +
     person.imageId +
     size +
     '.jpg'
@@ -852,7 +852,7 @@ Voit myös näyttää tarkemman kuvan korkean pikselitiheyden näytöille huomio
 
 <Sandpack>
 
-```js App.js
+```js src/App.js
 import { getImageUrl } from './utils.js';
 
 const ratio = window.devicePixelRatio;
@@ -878,22 +878,22 @@ export default function Profile() {
     <>
       <Avatar
         size={40}
-        person={{ 
-          name: 'Gregorio Y. Zara', 
+        person={{
+          name: 'Gregorio Y. Zara',
           imageId: '7vQD0fP'
         }}
       />
       <Avatar
         size={70}
-        person={{ 
-          name: 'Gregorio Y. Zara', 
+        person={{
+          name: 'Gregorio Y. Zara',
           imageId: '7vQD0fP'
         }}
       />
       <Avatar
         size={120}
-        person={{ 
-          name: 'Gregorio Y. Zara', 
+        person={{
+          name: 'Gregorio Y. Zara',
           imageId: '7vQD0fP'
         }}
       />
@@ -902,10 +902,10 @@ export default function Profile() {
 }
 ```
 
-```js utils.js
+```js src/utils.js
 export function getImageUrl(person, size) {
   return (
-    'https://i.imgur.com/' +
+    'https://react.dev/images/docs/scientists/' +
     person.imageId +
     size +
     '.jpg'
@@ -938,7 +938,7 @@ export default function Profile() {
           <h1>Photo</h1>
           <img
             className="avatar"
-            src="https://i.imgur.com/OKS67lhm.jpg"
+            src="https://react.dev/images/docs/scientists/OKS67lhm.jpg"
             alt="Aklilu Lemma"
             width={70}
             height={70}
@@ -1011,7 +1011,7 @@ export default function Profile() {
         <h1>Photo</h1>
         <img
           className="avatar"
-          src="https://i.imgur.com/OKS67lhm.jpg"
+          src="https://react.dev/images/docs/scientists/OKS67lhm.jpg"
           alt="Aklilu Lemma"
           width={100}
           height={100}
@@ -1073,7 +1073,7 @@ export default function Profile() {
       <Card title="Photo">
         <img
           className="avatar"
-          src="https://i.imgur.com/OKS67lhm.jpg"
+          src="https://react.dev/images/docs/scientists/OKS67lhm.jpg"
           alt="Aklilu Lemma"
           width={100}
           height={100}
