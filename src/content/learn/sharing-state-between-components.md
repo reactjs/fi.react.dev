@@ -323,7 +323,11 @@ Nähdäksesi mitä tämä tarkoittaa käytännössä muutamin komponentein, lue 
 
 #### Synkronoidut tulot {/*synced-inputs*/}
 
+<<<<<<< HEAD
 Nämä kaksi syöttökenttää ovat toisistaan riippumattomia. Tee niistä synkronoituja: yhden muuttaminen päivittää toisen samalla tekstillä ja päin vastoin.
+=======
+These two inputs are independent. Make them stay in sync: editing one input should update the other input with the same text, and vice versa.
+>>>>>>> 152a471aa9ac2f6f0f3e64c04f39da790d40cf61
 
 <Hint>
 
@@ -491,7 +495,7 @@ function List({ items }) {
 }
 ```
 
-```js data.js
+```js src/data.js
 export function filterItems(items, query) {
   query = query.toLowerCase();
   return items.filter(item =>
@@ -571,7 +575,7 @@ function SearchBar({ query, onChange }) {
 function List({ items }) {
   return (
     <table>
-      <tbody> 
+      <tbody>
         {items.map(food => (
           <tr key={food.id}>
             <td>{food.name}</td>
@@ -584,7 +588,7 @@ function List({ items }) {
 }
 ```
 
-```js data.js
+```js src/data.js
 export function filterItems(items, query) {
   query = query.toLowerCase();
   return items.filter(item =>
