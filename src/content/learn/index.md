@@ -4,7 +4,11 @@ title: Pika-aloitus
 
 <Intro>
 
+<<<<<<< HEAD
 Tervetuloa Reactin dokumentaatioon. Tällä sivulla esitellään 80% Reactin konsepteista, joita käytät päivittäin.
+=======
+Welcome to the React documentation! This page will give you an introduction to 80% of the React concepts that you will use on a daily basis.
+>>>>>>> 152a471aa9ac2f6f0f3e64c04f39da790d40cf61
 
 </Intro>
 
@@ -134,10 +138,17 @@ JSX aaltosulkeisiin voi laittaa myös laajempia lausekkeita, esimerkiksi [merkki
 <Sandpack>
 
 ```js
+<<<<<<< HEAD
 const kayttaja = {
   nimi: 'Hedy Lamarr',
   kuvanUrl: 'https://i.imgur.com/yXOvdOSs.jpg',
   kuvanKoko: 90,
+=======
+const user = {
+  name: 'Hedy Lamarr',
+  imageUrl: 'https://react.dev/images/docs/scientists/yXOvdOSs.jpg',
+  imageSize: 90,
+>>>>>>> 152a471aa9ac2f6f0f3e64c04f39da790d40cf61
 };
 
 export default function Profiili() {

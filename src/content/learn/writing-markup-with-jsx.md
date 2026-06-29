@@ -69,10 +69,17 @@ JSX ja React ovat kaksi eri asiaa. Niitä usein käytetään yhdessä, mutta *vo
 Oletataan, että sinulla on vähän (täysin validia) HTML:ää.
 
 ```html
+<<<<<<< HEAD
 <h1>Hedy Lamarrin tehtävälista</h1>
 <img 
   src="https://i.imgur.com/yXOvdOSs.jpg" 
   alt="Hedy Lamarr" 
+=======
+<h1>Hedy Lamarr's Todos</h1>
+<img
+  src="https://react.dev/images/docs/scientists/yXOvdOSs.jpg"
+  alt="Hedy Lamarr"
+>>>>>>> 152a471aa9ac2f6f0f3e64c04f39da790d40cf61
   class="photo"
 >
 <ul>
@@ -100,11 +107,19 @@ Jos kopioit ja liität sen sellaisenaan, se ei toimi:
 ```js
 export default function TodoList() {
   return (
+<<<<<<< HEAD
     // Tämä ei ihan toimi
     <h1>Hedy Lamarrin tehtävälista</h1>
     <img 
       src="https://i.imgur.com/yXOvdOSs.jpg" 
       alt="Hedy Lamarr" 
+=======
+    // This doesn't quite work!
+    <h1>Hedy Lamarr's Todos</h1>
+    <img
+      src="https://react.dev/images/docs/scientists/yXOvdOSs.jpg"
+      alt="Hedy Lamarr"
+>>>>>>> 152a471aa9ac2f6f0f3e64c04f39da790d40cf61
       class="photo"
     >
     <ul>
@@ -140,10 +155,17 @@ Esimerkiksi, voit käyttää `<div>`:
 
 ```js {1,11}
 <div>
+<<<<<<< HEAD
   <h1>Hedy Lamarrin tehtävälista</h1>
   <img 
     src="https://i.imgur.com/yXOvdOSs.jpg" 
     alt="Hedy Lamarr" 
+=======
+  <h1>Hedy Lamarr's Todos</h1>
+  <img
+    src="https://react.dev/images/docs/scientists/yXOvdOSs.jpg"
+    alt="Hedy Lamarr"
+>>>>>>> 152a471aa9ac2f6f0f3e64c04f39da790d40cf61
     class="photo"
   >
   <ul>
@@ -156,10 +178,17 @@ Jos et halua lisätä ylimääräistä `<div>` tagia merkintäkoodiisi, voit kir
 
 ```js {1,11}
 <>
+<<<<<<< HEAD
   <h1>Hedy Lamarrin tehtävälista</h1>
   <img 
     src="https://i.imgur.com/yXOvdOSs.jpg" 
     alt="Hedy Lamarr" 
+=======
+  <h1>Hedy Lamarr's Todos</h1>
+  <img
+    src="https://react.dev/images/docs/scientists/yXOvdOSs.jpg"
+    alt="Hedy Lamarr"
+>>>>>>> 152a471aa9ac2f6f0f3e64c04f39da790d40cf61
     class="photo"
   >
   <ul>
@@ -186,9 +215,9 @@ Tältä näyttää Hedy Lamarrin kuva ja listan kohteet suljettuina:
 
 ```js {2-6,8-10}
 <>
-  <img 
-    src="https://i.imgur.com/yXOvdOSs.jpg" 
-    alt="Hedy Lamarr" 
+  <img
+    src="https://react.dev/images/docs/scientists/yXOvdOSs.jpg"
+    alt="Hedy Lamarr"
     class="photo"
    />
   <ul>
@@ -206,9 +235,9 @@ JSX muuttuu JavaScriptiksi ja attribuutit kirjoitettuna JSX:ssä muuttuvat JavaS
 Tämän takia Reactissa monet HTML ja SVG attribuutit kirjoitetaan camelCase muodossa. Esimerkiksi, sen sijaan, että kirjoittaisit `stroke-width` käytät `strokeWidth`. Kerta `class` on varattu sana, Reactissa kirjoitat `className`, joka on nimetty [vastaavan DOM ominaisuuden](https://developer.mozilla.org/en-US/docs/Web/API/Element/className) mukaan:
 
 ```js {4}
-<img 
-  src="https://i.imgur.com/yXOvdOSs.jpg" 
-  alt="Hedy Lamarr" 
+<img
+  src="https://react.dev/images/docs/scientists/yXOvdOSs.jpg"
+  alt="Hedy Lamarr"
   className="photo"
 />
 ```
@@ -233,11 +262,19 @@ Tässä lopullinen tulos:
 export default function TodoList() {
   return (
     <>
+<<<<<<< HEAD
       <h1>Hedy Lamarrin tehtävälistä</h1>
       <img 
         src="https://i.imgur.com/yXOvdOSs.jpg" 
         alt="Hedy Lamarr" 
         className="photo" 
+=======
+      <h1>Hedy Lamarr's Todos</h1>
+      <img
+        src="https://react.dev/images/docs/scientists/yXOvdOSs.jpg"
+        alt="Hedy Lamarr"
+        className="photo"
+>>>>>>> 152a471aa9ac2f6f0f3e64c04f39da790d40cf61
       />
       <ul>
         <li>Keksi uusi liikennevalo</li>

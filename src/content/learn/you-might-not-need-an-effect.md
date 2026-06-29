@@ -25,7 +25,11 @@ On kaksi yleistä tapausta, joissa et tarvitse efektejä:
 * **Et tarvitse efektejä datan muokkaamiseen renderöintiä varten.** Esimerkiksi, sanotaan että haluat suodattaa listaa ennen sen näyttämistä. Saatat tuntea houkutuksen efektin kirjoittamiseen, joka päivittää tilamuuttujan, kun lista muuttuu. Kuitenkin tämä on tehottomaa. Kun päivität tilaa, React ensin kutsuu komponenttifunktioitasi laskemaan, mitä tulisi näytölle. Sitten React ["kommittaa"](/learn/render-and-commit) nämä muutokset DOMiin päivittäen näytön. Sitten React suorittaa efektit. Jos efektisi *myös* päivittää välittömästi tilaa, tämä käynnistää koko prosessin alusta! Välttääksesi tarpeettomat renderöintikierrokset, muokkaa kaikki data komponenttiesi ylätasolla. Tuo koodi ajetaan automaattisesti aina kun propsit tai tila muuttuvat.
 * **Et tarvitse efektejä käsittelemään käyttäjätapahtumia.** Esimerkiksi, oletetaan että haluat lähettää `/api/buy` POST-pyynnön ja näyttää ilmoituksen, kun käyttäjä ostaa tuotteen. Osta-nappulan klikkaustapahtumankäsittelijässä tiedät tarkalleen mitä tapahtui. Kun efekti suoritetaan, et tiedä *mitä* käyttäjä teki (esimerkiksi, minkä nappulan hän klikkasi). Tämän vuoksi käyttäjätapahtumat käsitellään yleensä vastaavissa tapahtumankäsittelijöissä.
 
+<<<<<<< HEAD
 Tarvitset *kyllä* efektejä [synkronoimiseen](/learn/synchronizing-with-effects#what-are-effects-and-how-are-they-different-from-events) ulkoisten järjestelmien kanssa. Esimerkiksi voit kirjoittaa efektin, joka pitää jQuery-widgetin synkronoituna Reactin tilan kanssa. Voit myös noutaa tietoja efekteillä: esimerkiksi voit pitää hakutulokset synkronoituna nykyisen hakukyselyn kanssa. On kuitenkin hyvä pitää mielessä, että nykyaikaiset [kehysratkaisut](/learn/start-a-new-react-project#production-grade-react-frameworks) tarjoavat tehokkaampia sisäänrakennettuja tiedonhakumekanismeja kuin efektien kirjoittaminen suoraan komponentteihin.
+=======
+You *do* need Effects to [synchronize](/learn/synchronizing-with-effects#what-are-effects-and-how-are-they-different-from-events) with external systems. For example, you can write an Effect that keeps a jQuery widget synchronized with the React state. You can also fetch data with Effects: for example, you can synchronize the search results with the current search query. Keep in mind that modern [frameworks](/learn/creating-a-react-app#full-stack-frameworks) provide more efficient built-in data fetching mechanisms than writing Effects directly in your components.
+>>>>>>> 152a471aa9ac2f6f0f3e64c04f39da790d40cf61
 
 Katsotaanpa joitakin yleisiä konkreettisia esimerkkejä saadaksesi oikeanlaisen intuition.
 
@@ -33,7 +37,7 @@ Katsotaanpa joitakin yleisiä konkreettisia esimerkkejä saadaksesi oikeanlaisen
 
 Oletetaan, että sinulla on komponentti, jossa on kaksi tilamuuttujaa: `firstName` ja `lastName`. Haluat laskea niistä `fullName`-nimen yhdistämällä ne. Lisäksi haluat, että `fullName` päivittyy aina, kun `firstName` tai `lastName` muuttuvat. Ensimmäinen vaistosi saattaa olla lisätä `fullName`-tilamuuttuja ja päivittää se effektissa:
 
-```js {5-9}
+```js {expectedErrors: {'react-compiler': [8]}} {5-9}
 function Form() {
   const [firstName, setFirstName] = useState('Taylor');
   const [lastName, setLastName] = useState('Swift');
@@ -65,7 +69,7 @@ function Form() {
 
 Tämä komponentti laskee `visibleTodos`-muuttujan ottamalla `todos`-muuttujan propsina vastaan ja suodattamalla sen `filter`-propsin perusteella. Saatat tuntea houkutuksen tallentaa tulos tilaan ja päivittää sen Effektin avulla:
 
-```js {4-8}
+```js {expectedErrors: {'react-compiler': [7]}} {4-8}
 function TodoList({ todos, filter }) {
   const [newTodo, setNewTodo] = useState('');
 
@@ -93,6 +97,12 @@ function TodoList({ todos, filter }) {
 Useiten, tämä koodi on okei! Mutta ehkä `getFilteredTodos()` on hidas tai sinulla on useita `todos` kohteita. Tässä tapauksessa et halua laskea `getFilteredTodos()` uudelleen, jos jokin epäolennainen tilamuuttuja, kuten `newTodo`, on muuttunut.
 
 Voit välimuistittaa (tai ["memoisoida"](https://en.wikipedia.org/wiki/Memoization)) kalliin laskutoimituksen käärimällä sen [`useMemo`](/reference/react/useMemo)-Hookin sisään:
+
+<Note>
+
+[React Compiler](/learn/react-compiler) can automatically memoize expensive calculations for you, eliminating the need for manual `useMemo` in many cases.
+
+</Note>
 
 ```js {5-8}
 import { useMemo, useState } from 'react';
@@ -158,7 +168,7 @@ Huomaa myös, että suorituskyvyn mittaaminen kehitysvaiheessa ei anna sinulle t
 
 `ProfilePage` komponentti saa `userId` propsin. Sivulla on kommenttikenttä, ja käytät `comment`-tilamuuttujaa sen arvon säilyttämiseen. Eräänä päivänä huomaat ongelman: kun navigoit yhdestä profiilista toiseen, `comment`-tila ei nollaudu. Tämän seurauksena on helppo vahingossa lähettää kommentti väärälle käyttäjän profiilille. Korjataksesi ongelman, haluat tyhjentää `comment`-tilamuuttujan aina, kun `userId` muuttuu:
 
-```js {4-7}
+```js {expectedErrors: {'react-compiler': [6]}} {4-7}
 export default function ProfilePage({ userId }) {
   const [comment, setComment] = useState('');
 
@@ -201,7 +211,7 @@ Joskus saatat haluat nollata tai säätää osan tilasta propin muuttuessa, mutt
 
 `List` komponetti vastaanottaa listan `items` propsina ja ylläpitää valittua kohdetta `selection`-tilamuuttujassa. Haluat nollata `selection`-tilan `null`:ksi aina kun `items`-propiin tulee eri taulukko:
 
-```js {5-8}
+```js {expectedErrors: {'react-compiler': [7]}} {5-8}
 function List({ items }) {
   const [isReverse, setIsReverse] = useState(false);
   const [selection, setSelection] = useState(null);
@@ -407,9 +417,15 @@ function Game() {
 
 Tässä koodissa on kaksi ongelmaa.
 
+<<<<<<< HEAD
 Ensimmäinen ongelma on, että se on hyvin tehoton: komponentti (ja sen lapset) täytyy renderöidä uudelleen jokaisen `set`-kutsun välillä ketjussa. Yllä olevassa esimerkissä, pahimmassa tapauksessa (`setCard` → renderöi → `setGoldCardCount` → renderöi → `setRound` → renderöi → `setIsGameOver` → renderöi) on kolme tarpeetonta uudelleenrenderöintiä puussa.
 
 Vaikka se ei olisi hidas, koodisi eläessä tulet törmäämään tilanteisiin, joissa "ketju" jonka kirjoitit, ei vastaa uusia vaatimuksia. Kuvittele, että olet lisäämässä tapaa selata pelin siirtohistoriaa. Tämä tehdään päivittämällä jokainen tilamuuttuja arvoon menneisyydestä. Kuitenkin, `card`-tilan asettaminen menneisyyden arvoon aiheuttaisi Efektiketjun uudelleen ja muuttaisi näytettävää dataa. Tällainen koodi on usein jäykkää ja haurasta.
+=======
+The first problem is that it is very inefficient: the component (and its children) have to re-render between each `set` call in the chain. In the example above, in the worst case (`setCard` → render → `setGoldCardCount` → render → `setRound` → render → `setIsGameOver` → render) there are three unnecessary re-renders of the tree below.
+
+The second problem is that even if it weren't slow, as your code evolves, you will run into cases where the "chain" you wrote doesn't fit the new requirements. Imagine you are adding a way to step through the history of the game moves. You'd do it by updating each state variable to a value from the past. However, setting the `card` state to a value from the past would trigger the Effect chain again and change the data you're showing. Such code is often rigid and fragile.
+>>>>>>> 152a471aa9ac2f6f0f3e64c04f39da790d40cf61
 
 Tässä tilanteessa on parempi laskea mitä voit renderöinnin aikana ja säätää tilaa tapahtumankäsittelijässä:
 
@@ -430,7 +446,7 @@ function Game() {
     // ✅ Laske koko seuraava tila Tapahtumankäsittelijässä
     setCard(nextCard);
     if (nextCard.gold) {
-      if (goldCardCount <= 3) {
+      if (goldCardCount < 3) {
         setGoldCardCount(goldCardCount + 1);
       } else {
         setGoldCardCount(0);
@@ -751,7 +767,11 @@ Tämä varmistaa, että kun Efekti hakee dataa, kaikki vastaukset paitsi viimeis
 
 Race conditionien käsitteleminen ei ole ainoa vaikeus datan hakemisessa. Saatat myös haluta miettiä vastausten välimuistitusta (jotta käyttäjä voi klikata takaisin ja nähdä edellisen näytön välittömästi), miten hakea dataa palvelimella (jotta alustava palvelimella renderöity HTML sisältää haetun sisällön sen sijaan että näyttäisi latausikonia), ja miten välttää verkon vesiputoukset (jotta alakomponentti voi hakea dataa ilman että odottaa jokaista vanhempaa).
 
+<<<<<<< HEAD
 **Nämä ongelmat pätevät mihin tahansa käyttöliittymäkirjastoon, ei vain Reactiin. Niiden ratkaiseminen ei ole triviaalia, minkä takia modernit [ohjelmistokehykset](/learn/start-a-new-react-project#production-grade-react-frameworks) tarjoavat tehokkaampia sisäänrakennettuja datan hakumekanismeja kuin datan hakeminen effekteissä.**
+=======
+**These issues apply to any UI library, not just React. Solving them is not trivial, which is why modern [frameworks](/learn/creating-a-react-app#full-stack-frameworks) provide more efficient built-in data fetching mechanisms than fetching data in Effects.**
+>>>>>>> 152a471aa9ac2f6f0f3e64c04f39da790d40cf61
 
 Jos et käytä ohjelmistokehitystä (ja et halua rakentaa omaasi), mutta haluat tehdä datan hakemisesta effekteistä ergonomisempaa, harkitse hakulogiiikan eristämistä omaksi Hookiksi kuten tässä esimerkissä:
 
@@ -813,7 +833,7 @@ Yksinkertaista tämä komponentti poistamalla turha tila ja Effektit.
 
 <Sandpack>
 
-```js
+```js {expectedErrors: {'react-compiler': [12, 16, 20]}}
 import { useState, useEffect } from 'react';
 import { initialTodos, createTodo } from './todos.js';
 
@@ -882,7 +902,7 @@ function NewTodo({ onAdd }) {
 }
 ```
 
-```js todos.js
+```js src/todos.js
 let nextId = 0;
 
 export function createTodo(text, completed = false) {
@@ -975,7 +995,7 @@ function NewTodo({ onAdd }) {
 }
 ```
 
-```js todos.js
+```js src/todos.js
 let nextId = 0;
 
 export function createTodo(text, completed = false) {
@@ -1016,7 +1036,7 @@ Yksi ratkaisu on lisätä `useMemo` kutsu välimuistittaaksesi näkyvät tehtäv
 
 <Sandpack>
 
-```js
+```js {expectedErrors: {'react-compiler': [11]}}
 import { useState, useEffect } from 'react';
 import { initialTodos, createTodo, getVisibleTodos } from './todos.js';
 
@@ -1061,7 +1081,7 @@ export default function TodoList() {
 }
 ```
 
-```js todos.js
+```js src/todos.js
 let nextId = 0;
 let calls = 0;
 
@@ -1144,7 +1164,7 @@ export default function TodoList() {
 }
 ```
 
-```js todos.js
+```js src/todos.js
 let nextId = 0;
 let calls = 0;
 
@@ -1233,7 +1253,7 @@ function NewTodo({ onAdd }) {
 }
 ```
 
-```js todos.js
+```js src/todos.js
 let nextId = 0;
 let calls = 0;
 
@@ -1278,7 +1298,7 @@ Kun valitset yhteystiedon yläpuolella olevilla napeilla, lomake nollataan vasta
 
 <Sandpack>
 
-```js App.js hidden
+```js src/App.js hidden
 import { useState } from 'react';
 import ContactList from './ContactList.js';
 import EditContact from './EditContact.js';
@@ -1330,7 +1350,7 @@ const initialContacts = [
 ];
 ```
 
-```js ContactList.js hidden
+```js src/ContactList.js hidden
 export default function ContactList({
   contacts,
   selectedId,
@@ -1357,7 +1377,7 @@ export default function ContactList({
 }
 ```
 
-```js EditContact.js active
+```js {expectedErrors: {'react-compiler': [8, 9]}} src/EditContact.js active
 import { useState, useEffect } from 'react';
 
 export default function EditContact({ savedContact, onSave }) {
@@ -1442,7 +1462,7 @@ Jaa `EditContact` komponentti kahteen. Siirrä kaikki lomakkeen tila sisäiseen 
 
 <Sandpack>
 
-```js App.js hidden
+```js src/App.js hidden
 import { useState } from 'react';
 import ContactList from './ContactList.js';
 import EditContact from './EditContact.js';
@@ -1494,7 +1514,7 @@ const initialContacts = [
 ];
 ```
 
-```js ContactList.js hidden
+```js src/ContactList.js hidden
 export default function ContactList({
   contacts,
   selectedId,
@@ -1521,7 +1541,7 @@ export default function ContactList({
 }
 ```
 
-```js EditContact.js active
+```js src/EditContact.js active
 import { useState } from 'react';
 
 export default function EditContact(props) {
