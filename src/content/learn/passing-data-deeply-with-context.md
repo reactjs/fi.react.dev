@@ -65,7 +65,7 @@ export default function Page() {
 }
 ```
 
-```js Section.js
+```js src/Section.js
 export default function Section({ children }) {
   return (
     <section className="section">
@@ -75,7 +75,7 @@ export default function Section({ children }) {
 }
 ```
 
-```js Heading.js
+```js src/Heading.js
 export default function Heading({ level, children }) {
   switch (level) {
     case 1:
@@ -139,7 +139,7 @@ export default function Page() {
 }
 ```
 
-```js Section.js
+```js src/Section.js
 export default function Section({ children }) {
   return (
     <section className="section">
@@ -149,7 +149,7 @@ export default function Section({ children }) {
 }
 ```
 
-```js Heading.js
+```js src/Heading.js
 export default function Heading({ level, children }) {
   switch (level) {
     case 1:
@@ -261,7 +261,7 @@ export default function Page() {
 }
 ```
 
-```js Section.js
+```js src/Section.js
 export default function Section({ children }) {
   return (
     <section className="section">
@@ -271,7 +271,7 @@ export default function Section({ children }) {
 }
 ```
 
-```js Heading.js
+```js src/Heading.js
 export default function Heading({ level, children }) {
   switch (level) {
     case 1:
@@ -292,7 +292,7 @@ export default function Heading({ level, children }) {
 }
 ```
 
-```js LevelContext.js active
+```js src/LevelContext.js active
 import { createContext } from 'react';
 
 export const LevelContext = createContext(1);
@@ -391,7 +391,7 @@ export default function Page() {
 }
 ```
 
-```js Section.js
+```js src/Section.js
 export default function Section({ children }) {
   return (
     <section className="section">
@@ -401,7 +401,7 @@ export default function Section({ children }) {
 }
 ```
 
-```js Heading.js
+```js src/Heading.js
 import { useContext } from 'react';
 import { LevelContext } from './LevelContext.js';
 
@@ -426,7 +426,7 @@ export default function Heading({ children }) {
 }
 ```
 
-```js LevelContext.js
+```js src/LevelContext.js
 import { createContext } from 'react';
 
 export const LevelContext = createContext(1);
@@ -469,15 +469,19 @@ import { LevelContext } from './LevelContext.js';
 export default function Section({ level, children }) {
   return (
     <section className="section">
-      <LevelContext.Provider value={level}>
+      <LevelContext value={level}>
         {children}
-      </LevelContext.Provider>
+      </LevelContext>
     </section>
   );
 }
 ```
 
+<<<<<<< HEAD
 Tämä kertoo Reactille: "jos jokin komponentti tämän `<Section>` -komponentin sisällä kysyy `LevelContext`:iä, anna heille tämä `level`." Komponentti käyttää lähintä `<LevelContext.Provider>` -komponenttia UI-puussa sen yläpuolella.
+=======
+This tells React: "if any component inside this `<Section>` asks for `LevelContext`, give them this `level`." The component will use the value of the nearest `<LevelContext>` in the UI tree above it.
+>>>>>>> 6be2b020a0cabf2fd6dbff5c42c399b8ac323bca
 
 <Sandpack>
 
@@ -509,21 +513,21 @@ export default function Page() {
 }
 ```
 
-```js Section.js
+```js src/Section.js
 import { LevelContext } from './LevelContext.js';
 
 export default function Section({ level, children }) {
   return (
     <section className="section">
-      <LevelContext.Provider value={level}>
+      <LevelContext value={level}>
         {children}
-      </LevelContext.Provider>
+      </LevelContext>
     </section>
   );
 }
 ```
 
-```js Heading.js
+```js src/Heading.js
 import { useContext } from 'react';
 import { LevelContext } from './LevelContext.js';
 
@@ -548,7 +552,7 @@ export default function Heading({ children }) {
 }
 ```
 
-```js LevelContext.js
+```js src/LevelContext.js
 import { createContext } from 'react';
 
 export const LevelContext = createContext(1);
@@ -567,9 +571,15 @@ export const LevelContext = createContext(1);
 
 Tämä on sama tulos kuin alkuperäisessä koodissa, mutta sinun ei tarvinnut antaa `level` -propsia jokaiselle `Heading` -komponentille! Sen sijaan se "päättelee" otsikkotason kysymällä lähimmältä `Section` -komponentilta yläpuolella:
 
+<<<<<<< HEAD
 1. Välität `level` -propsin `<Section>` -komponentille.
 2. `Section` käärii lapsensa `<LevelContext.Provider value={level}>`:n sisään.
 3. `Heading` kysyy lähimmän `LevelContext`:n arvon `useContext(LevelContext)` funktiolla.
+=======
+1. You pass a `level` prop to the `<Section>`.
+2. `Section` wraps its children into `<LevelContext value={level}>`.
+3. `Heading` asks the closest value of `LevelContext` above with `useContext(LevelContext)`.
+>>>>>>> 6be2b020a0cabf2fd6dbff5c42c399b8ac323bca
 
 ## Contextin käyttäminen ja tarjoaminen samasta komponentista {/*using-and-providing-context-from-the-same-component*/}
 
@@ -588,7 +598,7 @@ export default function Page() {
 
 Koska konteksti antaa sinun lukea tietoja komponentista yläpuolelta, jokainen `Section` voisi lukea `level` -arvon yläpuolelta olevasta `Section` -komponentista ja välittää `level + 1` alaspäin automaattisesti. Tässä on tapa tehdä se:
 
-```js Section.js {5,8}
+```js src/Section.js {5,8}
 import { useContext } from 'react';
 import { LevelContext } from './LevelContext.js';
 
@@ -596,9 +606,9 @@ export default function Section({ children }) {
   const level = useContext(LevelContext);
   return (
     <section className="section">
-      <LevelContext.Provider value={level + 1}>
+      <LevelContext value={level + 1}>
         {children}
-      </LevelContext.Provider>
+      </LevelContext>
     </section>
   );
 }
@@ -636,7 +646,7 @@ export default function Page() {
 }
 ```
 
-```js Section.js
+```js src/Section.js
 import { useContext } from 'react';
 import { LevelContext } from './LevelContext.js';
 
@@ -644,15 +654,15 @@ export default function Section({ children }) {
   const level = useContext(LevelContext);
   return (
     <section className="section">
-      <LevelContext.Provider value={level + 1}>
+      <LevelContext value={level + 1}>
         {children}
-      </LevelContext.Provider>
+      </LevelContext>
     </section>
   );
 }
 ```
 
-```js Heading.js
+```js src/Heading.js
 import { useContext } from 'react';
 import { LevelContext } from './LevelContext.js';
 
@@ -679,7 +689,7 @@ export default function Heading({ children }) {
 }
 ```
 
-```js LevelContext.js
+```js src/LevelContext.js
 import { createContext } from 'react';
 
 export const LevelContext = createContext(0);
@@ -767,7 +777,7 @@ function Post({ title, body }) {
 }
 ```
 
-```js Section.js
+```js src/Section.js
 import { useContext } from 'react';
 import { LevelContext } from './LevelContext.js';
 
@@ -778,15 +788,15 @@ export default function Section({ children, isFancy }) {
       'section ' +
       (isFancy ? 'fancy' : '')
     }>
-      <LevelContext.Provider value={level + 1}>
+      <LevelContext value={level + 1}>
         {children}
-      </LevelContext.Provider>
+      </LevelContext>
     </section>
   );
 }
 ```
 
-```js Heading.js
+```js src/Heading.js
 import { useContext } from 'react';
 import { LevelContext } from './LevelContext.js';
 
@@ -813,7 +823,7 @@ export default function Heading({ children }) {
 }
 ```
 
-```js LevelContext.js
+```js src/LevelContext.js
 import { createContext } from 'react';
 
 export const LevelContext = createContext(0);
@@ -855,10 +865,19 @@ Jos nämä eivät toimi, harkitse kontekstia.
 
 ## Contextin käyttökohteita {/*use-cases-for-context*/}
 
+<<<<<<< HEAD
 * **Teemat:** Jos sovelluksesi antaa käyttäjän vaihtaa sen ulkoasua (esim. tumma tila), voit laittaa kontekstitarjoajan ylätasolle, ja käyttää sitä komponenteissa joiden täytyy muuttaa ulkoasuaan.
 * **Tämänhetkinen tili:** Monet komponentit saattavat tarvita tietää tämän hetkinen sisäänkirjautunut käyttäjä. Sen laittaminen kontekstiin tekee sen lukemisesta helppoa mistä tahansa puun tasosta. Joissain sovelluksissa voit myös toimia useiden tilien kanssa samanaikaisesti (esim. jättää kommentin eri käyttäjänä). Tällöin voi olla kätevää kääriä osa käyttöliittymästä sisäkkäiseen tarjoajaan eri tiliarvolla.
 * **Reititys:** Useimmat reititysratkaisut käyttävät kontekstia sisäisesti pitääkseen kirjaa nykyisestä reitistä. Tämä on se tapa jolla jokainen linkki "tietää" onko se aktiivinen vai ei. Jos rakennat oman reititysratkaisusi, saatat haluta tehdä samoin.
 * **Tilan hallinta:** Kun sovelluksesi kasvaa, saatat joutua pitämään paljon tilaa ylhäällä puussa. Monet kaukaiset komponentit alhaalla saattavat haluta muuttaa sitä. Yleensä [käytetään reduktoria yhdessä kontekstin kanssa](/learn/scaling-up-with-reducer-and-context) hallitaksesi monimutkaista tilaa ja välittääksesi sen eteenpäin komponenteille, jotka ovat kaukana toisistaan.
+=======
+* **Theming:** If your app lets the user change its appearance (e.g. dark mode), you can put a context provider at the top of your app, and use that context in components that need to adjust their visual look.
+* **Current account:** Many components might need to know the currently logged in user. Putting it in context makes it convenient to read it anywhere in the tree. Some apps also let you operate multiple accounts at the same time (e.g. to leave a comment as a different user). In those cases, it can be convenient to wrap a part of the UI into a nested provider with a different current account value.
+* **Routing:** Most routing solutions use context internally to hold the current route. This is how every link "knows" whether it's active or not. If you build your own router, you might want to do it too.
+* **Managing state:** As your app grows, you might end up with a lot of state closer to the top of your app. Many distant components below may want to change it. It is common to [use a reducer together with context](/learn/scaling-up-with-reducer-and-context) to manage complex state and pass it down to distant components without too much hassle.
+
+Context is not limited to static values. If you pass a different value on the next render, React will update all the components reading it below! This is why context is often used in combination with state.
+>>>>>>> 6be2b020a0cabf2fd6dbff5c42c399b8ac323bca
 
 Konteksti ei ole rajoitettu staattisiin arvoihin. Jos välität eri arvon seuraavalla renderöinnillä, React päivittää kaikki komponentit jotka lukevat sitä alapuolelta! Tämä on syy miksi kontekstia käytetään usein yhdistettynä tilaan.
 
@@ -866,6 +885,7 @@ Yleisesti, jos jokin tieto on tarpeen kaukaisissa komponenteissa puussa, se on h
 
 <Recap>
 
+<<<<<<< HEAD
 * Kontekstin avulla komponentti voi tarjota tietoa koko puun alapuolelle.
 * Välittääksesi konteksti:
   1. Luo ja exporttaa se koodilla `export const MyContext = createContext(defaultValue)`.
@@ -874,6 +894,16 @@ Yleisesti, jos jokin tieto on tarpeen kaukaisissa komponenteissa puussa, se on h
 * Konteksti välittyy välissä olevien komponenttien läpi.
 * Konteksti antaa sinun kirjoittaa komponentteja jotka "sovittuvat ympäristöönsä".
 * Ennen kuin käytät kontekstia, yritä välittää propseja tai välitä JSX `children`:nä.
+=======
+* Context lets a component provide some information to the entire tree below it.
+* To pass context:
+  1. Create and export it with `export const MyContext = createContext(defaultValue)`.
+  2. Pass it to the `useContext(MyContext)` Hook to read it in any child component, no matter how deep.
+  3. Wrap children into `<MyContext value={...}>` to provide it from a parent.
+* Context passes through any components in the middle.
+* Context lets you write components that "adapt to their surroundings".
+* Before you use context, try passing props or passing JSX as `children`.
+>>>>>>> 6be2b020a0cabf2fd6dbff5c42c399b8ac323bca
 
 </Recap>
 
@@ -889,7 +919,7 @@ Voit määritellä kontekstin `Context.js`-tiedostossa.
 
 <Sandpack>
 
-```js App.js
+```js src/App.js
 import { useState } from 'react';
 import { places } from './data.js';
 import { getImageUrl } from './utils.js';
@@ -954,40 +984,40 @@ function PlaceImage({ place, imageSize }) {
 }
 ```
 
-```js Context.js
+```js src/Context.js
 
 ```
 
-```js data.js
+```js src/data.js
 export const places = [{
   id: 0,
   name: 'Bo-Kaap in Cape Town, South Africa',
   description: 'The tradition of choosing bright colors for houses began in the late 20th century.',
   imageId: 'K9HVAGH'
 }, {
-  id: 1, 
+  id: 1,
   name: 'Rainbow Village in Taichung, Taiwan',
   description: 'To save the houses from demolition, Huang Yung-Fu, a local resident, painted all 1,200 of them in 1924.',
   imageId: '9EAYZrt'
 }, {
-  id: 2, 
+  id: 2,
   name: 'Macromural de Pachuca, Mexico',
   description: 'One of the largest murals in the world covering homes in a hillside neighborhood.',
   imageId: 'DgXHVwu'
 }, {
-  id: 3, 
+  id: 3,
   name: 'Selarón Staircase in Rio de Janeiro, Brazil',
   description: 'This landmark was created by Jorge Selarón, a Chilean-born artist, as a "tribute to the Brazilian people."',
   imageId: 'aeO3rpI'
 }, {
-  id: 4, 
+  id: 4,
   name: 'Burano, Italy',
   description: 'The houses are painted following a specific color system dating back to 16th century.',
   imageId: 'kxsph5C'
 }, {
-  id: 5, 
+  id: 5,
   name: 'Chefchaouen, Marocco',
-  description: 'There are a few theories on why the houses are painted blue, including that the color repells mosquitos or that it symbolizes sky and heaven.',
+  description: 'There are a few theories on why the houses are painted blue, including that the color repels mosquitos or that it symbolizes sky and heaven.',
   imageId: 'rTqKo46'
 }, {
   id: 6,
@@ -997,10 +1027,10 @@ export const places = [{
 }];
 ```
 
-```js utils.js
+```js src/utils.js
 export function getImageUrl(place) {
   return (
-    'https://i.imgur.com/' +
+    'https://react.dev/images/docs/scientists/' +
     place.imageId +
     'l.jpg'
   );
@@ -1009,9 +1039,9 @@ export function getImageUrl(place) {
 
 ```css
 ul { list-style-type: none; padding: 0px 10px; }
-li { 
-  margin-bottom: 10px; 
-  display: grid; 
+li {
+  margin-bottom: 10px;
+  display: grid;
   grid-template-columns: auto 1fr;
   gap: 20px;
   align-items: center;
@@ -1024,11 +1054,15 @@ li {
 
 Poista `imageSize` propsi kaikilta komponenteilta.
 
+<<<<<<< HEAD
 Luo ja exporttaa `ImageSizeContext` `Context.js`:stä. Sitten ympäröi List `<ImageSizeContext.Provider value={imageSize}>`-komponentilla, jotta arvo välittyy alaspäin, ja käytä `useContext(ImageSizeContext)`:a lukeaksesi sen `PlaceImage`:ssa:
+=======
+Create and export `ImageSizeContext` from `Context.js`. Then wrap the List into `<ImageSizeContext value={imageSize}>` to pass the value down, and `useContext(ImageSizeContext)` to read it in the `PlaceImage`:
+>>>>>>> 6be2b020a0cabf2fd6dbff5c42c399b8ac323bca
 
 <Sandpack>
 
-```js App.js
+```js src/App.js
 import { useState, useContext } from 'react';
 import { places } from './data.js';
 import { getImageUrl } from './utils.js';
@@ -1038,7 +1072,7 @@ export default function App() {
   const [isLarge, setIsLarge] = useState(false);
   const imageSize = isLarge ? 150 : 100;
   return (
-    <ImageSizeContext.Provider
+    <ImageSizeContext
       value={imageSize}
     >
       <label>
@@ -1053,7 +1087,7 @@ export default function App() {
       </label>
       <hr />
       <List />
-    </ImageSizeContext.Provider>
+    </ImageSizeContext>
   )
 }
 
@@ -1091,42 +1125,42 @@ function PlaceImage({ place }) {
 }
 ```
 
-```js Context.js
+```js src/Context.js
 import { createContext } from 'react';
 
 export const ImageSizeContext = createContext(500);
 ```
 
-```js data.js
+```js src/data.js
 export const places = [{
   id: 0,
   name: 'Bo-Kaap in Cape Town, South Africa',
   description: 'The tradition of choosing bright colors for houses began in the late 20th century.',
   imageId: 'K9HVAGH'
 }, {
-  id: 1, 
+  id: 1,
   name: 'Rainbow Village in Taichung, Taiwan',
   description: 'To save the houses from demolition, Huang Yung-Fu, a local resident, painted all 1,200 of them in 1924.',
   imageId: '9EAYZrt'
 }, {
-  id: 2, 
+  id: 2,
   name: 'Macromural de Pachuca, Mexico',
   description: 'One of the largest murals in the world covering homes in a hillside neighborhood.',
   imageId: 'DgXHVwu'
 }, {
-  id: 3, 
+  id: 3,
   name: 'Selarón Staircase in Rio de Janeiro, Brazil',
   description: 'This landmark was created by Jorge Selarón, a Chilean-born artist, as a "tribute to the Brazilian people".',
   imageId: 'aeO3rpI'
 }, {
-  id: 4, 
+  id: 4,
   name: 'Burano, Italy',
   description: 'The houses are painted following a specific color system dating back to 16th century.',
   imageId: 'kxsph5C'
 }, {
-  id: 5, 
+  id: 5,
   name: 'Chefchaouen, Marocco',
-  description: 'There are a few theories on why the houses are painted blue, including that the color repells mosquitos or that it symbolizes sky and heaven.',
+  description: 'There are a few theories on why the houses are painted blue, including that the color repels mosquitos or that it symbolizes sky and heaven.',
   imageId: 'rTqKo46'
 }, {
   id: 6,
@@ -1136,10 +1170,10 @@ export const places = [{
 }];
 ```
 
-```js utils.js
+```js src/utils.js
 export function getImageUrl(place) {
   return (
-    'https://i.imgur.com/' +
+    'https://react.dev/images/docs/scientists/' +
     place.imageId +
     'l.jpg'
   );
@@ -1148,9 +1182,9 @@ export function getImageUrl(place) {
 
 ```css
 ul { list-style-type: none; padding: 0px 10px; }
-li { 
-  margin-bottom: 10px; 
-  display: grid; 
+li {
+  margin-bottom: 10px;
+  display: grid;
   grid-template-columns: auto 1fr;
   gap: 20px;
   align-items: center;
