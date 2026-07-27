@@ -31,7 +31,11 @@ Joissain editoreissa nämä ominaisuudet tulevat sisäänrakennettuna, mutta jot
 
 ### Lintterit {/*linting*/}
 
+<<<<<<< HEAD
 Koodilintterit taikka "nukan poistajat" etsivät ongelmia koodistasi kun kirjoitat, auttaen korjaamaan ne ajoissa. [ESLint](https://eslint.org/) on suosittu, avoimen lähdekoodin lintteri JavaScriptille.
+=======
+Code linters find problems in your code as you write, helping you fix them early. [ESLint](https://eslint.org/) is a popular, open source linter for JavaScript.
+>>>>>>> 7b6c3ceb9dd97249e9dce4a8a94e61aed6424698
 
 * [Asenna ESLint suositelluilla määrityksillä Reactille](https://www.npmjs.com/package/eslint-config-react-app) (tarkista, että sinulla on [Node asennettuna!](https://nodejs.org/en/download/current/))
 * [Integroi ESLint VSCodeen virallisella lisäosalla](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint)
@@ -40,7 +44,11 @@ Koodilintterit taikka "nukan poistajat" etsivät ongelmia koodistasi kun kirjoit
 
 ### Muotoilu {/*formatting*/}
 
+<<<<<<< HEAD
 Vihoviimeinen asia on joutua keskustelemaan toisen kehittäjän kanssa aihesta [sarkain vs välilyönti](https://www.google.com/search?q=tabs+vs+spaces)! Onneksi [Prettier](https://prettier.io/) siivoaa koodisi uudelleen muotoilemalla sen pitäytymään muutettaviin esimääriteltyihin sääntöihin. Suorita Prettier ja kaikki välilehtesi muutetaan välilyönneiksi-ja kaikki sisennykset, lainausmerkit, jne tulee muuttumaan konfiguraation mukaiseksi. Ihanteellisessa tilanteessa Prettier suoritetaan kun tallennat tiedostosi, nopeasti tehden nämä muutokset sinulle.
+=======
+The last thing you want to do when sharing your code with another contributor is get into a discussion about [tabs vs spaces](https://www.google.com/search?q=tabs+vs+spaces)! Fortunately, [Prettier](https://prettier.io/) will clean up your code by reformatting it to conform to preset, configurable rules. Run Prettier, and all your tabs will be converted to spaces—and your indentation, quotes, etc will also all be changed to conform to the configuration. In the ideal setup, Prettier will run when you save your file, quickly making these edits for you.
+>>>>>>> 7b6c3ceb9dd97249e9dce4a8a94e61aed6424698
 
 Voit asentaa [Prettier lisäosan VSCodeen](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode) seuraamalla näitä vaiheita:
 
