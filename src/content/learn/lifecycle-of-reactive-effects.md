@@ -252,7 +252,7 @@ export default function App() {
 }
 ```
 
-```js chat.js
+```js src/chat.js
 export function createConnection(serverUrl, roomId) {
   // A real implementation would actually connect to the server
   return {
@@ -294,7 +294,11 @@ Saatat miettiä miten React tiesi, että Efektisi täytyi synkronoida uudelleen 
 ```js {1,3,8}
 function ChatRoom({ roomId }) { // roomId propsi saattaa muuttua ajan kanssa
   useEffect(() => {
+<<<<<<< HEAD
     const connection = createConnection(serverUrl, roomId); // Tämä Efekti lukee roomId:n
+=======
+    const connection = createConnection(serverUrl, roomId); // This Effect reads roomId
+>>>>>>> c7d6b700038c63d1aaf2c649af1aefe01ebbacac
     connection.connect();
     return () => {
       connection.disconnect();
@@ -448,7 +452,7 @@ export default function App() {
 }
 ```
 
-```js chat.js
+```js src/chat.js
 export function createConnection(serverUrl, roomId) {
   // Todellinen toteutus yhdistäisi palvelimeen oikeasti
   return {
@@ -528,7 +532,7 @@ export default function App() {
 }
 ```
 
-```js chat.js
+```js src/chat.js
 export function createConnection(serverUrl, roomId) {
   // Todellinen toteutus yhdistäisi palvelimeen oikeasti
   return {
@@ -647,7 +651,7 @@ export default function App() {
 }
 ```
 
-```js chat.js
+```js src/chat.js
 export function createConnection(serverUrl, roomId) {
   // Todellinen toteutus yhdistäisi palvelimeen oikeasti
   return {
@@ -839,7 +843,7 @@ export default function App() {
 }
 ```
 
-```js chat.js
+```js src/chat.js
 export function createConnection(serverUrl, roomId) {
   // Todellinen toteutus yhdistäisi palvelimeen oikeasti
   return {
@@ -914,7 +918,7 @@ export default function App() {
 }
 ```
 
-```js chat.js
+```js src/chat.js
 export function createConnection(serverUrl, roomId) {
   // Todellinen toteutus yhdistäisi palvelimeen oikeasti
   return {
@@ -971,7 +975,7 @@ export default function App() {
       <label>
         <input type="checkbox"
           checked={canMove}
-          onChange={e => setCanMove(e.target.checked)} 
+          onChange={e => setCanMove(e.target.checked)}
         />
         The dot is allowed to move
       </label>
@@ -1029,7 +1033,7 @@ export default function App() {
       <label>
         <input type="checkbox"
           checked={canMove}
-          onChange={e => setCanMove(e.target.checked)} 
+          onChange={e => setCanMove(e.target.checked)}
         />
         The dot is allowed to move
       </label>
@@ -1085,7 +1089,7 @@ export default function App() {
       <label>
         <input type="checkbox"
           checked={canMove}
-          onChange={e => setCanMove(e.target.checked)} 
+          onChange={e => setCanMove(e.target.checked)}
         />
         The dot is allowed to move
       </label>
@@ -1133,7 +1137,7 @@ Jos näet hiljennetyn linter-säännön, poista hiljennys! Sieltä virheet yleen
 
 <Sandpack>
 
-```js
+```js {expectedErrors: {'react-compiler': [16]}}
 import { useState, useEffect } from 'react';
 
 export default function App() {
@@ -1157,7 +1161,7 @@ export default function App() {
       <label>
         <input type="checkbox"
           checked={canMove}
-          onChange={e => setCanMove(e.target.checked)} 
+          onChange={e => setCanMove(e.target.checked)}
         />
         The dot is allowed to move
       </label>
@@ -1222,7 +1226,7 @@ export default function App() {
       <label>
         <input type="checkbox"
           checked={canMove}
-          onChange={e => setCanMove(e.target.checked)} 
+          onChange={e => setCanMove(e.target.checked)}
         />
         The dot is allowed to move
       </label>
@@ -1281,7 +1285,7 @@ export default function App() {
       <label>
         <input type="checkbox"
           checked={canMove}
-          onChange={e => setCanMove(e.target.checked)} 
+          onChange={e => setCanMove(e.target.checked)}
         />
         The dot is allowed to move
       </label>
@@ -1331,7 +1335,7 @@ Linterin hiljentäminen on aina epäilyttävää. Voisiko tämä olla bugi?
 
 <Sandpack>
 
-```js App.js
+```js src/App.js
 import { useState } from 'react';
 import ChatRoom from './ChatRoom.js';
 import {
@@ -1376,7 +1380,7 @@ export default function App() {
 }
 ```
 
-```js ChatRoom.js active
+```js {expectedErrors: {'react-compiler': [8]}} src/ChatRoom.js active
 import { useState, useEffect } from 'react';
 
 export default function ChatRoom({ roomId, createConnection }) {
@@ -1391,7 +1395,7 @@ export default function ChatRoom({ roomId, createConnection }) {
 }
 ```
 
-```js chat.js
+```js src/chat.js
 export function createEncryptedConnection(roomId) {
   // Todellinen toteutus yhdistäisi palvelimeen oikeasti
   return {
@@ -1429,7 +1433,7 @@ Jos poistat linterin hiljennyksen, näet linter virheen. Ongelma on siinä, ett�
 
 <Sandpack>
 
-```js App.js
+```js src/App.js
 import { useState } from 'react';
 import ChatRoom from './ChatRoom.js';
 import {
@@ -1474,7 +1478,7 @@ export default function App() {
 }
 ```
 
-```js ChatRoom.js active
+```js src/ChatRoom.js active
 import { useState, useEffect } from 'react';
 
 export default function ChatRoom({ roomId, createConnection }) {
@@ -1488,7 +1492,7 @@ export default function ChatRoom({ roomId, createConnection }) {
 }
 ```
 
-```js chat.js
+```js src/chat.js
 export function createEncryptedConnection(roomId) {
   // Todellinen toteutus yhdistäisi palvelimeen oikeasti
   return {
@@ -1524,7 +1528,7 @@ On oikein, että `createConnection` on riippuvuus. Kuitenkin, tämä koodi on hi
 
 <Sandpack>
 
-```js App.js
+```js src/App.js
 import { useState } from 'react';
 import ChatRoom from './ChatRoom.js';
 
@@ -1562,7 +1566,7 @@ export default function App() {
 }
 ```
 
-```js ChatRoom.js active
+```js src/ChatRoom.js active
 import { useState, useEffect } from 'react';
 import {
   createEncryptedConnection,
@@ -1583,7 +1587,7 @@ export default function ChatRoom({ roomId, isEncrypted }) {
 }
 ```
 
-```js chat.js
+```js src/chat.js
 export function createEncryptedConnection(roomId) {
   // Todellinen toteutus yhdistäisi palvelimeen oikeasti
   return {
@@ -1635,7 +1639,7 @@ Jos sinulla on kaksi synkronisointiprosessia, ne täytyy kirjoittaa kahteen eril
 
 <Sandpack>
 
-```js App.js
+```js src/App.js
 import { useState, useEffect } from 'react';
 import { fetchData } from './api.js';
 
@@ -1689,7 +1693,7 @@ export default function Page() {
 }
 ```
 
-```js api.js hidden
+```js src/api.js hidden
 export function fetchData(url) {
   if (url === '/planets') {
     return fetchPlanets();
@@ -1713,7 +1717,7 @@ async function fetchPlanets() {
         name: 'Venus'
       }, {
         id: 'mars',
-        name: 'Mars'        
+        name: 'Mars'
       }]);
     }, 1000);
   });
@@ -1737,7 +1741,7 @@ async function fetchPlaces(planetId) {
           name: 'Spain'
         }, {
           id: 'vietnam',
-          name: 'Vietnam'        
+          name: 'Vietnam'
         }]);
       } else if (planetId === 'venus') {
         resolve([{
@@ -1748,7 +1752,7 @@ async function fetchPlaces(planetId) {
           name: 'Diana Chasma'
         }, {
           id: 'kumsong-vallis',
-          name: 'Kŭmsŏng Vallis'        
+          name: 'Kŭmsŏng Vallis'
         }]);
       } else if (planetId === 'mars') {
         resolve([{
@@ -1784,7 +1788,7 @@ This is why it makes sense to describe them as two separate Effects. Here's an e
 
 <Sandpack>
 
-```js App.js
+```js src/App.js
 import { useState, useEffect } from 'react';
 import { fetchData } from './api.js';
 
@@ -1857,7 +1861,7 @@ export default function Page() {
 }
 ```
 
-```js api.js hidden
+```js src/api.js hidden
 export function fetchData(url) {
   if (url === '/planets') {
     return fetchPlanets();
@@ -1881,7 +1885,7 @@ async function fetchPlanets() {
         name: 'Venus'
       }, {
         id: 'mars',
-        name: 'Mars'        
+        name: 'Mars'
       }]);
     }, 1000);
   });
@@ -1905,7 +1909,7 @@ async function fetchPlaces(planetId) {
           name: 'Spain'
         }, {
           id: 'vietnam',
-          name: 'Vietnam'        
+          name: 'Vietnam'
         }]);
       } else if (planetId === 'venus') {
         resolve([{
@@ -1916,7 +1920,7 @@ async function fetchPlaces(planetId) {
           name: 'Diana Chasma'
         }, {
           id: 'kumsong-vallis',
-          name: 'Kŭmsŏng Vallis'        
+          name: 'Kŭmsŏng Vallis'
         }]);
       } else if (planetId === 'mars') {
         resolve([{
@@ -1947,7 +1951,7 @@ Sen sijaan, välttääksesi toistoa, voit erottaa logiikan omaksi hookiksi kuten
 
 <Sandpack>
 
-```js App.js
+```js src/App.js
 import { useState } from 'react';
 import { useSelectOptions } from './useSelectOptions.js';
 
@@ -1993,7 +1997,7 @@ export default function Page() {
 }
 ```
 
-```js useSelectOptions.js
+```js src/useSelectOptions.js
 import { useState, useEffect } from 'react';
 import { fetchData } from './api.js';
 
@@ -2020,7 +2024,7 @@ export function useSelectOptions(url) {
 }
 ```
 
-```js api.js hidden
+```js src/api.js hidden
 export function fetchData(url) {
   if (url === '/planets') {
     return fetchPlanets();
@@ -2044,7 +2048,7 @@ async function fetchPlanets() {
         name: 'Venus'
       }, {
         id: 'mars',
-        name: 'Mars'        
+        name: 'Mars'
       }]);
     }, 1000);
   });
@@ -2068,7 +2072,7 @@ async function fetchPlaces(planetId) {
           name: 'Spain'
         }, {
           id: 'vietnam',
-          name: 'Vietnam'        
+          name: 'Vietnam'
         }]);
       } else if (planetId === 'venus') {
         resolve([{
@@ -2079,7 +2083,7 @@ async function fetchPlaces(planetId) {
           name: 'Diana Chasma'
         }, {
           id: 'kumsong-vallis',
-          name: 'Kŭmsŏng Vallis'        
+          name: 'Kŭmsŏng Vallis'
         }]);
       } else if (planetId === 'mars') {
         resolve([{
