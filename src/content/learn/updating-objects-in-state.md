@@ -55,8 +55,14 @@ Tässä esimerkissä pidetään oliota tilasa, joka edustaa pointterin nykyistä
 
 <Sandpack>
 
+<<<<<<< HEAD
 ```js
 import {useState} from 'react';
+=======
+```js {expectedErrors: {'react-compiler': [11]}}
+import { useState } from 'react';
+
+>>>>>>> 383a1e9239c8c084a16a19daa4fc2a7ad04e2a3a
 export default function MovingDot() {
   const [position, setPosition] = useState({
     x: 0,
@@ -131,7 +137,12 @@ Huomaa miten punainen piste nyt seuraa sinun kursoria kun kosketat tai liikutat 
 <Sandpack>
 
 ```js
+<<<<<<< HEAD
 import {useState} from 'react';
+=======
+import { useState } from 'react';
+
+>>>>>>> 383a1e9239c8c084a16a19daa4fc2a7ad04e2a3a
 export default function MovingDot() {
   const [position, setPosition] = useState({
     x: 0,
@@ -218,8 +229,13 @@ Nämä syöttökentät eivät toimi koska `onChange`-käsittelijät mutatoivat t
 
 <Sandpack>
 
+<<<<<<< HEAD
 ```js
 import {useState} from 'react';
+=======
+```js {expectedErrors: {'react-compiler': [11, 15, 19]}}
+import { useState } from 'react';
+>>>>>>> 383a1e9239c8c084a16a19daa4fc2a7ad04e2a3a
 
 export default function Form() {
   const [person, setPerson] = useState({
@@ -299,7 +315,11 @@ setPerson({
 });
 ```
 
+<<<<<<< HEAD
 Nyt lomake toimii!
+=======
+Now the form works!
+>>>>>>> 383a1e9239c8c084a16a19daa4fc2a7ad04e2a3a
 
 Huomaa miten et määritellyt erillistä tilamuuttujaa jokaista syöttökenttää varten. Laajemmissa lomakkeissa kaiken datan säilyttäminen oliossa on hyvin kätevää--kunhan päivität sitä oikeaoppisesti!
 
@@ -370,13 +390,21 @@ input {
 
 </Sandpack>
 
+<<<<<<< HEAD
 Huomaa, että `...` spread -syntaksi on "matala" (engl. shallow)--se kopioi asioita vain yhden tason syvyydeltä. Tämä tekee siitä nopean, mutta tämä tarkoittaa myös, että jos haluat päivittää sisäkkäistä propertyä, joudut käyttämään sitä useammin.
+=======
+Note that the `...` spread syntax is "shallow"--it only copies things one level deep. This makes it fast, but it also means that if you want to update a nested property, you'll have to use it more than once.
+>>>>>>> 383a1e9239c8c084a16a19daa4fc2a7ad04e2a3a
 
 <DeepDive>
 
 #### Yhden Tapahtumankäsittelijän käyttäminen useille kentille {/*using-a-single-event-handler-for-multiple-fields*/}
 
+<<<<<<< HEAD
 Voit myös käyttää `[` ja `]` sulkeita olion määrittelyn sisällä määritelläksesi propertyn dynaamisella nimellä. Tässä on sama esimerkki, mutta yhdellä Tapahtumankäsittelijällä kolmen sijaan:
+=======
+You can also use the `[` and `]` braces inside your object definition to specify a property with a dynamic name. Here is the same example, but with a single event handler instead of three different ones:
+>>>>>>> 383a1e9239c8c084a16a19daa4fc2a7ad04e2a3a
 
 <Sandpack>
 
@@ -453,8 +481,13 @@ const [person, setPerson] = useState({
   artwork: {
     title: 'Blue Nana',
     city: 'Hamburg',
+<<<<<<< HEAD
     image: 'https://i.imgur.com/Sd1AgUOm.jpg',
   },
+=======
+    image: 'https://react.dev/images/docs/scientists/Sd1AgUOm.jpg',
+  }
+>>>>>>> 383a1e9239c8c084a16a19daa4fc2a7ad04e2a3a
 });
 ```
 
@@ -498,8 +531,13 @@ export default function Form() {
     artwork: {
       title: 'Blue Nana',
       city: 'Hamburg',
+<<<<<<< HEAD
       image: 'https://i.imgur.com/Sd1AgUOm.jpg',
     },
+=======
+      image: 'https://react.dev/images/docs/scientists/Sd1AgUOm.jpg',
+    }
+>>>>>>> 383a1e9239c8c084a16a19daa4fc2a7ad04e2a3a
   });
 
   function handleNameChange(e) {
@@ -564,7 +602,14 @@ export default function Form() {
         <br />
         (located in {person.artwork.city})
       </p>
+<<<<<<< HEAD
       <img src={person.artwork.image} alt={person.artwork.title} />
+=======
+      <img
+        src={person.artwork.image}
+        alt={person.artwork.title}
+      />
+>>>>>>> 383a1e9239c8c084a16a19daa4fc2a7ad04e2a3a
     </>
   );
 }
@@ -599,8 +644,13 @@ let obj = {
   artwork: {
     title: 'Blue Nana',
     city: 'Hamburg',
+<<<<<<< HEAD
     image: 'https://i.imgur.com/Sd1AgUOm.jpg',
   },
+=======
+    image: 'https://react.dev/images/docs/scientists/Sd1AgUOm.jpg',
+  }
+>>>>>>> 383a1e9239c8c084a16a19daa4fc2a7ad04e2a3a
 };
 ```
 
@@ -610,7 +660,7 @@ let obj = {
 let obj1 = {
   title: 'Blue Nana',
   city: 'Hamburg',
-  image: 'https://i.imgur.com/Sd1AgUOm.jpg',
+  image: 'https://react.dev/images/docs/scientists/Sd1AgUOm.jpg',
 };
 
 let obj2 = {
@@ -625,7 +675,7 @@ Olio `obj1` ei ole olion `obj2` sisällä. Esimerkiksi `obj3` voisi "osoittaa" m
 let obj1 = {
   title: 'Blue Nana',
   city: 'Hamburg',
-  image: 'https://i.imgur.com/Sd1AgUOm.jpg',
+  image: 'https://react.dev/images/docs/scientists/Sd1AgUOm.jpg',
 };
 
 let obj2 = {
@@ -681,8 +731,13 @@ export default function Form() {
     artwork: {
       title: 'Blue Nana',
       city: 'Hamburg',
+<<<<<<< HEAD
       image: 'https://i.imgur.com/Sd1AgUOm.jpg',
     },
+=======
+      image: 'https://react.dev/images/docs/scientists/Sd1AgUOm.jpg',
+    }
+>>>>>>> 383a1e9239c8c084a16a19daa4fc2a7ad04e2a3a
   });
 
   function handleNameChange(e) {
@@ -734,7 +789,14 @@ export default function Form() {
         <br />
         (located in {person.artwork.city})
       </p>
+<<<<<<< HEAD
       <img src={person.artwork.image} alt={person.artwork.title} />
+=======
+      <img
+        src={person.artwork.image}
+        alt={person.artwork.title}
+      />
+>>>>>>> 383a1e9239c8c084a16a19daa4fc2a7ad04e2a3a
     </>
   );
 }
@@ -814,8 +876,13 @@ Your task is to fix all of these bugs. As you fix them, explain why each of them
 
 <Sandpack>
 
+<<<<<<< HEAD
 ```js
 import {useState} from 'react';
+=======
+```js {expectedErrors: {'react-compiler': [11]}}
+import { useState } from 'react';
+>>>>>>> 383a1e9239c8c084a16a19daa4fc2a7ad04e2a3a
 
 export default function Scoreboard() {
   const [player, setPlayer] = useState({
@@ -963,8 +1030,13 @@ Jos jokin odottamaton asia muuttuu, kyseessä on mutaatio. Etsi mutaatio tiedost
 
 <Sandpack>
 
+<<<<<<< HEAD
 ```js App.js
 import {useState} from 'react';
+=======
+```js {expectedErrors: {'react-compiler': [17]}} src/App.js
+import { useState } from 'react';
+>>>>>>> 383a1e9239c8c084a16a19daa4fc2a7ad04e2a3a
 import Background from './Background.js';
 import Box from './Box.js';
 
@@ -1007,8 +1079,13 @@ export default function Canvas() {
 }
 ```
 
+<<<<<<< HEAD
 ```js Box.js
 import {useState} from 'react';
+=======
+```js src/Box.js
+import { useState } from 'react';
+>>>>>>> 383a1e9239c8c084a16a19daa4fc2a7ad04e2a3a
 
 export default function Box({children, color, position, onMove}) {
   const [lastCoordinates, setLastCoordinates] = useState(null);
@@ -1063,8 +1140,15 @@ export default function Box({children, color, position, onMove}) {
 }
 ```
 
+<<<<<<< HEAD
 ```js Background.js
 export default function Background({position}) {
+=======
+```js src/Background.js
+export default function Background({
+  position
+}) {
+>>>>>>> 383a1e9239c8c084a16a19daa4fc2a7ad04e2a3a
   return (
     <div
       style={{
@@ -1101,8 +1185,13 @@ Tämän voi korjata poistamalla mutaatio `handleMove`:sta ja käyttää levityss
 
 <Sandpack>
 
+<<<<<<< HEAD
 ```js App.js
 import {useState} from 'react';
+=======
+```js src/App.js
+import { useState } from 'react';
+>>>>>>> 383a1e9239c8c084a16a19daa4fc2a7ad04e2a3a
 import Background from './Background.js';
 import Box from './Box.js';
 
@@ -1150,8 +1239,13 @@ export default function Canvas() {
 }
 ```
 
+<<<<<<< HEAD
 ```js Box.js
 import {useState} from 'react';
+=======
+```js src/Box.js
+import { useState } from 'react';
+>>>>>>> 383a1e9239c8c084a16a19daa4fc2a7ad04e2a3a
 
 export default function Box({children, color, position, onMove}) {
   const [lastCoordinates, setLastCoordinates] = useState(null);
@@ -1206,8 +1300,15 @@ export default function Box({children, color, position, onMove}) {
 }
 ```
 
+<<<<<<< HEAD
 ```js Background.js
 export default function Background({position}) {
+=======
+```js src/Background.js
+export default function Background({
+  position
+}) {
+>>>>>>> 383a1e9239c8c084a16a19daa4fc2a7ad04e2a3a
   return (
     <div
       style={{
@@ -1244,9 +1345,15 @@ Tämä on sama virheellinen esimerkki kuin edellisessä haasteessa. Tällä kert
 
 <Sandpack>
 
+<<<<<<< HEAD
 ```js App.js
 import {useState} from 'react';
 import {useImmer} from 'use-immer';
+=======
+```js {expectedErrors: {'react-compiler': [18]}} src/App.js
+import { useState } from 'react';
+import { useImmer } from 'use-immer';
+>>>>>>> 383a1e9239c8c084a16a19daa4fc2a7ad04e2a3a
 import Background from './Background.js';
 import Box from './Box.js';
 
@@ -1289,8 +1396,13 @@ export default function Canvas() {
 }
 ```
 
+<<<<<<< HEAD
 ```js Box.js
 import {useState} from 'react';
+=======
+```js src/Box.js
+import { useState } from 'react';
+>>>>>>> 383a1e9239c8c084a16a19daa4fc2a7ad04e2a3a
 
 export default function Box({children, color, position, onMove}) {
   const [lastCoordinates, setLastCoordinates] = useState(null);
@@ -1345,8 +1457,15 @@ export default function Box({children, color, position, onMove}) {
 }
 ```
 
+<<<<<<< HEAD
 ```js Background.js
 export default function Background({position}) {
+=======
+```js src/Background.js
+export default function Background({
+  position
+}) {
+>>>>>>> 383a1e9239c8c084a16a19daa4fc2a7ad04e2a3a
   return (
     <div
       style={{
@@ -1399,8 +1518,13 @@ Tämä on Immerin avulla uudelleen kirjoitettu ratkaisu. Huomaa, että tapahtuma
 
 <Sandpack>
 
+<<<<<<< HEAD
 ```js App.js
 import {useImmer} from 'use-immer';
+=======
+```js src/App.js
+import { useImmer } from 'use-immer';
+>>>>>>> 383a1e9239c8c084a16a19daa4fc2a7ad04e2a3a
 import Background from './Background.js';
 import Box from './Box.js';
 
@@ -1444,8 +1568,13 @@ export default function Canvas() {
 }
 ```
 
+<<<<<<< HEAD
 ```js Box.js
 import {useState} from 'react';
+=======
+```js src/Box.js
+import { useState } from 'react';
+>>>>>>> 383a1e9239c8c084a16a19daa4fc2a7ad04e2a3a
 
 export default function Box({children, color, position, onMove}) {
   const [lastCoordinates, setLastCoordinates] = useState(null);
@@ -1500,8 +1629,15 @@ export default function Box({children, color, position, onMove}) {
 }
 ```
 
+<<<<<<< HEAD
 ```js Background.js
 export default function Background({position}) {
+=======
+```js src/Background.js
+export default function Background({
+  position
+}) {
+>>>>>>> 383a1e9239c8c084a16a19daa4fc2a7ad04e2a3a
   return (
     <div
       style={{
