@@ -44,7 +44,11 @@ function ChatRoom({ roomId }) {
   return (
     <>
       <input value={message} onChange={e => setMessage(e.target.value)} />
+<<<<<<< HEAD
       <button onClick={handleSendClick}>Lähetä</button>;
+=======
+      <button onClick={handleSendClick}>Send</button>
+>>>>>>> 12d692da47e77cdc558b928fcfbaf4e71c6d0cec
     </>
   );
 }
@@ -130,7 +134,7 @@ export default function App() {
 }
 ```
 
-```js chat.js
+```js src/chat.js
 export function sendMessage(message) {
   console.log('🔵 You sent: ' + message);
 }
@@ -333,7 +337,7 @@ export default function App() {
 }
 ```
 
-```js chat.js
+```js src/chat.js
 export function createConnection(serverUrl, roomId) {
   // Todellinen toteutus yhdistäisi palvelimeen
   let connectedCallback;
@@ -362,7 +366,7 @@ export function createConnection(serverUrl, roomId) {
 }
 ```
 
-```js notifications.js
+```js src/notifications.js
 import Toastify from 'toastify-js';
 import 'toastify-js/src/toastify.css';
 
@@ -400,6 +404,7 @@ Tarvitset tavan erottaa tämän ei-reaktiivisen logiikan reaktiivisesta Efektist
 
 ### Efektitapahtuman määrittäminen {/*declaring-an-effect-event*/}
 
+<<<<<<< HEAD
 <Wip>
 
 Tämä kohta kuvailee **kokeellista API:a joka ei ole vielä julkaistu** Reactin vakaassa versiossa.
@@ -407,6 +412,9 @@ Tämä kohta kuvailee **kokeellista API:a joka ei ole vielä julkaistu** Reactin
 </Wip>
 
 Käytä erityistä Hookia nimeltä [`useEffectEvent`](/reference/react/experimental_useEffectEvent) irroittaaksesi tämän ei-reaktiivisen logiikan Efektistä:
+=======
+Use a special Hook called [`useEffectEvent`](/reference/react/useEffectEvent) to extract this non-reactive logic out of your Effect:
+>>>>>>> 12d692da47e77cdc558b928fcfbaf4e71c6d0cec
 
 ```js {1,4-6}
 import { useEffect, useEffectEvent } from 'react';
@@ -439,7 +447,11 @@ function ChatRoom({ roomId, theme }) {
   // ...
 ```
 
+<<<<<<< HEAD
 Tämä korjaa ongelman. Huomaa, että sinun täytyi *poistaa* `onConnected` Efektisi riippuvuuksien listalta. **Efektitapahtumat eivät ole reaktiivisia ja ne täytyy jättää pois riippuvuuksien listalta.**
+=======
+This solves the problem. Note that you had to *remove* `theme` from the list of your Effect's dependencies, because it's no longer used in the Effect. You also don't need to *add* `onConnected` to it, because **Effect Events are not reactive and must be omitted from dependencies.**
+>>>>>>> 12d692da47e77cdc558b928fcfbaf4e71c6d0cec
 
 Varmista, että uusi käyttäytyminen toimii odotetusti:
 
@@ -448,8 +460,8 @@ Varmista, että uusi käyttäytyminen toimii odotetusti:
 ```json package.json hidden
 {
   "dependencies": {
-    "react": "experimental",
-    "react-dom": "experimental",
+    "react": "latest",
+    "react-dom": "latest",
     "react-scripts": "latest",
     "toastify-js": "1.12.0"
   },
@@ -464,7 +476,7 @@ Varmista, että uusi käyttäytyminen toimii odotetusti:
 
 ```js
 import { useState, useEffect } from 'react';
-import { experimental_useEffectEvent as useEffectEvent } from 'react';
+import { useEffectEvent } from 'react';
 import { createConnection, sendMessage } from './chat.js';
 import { showNotification } from './notifications.js';
 
@@ -521,7 +533,7 @@ export default function App() {
 }
 ```
 
-```js chat.js
+```js src/chat.js
 export function createConnection(serverUrl, roomId) {
   // Todellinen toteutus yhdistäisi palvelimeen oikeasti
   let connectedCallback;
@@ -550,7 +562,7 @@ export function createConnection(serverUrl, roomId) {
 }
 ```
 
-```js notifications.js hidden
+```js src/notifications.js hidden
 import Toastify from 'toastify-js';
 import 'toastify-js/src/toastify.css';
 
@@ -574,10 +586,15 @@ label { display: block; margin-top: 10px; }
 
 </Sandpack>
 
+<<<<<<< HEAD
 Voit ajatella Efektitapahtumien olevat hyvin samanlaisia kuin tapahtumankäsittelijät. Pääero on, että tapahtumankäsittelijät suoritetaan vastauksena käyttäjän vuorovaikutukseen, kun taas Efektitapahtumat käynnistetään Efektistäsi. Efektitapahtumat antavat sinun "katkaista ketjun" Efektien reaktiivisuuden ja koodin välillä, jonka ei tulisi olla reaktiivista.
+=======
+You can think of Effect Events as being very similar to event handlers. The main difference is that event handlers run in response to user interactions, whereas Effect Events are triggered by you from Effects. Effect Events let you "break the chain" between the reactivity of Effects and code that should not be reactive.
+>>>>>>> 12d692da47e77cdc558b928fcfbaf4e71c6d0cec
 
 ### Viimeisimmän propsin ja tilan lukeminen Efektitapahtumilla {/*reading-latest-props-and-state-with-effect-events*/}
 
+<<<<<<< HEAD
 <Wip>
 
 Tämä kohta kuvailee **kokeellista API:a joka ei ole vielä julkaistu** Reactin vakaassa versiossa.
@@ -585,6 +602,9 @@ Tämä kohta kuvailee **kokeellista API:a joka ei ole vielä julkaistu** Reactin
 </Wip>
 
 Efektitapahtumien avulla voit korjata monia tapauksia, joissa saattaisit kokea houkutuksen linterin hiljentämiseen.
+=======
+Effect Events let you fix many patterns where you might be tempted to suppress the dependency linter.
+>>>>>>> 12d692da47e77cdc558b928fcfbaf4e71c6d0cec
 
 Sanotaan esimerkiksi, että sinulla on Efekti, joka kerää sivun vierailut:
 
@@ -711,7 +731,7 @@ Tässä, `url` `onVisit`:n sisällä vastaa *viimeisintä* `url`:ää (joka saat
 
 Olemassa olevissa koodipohjissa, saatat törmätä linterin hiljentämiseen tällä tavalla:
 
-```js {7-9}
+```js {expectedErrors: {'react-compiler': [8]}} {7-9}
 function Page({ url }) {
   const { items } = useContext(ShoppingCartContext);
   const numberOfItems = items.length;
@@ -725,7 +745,11 @@ function Page({ url }) {
 }
 ```
 
+<<<<<<< HEAD
 Kun `useEffectEvent`:sta tulee vakaa osa Reactia, suosittelemme **älä koskaan hiljennä linteriä**.
+=======
+We recommend **never suppressing the linter**.
+>>>>>>> 12d692da47e77cdc558b928fcfbaf4e71c6d0cec
 
 Ensimmäinen haittapuoli linterin hiljentämisessä on, että React ei enää varoita sinua kun Efektisi tarvitsee "reagoida" uuteen reaktiiviseen riippuvuuteen, jonka olet lisännyt koodiisi. Aiemmassa esimerkissä, lisäsit `url`:n riippuvuudeksi *koska* React muistutti sinua siitä. Et enää saa tällaisia muistutuksia tulevista muutoksista Efektiin jos hiljennät linterin. Tämä johtaa bugeihin.
 
@@ -735,7 +759,7 @@ Löydätkö miksi?
 
 <Sandpack>
 
-```js
+```js {expectedErrors: {'react-compiler': [16]}}
 import { useState, useEffect } from 'react';
 
 export default function App() {
@@ -800,25 +824,9 @@ Käyttämällä `useEffectEvent` hookkia, ei ole tarpeen "valehdella" linterille
 
 <Sandpack>
 
-```json package.json hidden
-{
-  "dependencies": {
-    "react": "experimental",
-    "react-dom": "experimental",
-    "react-scripts": "latest"
-  },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
-  }
-}
-```
-
 ```js
 import { useState, useEffect } from 'react';
-import { experimental_useEffectEvent as useEffectEvent } from 'react';
+import { useEffectEvent } from 'react';
 
 export default function App() {
   const [position, setPosition] = useState({ x: 0, y: 0 });
@@ -878,6 +886,7 @@ Lue [Riippuvuuksien poistaminen Efektista](/learn/removing-effect-dependencies) 
 
 ### Efektitapahtumien rajoitteet {/*limitations-of-effect-events*/}
 
+<<<<<<< HEAD
 <Wip>
 
 Tämä kohta kuvailee **kokeellista API:a joka ei ole vielä julkaistu** Reactin vakaassa versiossa.
@@ -885,6 +894,9 @@ Tämä kohta kuvailee **kokeellista API:a joka ei ole vielä julkaistu** Reactin
 </Wip>
 
 Efektitapahtumat ovat hyvin rajattuja siinä miten voit käyttää niitä:
+=======
+Effect Events are very limited in how you can use them:
+>>>>>>> 12d692da47e77cdc558b928fcfbaf4e71c6d0cec
 
 * **Kutsu vain Efektin sisältä.**
 * **Älä koskaan välitä niitä toisiin komponentteihin tai Hookkeihin.**
@@ -973,7 +985,7 @@ Korjataksesi tämä koodi, riittää että seuraat sääntöjä.
 
 <Sandpack>
 
-```js
+```js {expectedErrors: {'react-compiler': [14]}}
 import { useState, useEffect } from 'react';
 
 export default function Timer() {
@@ -1088,25 +1100,9 @@ Näyttää siltä, että Efekti joka asettaa ajastimen "reagoi" `increment` arvo
 
 <Sandpack>
 
-```json package.json hidden
-{
-  "dependencies": {
-    "react": "experimental",
-    "react-dom": "experimental",
-    "react-scripts": "latest"
-  },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
-  }
-}
-```
-
 ```js
 import { useState, useEffect } from 'react';
-import { experimental_useEffectEvent as useEffectEvent } from 'react';
+import { useEffectEvent } from 'react';
 
 export default function Timer() {
   const [count, setCount] = useState(0);
@@ -1157,25 +1153,9 @@ Korjataksesi ongelman, irroita `onTick` Efektitapahtuma Efektistä:
 
 <Sandpack>
 
-```json package.json hidden
-{
-  "dependencies": {
-    "react": "experimental",
-    "react-dom": "experimental",
-    "react-scripts": "latest"
-  },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
-  }
-}
-```
-
 ```js
 import { useState, useEffect } from 'react';
-import { experimental_useEffectEvent as useEffectEvent } from 'react';
+import { useEffectEvent } from 'react';
 
 export default function Timer() {
   const [count, setCount] = useState(0);
@@ -1239,25 +1219,9 @@ Koodi Efektitapahtuman sisällä ei ole reaktiivista. Onko tapauksia joissa halu
 
 <Sandpack>
 
-```json package.json hidden
-{
-  "dependencies": {
-    "react": "experimental",
-    "react-dom": "experimental",
-    "react-scripts": "latest"
-  },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
-  }
-}
-```
-
 ```js
 import { useState, useEffect } from 'react';
-import { experimental_useEffectEvent as useEffectEvent } from 'react';
+import { useEffectEvent } from 'react';
 
 export default function Timer() {
   const [count, setCount] = useState(0);
@@ -1326,25 +1290,9 @@ Ongelma yllä olevassa esimerkissä on, että se erotti Efektitapahtuman nimelt�
 
 <Sandpack>
 
-```json package.json hidden
-{
-  "dependencies": {
-    "react": "experimental",
-    "react-dom": "experimental",
-    "react-scripts": "latest"
-  },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
-  }
-}
-```
-
 ```js
 import { useState, useEffect } from 'react';
-import { experimental_useEffectEvent as useEffectEvent } from 'react';
+import { useEffectEvent } from 'react';
 
 export default function Timer() {
   const [count, setCount] = useState(0);
@@ -1425,8 +1373,8 @@ Efektisi tietää mihin huoneeseen se on yhdistetty. Onko mitään tietoa, jonka
 ```json package.json hidden
 {
   "dependencies": {
-    "react": "experimental",
-    "react-dom": "experimental",
+    "react": "latest",
+    "react-dom": "latest",
     "react-scripts": "latest",
     "toastify-js": "1.12.0"
   },
@@ -1441,7 +1389,7 @@ Efektisi tietää mihin huoneeseen se on yhdistetty. Onko mitään tietoa, jonka
 
 ```js
 import { useState, useEffect } from 'react';
-import { experimental_useEffectEvent as useEffectEvent } from 'react';
+import { useEffectEvent } from 'react';
 import { createConnection, sendMessage } from './chat.js';
 import { showNotification } from './notifications.js';
 
@@ -1500,7 +1448,7 @@ export default function App() {
 }
 ```
 
-```js chat.js
+```js src/chat.js
 export function createConnection(serverUrl, roomId) {
   // Todellinen toteutus yhdistäisi palvelimeen oikeasti
   let connectedCallback;
@@ -1529,7 +1477,7 @@ export function createConnection(serverUrl, roomId) {
 }
 ```
 
-```js notifications.js hidden
+```js src/notifications.js hidden
 import Toastify from 'toastify-js';
 import 'toastify-js/src/toastify.css';
 
@@ -1566,8 +1514,8 @@ Korjataksesi ongelma, sen sijaan että lukisit *uusimman* `roomId` arvon Efektit
 ```json package.json hidden
 {
   "dependencies": {
-    "react": "experimental",
-    "react-dom": "experimental",
+    "react": "latest",
+    "react-dom": "latest",
     "react-scripts": "latest",
     "toastify-js": "1.12.0"
   },
@@ -1582,7 +1530,7 @@ Korjataksesi ongelma, sen sijaan että lukisit *uusimman* `roomId` arvon Efektit
 
 ```js
 import { useState, useEffect } from 'react';
-import { experimental_useEffectEvent as useEffectEvent } from 'react';
+import { useEffectEvent } from 'react';
 import { createConnection, sendMessage } from './chat.js';
 import { showNotification } from './notifications.js';
 
@@ -1641,7 +1589,7 @@ export default function App() {
 }
 ```
 
-```js chat.js
+```js src/chat.js
 export function createConnection(serverUrl, roomId) {
   // Todellinen toteutus yhdistäisi palvelimeen oikeasti
   let connectedCallback;
@@ -1670,7 +1618,7 @@ export function createConnection(serverUrl, roomId) {
 }
 ```
 
-```js notifications.js hidden
+```js src/notifications.js hidden
 import Toastify from 'toastify-js';
 import 'toastify-js/src/toastify.css';
 
@@ -1703,8 +1651,8 @@ Ratkaistaksesi lisähaasteen, tallenna ilmoituksen viiveen ID ja siivoa se Efekt
 ```json package.json hidden
 {
   "dependencies": {
-    "react": "experimental",
-    "react-dom": "experimental",
+    "react": "latest",
+    "react-dom": "latest",
     "react-scripts": "latest",
     "toastify-js": "1.12.0"
   },
@@ -1719,7 +1667,7 @@ Ratkaistaksesi lisähaasteen, tallenna ilmoituksen viiveen ID ja siivoa se Efekt
 
 ```js
 import { useState, useEffect } from 'react';
-import { experimental_useEffectEvent as useEffectEvent } from 'react';
+import { useEffectEvent } from 'react';
 import { createConnection, sendMessage } from './chat.js';
 import { showNotification } from './notifications.js';
 
@@ -1784,7 +1732,7 @@ export default function App() {
 }
 ```
 
-```js chat.js
+```js src/chat.js
 export function createConnection(serverUrl, roomId) {
   // Oikea toteutus yhdistäisi palvelimeen oikeasti
   let connectedCallback;
@@ -1813,7 +1761,7 @@ export function createConnection(serverUrl, roomId) {
 }
 ```
 
-```js notifications.js hidden
+```js src/notifications.js hidden
 import Toastify from 'toastify-js';
 import 'toastify-js/src/toastify.css';
 

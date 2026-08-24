@@ -163,7 +163,7 @@ export default function ChatRoom() {
 }
 ```
 
-```js chat.js
+```js src/chat.js
 export function createConnection() {
   // Todellinen toteutus yhdistäisi palvelimeen oikeasti
   return {
@@ -201,7 +201,7 @@ On kaksi yleistä tapaa missä et tarvitse Efektiä:
 
 Esimerkiksi, et tarvitse Efektiä säätääksesi jotain tilaa toisen tilan perusteella:
 
-```js {5-9}
+```js {expectedErrors: {'react-compiler': [8]}} {5-9}
 function Form() {
   const [firstName, setFirstName] = useState('Taylor');
   const [lastName, setLastName] = useState('Swift');
@@ -227,7 +227,11 @@ function Form() {
 }
 ```
 
+<<<<<<< HEAD
 Kuitenkin *tarvitset* Efektin synkronoidaksesi ulkoisten järjestelmien kanssa.
+=======
+However, you *do* need Effects to synchronize with external systems.
+>>>>>>> 12d692da47e77cdc558b928fcfbaf4e71c6d0cec
 
 <LearnMore path="/learn/you-might-not-need-an-effect">
 
@@ -281,7 +285,7 @@ export default function App() {
 }
 ```
 
-```js chat.js
+```js src/chat.js
 export function createConnection(serverUrl, roomId) {
   // Todellinen toteutus yhdistäisi palvelimeen oikeasti
   return {
@@ -312,6 +316,7 @@ Lue **[Reaktiivisten Efektien elinkaari](/learn/lifecycle-of-reactive-effects)**
 
 ## Tapahtumien erottaminen Efekteistä {/*separating-events-from-effects*/}
 
+<<<<<<< HEAD
 <Wip>
 
 Tämä osio kuvailee **kokeellista API:a, joka ei ole vielä julkaistu** Reactin vakaassa versiossa.
@@ -319,6 +324,9 @@ Tämä osio kuvailee **kokeellista API:a, joka ei ole vielä julkaistu** Reactin
 </Wip>
 
 Tapahtumankäsittelijät suoritetaan uudelleen ainoastaan kun suoritat saman vuorovaikutuksen uudelleen. Toisin kuin Tapahtumankäsittelijät, Efektit synkronoituvat jos jokin arvo jota ne luki, kuten propsi tai tilamuuttuja, on muuttunut viimeisestä renderöinnistä. Joskus haluat myös sekoituksen molemmista käyttäytymisistä: Efekti joka suoritetaan uudelleen vastauksena joihinkin arvoihin mutta ei toisiin.
+=======
+Event handlers only re-run when you perform the same interaction again. Unlike event handlers, Effects re-synchronize if any of the values they read, like props or state, are different than during last render. Sometimes, you want a mix of both behaviors: an Effect that re-runs in response to some values but not others.
+>>>>>>> 12d692da47e77cdc558b928fcfbaf4e71c6d0cec
 
 Kaikki koodi Efektin sisällä on *reaktiivista.* Se suoritetaan uudelleen mikäli jokin reaktiivinen arvo jota se lukee on muuttunut renderöinnin yhteydessä. Esimerkiksi, tämä Efekti yhdistää uudelleen chattiin jos joko `roomId` tai `theme` on muuttunut:
 
@@ -388,14 +396,14 @@ export default function App() {
       <hr />
       <ChatRoom
         roomId={roomId}
-        theme={isDark ? 'dark' : 'light'} 
+        theme={isDark ? 'dark' : 'light'}
       />
     </>
   );
 }
 ```
 
-```js chat.js
+```js src/chat.js
 export function createConnection(serverUrl, roomId) {
   // Todellinen toteutus yhdistäisi palvelimeen oikeasti
   let connectedCallback;
@@ -424,7 +432,7 @@ export function createConnection(serverUrl, roomId) {
 }
 ```
 
-```js notifications.js
+```js src/notifications.js
 import Toastify from 'toastify-js';
 import 'toastify-js/src/toastify.css';
 
@@ -455,8 +463,8 @@ Tämä ei ole ihanteellista. Haluat yhdistää uudelleen chattiin vain jos `room
 ```json package.json hidden
 {
   "dependencies": {
-    "react": "experimental",
-    "react-dom": "experimental",
+    "react": "latest",
+    "react-dom": "latest",
     "react-scripts": "latest",
     "toastify-js": "1.12.0"
   },
@@ -471,7 +479,7 @@ Tämä ei ole ihanteellista. Haluat yhdistää uudelleen chattiin vain jos `room
 
 ```js
 import { useState, useEffect } from 'react';
-import { experimental_useEffectEvent as useEffectEvent } from 'react';
+import { useEffectEvent } from 'react';
 import { createConnection, sendMessage } from './chat.js';
 import { showNotification } from './notifications.js';
 
@@ -521,14 +529,14 @@ export default function App() {
       <hr />
       <ChatRoom
         roomId={roomId}
-        theme={isDark ? 'dark' : 'light'} 
+        theme={isDark ? 'dark' : 'light'}
       />
     </>
   );
 }
 ```
 
-```js chat.js
+```js src/chat.js
 export function createConnection(serverUrl, roomId) {
   // Todellinen toteutus yhdistäisi palvelimeen oikeasti
   let connectedCallback;
@@ -557,7 +565,7 @@ export function createConnection(serverUrl, roomId) {
 }
 ```
 
-```js notifications.js hidden
+```js src/notifications.js hidden
 import Toastify from 'toastify-js';
 import 'toastify-js/src/toastify.css';
 
@@ -647,7 +655,7 @@ export default function App() {
 }
 ```
 
-```js chat.js
+```js src/chat.js
 export function createConnection({ serverUrl, roomId }) {
   // Todellinen toteutus yhdistäisi palvelimeen oikeasti
   return {
@@ -721,7 +729,7 @@ export default function App() {
 }
 ```
 
-```js chat.js
+```js src/chat.js
 export function createConnection({ serverUrl, roomId }) {
   // Todellinen toteutus yhdistäisi palvelimeen oikeasti
   return {
@@ -797,7 +805,7 @@ function Dot({ position, opacity }) {
 }
 ```
 
-```js usePointerPosition.js
+```js src/usePointerPosition.js
 import { useState, useEffect } from 'react';
 
 export function usePointerPosition() {
@@ -813,7 +821,7 @@ export function usePointerPosition() {
 }
 ```
 
-```js useDelayedValue.js
+```js src/useDelayedValue.js
 import { useState, useEffect } from 'react';
 
 export function useDelayedValue(value, delay) {

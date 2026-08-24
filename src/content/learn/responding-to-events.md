@@ -169,7 +169,11 @@ Näin nämä kaksi painiketta voivat näyttää eri viestejä. Kokeile muuttaa n
 
 ### Tapahtumankäsittelijöiden välittäminen propseina {/*passing-event-handlers-as-props*/}
 
+<<<<<<< HEAD
 Usein haluat pääkomponentin pystyä määritellä alakomponentin Tapahtumankäsittelijän. Esimerkiksi painikkeet: riippuen missä käytät `Button` komponenttia, saatat haluta kutsua eri funktiota. Ehkäpä yksi toistaa videota ja toinen lähettää kuvan palvelimelle.
+=======
+Often you'll want the parent component to specify a child's event handler. Consider buttons: depending on where you're using a `Button` component, you might want to execute a different function—perhaps one plays a movie and another uploads an image.
+>>>>>>> 12d692da47e77cdc558b928fcfbaf4e71c6d0cec
 
 Voit tehdä tämän välittämällä Tapahtumankäsittelijän propsina alakomponentille: 
 
@@ -313,12 +317,21 @@ button { margin-right: 10px; }
 
 </Sandpack>
 
+<<<<<<< HEAD
 Huomaa, miten `App` komponentin ei tarvitse tietää *mitä* `Toolbar` tekee sen `onPlayMovie` tai `onUploadImage` Tapahtumankäsittelijöillä. Se on `Toolbar` komponentin toteutusyksityiskohta. Tässä, `Toolbar` välittää ne `Button`:nien `onClick` käsittelijöinä, mutta se voisi myöhemmin myös kutsua niitä pikanäppäimestä. Propsien nimeäminen sovelluskohtaisten vuorovaikutusten kautta, kuten `onPlayMovie`, antaa joustavuuden muuttaa niitä myöhemmin.
 
 <Note>
 
 Varmista, että käytät asianmukaisia HTML-tageja tapahtumankäsittelijöillesi. Esimerkiksi klikkausten käsittelyyn käytä [`<button onClick={handleClick}>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button) -elementtiä sen sijaan, että käyttäisit `<div onClick={handleClick}>`. Todellisen selaimen `<button>` -elementin käyttäminen mahdollistaa sisäänrakennetut selaimen toiminnot, kuten näppäimistönavigoinnin. Jos et pidä oletusarvoisesta painikkeen ulkoasusta ja haluat muokata sitä näyttämään enemmän linkiltä tai erilaiselta käyttöliittymäelementiltä, voit saavuttaa sen CSS:n avulla. [Lue lisää saavutettavan merkinnän kirjoittamisesta.](https://developer.mozilla.org/en-US/docs/Learn/Accessibility/HTML)
   
+=======
+Notice how the `App` component does not need to know *what* `Toolbar` will do with `onPlayMovie` or `onUploadImage`. That's an implementation detail of the `Toolbar`. Here, `Toolbar` passes them down as `onClick` handlers to its `Button`s, but it could later also trigger them on a keyboard shortcut. Naming props after app-specific interactions like `onPlayMovie` gives you the flexibility to change how they're used later.
+
+<Note>
+
+Make sure that you use the appropriate HTML tags for your event handlers. For example, to handle clicks, use [`<button onClick={handleClick}>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button) instead of `<div onClick={handleClick}>`. Using a real browser `<button>` enables built-in browser behaviors like keyboard navigation. If you don't like the default browser styling of a button and want to make it look more like a link or a different UI element, you can achieve it with CSS. [Learn more about writing accessible markup.](https://developer.mozilla.org/en-US/docs/Learn/Accessibility/HTML)
+
+>>>>>>> 12d692da47e77cdc558b928fcfbaf4e71c6d0cec
 </Note>
 
 ## Tapahtuman leviäminen {/*event-propagation*/}
@@ -412,12 +425,21 @@ button { margin: 5px; }
 
 Kun klikkaat painiketta:
 
+<<<<<<< HEAD
 1. React kutsuu `<button>` tagille annettua `onClick` käsittelijää. 
 2. Tämä `Button`:ssa määritelty käsittelijä tekee seuraavat asiat:
    * Kutsuu `e.stopPropagation()` funktiota, estäen tapahtuman kuplimisen.
    * Kutsuu `onClick` funktiota, joka on `Toolbar` komponentista välitetty propsi.
 3. `Toolbar` komponentissa määritelty funktio näyttää painikkeen oman ilmoituksen.
 4. Sillä propagointi on pysäytetty, `<div>` tagin `onClick` käsittelijää ei suoriteta.
+=======
+1. React calls the `onClick` handler passed to `<button>`.
+2. That handler, defined in `Button`, does the following:
+   * Calls `e.stopPropagation()`, preventing the event from bubbling further.
+   * Calls the `onClick` function, which is a prop passed from the `Toolbar` component.
+3. That function, defined in the `Toolbar` component, displays the button's own alert.
+4. Since the propagation was stopped, the parent `<div>`'s `onClick` handler does *not* run.
+>>>>>>> 12d692da47e77cdc558b928fcfbaf4e71c6d0cec
 
 `e.stopPropagation()` funktion tuloksena painikkeiden klikkaaminen näyttää vain yhden ilmoituksen (`button`:sta) kahden ilmoituksen sijaan (`<button>`:sta sekä `<div>`:sta). Painikkeen klikkaaminen ei ole sama asia kuin ympäröivä työkalupalkki, joten propagoinnin pysäyttäminen on järkevää tälle UI:lle.
 
@@ -434,11 +456,19 @@ Harvinaisissa tapauksissa saatat haluta napata kaikki lapsielementtien tapahtuma
 </div>
 ```
 
+<<<<<<< HEAD
 Jokainen tapahtuma propagoituu kolmaessa vaiheessa:
 
 1. Se kulkee alaspäin, kutsuen kaikki `onClickCapture` käsittelijät.
 2. Se suorittaa klikatun elementin `onClick` käsittelijän. 
 3. Se kulkee ylöspäin, kutsuen kaikki `onClick` käsittelijät.
+=======
+Each event propagates in three phases:
+
+1. It travels down, calling all `onClickCapture` handlers.
+2. It runs the clicked element's `onClick` handler.
+3. It travels upwards, calling all `onClick` handlers.
+>>>>>>> 12d692da47e77cdc558b928fcfbaf4e71c6d0cec
 
 Tapahtumien nappaaminen on kätevää koodille kuten reitittimille taikka analytiikalle, mutta et todennäköisesti tule käyttämään sitä sovelluskoodissa.
 
@@ -547,7 +577,7 @@ Painikkeen painamisen on tarkoitus vaihtaa sivun taustaväriä valkoisen ja must
 
 <Sandpack>
 
-```js
+```js {expectedErrors: {'react-compiler': [5, 7]}}
 export default function LightSwitch() {
   function handleClick() {
     let bodyStyle = document.body.style;
@@ -630,7 +660,7 @@ Kun olet tehnyt tämän, huomaa, että painikkeen klikkaaminen myös kasvattaa s
 
 <Sandpack>
 
-```js ColorSwitch.js active
+```js src/ColorSwitch.js active
 export default function ColorSwitch({
   onChangeColor
 }) {
@@ -642,7 +672,7 @@ export default function ColorSwitch({
 }
 ```
 
-```js App.js hidden
+```js src/App.js hidden
 import { useState } from 'react';
 import ColorSwitch from './ColorSwitch.js';
 
@@ -686,7 +716,7 @@ Tämä kuitenkin luo ongelman kasvavasta luvusta. Jos `onChangeColor` ei tee tä
 
 <Sandpack>
 
-```js ColorSwitch.js active
+```js src/ColorSwitch.js active
 export default function ColorSwitch({
   onChangeColor
 }) {
@@ -701,7 +731,7 @@ export default function ColorSwitch({
 }
 ```
 
-```js App.js hidden
+```js src/App.js hidden
 import { useState } from 'react';
 import ColorSwitch from './ColorSwitch.js';
 
