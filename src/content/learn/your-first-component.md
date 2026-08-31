@@ -63,7 +63,7 @@ Perinteisesti verkkosivuja luodessa kehittäjät lisäsivät merkintäkoodia sis
 export default function Profile() {
   return (
     <img
-      src="https://i.imgur.com/MK3eW3Am.jpg"
+      src="https://react.dev/images/docs/scientists/MK3eW3Am.jpg"
       alt="Katherine Johnson"
     />
   )
@@ -99,7 +99,7 @@ Komponentti palauttaa `<img />` tagin `src` ja `alt` attribuuteilla. `<img /> on
 Palautuslause voidaan kirjoittaa yhdellä rivillä, kuten tässä komponentissa:
 
 ```js
-return <img src="https://i.imgur.com/MK3eW3As.jpg" alt="Katherine Johnson" />;
+return <img src="https://react.dev/images/docs/scientists/MK3eW3As.jpg" alt="Katherine Johnson" />;
 ```
 
 Mutta jos merkintäkoodisi ei ole samalla rivillä kuin `return` avainsana, täytyy koodi kääriä sulkujen sisään:
@@ -107,7 +107,7 @@ Mutta jos merkintäkoodisi ei ole samalla rivillä kuin `return` avainsana, täy
 ```js
 return (
   <div>
-    <img src="https://i.imgur.com/MK3eW3As.jpg" alt="Katherine Johnson" />
+    <img src="https://react.dev/images/docs/scientists/MK3eW3As.jpg" alt="Katherine Johnson" />
   </div>
 );
 ```
@@ -128,7 +128,7 @@ Nyt kun olet määritellyt `Profile` komponentin, voit upottaa sen toisten kompo
 function Profile() {
   return (
     <img
-      src="https://i.imgur.com/MK3eW3As.jpg"
+      src="https://react.dev/images/docs/scientists/MK3eW3As.jpg"
       alt="Katherine Johnson"
     />
   );
@@ -164,9 +164,9 @@ Ja `Profile` sisältää vielä enemmän HTML koodia: `<img />`. Lopuksi selain 
 ```html
 <section>
   <h1>Amazing scientists</h1>
-  <img src="https://i.imgur.com/MK3eW3As.jpg" alt="Katherine Johnson" />
-  <img src="https://i.imgur.com/MK3eW3As.jpg" alt="Katherine Johnson" />
-  <img src="https://i.imgur.com/MK3eW3As.jpg" alt="Katherine Johnson" />
+  <img src="https://react.dev/images/docs/scientists/MK3eW3As.jpg" alt="Katherine Johnson" />
+  <img src="https://react.dev/images/docs/scientists/MK3eW3As.jpg" alt="Katherine Johnson" />
+  <img src="https://react.dev/images/docs/scientists/MK3eW3As.jpg" alt="Katherine Johnson" />
 </section>
 ```
 
@@ -215,7 +215,11 @@ React sovelluksesi alkaa "juurikomponentista". Useimmiten se luodaan automaattis
 
 Useimmat React sovellukset käyttävät komponentteja loppuun asti. Tämä tarkoittaa, että et ainoastaan käytä komponentteja uudelleenkäytettäviin palasiin kuten painikkeisiin, mutta myös suurempiin paloihin kuten sivuplakkeihin, listoihin ja lopulta kokonaisiin sivuihin! Komponentit ovat näppärä tapa järjestää merkintä- ja UI-koodia vaikka joitain käytettäisiin vain kerran.
 
+<<<<<<< HEAD
 [React-pohjaiset ohjelmistokehykset](/learn/start-a-new-react-project) vievät tämän askeleen eteenpäin. Sen sijaan, että käyttäisit tyhjää HTML tiedostoa ja annat Reactin "ottaa sivu haltuun" halliten sivua JavaScriptilla, ne **myös* generoivat HTML:n autoaattisesti React komponenteistasi. Tämä mahdollistaa sovelluksesi näyttämään sisältöä enne kuin JavaScript koodi on latautunut.
+=======
+[React-based frameworks](/learn/creating-a-react-app) take this a step further. Instead of using an empty HTML file and letting React "take over" managing the page with JavaScript, they *also* generate the HTML automatically from your React components. This allows your app to show some content before the JavaScript code loads.
+>>>>>>> 7c36f7ac329fe3cf2e11222edce9a535158c2cab
 
 Kuitenkin monet verkkosivut käyttävät Reactia [lisätäkseen "ripausta interkatiivisuutta".](/learn/add-react-to-an-existing-project#using-react-for-a-part-of-your-existing-page) Niillä on useita juurikomponentteja yhden sijasta koko verkkosivulle. Voit käyttää niin paljon tai niin vähän Reactia kuin tarvitset.
 
@@ -248,7 +252,7 @@ Tämä hiekkalaatikko ei toimi, koska juurikomponenttia ei ole exportattu:
 function Profile() {
   return (
     <img
-      src="https://i.imgur.com/lICfvbD.jpg"
+      src="https://react.dev/images/docs/scientists/lICfvbD.jpg"
       alt="Aklilu Lemma"
     />
   );
@@ -273,7 +277,7 @@ Lisää `export default` ennen funktion määrittämistä, tällä tavalla:
 export default function Profile() {
   return (
     <img
-      src="https://i.imgur.com/lICfvbD.jpg"
+      src="https://react.dev/images/docs/scientists/lICfvbD.jpg"
       alt="Aklilu Lemma"
     />
   );
@@ -306,7 +310,7 @@ Saatat saada "Unexpected token" virheen tätä virhettä ratkaistaessa. Tässä 
 ```js
 export default function Profile() {
   return
-    <img src="https://i.imgur.com/jA8hHMpm.jpg" alt="Katsuko Saruhashi" />;
+    <img src="https://react.dev/images/docs/scientists/jA8hHMpm.jpg" alt="Katsuko Saruhashi" />;
 }
 ```
 
@@ -324,7 +328,7 @@ Voit ratkaista tämän komponentin siirtämällä palautuslauseen yhdelle rivill
 
 ```js
 export default function Profile() {
-  return <img src="https://i.imgur.com/jA8hHMpm.jpg" alt="Katsuko Saruhashi" />;
+  return <img src="https://react.dev/images/docs/scientists/jA8hHMpm.jpg" alt="Katsuko Saruhashi" />;
 }
 ```
 
@@ -341,9 +345,9 @@ Tai käärimällä palautetun JSX merkintäkoodin sulkeisiin, jotka aukeavat `re
 ```js
 export default function Profile() {
   return (
-    <img 
-      src="https://i.imgur.com/jA8hHMpm.jpg" 
-      alt="Katsuko Saruhashi" 
+    <img
+      src="https://react.dev/images/docs/scientists/jA8hHMpm.jpg"
+      alt="Katsuko Saruhashi"
     />
   );
 }
@@ -367,7 +371,7 @@ Jokin on pielessä miten `Profile` komponetti on määritelty ja käytetty. Tunn
 function profile() {
   return (
     <img
-      src="https://i.imgur.com/QIrZWGIs.jpg"
+      src="https://react.dev/images/docs/scientists/QIrZWGIs.jpg"
       alt="Alan L. Hart"
     />
   );
@@ -403,7 +407,7 @@ Muuta `function profile()` lukemaan `function Profile()`, ja sitten muuta jokain
 function Profile() {
   return (
     <img
-      src="https://i.imgur.com/QIrZWGIs.jpg"
+      src="https://react.dev/images/docs/scientists/QIrZWGIs.jpg"
       alt="Alan L. Hart"
     />
   );
