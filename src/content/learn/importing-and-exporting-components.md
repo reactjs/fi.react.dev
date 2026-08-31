@@ -28,7 +28,7 @@ Komponenttien taika perustuu niiden uudelleenkäytettävyyteen: voit luoda kompo
 function Profile() {
   return (
     <img
-      src="https://i.imgur.com/MK3eW3As.jpg"
+      src="https://react.dev/images/docs/scientists/MK3eW3As.jpg"
       alt="Katherine Johnson"
     />
   );
@@ -66,7 +66,7 @@ Tässä sekä `Profile` että `Gallery` on siirretty pois `App.js` tiedostosta u
 
 <Sandpack>
 
-```js App.js
+```js src/App.js
 import Gallery from './Gallery.js';
 
 export default function App() {
@@ -76,11 +76,11 @@ export default function App() {
 }
 ```
 
-```js Gallery.js
+```js src/Gallery.js
 function Profile() {
   return (
     <img
-      src="https://i.imgur.com/QIrZWGIs.jpg"
+      src="https://react.dev/images/docs/scientists/QIrZWGIs.jpg"
       alt="Alan L. Hart"
     />
   );
@@ -118,7 +118,7 @@ Huomaa miten tämä esimerkki jakautuu kahteen komponenttitiedostoon:
 
 Saatat huomata tiedostoja, jotka luopuvat `.js` päätteestä, kuten:
 
-```js 
+```js
 import Gallery from './Gallery';
 ```
 
@@ -182,7 +182,7 @@ Nyt `Gallery.js` sisältää kaksi exporttia: default `Gallery` exportin, sekä 
 
 <Sandpack>
 
-```js App.js
+```js src/App.js
 import Gallery from './Gallery.js';
 import { Profile } from './Gallery.js';
 
@@ -193,11 +193,11 @@ export default function App() {
 }
 ```
 
-```js Gallery.js
+```js src/Gallery.js
 export function Profile() {
   return (
     <img
-      src="https://i.imgur.com/QIrZWGIs.jpg"
+      src="https://react.dev/images/docs/scientists/QIrZWGIs.jpg"
       alt="Alan L. Hart"
     />
   );
@@ -268,7 +268,7 @@ Voit käyttää joko default tai nimettyä exporttia `Profile` komponentille, mu
 
 <Sandpack>
 
-```js App.js
+```js src/App.js
 import Gallery from './Gallery.js';
 import { Profile } from './Gallery.js';
 
@@ -281,12 +281,17 @@ export default function App() {
 }
 ```
 
+<<<<<<< HEAD
 ```js Gallery.js active
 // Siirä minut Profile.js tiedostoon!
+=======
+```js src/Gallery.js active
+// Move me to Profile.js!
+>>>>>>> 7c36f7ac329fe3cf2e11222edce9a535158c2cab
 export function Profile() {
   return (
     <img
-      src="https://i.imgur.com/QIrZWGIs.jpg"
+      src="https://react.dev/images/docs/scientists/QIrZWGIs.jpg"
       alt="Alan L. Hart"
     />
   );
@@ -304,7 +309,7 @@ export default function Gallery() {
 }
 ```
 
-```js Profile.js
+```js src/Profile.js
 ```
 
 ```css
@@ -321,7 +326,7 @@ Tässä ratkaisu nimetyillä exporteilla:
 
 <Sandpack>
 
-```js App.js
+```js src/App.js
 import Gallery from './Gallery.js';
 import { Profile } from './Profile.js';
 
@@ -335,7 +340,7 @@ export default function App() {
 }
 ```
 
-```js Gallery.js
+```js src/Gallery.js
 import { Profile } from './Profile.js';
 
 export default function Gallery() {
@@ -350,11 +355,11 @@ export default function Gallery() {
 }
 ```
 
-```js Profile.js
+```js src/Profile.js
 export function Profile() {
   return (
     <img
-      src="https://i.imgur.com/QIrZWGIs.jpg"
+      src="https://react.dev/images/docs/scientists/QIrZWGIs.jpg"
       alt="Alan L. Hart"
     />
   );
@@ -371,7 +376,7 @@ Tässä ratkaisu default exporteilla:
 
 <Sandpack>
 
-```js App.js
+```js src/App.js
 import Gallery from './Gallery.js';
 import Profile from './Profile.js';
 
@@ -385,7 +390,7 @@ export default function App() {
 }
 ```
 
-```js Gallery.js
+```js src/Gallery.js
 import Profile from './Profile.js';
 
 export default function Gallery() {
@@ -400,11 +405,11 @@ export default function Gallery() {
 }
 ```
 
-```js Profile.js
+```js src/Profile.js
 export default function Profile() {
   return (
     <img
-      src="https://i.imgur.com/QIrZWGIs.jpg"
+      src="https://react.dev/images/docs/scientists/QIrZWGIs.jpg"
       alt="Alan L. Hart"
     />
   );
