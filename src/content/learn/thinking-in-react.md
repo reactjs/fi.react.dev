@@ -51,9 +51,15 @@ Aloita piirtämällä laatikkoja jokaisen komponentin ja alakomponentin ympäril
 
 Riippuen taustastasi, voit ajatella mallin jakamista osiin eri tavoin:
 
+<<<<<<< HEAD
 - **Ohjelmointi**--käytä samaa tekniikkaa päättääkseen mikäli sinun pitää luoda uusi funktio tai olio. Yksi tekniikka on [single responsibility -periaate](https://en.wikipedia.org/wiki/Single_responsibility_principle), joka tarkoittaa, että komponentin täytyisi tehdä vain yksi asia. Mikäli se päätyy kasvamaan, se pitäisi jakaa pienempiin alakomponentteihin.
 - **CSS**--harkitse mille tekisit luokka-valitsimia. (Kuitenkin, komponentit koostuvat pienistä palasista.)
 - **Design**--harkiste miten järjestäisit mallin eri tasoihin.
+=======
+* **Programming**--use the same techniques for deciding if you should create a new function or object. One such technique is the [separation of concerns](https://en.wikipedia.org/wiki/Separation_of_concerns), that is, a component should ideally only be concerned with one thing. If it ends up growing, it should be decomposed into smaller subcomponents.
+* **CSS**--consider what you would make class selectors for. (However, components are a bit less granular.)
+* **Design**--consider how you would organize the design's layers.
+>>>>>>> f3d9794fc31f4a3faf7e863984d37f4ae86b3290
 
 Huomaat jos JSON:isi on hyvin määriteltyä, se usein mäppäytyy komponentin rakenteeseen käyttöliittymässäsi. Tämä siksi, koska UI ja tietomalleilla usein on sama tietoarkkitehtuuri--eli, sama muoto. Erota käyttöliittymäsi komponenteiksi, jossa jokainen komponentti vastaa yhtä palasta tietomalliasi.
 
@@ -99,8 +105,13 @@ Voit rakentaa joko "ylhäältä alas" aloittamalla komponenteilla, jotka ovat hi
 
 <Sandpack>
 
+<<<<<<< HEAD
 ```jsx App.js
 function ProductCategoryRow({category}) {
+=======
+```jsx src/App.js
+function ProductCategoryRow({ category }) {
+>>>>>>> f3d9794fc31f4a3faf7e863984d37f4ae86b3290
   return (
     <tr>
       <th colSpan="2">{category}</th>
@@ -240,10 +251,17 @@ Se mitä jää jäljelle on varmaankin tila.
 
 Käydään ne vielä läpi yksitellen:
 
+<<<<<<< HEAD
 1. Alkuperäinen lista tuotteista **välitetään propseina, joten se ei ole tila.**
 2. Hakulause vaikuttaa olevan tila sillä se muuttuu ajan kuluessa eikä sitä voida laskea mistään.
 3. Valintaruudun arvo vaikuttaa olevan tila sillä se muuttuu ajan kuluessa eikä sitä voida laskea mistään.
 4. Lista suodatetuista tuotteista **ei ole tila sillä se voidaan laskea** alkuperäisestä tuotelistasta suodattamalla hakulauseen ja valintaruudun perusteella.
+=======
+1. The original list of products is **passed in as props, so it's not state.**
+2. The search text seems to be state since it changes over time and can't be computed from anything.
+3. The value of the checkbox seems to be state since it changes over time and can't be computed from anything.
+4. The filtered list of products **isn't state because it can be computed** by taking the original list of products and filtering it according to the search text and value of the checkbox.
+>>>>>>> f3d9794fc31f4a3faf7e863984d37f4ae86b3290
 
 Tämä tarkoittaa, että vain hakulause ja valintaruudun arvo ovat tiloja. Hienosti tehty!
 
@@ -277,6 +295,7 @@ Edellisessä vaiheessa sait kaksi tilan palaa sovelluksessa: hakulauseen sekä v
 
 Käydään läpi strategiaa tälle tilalle:
 
+<<<<<<< HEAD
 1. **Tunnista komponentit, jotka käyttävät tilaa:**
    - `ProductTable`:n täytyy suodataa tuotelista tilan perusteella (hakulauseella ja valintaruudun arvolla).
    - `SearchBar`:n täytyy näyttää tila (hakulause ja valintaruudun arvo).
@@ -284,6 +303,15 @@ Käydään läpi strategiaa tälle tilalle:
 3. **Päätä missä tila elää**: Pidämme hakulauseen ja valintaruudun arvon `FilterableProductTable` komponentissa.
 
 Joten tila elää `FilterableProductTable` komponentissa.
+=======
+1. **Identify components that use state:**
+    * `ProductTable` needs to filter the product list based on that state (search text and checkbox value).
+    * `SearchBar` needs to display that state (search text and checkbox value).
+2. **Find their common parent:** The first parent component both components share is `FilterableProductTable`.
+3. **Decide where the state lives**: We'll keep the filter text and checked state values in `FilterableProductTable`.
+
+So the state values will live in `FilterableProductTable`.
+>>>>>>> f3d9794fc31f4a3faf7e863984d37f4ae86b3290
 
 Lisää tila komponenttiin käyttämällä [`useState()` Hookkia.](/reference/react/useState) Hookit ovat erityisiä funktioita, joiden avulla pääset käsiksi Reactiin. Lisä kaksi tilamuuttujaa `FilterableProductTable` komponentin yläosassa ja määritä sovelluksesi aloitusarvot:
 
@@ -297,7 +325,13 @@ Sitten välitä `filterText` ja `inStockOnly` komponenteille `ProductTable` ja `
 
 ```js
 <div>
+<<<<<<< HEAD
   <SearchBar filterText={filterText} inStockOnly={inStockOnly} />
+=======
+  <SearchBar
+    filterText={filterText}
+    inStockOnly={inStockOnly} />
+>>>>>>> f3d9794fc31f4a3faf7e863984d37f4ae86b3290
   <ProductTable
     products={products}
     filterText={filterText}
@@ -310,8 +344,13 @@ Alat näkemään miten sovelluksesi tulee käyttäytymään. Muokkaa `filterText
 
 <Sandpack>
 
+<<<<<<< HEAD
 ```jsx App.js
 import {useState} from 'react';
+=======
+```jsx src/App.js
+import { useState } from 'react';
+>>>>>>> f3d9794fc31f4a3faf7e863984d37f4ae86b3290
 
 function FilterableProductTable({products}) {
   const [filterText, setFilterText] = useState('');
@@ -319,7 +358,13 @@ function FilterableProductTable({products}) {
 
   return (
     <div>
+<<<<<<< HEAD
       <SearchBar filterText={filterText} inStockOnly={inStockOnly} />
+=======
+      <SearchBar
+        filterText={filterText}
+        inStockOnly={inStockOnly} />
+>>>>>>> f3d9794fc31f4a3faf7e863984d37f4ae86b3290
       <ProductTable
         products={products}
         filterText={filterText}
@@ -391,10 +436,23 @@ function ProductTable({products, filterText, inStockOnly}) {
 function SearchBar({filterText, inStockOnly}) {
   return (
     <form>
+<<<<<<< HEAD
       <input type="text" value={filterText} placeholder="Search..." />
       <label>
         <input type="checkbox" checked={inStockOnly} /> Only show products in
         stock
+=======
+      <input
+        type="text"
+        value={filterText}
+        placeholder="Search..."/>
+      <label>
+        <input
+          type="checkbox"
+          checked={inStockOnly} />
+        {' '}
+        Only show products in stock
+>>>>>>> f3d9794fc31f4a3faf7e863984d37f4ae86b3290
       </label>
     </form>
   );
@@ -459,7 +517,11 @@ Kuitenkaan, et ole vielä lisännyt yhtään koodia vastaamaan käyttäjän toim
 
 Tällä hetkellä sovelluksesi renderöityy oikein, kun propsit ja tila kulkevat alas hierarkiassa. Mutta muuttaaksesi tila käyttäjän syötteen perusteella, joudutaan tukemaan tiedon kulkemista toiseen suuntaan: lomakekomponentit syvällä hierarkiassa joutuvat päivittämään tilaa `FilterableProductTable` komponentissa.
 
+<<<<<<< HEAD
 React tekee tästä tiedonkulusta selkeää, mutta se vaatii hieman enemmän kirjoittamista kuin kaksisuuntaisessa tiedonkulussa. Jos koitat kirjoittaa tai valita valintaruutua ylläolevassa esimerkissä huomaat, että React ei välitä syötteestäsi. Tämä on tarkoituksellista. Kirjoittamalla `<input value={filterText} />` olet asettanut `input` elementin `value` propin olemaan aina yhtä `filterText` tilan kanssa, joka annetaan `FilterableProductTable` komponentissa. Sillä `filterText` tilaa ei koskaan aseteta, syöttökenttä ei koskaan muutu.
+=======
+Currently your app renders correctly with props and state flowing down the hierarchy. But to change the state according to user input, you will need to support data flowing the other way: the form components deep in the hierarchy need to update the state in `FilterableProductTable`.
+>>>>>>> f3d9794fc31f4a3faf7e863984d37f4ae86b3290
 
 Halutaankin tehdä siten, että kun käyttäjä muuttaa lomakkeiden syöttetä, tila päivittyy vastaamaan näitä muutoksia. Tilan omistaa `FilterableProductTable` komponentti, joten ainoastaan se voi kutsua `setFilterText` ja `setInStockOnly` funktioita. Jotta `SearchBar` voisi päivittää `FilterableProductsTable`:n tilaa, täytyy nämä funktiot antaa `SearchBar`:lle.
 
@@ -479,6 +541,7 @@ function FilterableProductTable({ products }) {
 
 `SearchBar` komponentissa lisää `onChange` Tapahtumankäsittelijä ja muuta yläkomponentin tila sieltä käsin:
 
+<<<<<<< HEAD
 ```js {5}
 <input
   type="text"
@@ -486,14 +549,41 @@ function FilterableProductTable({ products }) {
   placeholder="Search..."
   onChange={(e) => onFilterTextChange(e.target.value)}
 />
+=======
+```js {4,5,13,19}
+function SearchBar({
+  filterText,
+  inStockOnly,
+  onFilterTextChange,
+  onInStockOnlyChange
+}) {
+  return (
+    <form>
+      <input
+        type="text"
+        value={filterText}
+        placeholder="Search..."
+        onChange={(e) => onFilterTextChange(e.target.value)}
+      />
+      <label>
+        <input
+          type="checkbox"
+          checked={inStockOnly}
+          onChange={(e) => onInStockOnlyChange(e.target.checked)}
+>>>>>>> f3d9794fc31f4a3faf7e863984d37f4ae86b3290
 ```
 
 Nyt sovellus toimii täysin!
 
 <Sandpack>
 
+<<<<<<< HEAD
 ```jsx App.js
 import {useState} from 'react';
+=======
+```jsx src/App.js
+import { useState } from 'react';
+>>>>>>> f3d9794fc31f4a3faf7e863984d37f4ae86b3290
 
 function FilterableProductTable({products}) {
   const [filterText, setFilterText] = useState('');
@@ -502,6 +592,15 @@ function FilterableProductTable({products}) {
   return (
     <div>
       <SearchBar
+<<<<<<< HEAD
+=======
+        filterText={filterText}
+        inStockOnly={inStockOnly}
+        onFilterTextChange={setFilterText}
+        onInStockOnlyChange={setInStockOnly} />
+      <ProductTable
+        products={products}
+>>>>>>> f3d9794fc31f4a3faf7e863984d37f4ae86b3290
         filterText={filterText}
         inStockOnly={inStockOnly}
         onFilterTextChange={setFilterText}
@@ -585,16 +684,26 @@ function SearchBar({
     <form>
       <input
         type="text"
+<<<<<<< HEAD
         value={filterText}
         placeholder="Search..."
         onChange={(e) => onFilterTextChange(e.target.value)}
       />
+=======
+        value={filterText} placeholder="Search..."
+        onChange={(e) => onFilterTextChange(e.target.value)} />
+>>>>>>> f3d9794fc31f4a3faf7e863984d37f4ae86b3290
       <label>
         <input
           type="checkbox"
           checked={inStockOnly}
+<<<<<<< HEAD
           onChange={(e) => onInStockOnlyChange(e.target.checked)}
         />{' '}
+=======
+          onChange={(e) => onInStockOnlyChange(e.target.checked)} />
+        {' '}
+>>>>>>> f3d9794fc31f4a3faf7e863984d37f4ae86b3290
         Only show products in stock
       </label>
     </form>
