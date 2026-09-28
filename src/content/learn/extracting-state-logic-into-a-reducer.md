@@ -23,7 +23,7 @@ Kun komponenttisi kasvavat monimutkaisemmiksi, voi olla vaikeampaa nähdä yhdel
 
 <Sandpack>
 
-```js App.js
+```js src/App.js
 import { useState } from 'react';
 import AddTask from './AddTask.js';
 import TaskList from './TaskList.js';
@@ -79,7 +79,7 @@ const initialTasks = [
 ];
 ```
 
-```js AddTask.js hidden
+```js src/AddTask.js hidden
 import { useState } from 'react';
 
 export default function AddTask({onAddTask}) {
@@ -103,7 +103,7 @@ export default function AddTask({onAddTask}) {
 }
 ```
 
-```js TaskList.js hidden
+```js src/TaskList.js hidden
 import { useState } from 'react';
 
 export default function TaskList({tasks, onChangeTask, onDeleteTask}) {
@@ -398,7 +398,7 @@ Voisit jopa käyttää `reduce()`-metodia `initialState`- ja `actions`-taulukoid
 
 <Sandpack>
 
-```js index.js active
+```js src/index.js active
 import tasksReducer from './tasksReducer.js';
 
 let initialState = [];
@@ -415,7 +415,7 @@ const output = document.getElementById('output');
 output.textContent = JSON.stringify(finalState, null, 2);
 ```
 
-```js tasksReducer.js
+```js src/tasksReducer.js
 export default function tasksReducer(tasks, action) {
   switch (action.type) {
     case 'added': {
@@ -493,7 +493,7 @@ Nyt se on täysin kytketty! Tässä reduktori on määritelty komponentin tiedos
 
 <Sandpack>
 
-```js App.js
+```js src/App.js
 import { useReducer } from 'react';
 import AddTask from './AddTask.js';
 import TaskList from './TaskList.js';
@@ -574,7 +574,7 @@ const initialTasks = [
 ];
 ```
 
-```js AddTask.js hidden
+```js src/AddTask.js hidden
 import { useState } from 'react';
 
 export default function AddTask({onAddTask}) {
@@ -598,7 +598,7 @@ export default function AddTask({onAddTask}) {
 }
 ```
 
-```js TaskList.js hidden
+```js src/TaskList.js hidden
 import { useState } from 'react';
 
 export default function TaskList({tasks, onChangeTask, onDeleteTask}) {
@@ -678,7 +678,7 @@ Jos haluat, voit siirtää reduktorin eri tiedostoon:
 
 <Sandpack>
 
-```js App.js
+```js src/App.js
 import { useReducer } from 'react';
 import AddTask from './AddTask.js';
 import TaskList from './TaskList.js';
@@ -730,7 +730,7 @@ const initialTasks = [
 ];
 ```
 
-```js tasksReducer.js
+```js src/tasksReducer.js
 export default function tasksReducer(tasks, action) {
   switch (action.type) {
     case 'added': {
@@ -762,7 +762,7 @@ export default function tasksReducer(tasks, action) {
 }
 ```
 
-```js AddTask.js hidden
+```js src/AddTask.js hidden
 import { useState } from 'react';
 
 export default function AddTask({onAddTask}) {
@@ -786,7 +786,7 @@ export default function AddTask({onAddTask}) {
 }
 ```
 
-```js TaskList.js hidden
+```js src/TaskList.js hidden
 import { useState } from 'react';
 
 export default function TaskList({tasks, onChangeTask, onDeleteTask}) {
@@ -890,7 +890,7 @@ Juuri kuten [olioiden](/learn/updating-objects-in-state#write-concise-update-log
 
 <Sandpack>
 
-```js App.js
+```js src/App.js
 import { useImmerReducer } from 'use-immer';
 import AddTask from './AddTask.js';
 import TaskList from './TaskList.js';
@@ -965,7 +965,7 @@ const initialTasks = [
 ];
 ```
 
-```js AddTask.js hidden
+```js src/AddTask.js hidden
 import { useState } from 'react';
 
 export default function AddTask({onAddTask}) {
@@ -989,7 +989,7 @@ export default function AddTask({onAddTask}) {
 }
 ```
 
-```js TaskList.js hidden
+```js src/TaskList.js hidden
 import { useState } from 'react';
 
 export default function TaskList({tasks, onChangeTask, onDeleteTask}) {
@@ -1127,7 +1127,7 @@ Tämä tarkoittaa, että toiminto-oliosi pitäisi sisältää `type: 'changed_se
 
 <Sandpack>
 
-```js App.js
+```js src/App.js
 import { useReducer } from 'react';
 import Chat from './Chat.js';
 import ContactList from './ContactList.js';
@@ -1161,7 +1161,7 @@ const contacts = [
 ];
 ```
 
-```js messengerReducer.js
+```js src/messengerReducer.js
 export const initialState = {
   selectedId: 0,
   message: 'Hello',
@@ -1189,7 +1189,7 @@ export function messengerReducer(state, action) {
 }
 ```
 
-```js ContactList.js
+```js src/ContactList.js
 export default function ContactList({contacts, selectedId, dispatch}) {
   return (
     <section className="contact-list">
@@ -1210,7 +1210,7 @@ export default function ContactList({contacts, selectedId, dispatch}) {
 }
 ```
 
-```js Chat.js
+```js src/Chat.js
 import { useState } from 'react';
 
 export default function Chat({contact, message, dispatch}) {
@@ -1277,7 +1277,7 @@ Tässä on esimerkki päivitetty lähettämään vastaavat viestit:
 
 <Sandpack>
 
-```js App.js
+```js src/App.js
 import { useReducer } from 'react';
 import Chat from './Chat.js';
 import ContactList from './ContactList.js';
@@ -1311,7 +1311,7 @@ const contacts = [
 ];
 ```
 
-```js messengerReducer.js
+```js src/messengerReducer.js
 export const initialState = {
   selectedId: 0,
   message: 'Hello',
@@ -1339,7 +1339,7 @@ export function messengerReducer(state, action) {
 }
 ```
 
-```js ContactList.js
+```js src/ContactList.js
 export default function ContactList({contacts, selectedId, dispatch}) {
   return (
     <section className="contact-list">
@@ -1363,7 +1363,7 @@ export default function ContactList({contacts, selectedId, dispatch}) {
 }
 ```
 
-```js Chat.js
+```js src/Chat.js
 import { useState } from 'react';
 
 export default function Chat({contact, message, dispatch}) {
@@ -1421,7 +1421,7 @@ Tällä hetkellä, "Lähetä" ei tee mitään. Lisää tapahtumankäsittelijä "
 
 <Sandpack>
 
-```js App.js
+```js src/App.js
 import { useReducer } from 'react';
 import Chat from './Chat.js';
 import ContactList from './ContactList.js';
@@ -1455,7 +1455,7 @@ const contacts = [
 ];
 ```
 
-```js messengerReducer.js
+```js src/messengerReducer.js
 export const initialState = {
   selectedId: 0,
   message: 'Hello',
@@ -1483,7 +1483,7 @@ export function messengerReducer(state, action) {
 }
 ```
 
-```js ContactList.js
+```js src/ContactList.js
 export default function ContactList({contacts, selectedId, dispatch}) {
   return (
     <section className="contact-list">
@@ -1507,7 +1507,7 @@ export default function ContactList({contacts, selectedId, dispatch}) {
 }
 ```
 
-```js Chat.js active
+```js src/Chat.js active
 import { useState } from 'react';
 
 export default function Chat({contact, message, dispatch}) {
@@ -1560,7 +1560,7 @@ On muutama tapa, jolla voit tehdä sen "Lähetä" painikkeen tapahtumankäsittel
 
 <Sandpack>
 
-```js App.js
+```js src/App.js
 import { useReducer } from 'react';
 import Chat from './Chat.js';
 import ContactList from './ContactList.js';
@@ -1594,7 +1594,7 @@ const contacts = [
 ];
 ```
 
-```js messengerReducer.js
+```js src/messengerReducer.js
 export const initialState = {
   selectedId: 0,
   message: 'Hello',
@@ -1622,7 +1622,7 @@ export function messengerReducer(state, action) {
 }
 ```
 
-```js ContactList.js
+```js src/ContactList.js
 export default function ContactList({contacts, selectedId, dispatch}) {
   return (
     <section className="contact-list">
@@ -1646,7 +1646,7 @@ export default function ContactList({contacts, selectedId, dispatch}) {
 }
 ```
 
-```js Chat.js active
+```js src/Chat.js active
 import { useState } from 'react';
 
 export default function Chat({contact, message, dispatch}) {
@@ -1708,7 +1708,7 @@ Kuitenkin, _käyttäjän näkökulmasta_, viestin lähettäminen on eri toiminto
 
 <Sandpack>
 
-```js App.js
+```js src/App.js
 import { useReducer } from 'react';
 import Chat from './Chat.js';
 import ContactList from './ContactList.js';
@@ -1742,7 +1742,7 @@ const contacts = [
 ];
 ```
 
-```js messengerReducer.js active
+```js src/messengerReducer.js active
 export const initialState = {
   selectedId: 0,
   message: 'Hello',
@@ -1776,7 +1776,7 @@ export function messengerReducer(state, action) {
 }
 ```
 
-```js ContactList.js
+```js src/ContactList.js
 export default function ContactList({contacts, selectedId, dispatch}) {
   return (
     <section className="contact-list">
@@ -1800,7 +1800,7 @@ export default function ContactList({contacts, selectedId, dispatch}) {
 }
 ```
 
-```js Chat.js active
+```js src/Chat.js active
 import { useState } from 'react';
 
 export default function Chat({contact, message, dispatch}) {
@@ -1905,7 +1905,7 @@ export const initialState = {
 
 <Sandpack>
 
-```js App.js
+```js src/App.js
 import { useReducer } from 'react';
 import Chat from './Chat.js';
 import ContactList from './ContactList.js';
@@ -1939,7 +1939,7 @@ const contacts = [
 ];
 ```
 
-```js messengerReducer.js
+```js src/messengerReducer.js
 export const initialState = {
   selectedId: 0,
   message: 'Hello',
@@ -1973,7 +1973,7 @@ export function messengerReducer(state, action) {
 }
 ```
 
-```js ContactList.js
+```js src/ContactList.js
 export default function ContactList({contacts, selectedId, dispatch}) {
   return (
     <section className="contact-list">
@@ -1997,7 +1997,7 @@ export default function ContactList({contacts, selectedId, dispatch}) {
 }
 ```
 
-```js Chat.js
+```js src/Chat.js
 import { useState } from 'react';
 
 export default function Chat({contact, message, dispatch}) {
@@ -2082,7 +2082,7 @@ Tässä on kokonaisuus:
 
 <Sandpack>
 
-```js App.js
+```js src/App.js
 import { useReducer } from 'react';
 import Chat from './Chat.js';
 import ContactList from './ContactList.js';
@@ -2116,7 +2116,7 @@ const contacts = [
 ];
 ```
 
-```js messengerReducer.js
+```js src/messengerReducer.js
 export const initialState = {
   selectedId: 0,
   messages: {
@@ -2159,7 +2159,7 @@ export function messengerReducer(state, action) {
 }
 ```
 
-```js ContactList.js
+```js src/ContactList.js
 export default function ContactList({contacts, selectedId, dispatch}) {
   return (
     <section className="contact-list">
@@ -2183,7 +2183,7 @@ export default function ContactList({contacts, selectedId, dispatch}) {
 }
 ```
 
-```js Chat.js
+```js src/Chat.js
 import { useState } from 'react';
 
 export default function Chat({contact, message, dispatch}) {
@@ -2270,7 +2270,7 @@ Muista, että reduktorifunktio otta kaksi argumenttia: nykyisen tilan ja toimint
 
 <Sandpack>
 
-```js App.js
+```js src/App.js
 import { useReducer } from './MyReact.js';
 import Chat from './Chat.js';
 import ContactList from './ContactList.js';
@@ -2304,7 +2304,7 @@ const contacts = [
 ];
 ```
 
-```js messengerReducer.js
+```js src/messengerReducer.js
 export const initialState = {
   selectedId: 0,
   messages: {
@@ -2347,7 +2347,7 @@ export function messengerReducer(state, action) {
 }
 ```
 
-```js MyReact.js active
+```js src/MyReact.js active
 import { useState } from 'react';
 
 export function useReducer(reducer, initialState) {
@@ -2359,7 +2359,7 @@ export function useReducer(reducer, initialState) {
 }
 ```
 
-```js ContactList.js hidden
+```js src/ContactList.js hidden
 export default function ContactList({contacts, selectedId, dispatch}) {
   return (
     <section className="contact-list">
@@ -2383,7 +2383,7 @@ export default function ContactList({contacts, selectedId, dispatch}) {
 }
 ```
 
-```js Chat.js hidden
+```js src/Chat.js hidden
 import { useState } from 'react';
 
 export default function Chat({contact, message, dispatch}) {
@@ -2444,7 +2444,7 @@ Toiminnon lähettäminen kutsuu reduktoria nykyisen tilan ja toiminnon kanssa ja
 
 <Sandpack>
 
-```js App.js
+```js src/App.js
 import { useReducer } from './MyReact.js';
 import Chat from './Chat.js';
 import ContactList from './ContactList.js';
@@ -2478,7 +2478,7 @@ const contacts = [
 ];
 ```
 
-```js messengerReducer.js
+```js src/messengerReducer.js
 export const initialState = {
   selectedId: 0,
   messages: {
@@ -2521,7 +2521,7 @@ export function messengerReducer(state, action) {
 }
 ```
 
-```js MyReact.js active
+```js src/MyReact.js active
 import { useState } from 'react';
 
 export function useReducer(reducer, initialState) {
@@ -2536,7 +2536,7 @@ export function useReducer(reducer, initialState) {
 }
 ```
 
-```js ContactList.js hidden
+```js src/ContactList.js hidden
 export default function ContactList({contacts, selectedId, dispatch}) {
   return (
     <section className="contact-list">
@@ -2560,7 +2560,7 @@ export default function ContactList({contacts, selectedId, dispatch}) {
 }
 ```
 
-```js Chat.js hidden
+```js src/Chat.js hidden
 import { useState } from 'react';
 
 export default function Chat({contact, message, dispatch}) {
