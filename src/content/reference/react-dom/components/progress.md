@@ -30,7 +30,11 @@ Näyttääksesi edistymisindikaattorin, renderöi [selaimen sisäänrakennettu `
 
 #### Propsit {/*props*/}
 
+<<<<<<< HEAD
 `<progress>` tukee kaikkia [yleisien elementin propseja.](/reference/react-dom/components/common#props)
+=======
+`<progress>` supports all [common element props.](/reference/react-dom/components/common#common-props)
+>>>>>>> 0821e7d9428a6c58c922765b891bbffba9ed6249
 
 Lisäksi, `<progress>` tukee näitä propseja:
 
