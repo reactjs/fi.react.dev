@@ -29,7 +29,7 @@ Näet alla miltä se tulee lopulta näyttämään kun saat sen valmiiksi:
 
 <Sandpack>
 
-```js App.js
+```js src/App.js
 import { useState } from 'react';
 
 function Square({ value, onSquareClick }) {
@@ -147,7 +147,7 @@ function calculateWinner(squares) {
 }
 ```
 
-```css styles.css
+```css src/styles.css
 * {
   box-sizing: border-box;
 }
@@ -206,13 +206,13 @@ Alla olevassa koodieditorissa, paina **Forkkaa* oikeassa yläreunassa avataksesi
 
 <Sandpack>
 
-```js App.js
+```js src/App.js
 export default function Square() {
   return <button className="square">X</button>;
 }
 ```
 
-```css styles.css
+```css src/styles.css
 * {
   box-sizing: border-box;
 }
@@ -263,7 +263,15 @@ body {
 
 You can also follow this tutorial using your local development environment. To do this, you need to:
 
+<<<<<<< HEAD
 Voit myös seurata tätä opasta paikallisessa kehitysympäristössä. Tämä vaatii:
+=======
+1. Install [Node.js](https://nodejs.org/en/)
+1. In the CodeSandbox tab you opened earlier, press the top-left corner button to open the menu, and then choose **Download Sandbox** in that menu to download an archive of the files locally
+1. Unzip the archive, then open a terminal and `cd` to the directory you unzipped
+1. Install the dependencies with `npm install`
+1. Run `npm start` to start a local server and follow the prompts to view the code running in a browser
+>>>>>>> f5fa1e82edacdf8c6bfc4dfd9cf52029a96d5fd3
 
 1. Asenna [Node.js](https://nodejs.org/en/)
 1. Aikaisemmin avatussa CodeSandbox -välilehdessä, paina vasemmassa yläreunassa olevaa painiketta ja valitse **File > Export to ZIP** ladataksesi arkiston tiedostoista.
@@ -285,9 +293,15 @@ CodeSandboxissa näet kolme eri osiota:
 
 ![CodeSandbox aloituskoodilla](../images/tutorial/react-starter-code-codesandbox.png)
 
+<<<<<<< HEAD
 1. _Files_ osio, jossa on listaus tiedostoista kuten `App.js`, `index.js`, `styles.css` ja hakemisto nimeltään `public`
 1. _Koodieditori_, jossa näet valitun tiedoston lähdekoodin
 1. _Selain_, jossa näet miltä kirjoittamasi koodi näyttää
+=======
+1. The _Files_ section with a list of files like `App.js`, `index.js`, `styles.css` in `src` folder and a folder called `public`
+1. The _code editor_ where you'll see the source code of your selected file
+1. The _browser_ section where you'll see how the code you've written will be displayed
+>>>>>>> f5fa1e82edacdf8c6bfc4dfd9cf52029a96d5fd3
 
 `App.js` tiedoston tulisi olla valittuna _Files_ osiossa. Tiedoston sisältö _koodieditorissa_ tulisi olla seuraava:
 
@@ -297,7 +311,11 @@ export default function Square() {
 }
 ```
 
+<<<<<<< HEAD
 _Selaimen_ tulisi näyttää neliö, jossa on X:
+=======
+The _browser_ section should be displaying a square with an X in it like this:
+>>>>>>> f5fa1e82edacdf8c6bfc4dfd9cf52029a96d5fd3
 
 ![Neliö, jossa on X](../images/tutorial/x-filled-square.png)
 
@@ -339,7 +357,11 @@ import './styles.css';
 import App from './App';
 ```
 
+<<<<<<< HEAD
 Rivit 1-5 tuovat kaikki tarvittavat palaset yhteen:
+=======
+Lines 1-5 bring all the necessary pieces together:
+>>>>>>> f5fa1e82edacdf8c6bfc4dfd9cf52029a96d5fd3
 
 * React
 * Reactin kirjasto, jolla se juttelee selaimen kanssa (React DOM)
@@ -364,11 +386,15 @@ Saat tämän virheen:
 
 <ConsoleBlock level="error">
 
-/src/App.js: Adjacent JSX elements must be wrapped in an enclosing tag. Did you want a JSX fragment `<>...</>`?
+/src/App.js: Adjacent JSX elements must be wrapped in an enclosing tag. Did you want a JSX Fragment `<>...</>`?
 
 </ConsoleBlock>
 
+<<<<<<< HEAD
 React komponenttien täytyy palauttaa yksi JSX elementti, ei useampia vierekkäisiä JSX elementtejä kun kaksi painonappia. Korjataksesi tämän käytä *fragmenttejä* (`<>` ja `</>`) käärimään useampia vierekkäisiä JSX elementtejä näin:
+=======
+React components need to return a single JSX element and not multiple adjacent JSX elements like two buttons. To fix this you can use *Fragments* (`<>` and `</>`) to wrap multiple adjacent JSX elements like this:
+>>>>>>> f5fa1e82edacdf8c6bfc4dfd9cf52029a96d5fd3
 
 ```js {3-6}
 export default function Square() {
@@ -457,7 +483,7 @@ export default function Board() {
 }
 ```
 
-```css styles.css
+```css src/styles.css
 * {
   box-sizing: border-box;
 }
@@ -553,7 +579,11 @@ export default function Board() {
 }
 ```
 
+<<<<<<< HEAD
 Huomaa miten toisin kuin selainten `div`:it, omat komponenttisi `Board` ja `Square` täytyy alkaa isolla kirjaimella.
+=======
+Note how unlike the browser `div`s, your own components `Board` and `Square` must start with a capital letter.
+>>>>>>> f5fa1e82edacdf8c6bfc4dfd9cf52029a96d5fd3
 
 Katsotaanpa:
 
@@ -629,7 +659,7 @@ Päivitetyn koodisi tulisi näyttää tämänkaltaiselta:
 
 <Sandpack>
 
-```js App.js
+```js src/App.js
 function Square({ value }) {
   return <button className="square">{value}</button>;
 }
@@ -657,7 +687,7 @@ export default function Board() {
 }
 ```
 
-```css styles.css
+```css src/styles.css
 * {
   box-sizing: border-box;
 }
@@ -809,7 +839,7 @@ Kun olet tehnyt yllä olevat muutokset, koodisi tulisi näyttää tältä:
 
 <Sandpack>
 
-```js App.js
+```js src/App.js
 import { useState } from 'react';
 
 function Square() {
@@ -852,7 +882,7 @@ export default function Board() {
 }
 ```
 
-```css styles.css
+```css src/styles.css
 * {
   box-sizing: border-box;
 }
@@ -901,6 +931,7 @@ body {
 
 ### React kehitystyökalut {/*react-developer-tools*/}
 
+<<<<<<< HEAD
 React kehitystyökalujen avulla voit tarkastella React komponenttiesi propseja ja tilaa. React DevTools välilehti löytyy _browser_ osion alapuolelta CodeSandboxissa:
 
 ![React DevTools CodeSandboxissa](../images/tutorial/codesandbox-devtools.png)
@@ -908,12 +939,26 @@ React kehitystyökalujen avulla voit tarkastella React komponenttiesi propseja j
 Tarkastellaksesi tiettyä komponenttia ruudulla, käytä nappia React DevToolsin vasemmassa yläkulmassa:
 
 ![Komponentin valinta sivulla React DevToolsissa](../images/tutorial/devtools-select.gif)
+=======
+React Developer Tools let you check the props and the state of your React components. It is available as a [Chrome](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi?hl=en), [Firefox](https://addons.mozilla.org/en-US/firefox/addon/react-devtools/), and [Edge](https://microsoftedge.microsoft.com/addons/detail/react-developer-tools/gpphkfbcpidddadnkolkpfckpihlkkil) browser extension.
 
-<Note>
+After you install it, a new *Components* tab will appear in your browser Developer Tools for sites using React. If you're following along in CodeSandbox, you'd need to first open your sandbox preview in a new tab:
 
+![opening in new tab](../images/tutorial/sandbox-new-tab.png)
+
+Then, on the preview page, open your browser's DevTools and find the *Components* tab:
+>>>>>>> f5fa1e82edacdf8c6bfc4dfd9cf52029a96d5fd3
+
+![components tab](../images/tutorial/components-tab.png)
+
+<<<<<<< HEAD
 Paikallisessa kehityksessä, React DevTools on saatavilla [Chrome](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi?hl=en), [Firefox](https://addons.mozilla.org/en-US/firefox/addon/react-devtools/), ja [Edge](https://microsoftedge.microsoft.com/addons/detail/react-developer-tools/gpphkfbcpidddadnkolkpfckpihlkkil) selainlaajennuksena. Asenna se, ja *Components* välilehti ilmestyy selaimen kehitystyökaluihin sivuille, jotka käyttävät Reactia.
+=======
+To inspect a particular component on the screen, use the button in the top left corner of the Components tab:
 
-</Note>
+![inspecting with devtools](../images/tutorial/devtools-inspect.gif)
+>>>>>>> f5fa1e82edacdf8c6bfc4dfd9cf52029a96d5fd3
+
 
 ## Pelin viimeistely {/*completing-the-game*/}
 
@@ -990,7 +1035,7 @@ Ja koodisi tulisi näyttää tältä:
 
 <Sandpack>
 
-```js App.js
+```js src/App.js
 import { useState } from 'react';
 
 function Square({ value }) {
@@ -1021,7 +1066,7 @@ export default function Board() {
 }
 ```
 
-```css styles.css
+```css src/styles.css
 * {
   box-sizing: border-box;
 }
@@ -1096,7 +1141,11 @@ function Square({ value, onSquareClick }) {
 }
 ```
 
+<<<<<<< HEAD
 Nyt yhdistät `onSquareClick` propsin `Board` komponentin funktioon, jonka nimeät `handleClick`. Yhdistääksesi `onSquareClick` `handleClick`:iin, välität funktion `onSquareClick` propsin ensimmäiselle `Square` komponentille:
+=======
+Now you'll connect the `onSquareClick` prop to a function in the `Board` component that you'll name `handleClick`. To connect `onSquareClick` to `handleClick` you'll pass a function to the `onSquareClick` prop of the first `Square` component:
+>>>>>>> f5fa1e82edacdf8c6bfc4dfd9cf52029a96d5fd3
 
 ```js {7}
 export default function Board() {
@@ -1135,11 +1184,19 @@ Kutsumalla `setSquares` funktiota kerrot Reactille, että komponentin tila on mu
 
 <Note>
 
+<<<<<<< HEAD
 JavaScript tukee [closureja](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Closures), mikä tarkoittaa, että sisäinen funktio (esim. `handleClick`) pääsee käsiksi muuttujiin ja funktioihin, jotka on määritelty ulomman funktion sisällä (esim. `Board`). `handleClick` funktio voi lukea `squares` tilaa ja kutsua `setSquares` metodia, koska ne molemmat on määritelty `Board` funktion sisällä.
 
 </Note>
 
 Nyt voit lisätä X:ät pelilaudalle... mutta vain ylävasempaan neliöön. `handleClick` funktiosi on kovakoodattu päivittämään ylävasemman neliön indeksiä (`0`). Päivitetään `handleClick` funktio päivittämään mitä tahansa neliötä. Lisää argumentti `i` `handleClick` funktioon, joka ottaa neliön indeksin, jota päivittää:
+=======
+JavaScript supports [closures](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Closures) which means an inner function (e.g. `handleClick`) has access to variables and functions defined in an outer function (e.g. `Board`). The `handleClick` function can read the `squares` state and call the `setSquares` method because they are both defined inside of the `Board` function.
+
+</Note>
+
+Now you can add X's to the board...  but only to the upper left square. Your `handleClick` function is hardcoded to update the index for the upper left square (`0`). Let's update `handleClick` to be able to update any square. Add a parameter `i` to the `handleClick` function that takes the index of the square to update:
+>>>>>>> f5fa1e82edacdf8c6bfc4dfd9cf52029a96d5fd3
 
 ```js {4,6}
 export default function Board() {
@@ -1230,7 +1287,7 @@ Tämä on mitä koodisi tulisi näyttää:
 
 <Sandpack>
 
-```js App.js
+```js src/App.js
 import { useState } from 'react';
 
 function Square({ value, onSquareClick }) {
@@ -1272,7 +1329,7 @@ export default function Board() {
 }
 ```
 
-```css styles.css
+```css src/styles.css
 * {
   box-sizing: border-box;
 }
@@ -1327,7 +1384,11 @@ Käydään läpi mitä tapahtuu kun käyttäjä painaa ylävasenta neliötä pel
 1. `handleClick` käyttää argumenttia (`0`) päivittääkseen `squares` taulukon ensimmäisen elementin `null` arvosta `X` arvoon.
 1. `squares` tila `Board` komponentissa päivitettiin, joten `Board` ja kaikki sen alakomponentit renderöitiin uudelleen. Tämä aiheuttaa `Square` komponentin `value` propin muuttumisen indeksillä `0` `null` arvosta `X` arvoon.
 
+<<<<<<< HEAD
 Lopussa käyttäjä näkee, että ylävasen neliö on muuttunut tyhjästä `X`:ksi sen painamisen jälkeen.
+=======
+In the end the user sees that the upper left square has changed from empty to having an `X` after clicking it.
+>>>>>>> f5fa1e82edacdf8c6bfc4dfd9cf52029a96d5fd3
 
 <Note>
 
@@ -1408,7 +1469,11 @@ Mutta hetkonen, tässä on ongelma. Kokeile klikata samaa neliötä useamman ker
 
 `X` ylikirjoitetaan `0`:lla! Vaikka tämä lisäisikin mielenkiint0isen käänteen peliin, pysytään alkuperäisissä säännöissä toistaiseksi.
 
+<<<<<<< HEAD
 Kun merkitset neliön `X`:llä tai `0`:lla, et ensin tarkista onko neliöllä jo `X` tai `0` arvoa. Voit korjata tämän *palaamalla aikaisin*. Tarkistat onko neliöllä jo `X` tai `0` arvo. Jos neliö on jo täytetty, `return` `handleClick` funktiossa aikaisin--ennen kuin se yrittää päivittää pelilaudan tilaa.
+=======
+When you mark a square with an `X` or an `O` you aren't first checking to see if the square already has an `X` or `O` value. You can fix this by *returning early*. You'll check to see if the square already has an `X` or an `O`. If the square is already filled, you will `return` in the `handleClick` function early--before it tries to update the board state.
+>>>>>>> f5fa1e82edacdf8c6bfc4dfd9cf52029a96d5fd3
 
 ```js {2,3,4}
 function handleClick(i) {
@@ -1424,7 +1489,7 @@ Nyt voit lisätä vain `X` tai `0` tyhjille neliöille! Tässä on mitä koodisi
 
 <Sandpack>
 
-```js App.js
+```js src/App.js
 import { useState } from 'react';
 
 function Square({value, onSquareClick}) {
@@ -1475,7 +1540,7 @@ export default function Board() {
 }
 ```
 
-```css styles.css
+```css src/styles.css
 * {
   box-sizing: border-box;
 }
@@ -1526,7 +1591,7 @@ body {
 
 Nyt kun pelaajat voivat ottaa vuoroja, haluat näyttää kun peli on voitettu ja ei ole enää vuoroja tehtävänä. Tämän tekemiseksi lisäät apufunktion nimeltä `calculateWinner`, joka ottaa yhdeksän neliön taulukon, tarkistaa onko voittaja ja palauttaa `'X'`, `'O'`, tai `null` tarvittaessa. Älä huoli liikaa `calculateWinner` funktiosta; se ei ole Reactiin erityinen:
 
-```js App.js
+```js src/App.js
 export default function Board() {
   //...
 }
@@ -1558,7 +1623,11 @@ Ei ole väliä määritteletkö `calculateWinner` ennen vai jälkeen `Board`:n. 
 
 </Note>
 
+<<<<<<< HEAD
 Kutsut `calculateWinner(squares)` `Board` komponentin `handleClick` funktiossa tarkistaaksesi onko pelaaja voittanut. Voit suorittaa tämän tarkistuksen samaan aikaan kun tarkistat onko käyttäjä klikannut neliötä, jossa on jo `X` tai `O`. Haluamme palata aikaisin molemmissa tapauksissa:
+=======
+You will call `calculateWinner(squares)` in the `Board` component's `handleClick` function to check if a player has won. You can perform this check at the same time you check if a user has clicked a square that already has an `X` or an `O`. We'd like to return early in both cases:
+>>>>>>> f5fa1e82edacdf8c6bfc4dfd9cf52029a96d5fd3
 
 ```js {2}
 function handleClick(i) {
@@ -1596,7 +1665,7 @@ Onneksi olkoon! Sinulla on nyt toimi ristinolla-peli. Ja olet juuri oppinut Reac
 
 <Sandpack>
 
-```js App.js
+```js src/App.js
 import { useState } from 'react';
 
 function Square({value, onSquareClick}) {
@@ -1676,7 +1745,7 @@ function calculateWinner(squares) {
 }
 ```
 
-```css styles.css
+```css src/styles.css
 * {
   box-sizing: border-box;
 }
@@ -1874,7 +1943,7 @@ Tässä kohtaa, olet siirtänyt tilan `Game` komponenttiin, ja käyttöliittymä
 
 <Sandpack>
 
-```js App.js
+```js src/App.js
 import { useState } from 'react';
 
 function Square({ value, onSquareClick }) {
@@ -1972,7 +2041,7 @@ function calculateWinner(squares) {
 }
 ```
 
-```css styles.css
+```css src/styles.css
 * {
   box-sizing: border-box;
 }
@@ -2075,17 +2144,25 @@ export default function Game() {
 }
 ```
 
+<<<<<<< HEAD
 Voit nähdä miltä koodisi tulisi näyttää alla. Huomaa, että sinun tulisi nähdä virhe kehittäjätyökalujen konsolissa, jossa lukee:
+=======
+You can see what your code should look like below. Note that you should see an error in the developer tools console that says:
+>>>>>>> f5fa1e82edacdf8c6bfc4dfd9cf52029a96d5fd3
 
 <ConsoleBlock level="warning">
 Warning: Each child in an array or iterator should have a unique "key" prop. Check the render method of &#96;Game&#96;.
 </ConsoleBlock>
 
+<<<<<<< HEAD
 Korjaat tämän virheen seuraavassa osiossa.
+=======
+You'll fix this error in the next section.
+>>>>>>> f5fa1e82edacdf8c6bfc4dfd9cf52029a96d5fd3
 
 <Sandpack>
 
-```js App.js
+```js src/App.js
 import { useState } from 'react';
 
 function Square({ value, onSquareClick }) {
@@ -2201,7 +2278,7 @@ function calculateWinner(squares) {
 }
 ```
 
-```css styles.css
+```css src/styles.css
 * {
   box-sizing: border-box;
 }
@@ -2249,7 +2326,11 @@ body {
 
 </Sandpack>
 
+<<<<<<< HEAD
 Kun iteroidaan `history` taulukon läpi funktiossa, jonka välitit `map`:lle, `squares` argumentti käy läpi jokaisen `history` alkion, ja `move` argumentti käy läpi jokaisen taulukon indeksin: `0`, `1`, `2`, …. (Useimmissa tapauksissa, tarvitsisit itse taulukon alkiot, mutta renderöidäksesi listan siirroista, tarvitset vain indeksit.)
+=======
+As you iterate through the `history` array inside the function you passed to `map`, the `squares` argument goes through each element of `history`, and the `move` argument goes through each array index: `0`, `1`, `2`, …. (In most cases, you'd need the actual array elements, but to render a list of moves you will only need indexes.)
+>>>>>>> f5fa1e82edacdf8c6bfc4dfd9cf52029a96d5fd3
 
 Jokaiselle liikkeelle ristinolla-pelin historiassa, luot listan kohteen `<li>`, joka sisältää painikkeen `<button>`. Painikkeella on `onClick` käsittelijä, joka kutsuu funktiota nimeltä `jumpTo` (jota et ole vielä toteuttanut).
 
@@ -2313,7 +2394,7 @@ const moves = history.map((squares, move) => {
 
 <Sandpack>
 
-```js App.js
+```js src/App.js
 import { useState } from 'react';
 
 function Square({ value, onSquareClick }) {
@@ -2430,7 +2511,7 @@ function calculateWinner(squares) {
 
 ```
 
-```css styles.css
+```css src/styles.css
 * {
   box-sizing: border-box;
 }
@@ -2534,7 +2615,7 @@ Jos klikkaat mitä tahansa siirtoa pelin historiassa, ristinolla-pelin taulukko 
 
 <Sandpack>
 
-```js App.js
+```js src/App.js
 import { useState } from 'react';
 
 function Square({value, onSquareClick}) {
@@ -2654,7 +2735,7 @@ function calculateWinner(squares) {
 }
 ```
 
-```css styles.css
+```css src/styles.css
 * {
   box-sizing: border-box;
 }
@@ -2744,7 +2825,7 @@ Katso lopullinen tulos täältä:
 
 <Sandpack>
 
-```js App.js
+```js src/App.js
 import { useState } from 'react';
 
 function Square({ value, onSquareClick }) {
@@ -2862,7 +2943,7 @@ function calculateWinner(squares) {
 }
 ```
 
-```css styles.css
+```css src/styles.css
 * {
   box-sizing: border-box;
 }
@@ -2917,4 +2998,8 @@ Jos sinulla on ylimääräistä aikaa tai haluat harjoitella uusia React taitoja
 1. Kun joku voittaa, korosta kolme ruutua, jotka aiheuttivat voiton (ja kun kukaan ei voita, näytä viesti tuloksesta olevan tasapeli).
 1. Näytä jokaisen siirron sijainti muodossa (rivi, sarake) siirtohistorian listassa.
 
+<<<<<<< HEAD
 Tämän oppaan aikana, olet käsitellyt Reactin käsitteitä, mukaan lukien elementit, komponentit, propsit ja tila. Nyt kun olet nähnyt miten nämä käsitteet toimivat peliä rakentaessa, katso [Ajattelu Reactissa](/learn/thinking-in-react) nähdäksesi miten samat Reactin käsitteet toimivat kun rakennat sovelluksen käyttöliittymää.
+=======
+Throughout this tutorial, you've touched on React concepts including elements, components, props, and state. Now that you've seen how these concepts work when building a game, check out [Thinking in React](/learn/thinking-in-react) to see how the same React concepts work when building an app's UI.
+>>>>>>> f5fa1e82edacdf8c6bfc4dfd9cf52029a96d5fd3

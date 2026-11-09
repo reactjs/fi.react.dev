@@ -24,6 +24,7 @@ Tämä sisältää myös Reactin omat propsit, kuten `ref` ja `dangerouslySetInn
 
 Nämä selaimen sisäänrakennetut komponentit hyväksyvät käyttäjän syötteen:
 
+* [`<form>`](/reference/react-dom/components/form)
 * [`<input>`](/reference/react-dom/components/input)
 * [`<select>`](/reference/react-dom/components/select)
 * [`<textarea>`](/reference/react-dom/components/textarea)
@@ -32,7 +33,26 @@ Ne ovat erityisiä Reactissa, koska `value`-propsin antaminen niille tekee niist
 
 ---
 
+<<<<<<< HEAD
 ## Kaikki HTML komponentit {/*all-html-components*/}
+=======
+## Resource and Metadata Components {/*resource-and-metadata-components*/}
+
+These built-in browser components let you load external resources or annotate the document with metadata:
+
+* [`<img>`](/reference/react-dom/components/img)
+* [`<link>`](/reference/react-dom/components/link)
+* [`<meta>`](/reference/react-dom/components/meta)
+* [`<script>`](/reference/react-dom/components/script)
+* [`<style>`](/reference/react-dom/components/style)
+* [`<title>`](/reference/react-dom/components/title)
+
+They are special in React because React can render them into the document head, suspend while resources are loading, and enact other behaviors that are described on the reference page for each specific component.
+
+---
+
+## All HTML components {/*all-html-components*/}
+>>>>>>> f5fa1e82edacdf8c6bfc4dfd9cf52029a96d5fd3
 
 React tukee kaikkia selaimen sisäänrakennettuja HTML komponentteja. Tämä sisältää:
 
@@ -68,7 +88,7 @@ React tukee kaikkia selaimen sisäänrakennettuja HTML komponentteja. Tämä sis
 * [`<figcaption>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/figcaption)
 * [`<figure>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/figure)
 * [`<footer>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/footer)
-* [`<form>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/form)
+* [`<form>`](/reference/react-dom/components/form)
 * [`<h1>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/h1)
 * [`<head>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/head)
 * [`<header>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/header)
@@ -77,19 +97,19 @@ React tukee kaikkia selaimen sisäänrakennettuja HTML komponentteja. Tämä sis
 * [`<html>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/html)
 * [`<i>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/i)
 * [`<iframe>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/iframe)
-* [`<img>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/img)
+* [`<img>`](/reference/react-dom/components/img)
 * [`<input>`](/reference/react-dom/components/input)
 * [`<ins>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/ins)
 * [`<kbd>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/kbd)
 * [`<label>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/label)
 * [`<legend>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/legend)
 * [`<li>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/li)
-* [`<link>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/link)
+* [`<link>`](/reference/react-dom/components/link)
 * [`<main>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/main)
 * [`<map>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/map)
 * [`<mark>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/mark)
 * [`<menu>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/menu)
-* [`<meta>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/meta)
+* [`<meta>`](/reference/react-dom/components/meta)
 * [`<meter>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/meter)
 * [`<nav>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/nav)
 * [`<noscript>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/noscript)
@@ -108,7 +128,7 @@ React tukee kaikkia selaimen sisäänrakennettuja HTML komponentteja. Tämä sis
 * [`<ruby>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/ruby)
 * [`<s>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/s)
 * [`<samp>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/samp)
-* [`<script>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/script)
+* [`<script>`](/reference/react-dom/components/script)
 * [`<section>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/section)
 * [`<select>`](/reference/react-dom/components/select)
 * [`<slot>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/slot)
@@ -116,7 +136,7 @@ React tukee kaikkia selaimen sisäänrakennettuja HTML komponentteja. Tämä sis
 * [`<source>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/source)
 * [`<span>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/span)
 * [`<strong>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/strong)
-* [`<style>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/style)
+* [`<style>`](/reference/react-dom/components/style)
 * [`<sub>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/sub)
 * [`<summary>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/summary)
 * [`<sup>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/sup)
@@ -129,7 +149,7 @@ React tukee kaikkia selaimen sisäänrakennettuja HTML komponentteja. Tämä sis
 * [`<th>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/th)
 * [`<thead>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/thead)
 * [`<time>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/time)
-* [`<title>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/title)
+* [`<title>`](/reference/react-dom/components/title)
 * [`<tr>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/tr)
 * [`<track>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/track)
 * [`<u>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/u)
@@ -148,15 +168,137 @@ Vastaavasti kuten [DOM standardissa,](https://developer.mozilla.org/en-US/docs/W
 
 ### Mukautetut HTML elementit {/*custom-html-elements*/}
 
+<<<<<<< HEAD
 Jos renderöit tagin, jossa on viiva, kuten `<my-element>`, React olettaa, että haluat renderöidä [mukautetun HTML elementin.](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_custom_elements) Reactissa, mukautetun elementin renderöinti toimii eri tavalla kuin selaimen sisäänrakennetun tagin renderöinti:
 
 - Kaikki mukautetun elementin propsit serialisoidaan merkkijonoiksi ja asetetaan aina attribuutteina.
 - Mukautetut elementit hyväksyvät `class`-propsin sijaan `className`-propsin, ja `for`-propsin sijaan `htmlFor`-propsin.
+=======
+If you render a tag with a dash, like `<my-element>`, React will assume you want to render a [custom HTML element.](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_custom_elements)
+>>>>>>> f5fa1e82edacdf8c6bfc4dfd9cf52029a96d5fd3
 
 Jos renderöit selaimen sisäänrakennetun HTML elementin [`is`](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/is) attribuutilla, se käsitellään myös mukautettuna elementtinä.
 
+#### Setting values on custom elements {/*attributes-vs-properties*/}
+
+Custom elements have two methods of passing data into them:
+
+1) Attributes: Which are displayed in markup and can only be set to string values
+2) Properties: Which are not displayed in markup and can be set to arbitrary JavaScript values
+
+By default, React will pass values bound in JSX as attributes:
+
+```jsx
+<my-element value="Hello, world!"></my-element>
+```
+
+Non-string JavaScript values passed to custom elements will be serialized by default:
+
+```jsx
+// Will be passed as `"1,2,3"` as the output of `[1,2,3].toString()`
+<my-element value={[1,2,3]}></my-element>
+```
+
+React will, however, recognize a custom element's property as one that it may pass arbitrary values to if the property name shows up on the class during construction:
+
+<Sandpack>
+
+```js src/index.js hidden
+import {MyElement} from './MyElement.js';
+import { createRoot } from 'react-dom/client';
+import {App} from "./App.js";
+
+customElements.define('my-element', MyElement);
+
+const root = createRoot(document.getElementById('root'))
+root.render(<App />);
+```
+
+```js src/MyElement.js active
+export class MyElement extends HTMLElement {
+  constructor() {
+    super();
+    // The value here will be overwritten by React
+    // when initialized as an element
+    this.value = undefined;
+  }
+
+  connectedCallback() {
+    this.innerHTML = this.value.join(", ");
+  }
+}
+```
+
+```js src/App.js
+export function App() {
+  return <my-element value={[1,2,3]}></my-element>
+}
+```
+
+</Sandpack>
+
+#### Listening for events on custom elements {/*custom-element-events*/}
+
+A common pattern when using custom elements is that they may dispatch [`CustomEvent`s](https://developer.mozilla.org/en-US/docs/Web/API/CustomEvent) rather than accept a function to call when an event occur. You can listen for these events using an `on` prefix when binding to the event via JSX.
+
+<Sandpack>
+
+```js src/index.js hidden
+import {MyElement} from './MyElement.js';
+import { createRoot } from 'react-dom/client';
+import {App} from "./App.js";
+
+customElements.define('my-element', MyElement);
+
+const root = createRoot(document.getElementById('root'))
+root.render(<App />);
+```
+
+```javascript src/MyElement.js
+export class MyElement extends HTMLElement {
+  constructor() {
+    super();
+    this.test = undefined;
+    this.emitEvent = this._emitEvent.bind(this);
+  }
+
+  _emitEvent() {
+    const event = new CustomEvent('speak', {
+      detail: {
+        message: 'Hello, world!',
+      },
+    });
+    this.dispatchEvent(event);
+  }
+
+  connectedCallback() {
+    this.el = document.createElement('button');
+    this.el.innerText = 'Say hi';
+    this.el.addEventListener('click', this.emitEvent);
+    this.appendChild(this.el);
+  }
+
+  disconnectedCallback() {
+    this.el.removeEventListener('click', this.emitEvent);
+  }
+}
+```
+
+```jsx src/App.js active
+export function App() {
+  return (
+    <my-element
+      onspeak={e => console.log(e.detail.message)}
+    ></my-element>
+  )
+}
+```
+
+</Sandpack>
+
 <Note>
 
+<<<<<<< HEAD
 [Tulevaisuuden versio Reactista sisältää kattavamman tuen mukautetuille elementeille.](https://github.com/facebook/react/issues/11347#issuecomment-1122275286)
 
 Voit kokeilla sitä päivittämällä React paketit uusimpaan kokeelliseen versioon:
@@ -165,6 +307,16 @@ Voit kokeilla sitä päivittämällä React paketit uusimpaan kokeelliseen versi
 - `react-dom@experimental`
 
 Kokeelliset versiot Reactista saattavat sisältää bugeja. Älä käytä niitä tuotannossa.
+=======
+Events are case-sensitive and support dashes (`-`). Preserve the casing of the event and include all dashes when listening for custom element's events:
+
+```jsx
+// Listens for `say-hi` events
+<my-element onsay-hi={console.log}></my-element>
+// Listens for `sayHi` events
+<my-element onsayHi={console.log}></my-element>
+```
+>>>>>>> f5fa1e82edacdf8c6bfc4dfd9cf52029a96d5fd3
 
 </Note>
 ---
