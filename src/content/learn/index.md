@@ -4,7 +4,11 @@ title: Pika-aloitus
 
 <Intro>
 
+<<<<<<< HEAD
 Tervetuloa Reactin dokumentaatioon. Tällä sivulla esitellään 80% Reactin konsepteista, joita käytät päivittäin.
+=======
+Welcome to the React documentation! This page will give you an introduction to 80% of the React concepts that you will use on a daily basis.
+>>>>>>> 46a54e0592729712b7640308b53268e84fdc7c9f
 
 </Intro>
 
@@ -134,10 +138,17 @@ JSX aaltosulkeisiin voi laittaa myös laajempia lausekkeita, esimerkiksi [merkki
 <Sandpack>
 
 ```js
+<<<<<<< HEAD
 const kayttaja = {
   nimi: 'Hedy Lamarr',
   kuvanUrl: 'https://i.imgur.com/yXOvdOSs.jpg',
   kuvanKoko: 90,
+=======
+const user = {
+  name: 'Hedy Lamarr',
+  imageUrl: 'https://react.dev/images/docs/scientists/yXOvdOSs.jpg',
+  imageSize: 90,
+>>>>>>> 46a54e0592729712b7640308b53268e84fdc7c9f
 };
 
 export default function Profiili() {
@@ -307,7 +318,11 @@ function Painonappi() {
 }
 ```
 
+<<<<<<< HEAD
 React kutsuu komponenttifunktiota uudelleen. Silloin `count` on `1`. Sitten se tulee olemaan `2`. Ja niin edelleen.
+=======
+Calling `setCount` tells React to call your component function again. This is called a *re-render*. This time, `count` will be `1`. Then it will be `2`. And so on.
+>>>>>>> 46a54e0592729712b7640308b53268e84fdc7c9f
 
 Jos renderöit saman komponentin useita kertoja, kullakin komponentilla on oma tilansa. Kokeile napsauttaa painikkeita erikseen:
 
